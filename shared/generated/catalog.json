@@ -1,0 +1,425 @@
+{
+  "version": "15.20.1",
+  "displayPatch": "25.20",
+  "locale": "en_US",
+  "source": "https://ddragon.leagueoflegends.com",
+  "champions": {
+    "Gnar": {
+      "id": "Gnar",
+      "key": "150",
+      "name": "Gnar",
+      "icon": "/ddragon/15.20.1/champion/Gnar.png",
+      "portrait": "/ddragon/15.20.1/loading/Gnar_0.jpg"
+    },
+    "XinZhao": {
+      "id": "XinZhao",
+      "key": "5",
+      "name": "Xin Zhao",
+      "icon": "/ddragon/15.20.1/champion/XinZhao.png",
+      "portrait": "/ddragon/15.20.1/loading/XinZhao_0.jpg"
+    },
+    "Ryze": {
+      "id": "Ryze",
+      "key": "13",
+      "name": "Ryze",
+      "icon": "/ddragon/15.20.1/champion/Ryze.png",
+      "portrait": "/ddragon/15.20.1/loading/Ryze_0.jpg"
+    },
+    "Zeri": {
+      "id": "Zeri",
+      "key": "221",
+      "name": "Zeri",
+      "icon": "/ddragon/15.20.1/champion/Zeri.png",
+      "portrait": "/ddragon/15.20.1/loading/Zeri_0.jpg"
+    },
+    "Neeko": {
+      "id": "Neeko",
+      "key": "518",
+      "name": "Neeko",
+      "icon": "/ddragon/15.20.1/champion/Neeko.png",
+      "portrait": "/ddragon/15.20.1/loading/Neeko_0.jpg"
+    },
+    "Ambessa": {
+      "id": "Ambessa",
+      "key": "799",
+      "name": "Ambessa",
+      "icon": "/ddragon/15.20.1/champion/Ambessa.png",
+      "portrait": "/ddragon/15.20.1/loading/Ambessa_0.jpg"
+    },
+    "JarvanIV": {
+      "id": "JarvanIV",
+      "key": "59",
+      "name": "Jarvan IV",
+      "icon": "/ddragon/15.20.1/champion/JarvanIV.png",
+      "portrait": "/ddragon/15.20.1/loading/JarvanIV_0.jpg"
+    },
+    "Taliyah": {
+      "id": "Taliyah",
+      "key": "163",
+      "name": "Taliyah",
+      "icon": "/ddragon/15.20.1/champion/Taliyah.png",
+      "portrait": "/ddragon/15.20.1/loading/Taliyah_0.jpg"
+    },
+    "Sivir": {
+      "id": "Sivir",
+      "key": "15",
+      "name": "Sivir",
+      "icon": "/ddragon/15.20.1/champion/Sivir.png",
+      "portrait": "/ddragon/15.20.1/loading/Sivir_0.jpg"
+    },
+    "Lulu": {
+      "id": "Lulu",
+      "key": "117",
+      "name": "Lulu",
+      "icon": "/ddragon/15.20.1/champion/Lulu.png",
+      "portrait": "/ddragon/15.20.1/loading/Lulu_0.jpg"
+    },
+    "MonkeyKing": {
+      "id": "MonkeyKing",
+      "key": "62",
+      "name": "Wukong",
+      "icon": "/ddragon/15.20.1/champion/MonkeyKing.png",
+      "portrait": "/ddragon/15.20.1/loading/MonkeyKing_0.jpg"
+    },
+    "Rumble": {
+      "id": "Rumble",
+      "key": "68",
+      "name": "Rumble",
+      "icon": "/ddragon/15.20.1/champion/Rumble.png",
+      "portrait": "/ddragon/15.20.1/loading/Rumble_0.jpg"
+    },
+    "Varus": {
+      "id": "Varus",
+      "key": "110",
+      "name": "Varus",
+      "icon": "/ddragon/15.20.1/champion/Varus.png",
+      "portrait": "/ddragon/15.20.1/loading/Varus_0.jpg"
+    },
+    "Ezreal": {
+      "id": "Ezreal",
+      "key": "81",
+      "name": "Ezreal",
+      "icon": "/ddragon/15.20.1/champion/Ezreal.png",
+      "portrait": "/ddragon/15.20.1/loading/Ezreal_0.jpg"
+    },
+    "Blitzcrank": {
+      "id": "Blitzcrank",
+      "key": "53",
+      "name": "Blitzcrank",
+      "icon": "/ddragon/15.20.1/champion/Blitzcrank.png",
+      "portrait": "/ddragon/15.20.1/loading/Blitzcrank_0.jpg"
+    },
+    "Gwen": {
+      "id": "Gwen",
+      "key": "887",
+      "name": "Gwen",
+      "icon": "/ddragon/15.20.1/champion/Gwen.png",
+      "portrait": "/ddragon/15.20.1/loading/Gwen_0.jpg"
+    },
+    "Shen": {
+      "id": "Shen",
+      "key": "98",
+      "name": "Shen",
+      "icon": "/ddragon/15.20.1/champion/Shen.png",
+      "portrait": "/ddragon/15.20.1/loading/Shen_0.jpg"
+    },
+    "Zed": {
+      "id": "Zed",
+      "key": "238",
+      "name": "Zed",
+      "icon": "/ddragon/15.20.1/champion/Zed.png",
+      "portrait": "/ddragon/15.20.1/loading/Zed_0.jpg"
+    },
+    "Leona": {
+      "id": "Leona",
+      "key": "89",
+      "name": "Leona",
+      "icon": "/ddragon/15.20.1/champion/Leona.png",
+      "portrait": "/ddragon/15.20.1/loading/Leona_0.jpg"
+    },
+    "Yunara": {
+      "id": "Yunara",
+      "key": "804",
+      "name": "Yunara",
+      "icon": "/ddragon/15.20.1/champion/Yunara.png",
+      "portrait": "/ddragon/15.20.1/loading/Yunara_0.jpg"
+    },
+    "Yone": {
+      "id": "Yone",
+      "key": "777",
+      "name": "Yone",
+      "icon": "/ddragon/15.20.1/champion/Yone.png",
+      "portrait": "/ddragon/15.20.1/loading/Yone_0.jpg"
+    },
+    "Jhin": {
+      "id": "Jhin",
+      "key": "202",
+      "name": "Jhin",
+      "icon": "/ddragon/15.20.1/champion/Jhin.png",
+      "portrait": "/ddragon/15.20.1/loading/Jhin_0.jpg"
+    },
+    "Azir": {
+      "id": "Azir",
+      "key": "268",
+      "name": "Azir",
+      "icon": "/ddragon/15.20.1/champion/Azir.png",
+      "portrait": "/ddragon/15.20.1/loading/Azir_0.jpg"
+    }
+  },
+  "items": {
+    "1054": {
+      "id": "1054",
+      "name": "Doran's Shield",
+      "icon": "/ddragon/15.20.1/item/1054.png"
+    },
+    "1055": {
+      "id": "1055",
+      "name": "Doran's Blade",
+      "icon": "/ddragon/15.20.1/item/1055.png"
+    },
+    "1056": {
+      "id": "1056",
+      "name": "Doran's Ring",
+      "icon": "/ddragon/15.20.1/item/1056.png"
+    },
+    "2003": {
+      "id": "2003",
+      "name": "Health Potion",
+      "icon": "/ddragon/15.20.1/item/2003.png"
+    },
+    "2055": {
+      "id": "2055",
+      "name": "Control Ward",
+      "icon": "/ddragon/15.20.1/item/2055.png"
+    },
+    "3006": {
+      "id": "3006",
+      "name": "Berserker's Greaves",
+      "icon": "/ddragon/15.20.1/item/3006.png"
+    },
+    "3020": {
+      "id": "3020",
+      "name": "Sorcerer's Shoes",
+      "icon": "/ddragon/15.20.1/item/3020.png"
+    },
+    "3031": {
+      "id": "3031",
+      "name": "Infinity Edge",
+      "icon": "/ddragon/15.20.1/item/3031.png"
+    },
+    "3036": {
+      "id": "3036",
+      "name": "Lord Dominik's Regards",
+      "icon": "/ddragon/15.20.1/item/3036.png"
+    },
+    "3040": {
+      "id": "3040",
+      "name": "Seraph's Embrace",
+      "icon": "/ddragon/15.20.1/item/3040.png"
+    },
+    "3047": {
+      "id": "3047",
+      "name": "Plated Steelcaps",
+      "icon": "/ddragon/15.20.1/item/3047.png"
+    },
+    "3053": {
+      "id": "3053",
+      "name": "Sterak's Gage",
+      "icon": "/ddragon/15.20.1/item/3053.png"
+    },
+    "3071": {
+      "id": "3071",
+      "name": "Black Cleaver",
+      "icon": "/ddragon/15.20.1/item/3071.png"
+    },
+    "3078": {
+      "id": "3078",
+      "name": "Trinity Force",
+      "icon": "/ddragon/15.20.1/item/3078.png"
+    },
+    "3083": {
+      "id": "3083",
+      "name": "Warmog's Armor",
+      "icon": "/ddragon/15.20.1/item/3083.png"
+    },
+    "3085": {
+      "id": "3085",
+      "name": "Runaan's Hurricane",
+      "icon": "/ddragon/15.20.1/item/3085.png"
+    },
+    "3089": {
+      "id": "3089",
+      "name": "Rabadon's Deathcap",
+      "icon": "/ddragon/15.20.1/item/3089.png"
+    },
+    "3094": {
+      "id": "3094",
+      "name": "Rapid Firecannon",
+      "icon": "/ddragon/15.20.1/item/3094.png"
+    },
+    "3107": {
+      "id": "3107",
+      "name": "Redemption",
+      "icon": "/ddragon/15.20.1/item/3107.png"
+    },
+    "3110": {
+      "id": "3110",
+      "name": "Frozen Heart",
+      "icon": "/ddragon/15.20.1/item/3110.png"
+    },
+    "3111": {
+      "id": "3111",
+      "name": "Mercury's Treads",
+      "icon": "/ddragon/15.20.1/item/3111.png"
+    },
+    "3116": {
+      "id": "3116",
+      "name": "Rylai's Crystal Scepter",
+      "icon": "/ddragon/15.20.1/item/3116.png"
+    },
+    "3118": {
+      "id": "3118",
+      "name": "Malignance",
+      "icon": "/ddragon/15.20.1/item/3118.png"
+    },
+    "3135": {
+      "id": "3135",
+      "name": "Void Staff",
+      "icon": "/ddragon/15.20.1/item/3135.png"
+    },
+    "3152": {
+      "id": "3152",
+      "name": "Hextech Rocketbelt",
+      "icon": "/ddragon/15.20.1/item/3152.png"
+    },
+    "3158": {
+      "id": "3158",
+      "name": "Ionian Boots of Lucidity",
+      "icon": "/ddragon/15.20.1/item/3158.png"
+    },
+    "3161": {
+      "id": "3161",
+      "name": "Spear of Shojin",
+      "icon": "/ddragon/15.20.1/item/3161.png"
+    },
+    "3190": {
+      "id": "3190",
+      "name": "Locket of the Iron Solari",
+      "icon": "/ddragon/15.20.1/item/3190.png"
+    },
+    "3340": {
+      "id": "3340",
+      "name": "Stealth Ward",
+      "icon": "/ddragon/15.20.1/item/3340.png"
+    },
+    "3363": {
+      "id": "3363",
+      "name": "Farsight Alteration",
+      "icon": "/ddragon/15.20.1/item/3363.png"
+    },
+    "3364": {
+      "id": "3364",
+      "name": "Oracle Lens",
+      "icon": "/ddragon/15.20.1/item/3364.png"
+    },
+    "3877": {
+      "id": "3877",
+      "name": "Bloodsong",
+      "icon": "/ddragon/15.20.1/item/3877.png"
+    },
+    "6657": {
+      "id": "6657",
+      "name": "Rod of Ages",
+      "icon": "/ddragon/15.20.1/item/6657.png"
+    },
+    "6672": {
+      "id": "6672",
+      "name": "Kraken Slayer",
+      "icon": "/ddragon/15.20.1/item/6672.png"
+    }
+  },
+  "spells": {
+    "SummonerBarrier": {
+      "id": "SummonerBarrier",
+      "name": "Barrier",
+      "icon": "/ddragon/15.20.1/spell/SummonerBarrier.png"
+    },
+    "SummonerDot": {
+      "id": "SummonerDot",
+      "name": "Ignite",
+      "icon": "/ddragon/15.20.1/spell/SummonerDot.png"
+    },
+    "SummonerExhaust": {
+      "id": "SummonerExhaust",
+      "name": "Exhaust",
+      "icon": "/ddragon/15.20.1/spell/SummonerExhaust.png"
+    },
+    "SummonerFlash": {
+      "id": "SummonerFlash",
+      "name": "Flash",
+      "icon": "/ddragon/15.20.1/spell/SummonerFlash.png"
+    },
+    "SummonerHeal": {
+      "id": "SummonerHeal",
+      "name": "Heal",
+      "icon": "/ddragon/15.20.1/spell/SummonerHeal.png"
+    },
+    "SummonerSmite": {
+      "id": "SummonerSmite",
+      "name": "Smite",
+      "icon": "/ddragon/15.20.1/spell/SummonerSmite.png"
+    },
+    "SummonerTeleport": {
+      "id": "SummonerTeleport",
+      "name": "Teleport",
+      "icon": "/ddragon/15.20.1/spell/SummonerTeleport.png"
+    }
+  },
+  "runes": {
+    "8005": {
+      "id": 8005,
+      "name": "Press the Attack",
+      "icon": "/ddragon/15.20.1/rune/8005.png"
+    },
+    "8008": {
+      "id": 8008,
+      "name": "Lethal Tempo",
+      "icon": "/ddragon/15.20.1/rune/8008.png"
+    },
+    "8010": {
+      "id": 8010,
+      "name": "Conqueror",
+      "icon": "/ddragon/15.20.1/rune/8010.png"
+    },
+    "8021": {
+      "id": 8021,
+      "name": "Fleet Footwork",
+      "icon": "/ddragon/15.20.1/rune/8021.png"
+    },
+    "8112": {
+      "id": 8112,
+      "name": "Electrocute",
+      "icon": "/ddragon/15.20.1/rune/8112.png"
+    },
+    "8229": {
+      "id": 8229,
+      "name": "Arcane Comet",
+      "icon": "/ddragon/15.20.1/rune/8229.png"
+    },
+    "8230": {
+      "id": 8230,
+      "name": "Phase Rush",
+      "icon": "/ddragon/15.20.1/rune/8230.png"
+    },
+    "8439": {
+      "id": 8439,
+      "name": "Aftershock",
+      "icon": "/ddragon/15.20.1/rune/8439.png"
+    },
+    "8465": {
+      "id": 8465,
+      "name": "Guardian",
+      "icon": "/ddragon/15.20.1/rune/8465.png"
+    }
+  }
+}
