@@ -24,10 +24,12 @@ Kết nối Agent có token riêng trước khi hỗ trợ nhiều máy. Credent
 
 Theme v1 là JSON cấu hình, không thực thi JavaScript/CSS do người dùng nhập. Mở rộng asset manifest với logo/font/champion art sau khi duyệt UI. Mở rộng layout theo widget (anchor, x/y, size, zIndex) trước khi làm drag/drop. Giữ migration khi schema thay đổi.
 
-## Lộ trình ngay sau preview
+## Lộ trình sau baseline đã duyệt
 
-1. Duyệt bố cục ingame/draft theo hai ảnh; nhận branding thực.
-2. Tách scene/widget thành module riêng khi bổ sung assets và bố cục chi tiết.
-3. Collector read-only LCU + Live Client; ghi fixture có consent trong trận test.
-4. Kiểm chứng data matrix trên patch thực. Bật feature dựa capability, không dựa giao diện demo.
-5. Replay log, snapshot checkpoint, SQLite production config; kiểm thử reconnect và clock.
+1. UI draft/in-game đã được người dùng duyệt; renderer nằm trong `src/overlay`. Giữ baseline này.
+2. Xây màn hình chẩn đoán và khảo sát chỉ đọc LCU/Live Client trên máy thực; người dùng hỗ trợ thao tác client.
+3. Kiểm chứng data matrix trên patch thực trước khi cam kết field; bật feature dựa capability.
+4. Xây Agent, adapter và bản ghi phiên; kiểm thử reconnect, session và clock.
+5. Nối widget thật, hoàn thiện tùy biến và đóng gói. SQLite là lựa chọn tương lai, chưa phải dependency hiện tại.
+
+Chi tiết thứ tự và điều kiện hoàn thành: `ROADMAP.md`. Trạng thái bàn giao: `PROJECT_STATUS.md`.

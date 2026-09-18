@@ -1,5 +1,7 @@
 # Audit giao diện LoL — 18/09/2026
 
+**Cập nhật sau audit:** người dùng đã xác nhận draft và in-game đạt yêu cầu ban đầu. Hai scene là baseline được duyệt để tiếp tục kết nối dữ liệu. Các khác biệt bên dưới được ghi nhận, không phải yêu cầu mở lại vòng thiết kế.
+
 Nguồn chuẩn là `ingame.png` và `overlay.png` do người dùng cung cấp, kích thước 1920×1080. Đã đo vùng chính trên DOM của renderer độc lập ở cùng độ phân giải; không dùng ảnh nền để đánh giá thành phần đã vẽ.
 
 | Thành phần | X | Y | Rộng | Cao |
