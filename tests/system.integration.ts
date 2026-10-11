@@ -1,0 +1,287 @@
+import assert from "node:assert/strict";
+import { spawn } from "node:child_process";
+import { createServer as createPortProbe } from "node:net";
+import { mkdtemp, readFile, rm } from "node:fs/promises";
+import { existsSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
+import { WebSocket } from "ws";
+import { defaultTheme, themeSchema } from "../shared/schema";
+import { observerFrameSchema } from "../shared/observer";
+
+const base = "http://127.0.0.1:4311";
+// Refuse an occupied port before starting or mutating any unrelated backend.
+await new Promise<void>((resolve, reject) => {
+  const probe = createPortProbe();
+  probe.once("error", () =>
+    reject(Error("Test port 4311 is occupied; no backend commands were sent.")),
+  );
+  probe.listen(4311, "127.0.0.1", () =>
+    probe.close((error) => (error ? reject(error) : resolve())),
+  );
+});
+const directory = await mkdtemp(join(tmpdir(), "riot-overlay-test-"));
+const themePath = join(directory, "theme.json");
+const server = spawn(
+  process.execPath,
+  ["--import", "tsx", "server/index.ts", "--production"],
+  {
+    env: { ...process.env, PORT: "4311", RIOT_OVERLAY_THEME_PATH: themePath },
+    stdio: ["ignore", "pipe", "pipe"],
+  },
+);
+let logs = "";
+server.stdout.on("data", (b) => (logs += b));
+server.stderr.on("data", (b) => (logs += b));
+let ws: WebSocket | undefined;
+const wait = (ms: number) => new Promise((r) => setTimeout(r, ms));
+try {
+  let ready = false;
+  for (let i = 0; i < 80; i++) {
+    if (server.exitCode !== null) throw Error(logs);
+    try {
+      ready = (await fetch(base + "/api/health")).ok;
+    } catch {}
+    if (ready) break;
+    await wait(100);
+  }
+  assert.ok(
+    ready,
+    `isolated backend startup failed: ${logs || "no startup output (check sandbox/network permissions)"}`,
+  );
+  for (const [path, mime] of [
+    ["/broadcast/artwork/riot-dragons/water.webp", "image/webp"],
+    ["/fonts/riot/Spiegel-Regular.otf", "font/otf"],
+    ["/fonts/broadcast/Anton-Regular.ttf", "font/ttf"],
+  ]) {
+    const response = await fetch(base + path);
+    assert.equal(response.status, 200, path);
+    assert.equal(response.headers.get("content-type"), mime, path);
+    assert.ok((await response.arrayBuffer()).byteLength > 1000);
+  }
+  assert.equal((await fetch(base + "/%2e%2e%2fpackage.json")).status, 404);
+  await new Promise<void>((resolve, reject) => {
+    const rejected = new WebSocket(base.replace("http", "ws") + "/ws", {
+      origin: base,
+      headers: { Host: "example.com" },
+    });
+    rejected.once("open", () => {
+      rejected.terminate();
+      reject(Error("WebSocket accepted foreign Host"));
+    });
+    rejected.once("error", () => resolve());
+  });
+  process.env.OVERLAY_TEST_URL = base;
+  await import("./observer.integration");
+  await import("./transport.integration");
+  ws = new WebSocket(base.replace("http", "ws") + "/ws?role=studio", {
+    origin: base,
+  });
+  const messages: any[] = [];
+  ws.on("message", (raw) => messages.push(JSON.parse(raw.toString())));
+  const until = async (
+    predicate: (message: any) => boolean,
+    timeout = 15000,
+  ) => {
+    const start = Date.now();
+    while (Date.now() - start < timeout) {
+      const index = messages.findIndex(predicate);
+      if (index >= 0) return messages.splice(index, 1)[0];
+      await wait(20);
+    }
+    throw Error("Timed out waiting for backend result");
+  };
+  await until((m) => m.type === "snapshot");
+  const command = async (value: any) => {
+    messages.length = 0;
+    ws!.send(JSON.stringify(value));
+    return until((m) => m.type === "snapshot" || m.type === "error");
+  };
+  for (const value of ["ingame", "draft", "postgame"])
+    assert.equal((await command({ type: "scene", value })).state.scene, value);
+  await command({ type: "mockVisible", value: true });
+  for (const value of ["kill", "level", "objective", "draft"])
+    assert.equal((await command({ type: "event", value })).type, "snapshot");
+  for (const value of ["balanced", "advantage", "missing"])
+    assert.equal((await command({ type: "scenario", value })).type, "snapshot");
+  for (const value of [true, false])
+    assert.equal(
+      (await command({ type: "playing", value })).state.playing,
+      value,
+    );
+  assert.equal(
+    (await command({ type: "seek", value: 600 })).state.gameTime,
+    600,
+  );
+  for (const invalid of [
+    { type: "seek", value: -1 },
+    { type: "provider", value: "bad" },
+    { type: "captureLoad", id: "../secret" },
+    { type: "theme", value: { ...defaultTheme, blue: "url(x)" } },
+    { type: "captureControl", speed: 9 },
+  ])
+    assert.equal((await command(invalid)).type, "error");
+  const theme = themeSchema.parse({
+    ...defaultTheme,
+    blueName: "TEST BLUE",
+    variant: "minimal",
+  });
+  assert.deepEqual(
+    (await command({ type: "theme", value: JSON.parse(JSON.stringify(theme)) }))
+      .state.theme,
+    theme,
+  );
+  let saved = false;
+  for (let i = 0; i < 50; i++) {
+    try {
+      saved =
+        JSON.parse(await readFile(themePath, "utf8")).blueName === "TEST BLUE";
+    } catch {}
+    if (saved) break;
+    await wait(20);
+  }
+  assert.ok(saved, "theme persistence in isolated path");
+  assert.equal(
+    (await command({ type: "reset" })).state.theme.blueName,
+    "TEST BLUE",
+  );
+  assert.equal(
+    (await command({ type: "provider", value: "recording" })).state.provider,
+    "recording",
+  );
+  assert.equal(
+    (await command({ type: "captureControl", playing: true })).type,
+    "error",
+    "cannot play before load",
+  );
+  const id = "lb-2026-10-11T09-07-37-947Z";
+  if (existsSync(`data/captures/${id}/leaguebroadcast-ws.ndjson`)) {
+    assert.equal(
+      (await command({ type: "captureLoad", id })).state.provider,
+      "recording",
+    );
+    const first = observerFrameSchema.parse(
+      (
+        await until(
+          (m) => m.type === "observer" && m.frame?.playback?.captureId === id,
+        )
+      ).frame,
+    );
+    assert.equal(first.sample?.players.length, 10);
+    assert.equal(first.newEvents.length, 0);
+    const caps = await (await fetch(base + "/api/rehearsal")).json();
+    for (const button of caps.buttons) {
+      const result = await command({ type: "rehearsal", value: button.kind });
+      assert.equal(
+        result.type,
+        button.available ? "snapshot" : "error",
+        button.kind,
+      );
+      if (button.available) {
+        assert.equal(
+          result.state.rehearsal?.kind,
+          button.kind === "clear" ? undefined : button.kind,
+        );
+        const observed = observerFrameSchema.parse(
+          await (await fetch(base + "/api/observer")).json(),
+        );
+        assert.equal(observed.sample?.players.length, 10);
+      }
+    }
+    for (const [value, variant] of [
+      ["timers", { pit: "GRUB", dragon: "elder" }],
+      ["timers", { pit: "HERALD", dragon: "hextech" }],
+      ["dragon", { dragon: "elder" }],
+      ["soul", { dragon: "chemtech" }],
+      ["baron", { buffs: "baron" }],
+      ["baron", { buffs: "elder" }],
+      ["baron", { buffs: "both" }],
+      ["inhibitor", { inhibitorTeam: "ORDER" }],
+      ["inhibitor", { inhibitorTeam: "CHAOS" }],
+      ["tower", { tower: "first" }],
+      ["tower", { tower: "normal" }],
+    ] as const) {
+      const baseline = await command({ type: "rehearsal", value });
+      assert.equal(baseline.type, "snapshot");
+      const before = await (await fetch(base + "/api/observer")).json();
+      const result = await command({ type: "rehearsal", value, variant });
+      assert.equal(result.type, "snapshot");
+      assert.deepEqual(result.state.rehearsal.variant, variant);
+      const after = observerFrameSchema.parse(
+        await (await fetch(base + "/api/observer")).json(),
+      );
+      assert.deepEqual(
+        after.sample?.pitTimers?.map((t) => t.type.value),
+        before.sample?.pitTimers?.map((t: any) => t.type.value),
+      );
+      assert.deepEqual(
+        after.sample?.inhibitors?.value,
+        before.sample?.inhibitors?.value,
+      );
+      assert.deepEqual(
+        after.sample?.players.map((p) => [
+          p.hasBaron?.value,
+          p.hasElder?.value,
+        ]),
+        before.sample?.players.map((p: any) => [
+          p.hasBaron?.value,
+          p.hasElder?.value,
+        ]),
+      );
+    }
+    assert.equal(
+      (
+        await command({
+          type: "rehearsal",
+          value: "soul",
+          variant: { dragon: "elder" },
+        })
+      ).type,
+      "error",
+    );
+    assert.equal(
+      (
+        await command({
+          type: "rehearsal",
+          value: "soul",
+          variant: { buffs: "both" },
+        })
+      ).type,
+      "error",
+    );
+    await command({
+      type: "captureControl",
+      positionMs: 400000,
+      playing: false,
+    });
+    const paused = await (await fetch(base + "/api/observer")).json();
+    await wait(250);
+    assert.equal(
+      (await (await fetch(base + "/api/observer")).json()).sample.gameTime
+        .value,
+      paused.sample.gameTime.value,
+    );
+    await command({ type: "captureControl", speed: 4, playing: true });
+    await wait(300);
+    assert.ok(
+      (await (await fetch(base + "/api/observer")).json()).sample.gameTime
+        .value > paused.sample.gameTime.value,
+    );
+    await command({ type: "captureControl", positionMs: 0, playing: false });
+    assert.equal(
+      (await (await fetch(base + "/api/observer")).json()).newEvents.length,
+      0,
+    );
+  } else console.log("SKIP: local real capture not present");
+  await command({ type: "provider", value: "riot" });
+  await command({ type: "mockVisible", value: false });
+  console.log(
+    "PASS: isolated scenes, demo controls, validation, theme persistence, providers, full capture load/pause/speed/seek",
+  );
+} finally {
+  ws?.terminate();
+  server.kill();
+  if (server.exitCode === null)
+    await new Promise<void>((resolve) => server.once("exit", () => resolve()));
+  await rm(directory, { recursive: true, force: true });
+}

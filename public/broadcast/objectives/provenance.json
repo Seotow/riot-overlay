@@ -1,0 +1,67 @@
+{
+  "repository": "https://github.com/BlueBottleGG/leaguebroadcast-js-client-demo",
+  "revision": "486502329f2c18ddf1cfce6cb8886ae4606b0722",
+  "notice": "Visual game assets hosted by BlueBottle; underlying Riot artwork. No provider runtime/source code copied. Verify redistribution rights before publishing.",
+  "assets": [
+    {
+      "id": "baron",
+      "source": "https://raw.githubusercontent.com/BlueBottleGG/leaguebroadcast-js-client-demo/486502329f2c18ddf1cfce6cb8886ae4606b0722/src/assets/baron/baron.png",
+      "path": "public/broadcast/objectives/baron.png",
+      "sha256": "ccf58832715dc990a605f7e23ded757f6423340ea5f891f651ee61a3a1bb07e7"
+    },
+    {
+      "id": "herald",
+      "source": "https://raw.githubusercontent.com/BlueBottleGG/leaguebroadcast-js-client-demo/486502329f2c18ddf1cfce6cb8886ae4606b0722/src/assets/baron/herald.png",
+      "path": "public/broadcast/objectives/herald.png",
+      "sha256": "00cbb08a95b40301104aac0c9536944168f7f50bcf5880c654df55be82a23969"
+    },
+    {
+      "id": "grubs",
+      "source": "https://raw.githubusercontent.com/BlueBottleGG/leaguebroadcast-js-client-demo/486502329f2c18ddf1cfce6cb8886ae4606b0722/src/assets/baron/grubs.png",
+      "path": "public/broadcast/objectives/grubs.png",
+      "sha256": "20150a59a17056d97d23ddf59c966e9360fde35fdc0a6b1dcca32d11ae1db637"
+    },
+    {
+      "id": "air",
+      "source": "https://raw.githubusercontent.com/BlueBottleGG/leaguebroadcast-js-client-demo/486502329f2c18ddf1cfce6cb8886ae4606b0722/src/assets/dragon/air.png",
+      "path": "public/broadcast/objectives/air.png",
+      "sha256": "6afb8b79cfea564bd275cdff87db5a60434d11f94f7a73e2dce865665549d872"
+    },
+    {
+      "id": "chemtech",
+      "source": "https://raw.githubusercontent.com/BlueBottleGG/leaguebroadcast-js-client-demo/486502329f2c18ddf1cfce6cb8886ae4606b0722/src/assets/dragon/chemtech.png",
+      "path": "public/broadcast/objectives/chemtech.png",
+      "sha256": "1f2eb561cead94714150cd8a3aea102af17295fb07d726ffa6c95c3654a96084"
+    },
+    {
+      "id": "earth",
+      "source": "https://raw.githubusercontent.com/BlueBottleGG/leaguebroadcast-js-client-demo/486502329f2c18ddf1cfce6cb8886ae4606b0722/src/assets/dragon/earth.png",
+      "path": "public/broadcast/objectives/earth.png",
+      "sha256": "14da507408d57e25c240f8f879aef46c3e1cc53eadfd93a9db62fe12de29bac7"
+    },
+    {
+      "id": "elder",
+      "source": "https://raw.githubusercontent.com/BlueBottleGG/leaguebroadcast-js-client-demo/486502329f2c18ddf1cfce6cb8886ae4606b0722/src/assets/dragon/elder.png",
+      "path": "public/broadcast/objectives/elder.png",
+      "sha256": "c2cd87576b386606ac3ed5a5fbe49bafe1b090aaebb46fadb1a899d2bb83318a"
+    },
+    {
+      "id": "fire",
+      "source": "https://raw.githubusercontent.com/BlueBottleGG/leaguebroadcast-js-client-demo/486502329f2c18ddf1cfce6cb8886ae4606b0722/src/assets/dragon/fire.png",
+      "path": "public/broadcast/objectives/fire.png",
+      "sha256": "7710e45b22a46004229c493804d00155039bf8ef8253dc994a3db1a802402854"
+    },
+    {
+      "id": "hextech",
+      "source": "https://raw.githubusercontent.com/BlueBottleGG/leaguebroadcast-js-client-demo/486502329f2c18ddf1cfce6cb8886ae4606b0722/src/assets/dragon/hextech.png",
+      "path": "public/broadcast/objectives/hextech.png",
+      "sha256": "16ff94664e2f4733f921a9ef846d5dfd144259522322861b50d6a16ea887657c"
+    },
+    {
+      "id": "water",
+      "source": "https://raw.githubusercontent.com/BlueBottleGG/leaguebroadcast-js-client-demo/486502329f2c18ddf1cfce6cb8886ae4606b0722/src/assets/dragon/water.png",
+      "path": "public/broadcast/objectives/water.png",
+      "sha256": "1e2ca4dae2032b26042ea6b5843ffc86d5c40ef003c0219b4f07b951d360620e"
+    }
+  ]
+}

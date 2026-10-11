@@ -34,4 +34,34 @@ Logo/font riêng, vị trí/kích thước từng widget, preset có migration, 
 
 ## Ngoài phạm vi hiện tại
 
-Valorant và TFT khảo sát sau khi đường thu dữ liệu LoL ổn định. Các project tham khảo ban đầu: Riot Developer Portal, RCVolus/league-prod-toolkit, League Broadcast và ValoSpectra/Spectra-Client. Thông tin API/chính sách có thể đổi; cần kiểm chứng lại từ nguồn chính thức khi bắt đầu adapter tương ứng.
+Theo yêu cầu 11/10/2026, Valorant bắt đầu nhánh nghiên cứu ValoSpectra song song với LoL; xem [VALOSPECTRA_FEASIBILITY.md](VALOSPECTRA_FEASIBILITY.md). Chưa triển khai adapter/renderer Valorant và chưa thay ưu tiên production LoL. TFT vẫn để sau. Các project tham khảo ban đầu: Riot Developer Portal, RCVolus/league-prod-toolkit, League Broadcast và ValoSpectra/Spectra-Client. Thông tin API/chính sách có thể đổi; cần kiểm chứng lại từ nguồn chính thức khi bắt đầu adapter tương ứng.
+
+## Phase provider và game module
+
+1. Giữ LeagueBroadcast là dependency production cho telemetry đầy đủ; Riot local là replay/diagnostic và chế độ giới hạn. Dashboard phải thể hiện rõ trạng thái này và không tự fallback.
+2. Lập ma trận sự kiện giải đấu từ video tham chiếu: nguồn trigger, payload, điều kiện phát, thời lượng, ưu tiên, chống trùng và hành vi khi seek/reconnect.
+3. Hoàn thiện event contract và renderer cho kill, multikill, first blood, ace, objective, tower, inhibitor, power play, pause/resume, replay và transition đã được xác nhận trong audit.
+4. Audit rồi chỉnh scoreboard, player panel, objective/timer, lower-third, replay/transition và công cụ điều khiển production; không mở lại baseline draft/in-game ngoài các khác biệt được video chứng minh.
+5. Xây bộ phát bản ghi regression để kiểm tra toàn bộ trigger/animation mà không cần custom mới ở mỗi lần sửa.
+6. Tạo contract và renderer riêng cho Valorant sau khi đường production LoL hoàn tất.
+
+Ma trận chi tiết và ranh giới nghiên cứu nằm tại `DATA_SOURCES.md`.
+
+Mốc chốt phase UI/phòng thử 11/10/2026: đã có gold/level ranking 10 người,
+rune scene, Soul takeover sáu artwork tĩnh và copy có nguồn, Baron Power Play
+derived/Elder timer, active item/GA sweep, quest progress/reward/cue, trụ đầu
+và inhibitor một đội mỗi lần. Dropdown phòng thử phủ các biến thể mục tiêu.
+Parser/capture regression toàn trận đã có. **Chốt phần đã có dữ liệu, không
+chốt toàn bộ sản phẩm production**: combat/damage tự động, Zhonya activation,
+end-game, draft live và transition đầy đủ vẫn hoãn; Elder/nhà lính xanh thiếu
+mẫu live. Chưa chứng minh 95–98% toàn UI. Collector headless/REA là nhánh riêng.
+
+## Tiến độ chuẩn bị in-game
+
+Đã có collector trong backend, adapter mẫu đã lọc, session/epoch/dedup và bảng quan sát Studio; xem `PROJECT_STATUS.md`. Người dùng chọn kiểm chứng bằng replay trước, tạm hoãn champ-select. Việc kế tiếp cần client: xác minh từng field, pause/tốc độ/tua/reconnect. Không coi kiểm thử fixture là bằng chứng API thực tế hỗ trợ field.
+
+## Ưu tiên mới cho collector — 11/10/2026
+
+Ưu tiên chính: xác minh CollectorHost headless lấy dữ liệu spectator **live** khi LB UI tắt, sau đó adapter và autostart cùng app. Cập nhật này thay thứ tự “replay trước” của các mốc cũ đối với nhánh collector.
+
+**Ưu tiên thấp:** điều tra collector có thu telemetry đầy đủ khi xem replay `.rofl` hay không. Phân biệt replay trận trong LoL với phát lại snapshot NDJSON của overlay và tua trong spectator live. Kiểm tra từng tầng: phát hiện cửa sổ → kết nối/auth/version → GameStarted/capture → GameInfo → normalized state. Không chỉ dựa vào Replay API có clock hoặc UI báo Loading. Điều kiện đạt: dữ liệu 10 player/field bắt buộc có mẫu thật, pause/tốc độ/seek không giữ stale hoặc phát event lịch sử sai. Không yêu cầu người dùng vào trận riêng cho nhánh thấp này trước khi đường live đạt. Xem mục mới trong `LEAGUEBROADCAST_FEASIBILITY.md`.

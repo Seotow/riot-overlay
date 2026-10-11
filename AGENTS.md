@@ -1,5 +1,14 @@
 # Hướng dẫn làm việc với Riot Overlay
 
+## Mốc hiện hành 11/10/2026
+
+Phase UI/phòng thử trên snapshot thật được chốt theo PROJECT_STATUS.md và
+TEST_REPORT.md. Không quay lại các bước khảo sát cũ như thể chưa triển khai.
+Giữ nhánh REA/collector và tài liệu Valorant để tiếp tục riêng; chưa có
+collector headless thay LB hoặc runtime Valorant. Các mốc thiếu telemetry
+đã hoãn (damage/combat/end-game/Elder live) phải tiếp tục ghi rõ, không
+biến preview giả lập UI thành dữ liệu thật. Không tuyên bố 95–98% khi chưa đo.
+
 ## Đọc trước khi tiếp tục
 
 1. `PROJECT_STATUS.md`: trạng thái bàn giao, quyết định người dùng đã chốt.
@@ -20,7 +29,7 @@ Các tài liệu này giúp tiếp tục công việc mà không cần lịch s�
 
 ## Ranh giới kỹ thuật
 
-- Hiện toàn bộ số liệu trận là mock. Có ảnh/tên Data Dragon không đồng nghĩa có dữ liệu live.
+- Có nhánh in-game quan sát thật và nhánh mock riêng. Có ảnh/tên Data Dragon không tự chứng minh field đã được nguồn live cung cấp.
 - Luồng mục tiêu: nguồn local → Observer Agent → adapter/backend → Studio và renderer OBS.
 - Không đưa credentials LCU vào frontend, log, fixture, tài liệu hay Git. Không đưa raw payload provider trực tiếp vào widget.
 - Không giả lập giá trị thiếu thành dữ liệu thật. Dùng availability/capability và `null` thích hợp; chỉ hứa hỗ trợ field sau khi kiểm chứng.
@@ -38,3 +47,7 @@ Các tài liệu này giúp tiếp tục công việc mà không cần lịch s�
 - Không cần chạy test ứng dụng cho thay đổi tài liệu thuần túy; kiểm tra liên kết, lệnh và tính nhất quán.
 
 Cập nhật `PROJECT_STATUS.md` khi hoàn thành một mốc, ghi rõ đã làm, chưa làm, kiểm chứng và bước tiếp theo. Không ghi trạng thái chạy của port/process như một đảm bảo lâu dài.
+
+## Cập nhật hướng ưu tiên 19/09/2026
+
+Người dùng chọn in-game trước và sẽ mở replay để cung cấp mẫu. Collector/adapter/session phục vụ Studio đã được chuẩn bị, xem phần cuối PROJECT_STATUS.md. Tiếp tục kiểm chứng replay khi client sẵn sàng; tạm hoãn champ-select. Không coi Replay API có clock là bằng chứng có dữ liệu 10 người chơi.

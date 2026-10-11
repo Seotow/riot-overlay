@@ -31,3 +31,16 @@ test("every mocked game entity resolves to a named, cached Data Dragon asset", (
   }
   assert.equal(champion("MonkeyKing").name, "Wukong");
 });
+
+test("official LoL typography assets used by Studio and overlay are present", () => {
+  for (const name of [
+    "BeaufortforLOL-Regular.otf",
+    "BeaufortforLOL-Bold.otf",
+    "BeaufortforLOL-Heavy.otf",
+    "Spiegel-Regular.otf",
+    "Spiegel-SemiBold.otf",
+    "Spiegel-Bold.otf",
+  ]) {
+    assert.ok(statSync(resolve("public", "fonts", "riot", name)).size > 50_000, name);
+  }
+});

@@ -1,0 +1,45 @@
+{
+  "version": "16.20",
+  "spells": {
+    "S5_SummonerSmitePlayerGanker": {
+      "id": "S5_SummonerSmitePlayerGanker",
+      "name": "Unleashed Smite",
+      "key": 0,
+      "icon": "/broadcast/spells/S5_SummonerSmitePlayerGanker.png",
+      "source": "https://raw.communitydragon.org/16.20/game/data/spells/icons2d/avatarsmite_firstupgrade.png",
+      "sha256": "3b79e530eabf78ba45ac144905ac6ee77c3832cbd08fe875429c86a6682e843c"
+    },
+    "SummonerSmiteAvatarOffensive": {
+      "id": "SummonerSmiteAvatarOffensive",
+      "name": "Primal Smite · Scorchclaw",
+      "key": 0,
+      "icon": "/broadcast/spells/SummonerSmiteAvatarOffensive.png",
+      "source": "https://raw.communitydragon.org/16.20/game/data/spells/icons2d/1101_smite.png",
+      "sha256": "8d75de11e3c2eb3fc026af9bb0a2ceedaf20f84b3b57a1f902da9288d8d92019"
+    },
+    "SummonerSmiteAvatarDefensive": {
+      "id": "SummonerSmiteAvatarDefensive",
+      "name": "Primal Smite · Mosstomper",
+      "key": 0,
+      "icon": "/broadcast/spells/SummonerSmiteAvatarDefensive.png",
+      "source": "https://raw.communitydragon.org/16.20/game/data/spells/icons2d/1103_smite.png",
+      "sha256": "4662849d5ce5f1dd17975216e217c48dc0925802c7746489425cc82a8b5da417"
+    },
+    "SummonerSmiteAvatarUtility": {
+      "id": "SummonerSmiteAvatarUtility",
+      "name": "Primal Smite · Gustwalker",
+      "key": 0,
+      "icon": "/broadcast/spells/SummonerSmiteAvatarUtility.png",
+      "source": "https://raw.communitydragon.org/16.20/game/data/spells/icons2d/1102_smite.png",
+      "sha256": "9d1755e2e457f7d1b5af93cac2f3d2d36cbc5f3e544da7f6143da4a8d1a9feb1"
+    },
+    "S12_SummonerTeleportUpgrade": {
+      "id": "S12_SummonerTeleportUpgrade",
+      "name": "Unleashed Teleport",
+      "key": 0,
+      "icon": "/broadcast/spells/S12_SummonerTeleportUpgrade.png",
+      "source": "https://raw.communitydragon.org/16.20/game/data/spells/icons2d/unleashed_teleport_new.png",
+      "sha256": "520634c86c6ccac0dc2b56caa4259d615f77b2792b2911dddae3c7705b2b488b"
+    }
+  }
+}

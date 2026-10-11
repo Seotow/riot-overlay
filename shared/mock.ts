@@ -6,6 +6,8 @@ export function createState(): State {
     protocol: 1,
     revision: 0,
     source: "mock",
+    mockVisible: false,
+    provider: "riot",
     scene: "ingame",
     playing: false,
     gameTime: 1538,
@@ -41,6 +43,11 @@ export function createState(): State {
 export function applyCommand(state: State, cmd: Command): State {
   const s = structuredClone(state);
   s.revision++;
+  if (cmd.type === "provider") s.provider = cmd.value;
+  if (cmd.type === "mockVisible") {
+    s.mockVisible = cmd.value;
+    if (!cmd.value) s.playing = false;
+  }
   if (cmd.type === "theme") s.theme = cmd.value;
   if (cmd.type === "scene") s.scene = cmd.value;
   if (cmd.type === "playing") s.playing = cmd.value;
@@ -81,11 +88,19 @@ export function applyCommand(state: State, cmd: Command): State {
       s.players[2].level = Math.min(18, s.players[2].level + 1);
     if (cmd.value === "objective") {
       s.objectives = [{ name: "DRAGON", endsAt: s.gameTime + 300 }];
+      s.events.unshift({
+        id: s.revision,
+        at: s.gameTime,
+        text: `${s.theme.blueName}  ›  RỒNG`,
+      });
+      s.events = s.events.slice(0, 4);
     }
   }
   if (cmd.type === "reset") {
     const reset = createState();
     reset.theme = s.theme;
+    reset.mockVisible = s.mockVisible;
+    reset.provider = s.provider;
     reset.revision = s.revision;
     return reset;
   }

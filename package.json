@@ -8,15 +8,19 @@
     "build": "tsc --noEmit && vite build",
     "start": "tsx server/index.ts --production",
     "test": "tsx --test tests/*.test.ts",
-    "assets:sync": "node scripts/sync-assets.mjs"
+    "test:integration": "tsx tests/system.integration.ts",
+    "assets:sync": "node scripts/sync-assets.mjs",
+    "assets:sync:live": "node scripts/sync-live-assets.mjs",
+    "capture:live": "node scripts/capture-live-session.mjs",
+    "capture:lb": "node scripts/capture-leaguebroadcast.mjs",
+    "capture:mark": "node scripts/mark-capture-event.mjs",
+    "capture:analyze": "node scripts/analyze-capture-events.mjs"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "module",
   "dependencies": {
-    "@fontsource/anton": "^5.3.0",
-    "@fontsource/roboto-condensed": "^5.3.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "ws": "^8.18.0",

@@ -50,3 +50,38 @@ test("seeking clears transient events and resets demo timers deterministically",
   assert.equal(s.events.length, 0);
   assert.equal(s.objectives[0].endsAt, 728);
 });
+test("provider selection is validated and survives a demo reset", () => {
+  const selected = applyCommand(createState(), {
+    type: "provider",
+    value: "leaguebroadcast",
+  });
+  assert.equal(selected.provider, "leaguebroadcast");
+  assert.equal(applyCommand(selected, { type: "reset" }).provider, "leaguebroadcast");
+  assert.equal(
+    commandSchema.safeParse({ type: "provider", value: "memory-reader" }).success,
+    false,
+  );
+});
+
+test("mock fixture remains a complete ten-player tournament sample", () => {
+  const state = createState();
+  assert.equal(state.players.length, 10);
+  assert.deepEqual(state.players.map(player => player.role), ["TOP", "JGL", "MID", "BOT", "SUP", "TOP", "JGL", "MID", "BOT", "SUP"]);
+  assert.ok(state.players.every(player => player.items.length === 6));
+  assert.ok(state.players.every(player => player.spells.length === 2));
+  assert.ok(state.players.every(player => player.gold !== null && player.gold > 0));
+  assert.equal(themeSchema.safeParse(state.theme).success, true);
+});
+
+test("every mock control produces an explicit, deterministic state change", () => {
+  const base = createState();
+  const level = applyCommand(base, { type: "event", value: "level" });
+  assert.equal(level.players[2].level, base.players[2].level + 1);
+  const objective = applyCommand(base, { type: "event", value: "objective" });
+  assert.equal(objective.objectives[0].name, "DRAGON");
+  assert.match(objective.events[0].text, /RỒNG/);
+  const draft = applyCommand(base, { type: "event", value: "draft" });
+  assert.equal(draft.draftStep, (base.draftStep + 1) % 11);
+  const advantage = applyCommand(base, { type: "scenario", value: "advantage" });
+  assert.ok(advantage.players.slice(0, 5).every((player, index) => player.gold! > advantage.players[index + 5].gold!));
+});

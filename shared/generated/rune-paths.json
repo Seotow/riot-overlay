@@ -1,0 +1,253 @@
+{
+  "version": "16.20.1",
+  "paths": {
+    "8005": {
+      "treeId": 8000,
+      "keystone": true
+    },
+    "8008": {
+      "treeId": 8000,
+      "keystone": true
+    },
+    "8009": {
+      "treeId": 8000,
+      "keystone": false
+    },
+    "8010": {
+      "treeId": 8000,
+      "keystone": true
+    },
+    "8014": {
+      "treeId": 8000,
+      "keystone": false
+    },
+    "8017": {
+      "treeId": 8000,
+      "keystone": false
+    },
+    "8021": {
+      "treeId": 8000,
+      "keystone": true
+    },
+    "8105": {
+      "treeId": 8100,
+      "keystone": false
+    },
+    "8106": {
+      "treeId": 8100,
+      "keystone": false
+    },
+    "8112": {
+      "treeId": 8100,
+      "keystone": true
+    },
+    "8126": {
+      "treeId": 8100,
+      "keystone": false
+    },
+    "8128": {
+      "treeId": 8100,
+      "keystone": true
+    },
+    "8135": {
+      "treeId": 8100,
+      "keystone": false
+    },
+    "8137": {
+      "treeId": 8100,
+      "keystone": false
+    },
+    "8139": {
+      "treeId": 8100,
+      "keystone": false
+    },
+    "8140": {
+      "treeId": 8100,
+      "keystone": false
+    },
+    "8141": {
+      "treeId": 8100,
+      "keystone": false
+    },
+    "8143": {
+      "treeId": 8100,
+      "keystone": false
+    },
+    "8210": {
+      "treeId": 8200,
+      "keystone": false
+    },
+    "8214": {
+      "treeId": 8200,
+      "keystone": true
+    },
+    "8224": {
+      "treeId": 8200,
+      "keystone": false
+    },
+    "8226": {
+      "treeId": 8200,
+      "keystone": false
+    },
+    "8229": {
+      "treeId": 8200,
+      "keystone": true
+    },
+    "8230": {
+      "treeId": 8200,
+      "keystone": true
+    },
+    "8232": {
+      "treeId": 8200,
+      "keystone": false
+    },
+    "8233": {
+      "treeId": 8200,
+      "keystone": false
+    },
+    "8234": {
+      "treeId": 8200,
+      "keystone": false
+    },
+    "8236": {
+      "treeId": 8200,
+      "keystone": false
+    },
+    "8237": {
+      "treeId": 8200,
+      "keystone": false
+    },
+    "8242": {
+      "treeId": 8400,
+      "keystone": false
+    },
+    "8275": {
+      "treeId": 8200,
+      "keystone": false
+    },
+    "8299": {
+      "treeId": 8000,
+      "keystone": false
+    },
+    "8304": {
+      "treeId": 8300,
+      "keystone": false
+    },
+    "8306": {
+      "treeId": 8300,
+      "keystone": false
+    },
+    "8313": {
+      "treeId": 8300,
+      "keystone": false
+    },
+    "8316": {
+      "treeId": 8300,
+      "keystone": false
+    },
+    "8321": {
+      "treeId": 8300,
+      "keystone": false
+    },
+    "8345": {
+      "treeId": 8300,
+      "keystone": false
+    },
+    "8347": {
+      "treeId": 8300,
+      "keystone": false
+    },
+    "8351": {
+      "treeId": 8300,
+      "keystone": true
+    },
+    "8352": {
+      "treeId": 8300,
+      "keystone": false
+    },
+    "8360": {
+      "treeId": 8300,
+      "keystone": true
+    },
+    "8369": {
+      "treeId": 8300,
+      "keystone": true
+    },
+    "8401": {
+      "treeId": 8400,
+      "keystone": false
+    },
+    "8410": {
+      "treeId": 8300,
+      "keystone": false
+    },
+    "8429": {
+      "treeId": 8400,
+      "keystone": false
+    },
+    "8437": {
+      "treeId": 8400,
+      "keystone": true
+    },
+    "8439": {
+      "treeId": 8400,
+      "keystone": true
+    },
+    "8444": {
+      "treeId": 8400,
+      "keystone": false
+    },
+    "8446": {
+      "treeId": 8400,
+      "keystone": false
+    },
+    "8451": {
+      "treeId": 8400,
+      "keystone": false
+    },
+    "8453": {
+      "treeId": 8400,
+      "keystone": false
+    },
+    "8463": {
+      "treeId": 8400,
+      "keystone": false
+    },
+    "8465": {
+      "treeId": 8400,
+      "keystone": true
+    },
+    "8473": {
+      "treeId": 8400,
+      "keystone": false
+    },
+    "8992": {
+      "treeId": 8200,
+      "keystone": true
+    },
+    "9101": {
+      "treeId": 8000,
+      "keystone": false
+    },
+    "9103": {
+      "treeId": 8000,
+      "keystone": false
+    },
+    "9104": {
+      "treeId": 8000,
+      "keystone": false
+    },
+    "9105": {
+      "treeId": 8000,
+      "keystone": false
+    },
+    "9111": {
+      "treeId": 8000,
+      "keystone": false
+    },
+    "9923": {
+      "treeId": 8100,
+      "keystone": true
+    }
+  }
+}

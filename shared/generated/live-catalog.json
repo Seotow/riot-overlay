@@ -1,0 +1,6138 @@
+{
+  "version": "16.20.1",
+  "locale": "en_US",
+  "source": "https://ddragon.leagueoflegends.com",
+  "champions": {
+    "1": {
+      "id": "Annie",
+      "key": 1,
+      "name": "Annie",
+      "icon": "/ddragon/16.20.1/champion/Annie.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Annie.png"
+    },
+    "2": {
+      "id": "Olaf",
+      "key": 2,
+      "name": "Olaf",
+      "icon": "/ddragon/16.20.1/champion/Olaf.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Olaf.png"
+    },
+    "3": {
+      "id": "Galio",
+      "key": 3,
+      "name": "Galio",
+      "icon": "/ddragon/16.20.1/champion/Galio.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Galio.png"
+    },
+    "4": {
+      "id": "TwistedFate",
+      "key": 4,
+      "name": "Twisted Fate",
+      "icon": "/ddragon/16.20.1/champion/TwistedFate.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/TwistedFate.png"
+    },
+    "5": {
+      "id": "XinZhao",
+      "key": 5,
+      "name": "Xin Zhao",
+      "icon": "/ddragon/16.20.1/champion/XinZhao.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/XinZhao.png"
+    },
+    "6": {
+      "id": "Urgot",
+      "key": 6,
+      "name": "Urgot",
+      "icon": "/ddragon/16.20.1/champion/Urgot.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Urgot.png"
+    },
+    "7": {
+      "id": "Leblanc",
+      "key": 7,
+      "name": "LeBlanc",
+      "icon": "/ddragon/16.20.1/champion/Leblanc.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Leblanc.png"
+    },
+    "8": {
+      "id": "Vladimir",
+      "key": 8,
+      "name": "Vladimir",
+      "icon": "/ddragon/16.20.1/champion/Vladimir.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Vladimir.png"
+    },
+    "9": {
+      "id": "Fiddlesticks",
+      "key": 9,
+      "name": "Fiddlesticks",
+      "icon": "/ddragon/16.20.1/champion/Fiddlesticks.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Fiddlesticks.png"
+    },
+    "10": {
+      "id": "Kayle",
+      "key": 10,
+      "name": "Kayle",
+      "icon": "/ddragon/16.20.1/champion/Kayle.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Kayle.png"
+    },
+    "11": {
+      "id": "MasterYi",
+      "key": 11,
+      "name": "Master Yi",
+      "icon": "/ddragon/16.20.1/champion/MasterYi.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/MasterYi.png"
+    },
+    "12": {
+      "id": "Alistar",
+      "key": 12,
+      "name": "Alistar",
+      "icon": "/ddragon/16.20.1/champion/Alistar.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Alistar.png"
+    },
+    "13": {
+      "id": "Ryze",
+      "key": 13,
+      "name": "Ryze",
+      "icon": "/ddragon/16.20.1/champion/Ryze.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Ryze.png"
+    },
+    "14": {
+      "id": "Sion",
+      "key": 14,
+      "name": "Sion",
+      "icon": "/ddragon/16.20.1/champion/Sion.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Sion.png"
+    },
+    "15": {
+      "id": "Sivir",
+      "key": 15,
+      "name": "Sivir",
+      "icon": "/ddragon/16.20.1/champion/Sivir.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Sivir.png"
+    },
+    "16": {
+      "id": "Soraka",
+      "key": 16,
+      "name": "Soraka",
+      "icon": "/ddragon/16.20.1/champion/Soraka.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Soraka.png"
+    },
+    "17": {
+      "id": "Teemo",
+      "key": 17,
+      "name": "Teemo",
+      "icon": "/ddragon/16.20.1/champion/Teemo.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Teemo.png"
+    },
+    "18": {
+      "id": "Tristana",
+      "key": 18,
+      "name": "Tristana",
+      "icon": "/ddragon/16.20.1/champion/Tristana.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Tristana.png"
+    },
+    "19": {
+      "id": "Warwick",
+      "key": 19,
+      "name": "Warwick",
+      "icon": "/ddragon/16.20.1/champion/Warwick.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Warwick.png"
+    },
+    "20": {
+      "id": "Nunu",
+      "key": 20,
+      "name": "Nunu & Willump",
+      "icon": "/ddragon/16.20.1/champion/Nunu.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Nunu.png"
+    },
+    "21": {
+      "id": "MissFortune",
+      "key": 21,
+      "name": "Miss Fortune",
+      "icon": "/ddragon/16.20.1/champion/MissFortune.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/MissFortune.png"
+    },
+    "22": {
+      "id": "Ashe",
+      "key": 22,
+      "name": "Ashe",
+      "icon": "/ddragon/16.20.1/champion/Ashe.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Ashe.png"
+    },
+    "23": {
+      "id": "Tryndamere",
+      "key": 23,
+      "name": "Tryndamere",
+      "icon": "/ddragon/16.20.1/champion/Tryndamere.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Tryndamere.png"
+    },
+    "24": {
+      "id": "Jax",
+      "key": 24,
+      "name": "Jax",
+      "icon": "/ddragon/16.20.1/champion/Jax.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Jax.png"
+    },
+    "25": {
+      "id": "Morgana",
+      "key": 25,
+      "name": "Morgana",
+      "icon": "/ddragon/16.20.1/champion/Morgana.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Morgana.png"
+    },
+    "26": {
+      "id": "Zilean",
+      "key": 26,
+      "name": "Zilean",
+      "icon": "/ddragon/16.20.1/champion/Zilean.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Zilean.png"
+    },
+    "27": {
+      "id": "Singed",
+      "key": 27,
+      "name": "Singed",
+      "icon": "/ddragon/16.20.1/champion/Singed.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Singed.png"
+    },
+    "28": {
+      "id": "Evelynn",
+      "key": 28,
+      "name": "Evelynn",
+      "icon": "/ddragon/16.20.1/champion/Evelynn.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Evelynn.png"
+    },
+    "29": {
+      "id": "Twitch",
+      "key": 29,
+      "name": "Twitch",
+      "icon": "/ddragon/16.20.1/champion/Twitch.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Twitch.png"
+    },
+    "30": {
+      "id": "Karthus",
+      "key": 30,
+      "name": "Karthus",
+      "icon": "/ddragon/16.20.1/champion/Karthus.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Karthus.png"
+    },
+    "31": {
+      "id": "Chogath",
+      "key": 31,
+      "name": "Cho'Gath",
+      "icon": "/ddragon/16.20.1/champion/Chogath.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Chogath.png"
+    },
+    "32": {
+      "id": "Amumu",
+      "key": 32,
+      "name": "Amumu",
+      "icon": "/ddragon/16.20.1/champion/Amumu.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Amumu.png"
+    },
+    "33": {
+      "id": "Rammus",
+      "key": 33,
+      "name": "Rammus",
+      "icon": "/ddragon/16.20.1/champion/Rammus.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Rammus.png"
+    },
+    "34": {
+      "id": "Anivia",
+      "key": 34,
+      "name": "Anivia",
+      "icon": "/ddragon/16.20.1/champion/Anivia.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Anivia.png"
+    },
+    "35": {
+      "id": "Shaco",
+      "key": 35,
+      "name": "Shaco",
+      "icon": "/ddragon/16.20.1/champion/Shaco.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Shaco.png"
+    },
+    "36": {
+      "id": "DrMundo",
+      "key": 36,
+      "name": "Dr. Mundo",
+      "icon": "/ddragon/16.20.1/champion/DrMundo.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/DrMundo.png"
+    },
+    "37": {
+      "id": "Sona",
+      "key": 37,
+      "name": "Sona",
+      "icon": "/ddragon/16.20.1/champion/Sona.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Sona.png"
+    },
+    "38": {
+      "id": "Kassadin",
+      "key": 38,
+      "name": "Kassadin",
+      "icon": "/ddragon/16.20.1/champion/Kassadin.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Kassadin.png"
+    },
+    "39": {
+      "id": "Irelia",
+      "key": 39,
+      "name": "Irelia",
+      "icon": "/ddragon/16.20.1/champion/Irelia.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Irelia.png"
+    },
+    "40": {
+      "id": "Janna",
+      "key": 40,
+      "name": "Janna",
+      "icon": "/ddragon/16.20.1/champion/Janna.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Janna.png"
+    },
+    "41": {
+      "id": "Gangplank",
+      "key": 41,
+      "name": "Gangplank",
+      "icon": "/ddragon/16.20.1/champion/Gangplank.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Gangplank.png"
+    },
+    "42": {
+      "id": "Corki",
+      "key": 42,
+      "name": "Corki",
+      "icon": "/ddragon/16.20.1/champion/Corki.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Corki.png"
+    },
+    "43": {
+      "id": "Karma",
+      "key": 43,
+      "name": "Karma",
+      "icon": "/ddragon/16.20.1/champion/Karma.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Karma.png"
+    },
+    "44": {
+      "id": "Taric",
+      "key": 44,
+      "name": "Taric",
+      "icon": "/ddragon/16.20.1/champion/Taric.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Taric.png"
+    },
+    "45": {
+      "id": "Veigar",
+      "key": 45,
+      "name": "Veigar",
+      "icon": "/ddragon/16.20.1/champion/Veigar.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Veigar.png"
+    },
+    "48": {
+      "id": "Trundle",
+      "key": 48,
+      "name": "Trundle",
+      "icon": "/ddragon/16.20.1/champion/Trundle.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Trundle.png"
+    },
+    "50": {
+      "id": "Swain",
+      "key": 50,
+      "name": "Swain",
+      "icon": "/ddragon/16.20.1/champion/Swain.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Swain.png"
+    },
+    "51": {
+      "id": "Caitlyn",
+      "key": 51,
+      "name": "Caitlyn",
+      "icon": "/ddragon/16.20.1/champion/Caitlyn.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Caitlyn.png"
+    },
+    "53": {
+      "id": "Blitzcrank",
+      "key": 53,
+      "name": "Blitzcrank",
+      "icon": "/ddragon/16.20.1/champion/Blitzcrank.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Blitzcrank.png"
+    },
+    "54": {
+      "id": "Malphite",
+      "key": 54,
+      "name": "Malphite",
+      "icon": "/ddragon/16.20.1/champion/Malphite.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Malphite.png"
+    },
+    "55": {
+      "id": "Katarina",
+      "key": 55,
+      "name": "Katarina",
+      "icon": "/ddragon/16.20.1/champion/Katarina.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Katarina.png"
+    },
+    "56": {
+      "id": "Nocturne",
+      "key": 56,
+      "name": "Nocturne",
+      "icon": "/ddragon/16.20.1/champion/Nocturne.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Nocturne.png"
+    },
+    "57": {
+      "id": "Maokai",
+      "key": 57,
+      "name": "Maokai",
+      "icon": "/ddragon/16.20.1/champion/Maokai.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Maokai.png"
+    },
+    "58": {
+      "id": "Renekton",
+      "key": 58,
+      "name": "Renekton",
+      "icon": "/ddragon/16.20.1/champion/Renekton.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Renekton.png"
+    },
+    "59": {
+      "id": "JarvanIV",
+      "key": 59,
+      "name": "Jarvan IV",
+      "icon": "/ddragon/16.20.1/champion/JarvanIV.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/JarvanIV.png"
+    },
+    "60": {
+      "id": "Elise",
+      "key": 60,
+      "name": "Elise",
+      "icon": "/ddragon/16.20.1/champion/Elise.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Elise.png"
+    },
+    "61": {
+      "id": "Orianna",
+      "key": 61,
+      "name": "Orianna",
+      "icon": "/ddragon/16.20.1/champion/Orianna.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Orianna.png"
+    },
+    "62": {
+      "id": "MonkeyKing",
+      "key": 62,
+      "name": "Wukong",
+      "icon": "/ddragon/16.20.1/champion/MonkeyKing.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/MonkeyKing.png"
+    },
+    "63": {
+      "id": "Brand",
+      "key": 63,
+      "name": "Brand",
+      "icon": "/ddragon/16.20.1/champion/Brand.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Brand.png"
+    },
+    "64": {
+      "id": "LeeSin",
+      "key": 64,
+      "name": "Lee Sin",
+      "icon": "/ddragon/16.20.1/champion/LeeSin.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/LeeSin.png"
+    },
+    "67": {
+      "id": "Vayne",
+      "key": 67,
+      "name": "Vayne",
+      "icon": "/ddragon/16.20.1/champion/Vayne.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Vayne.png"
+    },
+    "68": {
+      "id": "Rumble",
+      "key": 68,
+      "name": "Rumble",
+      "icon": "/ddragon/16.20.1/champion/Rumble.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Rumble.png"
+    },
+    "69": {
+      "id": "Cassiopeia",
+      "key": 69,
+      "name": "Cassiopeia",
+      "icon": "/ddragon/16.20.1/champion/Cassiopeia.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Cassiopeia.png"
+    },
+    "72": {
+      "id": "Skarner",
+      "key": 72,
+      "name": "Skarner",
+      "icon": "/ddragon/16.20.1/champion/Skarner.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Skarner.png"
+    },
+    "74": {
+      "id": "Heimerdinger",
+      "key": 74,
+      "name": "Heimerdinger",
+      "icon": "/ddragon/16.20.1/champion/Heimerdinger.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Heimerdinger.png"
+    },
+    "75": {
+      "id": "Nasus",
+      "key": 75,
+      "name": "Nasus",
+      "icon": "/ddragon/16.20.1/champion/Nasus.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Nasus.png"
+    },
+    "76": {
+      "id": "Nidalee",
+      "key": 76,
+      "name": "Nidalee",
+      "icon": "/ddragon/16.20.1/champion/Nidalee.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Nidalee.png"
+    },
+    "77": {
+      "id": "Udyr",
+      "key": 77,
+      "name": "Udyr",
+      "icon": "/ddragon/16.20.1/champion/Udyr.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Udyr.png"
+    },
+    "78": {
+      "id": "Poppy",
+      "key": 78,
+      "name": "Poppy",
+      "icon": "/ddragon/16.20.1/champion/Poppy.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Poppy.png"
+    },
+    "79": {
+      "id": "Gragas",
+      "key": 79,
+      "name": "Gragas",
+      "icon": "/ddragon/16.20.1/champion/Gragas.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Gragas.png"
+    },
+    "80": {
+      "id": "Pantheon",
+      "key": 80,
+      "name": "Pantheon",
+      "icon": "/ddragon/16.20.1/champion/Pantheon.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Pantheon.png"
+    },
+    "81": {
+      "id": "Ezreal",
+      "key": 81,
+      "name": "Ezreal",
+      "icon": "/ddragon/16.20.1/champion/Ezreal.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Ezreal.png"
+    },
+    "82": {
+      "id": "Mordekaiser",
+      "key": 82,
+      "name": "Mordekaiser",
+      "icon": "/ddragon/16.20.1/champion/Mordekaiser.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Mordekaiser.png"
+    },
+    "83": {
+      "id": "Yorick",
+      "key": 83,
+      "name": "Yorick",
+      "icon": "/ddragon/16.20.1/champion/Yorick.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Yorick.png"
+    },
+    "84": {
+      "id": "Akali",
+      "key": 84,
+      "name": "Akali",
+      "icon": "/ddragon/16.20.1/champion/Akali.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Akali.png"
+    },
+    "85": {
+      "id": "Kennen",
+      "key": 85,
+      "name": "Kennen",
+      "icon": "/ddragon/16.20.1/champion/Kennen.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Kennen.png"
+    },
+    "86": {
+      "id": "Garen",
+      "key": 86,
+      "name": "Garen",
+      "icon": "/ddragon/16.20.1/champion/Garen.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Garen.png"
+    },
+    "89": {
+      "id": "Leona",
+      "key": 89,
+      "name": "Leona",
+      "icon": "/ddragon/16.20.1/champion/Leona.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Leona.png"
+    },
+    "90": {
+      "id": "Malzahar",
+      "key": 90,
+      "name": "Malzahar",
+      "icon": "/ddragon/16.20.1/champion/Malzahar.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Malzahar.png"
+    },
+    "91": {
+      "id": "Talon",
+      "key": 91,
+      "name": "Talon",
+      "icon": "/ddragon/16.20.1/champion/Talon.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Talon.png"
+    },
+    "92": {
+      "id": "Riven",
+      "key": 92,
+      "name": "Riven",
+      "icon": "/ddragon/16.20.1/champion/Riven.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Riven.png"
+    },
+    "96": {
+      "id": "KogMaw",
+      "key": 96,
+      "name": "Kog'Maw",
+      "icon": "/ddragon/16.20.1/champion/KogMaw.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/KogMaw.png"
+    },
+    "98": {
+      "id": "Shen",
+      "key": 98,
+      "name": "Shen",
+      "icon": "/ddragon/16.20.1/champion/Shen.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Shen.png"
+    },
+    "99": {
+      "id": "Lux",
+      "key": 99,
+      "name": "Lux",
+      "icon": "/ddragon/16.20.1/champion/Lux.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Lux.png"
+    },
+    "101": {
+      "id": "Xerath",
+      "key": 101,
+      "name": "Xerath",
+      "icon": "/ddragon/16.20.1/champion/Xerath.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Xerath.png"
+    },
+    "102": {
+      "id": "Shyvana",
+      "key": 102,
+      "name": "Shyvana",
+      "icon": "/ddragon/16.20.1/champion/Shyvana.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Shyvana.png"
+    },
+    "103": {
+      "id": "Ahri",
+      "key": 103,
+      "name": "Ahri",
+      "icon": "/ddragon/16.20.1/champion/Ahri.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Ahri.png"
+    },
+    "104": {
+      "id": "Graves",
+      "key": 104,
+      "name": "Graves",
+      "icon": "/ddragon/16.20.1/champion/Graves.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Graves.png"
+    },
+    "105": {
+      "id": "Fizz",
+      "key": 105,
+      "name": "Fizz",
+      "icon": "/ddragon/16.20.1/champion/Fizz.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Fizz.png"
+    },
+    "106": {
+      "id": "Volibear",
+      "key": 106,
+      "name": "Volibear",
+      "icon": "/ddragon/16.20.1/champion/Volibear.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Volibear.png"
+    },
+    "107": {
+      "id": "Rengar",
+      "key": 107,
+      "name": "Rengar",
+      "icon": "/ddragon/16.20.1/champion/Rengar.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Rengar.png"
+    },
+    "110": {
+      "id": "Varus",
+      "key": 110,
+      "name": "Varus",
+      "icon": "/ddragon/16.20.1/champion/Varus.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Varus.png"
+    },
+    "111": {
+      "id": "Nautilus",
+      "key": 111,
+      "name": "Nautilus",
+      "icon": "/ddragon/16.20.1/champion/Nautilus.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Nautilus.png"
+    },
+    "112": {
+      "id": "Viktor",
+      "key": 112,
+      "name": "Viktor",
+      "icon": "/ddragon/16.20.1/champion/Viktor.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Viktor.png"
+    },
+    "113": {
+      "id": "Sejuani",
+      "key": 113,
+      "name": "Sejuani",
+      "icon": "/ddragon/16.20.1/champion/Sejuani.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Sejuani.png"
+    },
+    "114": {
+      "id": "Fiora",
+      "key": 114,
+      "name": "Fiora",
+      "icon": "/ddragon/16.20.1/champion/Fiora.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Fiora.png"
+    },
+    "115": {
+      "id": "Ziggs",
+      "key": 115,
+      "name": "Ziggs",
+      "icon": "/ddragon/16.20.1/champion/Ziggs.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Ziggs.png"
+    },
+    "117": {
+      "id": "Lulu",
+      "key": 117,
+      "name": "Lulu",
+      "icon": "/ddragon/16.20.1/champion/Lulu.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Lulu.png"
+    },
+    "119": {
+      "id": "Draven",
+      "key": 119,
+      "name": "Draven",
+      "icon": "/ddragon/16.20.1/champion/Draven.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Draven.png"
+    },
+    "120": {
+      "id": "Hecarim",
+      "key": 120,
+      "name": "Hecarim",
+      "icon": "/ddragon/16.20.1/champion/Hecarim.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Hecarim.png"
+    },
+    "121": {
+      "id": "Khazix",
+      "key": 121,
+      "name": "Kha'Zix",
+      "icon": "/ddragon/16.20.1/champion/Khazix.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Khazix.png"
+    },
+    "122": {
+      "id": "Darius",
+      "key": 122,
+      "name": "Darius",
+      "icon": "/ddragon/16.20.1/champion/Darius.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Darius.png"
+    },
+    "126": {
+      "id": "Jayce",
+      "key": 126,
+      "name": "Jayce",
+      "icon": "/ddragon/16.20.1/champion/Jayce.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Jayce.png"
+    },
+    "127": {
+      "id": "Lissandra",
+      "key": 127,
+      "name": "Lissandra",
+      "icon": "/ddragon/16.20.1/champion/Lissandra.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Lissandra.png"
+    },
+    "131": {
+      "id": "Diana",
+      "key": 131,
+      "name": "Diana",
+      "icon": "/ddragon/16.20.1/champion/Diana.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Diana.png"
+    },
+    "133": {
+      "id": "Quinn",
+      "key": 133,
+      "name": "Quinn",
+      "icon": "/ddragon/16.20.1/champion/Quinn.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Quinn.png"
+    },
+    "134": {
+      "id": "Syndra",
+      "key": 134,
+      "name": "Syndra",
+      "icon": "/ddragon/16.20.1/champion/Syndra.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Syndra.png"
+    },
+    "136": {
+      "id": "AurelionSol",
+      "key": 136,
+      "name": "Aurelion Sol",
+      "icon": "/ddragon/16.20.1/champion/AurelionSol.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/AurelionSol.png"
+    },
+    "141": {
+      "id": "Kayn",
+      "key": 141,
+      "name": "Kayn",
+      "icon": "/ddragon/16.20.1/champion/Kayn.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Kayn.png"
+    },
+    "142": {
+      "id": "Zoe",
+      "key": 142,
+      "name": "Zoe",
+      "icon": "/ddragon/16.20.1/champion/Zoe.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Zoe.png"
+    },
+    "143": {
+      "id": "Zyra",
+      "key": 143,
+      "name": "Zyra",
+      "icon": "/ddragon/16.20.1/champion/Zyra.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Zyra.png"
+    },
+    "145": {
+      "id": "Kaisa",
+      "key": 145,
+      "name": "Kai'Sa",
+      "icon": "/ddragon/16.20.1/champion/Kaisa.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Kaisa.png"
+    },
+    "147": {
+      "id": "Seraphine",
+      "key": 147,
+      "name": "Seraphine",
+      "icon": "/ddragon/16.20.1/champion/Seraphine.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Seraphine.png"
+    },
+    "150": {
+      "id": "Gnar",
+      "key": 150,
+      "name": "Gnar",
+      "icon": "/ddragon/16.20.1/champion/Gnar.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Gnar.png"
+    },
+    "154": {
+      "id": "Zac",
+      "key": 154,
+      "name": "Zac",
+      "icon": "/ddragon/16.20.1/champion/Zac.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Zac.png"
+    },
+    "157": {
+      "id": "Yasuo",
+      "key": 157,
+      "name": "Yasuo",
+      "icon": "/ddragon/16.20.1/champion/Yasuo.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Yasuo.png"
+    },
+    "161": {
+      "id": "Velkoz",
+      "key": 161,
+      "name": "Vel'Koz",
+      "icon": "/ddragon/16.20.1/champion/Velkoz.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Velkoz.png"
+    },
+    "163": {
+      "id": "Taliyah",
+      "key": 163,
+      "name": "Taliyah",
+      "icon": "/ddragon/16.20.1/champion/Taliyah.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Taliyah.png"
+    },
+    "164": {
+      "id": "Camille",
+      "key": 164,
+      "name": "Camille",
+      "icon": "/ddragon/16.20.1/champion/Camille.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Camille.png"
+    },
+    "166": {
+      "id": "Akshan",
+      "key": 166,
+      "name": "Akshan",
+      "icon": "/ddragon/16.20.1/champion/Akshan.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Akshan.png"
+    },
+    "200": {
+      "id": "Belveth",
+      "key": 200,
+      "name": "Bel'Veth",
+      "icon": "/ddragon/16.20.1/champion/Belveth.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Belveth.png"
+    },
+    "201": {
+      "id": "Braum",
+      "key": 201,
+      "name": "Braum",
+      "icon": "/ddragon/16.20.1/champion/Braum.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Braum.png"
+    },
+    "202": {
+      "id": "Jhin",
+      "key": 202,
+      "name": "Jhin",
+      "icon": "/ddragon/16.20.1/champion/Jhin.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Jhin.png"
+    },
+    "203": {
+      "id": "Kindred",
+      "key": 203,
+      "name": "Kindred",
+      "icon": "/ddragon/16.20.1/champion/Kindred.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Kindred.png"
+    },
+    "221": {
+      "id": "Zeri",
+      "key": 221,
+      "name": "Zeri",
+      "icon": "/ddragon/16.20.1/champion/Zeri.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Zeri.png"
+    },
+    "222": {
+      "id": "Jinx",
+      "key": 222,
+      "name": "Jinx",
+      "icon": "/ddragon/16.20.1/champion/Jinx.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Jinx.png"
+    },
+    "223": {
+      "id": "TahmKench",
+      "key": 223,
+      "name": "Tahm Kench",
+      "icon": "/ddragon/16.20.1/champion/TahmKench.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/TahmKench.png"
+    },
+    "233": {
+      "id": "Briar",
+      "key": 233,
+      "name": "Briar",
+      "icon": "/ddragon/16.20.1/champion/Briar.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Briar.png"
+    },
+    "234": {
+      "id": "Viego",
+      "key": 234,
+      "name": "Viego",
+      "icon": "/ddragon/16.20.1/champion/Viego.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Viego.png"
+    },
+    "235": {
+      "id": "Senna",
+      "key": 235,
+      "name": "Senna",
+      "icon": "/ddragon/16.20.1/champion/Senna.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Senna.png"
+    },
+    "236": {
+      "id": "Lucian",
+      "key": 236,
+      "name": "Lucian",
+      "icon": "/ddragon/16.20.1/champion/Lucian.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Lucian.png"
+    },
+    "238": {
+      "id": "Zed",
+      "key": 238,
+      "name": "Zed",
+      "icon": "/ddragon/16.20.1/champion/Zed.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Zed.png"
+    },
+    "240": {
+      "id": "Kled",
+      "key": 240,
+      "name": "Kled",
+      "icon": "/ddragon/16.20.1/champion/Kled.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Kled.png"
+    },
+    "245": {
+      "id": "Ekko",
+      "key": 245,
+      "name": "Ekko",
+      "icon": "/ddragon/16.20.1/champion/Ekko.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Ekko.png"
+    },
+    "246": {
+      "id": "Qiyana",
+      "key": 246,
+      "name": "Qiyana",
+      "icon": "/ddragon/16.20.1/champion/Qiyana.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Qiyana.png"
+    },
+    "254": {
+      "id": "Vi",
+      "key": 254,
+      "name": "Vi",
+      "icon": "/ddragon/16.20.1/champion/Vi.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Vi.png"
+    },
+    "266": {
+      "id": "Aatrox",
+      "key": 266,
+      "name": "Aatrox",
+      "icon": "/ddragon/16.20.1/champion/Aatrox.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Aatrox.png"
+    },
+    "267": {
+      "id": "Nami",
+      "key": 267,
+      "name": "Nami",
+      "icon": "/ddragon/16.20.1/champion/Nami.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Nami.png"
+    },
+    "268": {
+      "id": "Azir",
+      "key": 268,
+      "name": "Azir",
+      "icon": "/ddragon/16.20.1/champion/Azir.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Azir.png"
+    },
+    "350": {
+      "id": "Yuumi",
+      "key": 350,
+      "name": "Yuumi",
+      "icon": "/ddragon/16.20.1/champion/Yuumi.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Yuumi.png"
+    },
+    "360": {
+      "id": "Samira",
+      "key": 360,
+      "name": "Samira",
+      "icon": "/ddragon/16.20.1/champion/Samira.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Samira.png"
+    },
+    "412": {
+      "id": "Thresh",
+      "key": 412,
+      "name": "Thresh",
+      "icon": "/ddragon/16.20.1/champion/Thresh.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Thresh.png"
+    },
+    "420": {
+      "id": "Illaoi",
+      "key": 420,
+      "name": "Illaoi",
+      "icon": "/ddragon/16.20.1/champion/Illaoi.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Illaoi.png"
+    },
+    "421": {
+      "id": "RekSai",
+      "key": 421,
+      "name": "Rek'Sai",
+      "icon": "/ddragon/16.20.1/champion/RekSai.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/RekSai.png"
+    },
+    "427": {
+      "id": "Ivern",
+      "key": 427,
+      "name": "Ivern",
+      "icon": "/ddragon/16.20.1/champion/Ivern.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Ivern.png"
+    },
+    "429": {
+      "id": "Kalista",
+      "key": 429,
+      "name": "Kalista",
+      "icon": "/ddragon/16.20.1/champion/Kalista.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Kalista.png"
+    },
+    "432": {
+      "id": "Bard",
+      "key": 432,
+      "name": "Bard",
+      "icon": "/ddragon/16.20.1/champion/Bard.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Bard.png"
+    },
+    "497": {
+      "id": "Rakan",
+      "key": 497,
+      "name": "Rakan",
+      "icon": "/ddragon/16.20.1/champion/Rakan.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Rakan.png"
+    },
+    "498": {
+      "id": "Xayah",
+      "key": 498,
+      "name": "Xayah",
+      "icon": "/ddragon/16.20.1/champion/Xayah.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Xayah.png"
+    },
+    "516": {
+      "id": "Ornn",
+      "key": 516,
+      "name": "Ornn",
+      "icon": "/ddragon/16.20.1/champion/Ornn.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Ornn.png"
+    },
+    "517": {
+      "id": "Sylas",
+      "key": 517,
+      "name": "Sylas",
+      "icon": "/ddragon/16.20.1/champion/Sylas.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Sylas.png"
+    },
+    "518": {
+      "id": "Neeko",
+      "key": 518,
+      "name": "Neeko",
+      "icon": "/ddragon/16.20.1/champion/Neeko.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Neeko.png"
+    },
+    "523": {
+      "id": "Aphelios",
+      "key": 523,
+      "name": "Aphelios",
+      "icon": "/ddragon/16.20.1/champion/Aphelios.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Aphelios.png"
+    },
+    "526": {
+      "id": "Rell",
+      "key": 526,
+      "name": "Rell",
+      "icon": "/ddragon/16.20.1/champion/Rell.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Rell.png"
+    },
+    "555": {
+      "id": "Pyke",
+      "key": 555,
+      "name": "Pyke",
+      "icon": "/ddragon/16.20.1/champion/Pyke.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Pyke.png"
+    },
+    "711": {
+      "id": "Vex",
+      "key": 711,
+      "name": "Vex",
+      "icon": "/ddragon/16.20.1/champion/Vex.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Vex.png"
+    },
+    "777": {
+      "id": "Yone",
+      "key": 777,
+      "name": "Yone",
+      "icon": "/ddragon/16.20.1/champion/Yone.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Yone.png"
+    },
+    "799": {
+      "id": "Ambessa",
+      "key": 799,
+      "name": "Ambessa",
+      "icon": "/ddragon/16.20.1/champion/Ambessa.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Ambessa.png"
+    },
+    "800": {
+      "id": "Mel",
+      "key": 800,
+      "name": "Mel",
+      "icon": "/ddragon/16.20.1/champion/Mel.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Mel.png"
+    },
+    "804": {
+      "id": "Yunara",
+      "key": 804,
+      "name": "Yunara",
+      "icon": "/ddragon/16.20.1/champion/Yunara.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Yunara.png"
+    },
+    "805": {
+      "id": "Locke",
+      "key": 805,
+      "name": "Locke",
+      "icon": "/ddragon/16.20.1/champion/Locke.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Locke.png"
+    },
+    "875": {
+      "id": "Sett",
+      "key": 875,
+      "name": "Sett",
+      "icon": "/ddragon/16.20.1/champion/Sett.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Sett.png"
+    },
+    "876": {
+      "id": "Lillia",
+      "key": 876,
+      "name": "Lillia",
+      "icon": "/ddragon/16.20.1/champion/Lillia.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Lillia.png"
+    },
+    "887": {
+      "id": "Gwen",
+      "key": 887,
+      "name": "Gwen",
+      "icon": "/ddragon/16.20.1/champion/Gwen.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Gwen.png"
+    },
+    "888": {
+      "id": "Renata",
+      "key": 888,
+      "name": "Renata Glasc",
+      "icon": "/ddragon/16.20.1/champion/Renata.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Renata.png"
+    },
+    "893": {
+      "id": "Aurora",
+      "key": 893,
+      "name": "Aurora",
+      "icon": "/ddragon/16.20.1/champion/Aurora.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Aurora.png"
+    },
+    "895": {
+      "id": "Nilah",
+      "key": 895,
+      "name": "Nilah",
+      "icon": "/ddragon/16.20.1/champion/Nilah.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Nilah.png"
+    },
+    "897": {
+      "id": "KSante",
+      "key": 897,
+      "name": "K'Sante",
+      "icon": "/ddragon/16.20.1/champion/KSante.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/KSante.png"
+    },
+    "901": {
+      "id": "Smolder",
+      "key": 901,
+      "name": "Smolder",
+      "icon": "/ddragon/16.20.1/champion/Smolder.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Smolder.png"
+    },
+    "902": {
+      "id": "Milio",
+      "key": 902,
+      "name": "Milio",
+      "icon": "/ddragon/16.20.1/champion/Milio.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Milio.png"
+    },
+    "904": {
+      "id": "Zaahen",
+      "key": 904,
+      "name": "Zaahen",
+      "icon": "/ddragon/16.20.1/champion/Zaahen.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Zaahen.png"
+    },
+    "910": {
+      "id": "Hwei",
+      "key": 910,
+      "name": "Hwei",
+      "icon": "/ddragon/16.20.1/champion/Hwei.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Hwei.png"
+    },
+    "950": {
+      "id": "Naafiri",
+      "key": 950,
+      "name": "Naafiri",
+      "icon": "/ddragon/16.20.1/champion/Naafiri.png",
+      "ultimateIcon": "/ddragon/16.20.1/ability/Naafiri.png"
+    }
+  },
+  "items": {
+    "1001": {
+      "id": 1001,
+      "name": "Boots",
+      "icon": "/ddragon/16.20.1/item/1001.png"
+    },
+    "1004": {
+      "id": 1004,
+      "name": "Faerie Charm",
+      "icon": "/ddragon/16.20.1/item/1004.png"
+    },
+    "1006": {
+      "id": 1006,
+      "name": "Rejuvenation Bead",
+      "icon": "/ddragon/16.20.1/item/1006.png"
+    },
+    "1011": {
+      "id": 1011,
+      "name": "Giant's Belt",
+      "icon": "/ddragon/16.20.1/item/1011.png"
+    },
+    "1018": {
+      "id": 1018,
+      "name": "Cloak of Agility",
+      "icon": "/ddragon/16.20.1/item/1018.png"
+    },
+    "1026": {
+      "id": 1026,
+      "name": "Blasting Wand",
+      "icon": "/ddragon/16.20.1/item/1026.png"
+    },
+    "1027": {
+      "id": 1027,
+      "name": "Sapphire Crystal",
+      "icon": "/ddragon/16.20.1/item/1027.png"
+    },
+    "1028": {
+      "id": 1028,
+      "name": "Ruby Crystal",
+      "icon": "/ddragon/16.20.1/item/1028.png"
+    },
+    "1029": {
+      "id": 1029,
+      "name": "Cloth Armor",
+      "icon": "/ddragon/16.20.1/item/1029.png"
+    },
+    "1031": {
+      "id": 1031,
+      "name": "Chain Vest",
+      "icon": "/ddragon/16.20.1/item/1031.png"
+    },
+    "1033": {
+      "id": 1033,
+      "name": "Null-Magic Mantle",
+      "icon": "/ddragon/16.20.1/item/1033.png"
+    },
+    "1035": {
+      "id": 1035,
+      "name": "Emberknife",
+      "icon": "/ddragon/16.20.1/item/1035.png"
+    },
+    "1036": {
+      "id": 1036,
+      "name": "Long Sword",
+      "icon": "/ddragon/16.20.1/item/1036.png"
+    },
+    "1037": {
+      "id": 1037,
+      "name": "Pickaxe",
+      "icon": "/ddragon/16.20.1/item/1037.png"
+    },
+    "1038": {
+      "id": 1038,
+      "name": "B. F. Sword",
+      "icon": "/ddragon/16.20.1/item/1038.png"
+    },
+    "1039": {
+      "id": 1039,
+      "name": "Hailblade",
+      "icon": "/ddragon/16.20.1/item/1039.png"
+    },
+    "1040": {
+      "id": 1040,
+      "name": "Obsidian Edge",
+      "icon": "/ddragon/16.20.1/item/1040.png"
+    },
+    "1042": {
+      "id": 1042,
+      "name": "Dagger",
+      "icon": "/ddragon/16.20.1/item/1042.png"
+    },
+    "1043": {
+      "id": 1043,
+      "name": "Recurve Bow",
+      "icon": "/ddragon/16.20.1/item/1043.png"
+    },
+    "1052": {
+      "id": 1052,
+      "name": "Amplifying Tome",
+      "icon": "/ddragon/16.20.1/item/1052.png"
+    },
+    "1053": {
+      "id": 1053,
+      "name": "Vampiric Scepter",
+      "icon": "/ddragon/16.20.1/item/1053.png"
+    },
+    "1054": {
+      "id": 1054,
+      "name": "Doran's Shield",
+      "icon": "/ddragon/16.20.1/item/1054.png"
+    },
+    "1055": {
+      "id": 1055,
+      "name": "Doran's Blade",
+      "icon": "/ddragon/16.20.1/item/1055.png"
+    },
+    "1056": {
+      "id": 1056,
+      "name": "Doran's Ring",
+      "icon": "/ddragon/16.20.1/item/1056.png"
+    },
+    "1057": {
+      "id": 1057,
+      "name": "Negatron Cloak",
+      "icon": "/ddragon/16.20.1/item/1057.png"
+    },
+    "1058": {
+      "id": 1058,
+      "name": "Needlessly Large Rod",
+      "icon": "/ddragon/16.20.1/item/1058.png"
+    },
+    "1082": {
+      "id": 1082,
+      "name": "Dark Seal",
+      "icon": "/ddragon/16.20.1/item/1082.png"
+    },
+    "1083": {
+      "id": 1083,
+      "name": "Cull",
+      "icon": "/ddragon/16.20.1/item/1083.png"
+    },
+    "1086": {
+      "id": 1086,
+      "name": "Doran's Bow",
+      "icon": "/ddragon/16.20.1/item/1086.png"
+    },
+    "1090": {
+      "id": 1090,
+      "name": "Quest: Top",
+      "icon": "/ddragon/16.20.1/item/1090.png"
+    },
+    "1091": {
+      "id": 1091,
+      "name": "Quest: Mid",
+      "icon": "/ddragon/16.20.1/item/1091.png"
+    },
+    "1092": {
+      "id": 1092,
+      "name": "Quest: Bot",
+      "icon": "/ddragon/16.20.1/item/1092.png"
+    },
+    "1093": {
+      "id": 1093,
+      "name": "Quest: Support",
+      "icon": "/ddragon/16.20.1/item/1093.png"
+    },
+    "1094": {
+      "id": 1094,
+      "name": "Quest: Jungle",
+      "icon": "/ddragon/16.20.1/item/1094.png"
+    },
+    "1101": {
+      "id": 1101,
+      "name": "Scorchclaw Pup",
+      "icon": "/ddragon/16.20.1/item/1101.png"
+    },
+    "1102": {
+      "id": 1102,
+      "name": "Gustwalker Hatchling",
+      "icon": "/ddragon/16.20.1/item/1102.png"
+    },
+    "1103": {
+      "id": 1103,
+      "name": "Mosstomper Seedling",
+      "icon": "/ddragon/16.20.1/item/1103.png"
+    },
+    "1104": {
+      "id": 1104,
+      "name": "Eye of the Herald",
+      "icon": "/ddragon/16.20.1/item/1104.png"
+    },
+    "1105": {
+      "id": 1105,
+      "name": "Mosstomper Seedling",
+      "icon": "/ddragon/16.20.1/item/1105.png"
+    },
+    "1106": {
+      "id": 1106,
+      "name": "Gustwalker Hatchling",
+      "icon": "/ddragon/16.20.1/item/1106.png"
+    },
+    "1107": {
+      "id": 1107,
+      "name": "Scorchclaw Pup",
+      "icon": "/ddragon/16.20.1/item/1107.png"
+    },
+    "1111": {
+      "id": 1111,
+      "name": "Jarvan I's",
+      "icon": "/ddragon/16.20.1/item/1111.png"
+    },
+    "1120": {
+      "id": 1120,
+      "name": "Doran's Helm",
+      "icon": "/ddragon/16.20.1/item/1120.png"
+    },
+    "1200": {
+      "id": 1200,
+      "name": "Top Lane Quest",
+      "icon": "/ddragon/16.20.1/item/1200.png"
+    },
+    "1201": {
+      "id": 1201,
+      "name": "Mid Lane Quest",
+      "icon": "/ddragon/16.20.1/item/1201.png"
+    },
+    "1202": {
+      "id": 1202,
+      "name": "Bot Lane Quest",
+      "icon": "/ddragon/16.20.1/item/1202.png"
+    },
+    "1203": {
+      "id": 1203,
+      "name": "Support Quest",
+      "icon": "/ddragon/16.20.1/item/1203.png"
+    },
+    "1204": {
+      "id": 1204,
+      "name": "Jungle Quest",
+      "icon": "/ddragon/16.20.1/item/1204.png"
+    },
+    "1205": {
+      "id": 1205,
+      "name": "Jungle Quest Reward",
+      "icon": "/ddragon/16.20.1/item/1205.png"
+    },
+    "1206": {
+      "id": 1206,
+      "name": "Mid Lane Quest Reward",
+      "icon": "/ddragon/16.20.1/item/1206.png"
+    },
+    "1207": {
+      "id": 1207,
+      "name": "Bot Lane Quest Reward",
+      "icon": "/ddragon/16.20.1/item/1207.png"
+    },
+    "1208": {
+      "id": 1208,
+      "name": "Support Quest Reward",
+      "icon": "/ddragon/16.20.1/item/1208.png"
+    },
+    "1209": {
+      "id": 1209,
+      "name": "Jungle Quest Reward",
+      "icon": "/ddragon/16.20.1/item/1209.png"
+    },
+    "1210": {
+      "id": 1210,
+      "name": "Jungle Quest Reward",
+      "icon": "/ddragon/16.20.1/item/1210.png"
+    },
+    "1211": {
+      "id": 1211,
+      "name": "Jungle Quest Reward",
+      "icon": "/ddragon/16.20.1/item/1211.png"
+    },
+    "1220": {
+      "id": 1220,
+      "name": "Unleashed Teleport (Top Lane Quest Reward)",
+      "icon": "/ddragon/16.20.1/item/1220.png"
+    },
+    "1221": {
+      "id": 1221,
+      "name": "Top Lane Quest Reward",
+      "icon": "/ddragon/16.20.1/item/1221.png"
+    },
+    "1222": {
+      "id": 1222,
+      "name": "Top Lane Quest",
+      "icon": "/ddragon/16.20.1/item/1222.png"
+    },
+    "1500": {
+      "id": 1500,
+      "name": "Penetrating Bullets",
+      "icon": "/ddragon/16.20.1/item/1500.png"
+    },
+    "1501": {
+      "id": 1501,
+      "name": "Fortification",
+      "icon": "/ddragon/16.20.1/item/1501.png"
+    },
+    "1502": {
+      "id": 1502,
+      "name": "Reinforced Armor",
+      "icon": "/ddragon/16.20.1/item/1502.png"
+    },
+    "1503": {
+      "id": 1503,
+      "name": "Warden's Eye",
+      "icon": "/ddragon/16.20.1/item/1503.png"
+    },
+    "1504": {
+      "id": 1504,
+      "name": "Vanguard",
+      "icon": "/ddragon/16.20.1/item/1504.png"
+    },
+    "1505": {
+      "id": 1505,
+      "name": "Reinforced Armor",
+      "icon": "/ddragon/16.20.1/item/1505.png"
+    },
+    "1506": {
+      "id": 1506,
+      "name": "Reinforced Armor",
+      "icon": "/ddragon/16.20.1/item/1506.png"
+    },
+    "1507": {
+      "id": 1507,
+      "name": "Overcharged",
+      "icon": "/ddragon/16.20.1/item/1507.png"
+    },
+    "1508": {
+      "id": 1508,
+      "name": "Anti-tower Socks",
+      "icon": "/ddragon/16.20.1/item/1508.png"
+    },
+    "1509": {
+      "id": 1509,
+      "name": "Gusto",
+      "icon": "/ddragon/16.20.1/item/1509.png"
+    },
+    "1510": {
+      "id": 1510,
+      "name": "Phreakish Gusto",
+      "icon": "/ddragon/16.20.1/item/1510.png"
+    },
+    "1511": {
+      "id": 1511,
+      "name": "Super Mech Armor",
+      "icon": "/ddragon/16.20.1/item/1511.png"
+    },
+    "1512": {
+      "id": 1512,
+      "name": "Super Mech Power Field",
+      "icon": "/ddragon/16.20.1/item/1512.png"
+    },
+    "1515": {
+      "id": 1515,
+      "name": "Turret Plating",
+      "icon": "/ddragon/16.20.1/item/1515.png"
+    },
+    "1516": {
+      "id": 1516,
+      "name": "Structure Bounty",
+      "icon": "/ddragon/16.20.1/item/1516.png"
+    },
+    "1517": {
+      "id": 1517,
+      "name": "Structure Bounty",
+      "icon": "/ddragon/16.20.1/item/1517.png"
+    },
+    "1518": {
+      "id": 1518,
+      "name": "Structure Bounty",
+      "icon": "/ddragon/16.20.1/item/1518.png"
+    },
+    "1519": {
+      "id": 1519,
+      "name": "Structure Bounty",
+      "icon": "/ddragon/16.20.1/item/1519.png"
+    },
+    "1520": {
+      "id": 1520,
+      "name": "OvererchargedHA",
+      "icon": "/ddragon/16.20.1/item/1520.png"
+    },
+    "1521": {
+      "id": 1521,
+      "name": "Fortification",
+      "icon": "/ddragon/16.20.1/item/1521.png"
+    },
+    "1522": {
+      "id": 1522,
+      "name": "Tower Power-Up",
+      "icon": "/ddragon/16.20.1/item/1522.png"
+    },
+    "1523": {
+      "id": 1523,
+      "name": "Overcharged",
+      "icon": "/ddragon/16.20.1/item/1523.png"
+    },
+    "1524": {
+      "id": 1524,
+      "name": "Overgrowth",
+      "icon": "/ddragon/16.20.1/item/1524.png"
+    },
+    "2001": {
+      "id": 2001,
+      "name": "Recall",
+      "icon": "/ddragon/16.20.1/item/2001.png"
+    },
+    "2002": {
+      "id": 2002,
+      "name": "Enhanced Recall",
+      "icon": "/ddragon/16.20.1/item/2002.png"
+    },
+    "2003": {
+      "id": 2003,
+      "name": "Health Potion",
+      "icon": "/ddragon/16.20.1/item/2003.png"
+    },
+    "2007": {
+      "id": 2007,
+      "name": "Disabled Recall",
+      "icon": "/ddragon/16.20.1/item/2007.png"
+    },
+    "2008": {
+      "id": 2008,
+      "name": "",
+      "icon": "/ddragon/16.20.1/item/2008.png"
+    },
+    "2010": {
+      "id": 2010,
+      "name": "Total Biscuit of Everlasting Will",
+      "icon": "/ddragon/16.20.1/item/2010.png"
+    },
+    "2015": {
+      "id": 2015,
+      "name": "Kircheis Shard",
+      "icon": "/ddragon/16.20.1/item/2015.png"
+    },
+    "2019": {
+      "id": 2019,
+      "name": "Steel Sigil",
+      "icon": "/ddragon/16.20.1/item/2019.png"
+    },
+    "2020": {
+      "id": 2020,
+      "name": "The Brutalizer",
+      "icon": "/ddragon/16.20.1/item/2020.png"
+    },
+    "2021": {
+      "id": 2021,
+      "name": "Tunneler",
+      "icon": "/ddragon/16.20.1/item/2021.png"
+    },
+    "2022": {
+      "id": 2022,
+      "name": "Glowing Mote",
+      "icon": "/ddragon/16.20.1/item/2022.png"
+    },
+    "2031": {
+      "id": 2031,
+      "name": "Refillable Potion",
+      "icon": "/ddragon/16.20.1/item/2031.png"
+    },
+    "2033": {
+      "id": 2033,
+      "name": "Corrupting Potion",
+      "icon": "/ddragon/16.20.1/item/2033.png"
+    },
+    "2049": {
+      "id": 2049,
+      "name": "Guardian's Amulet",
+      "icon": "/ddragon/16.20.1/item/2049.png"
+    },
+    "2050": {
+      "id": 2050,
+      "name": "Guardian's Shroud",
+      "icon": "/ddragon/16.20.1/item/2050.png"
+    },
+    "2051": {
+      "id": 2051,
+      "name": "Guardian's Horn",
+      "icon": "/ddragon/16.20.1/item/2051.png"
+    },
+    "2052": {
+      "id": 2052,
+      "name": "Poro-Snax",
+      "icon": "/ddragon/16.20.1/item/2052.png"
+    },
+    "2055": {
+      "id": 2055,
+      "name": "Control Ward",
+      "icon": "/ddragon/16.20.1/item/2055.png"
+    },
+    "2056": {
+      "id": 2056,
+      "name": "Stealth Ward",
+      "icon": "/ddragon/16.20.1/item/2056.png"
+    },
+    "2065": {
+      "id": 2065,
+      "name": "Shurelya's Battlesong",
+      "icon": "/ddragon/16.20.1/item/2065.png"
+    },
+    "2138": {
+      "id": 2138,
+      "name": "Elixir of Iron",
+      "icon": "/ddragon/16.20.1/item/2138.png"
+    },
+    "2139": {
+      "id": 2139,
+      "name": "Elixir of Sorcery",
+      "icon": "/ddragon/16.20.1/item/2139.png"
+    },
+    "2140": {
+      "id": 2140,
+      "name": "Elixir of Wrath",
+      "icon": "/ddragon/16.20.1/item/2140.png"
+    },
+    "2141": {
+      "id": 2141,
+      "name": "Cappa Juice",
+      "icon": "/ddragon/16.20.1/item/2141.png"
+    },
+    "2142": {
+      "id": 2142,
+      "name": "Juice of Power",
+      "icon": "/ddragon/16.20.1/item/2142.png"
+    },
+    "2143": {
+      "id": 2143,
+      "name": "Juice of Vitality",
+      "icon": "/ddragon/16.20.1/item/2143.png"
+    },
+    "2144": {
+      "id": 2144,
+      "name": "Juice of Haste",
+      "icon": "/ddragon/16.20.1/item/2144.png"
+    },
+    "2145": {
+      "id": 2145,
+      "name": "Lucky Dice",
+      "icon": "/ddragon/16.20.1/item/2145.png"
+    },
+    "2146": {
+      "id": 2146,
+      "name": "Enhanced Lucky Dice",
+      "icon": "/ddragon/16.20.1/item/2146.png"
+    },
+    "2147": {
+      "id": 2147,
+      "name": "Augment Level",
+      "icon": "/ddragon/16.20.1/item/2147.png"
+    },
+    "2150": {
+      "id": 2150,
+      "name": "Elixir of Skill",
+      "icon": "/ddragon/16.20.1/item/2150.png"
+    },
+    "2151": {
+      "id": 2151,
+      "name": "Elixir of Avarice",
+      "icon": "/ddragon/16.20.1/item/2151.png"
+    },
+    "2152": {
+      "id": 2152,
+      "name": "Elixir of Force",
+      "icon": "/ddragon/16.20.1/item/2152.png"
+    },
+    "2161": {
+      "id": 2161,
+      "name": "Bandle Juice of Power",
+      "icon": "/ddragon/16.20.1/item/2161.png"
+    },
+    "2162": {
+      "id": 2162,
+      "name": "Bandle Juice of Vitality",
+      "icon": "/ddragon/16.20.1/item/2162.png"
+    },
+    "2163": {
+      "id": 2163,
+      "name": "Bandle Juice of Haste",
+      "icon": "/ddragon/16.20.1/item/2163.png"
+    },
+    "2403": {
+      "id": 2403,
+      "name": "Minion Dematerializer",
+      "icon": "/ddragon/16.20.1/item/2403.png"
+    },
+    "2420": {
+      "id": 2420,
+      "name": "Seeker's Armguard",
+      "icon": "/ddragon/16.20.1/item/2420.png"
+    },
+    "2421": {
+      "id": 2421,
+      "name": "Shattered Armguard",
+      "icon": "/ddragon/16.20.1/item/2421.png"
+    },
+    "2422": {
+      "id": 2422,
+      "name": "Slightly Magical Footwear",
+      "icon": "/ddragon/16.20.1/item/2422.png"
+    },
+    "2501": {
+      "id": 2501,
+      "name": "Overlord's Bloodmail",
+      "icon": "/ddragon/16.20.1/item/2501.png"
+    },
+    "2502": {
+      "id": 2502,
+      "name": "Unending Despair",
+      "icon": "/ddragon/16.20.1/item/2502.png"
+    },
+    "2503": {
+      "id": 2503,
+      "name": "Blackfire Torch",
+      "icon": "/ddragon/16.20.1/item/2503.png"
+    },
+    "2504": {
+      "id": 2504,
+      "name": "Kaenic Rookern",
+      "icon": "/ddragon/16.20.1/item/2504.png"
+    },
+    "2508": {
+      "id": 2508,
+      "name": "Fated Ashes",
+      "icon": "/ddragon/16.20.1/item/2508.png"
+    },
+    "2510": {
+      "id": 2510,
+      "name": "Dusk and Dawn",
+      "icon": "/ddragon/16.20.1/item/2510.png"
+    },
+    "2512": {
+      "id": 2512,
+      "name": "Fiendhunter Bolts",
+      "icon": "/ddragon/16.20.1/item/2512.png"
+    },
+    "2517": {
+      "id": 2517,
+      "name": "Endless Hunger",
+      "icon": "/ddragon/16.20.1/item/2517.png"
+    },
+    "2520": {
+      "id": 2520,
+      "name": "Bastionbreaker",
+      "icon": "/ddragon/16.20.1/item/2520.png"
+    },
+    "2522": {
+      "id": 2522,
+      "name": "Actualizer",
+      "icon": "/ddragon/16.20.1/item/2522.png"
+    },
+    "2523": {
+      "id": 2523,
+      "name": "Hexoptics C44",
+      "icon": "/ddragon/16.20.1/item/2523.png"
+    },
+    "2524": {
+      "id": 2524,
+      "name": "Bandlepipes",
+      "icon": "/ddragon/16.20.1/item/2524.png"
+    },
+    "2525": {
+      "id": 2525,
+      "name": "Protoplasm Harness",
+      "icon": "/ddragon/16.20.1/item/2525.png"
+    },
+    "2526": {
+      "id": 2526,
+      "name": "Whispering Circlet",
+      "icon": "/ddragon/16.20.1/item/2526.png"
+    },
+    "2530": {
+      "id": 2530,
+      "name": "Diadem of Songs",
+      "icon": "/ddragon/16.20.1/item/2530.png"
+    },
+    "3001": {
+      "id": 3001,
+      "name": "Evenshroud",
+      "icon": "/ddragon/16.20.1/item/3001.png"
+    },
+    "3002": {
+      "id": 3002,
+      "name": "Trailblazer",
+      "icon": "/ddragon/16.20.1/item/3002.png"
+    },
+    "3003": {
+      "id": 3003,
+      "name": "Archangel's Staff",
+      "icon": "/ddragon/16.20.1/item/3003.png"
+    },
+    "3004": {
+      "id": 3004,
+      "name": "Manamune",
+      "icon": "/ddragon/16.20.1/item/3004.png"
+    },
+    "3005": {
+      "id": 3005,
+      "name": "Ghostcrawlers",
+      "icon": "/ddragon/16.20.1/item/3005.png"
+    },
+    "3006": {
+      "id": 3006,
+      "name": "Berserker's Greaves",
+      "icon": "/ddragon/16.20.1/item/3006.png"
+    },
+    "3008": {
+      "id": 3008,
+      "name": "Gluttonous Greaves",
+      "icon": "/ddragon/16.20.1/item/3008.png"
+    },
+    "3009": {
+      "id": 3009,
+      "name": "Boots of Swiftness",
+      "icon": "/ddragon/16.20.1/item/3009.png"
+    },
+    "3010": {
+      "id": 3010,
+      "name": "Symbiotic Soles",
+      "icon": "/ddragon/16.20.1/item/3010.png"
+    },
+    "3011": {
+      "id": 3011,
+      "name": "Chemtech Putrifier",
+      "icon": "/ddragon/16.20.1/item/3011.png"
+    },
+    "3012": {
+      "id": 3012,
+      "name": "Chalice of Blessing",
+      "icon": "/ddragon/16.20.1/item/3012.png"
+    },
+    "3013": {
+      "id": 3013,
+      "name": "Synchronized Souls",
+      "icon": "/ddragon/16.20.1/item/3013.png"
+    },
+    "3020": {
+      "id": 3020,
+      "name": "Sorcerer's Shoes",
+      "icon": "/ddragon/16.20.1/item/3020.png"
+    },
+    "3023": {
+      "id": 3023,
+      "name": "Lifewell Pendant",
+      "icon": "/ddragon/16.20.1/item/3023.png"
+    },
+    "3024": {
+      "id": 3024,
+      "name": "Glacial Buckler",
+      "icon": "/ddragon/16.20.1/item/3024.png"
+    },
+    "3026": {
+      "id": 3026,
+      "name": "Guardian Angel",
+      "icon": "/ddragon/16.20.1/item/3026.png"
+    },
+    "3031": {
+      "id": 3031,
+      "name": "Infinity Edge",
+      "icon": "/ddragon/16.20.1/item/3031.png"
+    },
+    "3032": {
+      "id": 3032,
+      "name": "Yun Tal Wildarrows",
+      "icon": "/ddragon/16.20.1/item/3032.png"
+    },
+    "3033": {
+      "id": 3033,
+      "name": "Mortal Reminder",
+      "icon": "/ddragon/16.20.1/item/3033.png"
+    },
+    "3035": {
+      "id": 3035,
+      "name": "Last Whisper",
+      "icon": "/ddragon/16.20.1/item/3035.png"
+    },
+    "3036": {
+      "id": 3036,
+      "name": "Lord Dominik's Regards",
+      "icon": "/ddragon/16.20.1/item/3036.png"
+    },
+    "3039": {
+      "id": 3039,
+      "name": "Atma's Reckoning",
+      "icon": "/ddragon/16.20.1/item/3039.png"
+    },
+    "3040": {
+      "id": 3040,
+      "name": "Seraph's Embrace",
+      "icon": "/ddragon/16.20.1/item/3040.png"
+    },
+    "3041": {
+      "id": 3041,
+      "name": "Mejai's Soulstealer",
+      "icon": "/ddragon/16.20.1/item/3041.png"
+    },
+    "3042": {
+      "id": 3042,
+      "name": "Muramana",
+      "icon": "/ddragon/16.20.1/item/3042.png"
+    },
+    "3044": {
+      "id": 3044,
+      "name": "Phage",
+      "icon": "/ddragon/16.20.1/item/3044.png"
+    },
+    "3046": {
+      "id": 3046,
+      "name": "Phantom Dancer",
+      "icon": "/ddragon/16.20.1/item/3046.png"
+    },
+    "3047": {
+      "id": 3047,
+      "name": "Plated Steelcaps",
+      "icon": "/ddragon/16.20.1/item/3047.png"
+    },
+    "3050": {
+      "id": 3050,
+      "name": "Zeke's Convergence",
+      "icon": "/ddragon/16.20.1/item/3050.png"
+    },
+    "3051": {
+      "id": 3051,
+      "name": "Hearthbound Axe",
+      "icon": "/ddragon/16.20.1/item/3051.png"
+    },
+    "3053": {
+      "id": 3053,
+      "name": "Sterak's Gage",
+      "icon": "/ddragon/16.20.1/item/3053.png"
+    },
+    "3057": {
+      "id": 3057,
+      "name": "Sheen",
+      "icon": "/ddragon/16.20.1/item/3057.png"
+    },
+    "3065": {
+      "id": 3065,
+      "name": "Spirit Visage",
+      "icon": "/ddragon/16.20.1/item/3065.png"
+    },
+    "3066": {
+      "id": 3066,
+      "name": "Winged Moonplate",
+      "icon": "/ddragon/16.20.1/item/3066.png"
+    },
+    "3067": {
+      "id": 3067,
+      "name": "Kindlegem",
+      "icon": "/ddragon/16.20.1/item/3067.png"
+    },
+    "3068": {
+      "id": 3068,
+      "name": "Sunfire Aegis",
+      "icon": "/ddragon/16.20.1/item/3068.png"
+    },
+    "3070": {
+      "id": 3070,
+      "name": "Tear of the Goddess",
+      "icon": "/ddragon/16.20.1/item/3070.png"
+    },
+    "3071": {
+      "id": 3071,
+      "name": "Black Cleaver",
+      "icon": "/ddragon/16.20.1/item/3071.png"
+    },
+    "3072": {
+      "id": 3072,
+      "name": "Bloodthirster",
+      "icon": "/ddragon/16.20.1/item/3072.png"
+    },
+    "3073": {
+      "id": 3073,
+      "name": "Experimental Hexplate",
+      "icon": "/ddragon/16.20.1/item/3073.png"
+    },
+    "3074": {
+      "id": 3074,
+      "name": "Ravenous Hydra",
+      "icon": "/ddragon/16.20.1/item/3074.png"
+    },
+    "3075": {
+      "id": 3075,
+      "name": "Thornmail",
+      "icon": "/ddragon/16.20.1/item/3075.png"
+    },
+    "3076": {
+      "id": 3076,
+      "name": "Bramble Vest",
+      "icon": "/ddragon/16.20.1/item/3076.png"
+    },
+    "3077": {
+      "id": 3077,
+      "name": "Tiamat",
+      "icon": "/ddragon/16.20.1/item/3077.png"
+    },
+    "3078": {
+      "id": 3078,
+      "name": "Trinity Force",
+      "icon": "/ddragon/16.20.1/item/3078.png"
+    },
+    "3082": {
+      "id": 3082,
+      "name": "Warden's Mail",
+      "icon": "/ddragon/16.20.1/item/3082.png"
+    },
+    "3083": {
+      "id": 3083,
+      "name": "Warmog's Armor",
+      "icon": "/ddragon/16.20.1/item/3083.png"
+    },
+    "3084": {
+      "id": 3084,
+      "name": "Heartsteel",
+      "icon": "/ddragon/16.20.1/item/3084.png"
+    },
+    "3085": {
+      "id": 3085,
+      "name": "Runaan's Hurricane",
+      "icon": "/ddragon/16.20.1/item/3085.png"
+    },
+    "3086": {
+      "id": 3086,
+      "name": "Zeal",
+      "icon": "/ddragon/16.20.1/item/3086.png"
+    },
+    "3087": {
+      "id": 3087,
+      "name": "Statikk Shiv",
+      "icon": "/ddragon/16.20.1/item/3087.png"
+    },
+    "3089": {
+      "id": 3089,
+      "name": "Rabadon's Deathcap",
+      "icon": "/ddragon/16.20.1/item/3089.png"
+    },
+    "3091": {
+      "id": 3091,
+      "name": "Wit's End",
+      "icon": "/ddragon/16.20.1/item/3091.png"
+    },
+    "3094": {
+      "id": 3094,
+      "name": "Rapid Firecannon",
+      "icon": "/ddragon/16.20.1/item/3094.png"
+    },
+    "3095": {
+      "id": 3095,
+      "name": "Stormrazor",
+      "icon": "/ddragon/16.20.1/item/3095.png"
+    },
+    "3100": {
+      "id": 3100,
+      "name": "Lich Bane",
+      "icon": "/ddragon/16.20.1/item/3100.png"
+    },
+    "3102": {
+      "id": 3102,
+      "name": "Banshee's Veil",
+      "icon": "/ddragon/16.20.1/item/3102.png"
+    },
+    "3105": {
+      "id": 3105,
+      "name": "Aegis of the Legion",
+      "icon": "/ddragon/16.20.1/item/3105.png"
+    },
+    "3107": {
+      "id": 3107,
+      "name": "Redemption",
+      "icon": "/ddragon/16.20.1/item/3107.png"
+    },
+    "3108": {
+      "id": 3108,
+      "name": "Fiendish Codex",
+      "icon": "/ddragon/16.20.1/item/3108.png"
+    },
+    "3109": {
+      "id": 3109,
+      "name": "Knight's Vow",
+      "icon": "/ddragon/16.20.1/item/3109.png"
+    },
+    "3110": {
+      "id": 3110,
+      "name": "Frozen Heart",
+      "icon": "/ddragon/16.20.1/item/3110.png"
+    },
+    "3111": {
+      "id": 3111,
+      "name": "Mercury's Treads",
+      "icon": "/ddragon/16.20.1/item/3111.png"
+    },
+    "3112": {
+      "id": 3112,
+      "name": "Guardian's Orb",
+      "icon": "/ddragon/16.20.1/item/3112.png"
+    },
+    "3113": {
+      "id": 3113,
+      "name": "Aether Wisp",
+      "icon": "/ddragon/16.20.1/item/3113.png"
+    },
+    "3114": {
+      "id": 3114,
+      "name": "Forbidden Idol",
+      "icon": "/ddragon/16.20.1/item/3114.png"
+    },
+    "3115": {
+      "id": 3115,
+      "name": "Nashor's Tooth",
+      "icon": "/ddragon/16.20.1/item/3115.png"
+    },
+    "3116": {
+      "id": 3116,
+      "name": "Rylai's Crystal Scepter",
+      "icon": "/ddragon/16.20.1/item/3116.png"
+    },
+    "3117": {
+      "id": 3117,
+      "name": "Mobility Boots",
+      "icon": "/ddragon/16.20.1/item/3117.png"
+    },
+    "3118": {
+      "id": 3118,
+      "name": "Malignance",
+      "icon": "/ddragon/16.20.1/item/3118.png"
+    },
+    "3119": {
+      "id": 3119,
+      "name": "Winter's Approach",
+      "icon": "/ddragon/16.20.1/item/3119.png"
+    },
+    "3121": {
+      "id": 3121,
+      "name": "Fimbulwinter",
+      "icon": "/ddragon/16.20.1/item/3121.png"
+    },
+    "3123": {
+      "id": 3123,
+      "name": "Executioner's Calling",
+      "icon": "/ddragon/16.20.1/item/3123.png"
+    },
+    "3124": {
+      "id": 3124,
+      "name": "Guinsoo's Rageblade",
+      "icon": "/ddragon/16.20.1/item/3124.png"
+    },
+    "3128": {
+      "id": 3128,
+      "name": "Deathfire Grasp",
+      "icon": "/ddragon/16.20.1/item/3128.png"
+    },
+    "3131": {
+      "id": 3131,
+      "name": "Sword of the Divine",
+      "icon": "/ddragon/16.20.1/item/3131.png"
+    },
+    "3133": {
+      "id": 3133,
+      "name": "Caulfield's Warhammer",
+      "icon": "/ddragon/16.20.1/item/3133.png"
+    },
+    "3134": {
+      "id": 3134,
+      "name": "Serrated Dirk",
+      "icon": "/ddragon/16.20.1/item/3134.png"
+    },
+    "3135": {
+      "id": 3135,
+      "name": "Void Staff",
+      "icon": "/ddragon/16.20.1/item/3135.png"
+    },
+    "3137": {
+      "id": 3137,
+      "name": "Cryptbloom",
+      "icon": "/ddragon/16.20.1/item/3137.png"
+    },
+    "3139": {
+      "id": 3139,
+      "name": "Mercurial Scimitar",
+      "icon": "/ddragon/16.20.1/item/3139.png"
+    },
+    "3140": {
+      "id": 3140,
+      "name": "Quicksilver Sash",
+      "icon": "/ddragon/16.20.1/item/3140.png"
+    },
+    "3142": {
+      "id": 3142,
+      "name": "Youmuu's Ghostblade",
+      "icon": "/ddragon/16.20.1/item/3142.png"
+    },
+    "3143": {
+      "id": 3143,
+      "name": "Randuin's Omen",
+      "icon": "/ddragon/16.20.1/item/3143.png"
+    },
+    "3144": {
+      "id": 3144,
+      "name": "Scout's Slingshot",
+      "icon": "/ddragon/16.20.1/item/3144.png"
+    },
+    "3145": {
+      "id": 3145,
+      "name": "Hextech Alternator",
+      "icon": "/ddragon/16.20.1/item/3145.png"
+    },
+    "3146": {
+      "id": 3146,
+      "name": "Hextech Gunblade",
+      "icon": "/ddragon/16.20.1/item/3146.png"
+    },
+    "3147": {
+      "id": 3147,
+      "name": "Haunting Guise",
+      "icon": "/ddragon/16.20.1/item/3147.png"
+    },
+    "3152": {
+      "id": 3152,
+      "name": "Hextech Rocketbelt",
+      "icon": "/ddragon/16.20.1/item/3152.png"
+    },
+    "3153": {
+      "id": 3153,
+      "name": "Blade of The Ruined King",
+      "icon": "/ddragon/16.20.1/item/3153.png"
+    },
+    "3155": {
+      "id": 3155,
+      "name": "Hexdrinker",
+      "icon": "/ddragon/16.20.1/item/3155.png"
+    },
+    "3156": {
+      "id": 3156,
+      "name": "Maw of Malmortius",
+      "icon": "/ddragon/16.20.1/item/3156.png"
+    },
+    "3157": {
+      "id": 3157,
+      "name": "Zhonya's Hourglass",
+      "icon": "/ddragon/16.20.1/item/3157.png"
+    },
+    "3158": {
+      "id": 3158,
+      "name": "Ionian Boots of Lucidity",
+      "icon": "/ddragon/16.20.1/item/3158.png"
+    },
+    "3161": {
+      "id": 3161,
+      "name": "Spear of Shojin",
+      "icon": "/ddragon/16.20.1/item/3161.png"
+    },
+    "3165": {
+      "id": 3165,
+      "name": "Morellonomicon",
+      "icon": "/ddragon/16.20.1/item/3165.png"
+    },
+    "3168": {
+      "id": 3168,
+      "name": "Immortal Path",
+      "icon": "/ddragon/16.20.1/item/3168.png"
+    },
+    "3170": {
+      "id": 3170,
+      "name": "Swiftmarch",
+      "icon": "/ddragon/16.20.1/item/3170.png"
+    },
+    "3171": {
+      "id": 3171,
+      "name": "Crimson Lucidity",
+      "icon": "/ddragon/16.20.1/item/3171.png"
+    },
+    "3172": {
+      "id": 3172,
+      "name": "Gunmetal Greaves",
+      "icon": "/ddragon/16.20.1/item/3172.png"
+    },
+    "3173": {
+      "id": 3173,
+      "name": "Chainlaced Crushers",
+      "icon": "/ddragon/16.20.1/item/3173.png"
+    },
+    "3174": {
+      "id": 3174,
+      "name": "Armored Advance",
+      "icon": "/ddragon/16.20.1/item/3174.png"
+    },
+    "3175": {
+      "id": 3175,
+      "name": "Spellslinger's Shoes",
+      "icon": "/ddragon/16.20.1/item/3175.png"
+    },
+    "3176": {
+      "id": 3176,
+      "name": "Forever Forward",
+      "icon": "/ddragon/16.20.1/item/3176.png"
+    },
+    "3177": {
+      "id": 3177,
+      "name": "Guardian's Blade",
+      "icon": "/ddragon/16.20.1/item/3177.png"
+    },
+    "3179": {
+      "id": 3179,
+      "name": "Umbral Glaive",
+      "icon": "/ddragon/16.20.1/item/3179.png"
+    },
+    "3181": {
+      "id": 3181,
+      "name": "Hullbreaker",
+      "icon": "/ddragon/16.20.1/item/3181.png"
+    },
+    "3184": {
+      "id": 3184,
+      "name": "Guardian's Hammer",
+      "icon": "/ddragon/16.20.1/item/3184.png"
+    },
+    "3190": {
+      "id": 3190,
+      "name": "Locket of the Iron Solari",
+      "icon": "/ddragon/16.20.1/item/3190.png"
+    },
+    "3193": {
+      "id": 3193,
+      "name": "Gargoyle Stoneplate",
+      "icon": "/ddragon/16.20.1/item/3193.png"
+    },
+    "3211": {
+      "id": 3211,
+      "name": "Spectre's Cowl",
+      "icon": "/ddragon/16.20.1/item/3211.png"
+    },
+    "3222": {
+      "id": 3222,
+      "name": "Mikael's Blessing",
+      "icon": "/ddragon/16.20.1/item/3222.png"
+    },
+    "3302": {
+      "id": 3302,
+      "name": "Terminus",
+      "icon": "/ddragon/16.20.1/item/3302.png"
+    },
+    "3330": {
+      "id": 3330,
+      "name": "Scarecrow Effigy",
+      "icon": "/ddragon/16.20.1/item/3330.png"
+    },
+    "3340": {
+      "id": 3340,
+      "name": "Stealth Ward",
+      "icon": "/ddragon/16.20.1/item/3340.png"
+    },
+    "3348": {
+      "id": 3348,
+      "name": "Arcane Sweeper",
+      "icon": "/ddragon/16.20.1/item/3348.png"
+    },
+    "3349": {
+      "id": 3349,
+      "name": "Lucent Singularity",
+      "icon": "/ddragon/16.20.1/item/3349.png"
+    },
+    "3363": {
+      "id": 3363,
+      "name": "Farsight Alteration",
+      "icon": "/ddragon/16.20.1/item/3363.png"
+    },
+    "3364": {
+      "id": 3364,
+      "name": "Oracle Lens",
+      "icon": "/ddragon/16.20.1/item/3364.png"
+    },
+    "3398": {
+      "id": 3398,
+      "name": "Small Party Favor",
+      "icon": "/ddragon/16.20.1/item/3398.png"
+    },
+    "3399": {
+      "id": 3399,
+      "name": "Party Favor",
+      "icon": "/ddragon/16.20.1/item/3399.png"
+    },
+    "3400": {
+      "id": 3400,
+      "name": "Your Cut",
+      "icon": "/ddragon/16.20.1/item/3400.png"
+    },
+    "3430": {
+      "id": 3430,
+      "name": "Rite Of Ruin",
+      "icon": "/ddragon/16.20.1/item/3430.png"
+    },
+    "3504": {
+      "id": 3504,
+      "name": "Ardent Censer",
+      "icon": "/ddragon/16.20.1/item/3504.png"
+    },
+    "3508": {
+      "id": 3508,
+      "name": "Essence Reaver",
+      "icon": "/ddragon/16.20.1/item/3508.png"
+    },
+    "3513": {
+      "id": 3513,
+      "name": "Eye of the Herald",
+      "icon": "/ddragon/16.20.1/item/3513.png"
+    },
+    "3599": {
+      "id": 3599,
+      "name": "Kalista's Black Spear",
+      "icon": "/ddragon/16.20.1/item/3599.png"
+    },
+    "3600": {
+      "id": 3600,
+      "name": "Kalista's Black Spear",
+      "icon": "/ddragon/16.20.1/item/3600.png"
+    },
+    "3742": {
+      "id": 3742,
+      "name": "Dead Man's Plate",
+      "icon": "/ddragon/16.20.1/item/3742.png"
+    },
+    "3748": {
+      "id": 3748,
+      "name": "Titanic Hydra",
+      "icon": "/ddragon/16.20.1/item/3748.png"
+    },
+    "3801": {
+      "id": 3801,
+      "name": "Crystalline Bracer",
+      "icon": "/ddragon/16.20.1/item/3801.png"
+    },
+    "3802": {
+      "id": 3802,
+      "name": "Lost Chapter",
+      "icon": "/ddragon/16.20.1/item/3802.png"
+    },
+    "3803": {
+      "id": 3803,
+      "name": "Catalyst of Aeons",
+      "icon": "/ddragon/16.20.1/item/3803.png"
+    },
+    "3814": {
+      "id": 3814,
+      "name": "Edge of Night",
+      "icon": "/ddragon/16.20.1/item/3814.png"
+    },
+    "3850": {
+      "id": 3850,
+      "name": "Spellthief's Edge",
+      "icon": "/ddragon/16.20.1/item/3850.png"
+    },
+    "3851": {
+      "id": 3851,
+      "name": "Frostfang",
+      "icon": "/ddragon/16.20.1/item/3851.png"
+    },
+    "3853": {
+      "id": 3853,
+      "name": "Shard of True Ice",
+      "icon": "/ddragon/16.20.1/item/3853.png"
+    },
+    "3854": {
+      "id": 3854,
+      "name": "Steel Shoulderguards",
+      "icon": "/ddragon/16.20.1/item/3854.png"
+    },
+    "3855": {
+      "id": 3855,
+      "name": "Runesteel Spaulders",
+      "icon": "/ddragon/16.20.1/item/3855.png"
+    },
+    "3857": {
+      "id": 3857,
+      "name": "Pauldrons of Whiterock",
+      "icon": "/ddragon/16.20.1/item/3857.png"
+    },
+    "3858": {
+      "id": 3858,
+      "name": "Relic Shield",
+      "icon": "/ddragon/16.20.1/item/3858.png"
+    },
+    "3859": {
+      "id": 3859,
+      "name": "Targon's Buckler",
+      "icon": "/ddragon/16.20.1/item/3859.png"
+    },
+    "3860": {
+      "id": 3860,
+      "name": "Bulwark of the Mountain",
+      "icon": "/ddragon/16.20.1/item/3860.png"
+    },
+    "3862": {
+      "id": 3862,
+      "name": "Spectral Sickle",
+      "icon": "/ddragon/16.20.1/item/3862.png"
+    },
+    "3863": {
+      "id": 3863,
+      "name": "Harrowing Crescent",
+      "icon": "/ddragon/16.20.1/item/3863.png"
+    },
+    "3864": {
+      "id": 3864,
+      "name": "Black Mist Scythe",
+      "icon": "/ddragon/16.20.1/item/3864.png"
+    },
+    "3865": {
+      "id": 3865,
+      "name": "World Atlas",
+      "icon": "/ddragon/16.20.1/item/3865.png"
+    },
+    "3866": {
+      "id": 3866,
+      "name": "Runic Compass",
+      "icon": "/ddragon/16.20.1/item/3866.png"
+    },
+    "3867": {
+      "id": 3867,
+      "name": "Bounty of Worlds",
+      "icon": "/ddragon/16.20.1/item/3867.png"
+    },
+    "3869": {
+      "id": 3869,
+      "name": "Celestial Opposition",
+      "icon": "/ddragon/16.20.1/item/3869.png"
+    },
+    "3870": {
+      "id": 3870,
+      "name": "Dream Maker",
+      "icon": "/ddragon/16.20.1/item/3870.png"
+    },
+    "3871": {
+      "id": 3871,
+      "name": "Zaz'Zak's Realmspike",
+      "icon": "/ddragon/16.20.1/item/3871.png"
+    },
+    "3876": {
+      "id": 3876,
+      "name": "Solstice Sleigh",
+      "icon": "/ddragon/16.20.1/item/3876.png"
+    },
+    "3877": {
+      "id": 3877,
+      "name": "Bloodsong",
+      "icon": "/ddragon/16.20.1/item/3877.png"
+    },
+    "3901": {
+      "id": 3901,
+      "name": "<rarityLegendary>Fire at Will</rarityLegendary><br><subtitleLeft><silver>500 Silver Serpents</silver></subtitleLeft>",
+      "icon": "/ddragon/16.20.1/item/3901.png"
+    },
+    "3902": {
+      "id": 3902,
+      "name": "<rarityLegendary>Death's Daughter</rarityLegendary><br><subtitleLeft><silver>500 Silver Serpents</silver></subtitleLeft>",
+      "icon": "/ddragon/16.20.1/item/3902.png"
+    },
+    "3903": {
+      "id": 3903,
+      "name": "<rarityLegendary>Raise Morale</rarityLegendary><br><subtitleLeft><silver>500 Silver Serpents</silver></subtitleLeft>",
+      "icon": "/ddragon/16.20.1/item/3903.png"
+    },
+    "3916": {
+      "id": 3916,
+      "name": "Oblivion Orb",
+      "icon": "/ddragon/16.20.1/item/3916.png"
+    },
+    "4003": {
+      "id": 4003,
+      "name": "Lifeline",
+      "icon": "/ddragon/16.20.1/item/4003.png"
+    },
+    "4004": {
+      "id": 4004,
+      "name": "Spectral Cutlass",
+      "icon": "/ddragon/16.20.1/item/4004.png"
+    },
+    "4005": {
+      "id": 4005,
+      "name": "Imperial Mandate",
+      "icon": "/ddragon/16.20.1/item/4005.png"
+    },
+    "4010": {
+      "id": 4010,
+      "name": "Bloodletter's Curse",
+      "icon": "/ddragon/16.20.1/item/4010.png"
+    },
+    "4011": {
+      "id": 4011,
+      "name": "Sword of Blossoming Dawn",
+      "icon": "/ddragon/16.20.1/item/4011.png"
+    },
+    "4012": {
+      "id": 4012,
+      "name": "Sin Eater",
+      "icon": "/ddragon/16.20.1/item/4012.png"
+    },
+    "4013": {
+      "id": 4013,
+      "name": "Lightning Braid",
+      "icon": "/ddragon/16.20.1/item/4013.png"
+    },
+    "4014": {
+      "id": 4014,
+      "name": "Frozen Mallet",
+      "icon": "/ddragon/16.20.1/item/4014.png"
+    },
+    "4015": {
+      "id": 4015,
+      "name": "Perplexity",
+      "icon": "/ddragon/16.20.1/item/4015.png"
+    },
+    "4016": {
+      "id": 4016,
+      "name": "Wordless Promise",
+      "icon": "/ddragon/16.20.1/item/4016.png"
+    },
+    "4017": {
+      "id": 4017,
+      "name": "Hellfire Hatchet",
+      "icon": "/ddragon/16.20.1/item/4017.png"
+    },
+    "4401": {
+      "id": 4401,
+      "name": "Force of Nature",
+      "icon": "/ddragon/16.20.1/item/4401.png"
+    },
+    "4402": {
+      "id": 4402,
+      "name": "Innervating Locket",
+      "icon": "/ddragon/16.20.1/item/4402.png"
+    },
+    "4403": {
+      "id": 4403,
+      "name": "The Golden Spatula",
+      "icon": "/ddragon/16.20.1/item/4403.png"
+    },
+    "4628": {
+      "id": 4628,
+      "name": "Horizon Focus",
+      "icon": "/ddragon/16.20.1/item/4628.png"
+    },
+    "4629": {
+      "id": 4629,
+      "name": "Cosmic Drive",
+      "icon": "/ddragon/16.20.1/item/4629.png"
+    },
+    "4630": {
+      "id": 4630,
+      "name": "Blighting Jewel",
+      "icon": "/ddragon/16.20.1/item/4630.png"
+    },
+    "4632": {
+      "id": 4632,
+      "name": "Verdant Barrier",
+      "icon": "/ddragon/16.20.1/item/4632.png"
+    },
+    "4633": {
+      "id": 4633,
+      "name": "Riftmaker",
+      "icon": "/ddragon/16.20.1/item/4633.png"
+    },
+    "4635": {
+      "id": 4635,
+      "name": "Leeching Leer",
+      "icon": "/ddragon/16.20.1/item/4635.png"
+    },
+    "4636": {
+      "id": 4636,
+      "name": "Night Harvester",
+      "icon": "/ddragon/16.20.1/item/4636.png"
+    },
+    "4637": {
+      "id": 4637,
+      "name": "Demonic Embrace",
+      "icon": "/ddragon/16.20.1/item/4637.png"
+    },
+    "4638": {
+      "id": 4638,
+      "name": "Watchful Wardstone",
+      "icon": "/ddragon/16.20.1/item/4638.png"
+    },
+    "4641": {
+      "id": 4641,
+      "name": "Stirring Wardstone",
+      "icon": "/ddragon/16.20.1/item/4641.png"
+    },
+    "4642": {
+      "id": 4642,
+      "name": "Bandleglass Mirror",
+      "icon": "/ddragon/16.20.1/item/4642.png"
+    },
+    "4643": {
+      "id": 4643,
+      "name": "Vigilant Wardstone",
+      "icon": "/ddragon/16.20.1/item/4643.png"
+    },
+    "4644": {
+      "id": 4644,
+      "name": "Crown of the Shattered Queen",
+      "icon": "/ddragon/16.20.1/item/4644.png"
+    },
+    "4645": {
+      "id": 4645,
+      "name": "Shadowflame",
+      "icon": "/ddragon/16.20.1/item/4645.png"
+    },
+    "4646": {
+      "id": 4646,
+      "name": "Stormsurge",
+      "icon": "/ddragon/16.20.1/item/4646.png"
+    },
+    "6029": {
+      "id": 6029,
+      "name": "Ironspike Whip",
+      "icon": "/ddragon/16.20.1/item/6029.png"
+    },
+    "6032": {
+      "id": 6032,
+      "name": "Stat Bonus",
+      "icon": "/ddragon/16.20.1/item/6032.png"
+    },
+    "6035": {
+      "id": 6035,
+      "name": "Silvermere Dawn",
+      "icon": "/ddragon/16.20.1/item/6035.png"
+    },
+    "6333": {
+      "id": 6333,
+      "name": "Death's Dance",
+      "icon": "/ddragon/16.20.1/item/6333.png"
+    },
+    "6609": {
+      "id": 6609,
+      "name": "Chempunk Chainsword",
+      "icon": "/ddragon/16.20.1/item/6609.png"
+    },
+    "6610": {
+      "id": 6610,
+      "name": "Sundered Sky",
+      "icon": "/ddragon/16.20.1/item/6610.png"
+    },
+    "6616": {
+      "id": 6616,
+      "name": "Staff of Flowing Water",
+      "icon": "/ddragon/16.20.1/item/6616.png"
+    },
+    "6617": {
+      "id": 6617,
+      "name": "Moonstone Renewer",
+      "icon": "/ddragon/16.20.1/item/6617.png"
+    },
+    "6620": {
+      "id": 6620,
+      "name": "Echoes of Helia",
+      "icon": "/ddragon/16.20.1/item/6620.png"
+    },
+    "6621": {
+      "id": 6621,
+      "name": "Dawncore",
+      "icon": "/ddragon/16.20.1/item/6621.png"
+    },
+    "6630": {
+      "id": 6630,
+      "name": "Goredrinker",
+      "icon": "/ddragon/16.20.1/item/6630.png"
+    },
+    "6631": {
+      "id": 6631,
+      "name": "Stridebreaker",
+      "icon": "/ddragon/16.20.1/item/6631.png"
+    },
+    "6632": {
+      "id": 6632,
+      "name": "Divine Sunderer",
+      "icon": "/ddragon/16.20.1/item/6632.png"
+    },
+    "6653": {
+      "id": 6653,
+      "name": "Liandry's Torment",
+      "icon": "/ddragon/16.20.1/item/6653.png"
+    },
+    "6655": {
+      "id": 6655,
+      "name": "Luden's Echo",
+      "icon": "/ddragon/16.20.1/item/6655.png"
+    },
+    "6656": {
+      "id": 6656,
+      "name": "Everfrost",
+      "icon": "/ddragon/16.20.1/item/6656.png"
+    },
+    "6657": {
+      "id": 6657,
+      "name": "Rod of Ages",
+      "icon": "/ddragon/16.20.1/item/6657.png"
+    },
+    "6660": {
+      "id": 6660,
+      "name": "Bami's Cinder",
+      "icon": "/ddragon/16.20.1/item/6660.png"
+    },
+    "6662": {
+      "id": 6662,
+      "name": "Iceborn Gauntlet",
+      "icon": "/ddragon/16.20.1/item/6662.png"
+    },
+    "6664": {
+      "id": 6664,
+      "name": "Hollow Radiance",
+      "icon": "/ddragon/16.20.1/item/6664.png"
+    },
+    "6665": {
+      "id": 6665,
+      "name": "Jak'Sho, The Protean",
+      "icon": "/ddragon/16.20.1/item/6665.png"
+    },
+    "6667": {
+      "id": 6667,
+      "name": "Radiant Virtue",
+      "icon": "/ddragon/16.20.1/item/6667.png"
+    },
+    "6670": {
+      "id": 6670,
+      "name": "Noonquiver",
+      "icon": "/ddragon/16.20.1/item/6670.png"
+    },
+    "6671": {
+      "id": 6671,
+      "name": "Galeforce",
+      "icon": "/ddragon/16.20.1/item/6671.png"
+    },
+    "6672": {
+      "id": 6672,
+      "name": "Kraken Slayer",
+      "icon": "/ddragon/16.20.1/item/6672.png"
+    },
+    "6673": {
+      "id": 6673,
+      "name": "Immortal Shieldbow",
+      "icon": "/ddragon/16.20.1/item/6673.png"
+    },
+    "6675": {
+      "id": 6675,
+      "name": "Navori Flickerblade",
+      "icon": "/ddragon/16.20.1/item/6675.png"
+    },
+    "6676": {
+      "id": 6676,
+      "name": "The Collector",
+      "icon": "/ddragon/16.20.1/item/6676.png"
+    },
+    "6677": {
+      "id": 6677,
+      "name": "Rageknife",
+      "icon": "/ddragon/16.20.1/item/6677.png"
+    },
+    "6690": {
+      "id": 6690,
+      "name": "Rectrix",
+      "icon": "/ddragon/16.20.1/item/6690.png"
+    },
+    "6691": {
+      "id": 6691,
+      "name": "Duskblade of Draktharr",
+      "icon": "/ddragon/16.20.1/item/6691.png"
+    },
+    "6692": {
+      "id": 6692,
+      "name": "Eclipse",
+      "icon": "/ddragon/16.20.1/item/6692.png"
+    },
+    "6693": {
+      "id": 6693,
+      "name": "Prowler's Claw",
+      "icon": "/ddragon/16.20.1/item/6693.png"
+    },
+    "6694": {
+      "id": 6694,
+      "name": "Serylda's Grudge",
+      "icon": "/ddragon/16.20.1/item/6694.png"
+    },
+    "6695": {
+      "id": 6695,
+      "name": "Serpent's Fang",
+      "icon": "/ddragon/16.20.1/item/6695.png"
+    },
+    "6696": {
+      "id": 6696,
+      "name": "Axiom Arc",
+      "icon": "/ddragon/16.20.1/item/6696.png"
+    },
+    "6697": {
+      "id": 6697,
+      "name": "Hubris",
+      "icon": "/ddragon/16.20.1/item/6697.png"
+    },
+    "6698": {
+      "id": 6698,
+      "name": "Profane Hydra",
+      "icon": "/ddragon/16.20.1/item/6698.png"
+    },
+    "6699": {
+      "id": 6699,
+      "name": "Voltaic Cyclosword",
+      "icon": "/ddragon/16.20.1/item/6699.png"
+    },
+    "6700": {
+      "id": 6700,
+      "name": "Shield of the Rakkor",
+      "icon": "/ddragon/16.20.1/item/6700.png"
+    },
+    "6701": {
+      "id": 6701,
+      "name": "Opportunity",
+      "icon": "/ddragon/16.20.1/item/6701.png"
+    },
+    "6702": {
+      "id": 6702,
+      "name": "Scouting Ahead",
+      "icon": "/ddragon/16.20.1/item/6702.png"
+    },
+    "7050": {
+      "id": 7050,
+      "name": "Gangplank Placeholder",
+      "icon": "/ddragon/16.20.1/item/7050.png"
+    },
+    "8001": {
+      "id": 8001,
+      "name": "Anathema's Chains",
+      "icon": "/ddragon/16.20.1/item/8001.png"
+    },
+    "8010": {
+      "id": 8010,
+      "name": "Bloodletter's Curse",
+      "icon": "/ddragon/16.20.1/item/8010.png"
+    },
+    "8020": {
+      "id": 8020,
+      "name": "Abyssal Mask",
+      "icon": "/ddragon/16.20.1/item/8020.png"
+    },
+    "9168": {
+      "id": 9168,
+      "name": "Locked Weapon Slot",
+      "icon": "/ddragon/16.20.1/item/9168.png"
+    },
+    "9171": {
+      "id": 9171,
+      "name": "Cyclonic Slicers",
+      "icon": "/ddragon/16.20.1/item/9171.png"
+    },
+    "9172": {
+      "id": 9172,
+      "name": "YuumiBot",
+      "icon": "/ddragon/16.20.1/item/9172.png"
+    },
+    "9173": {
+      "id": 9173,
+      "name": "Radiant Field",
+      "icon": "/ddragon/16.20.1/item/9173.png"
+    },
+    "9174": {
+      "id": 9174,
+      "name": "Statikk Sword",
+      "icon": "/ddragon/16.20.1/item/9174.png"
+    },
+    "9175": {
+      "id": 9175,
+      "name": "Lioness's Lament",
+      "icon": "/ddragon/16.20.1/item/9175.png"
+    },
+    "9176": {
+      "id": 9176,
+      "name": "Gatling Bunny-Guns",
+      "icon": "/ddragon/16.20.1/item/9176.png"
+    },
+    "9177": {
+      "id": 9177,
+      "name": "Searing Shortbow",
+      "icon": "/ddragon/16.20.1/item/9177.png"
+    },
+    "9178": {
+      "id": 9178,
+      "name": "The Annihilator",
+      "icon": "/ddragon/16.20.1/item/9178.png"
+    },
+    "9179": {
+      "id": 9179,
+      "name": "Battle Bunny Crossbow",
+      "icon": "/ddragon/16.20.1/item/9179.png"
+    },
+    "9180": {
+      "id": 9180,
+      "name": "UwU Blaster",
+      "icon": "/ddragon/16.20.1/item/9180.png"
+    },
+    "9181": {
+      "id": 9181,
+      "name": "Vortex Glove",
+      "icon": "/ddragon/16.20.1/item/9181.png"
+    },
+    "9183": {
+      "id": 9183,
+      "name": "Blade-o-rang",
+      "icon": "/ddragon/16.20.1/item/9183.png"
+    },
+    "9184": {
+      "id": 9184,
+      "name": "Bunny Mega-Blast",
+      "icon": "/ddragon/16.20.1/item/9184.png"
+    },
+    "9185": {
+      "id": 9185,
+      "name": "Anti-Shark Sea Mine",
+      "icon": "/ddragon/16.20.1/item/9185.png"
+    },
+    "9187": {
+      "id": 9187,
+      "name": "T.I.B.B.E.R.S",
+      "icon": "/ddragon/16.20.1/item/9187.png"
+    },
+    "9188": {
+      "id": 9188,
+      "name": "Ani-Mines",
+      "icon": "/ddragon/16.20.1/item/9188.png"
+    },
+    "9189": {
+      "id": 9189,
+      "name": "Final City Transit",
+      "icon": "/ddragon/16.20.1/item/9189.png"
+    },
+    "9190": {
+      "id": 9190,
+      "name": "Echoing Batblades",
+      "icon": "/ddragon/16.20.1/item/9190.png"
+    },
+    "9192": {
+      "id": 9192,
+      "name": "Paw Print Poisoner",
+      "icon": "/ddragon/16.20.1/item/9192.png"
+    },
+    "9193": {
+      "id": 9193,
+      "name": "Iceblast Armor",
+      "icon": "/ddragon/16.20.1/item/9193.png"
+    },
+    "9271": {
+      "id": 9271,
+      "name": "Unceasing Cyclone",
+      "icon": "/ddragon/16.20.1/item/9271.png"
+    },
+    "9272": {
+      "id": 9272,
+      "name": "YuumiBot_Final_FINAL",
+      "icon": "/ddragon/16.20.1/item/9272.png"
+    },
+    "9273": {
+      "id": 9273,
+      "name": "Explosive Embrace",
+      "icon": "/ddragon/16.20.1/item/9273.png"
+    },
+    "9274": {
+      "id": 9274,
+      "name": "Prumbis's Electrocarver",
+      "icon": "/ddragon/16.20.1/item/9274.png"
+    },
+    "9275": {
+      "id": 9275,
+      "name": "Enveloping Light",
+      "icon": "/ddragon/16.20.1/item/9275.png"
+    },
+    "9276": {
+      "id": 9276,
+      "name": "Double Bun-Bun Barrage",
+      "icon": "/ddragon/16.20.1/item/9276.png"
+    },
+    "9277": {
+      "id": 9277,
+      "name": "Evolved Embershot",
+      "icon": "/ddragon/16.20.1/item/9277.png"
+    },
+    "9278": {
+      "id": 9278,
+      "name": "Animapocalypse",
+      "icon": "/ddragon/16.20.1/item/9278.png"
+    },
+    "9279": {
+      "id": 9279,
+      "name": "Bunny Prime Ballista",
+      "icon": "/ddragon/16.20.1/item/9279.png"
+    },
+    "9280": {
+      "id": 9280,
+      "name": "OwO Blaster",
+      "icon": "/ddragon/16.20.1/item/9280.png"
+    },
+    "9281": {
+      "id": 9281,
+      "name": "Tempest's Gauntlet",
+      "icon": "/ddragon/16.20.1/item/9281.png"
+    },
+    "9283": {
+      "id": 9283,
+      "name": "Quad-o-rang",
+      "icon": "/ddragon/16.20.1/item/9283.png"
+    },
+    "9284": {
+      "id": 9284,
+      "name": "Rapid Rabbit Raindown",
+      "icon": "/ddragon/16.20.1/item/9284.png"
+    },
+    "9285": {
+      "id": 9285,
+      "name": "Neverending Mobstomper",
+      "icon": "/ddragon/16.20.1/item/9285.png"
+    },
+    "9287": {
+      "id": 9287,
+      "name": "T.I.B.B.E.R.S (B.E.E.G Edition)",
+      "icon": "/ddragon/16.20.1/item/9287.png"
+    },
+    "9288": {
+      "id": 9288,
+      "name": "Jinx's Tri-Namite",
+      "icon": "/ddragon/16.20.1/item/9288.png"
+    },
+    "9289": {
+      "id": 9289,
+      "name": "FC Limited Express",
+      "icon": "/ddragon/16.20.1/item/9289.png"
+    },
+    "9290": {
+      "id": 9290,
+      "name": "Vayne's Chromablades",
+      "icon": "/ddragon/16.20.1/item/9290.png"
+    },
+    "9292": {
+      "id": 9292,
+      "name": "Bearfoot Chem-Dispenser",
+      "icon": "/ddragon/16.20.1/item/9292.png"
+    },
+    "9293": {
+      "id": 9293,
+      "name": "Deep Freeze",
+      "icon": "/ddragon/16.20.1/item/9293.png"
+    },
+    "9300": {
+      "id": 9300,
+      "name": "Meow Meow",
+      "icon": "/ddragon/16.20.1/item/9300.png"
+    },
+    "9301": {
+      "id": 9301,
+      "name": "Shield Slam",
+      "icon": "/ddragon/16.20.1/item/9301.png"
+    },
+    "9302": {
+      "id": 9302,
+      "name": "Sound Wave",
+      "icon": "/ddragon/16.20.1/item/9302.png"
+    },
+    "9303": {
+      "id": 9303,
+      "name": "Pillory Swipe",
+      "icon": "/ddragon/16.20.1/item/9303.png"
+    },
+    "9304": {
+      "id": 9304,
+      "name": "Steel Tempest",
+      "icon": "/ddragon/16.20.1/item/9304.png"
+    },
+    "9305": {
+      "id": 9305,
+      "name": "Tentacle Slam",
+      "icon": "/ddragon/16.20.1/item/9305.png"
+    },
+    "9306": {
+      "id": 9306,
+      "name": "Winged Dagger",
+      "icon": "/ddragon/16.20.1/item/9306.png"
+    },
+    "9307": {
+      "id": 9307,
+      "name": "Guiding Hex",
+      "icon": "/ddragon/16.20.1/item/9307.png"
+    },
+    "9308": {
+      "id": 9308,
+      "name": "Bunny Hop",
+      "icon": "/ddragon/16.20.1/item/9308.png"
+    },
+    "9400": {
+      "id": 9400,
+      "name": "Battle Cat Barrage",
+      "icon": "/ddragon/16.20.1/item/9400.png"
+    },
+    "9401": {
+      "id": 9401,
+      "name": "Light of the Lion",
+      "icon": "/ddragon/16.20.1/item/9401.png"
+    },
+    "9402": {
+      "id": 9402,
+      "name": "Anima Echo",
+      "icon": "/ddragon/16.20.1/item/9402.png"
+    },
+    "9403": {
+      "id": 9403,
+      "name": "Savage Slice",
+      "icon": "/ddragon/16.20.1/item/9403.png"
+    },
+    "9404": {
+      "id": 9404,
+      "name": "Wandering Storms",
+      "icon": "/ddragon/16.20.1/item/9404.png"
+    },
+    "9405": {
+      "id": 9405,
+      "name": "Grizzly Smash",
+      "icon": "/ddragon/16.20.1/item/9405.png"
+    },
+    "9406": {
+      "id": 9406,
+      "name": "Lover's Ricochet",
+      "icon": "/ddragon/16.20.1/item/9406.png"
+    },
+    "9407": {
+      "id": 9407,
+      "name": "Hopped-Up Hex",
+      "icon": "/ddragon/16.20.1/item/9407.png"
+    },
+    "9408": {
+      "id": 9408,
+      "name": "Carrot Crash",
+      "icon": "/ddragon/16.20.1/item/9408.png"
+    },
+    "123430": {
+      "id": 123430,
+      "name": "Rite of Ruin",
+      "icon": "/ddragon/16.20.1/item/123430.png"
+    },
+    "124011": {
+      "id": 124011,
+      "name": "Sword of Blossoming Dawn",
+      "icon": "/ddragon/16.20.1/item/124011.png"
+    },
+    "126697": {
+      "id": 126697,
+      "name": "Hubris",
+      "icon": "/ddragon/16.20.1/item/126697.png"
+    },
+    "220000": {
+      "id": 220000,
+      "name": "Stat Bonus",
+      "icon": "/ddragon/16.20.1/item/220000.png"
+    },
+    "220001": {
+      "id": 220001,
+      "name": "Legendary Fighter Item",
+      "icon": "/ddragon/16.20.1/item/220001.png"
+    },
+    "220002": {
+      "id": 220002,
+      "name": "Legendary Marksman Item",
+      "icon": "/ddragon/16.20.1/item/220002.png"
+    },
+    "220003": {
+      "id": 220003,
+      "name": "Legendary Assassin Item",
+      "icon": "/ddragon/16.20.1/item/220003.png"
+    },
+    "220004": {
+      "id": 220004,
+      "name": "Legendary Mage Item",
+      "icon": "/ddragon/16.20.1/item/220004.png"
+    },
+    "220005": {
+      "id": 220005,
+      "name": "Legendary Tank Item",
+      "icon": "/ddragon/16.20.1/item/220005.png"
+    },
+    "220006": {
+      "id": 220006,
+      "name": "Legendary Support Item",
+      "icon": "/ddragon/16.20.1/item/220006.png"
+    },
+    "220007": {
+      "id": 220007,
+      "name": "Prismatic Item",
+      "icon": "/ddragon/16.20.1/item/220007.png"
+    },
+    "220008": {
+      "id": 220008,
+      "name": "Anvil Voucher",
+      "icon": "/ddragon/16.20.1/item/220008.png"
+    },
+    "220009": {
+      "id": 220009,
+      "name": "Gold Stat Anvil Voucher",
+      "icon": "/ddragon/16.20.1/item/220009.png"
+    },
+    "220010": {
+      "id": 220010,
+      "name": "Prismatic Stat Voucher",
+      "icon": "/ddragon/16.20.1/item/220010.png"
+    },
+    "220011": {
+      "id": 220011,
+      "name": "Bravery Voucher",
+      "icon": "/ddragon/16.20.1/item/220011.png"
+    },
+    "220012": {
+      "id": 220012,
+      "name": "Shardblade",
+      "icon": "/ddragon/16.20.1/item/220012.png"
+    },
+    "220013": {
+      "id": 220013,
+      "name": "Poro-Snax",
+      "icon": "/ddragon/16.20.1/item/220013.png"
+    },
+    "221011": {
+      "id": 221011,
+      "name": "Giant's Belt",
+      "icon": "/ddragon/16.20.1/item/221011.png"
+    },
+    "221026": {
+      "id": 221026,
+      "name": "Blasting Wand",
+      "icon": "/ddragon/16.20.1/item/221026.png"
+    },
+    "221031": {
+      "id": 221031,
+      "name": "Chain Vest",
+      "icon": "/ddragon/16.20.1/item/221031.png"
+    },
+    "221038": {
+      "id": 221038,
+      "name": "B. F. Sword",
+      "icon": "/ddragon/16.20.1/item/221038.png"
+    },
+    "221043": {
+      "id": 221043,
+      "name": "Recurve Bow",
+      "icon": "/ddragon/16.20.1/item/221043.png"
+    },
+    "221053": {
+      "id": 221053,
+      "name": "Vampiric Scepter",
+      "icon": "/ddragon/16.20.1/item/221053.png"
+    },
+    "221057": {
+      "id": 221057,
+      "name": "Negatron Cloak",
+      "icon": "/ddragon/16.20.1/item/221057.png"
+    },
+    "221058": {
+      "id": 221058,
+      "name": "Needlessly Large Rod",
+      "icon": "/ddragon/16.20.1/item/221058.png"
+    },
+    "222022": {
+      "id": 222022,
+      "name": "Glowing Mote",
+      "icon": "/ddragon/16.20.1/item/222022.png"
+    },
+    "222051": {
+      "id": 222051,
+      "name": "Guardian's Horn",
+      "icon": "/ddragon/16.20.1/item/222051.png"
+    },
+    "222065": {
+      "id": 222065,
+      "name": "Shurelya's Battlesong",
+      "icon": "/ddragon/16.20.1/item/222065.png"
+    },
+    "222141": {
+      "id": 222141,
+      "name": "Cappa Juice",
+      "icon": "/ddragon/16.20.1/item/222141.png"
+    },
+    "222502": {
+      "id": 222502,
+      "name": "Unending Despair",
+      "icon": "/ddragon/16.20.1/item/222502.png"
+    },
+    "222503": {
+      "id": 222503,
+      "name": "Blackfire Torch",
+      "icon": "/ddragon/16.20.1/item/222503.png"
+    },
+    "222504": {
+      "id": 222504,
+      "name": "Kaenic Rookern",
+      "icon": "/ddragon/16.20.1/item/222504.png"
+    },
+    "222510": {
+      "id": 222510,
+      "name": "Dusk and Dawn",
+      "icon": "/ddragon/16.20.1/item/222510.png"
+    },
+    "222512": {
+      "id": 222512,
+      "name": "Fiendhunter Bolts",
+      "icon": "/ddragon/16.20.1/item/222512.png"
+    },
+    "222517": {
+      "id": 222517,
+      "name": "Endless Hunger",
+      "icon": "/ddragon/16.20.1/item/222517.png"
+    },
+    "222522": {
+      "id": 222522,
+      "name": "Actualizer",
+      "icon": "/ddragon/16.20.1/item/222522.png"
+    },
+    "222523": {
+      "id": 222523,
+      "name": "Hexoptics C44",
+      "icon": "/ddragon/16.20.1/item/222523.png"
+    },
+    "222524": {
+      "id": 222524,
+      "name": "Bandlepipes",
+      "icon": "/ddragon/16.20.1/item/222524.png"
+    },
+    "222525": {
+      "id": 222525,
+      "name": "Protoplasm Harness",
+      "icon": "/ddragon/16.20.1/item/222525.png"
+    },
+    "222526": {
+      "id": 222526,
+      "name": "Whispering Circlet",
+      "icon": "/ddragon/16.20.1/item/222526.png"
+    },
+    "222530": {
+      "id": 222530,
+      "name": "Diadem of Songs",
+      "icon": "/ddragon/16.20.1/item/222530.png"
+    },
+    "223001": {
+      "id": 223001,
+      "name": "Evenshroud",
+      "icon": "/ddragon/16.20.1/item/223001.png"
+    },
+    "223002": {
+      "id": 223002,
+      "name": "Trailblazer",
+      "icon": "/ddragon/16.20.1/item/223002.png"
+    },
+    "223003": {
+      "id": 223003,
+      "name": "Archangel's Staff",
+      "icon": "/ddragon/16.20.1/item/223003.png"
+    },
+    "223004": {
+      "id": 223004,
+      "name": "Manamune",
+      "icon": "/ddragon/16.20.1/item/223004.png"
+    },
+    "223005": {
+      "id": 223005,
+      "name": "Ghostcrawlers",
+      "icon": "/ddragon/16.20.1/item/223005.png"
+    },
+    "223006": {
+      "id": 223006,
+      "name": "Berserker's Greaves",
+      "icon": "/ddragon/16.20.1/item/223006.png"
+    },
+    "223008": {
+      "id": 223008,
+      "name": "Gluttonous Greaves",
+      "icon": "/ddragon/16.20.1/item/223008.png"
+    },
+    "223009": {
+      "id": 223009,
+      "name": "Boots of Swiftness",
+      "icon": "/ddragon/16.20.1/item/223009.png"
+    },
+    "223011": {
+      "id": 223011,
+      "name": "Chemtech Putrifier",
+      "icon": "/ddragon/16.20.1/item/223011.png"
+    },
+    "223020": {
+      "id": 223020,
+      "name": "Sorcerer's Shoes",
+      "icon": "/ddragon/16.20.1/item/223020.png"
+    },
+    "223026": {
+      "id": 223026,
+      "name": "Guardian Angel",
+      "icon": "/ddragon/16.20.1/item/223026.png"
+    },
+    "223031": {
+      "id": 223031,
+      "name": "Infinity Edge",
+      "icon": "/ddragon/16.20.1/item/223031.png"
+    },
+    "223032": {
+      "id": 223032,
+      "name": "Yun Tal Wildarrows",
+      "icon": "/ddragon/16.20.1/item/223032.png"
+    },
+    "223033": {
+      "id": 223033,
+      "name": "Mortal Reminder",
+      "icon": "/ddragon/16.20.1/item/223033.png"
+    },
+    "223036": {
+      "id": 223036,
+      "name": "Lord Dominik's Regards",
+      "icon": "/ddragon/16.20.1/item/223036.png"
+    },
+    "223039": {
+      "id": 223039,
+      "name": "Atma's Reckoning",
+      "icon": "/ddragon/16.20.1/item/223039.png"
+    },
+    "223040": {
+      "id": 223040,
+      "name": "Seraph's Embrace",
+      "icon": "/ddragon/16.20.1/item/223040.png"
+    },
+    "223042": {
+      "id": 223042,
+      "name": "Muramana",
+      "icon": "/ddragon/16.20.1/item/223042.png"
+    },
+    "223046": {
+      "id": 223046,
+      "name": "Phantom Dancer",
+      "icon": "/ddragon/16.20.1/item/223046.png"
+    },
+    "223047": {
+      "id": 223047,
+      "name": "Plated Steelcaps",
+      "icon": "/ddragon/16.20.1/item/223047.png"
+    },
+    "223050": {
+      "id": 223050,
+      "name": "Zeke's Convergence",
+      "icon": "/ddragon/16.20.1/item/223050.png"
+    },
+    "223053": {
+      "id": 223053,
+      "name": "Sterak's Gage",
+      "icon": "/ddragon/16.20.1/item/223053.png"
+    },
+    "223057": {
+      "id": 223057,
+      "name": "Sheen",
+      "icon": "/ddragon/16.20.1/item/223057.png"
+    },
+    "223065": {
+      "id": 223065,
+      "name": "Spirit Visage",
+      "icon": "/ddragon/16.20.1/item/223065.png"
+    },
+    "223067": {
+      "id": 223067,
+      "name": "Kindlegem",
+      "icon": "/ddragon/16.20.1/item/223067.png"
+    },
+    "223068": {
+      "id": 223068,
+      "name": "Sunfire Aegis",
+      "icon": "/ddragon/16.20.1/item/223068.png"
+    },
+    "223069": {
+      "id": 223069,
+      "name": "Void Immolation",
+      "icon": "/ddragon/16.20.1/item/223069.png"
+    },
+    "223071": {
+      "id": 223071,
+      "name": "Black Cleaver",
+      "icon": "/ddragon/16.20.1/item/223071.png"
+    },
+    "223072": {
+      "id": 223072,
+      "name": "Bloodthirster",
+      "icon": "/ddragon/16.20.1/item/223072.png"
+    },
+    "223073": {
+      "id": 223073,
+      "name": "Experimental Hexplate",
+      "icon": "/ddragon/16.20.1/item/223073.png"
+    },
+    "223074": {
+      "id": 223074,
+      "name": "Ravenous Hydra",
+      "icon": "/ddragon/16.20.1/item/223074.png"
+    },
+    "223075": {
+      "id": 223075,
+      "name": "Thornmail",
+      "icon": "/ddragon/16.20.1/item/223075.png"
+    },
+    "223078": {
+      "id": 223078,
+      "name": "Trinity Force",
+      "icon": "/ddragon/16.20.1/item/223078.png"
+    },
+    "223084": {
+      "id": 223084,
+      "name": "Heartsteel",
+      "icon": "/ddragon/16.20.1/item/223084.png"
+    },
+    "223085": {
+      "id": 223085,
+      "name": "Runaan's Hurricane",
+      "icon": "/ddragon/16.20.1/item/223085.png"
+    },
+    "223087": {
+      "id": 223087,
+      "name": "Statikk Shiv",
+      "icon": "/ddragon/16.20.1/item/223087.png"
+    },
+    "223089": {
+      "id": 223089,
+      "name": "Rabadon's Deathcap",
+      "icon": "/ddragon/16.20.1/item/223089.png"
+    },
+    "223091": {
+      "id": 223091,
+      "name": "Wit's End",
+      "icon": "/ddragon/16.20.1/item/223091.png"
+    },
+    "223094": {
+      "id": 223094,
+      "name": "Rapid Firecannon",
+      "icon": "/ddragon/16.20.1/item/223094.png"
+    },
+    "223095": {
+      "id": 223095,
+      "name": "Stormrazor",
+      "icon": "/ddragon/16.20.1/item/223095.png"
+    },
+    "223100": {
+      "id": 223100,
+      "name": "Lich Bane",
+      "icon": "/ddragon/16.20.1/item/223100.png"
+    },
+    "223102": {
+      "id": 223102,
+      "name": "Banshee's Veil",
+      "icon": "/ddragon/16.20.1/item/223102.png"
+    },
+    "223105": {
+      "id": 223105,
+      "name": "Aegis of the Legion",
+      "icon": "/ddragon/16.20.1/item/223105.png"
+    },
+    "223107": {
+      "id": 223107,
+      "name": "Redemption",
+      "icon": "/ddragon/16.20.1/item/223107.png"
+    },
+    "223109": {
+      "id": 223109,
+      "name": "Knight's Vow",
+      "icon": "/ddragon/16.20.1/item/223109.png"
+    },
+    "223110": {
+      "id": 223110,
+      "name": "Frozen Heart",
+      "icon": "/ddragon/16.20.1/item/223110.png"
+    },
+    "223111": {
+      "id": 223111,
+      "name": "Mercury's Treads",
+      "icon": "/ddragon/16.20.1/item/223111.png"
+    },
+    "223112": {
+      "id": 223112,
+      "name": "Guardian's Orb",
+      "icon": "/ddragon/16.20.1/item/223112.png"
+    },
+    "223115": {
+      "id": 223115,
+      "name": "Nashor's Tooth",
+      "icon": "/ddragon/16.20.1/item/223115.png"
+    },
+    "223116": {
+      "id": 223116,
+      "name": "Rylai's Crystal Scepter",
+      "icon": "/ddragon/16.20.1/item/223116.png"
+    },
+    "223118": {
+      "id": 223118,
+      "name": "Malignance",
+      "icon": "/ddragon/16.20.1/item/223118.png"
+    },
+    "223119": {
+      "id": 223119,
+      "name": "Winter's Approach",
+      "icon": "/ddragon/16.20.1/item/223119.png"
+    },
+    "223121": {
+      "id": 223121,
+      "name": "Fimbulwinter",
+      "icon": "/ddragon/16.20.1/item/223121.png"
+    },
+    "223124": {
+      "id": 223124,
+      "name": "Guinsoo's Rageblade",
+      "icon": "/ddragon/16.20.1/item/223124.png"
+    },
+    "223135": {
+      "id": 223135,
+      "name": "Void Staff",
+      "icon": "/ddragon/16.20.1/item/223135.png"
+    },
+    "223137": {
+      "id": 223137,
+      "name": "Cryptbloom",
+      "icon": "/ddragon/16.20.1/item/223137.png"
+    },
+    "223139": {
+      "id": 223139,
+      "name": "Mercurial Scimitar",
+      "icon": "/ddragon/16.20.1/item/223139.png"
+    },
+    "223142": {
+      "id": 223142,
+      "name": "Youmuu's Ghostblade",
+      "icon": "/ddragon/16.20.1/item/223142.png"
+    },
+    "223143": {
+      "id": 223143,
+      "name": "Randuin's Omen",
+      "icon": "/ddragon/16.20.1/item/223143.png"
+    },
+    "223146": {
+      "id": 223146,
+      "name": "Hextech Gunblade",
+      "icon": "/ddragon/16.20.1/item/223146.png"
+    },
+    "223152": {
+      "id": 223152,
+      "name": "Hextech Rocketbelt",
+      "icon": "/ddragon/16.20.1/item/223152.png"
+    },
+    "223153": {
+      "id": 223153,
+      "name": "Blade of The Ruined King",
+      "icon": "/ddragon/16.20.1/item/223153.png"
+    },
+    "223156": {
+      "id": 223156,
+      "name": "Maw of Malmortius",
+      "icon": "/ddragon/16.20.1/item/223156.png"
+    },
+    "223157": {
+      "id": 223157,
+      "name": "Zhonya's Hourglass",
+      "icon": "/ddragon/16.20.1/item/223157.png"
+    },
+    "223158": {
+      "id": 223158,
+      "name": "Ionian Boots of Lucidity",
+      "icon": "/ddragon/16.20.1/item/223158.png"
+    },
+    "223161": {
+      "id": 223161,
+      "name": "Spear of Shojin",
+      "icon": "/ddragon/16.20.1/item/223161.png"
+    },
+    "223165": {
+      "id": 223165,
+      "name": "Morellonomicon",
+      "icon": "/ddragon/16.20.1/item/223165.png"
+    },
+    "223172": {
+      "id": 223172,
+      "name": "Zephyr",
+      "icon": "/ddragon/16.20.1/item/223172.png"
+    },
+    "223177": {
+      "id": 223177,
+      "name": "Guardian's Blade",
+      "icon": "/ddragon/16.20.1/item/223177.png"
+    },
+    "223181": {
+      "id": 223181,
+      "name": "Hullbreaker",
+      "icon": "/ddragon/16.20.1/item/223181.png"
+    },
+    "223184": {
+      "id": 223184,
+      "name": "Guardian's Hammer",
+      "icon": "/ddragon/16.20.1/item/223184.png"
+    },
+    "223185": {
+      "id": 223185,
+      "name": "Guardian's Dirk",
+      "icon": "/ddragon/16.20.1/item/223185.png"
+    },
+    "223190": {
+      "id": 223190,
+      "name": "Locket of the Iron Solari",
+      "icon": "/ddragon/16.20.1/item/223190.png"
+    },
+    "223193": {
+      "id": 223193,
+      "name": "Gargoyle Stoneplate",
+      "icon": "/ddragon/16.20.1/item/223193.png"
+    },
+    "223222": {
+      "id": 223222,
+      "name": "Mikael's Blessing",
+      "icon": "/ddragon/16.20.1/item/223222.png"
+    },
+    "223302": {
+      "id": 223302,
+      "name": "Terminus",
+      "icon": "/ddragon/16.20.1/item/223302.png"
+    },
+    "223504": {
+      "id": 223504,
+      "name": "Ardent Censer",
+      "icon": "/ddragon/16.20.1/item/223504.png"
+    },
+    "223508": {
+      "id": 223508,
+      "name": "Essence Reaver",
+      "icon": "/ddragon/16.20.1/item/223508.png"
+    },
+    "223742": {
+      "id": 223742,
+      "name": "Dead Man's Plate",
+      "icon": "/ddragon/16.20.1/item/223742.png"
+    },
+    "223748": {
+      "id": 223748,
+      "name": "Titanic Hydra",
+      "icon": "/ddragon/16.20.1/item/223748.png"
+    },
+    "223814": {
+      "id": 223814,
+      "name": "Edge of Night",
+      "icon": "/ddragon/16.20.1/item/223814.png"
+    },
+    "224004": {
+      "id": 224004,
+      "name": "Spectral Cutlass",
+      "icon": "/ddragon/16.20.1/item/224004.png"
+    },
+    "224005": {
+      "id": 224005,
+      "name": "Imperial Mandate",
+      "icon": "/ddragon/16.20.1/item/224005.png"
+    },
+    "224401": {
+      "id": 224401,
+      "name": "Force of Nature",
+      "icon": "/ddragon/16.20.1/item/224401.png"
+    },
+    "224403": {
+      "id": 224403,
+      "name": "The Golden Spatula",
+      "icon": "/ddragon/16.20.1/item/224403.png"
+    },
+    "224628": {
+      "id": 224628,
+      "name": "Horizon Focus",
+      "icon": "/ddragon/16.20.1/item/224628.png"
+    },
+    "224629": {
+      "id": 224629,
+      "name": "Cosmic Drive",
+      "icon": "/ddragon/16.20.1/item/224629.png"
+    },
+    "224633": {
+      "id": 224633,
+      "name": "Riftmaker",
+      "icon": "/ddragon/16.20.1/item/224633.png"
+    },
+    "224636": {
+      "id": 224636,
+      "name": "Night Harvester",
+      "icon": "/ddragon/16.20.1/item/224636.png"
+    },
+    "224637": {
+      "id": 224637,
+      "name": "Demonic Embrace",
+      "icon": "/ddragon/16.20.1/item/224637.png"
+    },
+    "224644": {
+      "id": 224644,
+      "name": "Crown of the Shattered Queen",
+      "icon": "/ddragon/16.20.1/item/224644.png"
+    },
+    "224645": {
+      "id": 224645,
+      "name": "Shadowflame",
+      "icon": "/ddragon/16.20.1/item/224645.png"
+    },
+    "224646": {
+      "id": 224646,
+      "name": "Stormsurge",
+      "icon": "/ddragon/16.20.1/item/224646.png"
+    },
+    "226035": {
+      "id": 226035,
+      "name": "Silvermere Dawn",
+      "icon": "/ddragon/16.20.1/item/226035.png"
+    },
+    "226333": {
+      "id": 226333,
+      "name": "Death's Dance",
+      "icon": "/ddragon/16.20.1/item/226333.png"
+    },
+    "226609": {
+      "id": 226609,
+      "name": "Chempunk Chainsword",
+      "icon": "/ddragon/16.20.1/item/226609.png"
+    },
+    "226610": {
+      "id": 226610,
+      "name": "Sundered Sky",
+      "icon": "/ddragon/16.20.1/item/226610.png"
+    },
+    "226616": {
+      "id": 226616,
+      "name": "Staff of Flowing Water",
+      "icon": "/ddragon/16.20.1/item/226616.png"
+    },
+    "226617": {
+      "id": 226617,
+      "name": "Moonstone Renewer",
+      "icon": "/ddragon/16.20.1/item/226617.png"
+    },
+    "226620": {
+      "id": 226620,
+      "name": "Echoes of Helia",
+      "icon": "/ddragon/16.20.1/item/226620.png"
+    },
+    "226621": {
+      "id": 226621,
+      "name": "Dawncore",
+      "icon": "/ddragon/16.20.1/item/226621.png"
+    },
+    "226630": {
+      "id": 226630,
+      "name": "Goredrinker",
+      "icon": "/ddragon/16.20.1/item/226630.png"
+    },
+    "226631": {
+      "id": 226631,
+      "name": "Stridebreaker",
+      "icon": "/ddragon/16.20.1/item/226631.png"
+    },
+    "226632": {
+      "id": 226632,
+      "name": "Divine Sunderer",
+      "icon": "/ddragon/16.20.1/item/226632.png"
+    },
+    "226653": {
+      "id": 226653,
+      "name": "Liandry's Anguish",
+      "icon": "/ddragon/16.20.1/item/226653.png"
+    },
+    "226655": {
+      "id": 226655,
+      "name": "Luden's Echo",
+      "icon": "/ddragon/16.20.1/item/226655.png"
+    },
+    "226656": {
+      "id": 226656,
+      "name": "Everfrost",
+      "icon": "/ddragon/16.20.1/item/226656.png"
+    },
+    "226657": {
+      "id": 226657,
+      "name": "Rod of Ages",
+      "icon": "/ddragon/16.20.1/item/226657.png"
+    },
+    "226660": {
+      "id": 226660,
+      "name": "",
+      "icon": "/ddragon/16.20.1/item/226660.png"
+    },
+    "226662": {
+      "id": 226662,
+      "name": "Iceborn Gauntlet",
+      "icon": "/ddragon/16.20.1/item/226662.png"
+    },
+    "226664": {
+      "id": 226664,
+      "name": "Hollow Radiance",
+      "icon": "/ddragon/16.20.1/item/226664.png"
+    },
+    "226665": {
+      "id": 226665,
+      "name": "Jak'Sho, The Protean",
+      "icon": "/ddragon/16.20.1/item/226665.png"
+    },
+    "226667": {
+      "id": 226667,
+      "name": "Radiant Virtue",
+      "icon": "/ddragon/16.20.1/item/226667.png"
+    },
+    "226668": {
+      "id": 226668,
+      "name": "Ultra Hydra",
+      "icon": "/ddragon/16.20.1/item/226668.png"
+    },
+    "226671": {
+      "id": 226671,
+      "name": "Galeforce",
+      "icon": "/ddragon/16.20.1/item/226671.png"
+    },
+    "226672": {
+      "id": 226672,
+      "name": "Kraken Slayer",
+      "icon": "/ddragon/16.20.1/item/226672.png"
+    },
+    "226673": {
+      "id": 226673,
+      "name": "Immortal Shieldbow",
+      "icon": "/ddragon/16.20.1/item/226673.png"
+    },
+    "226675": {
+      "id": 226675,
+      "name": "Navori Flickerblades",
+      "icon": "/ddragon/16.20.1/item/226675.png"
+    },
+    "226676": {
+      "id": 226676,
+      "name": "The Collector",
+      "icon": "/ddragon/16.20.1/item/226676.png"
+    },
+    "226691": {
+      "id": 226691,
+      "name": "Duskblade of Draktharr",
+      "icon": "/ddragon/16.20.1/item/226691.png"
+    },
+    "226692": {
+      "id": 226692,
+      "name": "Eclipse",
+      "icon": "/ddragon/16.20.1/item/226692.png"
+    },
+    "226693": {
+      "id": 226693,
+      "name": "Prowler's Claw",
+      "icon": "/ddragon/16.20.1/item/226693.png"
+    },
+    "226694": {
+      "id": 226694,
+      "name": "Serylda's Grudge",
+      "icon": "/ddragon/16.20.1/item/226694.png"
+    },
+    "226695": {
+      "id": 226695,
+      "name": "Serpent's Fang",
+      "icon": "/ddragon/16.20.1/item/226695.png"
+    },
+    "226696": {
+      "id": 226696,
+      "name": "Axiom Arc",
+      "icon": "/ddragon/16.20.1/item/226696.png"
+    },
+    "226697": {
+      "id": 226697,
+      "name": "Hubris",
+      "icon": "/ddragon/16.20.1/item/226697.png"
+    },
+    "226698": {
+      "id": 226698,
+      "name": "Profane Hydra",
+      "icon": "/ddragon/16.20.1/item/226698.png"
+    },
+    "226699": {
+      "id": 226699,
+      "name": "Voltaic Cyclosword",
+      "icon": "/ddragon/16.20.1/item/226699.png"
+    },
+    "226701": {
+      "id": 226701,
+      "name": "Opportunity",
+      "icon": "/ddragon/16.20.1/item/226701.png"
+    },
+    "228001": {
+      "id": 228001,
+      "name": "Anathema's Chains",
+      "icon": "/ddragon/16.20.1/item/228001.png"
+    },
+    "228002": {
+      "id": 228002,
+      "name": "Wooglet's Witchcap",
+      "icon": "/ddragon/16.20.1/item/228002.png"
+    },
+    "228003": {
+      "id": 228003,
+      "name": "Deathblade",
+      "icon": "/ddragon/16.20.1/item/228003.png"
+    },
+    "228004": {
+      "id": 228004,
+      "name": "Adaptive Helm",
+      "icon": "/ddragon/16.20.1/item/228004.png"
+    },
+    "228005": {
+      "id": 228005,
+      "name": "Obsidian Cleaver",
+      "icon": "/ddragon/16.20.1/item/228005.png"
+    },
+    "228006": {
+      "id": 228006,
+      "name": "Sanguine Blade",
+      "icon": "/ddragon/16.20.1/item/228006.png"
+    },
+    "228008": {
+      "id": 228008,
+      "name": "Runeglaive",
+      "icon": "/ddragon/16.20.1/item/228008.png"
+    },
+    "228009": {
+      "id": 228009,
+      "name": "Multitool",
+      "icon": "/ddragon/16.20.1/item/228009.png"
+    },
+    "228020": {
+      "id": 228020,
+      "name": "Abyssal Mask",
+      "icon": "/ddragon/16.20.1/item/228020.png"
+    },
+    "322065": {
+      "id": 322065,
+      "name": "Shurelya's Battlesong",
+      "icon": "/ddragon/16.20.1/item/322065.png"
+    },
+    "322526": {
+      "id": 322526,
+      "name": "Whispering Circlet",
+      "icon": "/ddragon/16.20.1/item/322526.png"
+    },
+    "322530": {
+      "id": 322530,
+      "name": "Diadem of Songs",
+      "icon": "/ddragon/16.20.1/item/322530.png"
+    },
+    "323002": {
+      "id": 323002,
+      "name": "Trailblazer",
+      "icon": "/ddragon/16.20.1/item/323002.png"
+    },
+    "323003": {
+      "id": 323003,
+      "name": "Archangel's Staff",
+      "icon": "/ddragon/16.20.1/item/323003.png"
+    },
+    "323004": {
+      "id": 323004,
+      "name": "Manamune",
+      "icon": "/ddragon/16.20.1/item/323004.png"
+    },
+    "323040": {
+      "id": 323040,
+      "name": "Seraph's Embrace",
+      "icon": "/ddragon/16.20.1/item/323040.png"
+    },
+    "323042": {
+      "id": 323042,
+      "name": "Muramana",
+      "icon": "/ddragon/16.20.1/item/323042.png"
+    },
+    "323050": {
+      "id": 323050,
+      "name": "Zeke's Convergence",
+      "icon": "/ddragon/16.20.1/item/323050.png"
+    },
+    "323070": {
+      "id": 323070,
+      "name": "Tear of the Goddess",
+      "icon": "/ddragon/16.20.1/item/323070.png"
+    },
+    "323075": {
+      "id": 323075,
+      "name": "Thornmail",
+      "icon": "/ddragon/16.20.1/item/323075.png"
+    },
+    "323107": {
+      "id": 323107,
+      "name": "Redemption",
+      "icon": "/ddragon/16.20.1/item/323107.png"
+    },
+    "323109": {
+      "id": 323109,
+      "name": "Knight's Vow",
+      "icon": "/ddragon/16.20.1/item/323109.png"
+    },
+    "323110": {
+      "id": 323110,
+      "name": "Frozen Heart",
+      "icon": "/ddragon/16.20.1/item/323110.png"
+    },
+    "323119": {
+      "id": 323119,
+      "name": "Winter's Approach",
+      "icon": "/ddragon/16.20.1/item/323119.png"
+    },
+    "323121": {
+      "id": 323121,
+      "name": "Fimbulwinter",
+      "icon": "/ddragon/16.20.1/item/323121.png"
+    },
+    "323190": {
+      "id": 323190,
+      "name": "Locket of the Iron Solari",
+      "icon": "/ddragon/16.20.1/item/323190.png"
+    },
+    "323222": {
+      "id": 323222,
+      "name": "Mikael's Blessing",
+      "icon": "/ddragon/16.20.1/item/323222.png"
+    },
+    "323504": {
+      "id": 323504,
+      "name": "Ardent Censer",
+      "icon": "/ddragon/16.20.1/item/323504.png"
+    },
+    "324005": {
+      "id": 324005,
+      "name": "Imperial Mandate",
+      "icon": "/ddragon/16.20.1/item/324005.png"
+    },
+    "326616": {
+      "id": 326616,
+      "name": "Staff of Flowing Water",
+      "icon": "/ddragon/16.20.1/item/326616.png"
+    },
+    "326617": {
+      "id": 326617,
+      "name": "Moonstone Renewer",
+      "icon": "/ddragon/16.20.1/item/326617.png"
+    },
+    "326620": {
+      "id": 326620,
+      "name": "Echoes of Helia",
+      "icon": "/ddragon/16.20.1/item/326620.png"
+    },
+    "326621": {
+      "id": 326621,
+      "name": "Dawncore",
+      "icon": "/ddragon/16.20.1/item/326621.png"
+    },
+    "326657": {
+      "id": 326657,
+      "name": "Rod of Ages",
+      "icon": "/ddragon/16.20.1/item/326657.png"
+    },
+    "328020": {
+      "id": 328020,
+      "name": "Abyssal Mask",
+      "icon": "/ddragon/16.20.1/item/328020.png"
+    },
+    "443054": {
+      "id": 443054,
+      "name": "Darksteel Talons",
+      "icon": "/ddragon/16.20.1/item/443054.png"
+    },
+    "443055": {
+      "id": 443055,
+      "name": "Fulmination",
+      "icon": "/ddragon/16.20.1/item/443055.png"
+    },
+    "443056": {
+      "id": 443056,
+      "name": "Demon King's Crown",
+      "icon": "/ddragon/16.20.1/item/443056.png"
+    },
+    "443058": {
+      "id": 443058,
+      "name": "Shield of Molten Stone",
+      "icon": "/ddragon/16.20.1/item/443058.png"
+    },
+    "443059": {
+      "id": 443059,
+      "name": "Cloak of Starry Night",
+      "icon": "/ddragon/16.20.1/item/443059.png"
+    },
+    "443060": {
+      "id": 443060,
+      "name": "Sword of the Divine",
+      "icon": "/ddragon/16.20.1/item/443060.png"
+    },
+    "443061": {
+      "id": 443061,
+      "name": "Force Of Entropy",
+      "icon": "/ddragon/16.20.1/item/443061.png"
+    },
+    "443062": {
+      "id": 443062,
+      "name": "Sanguine Gift",
+      "icon": "/ddragon/16.20.1/item/443062.png"
+    },
+    "443063": {
+      "id": 443063,
+      "name": "Eleisa's Miracle",
+      "icon": "/ddragon/16.20.1/item/443063.png"
+    },
+    "443064": {
+      "id": 443064,
+      "name": "Talisman Of Ascension",
+      "icon": "/ddragon/16.20.1/item/443064.png"
+    },
+    "443069": {
+      "id": 443069,
+      "name": "Hamstringer",
+      "icon": "/ddragon/16.20.1/item/443069.png"
+    },
+    "443079": {
+      "id": 443079,
+      "name": "Turbo Chemtank",
+      "icon": "/ddragon/16.20.1/item/443079.png"
+    },
+    "443080": {
+      "id": 443080,
+      "name": "Twin Mask",
+      "icon": "/ddragon/16.20.1/item/443080.png"
+    },
+    "443081": {
+      "id": 443081,
+      "name": "Hexbolt Companion",
+      "icon": "/ddragon/16.20.1/item/443081.png"
+    },
+    "443083": {
+      "id": 443083,
+      "name": "Warmog's Armor",
+      "icon": "/ddragon/16.20.1/item/443083.png"
+    },
+    "443090": {
+      "id": 443090,
+      "name": "Reaper's Toll",
+      "icon": "/ddragon/16.20.1/item/443090.png"
+    },
+    "443193": {
+      "id": 443193,
+      "name": "Gargoyle Stoneplate",
+      "icon": "/ddragon/16.20.1/item/443193.png"
+    },
+    "444636": {
+      "id": 444636,
+      "name": "Night Harvester",
+      "icon": "/ddragon/16.20.1/item/444636.png"
+    },
+    "444637": {
+      "id": 444637,
+      "name": "Demonic Embrace",
+      "icon": "/ddragon/16.20.1/item/444637.png"
+    },
+    "444644": {
+      "id": 444644,
+      "name": "Crown of the Shattered Queen",
+      "icon": "/ddragon/16.20.1/item/444644.png"
+    },
+    "446632": {
+      "id": 446632,
+      "name": "Divine Sunderer",
+      "icon": "/ddragon/16.20.1/item/446632.png"
+    },
+    "446656": {
+      "id": 446656,
+      "name": "Everfrost",
+      "icon": "/ddragon/16.20.1/item/446656.png"
+    },
+    "446667": {
+      "id": 446667,
+      "name": "Radiant Virtue",
+      "icon": "/ddragon/16.20.1/item/446667.png"
+    },
+    "446671": {
+      "id": 446671,
+      "name": "Galeforce",
+      "icon": "/ddragon/16.20.1/item/446671.png"
+    },
+    "446691": {
+      "id": 446691,
+      "name": "Duskblade of Draktharr",
+      "icon": "/ddragon/16.20.1/item/446691.png"
+    },
+    "446693": {
+      "id": 446693,
+      "name": "Prowler's Claw",
+      "icon": "/ddragon/16.20.1/item/446693.png"
+    },
+    "447100": {
+      "id": 447100,
+      "name": "Mirage Blade",
+      "icon": "/ddragon/16.20.1/item/447100.png"
+    },
+    "447101": {
+      "id": 447101,
+      "name": "Gambler's Blade",
+      "icon": "/ddragon/16.20.1/item/447101.png"
+    },
+    "447102": {
+      "id": 447102,
+      "name": "Reality Fracture",
+      "icon": "/ddragon/16.20.1/item/447102.png"
+    },
+    "447103": {
+      "id": 447103,
+      "name": "Hemomancer's Helm",
+      "icon": "/ddragon/16.20.1/item/447103.png"
+    },
+    "447104": {
+      "id": 447104,
+      "name": "Innervating Locket",
+      "icon": "/ddragon/16.20.1/item/447104.png"
+    },
+    "447105": {
+      "id": 447105,
+      "name": "Empyrean Promise",
+      "icon": "/ddragon/16.20.1/item/447105.png"
+    },
+    "447106": {
+      "id": 447106,
+      "name": "Dragonheart",
+      "icon": "/ddragon/16.20.1/item/447106.png"
+    },
+    "447107": {
+      "id": 447107,
+      "name": "Decapitator",
+      "icon": "/ddragon/16.20.1/item/447107.png"
+    },
+    "447108": {
+      "id": 447108,
+      "name": "Runecarver",
+      "icon": "/ddragon/16.20.1/item/447108.png"
+    },
+    "447109": {
+      "id": 447109,
+      "name": "Cruelty",
+      "icon": "/ddragon/16.20.1/item/447109.png"
+    },
+    "447110": {
+      "id": 447110,
+      "name": "Moonflair Spellblade",
+      "icon": "/ddragon/16.20.1/item/447110.png"
+    },
+    "447111": {
+      "id": 447111,
+      "name": "Overlord's Bloodmail",
+      "icon": "/ddragon/16.20.1/item/447111.png"
+    },
+    "447112": {
+      "id": 447112,
+      "name": "Flesheater",
+      "icon": "/ddragon/16.20.1/item/447112.png"
+    },
+    "447113": {
+      "id": 447113,
+      "name": "Detonation Orb",
+      "icon": "/ddragon/16.20.1/item/447113.png"
+    },
+    "447114": {
+      "id": 447114,
+      "name": "Reverberation",
+      "icon": "/ddragon/16.20.1/item/447114.png"
+    },
+    "447115": {
+      "id": 447115,
+      "name": "Regicide",
+      "icon": "/ddragon/16.20.1/item/447115.png"
+    },
+    "447116": {
+      "id": 447116,
+      "name": "Kinkou Jitte",
+      "icon": "/ddragon/16.20.1/item/447116.png"
+    },
+    "447118": {
+      "id": 447118,
+      "name": "Pyromancer's Cloak",
+      "icon": "/ddragon/16.20.1/item/447118.png"
+    },
+    "447119": {
+      "id": 447119,
+      "name": "Lightning Rod",
+      "icon": "/ddragon/16.20.1/item/447119.png"
+    },
+    "447120": {
+      "id": 447120,
+      "name": "Diamond-Tipped Spear",
+      "icon": "/ddragon/16.20.1/item/447120.png"
+    },
+    "447121": {
+      "id": 447121,
+      "name": "Twilight's Edge",
+      "icon": "/ddragon/16.20.1/item/447121.png"
+    },
+    "447122": {
+      "id": 447122,
+      "name": "Black Hole Gauntlet",
+      "icon": "/ddragon/16.20.1/item/447122.png"
+    },
+    "447123": {
+      "id": 447123,
+      "name": "Puppeteer",
+      "icon": "/ddragon/16.20.1/item/447123.png"
+    },
+    "550001": {
+      "id": 550001,
+      "name": "Healthbar Splash: Blue",
+      "icon": "/ddragon/16.20.1/item/550001.png"
+    },
+    "550002": {
+      "id": 550002,
+      "name": "Healthbar Splash: Orange",
+      "icon": "/ddragon/16.20.1/item/550002.png"
+    },
+    "550003": {
+      "id": 550003,
+      "name": "Healthbar Splash: Green",
+      "icon": "/ddragon/16.20.1/item/550003.png"
+    },
+    "550004": {
+      "id": 550004,
+      "name": "Healthbar Splash: Pink",
+      "icon": "/ddragon/16.20.1/item/550004.png"
+    },
+    "550005": {
+      "id": 550005,
+      "name": "Healthbar Cleanup: Reset Color",
+      "icon": "/ddragon/16.20.1/item/550005.png"
+    },
+    "550006": {
+      "id": 550006,
+      "name": "Healthbar Splash: Rainbow",
+      "icon": "/ddragon/16.20.1/item/550006.png"
+    },
+    "550007": {
+      "id": 550007,
+      "name": "Party Favor",
+      "icon": "/ddragon/16.20.1/item/550007.png"
+    },
+    "663039": {
+      "id": 663039,
+      "name": "Atma's Reckoning",
+      "icon": "/ddragon/16.20.1/item/663039.png"
+    },
+    "663056": {
+      "id": 663056,
+      "name": "Demon King's Crown",
+      "icon": "/ddragon/16.20.1/item/663056.png"
+    },
+    "663058": {
+      "id": 663058,
+      "name": "Shield of Molten Stone",
+      "icon": "/ddragon/16.20.1/item/663058.png"
+    },
+    "663059": {
+      "id": 663059,
+      "name": "Cloak of Starry Night",
+      "icon": "/ddragon/16.20.1/item/663059.png"
+    },
+    "663060": {
+      "id": 663060,
+      "name": "Sword of the Divine",
+      "icon": "/ddragon/16.20.1/item/663060.png"
+    },
+    "663064": {
+      "id": 663064,
+      "name": "Veigar's Talisman of Ascension",
+      "icon": "/ddragon/16.20.1/item/663064.png"
+    },
+    "663146": {
+      "id": 663146,
+      "name": "Hextech Gunblade",
+      "icon": "/ddragon/16.20.1/item/663146.png"
+    },
+    "663172": {
+      "id": 663172,
+      "name": "Zephyr",
+      "icon": "/ddragon/16.20.1/item/663172.png"
+    },
+    "663193": {
+      "id": 663193,
+      "name": "Gargoyle Stoneplate",
+      "icon": "/ddragon/16.20.1/item/663193.png"
+    },
+    "664011": {
+      "id": 664011,
+      "name": "Sword of Blossoming Dawn",
+      "icon": "/ddragon/16.20.1/item/664011.png"
+    },
+    "664403": {
+      "id": 664403,
+      "name": "The Golden Spatula",
+      "icon": "/ddragon/16.20.1/item/664403.png"
+    },
+    "664644": {
+      "id": 664644,
+      "name": "Crown of the Shattered Queen",
+      "icon": "/ddragon/16.20.1/item/664644.png"
+    },
+    "667101": {
+      "id": 667101,
+      "name": "Gambler's Blade",
+      "icon": "/ddragon/16.20.1/item/667101.png"
+    },
+    "667109": {
+      "id": 667109,
+      "name": "Cruelty",
+      "icon": "/ddragon/16.20.1/item/667109.png"
+    },
+    "667112": {
+      "id": 667112,
+      "name": "Flesheater",
+      "icon": "/ddragon/16.20.1/item/667112.png"
+    },
+    "667666": {
+      "id": 667666,
+      "name": "The Collector",
+      "icon": "/ddragon/16.20.1/item/667666.png"
+    },
+    "771001": {
+      "id": 771001,
+      "name": "Boots of Speed",
+      "icon": "/ddragon/16.20.1/item/771001.png"
+    },
+    "771004": {
+      "id": 771004,
+      "name": "Faerie Charm",
+      "icon": "/ddragon/16.20.1/item/771004.png"
+    },
+    "771006": {
+      "id": 771006,
+      "name": "Rejuvenation Bead",
+      "icon": "/ddragon/16.20.1/item/771006.png"
+    },
+    "771011": {
+      "id": 771011,
+      "name": "Giant's Belt",
+      "icon": "/ddragon/16.20.1/item/771011.png"
+    },
+    "771018": {
+      "id": 771018,
+      "name": "Cloak of Agility",
+      "icon": "/ddragon/16.20.1/item/771018.png"
+    },
+    "771026": {
+      "id": 771026,
+      "name": "Blasting Wand",
+      "icon": "/ddragon/16.20.1/item/771026.png"
+    },
+    "771027": {
+      "id": 771027,
+      "name": "Sapphire Crystal",
+      "icon": "/ddragon/16.20.1/item/771027.png"
+    },
+    "771028": {
+      "id": 771028,
+      "name": "Ruby Crystal",
+      "icon": "/ddragon/16.20.1/item/771028.png"
+    },
+    "771029": {
+      "id": 771029,
+      "name": "Cloth Armor",
+      "icon": "/ddragon/16.20.1/item/771029.png"
+    },
+    "771031": {
+      "id": 771031,
+      "name": "Chain Vest",
+      "icon": "/ddragon/16.20.1/item/771031.png"
+    },
+    "771033": {
+      "id": 771033,
+      "name": "Null-Magic Mantle",
+      "icon": "/ddragon/16.20.1/item/771033.png"
+    },
+    "771036": {
+      "id": 771036,
+      "name": "Long Sword",
+      "icon": "/ddragon/16.20.1/item/771036.png"
+    },
+    "771037": {
+      "id": 771037,
+      "name": "Pickaxe",
+      "icon": "/ddragon/16.20.1/item/771037.png"
+    },
+    "771038": {
+      "id": 771038,
+      "name": "B. F. Sword",
+      "icon": "/ddragon/16.20.1/item/771038.png"
+    },
+    "771039": {
+      "id": 771039,
+      "name": "Hunter's Machete",
+      "icon": "/ddragon/16.20.1/item/771039.png"
+    },
+    "771042": {
+      "id": 771042,
+      "name": "Dagger",
+      "icon": "/ddragon/16.20.1/item/771042.png"
+    },
+    "771043": {
+      "id": 771043,
+      "name": "Recurve Bow",
+      "icon": "/ddragon/16.20.1/item/771043.png"
+    },
+    "771051": {
+      "id": 771051,
+      "name": "Brawler's Gloves",
+      "icon": "/ddragon/16.20.1/item/771051.png"
+    },
+    "771052": {
+      "id": 771052,
+      "name": "Amplifying Tome",
+      "icon": "/ddragon/16.20.1/item/771052.png"
+    },
+    "771053": {
+      "id": 771053,
+      "name": "Vampiric Scepter",
+      "icon": "/ddragon/16.20.1/item/771053.png"
+    },
+    "771054": {
+      "id": 771054,
+      "name": "Doran's Shield",
+      "icon": "/ddragon/16.20.1/item/771054.png"
+    },
+    "771055": {
+      "id": 771055,
+      "name": "Doran's Blade",
+      "icon": "/ddragon/16.20.1/item/771055.png"
+    },
+    "771056": {
+      "id": 771056,
+      "name": "Doran's Ring",
+      "icon": "/ddragon/16.20.1/item/771056.png"
+    },
+    "771057": {
+      "id": 771057,
+      "name": "Negatron Cloak",
+      "icon": "/ddragon/16.20.1/item/771057.png"
+    },
+    "771058": {
+      "id": 771058,
+      "name": "Needlessly Large Rod",
+      "icon": "/ddragon/16.20.1/item/771058.png"
+    },
+    "771080": {
+      "id": 771080,
+      "name": "Spirit Stone",
+      "icon": "/ddragon/16.20.1/item/771080.png"
+    },
+    "771500": {
+      "id": 771500,
+      "name": "Penetrating Bullets",
+      "icon": "/ddragon/16.20.1/item/771500.png"
+    },
+    "772001": {
+      "id": 772001,
+      "name": "Recall",
+      "icon": "/ddragon/16.20.1/item/772001.png"
+    },
+    "772003": {
+      "id": 772003,
+      "name": "Health Potion",
+      "icon": "/ddragon/16.20.1/item/772003.png"
+    },
+    "772004": {
+      "id": 772004,
+      "name": "Mana Potion",
+      "icon": "/ddragon/16.20.1/item/772004.png"
+    },
+    "772009": {
+      "id": 772009,
+      "name": "Total Biscuit of Rejuvenation",
+      "icon": "/ddragon/16.20.1/item/772009.png"
+    },
+    "772037": {
+      "id": 772037,
+      "name": "Elixir of Fortitude",
+      "icon": "/ddragon/16.20.1/item/772037.png"
+    },
+    "772038": {
+      "id": 772038,
+      "name": "Elixir of Agility",
+      "icon": "/ddragon/16.20.1/item/772038.png"
+    },
+    "772039": {
+      "id": 772039,
+      "name": "Elixir of Brilliance",
+      "icon": "/ddragon/16.20.1/item/772039.png"
+    },
+    "772041": {
+      "id": 772041,
+      "name": "Crystalline Flask",
+      "icon": "/ddragon/16.20.1/item/772041.png"
+    },
+    "772042": {
+      "id": 772042,
+      "name": "Oracle's Elixir",
+      "icon": "/ddragon/16.20.1/item/772042.png"
+    },
+    "772043": {
+      "id": 772043,
+      "name": "Vision Ward",
+      "icon": "/ddragon/16.20.1/item/772043.png"
+    },
+    "772044": {
+      "id": 772044,
+      "name": "Sight Ward",
+      "icon": "/ddragon/16.20.1/item/772044.png"
+    },
+    "772045": {
+      "id": 772045,
+      "name": "Ruby Sightstone",
+      "icon": "/ddragon/16.20.1/item/772045.png"
+    },
+    "772049": {
+      "id": 772049,
+      "name": "Sightstone",
+      "icon": "/ddragon/16.20.1/item/772049.png"
+    },
+    "772050": {
+      "id": 772050,
+      "name": "Explorer's Ward",
+      "icon": "/ddragon/16.20.1/item/772050.png"
+    },
+    "772139": {
+      "id": 772139,
+      "name": "",
+      "icon": "/ddragon/16.20.1/item/772139.png"
+    },
+    "772140": {
+      "id": 772140,
+      "name": "",
+      "icon": "/ddragon/16.20.1/item/772140.png"
+    },
+    "773001": {
+      "id": 773001,
+      "name": "Abyssal Scepter",
+      "icon": "/ddragon/16.20.1/item/773001.png"
+    },
+    "773003": {
+      "id": 773003,
+      "name": "Archangel's Staff",
+      "icon": "/ddragon/16.20.1/item/773003.png"
+    },
+    "773004": {
+      "id": 773004,
+      "name": "Manamune",
+      "icon": "/ddragon/16.20.1/item/773004.png"
+    },
+    "773005": {
+      "id": 773005,
+      "name": "Atma's Impaler",
+      "icon": "/ddragon/16.20.1/item/773005.png"
+    },
+    "773006": {
+      "id": 773006,
+      "name": "Berserker's Greaves",
+      "icon": "/ddragon/16.20.1/item/773006.png"
+    },
+    "773009": {
+      "id": 773009,
+      "name": "Boots of Swiftness",
+      "icon": "/ddragon/16.20.1/item/773009.png"
+    },
+    "773010": {
+      "id": 773010,
+      "name": "Catalyst the Protector",
+      "icon": "/ddragon/16.20.1/item/773010.png"
+    },
+    "773020": {
+      "id": 773020,
+      "name": "Sorcerer's Shoes",
+      "icon": "/ddragon/16.20.1/item/773020.png"
+    },
+    "773022": {
+      "id": 773022,
+      "name": "Frozen Mallet",
+      "icon": "/ddragon/16.20.1/item/773022.png"
+    },
+    "773023": {
+      "id": 773023,
+      "name": "Twin Shadows",
+      "icon": "/ddragon/16.20.1/item/773023.png"
+    },
+    "773024": {
+      "id": 773024,
+      "name": "Glacial Shroud",
+      "icon": "/ddragon/16.20.1/item/773024.png"
+    },
+    "773025": {
+      "id": 773025,
+      "name": "Iceborn Gauntlet",
+      "icon": "/ddragon/16.20.1/item/773025.png"
+    },
+    "773026": {
+      "id": 773026,
+      "name": "Guardian Angel",
+      "icon": "/ddragon/16.20.1/item/773026.png"
+    },
+    "773027": {
+      "id": 773027,
+      "name": "Rod of Ages",
+      "icon": "/ddragon/16.20.1/item/773027.png"
+    },
+    "773028": {
+      "id": 773028,
+      "name": "Chalice of Harmony",
+      "icon": "/ddragon/16.20.1/item/773028.png"
+    },
+    "773031": {
+      "id": 773031,
+      "name": "Infinity Edge",
+      "icon": "/ddragon/16.20.1/item/773031.png"
+    },
+    "773035": {
+      "id": 773035,
+      "name": "Last Whisper",
+      "icon": "/ddragon/16.20.1/item/773035.png"
+    },
+    "773037": {
+      "id": 773037,
+      "name": "Mana Manipulator",
+      "icon": "/ddragon/16.20.1/item/773037.png"
+    },
+    "773040": {
+      "id": 773040,
+      "name": "Seraph's Embrace",
+      "icon": "/ddragon/16.20.1/item/773040.png"
+    },
+    "773041": {
+      "id": 773041,
+      "name": "Mejai's Soulstealer",
+      "icon": "/ddragon/16.20.1/item/773041.png"
+    },
+    "773042": {
+      "id": 773042,
+      "name": "Muramana",
+      "icon": "/ddragon/16.20.1/item/773042.png"
+    },
+    "773044": {
+      "id": 773044,
+      "name": "Phage",
+      "icon": "/ddragon/16.20.1/item/773044.png"
+    },
+    "773046": {
+      "id": 773046,
+      "name": "Phantom Dancer",
+      "icon": "/ddragon/16.20.1/item/773046.png"
+    },
+    "773047": {
+      "id": 773047,
+      "name": "Ninja Tabi",
+      "icon": "/ddragon/16.20.1/item/773047.png"
+    },
+    "773050": {
+      "id": 773050,
+      "name": "Stark's Fervor",
+      "icon": "/ddragon/16.20.1/item/773050.png"
+    },
+    "773052": {
+      "id": 773052,
+      "name": "Emblem of Valor",
+      "icon": "/ddragon/16.20.1/item/773052.png"
+    },
+    "773056": {
+      "id": 773056,
+      "name": "Ohmwrecker",
+      "icon": "/ddragon/16.20.1/item/773056.png"
+    },
+    "773057": {
+      "id": 773057,
+      "name": "Sheen",
+      "icon": "/ddragon/16.20.1/item/773057.png"
+    },
+    "773060": {
+      "id": 773060,
+      "name": "Banner of Command",
+      "icon": "/ddragon/16.20.1/item/773060.png"
+    },
+    "773063": {
+      "id": 773063,
+      "name": "Soul Shroud",
+      "icon": "/ddragon/16.20.1/item/773063.png"
+    },
+    "773064": {
+      "id": 773064,
+      "name": "Force of Nature",
+      "icon": "/ddragon/16.20.1/item/773064.png"
+    },
+    "773065": {
+      "id": 773065,
+      "name": "Spirit Visage",
+      "icon": "/ddragon/16.20.1/item/773065.png"
+    },
+    "773067": {
+      "id": 773067,
+      "name": "Kindlegem",
+      "icon": "/ddragon/16.20.1/item/773067.png"
+    },
+    "773068": {
+      "id": 773068,
+      "name": "Sunfire Cape",
+      "icon": "/ddragon/16.20.1/item/773068.png"
+    },
+    "773069": {
+      "id": 773069,
+      "name": "Shurelya's Reverie",
+      "icon": "/ddragon/16.20.1/item/773069.png"
+    },
+    "773070": {
+      "id": 773070,
+      "name": "Tear of the Goddess",
+      "icon": "/ddragon/16.20.1/item/773070.png"
+    },
+    "773071": {
+      "id": 773071,
+      "name": "The Black Cleaver",
+      "icon": "/ddragon/16.20.1/item/773071.png"
+    },
+    "773072": {
+      "id": 773072,
+      "name": "The Bloodthirster",
+      "icon": "/ddragon/16.20.1/item/773072.png"
+    },
+    "773073": {
+      "id": 773073,
+      "name": "Stack of Sunfire Capes",
+      "icon": "/ddragon/16.20.1/item/773073.png"
+    },
+    "773074": {
+      "id": 773074,
+      "name": "Ravenous Hydra",
+      "icon": "/ddragon/16.20.1/item/773074.png"
+    },
+    "773075": {
+      "id": 773075,
+      "name": "Thornmail",
+      "icon": "/ddragon/16.20.1/item/773075.png"
+    },
+    "773077": {
+      "id": 773077,
+      "name": "Tiamat",
+      "icon": "/ddragon/16.20.1/item/773077.png"
+    },
+    "773078": {
+      "id": 773078,
+      "name": "Trinity Force",
+      "icon": "/ddragon/16.20.1/item/773078.png"
+    },
+    "773082": {
+      "id": 773082,
+      "name": "Warden's Mail",
+      "icon": "/ddragon/16.20.1/item/773082.png"
+    },
+    "773083": {
+      "id": 773083,
+      "name": "Warmog's Armor",
+      "icon": "/ddragon/16.20.1/item/773083.png"
+    },
+    "773084": {
+      "id": 773084,
+      "name": "Innervating Locket",
+      "icon": "/ddragon/16.20.1/item/773084.png"
+    },
+    "773085": {
+      "id": 773085,
+      "name": "Runaan's Hurricane",
+      "icon": "/ddragon/16.20.1/item/773085.png"
+    },
+    "773086": {
+      "id": 773086,
+      "name": "Zeal",
+      "icon": "/ddragon/16.20.1/item/773086.png"
+    },
+    "773087": {
+      "id": 773087,
+      "name": "Statikk Shiv",
+      "icon": "/ddragon/16.20.1/item/773087.png"
+    },
+    "773089": {
+      "id": 773089,
+      "name": "Rabadon's Deathcap",
+      "icon": "/ddragon/16.20.1/item/773089.png"
+    },
+    "773091": {
+      "id": 773091,
+      "name": "Wit's End",
+      "icon": "/ddragon/16.20.1/item/773091.png"
+    },
+    "773092": {
+      "id": 773092,
+      "name": "Shard of True Ice",
+      "icon": "/ddragon/16.20.1/item/773092.png"
+    },
+    "773093": {
+      "id": 773093,
+      "name": "Avarice Blade",
+      "icon": "/ddragon/16.20.1/item/773093.png"
+    },
+    "773096": {
+      "id": 773096,
+      "name": "Philosopher's Stone",
+      "icon": "/ddragon/16.20.1/item/773096.png"
+    },
+    "773098": {
+      "id": 773098,
+      "name": "Lucky Pick",
+      "icon": "/ddragon/16.20.1/item/773098.png"
+    },
+    "773100": {
+      "id": 773100,
+      "name": "Lich Bane",
+      "icon": "/ddragon/16.20.1/item/773100.png"
+    },
+    "773101": {
+      "id": 773101,
+      "name": "Stinger",
+      "icon": "/ddragon/16.20.1/item/773101.png"
+    },
+    "773102": {
+      "id": 773102,
+      "name": "Banshee's Veil",
+      "icon": "/ddragon/16.20.1/item/773102.png"
+    },
+    "773105": {
+      "id": 773105,
+      "name": "Aegis of the Legion",
+      "icon": "/ddragon/16.20.1/item/773105.png"
+    },
+    "773106": {
+      "id": 773106,
+      "name": "Madred's Razors",
+      "icon": "/ddragon/16.20.1/item/773106.png"
+    },
+    "773107": {
+      "id": 773107,
+      "name": "Runic Bulwark",
+      "icon": "/ddragon/16.20.1/item/773107.png"
+    },
+    "773108": {
+      "id": 773108,
+      "name": "Fiendish Codex",
+      "icon": "/ddragon/16.20.1/item/773108.png"
+    },
+    "773109": {
+      "id": 773109,
+      "name": "Madred's Bloodrazor",
+      "icon": "/ddragon/16.20.1/item/773109.png"
+    },
+    "773110": {
+      "id": 773110,
+      "name": "Frozen Heart",
+      "icon": "/ddragon/16.20.1/item/773110.png"
+    },
+    "773111": {
+      "id": 773111,
+      "name": "Mercury's Treads",
+      "icon": "/ddragon/16.20.1/item/773111.png"
+    },
+    "773114": {
+      "id": 773114,
+      "name": "Malady",
+      "icon": "/ddragon/16.20.1/item/773114.png"
+    },
+    "773115": {
+      "id": 773115,
+      "name": "Nashor's Tooth",
+      "icon": "/ddragon/16.20.1/item/773115.png"
+    },
+    "773116": {
+      "id": 773116,
+      "name": "Rylai's Crystal Scepter",
+      "icon": "/ddragon/16.20.1/item/773116.png"
+    },
+    "773117": {
+      "id": 773117,
+      "name": "Boots of Mobility",
+      "icon": "/ddragon/16.20.1/item/773117.png"
+    },
+    "773123": {
+      "id": 773123,
+      "name": "Executioner's Calling",
+      "icon": "/ddragon/16.20.1/item/773123.png"
+    },
+    "773124": {
+      "id": 773124,
+      "name": "Guinsoo's Rageblade",
+      "icon": "/ddragon/16.20.1/item/773124.png"
+    },
+    "773128": {
+      "id": 773128,
+      "name": "Deathfire Grasp",
+      "icon": "/ddragon/16.20.1/item/773128.png"
+    },
+    "773131": {
+      "id": 773131,
+      "name": "Sword of the Divine",
+      "icon": "/ddragon/16.20.1/item/773131.png"
+    },
+    "773132": {
+      "id": 773132,
+      "name": "Heart of Gold",
+      "icon": "/ddragon/16.20.1/item/773132.png"
+    },
+    "773134": {
+      "id": 773134,
+      "name": "The Brutalizer",
+      "icon": "/ddragon/16.20.1/item/773134.png"
+    },
+    "773135": {
+      "id": 773135,
+      "name": "Void Staff",
+      "icon": "/ddragon/16.20.1/item/773135.png"
+    },
+    "773136": {
+      "id": 773136,
+      "name": "Haunting Guise",
+      "icon": "/ddragon/16.20.1/item/773136.png"
+    },
+    "773138": {
+      "id": 773138,
+      "name": "Leviathan",
+      "icon": "/ddragon/16.20.1/item/773138.png"
+    },
+    "773139": {
+      "id": 773139,
+      "name": "Mercurial Scimitar",
+      "icon": "/ddragon/16.20.1/item/773139.png"
+    },
+    "773140": {
+      "id": 773140,
+      "name": "Quicksilver Sash",
+      "icon": "/ddragon/16.20.1/item/773140.png"
+    },
+    "773141": {
+      "id": 773141,
+      "name": "Sword of the Occult",
+      "icon": "/ddragon/16.20.1/item/773141.png"
+    },
+    "773142": {
+      "id": 773142,
+      "name": "Youmuu's Ghostblade",
+      "icon": "/ddragon/16.20.1/item/773142.png"
+    },
+    "773143": {
+      "id": 773143,
+      "name": "Randuin's Omen",
+      "icon": "/ddragon/16.20.1/item/773143.png"
+    },
+    "773144": {
+      "id": 773144,
+      "name": "Bilgewater Cutlass",
+      "icon": "/ddragon/16.20.1/item/773144.png"
+    },
+    "773145": {
+      "id": 773145,
+      "name": "Hextech Revolver",
+      "icon": "/ddragon/16.20.1/item/773145.png"
+    },
+    "773146": {
+      "id": 773146,
+      "name": "Hextech Gunblade",
+      "icon": "/ddragon/16.20.1/item/773146.png"
+    },
+    "773151": {
+      "id": 773151,
+      "name": "Liandry's Torment",
+      "icon": "/ddragon/16.20.1/item/773151.png"
+    },
+    "773152": {
+      "id": 773152,
+      "name": "Will of the Ancients",
+      "icon": "/ddragon/16.20.1/item/773152.png"
+    },
+    "773153": {
+      "id": 773153,
+      "name": "Blade of The Ruined King",
+      "icon": "/ddragon/16.20.1/item/773153.png"
+    },
+    "773154": {
+      "id": 773154,
+      "name": "Wriggle's Lantern",
+      "icon": "/ddragon/16.20.1/item/773154.png"
+    },
+    "773155": {
+      "id": 773155,
+      "name": "Hexdrinker",
+      "icon": "/ddragon/16.20.1/item/773155.png"
+    },
+    "773156": {
+      "id": 773156,
+      "name": "Maw of Malmortius",
+      "icon": "/ddragon/16.20.1/item/773156.png"
+    },
+    "773157": {
+      "id": 773157,
+      "name": "Zhonya's Hourglass",
+      "icon": "/ddragon/16.20.1/item/773157.png"
+    },
+    "773158": {
+      "id": 773158,
+      "name": "Ionian Boots of Lucidity",
+      "icon": "/ddragon/16.20.1/item/773158.png"
+    },
+    "773160": {
+      "id": 773160,
+      "name": "Feral Flare",
+      "icon": "/ddragon/16.20.1/item/773160.png"
+    },
+    "773161": {
+      "id": 773161,
+      "name": "Moonflair Spellblade",
+      "icon": "/ddragon/16.20.1/item/773161.png"
+    },
+    "773162": {
+      "id": 773162,
+      "name": "Cloak and Dagger",
+      "icon": "/ddragon/16.20.1/item/773162.png"
+    },
+    "773165": {
+      "id": 773165,
+      "name": "Morellonomicon",
+      "icon": "/ddragon/16.20.1/item/773165.png"
+    },
+    "773172": {
+      "id": 773172,
+      "name": "Zephyr",
+      "icon": "/ddragon/16.20.1/item/773172.png"
+    },
+    "773173": {
+      "id": 773173,
+      "name": "Eleisa's Miracle",
+      "icon": "/ddragon/16.20.1/item/773173.png"
+    },
+    "773174": {
+      "id": 773174,
+      "name": "Shushei's Mana Jug",
+      "icon": "/ddragon/16.20.1/item/773174.png"
+    },
+    "773178": {
+      "id": 773178,
+      "name": "Ionic Spark",
+      "icon": "/ddragon/16.20.1/item/773178.png"
+    },
+    "773190": {
+      "id": 773190,
+      "name": "Locket of the Iron Solari",
+      "icon": "/ddragon/16.20.1/item/773190.png"
+    },
+    "773191": {
+      "id": 773191,
+      "name": "Seeker's Armguard",
+      "icon": "/ddragon/16.20.1/item/773191.png"
+    },
+    "773206": {
+      "id": 773206,
+      "name": "Spirit of the Spectral Wraith",
+      "icon": "/ddragon/16.20.1/item/773206.png"
+    },
+    "773207": {
+      "id": 773207,
+      "name": "Spirit of the Ancient Golem",
+      "icon": "/ddragon/16.20.1/item/773207.png"
+    },
+    "773209": {
+      "id": 773209,
+      "name": "Spirit of the Elder Lizard",
+      "icon": "/ddragon/16.20.1/item/773209.png"
+    },
+    "773211": {
+      "id": 773211,
+      "name": "Spectre's Cowl",
+      "icon": "/ddragon/16.20.1/item/773211.png"
+    },
+    "773222": {
+      "id": 773222,
+      "name": "Mikael's Crucible",
+      "icon": "/ddragon/16.20.1/item/773222.png"
+    },
+    "773340": {
+      "id": 773340,
+      "name": "Yellow Trinket",
+      "icon": "/ddragon/16.20.1/item/773340.png"
+    },
+    "773348": {
+      "id": 773348,
+      "name": "Red Trinket",
+      "icon": "/ddragon/16.20.1/item/773348.png"
+    },
+    "773504": {
+      "id": 773504,
+      "name": "Ardent Censer",
+      "icon": "/ddragon/16.20.1/item/773504.png"
+    },
+    "773512": {
+      "id": 773512,
+      "name": "Zz'Rot Portal",
+      "icon": "/ddragon/16.20.1/item/773512.png"
+    },
+    "773513": {
+      "id": 773513,
+      "name": "Prototype Hex Core",
+      "icon": "/ddragon/16.20.1/item/773513.png"
+    },
+    "773514": {
+      "id": 773514,
+      "name": "Hex Core mk-1",
+      "icon": "/ddragon/16.20.1/item/773514.png"
+    },
+    "773515": {
+      "id": 773515,
+      "name": "Hex Core mk-2",
+      "icon": "/ddragon/16.20.1/item/773515.png"
+    },
+    "773516": {
+      "id": 773516,
+      "name": "Perfect Hex Core",
+      "icon": "/ddragon/16.20.1/item/773516.png"
+    },
+    "773517": {
+      "id": 773517,
+      "name": "Eggnog",
+      "icon": "/ddragon/16.20.1/item/773517.png"
+    },
+    "773518": {
+      "id": 773518,
+      "name": "Bag of Tea",
+      "icon": "/ddragon/16.20.1/item/773518.png"
+    },
+    "773519": {
+      "id": 773519,
+      "name": "Candy Corn",
+      "icon": "/ddragon/16.20.1/item/773519.png"
+    },
+    "773521": {
+      "id": 773521,
+      "name": "Health Potion",
+      "icon": "/ddragon/16.20.1/item/773521.png"
+    },
+    "994403": {
+      "id": 994403,
+      "name": "Golden Spatula",
+      "icon": "/ddragon/16.20.1/item/994403.png"
+    }
+  },
+  "spells": {
+    "SummonerBarrier": {
+      "id": "SummonerBarrier",
+      "key": 21,
+      "name": "Barrier",
+      "icon": "/ddragon/16.20.1/spell/SummonerBarrier.png"
+    },
+    "SummonerBarrier_Jade": {
+      "id": "SummonerBarrier_Jade",
+      "key": 721,
+      "name": "Barrier",
+      "icon": "/ddragon/16.20.1/spell/SummonerBarrier_Jade.png"
+    },
+    "SummonerBattleCry_Jade": {
+      "id": "SummonerBattleCry_Jade",
+      "key": 716,
+      "name": "Surge",
+      "icon": "/ddragon/16.20.1/spell/SummonerBattleCry_Jade.png"
+    },
+    "SummonerBoost": {
+      "id": "SummonerBoost",
+      "key": 1,
+      "name": "Cleanse",
+      "icon": "/ddragon/16.20.1/spell/SummonerBoost.png"
+    },
+    "SummonerBoost_Jade": {
+      "id": "SummonerBoost_Jade",
+      "key": 71,
+      "name": "Cleanse",
+      "icon": "/ddragon/16.20.1/spell/SummonerBoost_Jade.png"
+    },
+    "SummonerCherryFlash": {
+      "id": "SummonerCherryFlash",
+      "key": 2202,
+      "name": "Flash",
+      "icon": "/ddragon/16.20.1/spell/SummonerCherryFlash.png"
+    },
+    "SummonerCherryHold": {
+      "id": "SummonerCherryHold",
+      "key": 2201,
+      "name": "Flee",
+      "icon": "/ddragon/16.20.1/spell/SummonerCherryHold.png"
+    },
+    "SummonerClairvoyance_Jade": {
+      "id": "SummonerClairvoyance_Jade",
+      "key": 75,
+      "name": "Clairvoyance",
+      "icon": "/ddragon/16.20.1/spell/SummonerClairvoyance_Jade.png"
+    },
+    "SummonerDot": {
+      "id": "SummonerDot",
+      "key": 14,
+      "name": "Ignite",
+      "icon": "/ddragon/16.20.1/spell/SummonerDot.png"
+    },
+    "SummonerDot_Jade": {
+      "id": "SummonerDot_Jade",
+      "key": 714,
+      "name": "Ignite",
+      "icon": "/ddragon/16.20.1/spell/SummonerDot_Jade.png"
+    },
+    "SummonerExhaust": {
+      "id": "SummonerExhaust",
+      "key": 3,
+      "name": "Exhaust",
+      "icon": "/ddragon/16.20.1/spell/SummonerExhaust.png"
+    },
+    "SummonerExhaust_Jade": {
+      "id": "SummonerExhaust_Jade",
+      "key": 73,
+      "name": "Exhaust",
+      "icon": "/ddragon/16.20.1/spell/SummonerExhaust_Jade.png"
+    },
+    "SummonerFlash": {
+      "id": "SummonerFlash",
+      "key": 4,
+      "name": "Flash",
+      "icon": "/ddragon/16.20.1/spell/SummonerFlash.png"
+    },
+    "SummonerFlash_Jade": {
+      "id": "SummonerFlash_Jade",
+      "key": 74,
+      "name": "Flash",
+      "icon": "/ddragon/16.20.1/spell/SummonerFlash_Jade.png"
+    },
+    "SummonerFortify_Jade": {
+      "id": "SummonerFortify_Jade",
+      "key": 705,
+      "name": "Fortify",
+      "icon": "/ddragon/16.20.1/spell/SummonerFortify_Jade.png"
+    },
+    "SummonerHaste": {
+      "id": "SummonerHaste",
+      "key": 6,
+      "name": "Ghost",
+      "icon": "/ddragon/16.20.1/spell/SummonerHaste.png"
+    },
+    "SummonerHaste_Jade": {
+      "id": "SummonerHaste_Jade",
+      "key": 76,
+      "name": "Ghost",
+      "icon": "/ddragon/16.20.1/spell/SummonerHaste_Jade.png"
+    },
+    "SummonerHeal": {
+      "id": "SummonerHeal",
+      "key": 7,
+      "name": "Heal",
+      "icon": "/ddragon/16.20.1/spell/SummonerHeal.png"
+    },
+    "SummonerHeal_Jade": {
+      "id": "SummonerHeal_Jade",
+      "key": 77,
+      "name": "Heal",
+      "icon": "/ddragon/16.20.1/spell/SummonerHeal_Jade.png"
+    },
+    "SummonerMana": {
+      "id": "SummonerMana",
+      "key": 13,
+      "name": "Clarity",
+      "icon": "/ddragon/16.20.1/spell/SummonerMana.png"
+    },
+    "SummonerMana_Jade": {
+      "id": "SummonerMana_Jade",
+      "key": 713,
+      "name": "Clarity",
+      "icon": "/ddragon/16.20.1/spell/SummonerMana_Jade.png"
+    },
+    "SummonerPoroRecall": {
+      "id": "SummonerPoroRecall",
+      "key": 30,
+      "name": "To the King!",
+      "icon": "/ddragon/16.20.1/spell/SummonerPoroRecall.png"
+    },
+    "SummonerPoroThrow": {
+      "id": "SummonerPoroThrow",
+      "key": 31,
+      "name": "Poro Toss",
+      "icon": "/ddragon/16.20.1/spell/SummonerPoroThrow.png"
+    },
+    "SummonerRally_Jade": {
+      "id": "SummonerRally_Jade",
+      "key": 709,
+      "name": "Rally",
+      "icon": "/ddragon/16.20.1/spell/SummonerRally_Jade.png"
+    },
+    "SummonerRevive_Jade": {
+      "id": "SummonerRevive_Jade",
+      "key": 777,
+      "name": "Revive",
+      "icon": "/ddragon/16.20.1/spell/SummonerRevive_Jade.png"
+    },
+    "SummonerSmite": {
+      "id": "SummonerSmite",
+      "key": 11,
+      "name": "Smite",
+      "icon": "/ddragon/16.20.1/spell/SummonerSmite.png"
+    },
+    "SummonerSmite_Jade": {
+      "id": "SummonerSmite_Jade",
+      "key": 711,
+      "name": "Smite",
+      "icon": "/ddragon/16.20.1/spell/SummonerSmite_Jade.png"
+    },
+    "SummonerSnowURFSnowball_Mark": {
+      "id": "SummonerSnowURFSnowball_Mark",
+      "key": 39,
+      "name": "Mark",
+      "icon": "/ddragon/16.20.1/spell/SummonerSnowURFSnowball_Mark.png"
+    },
+    "SummonerSnowball": {
+      "id": "SummonerSnowball",
+      "key": 32,
+      "name": "Mark",
+      "icon": "/ddragon/16.20.1/spell/SummonerSnowball.png"
+    },
+    "SummonerSpell_Promote_Jade": {
+      "id": "SummonerSpell_Promote_Jade",
+      "key": 720,
+      "name": "Promote",
+      "icon": "/ddragon/16.20.1/spell/SummonerSpell_Promote_Jade.png"
+    },
+    "SummonerTeleport": {
+      "id": "SummonerTeleport",
+      "key": 12,
+      "name": "Teleport",
+      "icon": "/ddragon/16.20.1/spell/SummonerTeleport.png"
+    },
+    "SummonerTeleport_Jade": {
+      "id": "SummonerTeleport_Jade",
+      "key": 712,
+      "name": "Teleport",
+      "icon": "/ddragon/16.20.1/spell/SummonerTeleport_Jade.png"
+    },
+    "Summoner_UltBookPlaceholder": {
+      "id": "Summoner_UltBookPlaceholder",
+      "key": 54,
+      "name": "Placeholder",
+      "icon": "/ddragon/16.20.1/spell/Summoner_UltBookPlaceholder.png"
+    },
+    "Summoner_UltBookSmitePlaceholder": {
+      "id": "Summoner_UltBookSmitePlaceholder",
+      "key": 55,
+      "name": "Placeholder and Attack-Smite",
+      "icon": "/ddragon/16.20.1/spell/Summoner_UltBookSmitePlaceholder.png"
+    }
+  },
+  "runes": {
+    "5001": {
+      "id": 5001,
+      "name": "Health",
+      "icon": "/ddragon/16.20.1/rune/5001.png"
+    },
+    "5005": {
+      "id": 5005,
+      "name": "Attack Speed",
+      "icon": "/ddragon/16.20.1/rune/5005.png"
+    },
+    "5007": {
+      "id": 5007,
+      "name": "Ability Haste",
+      "icon": "/ddragon/16.20.1/rune/5007.png"
+    },
+    "5008": {
+      "id": 5008,
+      "name": "Adaptive Force",
+      "icon": "/ddragon/16.20.1/rune/5008.png"
+    },
+    "5011": {
+      "id": 5011,
+      "name": "Scaling Health",
+      "icon": "/ddragon/16.20.1/rune/5011.png"
+    },
+    "8000": {
+      "id": 8000,
+      "name": "Precision",
+      "icon": "/ddragon/16.20.1/rune/8000.png"
+    },
+    "8005": {
+      "id": 8005,
+      "name": "Press the Attack",
+      "icon": "/ddragon/16.20.1/rune/8005.png"
+    },
+    "8008": {
+      "id": 8008,
+      "name": "Lethal Tempo",
+      "icon": "/ddragon/16.20.1/rune/8008.png"
+    },
+    "8009": {
+      "id": 8009,
+      "name": "Presence of Mind",
+      "icon": "/ddragon/16.20.1/rune/8009.png"
+    },
+    "8010": {
+      "id": 8010,
+      "name": "Conqueror",
+      "icon": "/ddragon/16.20.1/rune/8010.png"
+    },
+    "8014": {
+      "id": 8014,
+      "name": "Coup de Grace",
+      "icon": "/ddragon/16.20.1/rune/8014.png"
+    },
+    "8017": {
+      "id": 8017,
+      "name": "Cut Down",
+      "icon": "/ddragon/16.20.1/rune/8017.png"
+    },
+    "8021": {
+      "id": 8021,
+      "name": "Fleet Footwork",
+      "icon": "/ddragon/16.20.1/rune/8021.png"
+    },
+    "8100": {
+      "id": 8100,
+      "name": "Domination",
+      "icon": "/ddragon/16.20.1/rune/8100.png"
+    },
+    "8105": {
+      "id": 8105,
+      "name": "Relentless Hunter",
+      "icon": "/ddragon/16.20.1/rune/8105.png"
+    },
+    "8106": {
+      "id": 8106,
+      "name": "Ultimate Hunter",
+      "icon": "/ddragon/16.20.1/rune/8106.png"
+    },
+    "8112": {
+      "id": 8112,
+      "name": "Electrocute",
+      "icon": "/ddragon/16.20.1/rune/8112.png"
+    },
+    "8126": {
+      "id": 8126,
+      "name": "Cheap Shot",
+      "icon": "/ddragon/16.20.1/rune/8126.png"
+    },
+    "8128": {
+      "id": 8128,
+      "name": "Dark Harvest",
+      "icon": "/ddragon/16.20.1/rune/8128.png"
+    },
+    "8135": {
+      "id": 8135,
+      "name": "Treasure Hunter",
+      "icon": "/ddragon/16.20.1/rune/8135.png"
+    },
+    "8137": {
+      "id": 8137,
+      "name": "Sixth Sense",
+      "icon": "/ddragon/16.20.1/rune/8137.png"
+    },
+    "8139": {
+      "id": 8139,
+      "name": "Taste of Blood",
+      "icon": "/ddragon/16.20.1/rune/8139.png"
+    },
+    "8140": {
+      "id": 8140,
+      "name": "Grisly Mementos",
+      "icon": "/ddragon/16.20.1/rune/8140.png"
+    },
+    "8141": {
+      "id": 8141,
+      "name": "Deep Ward",
+      "icon": "/ddragon/16.20.1/rune/8141.png"
+    },
+    "8143": {
+      "id": 8143,
+      "name": "Sudden Impact",
+      "icon": "/ddragon/16.20.1/rune/8143.png"
+    },
+    "8200": {
+      "id": 8200,
+      "name": "Sorcery",
+      "icon": "/ddragon/16.20.1/rune/8200.png"
+    },
+    "8210": {
+      "id": 8210,
+      "name": "Transcendence",
+      "icon": "/ddragon/16.20.1/rune/8210.png"
+    },
+    "8214": {
+      "id": 8214,
+      "name": "Summon Aery",
+      "icon": "/ddragon/16.20.1/rune/8214.png"
+    },
+    "8224": {
+      "id": 8224,
+      "name": "Axiom Arcanist",
+      "icon": "/ddragon/16.20.1/rune/8224.png"
+    },
+    "8226": {
+      "id": 8226,
+      "name": "Manaflow Band",
+      "icon": "/ddragon/16.20.1/rune/8226.png"
+    },
+    "8229": {
+      "id": 8229,
+      "name": "Arcane Comet",
+      "icon": "/ddragon/16.20.1/rune/8229.png"
+    },
+    "8230": {
+      "id": 8230,
+      "name": "Stormraider's Surge",
+      "icon": "/ddragon/16.20.1/rune/8230.png"
+    },
+    "8232": {
+      "id": 8232,
+      "name": "Waterwalking",
+      "icon": "/ddragon/16.20.1/rune/8232.png"
+    },
+    "8233": {
+      "id": 8233,
+      "name": "Absolute Focus",
+      "icon": "/ddragon/16.20.1/rune/8233.png"
+    },
+    "8234": {
+      "id": 8234,
+      "name": "Celerity",
+      "icon": "/ddragon/16.20.1/rune/8234.png"
+    },
+    "8236": {
+      "id": 8236,
+      "name": "Gathering Storm",
+      "icon": "/ddragon/16.20.1/rune/8236.png"
+    },
+    "8237": {
+      "id": 8237,
+      "name": "Scorch",
+      "icon": "/ddragon/16.20.1/rune/8237.png"
+    },
+    "8242": {
+      "id": 8242,
+      "name": "Unflinching",
+      "icon": "/ddragon/16.20.1/rune/8242.png"
+    },
+    "8275": {
+      "id": 8275,
+      "name": "Nimbus Cloak",
+      "icon": "/ddragon/16.20.1/rune/8275.png"
+    },
+    "8299": {
+      "id": 8299,
+      "name": "Last Stand",
+      "icon": "/ddragon/16.20.1/rune/8299.png"
+    },
+    "8300": {
+      "id": 8300,
+      "name": "Inspiration",
+      "icon": "/ddragon/16.20.1/rune/8300.png"
+    },
+    "8304": {
+      "id": 8304,
+      "name": "Magical Footwear",
+      "icon": "/ddragon/16.20.1/rune/8304.png"
+    },
+    "8306": {
+      "id": 8306,
+      "name": "Hextech Flashtraption",
+      "icon": "/ddragon/16.20.1/rune/8306.png"
+    },
+    "8313": {
+      "id": 8313,
+      "name": "Triple Tonic",
+      "icon": "/ddragon/16.20.1/rune/8313.png"
+    },
+    "8316": {
+      "id": 8316,
+      "name": "Jack Of All Trades",
+      "icon": "/ddragon/16.20.1/rune/8316.png"
+    },
+    "8321": {
+      "id": 8321,
+      "name": "Cash Back",
+      "icon": "/ddragon/16.20.1/rune/8321.png"
+    },
+    "8345": {
+      "id": 8345,
+      "name": "Biscuit Delivery",
+      "icon": "/ddragon/16.20.1/rune/8345.png"
+    },
+    "8347": {
+      "id": 8347,
+      "name": "Cosmic Insight",
+      "icon": "/ddragon/16.20.1/rune/8347.png"
+    },
+    "8351": {
+      "id": 8351,
+      "name": "Glacial Augment",
+      "icon": "/ddragon/16.20.1/rune/8351.png"
+    },
+    "8352": {
+      "id": 8352,
+      "name": "Time Warp Tonic",
+      "icon": "/ddragon/16.20.1/rune/8352.png"
+    },
+    "8360": {
+      "id": 8360,
+      "name": "Unsealed Spellbook",
+      "icon": "/ddragon/16.20.1/rune/8360.png"
+    },
+    "8369": {
+      "id": 8369,
+      "name": "First Strike",
+      "icon": "/ddragon/16.20.1/rune/8369.png"
+    },
+    "8400": {
+      "id": 8400,
+      "name": "Resolve",
+      "icon": "/ddragon/16.20.1/rune/8400.png"
+    },
+    "8401": {
+      "id": 8401,
+      "name": "Shield Bash",
+      "icon": "/ddragon/16.20.1/rune/8401.png"
+    },
+    "8410": {
+      "id": 8410,
+      "name": "Approach Velocity",
+      "icon": "/ddragon/16.20.1/rune/8410.png"
+    },
+    "8429": {
+      "id": 8429,
+      "name": "Conditioning",
+      "icon": "/ddragon/16.20.1/rune/8429.png"
+    },
+    "8437": {
+      "id": 8437,
+      "name": "Grasp of the Undying",
+      "icon": "/ddragon/16.20.1/rune/8437.png"
+    },
+    "8439": {
+      "id": 8439,
+      "name": "Aftershock",
+      "icon": "/ddragon/16.20.1/rune/8439.png"
+    },
+    "8444": {
+      "id": 8444,
+      "name": "Second Wind",
+      "icon": "/ddragon/16.20.1/rune/8444.png"
+    },
+    "8446": {
+      "id": 8446,
+      "name": "Demolish",
+      "icon": "/ddragon/16.20.1/rune/8446.png"
+    },
+    "8451": {
+      "id": 8451,
+      "name": "Overgrowth",
+      "icon": "/ddragon/16.20.1/rune/8451.png"
+    },
+    "8453": {
+      "id": 8453,
+      "name": "Revitalize",
+      "icon": "/ddragon/16.20.1/rune/8453.png"
+    },
+    "8463": {
+      "id": 8463,
+      "name": "Font of Life",
+      "icon": "/ddragon/16.20.1/rune/8463.png"
+    },
+    "8465": {
+      "id": 8465,
+      "name": "Guardian",
+      "icon": "/ddragon/16.20.1/rune/8465.png"
+    },
+    "8473": {
+      "id": 8473,
+      "name": "Bone Plating",
+      "icon": "/ddragon/16.20.1/rune/8473.png"
+    },
+    "8992": {
+      "id": 8992,
+      "name": "Deathfire Touch",
+      "icon": "/ddragon/16.20.1/rune/8992.png"
+    },
+    "9101": {
+      "id": 9101,
+      "name": "Absorb Life",
+      "icon": "/ddragon/16.20.1/rune/9101.png"
+    },
+    "9103": {
+      "id": 9103,
+      "name": "Legend: Bloodline",
+      "icon": "/ddragon/16.20.1/rune/9103.png"
+    },
+    "9104": {
+      "id": 9104,
+      "name": "Legend: Alacrity",
+      "icon": "/ddragon/16.20.1/rune/9104.png"
+    },
+    "9105": {
+      "id": 9105,
+      "name": "Legend: Haste",
+      "icon": "/ddragon/16.20.1/rune/9105.png"
+    },
+    "9111": {
+      "id": 9111,
+      "name": "Triumph",
+      "icon": "/ddragon/16.20.1/rune/9111.png"
+    },
+    "9923": {
+      "id": 9923,
+      "name": "Hail of Blades",
+      "icon": "/ddragon/16.20.1/rune/9923.png"
+    }
+  }
+}

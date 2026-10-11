@@ -1,3 +1,5 @@
+import { LiveOverlay } from "./LiveOverlay";
+import type { ObserverFrame } from "../../shared/observer";
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import type { State, Player } from "../../shared/schema";
 import { clock } from "../../shared/mock";
@@ -88,7 +90,7 @@ function Scoreboard({ state }: { state: State }) {
           </span>
           <span>
             <MetricIcon kind="gold" />
-            {showGold ? `${(totals[0] / 1000).toFixed(1)}K` : "—"}
+            {showGold ? `${(totals[0] / 1000).toFixed(1)}K` : ""}
           </span>
         </div>
         <div className="score-kills">
@@ -98,7 +100,7 @@ function Scoreboard({ state }: { state: State }) {
         </div>
         <div className="score-economy right">
           <span>
-            {showGold ? `${(totals[1] / 1000).toFixed(1)}K` : "—"}
+            {showGold ? `${(totals[1] / 1000).toFixed(1)}K` : ""}
             <MetricIcon kind="gold" />
             {showGold && difference !== 0 && (
               <small className={difference > 0 ? "red-lead" : "blue-lead"}>
@@ -211,7 +213,7 @@ function PlayerTable({ state }: { state: State }) {
               ? g >= 1000
                 ? `${(g / 1000).toFixed(1)}K`
                 : g
-              : "—"}
+              : ""}
           </div>
         ))}
       </div>
@@ -336,12 +338,19 @@ export function Surface({
   preview = false,
   reference = false,
   compare = false,
+  observation = null,
 }: {
   state: State;
   preview?: boolean;
   reference?: boolean;
   compare?: boolean;
+  observation?: ObserverFrame | null;
 }) {
+  const [now, setNow] = useState(Date.now());
+  useEffect(() => {
+    const timer = setInterval(() => setNow(Date.now()), 500);
+    return () => clearInterval(timer);
+  }, []);
   const shell = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(1);
   useEffect(() => {
@@ -364,28 +373,39 @@ export function Surface({
     "--panel": t.background,
     "--display-font":
       t.font === "condensed"
-        ? "Anton"
+        ? '"Beaufort for LoL"'
         : t.font === "serif"
           ? "Georgia"
-          : '"Segoe UI"',
-    "--body-font": t.font === "serif" ? "Georgia" : '"Roboto Condensed"',
+          : '"Spiegel"',
+    "--body-font": t.font === "serif" ? "Georgia" : '"Spiegel"',
     transform: `scale(${scale})`,
   } as CSSProperties;
   return (
     <div ref={shell} className={`surface ${preview ? "preview" : ""}`}>
-      <div className={`canvas ref-canvas ${t.variant}`} style={style}>
-        {preview && (reference || compare) && (
+      <div
+        className={`canvas ref-canvas ${!state.mockVisible ? "live-canvas" : ""} ${state.rehearsal?.kind === "minimal" ? "minimal" : t.variant}`}
+        style={style}
+      >
+        {state.mockVisible && preview && (reference || compare) && (
           <img
             className="reference"
             src={`/references/${active === "draft" ? "draft" : "ingame"}.png`}
             alt="Ảnh gốc do bạn cung cấp"
           />
         )}
-        {preview && !reference && !compare && (
+        {preview && !state.mockVisible && (
+          <div className="stage">
+            <span>VÙNG HÌNH GAME / REPLAY</span>
+            <small>
+              Không có ảnh tham chiếu. Overlay dùng dữ liệu quan sát
+            </small>
+          </div>
+        )}
+        {state.mockVisible && preview && !reference && !compare && (
           <div className="stage">
             <div className="river" />
             <span>VÙNG HÌNH GAME / CAMERA</span>
-            <small>1920 × 1080 · nền chỉ xuất hiện trong preview</small>
+            <small>1920 × 1080, nền chỉ xuất hiện trong preview</small>
             <div className="minimap">
               MINIMAP
               <br />
@@ -393,7 +413,35 @@ export function Surface({
             </div>
           </div>
         )}
-        {!compare && (
+        {!state.mockVisible && (
+          <div
+            className="ref-graphics"
+            style={{
+              transform: `translateY(${t.offsetY}px) scale(${t.scale})`,
+            }}
+          >
+            <LiveOverlay
+              theme={
+                state.rehearsal
+                  ? {
+                      ...t,
+                      widgets: {
+                        ...t.widgets,
+                        players: true,
+                        objectives: true,
+                        killfeed: true,
+                        levels: state.rehearsal.kind === "levels",
+                      },
+                    }
+                  : t
+              }
+              frame={observation}
+              now={now}
+              rehearsal={state.rehearsal}
+            />
+          </div>
+        )}
+        {state.mockVisible && !compare && (
           <div
             className="ref-graphics"
             style={{
@@ -455,9 +503,9 @@ export function Surface({
                 <h1>{t.redName}</h1>
                 <h2>VICTORY</h2>
                 <div className="result-score">
-                  {state.blueKills} <span>—</span> {state.redKills}
+                  {state.blueKills} <span>:</span> {state.redKills}
                 </div>
-                <p>THỜI GIAN TRẬN · {clock(state.gameTime)}</p>
+                <p>THỜI GIAN TRẬN: {clock(state.gameTime)}</p>
                 <div className="result-table">
                   <div>
                     <b>PLAYER</b>

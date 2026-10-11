@@ -1,0 +1,22 @@
+# Read-only planning/review scope. Everything else stays local.
+/*
+!/*.md
+!/package.json
+!/tsconfig*.json
+!/vite.config.*
+!/index.html
+!/src/
+!/shared/
+!/server/
+!/tests/
+!/scripts/
+!/docs/
+# Never expose gameplay captures, local settings, binaries or investigation output.
+data/
+.npm-cache/
+*.log
+*.ndjson
+*.dll
+*.exe
+*.pdb
+lockfile

@@ -45,12 +45,12 @@
   left: 512px;
   top: 8px;
   width: 896px;
-  height: 102px;
-  background: linear-gradient(#08090dfc 0 62px, #080b14e8 62px, transparent);
+  height: 115px;
+  background: linear-gradient(#08090dfc 0 78px, #080b14e8 78px, transparent);
   font-family: var(--display-font), sans-serif;
 }
 .score-main {
-  height: 65px;
+  height: 78px;
   display: grid;
   grid-template-columns: 205px 175px 130px 175px 205px;
   border: 1px solid #76746b;
@@ -80,7 +80,7 @@
 }
 .team-caption b {
   display: block;
-  font-family: Arial, sans-serif;
+  font-family: var(--display-font), sans-serif;
   font-weight: 950;
   font-size: 25px;
   line-height: 27px;
@@ -90,7 +90,7 @@
 }
 .team-caption span {
   display: block;
-  font-family: "Roboto Condensed", sans-serif;
+  font-family: "Spiegel", sans-serif;
   font-size: 18px;
   line-height: 22px;
 }
@@ -173,10 +173,10 @@
 }
 .score-economy small {
   position: absolute;
-  top: 32px;
+  top: 29px;
   left: 0;
   width: 52px;
-  font: 700 16px "Roboto Condensed";
+  font: 700 16px/18px "Spiegel";
   text-align: center;
   background: #963033;
   color: #fff;
@@ -296,7 +296,7 @@
   border-top: 1px solid #8a8f7e;
   border-bottom: 1px solid #8a8f7e;
   color: #e4e8df;
-  font-family: Arial, sans-serif;
+  font-family: "Spiegel", sans-serif;
 }
 .ref-player-row {
   height: 51.6px;
@@ -442,7 +442,6 @@
 }
 .red-row .row-items {
   justify-content: flex-start;
-  flex-direction: row-reverse;
 }
 .red-row .row-name > div {
   flex-direction: row-reverse;
@@ -475,6 +474,44 @@
   border-bottom: 1px solid #5c644ea6;
   color: #bdc1b7;
 }
+.table-gold > .lane-gold-blue { color: var(--blue); text-shadow: 0 0 7px color-mix(in srgb, var(--blue) 55%, transparent); }
+.table-gold > .lane-gold-red { color: var(--red); text-shadow: 0 0 7px color-mix(in srgb, var(--red) 55%, transparent); }
+.live-dragons { position:absolute; top:4px; display:flex; gap:5px; min-width:145px; }
+.live-dragons .metric-icon { width:24px; height:24px; }
+.dragon-token { display:grid; place-items:center; color:#aeb9b1; }
+.dragon-fire { color:#dd6a42; }
+.dragon-earth { color:#b18a49; }
+.dragon-water { color:#4bb4ce; }
+.dragon-air { color:#66c5a5; }
+.dragon-hextech { color:#668bd8; }
+.dragon-chemtech { color:#75a94c; }
+.dragon-elder { color:#b998d8; }
+.blue-team-dragons { left:190px; justify-content:flex-end; }
+.red-team-dragons { right:190px; justify-content:flex-start; }
+.live-role-quests { position:absolute; top:2px; display:flex; gap:4px; }
+.blue-role-quests { left:10px; color:var(--blue); }
+.red-role-quests { right:10px; color:var(--red); flex-direction:row-reverse; }
+.role-quest-icon { width:25px; height:25px; fill:none; stroke:currentColor; stroke-width:1.8; opacity:.5; }
+.role-quest-icon.completed { fill:currentColor; opacity:1; filter:drop-shadow(0 0 5px currentColor); }
+.live-objective-stack { position:absolute; left:12px; top:12px; display:grid; gap:6px; }
+.live-objective-stack .ref-objective { position:relative; left:auto; top:auto; }
+.live-objective > div { display:flex; flex-direction:column; min-width:92px; }
+.live-objective small { color:#aeb9b1; font:10px/12px "Spiegel",sans-serif; letter-spacing:.5px; }
+.live-objective b { font-size:20px; line-height:24px; }
+.live-event-banner {
+  position:absolute; z-index:8; top:128px; left:50%; min-width:390px; height:64px;
+  transform:translateX(-50%); display:flex; align-items:center; justify-content:center; gap:13px;
+  padding:0 28px; color:#f4f0df; border:1px solid #b79b58;
+  background:linear-gradient(90deg,transparent,#071316f2 14%,#071316f2 86%,transparent);
+  box-shadow:0 5px 22px #000b; font-family:var(--display-font); animation:live-event-in 280ms ease-out both;
+}
+.live-event-banner.blue { border-left:4px solid var(--blue); }
+.live-event-banner.red { border-right:4px solid var(--red); }
+.live-event-banner .metric-icon { width:38px; height:38px; color:#c9b16c; }
+.live-event-banner div { display:flex; flex-direction:column; align-items:flex-start; }
+.live-event-banner b { color:#fff; font-size:22px; line-height:24px; }
+.live-event-banner span { color:#c9b16c; font:700 15px/20px "Spiegel",sans-serif; letter-spacing:.8px; }
+@keyframes live-event-in { from { opacity:0; transform:translate(-50%,-10px) scale(.97); } to { opacity:1; transform:translate(-50%,0) scale(1); } }
 .camera-caption {
   position: absolute;
   top: 1048px;
@@ -498,7 +535,7 @@
   top: 667px;
   width: 360px;
   height: 112px;
-  font-family: "Roboto Condensed", sans-serif;
+  font-family: "Spiegel", sans-serif;
 }
 .draft-bans h3 {
   height: 42px;
@@ -508,7 +545,7 @@
   line-height: 42px;
   margin: 0;
   font-weight: 700;
-  font-family: Arial, sans-serif;
+  font-family: "Spiegel", sans-serif;
   color: #d7d8d6;
 }
 .draft-bans > div {
@@ -623,7 +660,7 @@
   writing-mode: vertical-rl;
   transform: rotate(180deg);
   font-size: 25px;
-  font-family: Arial, sans-serif;
+  font-family: "Spiegel", sans-serif;
   line-height: 1;
   color: #eee;
   text-shadow: 0 1px 3px #000;
@@ -665,12 +702,12 @@
   top: 41px;
   text-shadow: 0 1px 4px #000;
   color: #e8e8e4;
-  font-family: Arial, sans-serif;
+  font-family: "Spiegel", sans-serif;
 }
 .pick-stat > b {
   font-size: 36px;
   line-height: 40px;
-  font-family: Arial, sans-serif;
+  font-family: "Spiegel", sans-serif;
   letter-spacing: -1.5px;
 }
 .pick-stat > strong {
@@ -762,7 +799,7 @@
   width: 100%;
   font-size: 22px;
   line-height: 25px;
-  font-family: Arial, sans-serif;
+  font-family: "Spiegel", sans-serif;
 }
 .reference-sponsors {
   position: absolute;
@@ -785,8 +822,8 @@
 .ref-canvas .postgame h1 {
   font-family: var(--display-font);
 }
-.ref-canvas.minimal .score-main,
-.ref-canvas.minimal .ref-player-table {
+.ref-canvas:is(.minimal, :has(.live-soul-takeover)) .score-main,
+.ref-canvas:is(.minimal, :has(.live-soul-takeover)) .ref-player-table {
   background: color-mix(in srgb, var(--panel) 94%, transparent);
   border-color: var(--accent);
 }
@@ -802,3 +839,361 @@
 .ref-canvas .mock-mark {
   display: none;
 }
+.live-player-row .live-item {
+  width: 24px;
+  height: 24px;
+  border: 1px solid #8f877a75;
+  display: grid;
+  place-items: center;
+  font:
+    9px "Spiegel",
+    sans-serif;
+  color: #dce5db;
+}
+.live-champion {
+  border: 1px solid #79776d;
+  display: grid;
+  place-items: center;
+  font:
+    14px "Spiegel",
+    sans-serif;
+}
+.live-player-row .row-name small {
+  color: #929992;
+  font-size: 10px;
+}
+.live-versus {
+  font:
+    16px "Spiegel",
+    sans-serif;
+  color: #b8bbba;
+}
+.live-source {
+  font:
+    12px/24px "Spiegel",
+    sans-serif;
+  color: #b8bbba;
+}
+.live-objective > span {
+  font:
+    12px "Spiegel",
+    sans-serif;
+}
+.live-icon-empty {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  background: #17201ce0;
+  border: 1px solid #7e887a50;
+  color: #7e887a;
+  font:
+    12px "Spiegel",
+    sans-serif;
+}
+.row-spells .live-icon-empty,
+.row-vision .live-icon-empty {
+  width: 22px;
+  height: 22px;
+}
+.live-rune-empty {
+  width: 25px;
+  flex-shrink: 0;
+  text-align: center;
+  color: #7e887a;
+}
+.live-missing-stat {
+  display: block;
+  font:
+    9px/9px "Spiegel",
+    sans-serif;
+  color: #838d82;
+}
+.live-player-row .row-name > div b {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.live-player-row.is-dead .row-champion img {
+  filter: grayscale(1);
+  opacity: 0.55;
+}
+.live-respawn {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font:
+    bold 20px "Spiegel",
+    sans-serif;
+  color: #fff;
+  text-shadow: 0 1px 3px #000;
+}
+.recording-watermark { position: absolute; left: 24px; top: 180px; color: #e9dbb0; background: #111b; padding: 8px 12px; font: 18px "Spiegel", sans-serif; z-index: 10; }
+.live-item-slot { position:relative; width:24px; height:24px; flex-shrink:0; }
+.live-spell-slot { position:relative; width:22px; height:22px; flex-shrink:0; }
+.live-spell-slot .item-countdown { font-size:11px; }
+.item-countdown { position:absolute; inset:0; display:grid; place-items:center; background:#060b12a8; color:white; font:700 13px "Spiegel",sans-serif; text-shadow:0 1px 3px #000; }
+.baron-player-buff { position:absolute; inset:-2px; width:auto; height:auto; border:3px solid #a759df; background:transparent; box-shadow:0 0 7px #922cca99,inset 0 0 5px #ab60e855; pointer-events:none; z-index:2; }
+.elder-player-buff { position:absolute; inset:0; border:2px solid #eee7c2; box-shadow:0 0 6px #eee2a699; pointer-events:none; z-index:3; }
+.elder-player-buff::after { content:""; position:absolute; inset:-2px; border:1px solid #fff; box-shadow:0 0 8px #fff8,inset 0 0 6px #fff5; animation:elder-glow 1.8s ease-in-out infinite alternate; }
+@keyframes elder-glow { from { opacity:.4; } to { opacity:1; } }
+@media (prefers-reduced-motion:reduce) { .elder-player-buff::after { animation:none; } }
+.real-elder-timer { position:absolute; top:12px; left:1414px; width:170px; height:60px; border:1px solid #b3b19c; padding:3px 8px 3px 54px; background:#141711cc; color:#f0edde; }
+.real-elder-timer.alongside-baron { left:1590px; }
+.elder-symbol { position:absolute; left:0; top:0; width:47px; height:58px; display:grid; place-items:center; border-right:1px solid #9b9980; background:#4c51459e; }
+.elder-symbol .metric-icon { width:35px; height:35px; }
+.real-elder-timer > b { display:block; font:700 12px/17px "Spiegel"; }
+.real-elder-timer > time { font:400 27px/31px "Broadcast Condensed",sans-serif; }
+.portrait-alert { position:absolute; inset:0; z-index:3; display:grid; place-items:center; background:#152c3af2; color:#e8ce87; font:700 24px "Beaufort for LoL",serif; box-shadow:inset 0 0 12px #e8ce87; animation:portrait-reveal .35s ease-out; }
+.portrait-alert img { width:40px; height:40px; }
+@keyframes portrait-reveal { from { opacity:0; transform:scale(.65); } to { opacity:1; transform:scale(1); } }
+.ultimate-status { display:block; color:#e6ce89; font:700 10px "Spiegel",sans-serif; line-height:10px; }
+.live-inhibitors { position:absolute; left:12px; bottom:115px; display:grid; gap:5px; width:230px; }
+.live-inhibitors > div { background:#0b141dee; border-left:3px solid var(--red); padding:10px 12px; display:grid; gap:4px; }
+.live-inhibitors > .blue { border-color:var(--blue); }
+.live-inhibitors small { color:#b6c2cf; font:12px "Spiegel",sans-serif; }
+.live-inhibitors b { color:#e8ce87; font:700 20px "Beaufort for LoL",serif; }
+.live-buff-status { position:absolute; top:132px; left:512px; width:896px; display:flex; justify-content:space-between; font:700 13px "Spiegel",sans-serif; }
+.live-buff-status > div { display:flex; gap:8px; }
+.live-buff-status span { background:#10151ee8; padding:5px 8px; border-bottom:2px solid #b882ed; }
+.live-buff-status .soul-status { color:#e8ce87; border-color:#e8ce87; }
+.ref-canvas:is(.minimal, :has(.live-soul-takeover)) .ref-player-table[data-source="observed"] { top:900px; height:180px; background:transparent; border:0; }
+.ref-canvas:is(.minimal, :has(.live-soul-takeover)) [data-source="observed"] .table-blue,
+.ref-canvas:is(.minimal, :has(.live-soul-takeover)) [data-source="observed"] .table-red { display:flex; justify-content:space-around; align-items:flex-end; }
+.ref-canvas:is(.minimal, :has(.live-soul-takeover)) .live-player-row { flex-direction:column; width:86px; height:178px; gap:4px; padding:6px; background:#0a121bd9; border-bottom:3px solid var(--blue); }
+.ref-canvas:is(.minimal, :has(.live-soul-takeover)) .live-player-row.red-row { border-color:var(--red); }
+.ref-canvas:is(.minimal, :has(.live-soul-takeover)) .live-player-row .row-vision,
+.ref-canvas:is(.minimal, :has(.live-soul-takeover)) .live-player-row .row-numbers,
+.ref-canvas:is(.minimal, :has(.live-soul-takeover)) [data-source="observed"] .table-gold > div { display:none; }
+.ref-canvas:is(.minimal, :has(.live-soul-takeover)) .live-player-row .row-items { width:74px; min-height:28px; max-height:52px; height:auto; flex-wrap:wrap; justify-content:center; order:0; }
+.ref-canvas:is(.minimal, :has(.live-soul-takeover)) .live-player-row .row-items > :not(.tracked-item) { display:none; }
+.ref-canvas:is(.minimal, :has(.live-soul-takeover)) .live-player-row .row-spells { flex-direction:row; width:auto; order:1; }
+.ref-canvas:is(.minimal, :has(.live-soul-takeover)) .live-player-row .row-champion { order:2; }
+.ref-canvas:is(.minimal, :has(.live-soul-takeover)) .live-player-row .row-name { width:72px; order:3; }
+.ref-canvas:is(.minimal, :has(.live-soul-takeover)) .live-player-row .row-name > div { display:none; }
+.rehearsal-watermark {position:absolute;left:24px;top:224px;background:#10151ee8;color:#dfc889;padding:8px 12px;font:14px "Spiegel",sans-serif;}
+.real-gold-ranking {position:absolute;left:32px;top:290px;width:310px;padding:18px;background:#0b141df5;border-top:3px solid var(--accent);font:16px "Spiegel",sans-serif;color:#ece7dc;}
+.real-gold-ranking h3,.real-powerplay h3 {font:700 28px "Beaufort for LoL",serif;margin:8px 0 14px;}
+.real-gold-ranking small,.real-powerplay small {font:12px "Spiegel",sans-serif;color:#b8bdc3;}
+.real-gold-ranking > div {display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid #384554;}
+.real-gold-ranking img {width:30px;height:30px;}
+.real-gold-ranking i {width:18px;color:#b5b9c0;font-style:normal;}
+.real-gold-ranking span {flex:1;}
+.real-gold-ranking .blue b {color:var(--blue);}.real-gold-ranking .red b {color:var(--red);}
+.real-powerplay {position:absolute;left:32px;top:310px;width:330px;padding:22px;background:#171122f5;border-top:3px solid #b882ed;color:#eee5ff;font:16px "Spiegel",sans-serif;}
+.real-powerplay > b {font:700 45px "Beaufort for LoL",serif;color:#d7b4ff;}
+.real-rune-board {position:absolute;left:32px;top:280px;width:560px;padding:20px;background:#0b141df5;color:#ece7dc;font:16px "Spiegel",sans-serif;border-top:3px solid var(--accent);}
+.real-rune-board > div {display:flex;gap:12px;align-items:center;padding:8px;border-bottom:1px solid #384554;}
+.real-rune-board b {width:110px;}.real-rune-board span {display:flex;gap:8px;align-items:center;}.real-rune-board img {width:28px;height:28px;}.real-rune-board i {font-size:10px;color:#b6bec8;font-style:normal;}
+
+/* Live-only calibration against images/ingame new.png, 1920 x 1080.
+   Do not modify the approved draft/mock baseline or persisted user theme. */
+.live-canvas .ref-graphics { --display-font: "Broadcast Condensed", "Spiegel"; }
+.live-scoreboard { top:10px; height:98px; background:linear-gradient(#090b0ceb 0 60px,#090e12b8 60px); }
+.live-scoreboard .score-main { height:60px; grid-template-columns:205px 175px 130px 175px minmax(0,1fr); background:#080a0ce8; border-color:#777a716f; }
+.live-scoreboard .team-caption b { font:400 30px/34px var(--display-font),sans-serif; }
+.live-scoreboard .team-caption span { font:700 16px/19px "Spiegel",sans-serif; }
+.live-scoreboard .side-blue { padding-left:74px; color:#1687d2; }
+.live-scoreboard .side-red { padding-right:74px; color:#d12a38; }
+.live-scoreboard .team-caption span { color:#e8e8e3; }
+.live-scoreboard .score-economy { font:400 29px/1 var(--display-font),sans-serif; gap:18px; }
+.live-scoreboard .score-kills { font:400 35px/1 var(--display-font),sans-serif; }
+.live-scoreboard .score-kills b { font-weight:400; }
+.live-scoreboard .score-sub { height:38px; }
+.live-scoreboard .score-sub time { top:5px; font:400 23px/29px var(--display-font),sans-serif; }
+.live-scoreboard .score-economy small { top:27px; font:700 14px/16px "Spiegel"; }
+.live-scoreboard .live-versus { font:22px "Spiegel"; }
+.live-scoreboard .role-quest-icon { width:31px; height:31px; border:1px solid currentColor; border-radius:50%; padding:3px; opacity:.55; }
+.live-scoreboard .role-quest-icon.completed { opacity:1; filter:none; }
+.live-scoreboard .live-role-quests { gap:6px; top:4px; }
+.live-scoreboard .live-dragons { top:6px; min-width:110px; }
+.live-scoreboard .blue-team-dragons { left:266px; }
+.live-scoreboard .red-team-dragons { right:266px; }
+.live-canvas .live-objective-stack { display:flex; gap:6px; }
+.live-canvas .live-objective { width:103px; height:48px; padding:3px; gap:6px; }
+.live-canvas .live-objective > div { min-width:0; }
+.live-canvas .live-objective small { display:none; }
+.live-canvas .live-objective b { font:400 23px/30px var(--display-font),sans-serif; }
+.live-canvas .live-objective > span { width:36px; height:38px; }
+.live-canvas .live-player-row .row-items { width:162px; }
+.live-canvas .live-player-row .ultimate-status { position:absolute; left:0; bottom:0; transform:translateY(100%); font-size:8px; }
+.live-canvas .live-player-row .row-name { position:relative; }
+.live-canvas .live-buff-status { top:112px; }
+.live-canvas .real-gold-ranking { left:0; top:145px; width:286px; height:600px; padding:0 15px 12px; border:1px solid #96988985; background:#091111b8; }
+.live-canvas .real-gold-ranking h3 { height:56px; margin:0 -15px 3px; padding:9px 15px; font:400 27px/35px var(--display-font),sans-serif; border-bottom:1px solid #92978b70; }
+.live-canvas .real-gold-ranking > div { position:relative; height:53px; padding:3px 8px 3px 0; margin:0 0 0 0; gap:10px; background:#050b0db3; border-bottom:4px solid transparent; }
+.live-canvas .real-gold-ranking img { width:44px; height:44px; border:1px solid #9b968b; }
+.live-canvas .real-gold-ranking > div > span:not(.ranking-track) { align-self:flex-start; padding-top:4px; font:700 14px/18px "Spiegel"; }
+.live-canvas .real-gold-ranking > div > b { align-self:flex-start; padding-top:4px; color:#e8e8df; font:700 14px/18px "Spiegel"; }
+.live-canvas .ranking-track { position:absolute; left:55px; right:9px; bottom:7px; height:9px; background:#020505; border:1px solid #646b6259; }
+.live-canvas .ranking-track i { display:block; width:auto; height:100%; background:#1686ce; }
+.live-canvas .red .ranking-track i { background:#c12a31; }
+.live-canvas .real-powerplay { left:1414px; top:12px; width:170px; height:60px; padding:3px 6px 3px 54px; border:1px solid #81778f; background:linear-gradient(90deg,#342660,#211933d9); }
+.live-canvas .real-powerplay h3 { font:700 10px/12px "Spiegel"; margin:0; }
+.live-canvas .real-powerplay > b { display:block; font:400 23px/27px var(--display-font),sans-serif; color:#f1eee7; white-space:nowrap; }
+.live-canvas .real-powerplay > small { font:8px/10px "Spiegel"; white-space:nowrap; }
+.powerplay-symbol { position:absolute; left:0; top:0; bottom:0; width:47px; display:grid; place-items:center; border-right:1px solid #9b83c6; background:#542784; }
+.powerplay-symbol .metric-icon { width:35px; height:35px; color:#bb99ef; }
+.live-canvas:is(.minimal, :has(.live-soul-takeover)) .ref-player-table[data-source="observed"] { top:909px; height:171px; grid-template-columns:476px 40px 476px; }
+.live-canvas:is(.minimal, :has(.live-soul-takeover)) .live-player-row { position:relative; width:60px; height:169px; padding:0; gap:0; background:transparent; border:0; overflow:visible; }
+.live-canvas:is(.minimal, :has(.live-soul-takeover)) .live-player-row .row-champion,
+.live-canvas:is(.minimal, :has(.live-soul-takeover)) .live-player-row .row-champion > img { width:58px; height:58px; }
+.live-canvas:is(.minimal, :has(.live-soul-takeover)) .live-player-row .row-champion { position:absolute; top:70px; left:0; border:1px solid #8c8d76; }
+.live-canvas:is(.minimal, :has(.live-soul-takeover)) .live-player-row .row-spells { position:absolute; top:41px; left:2px; height:27px; gap:3px; }
+.live-canvas:is(.minimal, :has(.live-soul-takeover)) .live-player-row .row-name { position:absolute; left:0; top:130px; width:60px; height:22px; padding:0; border:1px solid #8c8d76; background:#030909bc; }
+.live-canvas:is(.minimal, :has(.live-soul-takeover)) .live-player-row .row-name > div { display:block; position:absolute; top:-130px; left:10px; width:40px; height:40px; }
+.live-canvas:is(.minimal, :has(.live-soul-takeover)) .live-player-row .row-name > div img { width:40px; height:40px; border:1px solid #9a9980; }
+.live-canvas:is(.minimal, :has(.live-soul-takeover)) .live-player-row .row-name > div b { display:none; }
+.live-canvas:is(.minimal, :has(.live-soul-takeover)) .live-player-row .health-track,
+.live-canvas:is(.minimal, :has(.live-soul-takeover)) .live-player-row .resource-track { width:29px; margin-left:24px; margin-right:0; height:6px; }
+.live-canvas:is(.minimal, :has(.live-soul-takeover)) .live-player-row .row-champion > b { bottom:-21px; left:3px; right:auto; font-size:14px; background:none; }
+.live-canvas:is(.minimal, :has(.live-soul-takeover)) .live-player-row .row-items { position:absolute; top:41px; left:52px; width:auto; min-height:0; max-height:27px; flex-wrap:nowrap; justify-content:flex-start; }
+.live-canvas:is(.minimal, :has(.live-soul-takeover)) .live-player-row .ultimate-status { transform:none; top:0; bottom:auto; left:-8px; color:#ece8d7; }
+.live-canvas .recording-watermark { left:12px; top:120px; font:10px "Spiegel"; padding:3px 5px; }
+.live-canvas .rehearsal-watermark { left:12px; top:138px; font:9px "Spiegel"; padding:2px 5px; }
+.live-canvas .real-rune-board { left:287px; top:793px; width:1346px; height:287px; border:0; padding:0; background:linear-gradient(100deg,#090b10eb,#18171deb,#090b10eb); }
+.live-canvas .real-rune-board h3 { text-align:center; font:700 32px/45px "Spiegel"; margin:8px 0 25px; }
+.live-canvas .real-rune-board > .rune-teams { border:0; padding:0; margin:0 170px; display:flex; gap:46px; }
+.rune-team { display:flex; gap:5px; }
+.rune-card { width:92px; height:183px; border:1px solid #257b9e; border-radius:3px; background:linear-gradient(#071a26b3,#114465a8); padding:4px; }
+.rune-team.red .rune-card { border-color:#9b2d35; background:linear-gradient(#260b0db3,#651821a8); }
+.live-canvas .real-rune-board .rune-champion { width:64px; height:64px; display:block; margin:0 auto 6px; border:1px solid #8b8d7b; border-radius:3px; }
+.live-canvas .real-rune-board .rune-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; }
+.live-canvas .real-rune-board .rune-grid > :first-child { grid-column:1 / 4; justify-self:center; width:36px; height:36px; }
+.live-canvas .real-rune-board .rune-grid img { width:24px; height:24px; object-fit:contain; }
+.live-canvas .real-rune-board .rune-grid > :nth-child(7) { grid-column:1; }
+.live-canvas .real-rune-board .rune-grid i { display:grid; place-items:center; font:8px "Spiegel"; border:1px solid #5a6559; }
+.live-canvas .real-rune-board > b { position:absolute; width:auto; top:160px; font:700 30px "Spiegel"; }
+.rune-blue-name { left:55px; }.rune-red-name { right:45px; }.live-canvas .real-rune-board .rune-versus { left:656px; font-size:23px; }
+.live-canvas .live-inhibitors { left:12px; bottom:115px; width:263px; }
+.live-canvas .live-inhibitors > div { background:#111719e3; border-left:5px solid #c52d3b; min-height:105px; }
+.live-canvas .live-inhibitors > .blue { border-color:#1687d2; }
+.live-canvas .live-inhibitors small { font:700 20px/25px "Spiegel"; }
+.live-canvas .live-inhibitors b { font:400 22px/30px var(--display-font),sans-serif; }
+.live-canvas .live-inhibitors { gap:6px; }
+.live-inhibitors > section { height:107px; display:grid; grid-template-columns:1fr 88px; align-items:center; background:#090d10d9; border-left:5px solid #1687d2; padding:8px 12px; clip-path:polygon(0 0,91% 0,100% 19%,100% 100%,0 100%); }
+.live-inhibitors > section.red { border-color:#c52d3b; }
+.inhibitor-team { display:grid; grid-template-columns:36px 1fr; column-gap:12px; align-items:center; }
+.live-canvas .inhibitor-team b { font:700 24px/28px "Spiegel",sans-serif; }
+.live-canvas .inhibitor-team small { grid-column:2; font:12px/16px "Spiegel",sans-serif; color:#aeb8be; }
+.inhibitor-emblem { grid-row:span 2; width:30px; height:30px; border:3px solid #1687d2; border-radius:50%; position:relative; }
+.inhibitor-emblem::after { content:""; width:12px; height:12px; background:#1687d2; position:absolute; top:6px; left:6px; transform:rotate(45deg); }
+.red .inhibitor-emblem { border-color:#c52d3b; }
+.red .inhibitor-emblem::after { background:#c52d3b; }
+.inhibitor-lanes { display:grid; gap:6px; }
+.inhibitor-lanes > div { display:grid; grid-template-columns:24px 1fr; gap:9px; align-items:center; height:24px; }
+.inhibitor-lanes time,.inhibitor-lanes span { font:700 17px/24px "Spiegel",sans-serif; color:#f1f1ef; }
+.inhibitor-lanes .standing span { color:#869399; letter-spacing:2px; }
+.inhibitor-lane-icon { width:23px; height:23px; display:block; color:#1687d2; background:currentColor; }
+.red .inhibitor-lane-icon { color:#c52d3b; }
+.inhibitor-lane-icon.top { clip-path:polygon(0 0,100% 0,100% 100%,72% 100%,72% 28%,28% 28%,28% 100%,0 100%); }
+.inhibitor-lane-icon.mid { clip-path:polygon(0 72%,72% 0,100% 0,100% 28%,28% 100%,0 100%); }
+.inhibitor-lane-icon.bot { clip-path:polygon(0 0,28% 0,28% 72%,72% 72%,72% 0,100% 0,100% 100%,0 100%); }
+.minimal-ultimate { display:none; }
+.live-canvas:is(.minimal, :has(.live-soul-takeover)) .live-player-row .row-name > div { display:none; }
+.live-canvas:is(.minimal, :has(.live-soul-takeover)) .minimal-ultimate { display:block; position:absolute; top:-130px; left:10px; width:40px; height:40px; }
+.minimal-ultimate img { width:40px; height:40px; border-radius:50%; border:1px solid #9a9980; }
+.minimal-ultimate.on-cooldown img { opacity:.4; filter:grayscale(1); }
+.minimal-ultimate.on-cooldown::after { content:""; position:absolute; left:20px; top:0; width:1px; height:40px; background:#bba89a; transform:rotate(25deg); }
+
+/* Sponsor-free Soul takeover, measured independently of game/camera HUD. */
+.live-soul-takeover { position:absolute; left:0; top:145px; width:286px; height:600px; overflow:hidden; z-index:30; background:#064c4f; color:#fff; }
+.soul-artwork { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+.live-soul-takeover { background:radial-gradient(ellipse at 50% 35%, var(--soul-color), #080d12 85%); }
+.soul-artwork-render { inset:120px 0 auto; width:286px; height:230px; object-fit:cover; }
+.live-soul-takeover::after { content:""; position:absolute; inset:0; background:linear-gradient(#050a1185,transparent 29%,transparent 58%,#050a11b0); }
+.soul-team { position:absolute; z-index:1; top:29px; left:20px; right:20px; text-align:center; }
+.soul-team b { display:block; font:36px/1.2 "Broadcast Condensed",sans-serif; letter-spacing:1px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.soul-team span { display:block; margin-top:12px; font:700 20px/1.1 "Spiegel",sans-serif; }
+.soul-title { position:absolute; z-index:1; bottom:28px; left:12px; right:12px; text-align:center; text-shadow:0 2px 9px #00323455; }
+.soul-title > span { display:block; font:58px/1.1 "Broadcast Condensed",sans-serif; letter-spacing:6px; }
+.soul-title strong { display:block; font:120px/1.05 "Broadcast Condensed",sans-serif; letter-spacing:3px; }
+.soul-title small { display:block; margin-top:10px; font:700 16px/1.1 "Spiegel",sans-serif; }
+.live-soul-description { position:absolute; z-index:31; left:715px; top:113px; width:503px; height:35px; display:flex; align-items:center; justify-content:center; color:#061918; background:linear-gradient(90deg,transparent,#7ac4b3 9%,#7ac4b3 91%,transparent); font:700 17px/1 "Spiegel",sans-serif; }
+.live-soul-description span { max-width:455px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.live-soul-description .soul-effect-copy { display:flex; flex-direction:column; gap:1px; font:700 14px/15px "Spiegel",sans-serif; text-align:center; }
+.live-canvas:has(.live-soul-takeover) .live-buff-status { visibility:hidden; }
+.row-ultimate { position:relative; width:25px; height:25px; flex-shrink:0; }
+.row-ultimate.on-cooldown img { opacity:.35; filter:grayscale(1); }
+.row-ultimate small { position:absolute; inset:0; display:grid; place-items:center; color:white; font:700 10px "Spiegel"; text-shadow:0 1px 2px #000; }
+.live-scoreboard .score-team .mark-kt { position:absolute; left:28px; margin:0; }
+.live-scoreboard .score-team .mark-t1 { position:absolute; right:25px; margin:0; }
+.live-series-pips { position:absolute; left:5px; top:3px; display:grid; gap:3px; }
+.live-series-pips i { width:8px; height:15px; border:1px solid #898b7c; }
+.side-red .live-series-pips { left:auto; right:5px; }
+.live-scoreboard .side-red { text-align:right; justify-content:flex-end; }
+.live-scoreboard .side-red .team-caption { text-align:right; }
+.live-scoreboard .score-team .mark-t1 { right:25px; }
+.live-series-pips { justify-items:end; }
+.live-player-row { position:relative; }
+.row-runes { width:18px; height:44px; flex-shrink:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px; }
+.row-runes > span { display:grid; place-items:center; }
+.row-keystone { width:18px; height:18px; }
+.row-secondary { width:14px; height:14px; }
+.row-runes img { width:100%; height:100%; object-fit:contain; }
+.row-runes > span:empty { border:1px solid #6d777155; background:#11191577; }
+.live-canvas:is(.minimal,:has(.live-soul-takeover)) .row-runes { display:none; }
+.quest-completion { position:absolute; inset:0; z-index:8; display:flex; align-items:center; color:#f1f2eb; background:#101310f5; border-block:1px solid #87927b66; animation:quest-reveal .25s ease-out; }
+.quest-completion > strong { width:120px; padding:0 10px; flex-shrink:0; font:22px/1 var(--display-font),sans-serif; }
+.quest-completion > strong small { display:block; margin-top:4px; font:9px/1 "Spiegel",sans-serif; letter-spacing:1px; }
+.quest-completion > span { flex:1; display:grid; justify-items:center; gap:3px; border-left:1px solid #c9d0c344; }
+.quest-completion img,.quest-completion svg { width:27px; height:27px; }
+.quest-completion svg { fill:none; stroke:currentColor; stroke-width:2; }
+.quest-completion > span small { font:700 9px/1 "Spiegel",sans-serif; }
+.live-canvas:is(.minimal,:has(.live-soul-takeover)) .quest-completion { display:none; }
+@keyframes quest-reveal { from { opacity:0; transform:translateY(4px); } to { opacity:1; transform:none; } }
+.live-canvas .inhibitor-team b { color:#efefeb; }
+.live-canvas .live-inhibitors { justify-items:stretch; align-items:start; }
+.live-inhibitors > section { width:263px; justify-self:start; text-align:left; }
+.inhibitor-lane-icon { clip-path:none!important; mask-size:contain; mask-position:center; mask-repeat:no-repeat; -webkit-mask-size:contain; -webkit-mask-position:center; -webkit-mask-repeat:no-repeat; }
+.quest-progress { position:absolute; inset:-1px; width:32px; height:32px; }
+.live-scoreboard .role-quest-icon { position:relative; border-color:#68716b55; opacity:1; }
+.live-scoreboard .role-quest-icon.completed { border-color:currentColor; }
+.role-quest-glyph { opacity:.65; }
+.completed .role-quest-glyph { opacity:1; }
+.grub-count { display:flex; align-items:center; gap:4px; margin-left:7px; color:#d2d7cc; }
+.red-role-quests .grub-count { margin-left:0; margin-right:7px; flex-direction:row-reverse; }
+.grub-count .metric-icon { width:21px; height:23px; background-color:#c8cebc!important; }
+.grub-count b { font:22px/1 "Broadcast Condensed",sans-serif; }
+.dragon-event-strip { position:absolute; z-index:31; left:715px; top:113px; width:503px; height:35px; display:flex; align-items:center; justify-content:center; gap:15px; color:#080b09; background:linear-gradient(90deg,transparent,var(--dragon-color) 10%,var(--dragon-color) 90%,transparent); font:700 18px/1 "Spiegel",sans-serif; }
+.dragon-event-strip:not(.live-soul-description) span { font:22px/1 "Broadcast Condensed",sans-serif; }
+.tower-event-strip { --dragon-color:#c9b888; }
+.tower-banner-icon { width:23px; height:23px; fill:currentColor; flex-shrink:0; }
+.dragon-event-strip .dragon-banner-icon { display:block; width:23px; height:25px; background:currentColor; mask-size:contain; mask-repeat:no-repeat; mask-position:center; -webkit-mask-size:contain; -webkit-mask-repeat:no-repeat; -webkit-mask-position:center; }
+.dragon-event-strip.live-soul-description { background:linear-gradient(90deg,transparent,var(--dragon-color) 10%,var(--dragon-color) 90%,transparent); }
+.traced-metric { background:currentColor; mask-position:center; mask-size:contain; mask-repeat:no-repeat; -webkit-mask-position:center; -webkit-mask-size:contain; -webkit-mask-repeat:no-repeat; flex-shrink:0; }
+.live-scoreboard .role-quest-icon { display:grid; place-items:center; }
+.role-quest-glyph { display:block; width:23px; height:24px; background:currentColor; mask-position:center; mask-size:contain; mask-repeat:no-repeat; -webkit-mask-position:center; -webkit-mask-size:contain; -webkit-mask-repeat:no-repeat; clip-path:circle(49%); }
+.unavailable-objective { display:grid; place-items:center; font:700 9px "Spiegel",sans-serif; color:#c7bde0; }
+.live-canvas .table-gold > div { color:#e4e8df; text-shadow:none; position:relative; }
+.live-canvas .table-gold > .lane-gold-blue::before,
+.live-canvas .table-gold > .lane-gold-red::after { content:""; position:absolute; top:4px; bottom:4px; width:4px; background:#1686ce; }
+.live-canvas .table-gold > .lane-gold-blue::before { left:0; }
+.live-canvas .table-gold > .lane-gold-red::after { right:0; background:#c52e38; }
+
+/* Objective identities are selected from the observed pit type, never clock guesses. */
+.objective-glyph { display:inline-block; mask-size:contain; mask-repeat:no-repeat; mask-position:center; -webkit-mask-size:contain; -webkit-mask-repeat:no-repeat; -webkit-mask-position:center; }
+.live-canvas .live-objective { background:#000b; }
+.live-canvas .live-objective > span { background:#0009; border:1px solid #807e7270; }
+.live-canvas .real-powerplay { background:#16111dcc; padding-top:2px; }
+.live-canvas .real-powerplay > b { font-size:27px; line-height:30px; }
+.live-canvas .real-powerplay > time { display:block; font:700 17px/19px "Spiegel",sans-serif; color:#ece8e2; }
+.live-canvas .powerplay-symbol { background:#462162d9; }
+.sr-only { position:absolute!important; width:1px!important; height:1px!important; padding:0!important; margin:-1px!important; overflow:hidden!important; clip:rect(0,0,0,0)!important; white-space:nowrap!important; border:0!important; }
+.cooldown-sweep { position:absolute; inset:0; pointer-events:none; z-index:1; }
+.live-canvas .item-countdown { background:#0005; text-shadow:0 1px 3px #000,0 0 2px #000; z-index:2; }
+.lane-gold-arrow { display:block; position:absolute; width:0; height:0; top:50%; transform:translateY(-50%); border-top:4px solid transparent; border-bottom:4px solid transparent; }
+.lane-gold-arrow.blue { left:5px; border-right:5px solid #e4e4d9; }
+.lane-gold-arrow.red { right:5px; border-left:5px solid #e4e4d9; }
+.live-level-ranking { position:absolute; left:0; top:145px; width:286px; height:600px; border:1px solid #96988985; padding:0 15px 12px; background:#091111b8; }
+.live-level-ranking h3 { height:56px; margin:0 -15px 3px; padding:9px 15px; font:400 27px/35px var(--display-font),sans-serif; border-bottom:1px solid #92978b70; }
+.live-level-ranking > div { display:flex; align-items:center; height:53px; gap:10px; background:#050b0db3; border-bottom:4px solid transparent; }
+.live-level-ranking img { width:44px; height:44px; border:1px solid #9b968b; }
+.level-summary { flex:1; min-width:0; display:flex; flex-direction:column; gap:6px; font:700 14px/18px "Spiegel"; }
+.level-summary > span:first-child { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.level-progress { display:block; height:9px; background:#020505; border:1px solid #646b6259; }
+.level-progress i { display:block; height:100%; background:#1686ce; }
+.red .level-progress i { background:#c12a31; }
+.level-progress.unavailable { font:8px/9px "Spiegel"; color:#9eacaf; }
+.live-level-ranking > div > b { width:30px; text-align:right; padding-right:4px; font:400 23px "Broadcast Condensed",sans-serif; color:#eeeee4; }

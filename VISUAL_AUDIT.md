@@ -24,7 +24,7 @@ Nguồn chuẩn là `ingame.png` và `overlay.png` do người dùng cung cấp,
 
 ## Các khác biệt còn lại
 
-Chưa chứng minh mức giống 90% và chưa xem đây là bản tái tạo pixel-perfect. Font gốc chưa được cung cấp; Anton và Roboto Condensed là bản thay thế, một số nhãn dùng Arial. Icon role/mục tiêu đang là SVG minh họa nên chưa trùng hình gốc. Tướng/skin và một số bans được suy luận từ ảnh; portrait dùng base loading art, crop và skin có thể khác. Trang bị hợp lệ trong catalog nhưng không khẳng định trùng toàn bộ inventory trong ảnh. Số liệu phụ như gold giữa bảng, objective counters và hover stats là fixture minh họa.
+Chưa chứng minh mức giống 90% và chưa xem đây là bản tái tạo pixel-perfect. Beaufort for LoL và Spiegel đã thay font tạm; icon role/mục tiêu vẫn là SVG minh họa nên chưa trùng hình gốc. Tướng/skin và một số bans được suy luận từ ảnh; portrait dùng base loading art, crop và skin có thể khác. Trang bị hợp lệ trong catalog nhưng không khẳng định trùng toàn bộ inventory trong ảnh. Số liệu phụ như gold giữa bảng, objective counters và hover stats là fixture minh họa.
 
 Logo KT/T1/Worlds và sponsor hiện là các vùng crop CSS từ ảnh người dùng; cần file logo trong suốt để hoàn thiện theme giải và bỏ phần nền đen đi kèm. Camera, minimap và game footage chỉ có trong nền tham chiếu của Studio; OBS không nhúng toàn bộ ảnh chụp.
 
@@ -35,3 +35,58 @@ Logo KT/T1/Worlds và sponsor hiện là các vùng crop CSS từ ảnh người
 - [Riot Data Dragon](https://developer.riotgames.com/docs/lol#data-dragon): metadata và image assets.
 
 CSS renderer được viết riêng theo ảnh mẫu; không chạy runtime toolkit hoặc đưa font của toolkit vào dự án. Theme tiếp tục hỗ trợ đổi màu, font, tên đội, tỷ lệ/vị trí toàn bộ lớp và bật/tắt widget; chưa có editor từng phần tử.
+
+## Audit bộ ảnh production mới — 26/09/2026
+
+`images/ingame new.png` là baseline in-game mới nhất. So với overlay hiện tại, các nhóm còn thiếu được ưu tiên như sau:
+
+1. **Scene theo ngữ cảnh:** layout tối giản khi giao tranh; bảng damage của giao tranh gần nhất; bảng xếp hạng tổng vàng; bảng rune toàn đội; Baron Power Play; inhibitor respawn; Dragon Soul và các transition sản xuất.
+2. **Event vi mô:** hiệu ứng ngay trên portrait khi người chơi lên cấp hoặc hoàn thành món lớn. LB có level và inventory để phát hiện thay đổi, nhưng cần định nghĩa “món lớn” bằng catalog item hoàn chỉnh để không nháy khi mua linh kiện.
+3. **Combat window:** ảnh `damage dealt.png` ghi rõ “Damage Dealt to Champions Last Teamfight”. Bảng có 5 hàng đối xứng mỗi đội và tách physical, magic, true damage. Phải đo trong cửa sổ giao tranh gần nhất, không dùng tổng damage cả trận. Trigger bắt đầu/kết thúc giao tranh và damage telemetry vẫn cần kiểm chứng từ LB.
+4. **Combat minimal cooldown:** ảnh tối giản mới giữ portrait/HP/resource/ultimate và thêm timer cho item kích hoạt hoặc item bước ngoặt như Guardian Angel. Snapshot `2026-09-19T18-57-45-942Z` xác minh `totalCooldown/readyAt` của kỹ năng và một chu kỳ Luden's Echo 12 giây giảm còn 0,11 giây; chưa có mẫu Guardian Angel đã kích hoạt nên GA vẫn chưa được chốt semantics.
+5. **Dragon Soul:** ảnh `Linh hồn rồng.png` dùng một takeover lớn ở cạnh trái kèm mô tả hiệu ứng soul dưới scoreboard. Event dữ liệu được phát khi đội chuyển từ 3 lên 4 rồng; scene takeover và nội dung mô tả từng loại soul chưa dựng.
+
+Hàng biểu tượng dưới tên đội trong baseline mới là **Role Quest**, không còn được coi là Feat of Strength. LB đã xác minh item slot 8 cho năm role (`1200–1204` và các reward/variant); overlay hiển thị năm icon role và trạng thái hoàn thành. Không phục dựng Feat of Strength cũ.
+
+Rồng/Baron được tạo từ thay đổi trạng thái LB: danh sách rồng tích lũy và chuyển trạng thái buff Baron từ false sang true. Frame đầu, reconnect và tua ngược chỉ đặt baseline, không phát lại lịch sử. Banner event tồn tại 7 giây và dùng tên đội trong Theme.
+
+### Font
+
+Đã nhận bộ font chính thức trong `data/font-source` và đưa sáu file OTF cần thiết vào `public/fonts/riot`. Studio và overlay dùng **Beaufort for LoL** cho headline/team/score, **Spiegel** cho nhãn, người chơi, số nhỏ và control. Anton/Roboto Condensed không còn được nạp ở runtime. Đã kiểm tra font, màu và hierarchy trên browser ở cả bố cục rộng lẫn hẹp; vẫn cần đối chiếu crop 1:1 khi chốt từng scene production.
+
+## Đối chiếu snapshot với bộ ảnh — 26/09/2026
+
+Đã phát lại `data/captures/2026-09-19T18-57-45-942Z` qua đúng adapter và renderer OBS. Bản ghi có 40 state frame trong 19,9 giây, game clock 29:41–30:01, đủ 10 người. Overlay hiển thị được champion, level, KDA, CS, inventory, spell, keystone, HP, 9/10 resource, vision, respawn, vàng cá nhân; team gold/kills/towers/dragons và timer hai hố đều đủ.
+
+| Ảnh tham chiếu | Dữ liệu trong snapshot | Trạng thái giao diện |
+| --- | --- | --- |
+| `ingame new.png`, `ingame thông thường.png` | Đủ scoreboard và 10 người | Core đã dựng; nền game, camera, minimap và sponsor thuộc source phát sóng ngoài renderer |
+| `ingame chênh lệch tiền 2 bên và các player.png` | Đủ team gold và gold 10/10 | Đã có chênh lệch đội và từng vị trí |
+| `xếp hạng gold.png` | Đủ total gold 10/10 | Chưa có takeover xếp hạng |
+| `Runes.png` | Raw có 9 perk cho mỗi người | Adapter hiện chỉ giữ keystone; chưa có scene rune toàn đội |
+| `bộ tối giản khi giao tranh.png` | Đủ HP/resource và cooldown kỹ năng; có mẫu Luden's 12 giây | Chưa có trigger giao tranh và live minimal scene |
+| `damage dealt.png` | Không có damage physical/magic/true trong payload | Chưa thể dựng đúng từ snapshot này |
+| `baron powerplay.png` | Có `hasBaron` và team gold, nhưng 0/40 frame có Baron buff | Chưa có mốc nhận buff để kiểm chứng power-play delta |
+| `hồi sinh nhà lính.png` | Raw có inhibitor Red L1 hồi ở 1989,68; còn khoảng 208 giây tại frame đầu | Chưa normalize/render |
+| `Linh hồn rồng.png` | Baseline 3–0 rồng, không đổi trong 40 frame | Logic event rồng/soul có; chưa có takeover và chưa có fourth-dragon sample |
+| `Cấm chọn.png` | Capture này chỉ có state in-game | Không dùng snapshot này để xác minh draft |
+
+So với ảnh, hình học cố định vẫn giữ scoreboard `x=512, y=8, w=896` và bảng người chơi `x=464, y=821, w=992, h=259`. Các khác biệt visual đáng kể còn lại là logo/nhãn giải/series, hình icon objective chính xác theo asset giải và các takeover production. Tên hiển thị trong live overlay vẫn là tên tướng theo ranh giới privacy, không lấy player identity raw.
+
+Trong lần đối chiếu này, renderer đã được sửa để luôn có đủ năm slot Role Quest mỗi đội, tô màu rồng theo loại từ snapshot và dùng Spiegel cho toàn bộ bảng người chơi/nhãn live thay cho Arial. Snapshot có một transition level 15→16 ở frame 23, đủ làm fixture tiếp theo cho hiệu ứng lên cấp; không có thay đổi inventory trong cửa sổ 20 giây nên chưa kiểm chứng animation hoàn thành món lớn.
+
+## Cập nhật triển khai 11/10/2026
+
+Giữ baseline draft/in-game đã duyệt. Live có cooldown sweep (số trong 10s
+cuối, loại consumable/ward), R thật, level/item/quest cue, khung tím Baron/
+trắng Elder theo buff player, Power Play/timer, Soul takeover riêng sáu loại,
+timer inhibitor một đội mỗi lần và banner trụ đầu. Hai nhãn trạng thái Baron/
+Soul thừa đã bỏ. Minimal đủ 10 thẻ, thủ công, chưa auto combat. Ngọc chính/
+nhánh phụ nằm cạnh spell; reward quest chỉ thay ngọc phụ. Không đổi mock/draft.
+
+Đã kiểm tra Edge headless thật 1920×1080/DPR1, không ảnh nền tham chiếu,
+không fixture demo; recording thật và preview biến thể được phân biệt.
+Icon/font đủ, OBS không control/nền tham chiếu và trong suốt. Artifact
+`.npm-cache/visual-audit/`; chưa kết luận pixel-perfect/95–98% toàn UI.
+Xem TEST_REPORT.md/PROJECT_STATUS.md. Các phần audit cũ phía trên là lịch sử,
+không phải danh sách thiếu hiện tại.

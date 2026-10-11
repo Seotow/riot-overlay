@@ -1,4 +1,9 @@
 import { z } from "zod";
+import {
+  rehearsalKindSchema,
+  rehearsalVariantSchema,
+  type RehearsalDisplay,
+} from "./rehearsal";
 export const sceneSchema = z.enum(["ingame", "draft", "postgame"]);
 const color = z.string().regex(/^#[0-9a-fA-F]{6}$/);
 export const themeSchema = z.object({
@@ -47,6 +52,28 @@ export const defaultTheme: Theme = {
   },
 };
 export const commandSchema = z.discriminatedUnion("type", [
+  z.object({
+    type: z.literal("rehearsal"),
+    value: rehearsalKindSchema,
+    variant: rehearsalVariantSchema.optional(),
+  }),
+  z.object({
+    type: z.literal("provider"),
+    value: z.enum(["riot", "leaguebroadcast", "recording"]),
+  }),
+  z.object({
+    type: z.literal("captureLoad"),
+    id: z
+      .string()
+      .regex(/^(?:lb-)?\d{4}-\d{2}-\d{2}T\d{2}-\d{2}-\d{2}-\d{3}Z$/),
+  }),
+  z.object({
+    type: z.literal("captureControl"),
+    playing: z.boolean().optional(),
+    speed: z.number().min(0.25).max(4).optional(),
+    positionMs: z.number().finite().nonnegative().optional(),
+  }),
+  z.object({ type: z.literal("mockVisible"), value: z.boolean() }),
   z.object({ type: z.literal("scene"), value: sceneSchema }),
   z.object({ type: z.literal("playing"), value: z.boolean() }),
   z.object({
@@ -85,9 +112,12 @@ export type Player = {
   vision: number;
 };
 export type State = {
+  rehearsal?: RehearsalDisplay;
   protocol: 1;
   revision: number;
   source: "mock";
+  mockVisible: boolean;
+  provider: "riot" | "leaguebroadcast" | "recording";
   scene: z.infer<typeof sceneSchema>;
   playing: boolean;
   gameTime: number;

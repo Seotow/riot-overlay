@@ -1,0 +1,149 @@
+{
+  "source": "User supplied 1920x1080 broadcast references; static glyph masks only. Review rights before distributing.",
+  "glyphs": [
+    {
+      "name": "earth",
+      "file": "xếp hạng gold.png",
+      "rect": [
+        125,
+        20,
+        31,
+        31
+      ],
+      "color": "earth",
+      "foregroundPixels": 207
+    },
+    {
+      "name": "role-top",
+      "file": "ingame new.png",
+      "rect": [
+        526,
+        79,
+        23,
+        24
+      ],
+      "color": "blue",
+      "foregroundPixels": 89
+    },
+    {
+      "name": "role-jungle",
+      "file": "ingame new.png",
+      "rect": [
+        563,
+        79,
+        23,
+        24
+      ],
+      "color": "blue",
+      "foregroundPixels": 117
+    },
+    {
+      "name": "role-mid",
+      "file": "ingame new.png",
+      "rect": [
+        600,
+        79,
+        23,
+        24
+      ],
+      "color": "blue",
+      "foregroundPixels": 111
+    },
+    {
+      "name": "role-bot",
+      "file": "ingame new.png",
+      "rect": [
+        637,
+        79,
+        23,
+        24
+      ],
+      "color": "blue",
+      "foregroundPixels": 75
+    },
+    {
+      "name": "role-support",
+      "file": "ingame new.png",
+      "rect": [
+        674,
+        79,
+        23,
+        24
+      ],
+      "color": "blue",
+      "foregroundPixels": 114
+    },
+    {
+      "name": "baron",
+      "file": "ingame new.png",
+      "rect": [
+        16,
+        18,
+        32,
+        34
+      ],
+      "color": "purple",
+      "foregroundPixels": 445
+    },
+    {
+      "name": "air",
+      "file": "ingame new.png",
+      "rect": [
+        125,
+        20,
+        31,
+        31
+      ],
+      "color": "mint",
+      "foregroundPixels": 330
+    },
+    {
+      "name": "fire",
+      "file": "ingame new.png",
+      "rect": [
+        1011,
+        78,
+        25,
+        25
+      ],
+      "color": "orange",
+      "foregroundPixels": 99
+    },
+    {
+      "name": "water",
+      "file": "Linh hồn rồng.png",
+      "rect": [
+        856,
+        77,
+        26,
+        26
+      ],
+      "color": "mint",
+      "foregroundPixels": 155
+    },
+    {
+      "name": "tower",
+      "file": "ingame new.png",
+      "rect": [
+        716,
+        26,
+        26,
+        31
+      ],
+      "color": "neutral",
+      "foregroundPixels": 123
+    },
+    {
+      "name": "gold",
+      "file": "ingame new.png",
+      "rect": [
+        782,
+        29,
+        28,
+        25
+      ],
+      "color": "neutral",
+      "foregroundPixels": 185
+    }
+  ]
+}
