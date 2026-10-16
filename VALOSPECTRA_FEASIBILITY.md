@@ -1,6 +1,6 @@
 # Điều tra module Valorant / ValoSpectra
 
-Cập nhật: 11/10/2026. Phạm vi: nghiên cứu source công khai và cấu hình local chỉ đọc; chưa triển khai adapter hay xác minh một trận Valorant live.
+Cập nhật triển khai 13/10/2026: đã fork local source và có runtime/lifecycle độc lập, xem [runbook](docs/VALORANT_MODULE.md) và `modules/valorant/MODIFICATIONS.md`. Chưa chạy collector thật hoặc xác minh telemetry game. Các phân tích/kế hoạch dưới đây là mốc nghiên cứu 11/10, được giữ để truy nguồn.
 
 ## Mục tiêu được làm rõ — 11/10/2026
 
@@ -99,4 +99,4 @@ Envelope đề xuất có game/provider, sessionId, matchId nullable, sequence, 
 
 Source Client ghi [GPL-3.0-only](https://github.com/ValoSpectra/Spectra-Client/blob/a07fd0853129a549ac4d657544ae1e0b93e4f5e8/package.json); Server/Frontend có [ELv2](https://github.com/ValoSpectra/Spectra-Server/blob/64782ac2dcd5863aa179a084c8f402c3be794ebe/LICENSE.md). Đây là giấy phép khác nhau, không mặc định toàn bộ stack MIT. Kế hoạch fork phải giữ giấy phép, attribution và chức năng license/watermark được bảo vệ; chưa nhập source vào runtime. Việc gộp source không làm các phần upstream trở thành ISC theo package root hiện tại. Quyền phân phối/hosting cần đối chiếu điều khoản trước mốc sản phẩm tương ứng.
 
-Chưa cài dependency, chưa tạo collector thay GEP, chưa probe game, chưa kiểm thử replay Valorant hay runtime Docker. Không chạy test ứng dụng vì mốc này chỉ thay tài liệu.
+Ở mốc nghiên cứu 11/10 chưa cài dependency/chạy runtime. Mốc 13/10 đã cài/build riêng BE/FE và kiểm chứng launcher; vẫn chưa tạo collector thay GEP, probe game, kiểm thử replay Valorant hoặc chạy Docker. Không dùng test synthetic làm bằng chứng dữ liệu live.

@@ -3,6 +3,7 @@ import { normalizeIngame, rosterSignature } from "./ingame-adapter";
 import { ObserverSession } from "./observer-session";
 import { enrichRiotObjectives } from "./riot-objectives";
 import type { ObserverFrame } from "../shared/observer";
+import type { Probe } from "../shared/diagnostics";
 type ReadSource = (id: string, endpoint: string) => Promise<Result>;
 export class IngameCollector {
   private session = new ObserverSession();
@@ -11,6 +12,7 @@ export class IngameCollector {
   constructor(
     private read: ReadSource = getLocal,
     private clock: () => number = Date.now,
+    private onProbes?: (probes: readonly Probe[]) => void,
   ) {}
   recording() {
     return this.session.recording();
@@ -28,11 +30,23 @@ export class IngameCollector {
       const replay =
         results[1].status === "fulfilled" ? results[1].value : null;
       const now = new Date(this.clock()).toISOString();
-      const sample = enrichRiotObjectives(normalizeIngame(
+      try {
+        this.onProbes?.(
+          results.flatMap((r) =>
+            r.status === "fulfilled" ? [r.value.probe] : [],
+          ),
+        );
+      } catch {
+        /* Diagnostic consumers must not affect collection. */
+      }
+      const sample = enrichRiotObjectives(
+        normalizeIngame(
+          live?.probe.status === "ok" ? live.data : null,
+          replay?.probe.status === "ok" ? replay.data : null,
+          now,
+        ),
         live?.probe.status === "ok" ? live.data : null,
-        replay?.probe.status === "ok" ? replay.data : null,
-        now,
-      ), live?.probe.status === "ok" ? live.data : null);
+      );
       const available =
         sample.gameTime.value !== null ||
         sample.replay.time.value !== null ||

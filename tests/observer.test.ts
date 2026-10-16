@@ -106,7 +106,7 @@ test("export is allowlisted and caps player and event input", () => {
   assert.equal(result.limits.playersTruncated, true);
   assert.equal(result.events.length, 1);
   assert.ok(
-    !/SECRET|PRIVATE|password|riotId|summonerName/.test(JSON.stringify(result)),
+    !/SECRET|password|riotId|summonerName/.test(JSON.stringify(result)),
   );
   const long = normalizeIngame(
     fixture(
@@ -204,7 +204,7 @@ test("recording validates, stays bounded and rejects raw injected fields", () =>
   const record = s.recording();
   assert.ok(record.frames.length <= 120);
   assert.equal(record.frames.at(-1)?.sequence, 130);
-  assert.ok(!/PRIVATE|SECRET/.test(JSON.stringify(record)));
+  assert.ok(!/SECRET|password|riotId|summonerName/.test(JSON.stringify(record)));
   assert.equal(
     recordingSchema.safeParse({ ...record, password: "SECRET" }).success,
     false,

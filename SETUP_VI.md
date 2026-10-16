@@ -1,5 +1,21 @@
 # Cài đặt, chuyển máy và đưa lên Git
 
+**Chế độ DLL cache không tài khoản:** build, restart backend rồi chọn tại
+`/?page=sources` → **Nguồn trận đấu**; tắt demo. Không cần sửa/xóa file tài khoản.
+Phải có runtime/cache đã restore; bỏ `RIOT_OVERLAY_COLLECTOR_EXTERNAL=1` nếu có.
+Đã đo HP/resource/vàng thật trên SR khi không auth với cache hiện tại; vẫn là
+chế độ thử nghiệm, chưa đối chiếu HUD/full telemetry hoặc stability toàn trận.
+[Chi tiết](Collector/docs/PROJECT-RUNBOOK.vi.md).
+
+## Chạy collector tích hợp — 15/10/2026
+
+Sau khi restore runtime và build managed, credentials đặt tại
+`Collector/config/collector.env`, ngoài thư mục build và không theo Git.
+Chạy `npm run build` rồi `npm run start:collector`; mở Kết nối dữ liệu để xem
+process và roster. Không cần mở LB gốc. Hướng chuẩn bị máy mới, cổng và dừng
+host tại [runbook](Collector/docs/PROJECT-RUNBOOK.vi.md). Chưa kiểm chứng tuyến
+này trên trận thật; thiếu CS/lane/objective và các field chưa xác minh vẫn để trống.
+
 ## Cài trên máy mới
 
 Khuyến nghị Node.js 24 và npm đi kèm. Mở terminal tại thư mục có `package.json` sau khi clone hoặc giải nén source.
@@ -29,9 +45,13 @@ giải không mặc nhiên có quyền phân phối công khai; kiểm tra quy�
 
 Nếu cần phục hồi asset demo, dùng `npm run assets:sync` khi có mạng. Script dùng version demo cố định; không coi đây là bộ cập nhật asset live.
 
-`data/` bị loại khỏi Git. Để chuyển theme cá nhân: Export trong Studio máy cũ, Import trên máy mới. Hoặc copy riêng `data/theme.json` khi backend đã dừng. Theme baseline nằm trong source; chọn **Theme & layout → Khớp ảnh mẫu** nếu muốn áp dụng lại preset.
+Asset cấm chọn đủ 171 tướng có catalog riêng: khôi phục bằng `node scripts/sync-draft-assets.mjs` (15.20.1). Vận hành tại `/?page=draft`, OBS `/overlay?scene=draft`; xem `docs/DRAFT_RUNBOOK.md`. Export/import phiên draft riêng với theme; phiên draft không tự tồn tại qua backend restart.
+
+`data/` bị loại khỏi Git. Để chuyển theme cá nhân: Export tại **Cấu hình trước trận** máy cũ, Import rồi **Lưu cấu hình** trên máy mới. Hoặc copy riêng `data/theme.json` khi backend đã dừng. Theme baseline nằm trong source; config production có logo raster tùy chọn và không tự gán logo KT/T1.
 
 ## Kiểm tra
+
+Valorant có luồng cài/build/khởi động riêng, không dùng dependency hoặc theme LoL: xem [VALORANT_MODULE.md](docs/VALORANT_MODULE.md). Không chạy installer Collector tự động; cần xác định Spectra Client executable trước bước game thật.
 
 ```powershell
 npm test

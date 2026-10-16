@@ -7,7 +7,10 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { WebSocket } from "ws";
 import { defaultTheme, themeSchema } from "../shared/schema";
+import { defaultHud } from '../shared/replay-hud';
 import { observerFrameSchema } from "../shared/observer";
+import { emptyDraft } from "../shared/draft";
+import { samplePostgame } from "../shared/postgame";
 
 const base = "http://127.0.0.1:4311";
 // Refuse an occupied port before starting or mutating any unrelated backend.
@@ -24,7 +27,7 @@ const directory = await mkdtemp(join(tmpdir(), "riot-overlay-test-"));
 const themePath = join(directory, "theme.json");
 const server = spawn(
   process.execPath,
-  ["--import", "tsx", "server/index.ts", "--production"],
+  ["--import", "tsx", "--import", "./tests/fixtures/riot-api-preload.ts", "server/index.ts", "--production"],
   {
     env: { ...process.env, PORT: "4311", RIOT_OVERLAY_THEME_PATH: themePath },
     stdio: ["ignore", "pipe", "pipe"],
@@ -97,6 +100,55 @@ try {
     ws!.send(JSON.stringify(value));
     return until((m) => m.type === "snapshot" || m.type === "error");
   };
+  const riotPost = (route: string, value: unknown, origin = base) => fetch(`${base}/api/riot-postgame/${route}`, { method: "POST", headers: { Origin: origin, "Content-Type": "application/json" }, body: JSON.stringify(value) });
+  assert.equal((await (await fetch(base + "/api/riot-postgame/status")).json()).configured, false);
+  assert.equal((await riotPost("credential", { mode: "standard", secret: "SYNTHETIC-NOT-A-REAL-KEY" }, "https://evil.test")).status, 403);
+  const credentialStatus = await (await riotPost("credential", { mode: "standard", secret: "SYNTHETIC-NOT-A-REAL-KEY" })).text();
+  assert.doesNotMatch(credentialStatus, /SYNTHETIC|secret/);
+  assert.equal(JSON.parse(credentialStatus).configured, true);
+  assert.equal((await riotPost("load", { matchId: "https://evil.test", gameNumber: 1 })).status, 400);
+  assert.equal((await riotPost("publish", { matchId: "VN2_123456" })).status, 409);
+  const candidateResponse = await riotPost("load", { matchId: "VN2_123456", gameNumber: 1 });
+  assert.equal(candidateResponse.status, 200);
+  const candidate = (await candidateResponse.json()).candidate;
+  assert.equal(candidate.teams[0].players[0].damage, 1000);
+  assert.doesNotMatch(JSON.stringify(candidate), /SYNTHETIC|puuid|riotId|secret/);
+  messages.length = 0;
+  assert.equal((await riotPost("publish", { matchId: "VN2_123456" })).status, 200);
+  const publishedRiot = (await until(m => m.type === "snapshot")).state;
+  assert.deepEqual(publishedRiot.postgame, candidate);
+  assert.equal(publishedRiot.scene, "postgame"); assert.equal(publishedRiot.mockVisible, false);
+  assert.equal((await command({ type: "postgameState", value: candidate })).type, "error", "Observed provenance cannot be imported over WS");
+  assert.equal((await riotPost("credential", { clear: true })).status, 200);
+  assert.equal((await riotPost("load", { matchId: "VN2_123456", gameNumber: 1 })).status, 409);
+  assert.equal((await fetch(base + "/api/riot-postgame/credential")).status, 405);
+  const draft = { ...emptyDraft(), hover: "Annie" };
+  const sample = samplePostgame();
+  const pgResult = await command({ type: "postgameState", value: sample });
+  assert.deepEqual(pgResult.state.postgame, sample);
+  assert.equal((await command({ type: "postgameState", value: { ...sample, source: "live" } })).type, "error");
+  assert.equal((await command({ type: "postgameState", value: null })).state.postgame, null);
+  assert.deepEqual(
+    (await command({ type: "draftState", value: draft })).state.draft,
+    draft,
+  );
+  assert.equal(
+    (
+      await command({
+        type: "draftState",
+        value: { ...draft, hover: "NotAChampion" },
+      })
+    ).type,
+    "error",
+  );
+  for (const view of ["gold", "levels", "runes", "minimal", "normal"]) {
+    const result = await command({
+      type: "broadcast",
+      value: { view, inhibitors: "off" },
+    });
+    assert.equal(result.state.broadcast.view, view);
+    assert.equal(result.state.rehearsal, undefined);
+  }
   for (const value of ["ingame", "draft", "postgame"])
     assert.equal((await command({ type: "scene", value })).state.scene, value);
   await command({ type: "mockVisible", value: true });
@@ -123,7 +175,13 @@ try {
     assert.equal((await command(invalid)).type, "error");
   const theme = themeSchema.parse({
     ...defaultTheme,
+    killfeedStyle:'broadcast',
+    replayHud:defaultHud,
     blueName: "TEST BLUE",
+    blueScore: 2,
+    redScore: 1,
+    seriesGames: 3,
+    blueLogo: "data:image/png;base64," + "A".repeat(100000),
     variant: "minimal",
   });
   assert.deepEqual(
@@ -141,6 +199,10 @@ try {
     await wait(20);
   }
   assert.ok(saved, "theme persistence in isolated path");
+  assert.equal((await fetch(base+'/api/replay-hud/apply',{method:'POST',headers:{Origin:'https://other.invalid','Content-Type':'application/json'},body:JSON.stringify(defaultHud)})).status,403);
+  assert.equal((await fetch(base+'/api/replay-hud/apply',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(defaultHud)})).status,403);
+  assert.equal((await fetch(base+'/api/replay-hud/apply',{method:'POST',headers:{Origin:base,'Content-Type':'application/json'},body:JSON.stringify({...defaultHud,cameraMode:'fps'})})).status,400);
+  assert.equal((await fetch(base+'/api/replay-hud/apply',{method:'GET'})).status,405);
   assert.equal(
     (await command({ type: "reset" })).state.theme.blueName,
     "TEST BLUE",

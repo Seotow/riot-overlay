@@ -1,0 +1,95 @@
+{
+  "version": "16.20.1",
+  "source": "Riot Data Dragon",
+  "iconRules": "operator-requested",
+  "files": [
+    {
+      "code": "AurelionSol",
+      "ability": "passive",
+      "name": "Cosmic Creator",
+      "path": "public/broadcast/champion-stacks/AurelionSol.png",
+      "source": "https://ddragon.leagueoflegends.com/cdn/16.20.1/img/passive/AurelionSolP.png",
+      "sha256": "42da1bb0d4c4a400b6b558105092d0ec735216a393220a4b3374b14c0774a6a1"
+    },
+    {
+      "code": "Bard",
+      "ability": "passive",
+      "name": "Traveler's Call",
+      "path": "public/broadcast/champion-stacks/Bard.png",
+      "source": "https://ddragon.leagueoflegends.com/cdn/16.20.1/img/passive/Bard_Passive.png",
+      "sha256": "f18e18c87b3ebbc7051afa380121d4ee50e256c81cfa7905ab7b560df505ef99"
+    },
+    {
+      "code": "Belveth",
+      "ability": "passive",
+      "name": "Death in Lavender ",
+      "path": "public/broadcast/champion-stacks/Belveth.png",
+      "source": "https://ddragon.leagueoflegends.com/cdn/16.20.1/img/passive/Belveth_Passive.png",
+      "sha256": "2ce27e9380d09a32332bce9d01f4c4f2cccb243a65e6cb17ca9457341d8628e7"
+    },
+    {
+      "code": "Chogath",
+      "ability": "R",
+      "name": "Feast",
+      "path": "public/broadcast/champion-stacks/Chogath.png",
+      "source": "https://ddragon.leagueoflegends.com/cdn/16.20.1/img/spell/Feast.png",
+      "sha256": "5b1b242202c3e79f43cb95150c9c3ae2947b076f59e3e842226c480e92388d69"
+    },
+    {
+      "code": "Kindred",
+      "ability": "passive",
+      "name": "Mark of the Kindred",
+      "path": "public/broadcast/champion-stacks/Kindred.png",
+      "source": "https://ddragon.leagueoflegends.com/cdn/16.20.1/img/passive/Kindred_Passive.png",
+      "sha256": "ab0019240fc2c61778e98acda87864f3ec3321eba9f2e895634938d4402541f2"
+    },
+    {
+      "code": "Nasus",
+      "ability": "Q",
+      "name": "Siphoning Strike",
+      "path": "public/broadcast/champion-stacks/Nasus.png",
+      "source": "https://ddragon.leagueoflegends.com/cdn/16.20.1/img/spell/NasusQ.png",
+      "sha256": "89449d4078c6bdef6788e964fde9f867f9e0a94ea8dd41a7c52a9622c97ac900"
+    },
+    {
+      "code": "Senna",
+      "ability": "passive",
+      "name": "Absolution",
+      "path": "public/broadcast/champion-stacks/Senna.png",
+      "source": "https://ddragon.leagueoflegends.com/cdn/16.20.1/img/passive/Senna_Passive.png",
+      "sha256": "75ca87a4928e74c69699ecfe689a1cf3e14f19c94d3349b5815b4bec3b0e3604"
+    },
+    {
+      "code": "Sion",
+      "ability": "W",
+      "name": "Soul Furnace",
+      "path": "public/broadcast/champion-stacks/Sion.png",
+      "source": "https://ddragon.leagueoflegends.com/cdn/16.20.1/img/spell/SionW.png",
+      "sha256": "e41f97e2d7ce7e37e3ac59ded1f12be0d63c21d93e29aaaf8f0a9aeec2ae584a"
+    },
+    {
+      "code": "Smolder",
+      "ability": "passive",
+      "name": "Dragon Practice",
+      "path": "public/broadcast/champion-stacks/Smolder.png",
+      "source": "https://ddragon.leagueoflegends.com/cdn/16.20.1/img/passive/Icons_Smolder_Passive.png",
+      "sha256": "517290355816f5e40f3aff21cf19a8a042f37e1089271fe81405369c43dfbe09"
+    },
+    {
+      "code": "Thresh",
+      "ability": "passive",
+      "name": "Damnation",
+      "path": "public/broadcast/champion-stacks/Thresh.png",
+      "source": "https://ddragon.leagueoflegends.com/cdn/16.20.1/img/passive/Thresh_Passive.png",
+      "sha256": "91ea9c5f3e532386f742e85ad66ba880c99f6d105a034f12de4eb1c87335708c"
+    },
+    {
+      "code": "Veigar",
+      "ability": "passive",
+      "name": "Phenomenal Evil Power",
+      "path": "public/broadcast/champion-stacks/Veigar.png",
+      "source": "https://ddragon.leagueoflegends.com/cdn/16.20.1/img/passive/VeigarEntropy.png",
+      "sha256": "8623ac8b04f29d07891a300a80b53921c59ba8453ce368e48b2d0716f042113b"
+    }
+  ]
+}

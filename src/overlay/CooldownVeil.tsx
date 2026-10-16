@@ -1,9 +1,11 @@
 export function CooldownVeil({
   remaining,
   total,
+  dark = false,
 }: {
   remaining: number;
   total: number;
+  dark?: boolean;
 }) {
   if (
     !Number.isFinite(remaining) ||
@@ -19,7 +21,7 @@ export function CooldownVeil({
         className="cooldown-sweep"
         aria-hidden="true"
         style={{
-          background: `conic-gradient(from 0deg, transparent 0deg ${elapsed}deg, #000a ${elapsed}deg 360deg)`,
+          background: `conic-gradient(from 0deg, transparent 0deg ${elapsed}deg, ${dark ? "#000d" : "#000a"} ${elapsed}deg 360deg)`,
         }}
       />
       {remaining <= 10 && (

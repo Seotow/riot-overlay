@@ -1,5 +1,6 @@
 import type { CSSProperties } from "react";
 import { objectiveVisual } from "../../shared/ui-metrics";
+import { objectiveIconUrl } from "../../shared/objective-icons";
 import { dragonSoulCopy } from "../../shared/dragon-soul-copy";
 const names: Record<string, string> = {
   earth: "MOUNTAIN DRAKE",
@@ -24,8 +25,8 @@ export function DragonBanner({
     <i
       className="dragon-banner-icon"
       style={{
-        maskImage: `url(/broadcast/objectives/${visual?.glyph ?? "elder"}.svg)`,
-        WebkitMaskImage: `url(/broadcast/objectives/${visual?.glyph ?? "elder"}.svg)`,
+        maskImage: `url(${objectiveIconUrl(visual?.glyph ?? "dragon")})`,
+        WebkitMaskImage: `url(${objectiveIconUrl(visual?.glyph ?? "dragon")})`,
       }}
       aria-hidden="true"
     />

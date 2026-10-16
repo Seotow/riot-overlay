@@ -1,0 +1,351 @@
+.production-postgame {
+  position: absolute;
+  inset: 0;
+  padding: 30px;
+  color: #e6e5e0;
+  background:
+    repeating-linear-gradient(
+      67deg,
+      transparent 0 540px,
+      #ffffff05 542px 548px,
+      transparent 550px 575px
+    ),
+    linear-gradient(115deg, #15191a, #080b0d 60%, #171a1b);
+  font:
+    26px/1.2 "Spiegel",
+    sans-serif;
+}
+.production-postgame * {
+  box-sizing: border-box;
+}
+.production-postgame h2 {
+  font:
+    700 24px/1.2 "Spiegel",
+    sans-serif;
+  margin: 0;
+  text-align: center;
+}
+.pg-header {
+  height: 192px;
+  background: #070a0be8;
+  display: grid;
+  grid-template-columns: 1fr 330px 1fr;
+  position: relative;
+}
+.pg-team {
+  display: flex;
+  gap: 28px;
+  align-items: center;
+  padding: 20px 30px;
+  min-width: 0;
+  border-top: 4px solid var(--blue);
+}
+.pg-team.pg-side-1 {
+  grid-column: 3;
+  flex-direction: row-reverse;
+  border-color: var(--red);
+}
+.pg-team-brand {
+  min-width: 0;
+  flex: 1;
+}
+.pg-team-brand small {
+  display: block;
+  font-size: 21px;
+  color: #a7adae;
+}
+.pg-team-brand b {
+  display: block;
+  font:
+    72px/1.15 "Broadcast Condensed",
+    sans-serif;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.pg-team.pg-side-1 .pg-team-brand {
+  text-align: right;
+}
+.pg-logo {
+  width: 132px;
+  height: 110px;
+  object-fit: contain;
+}
+.pg-team strong {
+  font:
+    112px/1 "Broadcast Condensed",
+    sans-serif;
+}
+.pg-result {
+  font-weight: 700;
+  font-size: 28px;
+  color: #aaafb0;
+}
+.pg-winner.pg-side-0 :is(.pg-result, .pg-team-brand b),
+.pg-highlight-blue {
+  color: var(--blue);
+}
+.pg-winner.pg-side-1 :is(.pg-result, .pg-team-brand b),
+.pg-highlight-red {
+  color: var(--red);
+}
+.pg-time {
+  position: absolute;
+  left: calc(50% - 165px);
+  top: 15px;
+  height: 162px;
+  width: 330px;
+  border-inline: 1px solid #a1a7a8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.pg-time strong {
+  font:
+    104px/1 "Broadcast Condensed",
+    sans-serif;
+}
+.pg-time span {
+  font-size: 27px;
+  font-weight: 700;
+}
+.pg-ribbon {
+  height: 44px;
+  margin: 8px 0;
+  background: var(--accent);
+  color: #080c10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  font-weight: 700;
+  font-size: 25px;
+}
+.pg-ribbon span {
+  max-width: 1000px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.pg-ribbon i {
+  height: 28px;
+  width: 1px;
+  background: currentColor;
+}
+.pg-content {
+  display: grid;
+  grid-template-columns: 900px 1fr;
+  gap: 12px;
+  height: 768px;
+}
+.pg-stats {
+  background: #080b0ddc;
+  padding: 10px 20px;
+}
+.pg-stat {
+  display: grid;
+  grid-template-columns: 1fr 300px 1fr;
+  align-items: center;
+  text-align: center;
+  height: 83px;
+  border-bottom: 2px solid #777e7e;
+}
+.pg-stat b {
+  font:
+    44px/1.2 "Broadcast Condensed",
+    sans-serif;
+}
+.pg-stat span {
+  font-weight: 700;
+  font-size: 27px;
+}
+.pg-bans {
+  display: grid;
+  grid-template-columns: 1fr 100px 1fr;
+  height: 80px;
+  align-items: center;
+  text-align: center;
+  font-weight: 700;
+}
+.pg-bans > div {
+  display: flex;
+  gap: 7px;
+}
+.pg-bans > div:last-child {
+  justify-content: flex-end;
+}
+.pg-champion {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border: 1px solid #657071;
+  display: block;
+}
+.pg-unknown {
+  display: grid;
+  place-items: center;
+  background: #202829;
+  color: #949c9c;
+}
+.pg-analytics {
+  display: grid;
+  grid-template-rows: 340px 290px 122px;
+  gap: 8px;
+  min-width: 0;
+}
+.pg-damage,
+.pg-history,
+.pg-footer {
+  margin: 0;
+  border: 0;
+  color: #e6e5e0;
+  background: #080b0ddc;
+  padding: 14px 18px;
+}
+.pg-damage h2 {
+  margin-bottom: 14px;
+}
+.pg-damage-row {
+  display: grid;
+  grid-template-columns: 1fr 92px 1fr;
+  height: 53px;
+  align-items: center;
+}
+.pg-damage-side {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  grid-column: 1;
+  grid-row: 1;
+}
+.pg-damage-side.pg-side-1 {
+  grid-column: 3;
+  flex-direction: row-reverse;
+  text-align: right;
+}
+.pg-damage-meter {
+  flex: 1;
+}
+.pg-damage-meter b {
+  font:
+    29px/1.15 "Broadcast Condensed",
+    sans-serif;
+}
+.pg-damage-meter > div {
+  height: 13px;
+  width: 100%;
+}
+.pg-damage-meter i {
+  display: block;
+  height: 100%;
+  background: var(--blue);
+}
+.pg-side-1 .pg-damage-meter i {
+  margin-left: auto;
+  background: var(--red);
+}
+.pg-role {
+  grid-column: 2;
+  grid-row: 1;
+  font-size: 16px;
+  color: #6e797a;
+  text-align: center;
+}
+.pg-history {
+  position: relative;
+  padding-top: 12px;
+}
+.pg-chart-legend {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  font-size: 17px;
+  margin-top: 5px;
+}
+.pg-gold-chart {
+  width: 100%;
+  height: 205px;
+  display: block;
+  margin-top: -5px;
+  overflow: visible;
+}
+.pg-gold-chart text {
+  fill: #bfc7c7;
+  font:
+    21px "Spiegel",
+    sans-serif;
+}
+.pg-gold-chart .pg-axis-unit {
+  font-size: 13px;
+  fill: #707b7c;
+}
+.pg-grid {
+  stroke: #3c4545;
+  stroke-width: 1;
+}
+.pg-zero {
+  stroke: #899391;
+  stroke-width: 1.5;
+}
+.pg-curve {
+  fill: none;
+  stroke-width: 3.5;
+  stroke-linejoin: round;
+}
+.pg-curve.pg-blue {
+  stroke: var(--blue);
+}
+.pg-curve.pg-red {
+  stroke: var(--red);
+}
+.pg-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 35px;
+}
+.pg-footer > b {
+  font:
+    36px "Broadcast Condensed",
+    sans-serif;
+  max-width: 380px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.pg-footer > div {
+  border-left: 1px solid #8a9293;
+  padding-left: 35px;
+  display: grid;
+  gap: 10px;
+}
+.pg-footer span {
+  font-weight: 700;
+  letter-spacing: 2px;
+  font-size: 23px;
+}
+.pg-footer small {
+  font-size: 16px;
+  color: #9aa5a5;
+}
+.pg-no-history {
+  display: grid;
+  place-items: center;
+  height: 200px;
+  color: #7e8b8c;
+  font-size: 23px;
+}
+.pg-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+}
+.pg-empty h1 {
+  font: 64px "Broadcast Condensed";
+  margin: 0;
+}

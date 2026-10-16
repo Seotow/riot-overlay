@@ -1,0 +1,18 @@
+{
+  "notice": "Original Riot minimap unit glyphs, rendered as white alpha masks. Check redistribution rights before publishing.",
+  "version": "16.20",
+  "assets": [
+    {
+      "name": "minion",
+      "path": "public/broadcast/killers/minion.png",
+      "source": "https://raw.communitydragon.org/16.20/game/assets/ux/minimap/icons/minionmapcircle.png",
+      "sha256": "63257188f119d94084133a5c5e0e5e88ddb2d857265034ab7b9cf56a6de3cfc4"
+    },
+    {
+      "name": "monster",
+      "path": "public/broadcast/killers/monster.png",
+      "source": "https://raw.communitydragon.org/16.20/game/assets/ux/minimap/icons/camp.png",
+      "sha256": "9a90333d88606c17ca043f45946cfa9e59b30b4f2b6cede7dbcfb4176cf18b92"
+    }
+  ]
+}

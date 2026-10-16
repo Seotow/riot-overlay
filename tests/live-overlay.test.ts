@@ -11,7 +11,70 @@ import {
   projectedGameTime,
 } from "../shared/live-presentation";
 import { liveCatalog } from "../shared/live-assets";
+import { objectiveIconUrl } from "../shared/objective-icons";
 const now = Date.UTC(2026, 8, 19);
+test("champion stack takes secondary rune/quest priority in both full layouts and overlays ultimate in simple",()=>{
+ const f=frame(),p=f.sample!.players[0];f.sample!.assetVersion=liveCatalog.version;
+ p.championId={...p.championId,value:901};
+ p.championStacks={...p.totalGold,value:32,availability:"observed"};
+ p.perks={...p.totalGold,value:[8112,8143,8140,8106,8017,8009,5005,5008,5011]};
+ p.roleQuest={...p.totalGold,value:{role:"top",itemId:1220,completed:true,progress:1,rewardItemId:null,rewardSpellId:"S12_SummonerTeleportUpgrade"}};
+ for(const playerCameras of [false,true]){
+  const html=renderToStaticMarkup(createElement(LiveOverlay,{theme:{...createState().theme,playerCameras},frame:f,now}));
+  assert.match(html,/row-runes has-champion-stack[^]*?secondary-stack[^]*?data-stack-value="32"/);
+  assert.doesNotMatch(html,/row-secondary quest-reward/);
+  assert.match(html,/minimal-ultimate[^]*?minimal-stack[^]*?data-stack-value="32"/);
+ }
+});
+test("team runes temporarily replace player table in either layout without changing selection", () => {
+  const f = frame();
+  for (const layout of ["panel", "minimal"] as const) {
+    const render = (runes: boolean) => renderToStaticMarkup(createElement(LiveOverlay, {
+      theme: {...createState().theme, variant:layout}, frame:f, now,
+      broadcast:{view:"normal",inhibitors:"off",layout,runes},
+    }));
+    assert.doesNotMatch(render(true), /data-region="players"/);
+    assert.match(render(true), /data-region="runes"/);
+    assert.match(render(false), /data-region="players"/);
+  }
+});
+test("rune team branding uses team names and only renders supplied logos below names", () => {
+  const f = frame();
+  const render = (blueLogo?:string,redLogo?:string) => renderToStaticMarkup(createElement(LiveOverlay, {
+    theme:{...createState().theme,blueLogo,redLogo},frame:f,now,
+    broadcast:{view:"normal",inhibitors:"off",runes:true},
+  }));
+  assert.doesNotMatch(render(), /class="rune-team-logo"/);
+  const png="data:image/png;base64,iVBORw0KGgo=";
+  const html=render(png,png);
+  assert.equal((html.match(/class="rune-team-logo"/g)??[]).length,2);
+  assert.match(html,/rune-team-brand rune-blue-name[^]*?<b[^]*?<\/b><img class="rune-team-logo"/);
+});
+test("scoreboard and both rankings share sanitized nickname and explicit override", () => {
+  const f = frame();
+  f.sample!.players[0].playerName = {...f.sample!.players[0].totalGold,value:"Seotoww"};
+  f.sample!.players[0].totalGold = {...f.sample!.players[0].totalGold,value:1000};
+  const render = (playerNames?: string[]) => renderToStaticMarkup(createElement(LiveOverlay, {
+    theme:{...createState().theme,playerNames},frame:f,now,
+    broadcast:{view:"normal",inhibitors:"off",gold:true,levels:true},
+  }));
+  assert.ok((render().match(/>Seotoww</g)??[]).length >= 3);
+  assert.ok((render(["Override#VN2",...Array(9).fill("")]).match(/>Override</g)??[]).length >= 3);
+  assert.doesNotMatch(render(["Override#VN2",...Array(9).fill("")]), /#VN2/);
+});
+test("dead player's resource bar displays zero without changing recorded resource; alive restores it", () => {
+  const f = frame();
+  const p = f.sample!.players[0];
+  p.resource = { ...p.totalGold, value: { current: 75, max: 100 } };
+  p.isDead = { ...p.totalGold, value: true };
+  const render = () => renderToStaticMarkup(createElement(LiveOverlay, {
+    theme: createState().theme, frame: f, now,
+  }));
+  assert.equal(render().match(/class="resource-track"[^>]*><i style="width:([^;\"]+)/)?.[1], "0%");
+  assert.equal(p.resource.value!.current, 75);
+  p.isDead.value = false;
+  assert.equal(render().match(/class="resource-track"[^>]*><i style="width:([^;\"]+)/)?.[1], "75%");
+});
 test("preview variants show all pit types, Baron/Elder separately or together without changing source", () => {
   const f = frame(),
     s = f.sample!;
@@ -63,10 +126,10 @@ test("preview variants show all pit types, Baron/Elder separately or together wi
       assert.ok(html.includes("GIẢ LẬP UI"));
       assert.ok(
         html.includes(
-          `/broadcast/objectives/${pit === "GRUB" ? "grubs" : pit.toLowerCase()}.svg`,
+          objectiveIconUrl(pit),
         ),
       );
-      assert.ok(html.includes(`/broadcast/objectives/${dragon}.svg`));
+      assert.ok(html.includes(`/broadcast/objectives/riot-16.20/${dragon}.png`));
     }
   for (const buffs of ["baron", "elder", "both"] as const) {
     const html = render({ buffs });
@@ -132,12 +195,68 @@ test("two rune slots beside spells remain separate from actual ultimate, quest r
   assert.equal(
     (html.match(/class="row-secondary rune-path" title="Precision"/g) || [])
       .length,
-    9,
+    10,
   );
   assert.match(
     html,
-    /class="row-secondary quest-reward" title="Berserker&#x27;s Greaves"/,
+    /class="quest-reward"[^]*?title="Berserker&#x27;s Greaves"/,
   );
+});
+test("lane quest keeps observed circular progress beside inventory and restores secondary path after completion", () => {
+  const f = frame();
+  const s = f.sample!;
+  s.assetVersion = liveCatalog.version;
+  const observed = <T>(value: T) => ({
+    value,
+    availability: "observed" as const,
+    source: "leaguebroadcast" as const,
+    observedAt: s.capturedAt,
+  });
+  const p = s.players[0];
+  p.championId = observed(120);
+  p.perks = observed([8112, 8143, 8140, 8106, 8017, 8009, 5005, 5008, 5011]);
+  p.keystone = observed(8112);
+  p.roleQuest = observed({
+    role: "jungle" as const,
+    itemId: 1204,
+    completed: false,
+    progress: 0.5,
+    rewardItemId: null,
+    rewardSpellId: null,
+  });
+  const render = () =>
+    renderToStaticMarkup(
+      createElement(LiveOverlay, { theme: createState().theme, frame: f, now }),
+    );
+  let html = render();
+  assert.match(html, /row-lane-quest pending[^]*?Tiến độ 50%/);
+  assert.ok(
+    html.indexOf('class="row-items"') <
+      html.indexOf('class="row-lane-quest pending"'),
+  );
+  assert.ok(
+    html.indexOf('class="row-lane-quest pending"') <
+      html.indexOf('class="row-runes"'),
+  );
+  assert.match(html, /row-secondary rune-path" title="Precision"/);
+  p.roleQuest.value!.completed = true;
+  p.roleQuest.value!.rewardSpellId = "SummonerSmiteAvatarOffensive";
+  html = render();
+  assert.match(html, /row-lane-quest completed/);
+  assert.match(html, /row-secondary rune-path" title="Precision"/);
+  assert.doesNotMatch(html, /class="row-secondary quest-reward"/);
+  const cameraRender = () => renderToStaticMarkup(createElement(LiveOverlay, {
+    theme: { ...createState().theme, playerCameras: true }, frame: f, now,
+  }));
+  html = cameraRender();
+  assert.doesNotMatch(html, /row-lane-quest/);
+  assert.match(html, /live-role-quests blue-role-quests/);
+  assert.match(html, /row-secondary quest-reward/);
+  p.roleQuest.value!.completed = false;
+  p.roleQuest.value!.progress = 0.5;
+  html = cameraRender();
+  assert.match(html, /Tiến độ 50%/);
+  assert.match(html, /row-secondary rune-path" title="Precision"/);
 });
 test("observed cooldowns, Baron count and inhibitor timer disappear when source expires", () => {
   const f = frame();
@@ -211,9 +330,9 @@ test("observed level ranking respects widget switches and stale source", () => {
     renderToStaticMarkup(
       createElement(LiveOverlay, { theme, frame: frame(), now: at }),
     );
-  assert.ok(render(now).includes("LEVEL / EXPERIENCE"));
+  assert.ok(render(now).includes("XP + LVL"));
   assert.ok(!render(now).includes("live-player-row"));
-  assert.ok(!render(now + 5000).includes("LEVEL / EXPERIENCE"));
+  assert.ok(!render(now + 5000).includes("XP + LVL"));
 });
 test("real rehearsal gold ranking and Power Play never fill missing data", () => {
   const f = frame();
@@ -256,10 +375,11 @@ test("level leaderboard shows ten ranked rows and observed XP before current lev
     }),
   );
   assert.equal((html.match(/data-slot=/g) ?? []).length, 10);
-  assert.equal((html.match(/role="progressbar"/g) ?? []).length, 10);
+  assert.equal((html.match(/role="progressbar"/g) ?? []).length, 20);
   assert.ok(html.indexOf('data-slot="9"') < html.indexOf('data-slot="0"'));
   assert.match(html, /aria-valuenow="90"/);
-  assert.match(html, /level-progress[^]*?<\/div><b>4<\/b>/);
+  assert.match(html, /class="xp-percent">90%/);
+  assert.match(html, /level-progress[^]*?<\/div><b class="rank-level">4<\/b>/);
 });
 test("Power Play puts signed gold above timer with the user-defined three minute fallback", () => {
   const render = (endsAt?: number) =>
@@ -430,7 +550,8 @@ test("team lead, lane gaps, towers, dragons and objective timers use observed da
   assert.ok(html.includes('class="lane-gold-red">'));
   assert.ok(html.includes('title="Số trụ"'));
   assert.equal((html.match(/metric-icon dragon/g) || []).length, 4);
-  assert.equal((html.match(/role-quest-icon/g) || []).length, 10);
+  assert.equal((html.match(/row-lane-quest/g) || []).length, 10);
+  assert.equal((html.match(/Role Quest đội/g) || []).length, 0);
   assert.ok(html.includes("dragon-fire"));
   assert.ok(html.includes("dragon-water"));
   assert.ok(html.includes("dragon-earth"));

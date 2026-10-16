@@ -15,6 +15,24 @@ import type { Command, State } from "../shared/schema";
 
 export const studioModules = [
   {
+    id: "hud",
+    title: "HUD game",
+    icon: "UI",
+    description: "Preset HUD qua Replay API; không điều khiển camera.",
+  },
+  {
+    id: "postgame",
+    title: "Sau trận",
+    icon: "PG",
+    description: "Cấu hình Riot API, duyệt kết quả và phát postgame.",
+  },
+  {
+    id: "draft",
+    title: "Cấm chọn",
+    icon: "CS",
+    description: "Lượt cấm/chọn, timer và đội hình trước trận.",
+  },
+  {
     id: "overview",
     title: "Tổng quan",
     icon: "01",
@@ -36,11 +54,12 @@ export const studioModules = [
     id: "demo",
     title: "Phòng thử",
     icon: "04",
-    description: "Phát snapshot thật đã lưu và thử các biến thể UI có nhãn.",
+    description:
+      "Phát lại dữ liệu thật, tua timeline và điều khiển như phát sóng.",
   },
   {
     id: "theme",
-    title: "Giao diện & đội",
+    title: "Cấu hình trước trận",
     icon: "05",
     description: "Tên đội, màu sắc, kiểu chữ và thành phần hiển thị.",
   },
@@ -155,10 +174,28 @@ export function SourcePanel({
           >
             <option value="riot">Riot local: dữ liệu giới hạn</option>
             <option value="leaguebroadcast">
-              LeagueBroadcast: production đầy đủ
+              LeagueBroadcast gốc: nguồn ngoài dự phòng
             </option>
             <option value="recording">Bản ghi offline</option>
+            <option value="league-collector">
+              Collector có tài khoản LB (cấu hình local)
+            </option>
+            <option value="collector-accountless">
+              Collector không tài khoản LB (DLL cache · thử nghiệm)
+            </option>
           </select>
+          {state.provider === "league-collector" && (
+            <small>
+              Dùng tài khoản đã cấu hình trong Collector/config/collector.env;
+              không cần mở LB gốc.
+            </small>
+          )}
+          {state.provider === "collector-accountless" && (
+            <small>
+              Dùng DLL cache, không đọc tài khoản đã cấu hình. Đã đo
+              HP/resource/vàng trên SR spectator với cache hiện tại.
+            </small>
+          )}
         </label>
         <label className="demo-switch">
           <input
@@ -180,6 +217,40 @@ export function SourcePanel({
       />
       <div className="source-cards">
         <article>
+          <span className="module-icon">C</span>
+          <h3>LeagueCollector local</h3>
+          <small>
+            {state.provider === "collector-accountless"
+              ? "DLL cache · Không dùng tài khoản LB"
+              : "Chế độ tài khoản LB trên máy"}
+          </small>
+          <p>
+            {connected && report?.collector
+              ? `${report.collector.runtime.status} · dữ liệu ${report.collector.status}`
+              : "Chọn nguồn để project chạy collector, không cần mở LB gốc"}
+          </p>
+          <small>
+            {report?.collector
+              ? `${report.collector.players}/10 người · ${report.collector.acceptedFrames} frame`
+              : "Credentials giữ trên máy collector"}
+          </small>
+          {report?.collector?.runtime.error && (
+            <small>
+              Lỗi:{" "}
+              {report.collector.runtime.error ===
+              "accountless-external-not-supported"
+                ? "Chế độ không tài khoản cần host do app quản lý. Hãy bỏ cấu hình collector ngoài và khởi động lại backend."
+                : report.collector.runtime.error}
+            </small>
+          )}
+          <small>
+            {
+              " · CS chưa xác minh · thứ tự đường chưa chốt · objective chưa đủ · event chưa kiểm chứng"
+            }
+          </small>
+          <code>127.0.0.1:{report?.collector?.runtime.port ?? 18799}</code>
+        </article>
+        <article>
           <span className="module-icon">R</span>
           <h3>Riot local</h3>
           <p>
@@ -196,11 +267,9 @@ export function SourcePanel({
         </article>
         <article>
           <span className="module-icon">B</span>
-          <h3>LeagueBroadcast</h3>
+          <h3>LeagueBroadcast gốc</h3>
           <p>
-            {bb
-              ? statuses[bb.status]
-              : "Nguồn production bắt buộc chưa được kiểm tra"}
+            {bb ? statuses[bb.status] : "Nguồn LB ngoài chưa được kiểm tra"}
           </p>
           <small>
             {bb
@@ -235,10 +304,14 @@ export function SourcePanel({
       </div>
       <p className="module-note">
         {state.provider === "riot"
-          ? "Chế độ giới hạn: phù hợp replay và kiểm thử, không đạt bộ dữ liệu giải đấu đầy đủ. Production cần LeagueBroadcast cho vàng, HP, năng lượng, rune và objective."
-          : state.provider === "recording"
-            ? "Đang dùng dữ liệu lịch sử. Bản ghi không phản ánh trận đang chạy; nguồn trong bảng là nguồn đã tạo bản ghi."
-            : "Nguồn production đầy đủ. LeagueBroadcast, quyền tài khoản và custom spectator được hỗ trợ là bắt buộc; mất kết nối không tự chuyển nguồn."}
+          ? "Chế độ giới hạn. LeagueCollector local cung cấp telemetry đã đo; các field chưa hỗ trợ vẫn được đánh dấu thiếu."
+          : state.provider === "collector-accountless"
+            ? "DLL cache không đăng nhập LB: đã nhận HP/resource/vàng trên SR spectator và cùng sample ở Studio/OBS. Chưa đối chiếu số liệu với HUD hoặc xác minh đầy đủ tính năng và độ ổn định. Dữ liệu thiếu để trống, không tự chuyển nguồn."
+            : state.provider === "league-collector"
+              ? "Collector được project quản lý. Dữ liệu thiếu giữ null; CS, lane và objective/event chưa hoàn tất kiểm chứng."
+              : state.provider === "recording"
+                ? "Đang dùng dữ liệu lịch sử. Bản ghi không phản ánh trận đang chạy; nguồn trong bảng là nguồn đã tạo bản ghi."
+                : "Nguồn production đầy đủ. LeagueBroadcast, quyền tài khoản và custom spectator được hỗ trợ là bắt buộc; mất kết nối không tự chuyển nguồn."}
       </p>
       <div className="dashboard-heading">
         <h3>Dữ liệu đang vào overlay</h3>

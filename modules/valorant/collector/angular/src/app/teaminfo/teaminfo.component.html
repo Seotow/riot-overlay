@@ -1,0 +1,76 @@
+<div class="border-surface grid grid-cols-7 gap-3 rounded-lg border p-5">
+  <div class="col-span-4 flex flex-col justify-around gap-3">
+    <h1 class="text-color text-xl font-bold">{{ position | titlecase }} Team</h1>
+    <p-floatlabel variant="on">
+      <input
+        class="w-full"
+        pInputText
+        [(ngModel)]="teaminfo.name"
+        (ngModelChange)="runValidation()"
+        id="TeamNameInput"
+        placeholder=""
+      />
+      <label for="TeamNameInput">Team name</label>
+    </p-floatlabel>
+    <p-floatlabel variant="on">
+      <input
+        class="w-full"
+        pInputText
+        [(ngModel)]="teaminfo.tricode"
+        (ngModelChange)="runValidation()"
+        id="TeamTricodeInput"
+        placeholder=""
+      />
+      <label for="TeamTricodeInput">Team tricode</label>
+    </p-floatlabel>
+    <p-floatlabel variant="on">
+      <input
+        class="w-full"
+        [class.ng-dirty]="logoImageError"
+        [class.ng-invalid]="logoImageError"
+        pInputText
+        [(ngModel)]="teaminfo.url"
+        (ngModelChange)="runValidation()"
+        id="TeamLogoInput"
+        placeholder=""
+      />
+      <label for="TeamLogoInput">Team Logo URL</label>
+    </p-floatlabel>
+    <div class="flex flex-row content-center gap-2">
+      <p-radiobutton
+        [inputId]="'attackStartRadioButton' + position"
+        name="attackStart"
+        [value]="position"
+        [(ngModel)]="radiobuttonService.attackStart"
+      />
+      <label [for]="'attackStartRadioButton' + position">Starts as attacker</label>
+    </div>
+  </div>
+
+  <div class="col-span-3 flex flex-col items-center justify-center">
+    <p class="mb-2 text-sm italic">Logo preview</p>
+    <img
+      [src]="teaminfo.url"
+      alt="Image link invalid"
+      class="aspect-square w-4/6 justify-self-center object-contain"
+      [hidden]="!teaminfo.url || logoImageError"
+      (load)="onImageLoadSuccess()"
+      (error)="onImageLoadError()"
+    />
+
+    @if (!teaminfo.url || logoImageError) {
+      <div
+        class="border-surface bg-emphasis flex aspect-square w-4/6 items-center justify-center justify-self-center rounded-xl border"
+      >
+        <i
+          class="text-md! pi pi-info size-min cursor-pointer rounded-full border p-1"
+          (click)="info_popover.toggle($event)"
+        ></i>
+        <p-popover #info_popover>
+          <p class="">Make sure the link points directly to the image.</p>
+          <p class="">Valid links usually end in .png or .jpg.</p>
+        </p-popover>
+      </div>
+    }
+  </div>
+</div>

@@ -12,5 +12,17 @@
     "types": ["node"],
     "resolveJsonModule": true
   },
-  "include": ["src", "server", "shared", "tests"]
+  "include": [
+    "src",
+    "server",
+    "shared",
+    "tests",
+    "Collector/adapter",
+    "Collector/validation",
+    "Collector/scripts/validate-project-live.ts",
+    "Collector/scripts/probe-basic-fields.ts",
+    "Collector/scripts/check-accountless-offline.ts",
+    "Collector/scripts/capture-match.ts",
+    "Collector/runtime/supervisor.ts"
+  ]
 }

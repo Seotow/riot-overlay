@@ -1,0 +1,35 @@
+[
+  {
+    "repository": "https://github.com/ValoSpectra/Spectra-Server",
+    "revision": "64782ac2dcd5863aa179a084c8f402c3be794ebe",
+    "directory": "backend",
+    "excluded": [
+      ".github",
+      ".husky",
+      ".vscode"
+    ],
+    "archiveSha256": "da5fd6bde351d58063f8e521fc7aa081c77dc8dcaccaa2769c1b423aa1ca5251"
+  },
+  {
+    "repository": "https://github.com/ValoSpectra/Spectra-Frontend",
+    "revision": "1e81de161c35d4b6f5e4fb6056c6db100734bf96",
+    "directory": "frontend",
+    "excluded": [
+      ".github",
+      ".husky",
+      ".vscode"
+    ],
+    "archiveSha256": "a2db052a276a979a6505bab38906a1634816e73ed5d9666f5b4ee1271f28eb53"
+  },
+  {
+    "repository": "https://github.com/ValoSpectra/Spectra-Client",
+    "revision": "a07fd0853129a549ac4d657544ae1e0b93e4f5e8",
+    "directory": "collector",
+    "excluded": [
+      ".github",
+      ".husky",
+      ".vscode"
+    ],
+    "archiveSha256": "963c32e9382611af48e6b920326a3660d6abc1338160ce3b86316d12242c116f"
+  }
+]

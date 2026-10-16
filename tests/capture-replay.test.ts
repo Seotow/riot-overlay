@@ -7,6 +7,18 @@ import {
 } from "../server/capture-replay";
 import { observerFrameSchema } from "../shared/observer";
 const start = Date.parse("2026-09-20T00:00:00Z");
+test("reloading the same capture produces a new load acknowledgement; seeking does not", () => {
+  const replay = new CaptureReplay(() => start),
+    entries = parseCapture([line(0, 100), line(1000, 101)].join("\n"));
+  assert.equal(replay.snapshot().loadGeneration, 0);
+  replay.loadEntries("same", entries);
+  assert.equal(replay.snapshot().loadGeneration, 1);
+  replay.control({ positionMs: 500 });
+  assert.equal(replay.snapshot().loadGeneration, 1);
+  replay.loadEntries("same", entries);
+  assert.equal(replay.snapshot().loadGeneration, 2);
+  assert.equal(replay.snapshot().positionMs, 0);
+});
 function line(offset: number, time: number, kills = 1) {
   return JSON.stringify({
     receivedAt: new Date(start + offset).toISOString(),
@@ -42,6 +54,9 @@ test("capture playback advances only its clock between snapshots, pauses, seeks 
     ),
   );
   const first = replay.observe();
+  assert.equal(replay.snapshot().firstGameTime, 100);
+  assert.equal(replay.snapshot().lastGameTime, 102);
+  assert.equal(replay.snapshot().gameTime, 100);
   observerFrameSchema.parse(first);
   assert.equal(first.sample?.replay.paused.value, true);
   assert.equal(first.playback?.recordedAt, new Date(start).toISOString());
@@ -51,6 +66,7 @@ test("capture playback advances only its clock between snapshots, pauses, seeks 
   wall += 250;
   const middle = replay.observe();
   assert.equal(middle.sample?.gameTime.value, 100.5);
+  assert.equal(replay.snapshot().gameTime, 100.5);
   assert.equal(middle.sample?.players[0].kills.value, 1);
   wall += 250;
   assert.equal(replay.observe().sample?.players[0].kills.value, 2);
@@ -77,6 +93,7 @@ test("capture gaps expire data instead of interpolating stats or inventing futur
   replay.control({ playing: true });
   wall += 6000;
   assert.equal(replay.observe().sample, null);
+  assert.equal(replay.snapshot().gameTime, null);
   wall += 4000;
   assert.equal(replay.observe().sample?.gameTime.value, 110);
 });

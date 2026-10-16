@@ -2,6 +2,7 @@ import type { CSSProperties } from "react";
 import type { ObservedEvent } from "../../shared/observer";
 import type { Theme } from "../../shared/schema";
 import { DragonBanner } from "./DragonBanner";
+import { MotionPresence } from "./MotionPresence";
 
 const elements: Record<
   string,
@@ -29,9 +30,13 @@ const elements: Record<
 export function SoulTakeover({
   event,
   theme,
+  artworkVisible = true,
+  bannerVisible = true,
 }: {
   event: ObservedEvent;
   theme: Theme;
+  artworkVisible?: boolean;
+  bannerVisible?: boolean;
 }) {
   if (
     event.kind !== "DragonSoul" ||
@@ -43,31 +48,35 @@ export function SoulTakeover({
   const element = Object.hasOwn(elements, key) ? elements[key] : undefined;
   return (
     <>
-      <aside
-        className="live-soul-takeover"
-        data-region="soul-takeover"
-        role="status"
-        style={{ "--soul-color": element?.color ?? "#343d43" } as CSSProperties}
-      >
-        {element && (
-          <img
-            className={`soul-artwork${element.render ? " soul-artwork-render" : ""}`}
-            src={`/broadcast/artwork/riot-dragons/${key}.webp`}
-            style={{ objectPosition: element.crop }}
-            alt=""
-          />
-        )}
-        <div className="soul-team">
-          <b>{team}</b>
-          <span>LINH HỒN RỒNG</span>
-        </div>
-        <div className="soul-title">
-          <span>DRAGON</span>
-          <strong>SOUL</strong>
-          <small>{element?.name ?? "LINH HỒN RỒNG"}</small>
-        </div>
-      </aside>
-      <DragonBanner type={event.objectiveType} soul />
+      <MotionPresence show={artworkVisible}>
+        <aside
+          className="live-soul-takeover"
+          data-region="soul-takeover"
+          role="status"
+          style={
+            { "--soul-color": element?.color ?? "#343d43" } as CSSProperties
+          }
+        >
+          {element && (
+            <img
+              className={`soul-artwork${element.render ? " soul-artwork-render" : ""}`}
+              src={`/broadcast/artwork/riot-dragons/${key}.webp`}
+              style={{ objectPosition: element.crop }}
+              alt=""
+            />
+          )}
+          <div className="soul-team">
+            <b>{team}</b>
+            <span>LINH HỒN RỒNG</span>
+          </div>
+          <div className="soul-title">
+            <span>DRAGON</span>
+            <strong>SOUL</strong>
+            <small>{element?.name ?? "LINH HỒN RỒNG"}</small>
+          </div>
+        </aside>
+      </MotionPresence>
+      {bannerVisible && <DragonBanner type={event.objectiveType} soul />}
     </>
   );
 }

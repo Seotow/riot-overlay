@@ -4,6 +4,7 @@ const source = z.enum([
   "live-client",
   "replay-api",
   "leaguebroadcast",
+  "league-collector",
   "riot-events",
 ]);
 function field<T extends z.ZodType>(value: T) {
@@ -19,6 +20,12 @@ function field<T extends z.ZodType>(value: T) {
 export const observedPlayerSchema = z
   .object({
     slot: z.number().int().min(0).max(9),
+    playerName: field(z.string().min(1).max(80)).optional(),
+    championStacks: field(finite).optional(),
+    itemCounters: field(z.array(z.object({
+      slot:z.number().int().min(0).max(8),id:z.number().int().positive(),
+      stack:finite.nullable(),quantity:z.number().int().nonnegative().nullable(),
+    }).strict()).max(9)).optional(),
     team: field(z.enum(["ORDER", "CHAOS"])),
     championId: field(z.number().int().positive()),
     championMapping: z
@@ -39,6 +46,9 @@ export const observedPlayerSchema = z
           rewardSpellId: z.string().max(100).nullable(),
         })
         .strict(),
+    ).optional(),
+    sourceStats: field(
+      z.record(z.string().max(40), z.number().finite().nullable()),
     ).optional(),
     perks: field(z.array(z.number().int().positive()).max(9)).optional(),
     wardScore: field(finite).optional(),
@@ -91,6 +101,7 @@ export const observedPlayerSchema = z
     assists: field(z.number().int().nonnegative()),
     cs: field(z.number().int().nonnegative()),
     totalGold: field(finite),
+    currentGold: field(finite).optional(),
     items: field(z.array(z.number().int().nonnegative()).max(7)),
   })
   .strict();
@@ -105,6 +116,7 @@ export const observedEventSchema = z
       "DragonSoul",
       "BaronKill",
       "HeraldKill",
+      "VoidGrubKill",
       "TurretKilled",
       "InhibKilled",
       "InhibRespawned",
@@ -116,6 +128,7 @@ export const observedEventSchema = z
     ]),
     team: z.enum(["ORDER", "CHAOS"]).optional(),
     firstTurret: z.boolean().optional(),
+    goldBaseline: z.object({ own: finite, enemy: finite }).strict().optional(),
     objectiveType: z
       .enum([
         "fire",
@@ -130,6 +143,23 @@ export const observedEventSchema = z
       ])
       .optional(),
     playerSlot: z.number().int().min(0).max(9).optional(),
+    killerSlot: z.number().int().min(0).max(9).optional(),
+    killerUnitType: z.enum(["minion", "monster", "turret", "grubs"]).optional(),
+    killerObjectiveType: z
+      .enum([
+        "fire",
+        "earth",
+        "water",
+        "air",
+        "hextech",
+        "chemtech",
+        "elder",
+        "baron",
+        "herald",
+      ])
+      .optional(),
+    victimSlot: z.number().int().min(0).max(9).optional(),
+    assistSlots: z.array(z.number().int().min(0).max(9)).max(4).optional(),
     level: z.number().int().min(1).max(30).optional(),
     itemId: z.number().int().positive().optional(),
   })

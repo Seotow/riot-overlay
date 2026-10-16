@@ -1,0 +1,78 @@
+{
+  "name": "spectra-frontend",
+  "version": "0.3.6",
+  "author": {
+    "name": "Purple Shark UG (haftungsbeschränkt)",
+    "url": "https://valospectra.com"
+  },
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve --configuration development",
+    "start-docker": "ng serve --port=80 --host 0.0.0.0",
+    "build": "ng build --configuration production",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test",
+    "lint": "ng lint",
+    "lint-fix": "ng lint --fix",
+    "format": "prettier --write src",
+    "prepare": "husky"
+  },
+  "private": true,
+  "lint-staged": {
+    "*.{ts,js,html}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{scss,css,md,json,yml,yaml}": [
+      "prettier --write"
+    ]
+  },
+  "dependencies": {
+    "@angular/animations": "^20.2.1",
+    "@angular/common": "^20.2.1",
+    "@angular/compiler": "^20.2.1",
+    "@angular/core": "^20.2.1",
+    "@angular/forms": "^20.2.1",
+    "@angular/platform-browser": "^20.2.1",
+    "@angular/platform-browser-dynamic": "^20.2.1",
+    "@angular/router": "^20.2.1",
+    "@fontsource-variable/dm-sans": "5.3.0",
+    "@fontsource-variable/inter": "5.3.0",
+    "@fontsource-variable/montserrat": "5.3.0",
+    "@fontsource-variable/unbounded": "5.3.0",
+    "@ngx-translate/core": "^17.0.0",
+    "@ngx-translate/http-loader": "^17.0.0",
+    "@tailwindcss/postcss": "^4.1.10",
+    "animejs": "^4.0.2",
+    "express": "^4.21.2",
+    "lodash": "^4.17.21",
+    "rxjs": "~7.8.2",
+    "socket.io-client": "4.8.1",
+    "tailwindcss": "^4.1.10",
+    "tslib": "^2.8.1",
+    "zone.js": "^0.15.0"
+  },
+  "devDependencies": {
+    "@angular/build": "^20.2.0",
+    "@angular/cli": "^20.2.0",
+    "@angular/compiler-cli": "^20.2.1",
+    "@types/jasmine": "~5.1.7",
+    "@types/lodash": "^4",
+    "angular-eslint": "20.2.0",
+    "eslint": "^9.28.0",
+    "eslint-config-prettier": "^9.1.0",
+    "husky": "^9.1.7",
+    "jasmine-core": "^5.6.0",
+    "karma": "~6.4.4",
+    "karma-chrome-launcher": "~3.2.0",
+    "karma-coverage": "~2.2.1",
+    "karma-jasmine": "~5.1.0",
+    "karma-jasmine-html-reporter": "~2.1.0",
+    "lint-staged": "^16.4.0",
+    "prettier": "3.5.3",
+    "prettier-plugin-tailwindcss": "^0.6.14",
+    "typescript": "~5.8.3",
+    "typescript-eslint": "^8.33.1"
+  },
+  "packageManager": "yarn@4.7.0"
+}

@@ -1,10 +1,23 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, type CSSProperties } from "react";
+import { MotionPresence } from "./MotionPresence";
+import { BuffTimeProgress } from "./BuffTimeProgress";
+import { portraitCueDuration } from "../../shared/portrait-motion";
+import { RankingBoard } from "./RankingBoard";
+import { ChampionStack } from "./ChampionStack";
+import { ItemCounter } from "./ItemCounter";
+import { stackChampion } from "../../shared/champion-stacks";
+import { playerDisplayName } from "../../shared/player-name";
+import { broadcastWidgetOn } from "../../shared/broadcast-controls";
+import { graphicEnabled } from "../../shared/broadcast-graphics";
 import { SoulTakeover } from "./SoulTakeover";
 import { DragonBanner } from "./DragonBanner";
 import { CooldownVeil } from "./CooldownVeil";
 import { InhibitorTimers } from "./InhibitorTimers";
 import { QuestCompletion } from "./QuestCompletion";
 import { showItemCooldown } from "../../shared/role-quest";
+import { minimalLoadout } from "../../shared/minimal-loadout";
+import { seriesSlots } from "../../shared/match-config";
+import { BroadcastKillfeed } from "./BroadcastKillfeed";
 import { runeSummary } from "../../shared/rune-summary";
 import { TowerBanner } from "./TowerBanner";
 import { BARON_BUFF_SECONDS } from "../../shared/game-rules";
@@ -19,10 +32,11 @@ import {
   ELDER_BUFF_SECONDS,
 } from "../../shared/baron-powerplay";
 import {
-  levelProgress,
-  rankLevels,
   objectiveVisual,
+  levelProgress,
+  resourcePresentation,
 } from "../../shared/ui-metrics";
+import { objectiveIconUrl } from "../../shared/objective-icons";
 import {
   liveCatalog,
   liveChampion,
@@ -62,7 +76,10 @@ function MetricIcon({
     kind === "baron"
       ? objectiveVisual(dragonType ?? "BARON")
       : kind === "dragon"
-        ? objectiveVisual(dragonType)
+        ? (objectiveVisual(dragonType) ??
+          (!dragonType
+            ? { glyph: "dragon", label: "RỒNG", color: "#d2b47d" }
+            : null))
         : null;
   if (objective) {
     return (
@@ -71,8 +88,8 @@ function MetricIcon({
         title={objective.label}
         style={{
           backgroundColor: objective.color,
-          maskImage: `url(/broadcast/objectives/${objective.glyph}.svg)`,
-          WebkitMaskImage: `url(/broadcast/objectives/${objective.glyph}.svg)`,
+          maskImage: `url(${objectiveIconUrl(objective.glyph)})`,
+          WebkitMaskImage: `url(${objectiveIconUrl(objective.glyph)})`,
         }}
       />
     );
@@ -176,31 +193,6 @@ function RoleQuestIcon({
     </span>
   );
 }
-const roleQuestRoles = ["top", "jungle", "mid", "bot", "support"] as const;
-function RoleQuestRow({
-  quests,
-}: {
-  quests: Array<{
-    role: (typeof roleQuestRoles)[number];
-    completed: boolean;
-    progress?: number | null;
-  }> | null;
-}) {
-  return (
-    <>
-      {roleQuestRoles.map((role) => (
-        <RoleQuestIcon
-          key={role}
-          role={role}
-          completed={
-            quests?.find((quest) => quest.role === role)?.completed === true
-          }
-          progress={quests?.find((quest) => quest.role === role)?.progress}
-        />
-      ))}
-    </>
-  );
-}
 function LiveRow({
   player,
   slot,
@@ -209,7 +201,11 @@ function LiveRow({
   time,
   alert,
   previewBuffs,
+  rowQuest,
+  buffFrames = true,
+  playerNames,
 }: {
+  playerNames?: string[];
   player?: ObservedPlayer;
   slot: number;
   red: boolean;
@@ -217,6 +213,8 @@ function LiveRow({
   time: number | null;
   alert?: ObservedEvent;
   previewBuffs?: "baron" | "elder" | "both" | "none";
+  rowQuest: boolean;
+  buffFrames?: boolean;
 }) {
   const c = assetsReady ? liveChampion(player?.championId.value) : undefined;
   const ultimate = player?.cooldowns?.value?.find((c) => c.kind === "ultimate");
@@ -233,7 +231,8 @@ function LiveRow({
   const runes = assetsReady
     ? runeSummary(player?.perks?.value, player?.keystone?.value)
     : { keystone: undefined, secondary: undefined };
-  const secondary = quest?.completed ? reward : runes.secondary;
+  const secondary = !rowQuest && reward ? reward : runes.secondary;
+  const stack = assetsReady && stackChampion(player?.championId.value);
   const ids = inventory
     ? Array.from(
         { length: 6 },
@@ -245,12 +244,22 @@ function LiveRow({
   const health = player?.health?.value,
     resource = player?.resource?.value;
   const dead = player?.isDead?.value === true;
+  const xpProgress = player ? levelProgress(player) : null;
+  const resourceStyle = resourcePresentation(player);
+  const compact = assetsReady ? minimalLoadout(player) : undefined;
   return (
     <div
       className={`ref-player-row live-player-row ${red ? "red-row" : ""} ${dead ? "is-dead" : ""}`}
+      style={
+        {
+          "--row-index": slot % 5,
+          "--spread-x": `${(red ? -1 : 1) * (red ? (slot % 5) + 1 : 5 - (slot % 5)) * 100}px`,
+          "--cluster-delay": `${(red ? slot % 5 : 4 - (slot % 5)) * 65}ms`,
+        } as CSSProperties
+      }
     >
       {alert?.kind === "RoleQuestCompleted" && quest && (
-        <QuestCompletion role={quest.role} reward={reward} />
+        <QuestCompletion key={alert.id} role={quest.role} reward={reward} />
       )}
       <div className="row-vision">
         <b>
@@ -259,7 +268,7 @@ function LiveRow({
             : Math.floor(player.wardScore.value)}
         </b>
         {trinket ? (
-          <img src={trinket.icon} alt={trinket.name} title={trinket.name} />
+          <span className="trinket-with-stock"><img src={trinket.icon} alt={trinket.name} title={trinket.name} /><ItemCounter player={player} id={trinketId} slot={6} /></span>
         ) : (
           <span
             className="live-icon-empty"
@@ -272,6 +281,46 @@ function LiveRow({
             {trinketId ? "?" : ""}
           </span>
         )}
+      </div>
+      <div
+        className="minimal-loadout"
+        aria-label="Trang bị tối giản"
+        data-side={red ? "red" : "blue"}
+      >
+        {compact?.reward && (
+          <span
+            className="live-item-slot minimal-quest-reward"
+            data-position="0"
+            title={compact.reward.name}
+          >
+            <img src={compact.reward.icon} alt={compact.reward.name} />
+            <ItemCounter player={player} id={quest?.rewardItemId} />
+            {compact.rewardCooldown && time != null && (
+              <CooldownVeil
+                remaining={Math.max(0, compact.rewardCooldown.readyAt - time)}
+                total={compact.rewardCooldown.total}
+              />
+            )}
+          </span>
+        )}
+        {compact?.items.map((item, i) => (
+          <span
+            key={item.slot}
+            className="live-item-slot minimal-active-item"
+            data-position={i + (compact.reward ? 1 : 0)}
+            data-item-slot={item.slot}
+            title={item.asset.name}
+          >
+            <img src={item.asset.icon} alt={item.asset.name} />
+            <ItemCounter player={player} id={item.id} slot={item.slot} />
+            {item.cooldown && time != null && (
+              <CooldownVeil
+                remaining={Math.max(0, item.cooldown.readyAt - time)}
+                total={item.cooldown.total}
+              />
+            )}
+          </span>
+        ))}
       </div>
       <div className="row-items" aria-label="Trang bị">
         {(red ? ids : [...ids].reverse()).map((id, i) => {
@@ -293,6 +342,7 @@ function LiveRow({
               title={asset.name}
             >
               <img src={asset.icon} alt={asset.name} />
+              <ItemCounter player={player} id={id} slot={itemSlot} />
               {cd && <CooldownVeil remaining={remaining} total={cd.total} />}
             </span>
           ) : (
@@ -310,7 +360,36 @@ function LiveRow({
           );
         })}
       </div>
-      <div className="row-runes" aria-label="Ngọc chính và nhánh phụ">
+      {rowQuest && (
+        <div
+          className={`row-lane-quest ${quest?.completed ? "completed" : "pending"}`}
+          aria-label="Nhiệm vụ lane"
+          data-role={quest?.role}
+        >
+          {quest?.completed && reward ? (
+            <span className="lane-reward-with-stock"><img
+              className="quest-reward"
+              src={reward.icon}
+              alt={reward.name}
+              title={reward.name}
+            /><ItemCounter player={player} id={quest.rewardItemId} /></span>
+          ) : quest ? (
+            <RoleQuestIcon
+              role={quest.role}
+              completed={quest.completed}
+              progress={quest.progress}
+            />
+          ) : (
+            <span
+              className="quest-unavailable"
+              title="Chưa có dữ liệu lane quest"
+            >
+              —
+            </span>
+          )}
+        </div>
+      )}
+      <div className={`row-runes${stack ? " has-champion-stack" : ""}`} aria-label="Ngọc chính và nhánh phụ hoặc stack">
         <span
           className="row-keystone"
           title={runes.keystone?.name ?? "Chưa có ngọc chủ chốt"}
@@ -319,22 +398,25 @@ function LiveRow({
             <img src={runes.keystone.icon} alt={runes.keystone.name} />
           )}
         </span>
-        <span
-          className={`row-secondary ${quest?.completed ? "quest-reward" : "rune-path"}`}
-          title={
-            secondary?.name ??
-            (quest?.completed
-              ? "Chưa có icon phần thưởng quest"
-              : "Chưa có nhánh ngọc phụ")
-          }
+        {stack ? <ChampionStack player={player} /> : <span
+          className={`row-secondary ${!rowQuest && reward ? "quest-reward" : "rune-path"}`}
+          title={secondary?.name ?? "Chưa có nhánh ngọc phụ"}
         >
           {secondary && <img src={secondary.icon} alt={secondary.name} />}
-        </span>
+          {!rowQuest && reward && <ItemCounter player={player} id={quest?.rewardItemId} />}
+        </span>}
       </div>
       <div className="row-spells">
         {[0, 1].map((i) => {
+          const spellId = player?.spells?.value?.[i];
           const s = assetsReady
-            ? liveSpell(player?.spells?.value?.[i])
+            ? liveSpell(
+                quest?.completed &&
+                  quest.role === "top" &&
+                  /teleport/i.test(spellId ?? "")
+                  ? (quest.rewardSpellId ?? spellId)
+                  : spellId,
+              )
             : undefined;
           const cd = player?.cooldowns?.value?.find(
             (c) => c.kind === "spell" && c.slot === (i === 0 ? "D" : "F"),
@@ -363,28 +445,32 @@ function LiveRow({
           </span>
         )}
         <b>{value(player?.level.value)}</b>
-        {(previewBuffs
-          ? !dead && (previewBuffs === "baron" || previewBuffs === "both")
-          : player?.hasBaron?.value === true) && (
-          <i className="baron-player-buff" title="Bùa lợi Baron" />
-        )}
-        {(previewBuffs
-          ? !dead && (previewBuffs === "elder" || previewBuffs === "both")
-          : player?.hasElder?.value === true) && (
-          <i className="elder-player-buff" title="Bùa lợi Rồng Ngàn Tuổi" />
-        )}
+        {buffFrames &&
+          (previewBuffs
+            ? !dead && (previewBuffs === "baron" || previewBuffs === "both")
+            : player?.hasBaron?.value === true) && (
+            <i className="baron-player-buff" title="Bùa lợi Baron" />
+          )}
+        {buffFrames &&
+          (previewBuffs
+            ? !dead && (previewBuffs === "elder" || previewBuffs === "both")
+            : player?.hasElder?.value === true) && (
+            <i className="elder-player-buff" title="Bùa lợi Rồng Ngàn Tuổi" />
+          )}
         {alert && alert.kind !== "RoleQuestCompleted" && (
           <span key={alert.id} className="portrait-alert">
-            {alert.kind === "LevelUp"
-              ? `↑ ${alert.level}`
-              : (() => {
-                  const item = liveItem(alert.itemId);
-                  return item ? (
-                    <img src={item.icon} alt={item.name} />
-                  ) : (
-                    "ITEM"
-                  );
-                })()}
+            <span className="portrait-alert-content">
+              {alert.kind === "LevelUp"
+                ? `↑ ${alert.level}`
+                : (() => {
+                    const item = liveItem(alert.itemId);
+                    return item ? (
+                      <img src={item.icon} alt={item.name} />
+                    ) : (
+                      "ITEM"
+                    );
+                  })()}
+            </span>
           </span>
         )}
       </div>
@@ -399,6 +485,14 @@ function LiveRow({
             }
           >
             <img src={c.ultimateIcon} alt="Chiêu cuối" />
+            {ultimateRemaining != null && ultimate && (
+              <CooldownVeil
+                remaining={ultimateRemaining}
+                total={ultimate.total}
+                dark
+              />
+            )}
+            {stack && <ChampionStack player={player} minimal />}
           </span>
         )}
         <div>
@@ -412,17 +506,42 @@ function LiveRow({
               }
             >
               <img src={c.ultimateIcon} alt="Chiêu cuối" />
-              {ultimateRemaining != null && ultimateRemaining > 0 && (
-                <small>{Math.ceil(ultimateRemaining)}</small>
+              {ultimateRemaining != null && ultimate && (
+                <CooldownVeil
+                  remaining={ultimateRemaining}
+                  total={ultimate.total}
+                  dark
+                />
               )}
             </span>
           ) : (
             <span className="live-rune-empty" />
           )}
-          <b title={c?.name}>
-            {c?.name ?? `${red ? "RED" : "BLUE"} ${slot + 1}`}
+          <b title={playerDisplayName(player, playerNames, player?.slot ?? slot + (red ? 5 : 0))}>
+            {playerDisplayName(player, playerNames, player?.slot ?? slot + (red ? 5 : 0))}
           </b>
         </div>
+        <span
+          className={`experience-track${xpProgress === null ? " unavailable" : ""}`}
+          role="progressbar"
+          aria-label="Tiến độ kinh nghiệm"
+          aria-valuemin={0}
+          aria-valuemax={100}
+          aria-valuenow={
+            xpProgress === null ? undefined : Math.round(xpProgress * 100)
+          }
+          title={
+            xpProgress === null
+              ? "Chưa có XP đến cấp tiếp theo"
+              : `XP ${Math.round(xpProgress * 100)}% · ngưỡng cấp SR`
+          }
+        >
+          <i
+            style={{
+              width: xpProgress === null ? "0%" : `${xpProgress * 100}%`,
+            }}
+          />
+        </span>
         {health ? (
           <span className="health-track">
             <i
@@ -435,10 +554,15 @@ function LiveRow({
           <span className="live-missing-stat">HP</span>
         )}
         {resource ? (
-          <span className="resource-track">
+          <span
+            className="resource-track"
+            data-resource-kind={resourceStyle.kind}
+            title={resourceStyle.label}
+          >
             <i
               style={{
-                width: `${Math.min(100, (100 * resource.current) / resource.max)}%`,
+                width: `${dead ? 0 : Math.min(100, (100 * resource.current) / resource.max)}%`,
+                backgroundColor: resourceStyle.color,
               }}
             />
           </span>
@@ -461,13 +585,19 @@ export function LiveOverlay({
   frame,
   now,
   rehearsal,
+  broadcast,
 }: {
   theme: Theme;
   frame: ObserverFrame | null;
   now: number;
   rehearsal?: RehearsalDisplay;
+  broadcast?: import("../../shared/schema").State["broadcast"];
 }) {
   const v = livePresentation(frame, now);
+  const portraitDuration = portraitCueDuration(
+    rehearsal?.kind === "minimal" ||
+      broadcastWidgetOn(broadcast, "minimal", theme),
+  );
   const [baronWindow, setBaronWindow] = useState<BaronWindow | null>(null);
   const [elderWindow, setElderWindow] = useState<ElderWindow | null>(null);
   const [objectiveAlert, setObjectiveAlert] = useState<{
@@ -496,7 +626,9 @@ export function LiveOverlay({
     }
     const event =
       latestObjectiveEvent(frame) ??
-      frame.newEvents.find((e) => e.kind === "TurretKilled");
+      frame.newEvents.find(
+        (e) => e.kind === "TurretKilled" && e.firstTurret === true,
+      );
     const manualCue = frame.playback?.trigger === "manual-rehearsal";
     if (manualCue && !event) setObjectiveAlert(null);
     if (event) setObjectiveAlert({ event, expiresAt: now + 7000 });
@@ -504,11 +636,21 @@ export function LiveOverlay({
       [
         ...(manualCue ? [] : previous.filter((a) => a.expiresAt > now)),
         ...frame.newEvents
-          .filter((e) =>
-            ["InhibKilled", "ChampionKill", "Ace"].includes(e.kind),
+          .filter(
+            (e) =>
+              (e.kind !== "TurretKilled" || e.firstTurret === true) &&
+              [
+                "InhibKilled",
+                "ChampionKill",
+                "Ace",
+                "DragonKill",
+                "BaronKill",
+                "HeraldKill",
+                "TurretKilled",
+              ].includes(e.kind),
           )
           .map((event) => ({ event, expiresAt: now + 7000 })),
-      ].slice(-4),
+      ].slice(-32),
     );
     setPortraitAlerts((previous) => {
       const next = manualCue ? {} : { ...previous };
@@ -526,7 +668,9 @@ export function LiveOverlay({
           )
             next[e.playerSlot] = {
               event: e,
-              expiresAt: now + (e.kind === "RoleQuestCompleted" ? 4000 : 3000),
+              expiresAt:
+                now +
+                (e.kind === "RoleQuestCompleted" ? portraitCueDuration(false) : portraitDuration),
             };
       return next;
     });
@@ -579,6 +723,7 @@ export function LiveOverlay({
       )
     : null;
   const showPowerPlay =
+    graphicEnabled(theme, "baronPowerplay") &&
     v.sample &&
     (variant?.buffs
       ? previewBaron
@@ -594,6 +739,7 @@ export function LiveOverlay({
       ? elderWindow.startedAt + ELDER_BUFF_SECONDS
       : null;
   const showElder =
+    graphicEnabled(theme, "elderTimer") &&
     v.sample &&
     (variant?.buffs ? previewElder : elderTeam) &&
     (previewElder || !allElderLost(v.sample, elderTeam!)) &&
@@ -606,6 +752,7 @@ export function LiveOverlay({
           .padStart(2, "0")}:${Math.floor(v.time % 60)
           .toString()
           .padStart(2, "0")}`;
+  const showRunes = !!v.sample && (rehearsal?.kind === "runes" || broadcastWidgetOn(broadcast, "runes", theme));
   return (
     <>
       {rehearsal && v.sample && (
@@ -615,14 +762,24 @@ export function LiveOverlay({
             : "KÍCH HOẠT THỬ · SNAPSHOT THẬT"}
         </div>
       )}
-      {rehearsal?.kind === "runes" && v.sample && (
+      <MotionPresence
+        show={showRunes}
+      >
         <aside className="real-rune-board" data-region="runes">
           <h3>TEAM RUNES</h3>
           <div className="rune-teams">
             {[v.blue, v.red].map((players, side) => (
               <div className={`rune-team ${side ? "red" : "blue"}`} key={side}>
                 {players.map((p) => (
-                  <div className="rune-card" key={p.slot}>
+                  <div
+                    className="rune-card"
+                    key={p.slot}
+                    style={
+                      {
+                        "--rune-delay": `${480 + (p.slot % 5) * 55}ms`,
+                      } as CSSProperties
+                    }
+                  >
                     {v.sample?.assetVersion === liveCatalog.version &&
                       liveChampion(p.championId.value) && (
                         <img
@@ -656,46 +813,36 @@ export function LiveOverlay({
               </div>
             ))}
           </div>
-          <b className="rune-blue-name">{theme.blueName}</b>
+          <div className="rune-team-brand rune-blue-name">
+            <b title={theme.blueName}>{theme.blueName}</b>
+            {theme.blueLogo && <img className="rune-team-logo" src={theme.blueLogo} alt={`Logo ${theme.blueName}`} />}
+          </div>
           <b className="rune-versus">VS</b>
-          <b className="rune-red-name">{theme.redName}</b>
+          <div className="rune-team-brand rune-red-name">
+            <b title={theme.redName}>{theme.redName}</b>
+            {theme.redLogo && <img className="rune-team-logo" src={theme.redLogo} alt={`Logo ${theme.redName}`} />}
+          </div>
         </aside>
-      )}
-      {rehearsal?.kind === "gold" && v.sample && (
-        <aside className="real-gold-ranking" data-region="gold">
-          <h3>TOTAL GOLD</h3>
-          {[...v.sample.players]
-            .filter((p) => p.totalGold.value != null)
-            .sort((a, b) => b.totalGold.value! - a.totalGold.value!)
-            .map((p, index) => (
-              <div
-                key={p.slot}
-                className={p.team.value === "ORDER" ? "blue" : "red"}
-              >
-                {v.sample?.assetVersion === liveCatalog.version &&
-                  liveChampion(p.championId.value) && (
-                    <img src={liveChampion(p.championId.value)!.icon} alt="" />
-                  )}
-                <span>
-                  {liveChampion(p.championId.value)?.name ??
-                    `SLOT ${p.slot + 1}`}
-                </span>
-                <b>{gold(p.totalGold.value)}</b>
-                <span className="ranking-track">
-                  <i
-                    style={{
-                      width: `${(100 * p.totalGold.value!) / Math.max(1, ...v.sample!.players.map((p) => p.totalGold.value ?? 0))}%`,
-                    }}
-                  />
-                </span>
-              </div>
-            ))}
-        </aside>
-      )}
-      {showPowerPlay && (
+      </MotionPresence>
+      <RankingBoard
+        sample={v.sample}
+        mode="gold"
+        playerNames={theme.playerNames}
+        show={
+          rehearsal?.kind === "gold" ||
+          broadcastWidgetOn(broadcast, "gold", theme)
+        }
+      />
+      <MotionPresence show={!!showPowerPlay}>
         <aside
-          className="real-powerplay"
+          className={`real-powerplay ${powerPlay?.team === "CHAOS" ? "buff-side-red" : "buff-side-blue"}`}
+          data-team={powerPlay?.team}
           data-region="baron"
+          style={
+            {
+              "--powerplay-color": objectiveVisual("baron")!.color,
+            } as CSSProperties
+          }
           title="Δ vàng suy ra từ mốc nhận buff; timer quy tắc 3 phút, kết thúc sớm khi cả đội mất buff quan sát"
         >
           <span className="powerplay-symbol">
@@ -721,28 +868,45 @@ export function LiveOverlay({
           <small className="sr-only">
             Δ GOLD · SUY RA · TIMER QUY TẮC 3 PHÚT
           </small>
+          <BuffTimeProgress
+            endAt={powerPlayEnd}
+            time={v.time}
+            duration={BARON_BUFF_SECONDS}
+            label="Thời gian Baron còn lại"
+          />
         </aside>
-      )}
+      </MotionPresence>
       {frame?.playback && (
         <div className="recording-watermark">BẢN GHI / KIỂM THỬ</div>
       )}
-      {theme.widgets.objectives && showElder && (
+      <MotionPresence show={!!showElder}>
         <aside
-          className={`real-elder-timer ${showPowerPlay ? "alongside-baron" : ""}`}
+          className={`real-elder-timer ${elderTeam === "CHAOS" ? "buff-side-red" : "buff-side-blue"} ${showPowerPlay && powerPlay?.team === elderTeam ? "alongside-baron" : ""}`}
+          data-team={elderTeam}
           data-region="elder"
+          style={
+            {
+              "--powerplay-color": objectiveVisual("elder")!.color,
+            } as CSSProperties
+          }
           title="Rồng Ngàn Tuổi: timer quy tắc 150 giây; buff từng player do LB báo, không tính vàng"
         >
           <span className="elder-symbol">
             <MetricIcon kind="dragon" dragonType="elder" />
           </span>
-          <b>{elderTeam === "ORDER" ? theme.blueName : theme.redName}</b>
           <time>
             {elderEnd != null && v.time != null
               ? countdown(elderEnd - v.time)
               : "--:--"}
           </time>
+          <BuffTimeProgress
+            endAt={elderEnd}
+            time={v.time}
+            duration={ELDER_BUFF_SECONDS}
+            label="Thời gian Rồng Ngàn Tuổi còn lại"
+          />
         </aside>
-      )}
+      </MotionPresence>
       <header
         className="ref-scoreboard live-scoreboard"
         data-region="scoreboard"
@@ -751,16 +915,24 @@ export function LiveOverlay({
         <div className="score-main">
           <div className="score-team side-blue">
             <span className="live-series-pips" aria-hidden="true">
-              <i />
-              <i />
-              <i />
+              {Array.from(
+                {
+                  length: seriesSlots(theme),
+                },
+                (_, i) => (
+                  <i
+                    key={i}
+                    className={i < (theme.blueScore ?? 0) ? "won" : ""}
+                  />
+                ),
+              )}
             </span>
-            {theme.blueName === "KT" && (
-              <span className="broadcast-mark mark-kt" aria-label="KT" />
+            {theme.blueLogo && (
+              <img className="team-logo" src={theme.blueLogo} alt="" />
             )}
             <div className="team-caption">
               <b>{theme.blueName}</b>
-              <span>BLUE</span>
+              <span>{theme.tournament}</span>
             </div>
           </div>
           <div className="score-economy">
@@ -770,26 +942,36 @@ export function LiveOverlay({
             </span>
             <span>
               <MetricIcon kind="gold" />
-              {theme.widgets.gold ? gold(v.blueGold) : ""}
-              {theme.widgets.gold && delta !== null && delta < 0 && (
-                <small className="blue-lead">+{goldGap(Math.abs(delta))}</small>
-              )}
+              <span className="score-gold-value">
+                {theme.widgets.gold ? gold(v.blueGold) : ""}
+                {theme.widgets.gold && delta !== null && delta < 0 && (
+                  <small className="blue-lead">
+                    +{goldGap(Math.abs(delta))}
+                  </small>
+                )}
+              </span>
             </span>
           </div>
           <div className="score-kills">
             <b>{value(v.blueKills)}</b>
             <span className="live-versus" aria-label="Giải đấu">
-              ◆
+              {theme.scoreboardLogo ? (
+                <img src={theme.scoreboardLogo} alt="Logo giải đấu" />
+              ) : (
+                "◆"
+              )}
             </span>
             <b>{value(v.redKills)}</b>
           </div>
           <div className="score-economy right">
             <span>
-              {theme.widgets.gold ? gold(v.redGold) : ""}
+              <span className="score-gold-value">
+                {theme.widgets.gold ? gold(v.redGold) : ""}
+                {theme.widgets.gold && delta !== null && delta > 0 && (
+                  <small className="red-lead">+{goldGap(delta)}</small>
+                )}
+              </span>
               <MetricIcon kind="gold" />
-              {theme.widgets.gold && delta !== null && delta > 0 && (
-                <small className="red-lead">+{goldGap(delta)}</small>
-              )}
             </span>
             <span title="Số trụ">
               {value(v.redTowers)}
@@ -798,25 +980,43 @@ export function LiveOverlay({
           </div>
           <div className="score-team side-red">
             <span className="live-series-pips" aria-hidden="true">
-              <i />
-              <i />
-              <i />
+              {Array.from(
+                {
+                  length: seriesSlots(theme),
+                },
+                (_, i) => (
+                  <i
+                    key={i}
+                    className={i < (theme.redScore ?? 0) ? "won" : ""}
+                  />
+                ),
+              )}
             </span>
             <div className="team-caption">
               <b>{theme.redName}</b>
-              <span>RED</span>
+              <span>{theme.tournament}</span>
             </div>
-            {theme.redName === "T1" && (
-              <span className="broadcast-mark mark-t1" aria-label="T1" />
+            {theme.redLogo && (
+              <img className="team-logo" src={theme.redLogo} alt="" />
             )}
           </div>
         </div>
         <div className="score-sub">
           <span
-            className="live-role-quests blue-role-quests"
-            aria-label="Role Quest đội xanh"
+            className={
+              theme.playerCameras === false
+                ? "live-team-grubs blue-team-grubs"
+                : "live-role-quests blue-role-quests"
+            }
+            aria-label="Sâu hư không đội xanh"
           >
-            <RoleQuestRow quests={v.blueRoleQuests} />
+            {theme.playerCameras !== false &&
+              v.blue.map(
+                (p) =>
+                  p.roleQuest?.value && (
+                    <RoleQuestIcon key={p.slot} {...p.roleQuest.value} />
+                  ),
+              )}
             <span className="grub-count" title="Sâu hư không đội xanh">
               <MetricIcon kind="baron" dragonType="GRUB" />
               <b>
@@ -857,10 +1057,20 @@ export function LiveOverlay({
             ))}
           </span>
           <span
-            className="live-role-quests red-role-quests"
-            aria-label="Role Quest đội đỏ"
+            className={
+              theme.playerCameras === false
+                ? "live-team-grubs red-team-grubs"
+                : "live-role-quests red-role-quests"
+            }
+            aria-label="Sâu hư không đội đỏ"
           >
-            <RoleQuestRow quests={v.redRoleQuests} />
+            {theme.playerCameras !== false &&
+              v.red.map(
+                (p) =>
+                  p.roleQuest?.value && (
+                    <RoleQuestIcon key={p.slot} {...p.roleQuest.value} />
+                  ),
+              )}
             <span className="grub-count" title="Sâu hư không đội đỏ">
               <MetricIcon kind="baron" dragonType="GRUB" />
               <b>
@@ -871,59 +1081,42 @@ export function LiveOverlay({
           </span>
         </div>
       </header>
-      {theme.widgets.objectives &&
+      {(graphicEnabled(theme, "objectiveBanners") ||
+        graphicEnabled(theme, "soulTakeover")) &&
         visibleObjectiveAlert &&
         (() => {
           const blue = visibleObjectiveAlert.team === "ORDER";
           if (visibleObjectiveAlert.kind === "TurretKilled")
-            return (
+            return visibleObjectiveAlert.firstTurret === true ? (
               <TowerBanner
                 team={blue ? theme.blueName : theme.redName}
                 first={visibleObjectiveAlert.firstTurret}
               />
-            );
+            ) : null;
           if (visibleObjectiveAlert.kind === "DragonSoul") {
-            return <SoulTakeover event={visibleObjectiveAlert} theme={theme} />;
-          }
-          if (visibleObjectiveAlert.kind === "DragonKill")
-            return <DragonBanner type={visibleObjectiveAlert.objectiveType} />;
-          const team = blue ? theme.blueName : theme.redName;
-          const dragonNames: Record<string, string> = {
-            fire: "RỒNG LỬA",
-            earth: "RỒNG ĐẤT",
-            water: "RỒNG NƯỚC",
-            air: "RỒNG GIÓ",
-            hextech: "RỒNG HEXTECH",
-            chemtech: "RỒNG HÓA KỸ",
-            elder: "RỒNG NGÀN TUỔI",
-          };
-          const dragon =
-            dragonNames[visibleObjectiveAlert.objectiveType ?? ""] ?? "RỒNG";
-          const objective =
-            visibleObjectiveAlert.kind === "BaronKill"
-              ? "BARON NASHOR"
-              : dragon;
-          return (
-            <aside
-              className={`live-event-banner ${blue ? "blue" : "red"}`}
-              role="status"
-            >
-              <MetricIcon
-                dragonType={visibleObjectiveAlert.objectiveType}
-                kind={
-                  visibleObjectiveAlert.kind === "BaronKill"
-                    ? "baron"
-                    : "dragon"
-                }
+            return (
+              <SoulTakeover
+                key={visibleObjectiveAlert.id}
+                event={visibleObjectiveAlert}
+                theme={theme}
+                artworkVisible={graphicEnabled(theme, "soulTakeover")}
+                bannerVisible={graphicEnabled(theme, "objectiveBanners")}
               />
-              <div>
-                <b>{team}</b>
-                <span>ĐÃ HẠ GỤC {objective}</span>
-              </div>
-            </aside>
-          );
+            );
+          }
+          if (!graphicEnabled(theme, "objectiveBanners")) return null;
+          if (visibleObjectiveAlert.kind === "DragonKill")
+            return (
+              <DragonBanner
+                key={visibleObjectiveAlert.id}
+                type={visibleObjectiveAlert.objectiveType}
+              />
+            );
+          // No generic "team has slain" center banner. Dedicated dragon/soul
+          // strip, first-turret banner, counters and powerplays remain independent.
+          return null;
         })()}
-      {theme.widgets.objectives && (
+      <MotionPresence show={graphicEnabled(theme, "pitTimers") && !!v.sample}>
         <div className="live-objective-stack">
           {v.pitTimers.map((timer) => {
             const timerType =
@@ -945,41 +1138,54 @@ export function LiveOverlay({
                       ? destroy - v.time
                       : 0;
             const label =
-              objectiveVisual(timerType)?.label ?? "CHƯA XÁC ĐỊNH MỤC TIÊU";
+              objectiveVisual(timerType)?.label ??
+              (timerType === "dragon"
+                ? "RỒNG NGUYÊN TỐ · CHƯA RÕ LOẠI"
+                : "CHƯA XÁC ĐỊNH MỤC TIÊU");
             return (
-              <aside
-                className="ref-objective live-objective"
+              <MotionPresence
                 key={timer.pit}
-                title={label}
+                show={!(timer.pit === "baron" ? showPowerPlay : showElder)}
               >
-                <span>
-                  <MetricIcon
-                    kind={timer.pit === "baron" ? "baron" : "dragon"}
-                    dragonType={timerType ?? undefined}
-                  />
-                </span>
-                <div>
-                  <small>{label}</small>
-                  <b>
-                    {remaining == null
-                      ? "--:--"
-                      : remaining <= 0
-                        ? "LIVE"
-                        : `${Math.floor(remaining / 60)
-                            .toString()
-                            .padStart(2, "0")}:${Math.floor(remaining % 60)
-                            .toString()
-                            .padStart(2, "0")}`}
-                  </b>
-                </div>
-              </aside>
+                <aside
+                  className="ref-objective live-objective"
+                  key={timer.pit}
+                  title={`${label}${timer.basis === "rule-estimate" ? " · timer suy ra từ event + quy tắc SR; phòng tập có thể khác" : ""}`}
+                  data-basis={timer.basis ?? "reported"}
+                >
+                  <span>
+                    <MetricIcon
+                      kind={timer.pit === "baron" ? "baron" : "dragon"}
+                      dragonType={timerType ?? undefined}
+                    />
+                  </span>
+                  <div>
+                    <small>{label}</small>
+                    <b>
+                      {remaining == null
+                        ? "--:--"
+                        : remaining <= 0
+                          ? "LIVE"
+                          : `${Math.floor(remaining / 60)
+                              .toString()
+                              .padStart(2, "0")}:${Math.floor(remaining % 60)
+                              .toString()
+                              .padStart(2, "0")}`}
+                    </b>
+                  </div>
+                </aside>
+              </MotionPresence>
             );
           })}
         </div>
-      )}
-      {theme.widgets.objectives && v.sample && (
+      </MotionPresence>
+      {v.sample && (
         <>
           <InhibitorTimers
+            enabled={
+              graphicEnabled(theme, "inhibitorTimers") &&
+              broadcast?.inhibitors !== "off"
+            }
             preview={
               variant?.inhibitorTeam
                 ? { team: variant.inhibitorTeam, endsAt: previewAt + 300 }
@@ -993,12 +1199,15 @@ export function LiveOverlay({
                 ? "ORDER"
                 : rehearsal?.kind === "inhibitorRed"
                   ? "CHAOS"
-                  : undefined
+                  : broadcast?.inhibitors === "ORDER" ||
+                      broadcast?.inhibitors === "CHAOS"
+                    ? broadcast.inhibitors
+                    : undefined
             }
           />
         </>
       )}
-      {theme.widgets.players && rehearsal?.kind !== "runes" && (
+      {theme.widgets.players && !showRunes && (
         <section
           className="ref-player-table"
           data-region="players"
@@ -1008,17 +1217,34 @@ export function LiveOverlay({
             {Array.from({ length: 5 }, (_, i) => (
               <LiveRow
                 key={i}
+                playerNames={theme.playerNames}
                 slot={i}
                 player={v.blue[i]}
                 assetsReady={v.sample?.assetVersion === liveCatalog.version}
                 red={false}
+                rowQuest={theme.playerCameras === false}
+                buffFrames={graphicEnabled(theme, "buffFrames")}
                 time={v.time}
-                alert={playerAlert(v.blue[i]?.slot ?? i)}
+                alert={
+                  graphicEnabled(theme, "portraitEffects")
+                    ? playerAlert(v.blue[i]?.slot ?? i)
+                    : undefined
+                }
                 previewBuffs={variant?.buffs}
               />
             ))}
           </div>
           <div className="table-gold">
+            <span
+              className="minimal-center-logo"
+              aria-label="Logo giữa hai đội"
+            >
+              {theme.minimalLogo ? (
+                <img src={theme.minimalLogo} alt="Logo giải đấu" />
+              ) : (
+                "◆"
+              )}
+            </span>
             {v.laneGold.map((gap, i) => (
               <div key={i} className={gap ? `lane-gold-${gap.leader}` : ""}>
                 {theme.widgets.gold && gap && gap.leader !== "even" && (
@@ -1029,7 +1255,9 @@ export function LiveOverlay({
                 )}
                 {theme.widgets.gold && gap && gap.leader !== "even"
                   ? goldGap(gap.value)
-                  : ""}
+                  : theme.widgets.gold && gap?.leader === "even"
+                    ? "0"
+                    : ""}
               </div>
             ))}
           </div>
@@ -1039,94 +1267,76 @@ export function LiveOverlay({
                 key={i}
                 slot={i}
                 player={v.red[i]}
+                playerNames={theme.playerNames}
                 assetsReady={v.sample?.assetVersion === liveCatalog.version}
                 red
+                rowQuest={theme.playerCameras === false}
+                buffFrames={graphicEnabled(theme, "buffFrames")}
                 time={v.time}
-                alert={playerAlert(v.red[i]?.slot ?? i + 5)}
+                alert={
+                  graphicEnabled(theme, "portraitEffects")
+                    ? playerAlert(v.red[i]?.slot ?? i + 5)
+                    : undefined
+                }
                 previewBuffs={variant?.buffs ? "none" : undefined}
               />
             ))}
           </div>
         </section>
       )}
-      {theme.widgets.killfeed && v.sample && (
-        <div className="killfeed">
-          {structureAlerts
-            .filter((a) => a.expiresAt > now)
-            .map(({ event }) => (
-              <div key={event.id}>
-                {event.team === "ORDER"
-                  ? theme.blueName
-                  : event.team === "CHAOS"
-                    ? theme.redName
-                    : ""}{" "}
-                ·{" "}
-                {
-                  (
-                    {
-                      TurretKilled: "PHÁ TRỤ",
-                      InhibKilled: "PHÁ NHÀ LÍNH",
-                      InhibRespawned: "NHÀ LÍNH HỒI SINH",
-                      ChampionKill: "HẠ GỤC",
-                      Ace: "QUÉT SẠCH",
-                    } as Record<string, string>
-                  )[event.kind]
-                }
-              </div>
-            ))}
-        </div>
-      )}
-      {(theme.widgets.levels || rehearsal?.kind === "levels") && v.sample && (
-        <aside className="live-level-ranking" data-region="levels">
-          <h3>LEVEL / EXPERIENCE</h3>
-          {rankLevels(v.sample.players).map((p) => {
-            const progress = levelProgress(p);
-            return (
-              <div
-                key={p.slot}
-                className={p.team.value === "CHAOS" ? "red" : "blue"}
-                data-slot={p.slot}
-              >
-                {v.sample?.assetVersion === liveCatalog.version &&
-                  liveChampion(p.championId.value) && (
-                    <img
-                      width="30"
-                      height="30"
-                      src={liveChampion(p.championId.value)!.icon}
-                      alt=""
-                    />
-                  )}
-                <div className="level-summary">
-                  <span>
-                    {liveChampion(p.championId.value)?.name ??
-                      `SLOT ${p.slot + 1}`}
-                  </span>
-                  {progress == null ? (
-                    <span
-                      className="level-progress unavailable"
-                      title="Chưa có dữ liệu XP"
-                    >
-                      CHƯA CÓ XP
-                    </span>
-                  ) : (
-                    <span
-                      className="level-progress"
-                      role="progressbar"
-                      aria-label="Tiến độ cấp tiếp theo"
-                      aria-valuemin={0}
-                      aria-valuemax={100}
-                      aria-valuenow={Math.round(progress * 100)}
-                    >
-                      <i style={{ width: `${progress * 100}%` }} />
-                    </span>
-                  )}
+      {theme.widgets.killfeed &&
+        v.sample &&
+        (theme.killfeedStyle === "broadcast" ? (
+          <BroadcastKillfeed
+            sample={v.sample}
+            theme={theme}
+            events={structureAlerts
+              .filter((a) => a.expiresAt > now)
+              .slice(-4)
+              .map((a) => a.event)}
+          />
+        ) : (
+          <div className="killfeed">
+            {structureAlerts
+              .filter(
+                (a) =>
+                  a.expiresAt > now &&
+                  ["InhibKilled", "ChampionKill", "Ace"].includes(a.event.kind),
+              )
+              .slice(-4)
+              .map(({ event }) => (
+                <div key={event.id}>
+                  {event.team === "ORDER"
+                    ? theme.blueName
+                    : event.team === "CHAOS"
+                      ? theme.redName
+                      : ""}{" "}
+                  ·{" "}
+                  {
+                    (
+                      {
+                        TurretKilled: "PHÁ TRỤ",
+                        InhibKilled: "PHÁ NHÀ LÍNH",
+                        InhibRespawned: "NHÀ LÍNH HỒI SINH",
+                        ChampionKill: "HẠ GỤC",
+                        Ace: "QUÉT SẠCH",
+                      } as Record<string, string>
+                    )[event.kind]
+                  }
                 </div>
-                <b>{p.level.value ?? "—"}</b>
-              </div>
-            );
-          })}
-        </aside>
-      )}
+              ))}
+          </div>
+        ))}
+      <RankingBoard
+        sample={v.sample}
+        mode="levels"
+        playerNames={theme.playerNames}
+        show={
+          rehearsal?.kind === "levels" ||
+          broadcastWidgetOn(broadcast, "levels", theme)
+        }
+        alongside={broadcastWidgetOn(broadcast, "gold", theme)}
+      />
     </>
   );
 }

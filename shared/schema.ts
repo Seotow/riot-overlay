@@ -1,4 +1,7 @@
 import { z } from "zod";
+import { draftSchema, type DraftState } from "./draft";
+import { hudSchema } from "./replay-hud";
+import { postgameSampleSchema, type PostgameState } from "./postgame";
 import {
   rehearsalKindSchema,
   rehearsalVariantSchema,
@@ -7,6 +10,49 @@ import {
 export const sceneSchema = z.enum(["ingame", "draft", "postgame"]);
 const color = z.string().regex(/^#[0-9a-fA-F]{6}$/);
 export const themeSchema = z.object({
+  killfeedStyle: z.enum(["text", "broadcast"]).optional(),
+  replayHud: hudSchema.optional(),
+  ingamePanelOpacity: z.number().min(0.35).max(0.9).optional(),
+  draftLayout: z.enum(["broadcast", "simple"]).optional(),
+  playerCameras: z.boolean().optional(),
+  playerNames: z.array(z.string().max(80)).length(10).optional(),
+  blueSecondary: color.optional(),
+  redSecondary: color.optional(),
+  ingameGraphics: z
+    .object({
+      pitTimers: z.boolean().optional(),
+      baronPowerplay: z.boolean().optional(),
+      elderTimer: z.boolean().optional(),
+      soulTakeover: z.boolean().optional(),
+      objectiveBanners: z.boolean().optional(),
+      inhibitorTimers: z.boolean().optional(),
+      portraitEffects: z.boolean().optional(),
+      buffFrames: z.boolean().optional(),
+    })
+    .optional(),
+  scoreboardLogo: z
+    .string()
+    .max(150000)
+    .regex(/^$|^data:image\/png;base64,[A-Za-z0-9+/=]+$/)
+    .optional(),
+  minimalLogo: z
+    .string()
+    .max(150000)
+    .regex(/^$|^data:image\/png;base64,[A-Za-z0-9+/=]+$/)
+    .optional(),
+  blueLogo: z
+    .string()
+    .max(500000)
+    .regex(/^$|^data:image\/(png|jpeg|webp);base64,[A-Za-z0-9+/=]+$/)
+    .optional(),
+  redLogo: z
+    .string()
+    .max(500000)
+    .regex(/^$|^data:image\/(png|jpeg|webp);base64,[A-Za-z0-9+/=]+$/)
+    .optional(),
+  blueScore: z.number().int().min(0).max(9).optional(),
+  redScore: z.number().int().min(0).max(9).optional(),
+  seriesGames: z.number().int().min(1).max(9).optional(),
   version: z.literal(1),
   name: z.string().min(1).max(60),
   tournament: z.string().min(1).max(80),
@@ -30,13 +76,16 @@ export const themeSchema = z.object({
 });
 export type Theme = z.infer<typeof themeSchema>;
 export const defaultTheme: Theme = {
+  playerCameras: false,
   version: 1,
   name: "Tournament / Placeholder",
   tournament: "YOUR TOURNAMENT",
   blueName: "TEAM AZURE",
   redName: "TEAM CRIMSON",
-  blue: "#51c9ef",
-  red: "#f77983",
+  blue: "#0872b8",
+  red: "#bb243b",
+  blueSecondary: "#0373e0",
+  redSecondary: "#ba191c",
   accent: "#d8bc7e",
   background: "#101820",
   font: "system",
@@ -52,6 +101,31 @@ export const defaultTheme: Theme = {
   },
 };
 export const commandSchema = z.discriminatedUnion("type", [
+  z.object({ type: z.literal("draftState"), value: draftSchema }),
+  z.object({
+    type: z.literal("postgameState"),
+    value: postgameSampleSchema.nullable(),
+  }),
+  z.object({
+    type: z.literal("broadcast"),
+    value: z.object({
+      view: z.enum(["normal", "gold", "levels", "runes", "minimal"]),
+      inhibitors: z.enum(["off", "auto", "ORDER", "CHAOS"]),
+      layout: z.enum(["panel", "minimal"]).optional(),
+      gold: z.boolean().optional(),
+      levels: z.boolean().optional(),
+      runes: z.boolean().optional(),
+    }),
+  }),
+  z.object({
+    type: z.literal("broadcastWidget"),
+    key: z.enum(["gold", "levels", "runes", "minimal"]),
+    value: z.boolean(),
+  }),
+  z.object({
+    type: z.literal("broadcastInhibitors"),
+    value: z.enum(["off", "auto", "ORDER", "CHAOS"]),
+  }),
   z.object({
     type: z.literal("rehearsal"),
     value: rehearsalKindSchema,
@@ -59,7 +133,13 @@ export const commandSchema = z.discriminatedUnion("type", [
   }),
   z.object({
     type: z.literal("provider"),
-    value: z.enum(["riot", "leaguebroadcast", "recording"]),
+    value: z.enum([
+      "riot",
+      "leaguebroadcast",
+      "league-collector",
+      "collector-accountless",
+      "recording",
+    ]),
   }),
   z.object({
     type: z.literal("captureLoad"),
@@ -89,6 +169,11 @@ export const commandSchema = z.discriminatedUnion("type", [
     value: z.enum(["balanced", "advantage", "missing"]),
   }),
   z.object({ type: z.literal("theme"), value: themeSchema }),
+  z.object({
+    type: z.literal("ingameGraphic"),
+    key: themeSchema.shape.ingameGraphics.unwrap().keyof(),
+    value: z.boolean(),
+  }),
   z.object({ type: z.literal("reset") }),
 ]);
 export type Command = z.infer<typeof commandSchema>;
@@ -112,12 +197,27 @@ export type Player = {
   vision: number;
 };
 export type State = {
+  draft?: DraftState;
+  postgame?: PostgameState | null;
+  broadcast?: {
+    view: "normal" | "gold" | "levels" | "runes" | "minimal";
+    inhibitors: "off" | "auto" | "ORDER" | "CHAOS";
+    layout?: "panel" | "minimal";
+    gold?: boolean;
+    levels?: boolean;
+    runes?: boolean;
+  };
   rehearsal?: RehearsalDisplay;
   protocol: 1;
   revision: number;
   source: "mock";
   mockVisible: boolean;
-  provider: "riot" | "leaguebroadcast" | "recording";
+  provider:
+    | "riot"
+    | "leaguebroadcast"
+    | "league-collector"
+    | "collector-accountless"
+    | "recording";
   scene: z.infer<typeof sceneSchema>;
   playing: boolean;
   gameTime: number;

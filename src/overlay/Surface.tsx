@@ -1,10 +1,13 @@
 import { LiveOverlay } from "./LiveOverlay";
+import { broadcastWidgetOn } from "../../shared/broadcast-controls";
 import type { ObserverFrame } from "../../shared/observer";
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import type { State, Player } from "../../shared/schema";
 import { clock } from "../../shared/mock";
 import { champion, item, spell, rune, catalog } from "../../shared/assets";
 import { draftFixture } from "../../shared/reference";
+import { DraftOverlay } from "./DraftOverlay";
+import { PostgameOverlay } from "./PostgameOverlay";
 
 // Broadcast marks are explicit crops from the user-supplied reference, never HUD/data.
 function Mark({ kind, name }: { kind: "kt" | "t1" | "worlds"; name?: string }) {
@@ -367,8 +370,11 @@ export function Surface({
       : state.scene;
   const t = state.theme;
   const style = {
+    "--ingame-panel-opacity": t.ingamePanelOpacity ?? 0.84,
     "--blue": t.blue,
     "--red": t.red,
+    "--broadcast-blue": broadcastColors(t).blue,
+    "--broadcast-red": broadcastColors(t).red,
     "--accent": t.accent,
     "--panel": t.background,
     "--display-font":
@@ -383,7 +389,7 @@ export function Surface({
   return (
     <div ref={shell} className={`surface ${preview ? "preview" : ""}`}>
       <div
-        className={`canvas ref-canvas ${!state.mockVisible ? "live-canvas" : ""} ${state.rehearsal?.kind === "minimal" ? "minimal" : t.variant}`}
+        className={`canvas ref-canvas ${!state.mockVisible ? "live-canvas" : ""} ${t.playerCameras === false ? "no-player-cameras" : ""} ${state.rehearsal?.kind === "minimal" || broadcastWidgetOn(state.broadcast, "minimal", t) ? "minimal" : "panel"}`}
         style={style}
       >
         {state.mockVisible && preview && (reference || compare) && (
@@ -420,25 +426,32 @@ export function Surface({
               transform: `translateY(${t.offsetY}px) scale(${t.scale})`,
             }}
           >
-            <LiveOverlay
-              theme={
-                state.rehearsal
-                  ? {
-                      ...t,
-                      widgets: {
-                        ...t.widgets,
-                        players: true,
-                        objectives: true,
-                        killfeed: true,
-                        levels: state.rehearsal.kind === "levels",
-                      },
-                    }
-                  : t
-              }
-              frame={observation}
-              now={now}
-              rehearsal={state.rehearsal}
-            />
+            {active === "draft" ? (
+              <DraftOverlay theme={t} draft={state.draft} now={now} />
+            ) : active === "ingame" ? (
+              <LiveOverlay
+                theme={
+                  state.rehearsal
+                    ? {
+                        ...t,
+                        widgets: {
+                          ...t.widgets,
+                          players: true,
+                          objectives: true,
+                          killfeed: true,
+                          levels: state.rehearsal.kind === "levels",
+                        },
+                      }
+                    : t
+                }
+                frame={observation}
+                now={now}
+                rehearsal={state.rehearsal}
+                broadcast={state.rehearsal ? undefined : state.broadcast}
+              />
+            ) : active === "postgame" ? (
+              <PostgameOverlay theme={t} data={state.postgame} />
+            ) : null}
           </div>
         )}
         {state.mockVisible && !compare && (
@@ -498,40 +511,7 @@ export function Surface({
             )}
             {active === "draft" && <Draft state={state} />}
             {active === "postgame" && (
-              <section className="postgame">
-                <small>{t.tournament} / GAME 01</small>
-                <h1>{t.redName}</h1>
-                <h2>VICTORY</h2>
-                <div className="result-score">
-                  {state.blueKills} <span>:</span> {state.redKills}
-                </div>
-                <p>THỜI GIAN TRẬN: {clock(state.gameTime)}</p>
-                <div className="result-table">
-                  <div>
-                    <b>PLAYER</b>
-                    <b>CHAMPION</b>
-                    <b>K / D / A</b>
-                    <b>CS</b>
-                  </div>
-                  {state.players.map((p) => (
-                    <div key={p.id}>
-                      <span>{p.name}</span>
-                      <span>
-                        <img
-                          className="result-champion"
-                          src={champion(p.championId).icon}
-                          alt=""
-                        />
-                        {p.champion}
-                      </span>
-                      <span>
-                        {p.kills}/{p.deaths}/{p.assists}
-                      </span>
-                      <span>{p.cs}</span>
-                    </div>
-                  ))}
-                </div>
-              </section>
+              <PostgameOverlay theme={t} data={state.postgame} />
             )}
           </div>
         )}
@@ -539,3 +519,4 @@ export function Surface({
     </div>
   );
 }
+import { broadcastColors } from "../../shared/broadcast-colors";

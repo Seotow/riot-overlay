@@ -1,4 +1,6 @@
 import { WebSocket } from "ws";
+import { projectItemCounters } from "../shared/item-counters";
+import { completedItemIds } from "../shared/completed-items";
 import { questRoles, completedQuestIds, bootIds } from "../shared/role-quest";
 import { INHIBITOR_RESPAWN_SECONDS } from "../shared/game-rules";
 import { normalizeIngame } from "./ingame-adapter";
@@ -80,6 +82,9 @@ export function normalizeLeagueBroadcast(
       );
       players.push({
         team: side === 0 ? "ORDER" : "CHAOS",
+        riotIdGameName: p.riotIdGameName ?? detail.riotIdGameName,
+        riotId: p.riotId ?? detail.riotId,
+        summonerName: p.summonerName ?? detail.summonerName ?? p.name ?? detail.name,
         championId: obj(p.champion).id,
         level: p.level,
         totalGold: p.totalGold,
@@ -247,6 +252,7 @@ export function normalizeLeagueBroadcast(
           : {};
       const row = obj(obj(teams[side]).players[slot]);
       const rowItems = Array.isArray(row.items) ? row.items.map(obj) : [];
+      player.itemCounters = observed(projectItemCounters(rowItems));
       const questItem = rowItems.find(
         (i) =>
           i.slot === 8 &&
@@ -315,6 +321,7 @@ export function normalizeLeagueBroadcast(
         typeof detail.hasElder === "boolean" ? detail.hasElder : null,
       );
       const xp = obj(detail.experience);
+      player.championStacks = observed(stackChampion(player.championId.value) ? validChampionStacks(detail.stacksData) : null);
       player.experience = observed(
         finite(xp.previousLevel) &&
           finite(xp.current) &&
@@ -551,9 +558,7 @@ export class LeagueBroadcastSource {
       });
     if (before) {
       // Explicit major-item allowlist: do not classify arbitrary unknown IDs as completions.
-      const completedItems = new Set([
-        4646, 3152, 3026, 3157, 3089, 4645, 3031, 3036, 6676, 3124, 3072,
-      ]);
+      const completedItems = completedItemIds;
       for (const player of sample.players) {
         const old = before.players.find(
           (p) =>
@@ -921,3 +926,4 @@ export class LeagueBroadcastSource {
   }
 }
 export const leagueBroadcast = new LeagueBroadcastSource();
+import { stackChampion, validChampionStacks } from "../shared/champion-stacks";

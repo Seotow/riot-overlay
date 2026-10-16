@@ -1,5 +1,37 @@
 # Lộ trình tiếp theo — ưu tiên LoL
 
+## Ưu tiên hiện hành 17/10/2026
+
+Chốt phase snapshot/UI bằng commit trước. Tiếp theo trùng tu toàn bộ Studio
+bằng shadcn theo luồng vận hành: cấu hình, nguồn, phát sóng, bản ghi, cấm chọn,
+sau trận và HUD. Giảm thông tin thừa/debug, giữ availability và cảnh báo cần
+thiết; không thay layout phát sóng đã duyệt. Sau đó mới tiếp tục custom/EOG
+và các telemetry còn thiếu trong `docs/PHASE_HANDOFF_2026-10-17.md`.
+
+## Collector tích hợp — ưu tiên hiện tại 15/10/2026
+
+Launcher/provider/Studio/OBS đã nối và test offline, kể cả launcher thử thoát
+không cleanup ở host idle. Khi game sẵn sàng, kiểm tuyến thật không mở LB gốc rồi đối chiếu
+CS, lane, HP/gold/cooldown và stability qua session. Ngọc/buff/objective/event
+vẫn là phần thiếu của mục tiêu đầy đủ. Xem
+[runbook](Collector/docs/PROJECT-RUNBOOK.vi.md); không quay lại khảo sát UI baseline.
+
+## Postgame UI đang chờ duyệt — 13/10/2026
+
+Đã dựng trang `/?page=postgame` và contract mẫu phiên bản 1 theo ảnh người dùng.
+Chưa nối nguồn thật, chưa tự activate theo GameEnd. Người dùng duyệt bố cục
+trước; sau đó mới kiểm chứng nguồn winner, damage và lịch sử vàng. Xem
+[POSTGAME_UI_REVIEW](docs/POSTGAME_UI_REVIEW.md). Giữ baseline draft/in-game
+và nhánh REA độc lập.
+
+## Ưu tiên 12/10/2026
+
+In-game tạm dừng ở mức kiểm thử từng phần; bước kiểm chứng kế tiếp là track toàn
+bộ trận và ghi feed xuyên suốt, xem `docs/LIVE_MATCH_RUNBOOK.md`. Chưa chạy trận
+live mới. Cấm chọn chuyển sang hoàn thiện module theo ảnh: UI/luồng nhập tay đã
+có, draft tự động cần capture session thật và kiểm chứng hover/lock/timer/swap.
+Xem `docs/DRAFT_RUNBOOK.md`; thứ tự này thay mốc hoãn champ-select phía dưới.
+
 Baseline UI draft/in-game đã được người dùng duyệt. Lộ trình dưới đây chưa phải danh sách tính năng đã triển khai.
 
 ## 1. Chẩn đoán nguồn dữ liệu local
@@ -34,7 +66,7 @@ Logo/font riêng, vị trí/kích thước từng widget, preset có migration, 
 
 ## Ngoài phạm vi hiện tại
 
-Theo yêu cầu 11/10/2026, Valorant bắt đầu nhánh nghiên cứu ValoSpectra song song với LoL; xem [VALOSPECTRA_FEASIBILITY.md](VALOSPECTRA_FEASIBILITY.md). Chưa triển khai adapter/renderer Valorant và chưa thay ưu tiên production LoL. TFT vẫn để sau. Các project tham khảo ban đầu: Riot Developer Portal, RCVolus/league-prod-toolkit, League Broadcast và ValoSpectra/Spectra-Client. Thông tin API/chính sách có thể đổi; cần kiểm chứng lại từ nguồn chính thức khi bắt đầu adapter tương ứng.
+Valorant được nghiên cứu song song với LoL theo yêu cầu 11/10/2026; mốc 13/10 đã fork local BE/FE/Client và triển khai launcher độc lập, build/lifecycle/browser kiểm chứng đạt. Tiếp theo cần executable collector để chạy nguồn thật, rồi chốt capability và nhúng/custom module trong Studio. Chưa xác minh telemetry game hoặc collector fork; TFT vẫn để sau. Xem [runbook module](docs/VALORANT_MODULE.md) và [nghiên cứu nguồn](VALOSPECTRA_FEASIBILITY.md). Thông tin API/chính sách cần kiểm chứng từ nguồn chính thức khi mở rộng.
 
 ## Phase provider và game module
 
@@ -61,6 +93,14 @@ mẫu live. Chưa chứng minh 95–98% toàn UI. Collector headless/REA là nh�
 Đã có collector trong backend, adapter mẫu đã lọc, session/epoch/dedup và bảng quan sát Studio; xem `PROJECT_STATUS.md`. Người dùng chọn kiểm chứng bằng replay trước, tạm hoãn champ-select. Việc kế tiếp cần client: xác minh từng field, pause/tốc độ/tua/reconnect. Không coi kiểm thử fixture là bằng chứng API thực tế hỗ trợ field.
 
 ## Ưu tiên mới cho collector — 11/10/2026
+
+**Cập nhật 14/10:** người dùng chọn engine riêng, không reuse LB engine. Đã có
+lõi độc lập và HTTP/WS tại4313, chỉ acquisition Riot API2999, chưa full parity.
+Hướng này thay việc lặp thử CollectorHost thiếu Develop trong nhánh nghiên cứu;
+không thay provider production đang dùng. Bước quyết định tiếp là nguồn thật
+được phép cho HP/vàng/cooldown/buff/quest/objectives còn thiếu, rồi mới tích hợp
+và autostart cùng app. Xem `docs/INDEPENDENT_LOL_ENGINE.md`. Đoạn11/10 dưới đây
+giữ làm lịch sử, không phải yêu cầu chạy lại host chưa có thay đổi quyền.
 
 Ưu tiên chính: xác minh CollectorHost headless lấy dữ liệu spectator **live** khi LB UI tắt, sau đó adapter và autostart cùng app. Cập nhật này thay thứ tự “replay trước” của các mốc cũ đối với nhánh collector.
 

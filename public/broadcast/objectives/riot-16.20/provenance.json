@@ -1,0 +1,130 @@
+{
+  "version": "16.20",
+  "notice": "Riot game artwork mirrored by CommunityDragon. Cropped and soft foreground alpha extracted once for CSS tint masks; original shapes, no AI or runtime vectorization. Verify redistribution rights before publishing.",
+  "processing": "alpha *= clamp((max(R,G,B)-48)/64); white RGB; trim transparent padding; fit64x64",
+  "assets": [
+    {
+      "id": "earth",
+      "path": "public/broadcast/objectives/riot-16.20/earth.png",
+      "source": "https://raw.communitydragon.org/16.20/game/assets/ux/spectator/esportsneutraltimersatlas.png",
+      "sourceSha256": "a36c1702310a6e7230bb54b67c791ee27b0b48c60c838e86c083cd1656de250d",
+      "crop": [
+        0,
+        56,
+        42,
+        36
+      ],
+      "sha256": "c436c1307b4b946d5a0ffc25dc286429a650701d1698c5be5ad48a9585356764"
+    },
+    {
+      "id": "water",
+      "path": "public/broadcast/objectives/riot-16.20/water.png",
+      "source": "https://raw.communitydragon.org/16.20/game/assets/ux/spectator/esportsneutraltimersatlas.png",
+      "sourceSha256": "a36c1702310a6e7230bb54b67c791ee27b0b48c60c838e86c083cd1656de250d",
+      "crop": [
+        43,
+        56,
+        42,
+        36
+      ],
+      "sha256": "1d9345e8daa99ad6dd73f993028392ae9cb755e0a050af6aa62d92f1bb03a39b"
+    },
+    {
+      "id": "fire",
+      "path": "public/broadcast/objectives/riot-16.20/fire.png",
+      "source": "https://raw.communitydragon.org/16.20/game/assets/ux/spectator/esportsneutraltimersatlas.png",
+      "sourceSha256": "a36c1702310a6e7230bb54b67c791ee27b0b48c60c838e86c083cd1656de250d",
+      "crop": [
+        86,
+        56,
+        42,
+        36
+      ],
+      "sha256": "ecfd86e4936831630d470beb609d4213b72937b2f82a94104b944d9d1a35efae"
+    },
+    {
+      "id": "baron",
+      "path": "public/broadcast/objectives/riot-16.20/baron.png",
+      "source": "https://raw.communitydragon.org/16.20/game/assets/ux/spectator/esportsneutraltimersatlas.png",
+      "sourceSha256": "a36c1702310a6e7230bb54b67c791ee27b0b48c60c838e86c083cd1656de250d",
+      "crop": [
+        0,
+        92,
+        42,
+        36
+      ],
+      "sha256": "e7d96483f1df4395bde7675bc809ebc7c9344fd62aa3e6c9b230b05c26d5484f"
+    },
+    {
+      "id": "elder",
+      "path": "public/broadcast/objectives/riot-16.20/elder.png",
+      "source": "https://raw.communitydragon.org/16.20/game/assets/ux/spectator/esportsneutraltimersatlas.png",
+      "sourceSha256": "a36c1702310a6e7230bb54b67c791ee27b0b48c60c838e86c083cd1656de250d",
+      "crop": [
+        43,
+        92,
+        42,
+        36
+      ],
+      "sha256": "4e697c9de0032cd1c78fbcfb4b10bb2fe712c74ca3980011d99692fadc6bc521"
+    },
+    {
+      "id": "air",
+      "path": "public/broadcast/objectives/riot-16.20/air.png",
+      "source": "https://raw.communitydragon.org/16.20/game/assets/ux/spectator/esportsneutraltimersatlas.png",
+      "sourceSha256": "a36c1702310a6e7230bb54b67c791ee27b0b48c60c838e86c083cd1656de250d",
+      "crop": [
+        86,
+        92,
+        42,
+        36
+      ],
+      "sha256": "231e8af1ec984905144dfe18321f054e67c6372c9ca5044ebbe8e5f9200f2430"
+    },
+    {
+      "id": "hextech",
+      "path": "public/broadcast/objectives/riot-16.20/hextech.png",
+      "source": "https://raw.communitydragon.org/16.20/game/assets/ux/scoreboard/_hextechdrake.png",
+      "sourceSha256": "84cb6b938643d74702c0ef389ff3a18be2448fb4d2a34158632724994bd8e2b9",
+      "crop": null,
+      "sha256": "f877b953c120c89f45496b5dbe8d68a6a4d78fdde4a1d877d62d1b38a9d27451"
+    },
+    {
+      "id": "chemtech",
+      "path": "public/broadcast/objectives/riot-16.20/chemtech.png",
+      "source": "https://raw.communitydragon.org/16.20/game/assets/ux/scoreboard/_chemtechdrake.png",
+      "sourceSha256": "736f0f0c747584cda72bbb43d90581988fb9bd213606cc55539de2de3fe80bf7",
+      "crop": null,
+      "sha256": "d24188e83b784e4d8771da8a2d0728fe24a1d9cc9a3d56aef7572aabf210e302"
+    },
+    {
+      "id": "herald",
+      "path": "public/broadcast/objectives/riot-16.20/herald.png",
+      "source": "https://raw.communitydragon.org/16.20/game/assets/ux/scoreboard/_riftherald.png",
+      "sourceSha256": "9e5becbec25457928532c1e2776575c7752b4f8f31d8b6f2dae9f50d1a3436d7",
+      "crop": null,
+      "sha256": "be5b5737c269deb5d662991e4a8b25040ff484413b7e2d210931081add2969da"
+    },
+    {
+      "id": "grubs",
+      "path": "public/broadcast/objectives/riot-16.20/grubs.png",
+      "source": "https://raw.communitydragon.org/16.20/plugins/rcp-fe-lol-match-history/global/default/right_icons_grub.png",
+      "sourceSha256": "67ff22bdd2abc0c718a35b6870d2ce50ec18aa2bc227aaffa3fb917ba5654265",
+      "crop": [
+        0,
+        400,
+        80,
+        80
+      ],
+      "sha256": "025e9ff1c46713a0b20588580e1e4a95d5406163fc92bc298d8b99de475400a7"
+    },
+    {
+      "id": "dragon",
+      "path": "public/broadcast/objectives/riot-16.20/dragon.png",
+      "source": "https://raw.communitydragon.org/16.20/game/assets/ux/scoreboard/_dragon.png",
+      "sourceSha256": "959133c9756da8c26679785b80a93ad9246b643ff0c26d5385694c2a23e80b2e",
+      "crop": null,
+      "sha256": "0b6da98b3b19d201e1c88a49f8c315da55cb2ffee7ede8f3e69824405757b5f2"
+    }
+  ]
+}

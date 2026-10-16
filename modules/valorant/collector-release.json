@@ -1,0 +1,14 @@
+{
+  "repository": "https://github.com/ValoSpectra/Spectra-Client",
+  "tag": "v0.3.4",
+  "sourceImportedRevision": "a07fd0853129a549ac4d657544ae1e0b93e4f5e8",
+  "runtimeSourceMatchesImportedRevision": "unverified-different-version",
+  "artifact": "spectra-client-0.3.4-x64.nsis.7z",
+  "url": "https://github.com/ValoSpectra/Spectra-Client/releases/download/v0.3.4/spectra-client-0.3.4-x64.nsis.7z",
+  "size": 90947888,
+  "sha256": "ced9bfabf09bc8a7305d3aad960be5a15895be9e45f570059977c8a015822c9f",
+  "executable": "Spectra Client.exe",
+  "executableSha256": "179869966234160ff43cb35fba315ae3e02015ee99f296239e594e6ce0caea74",
+  "asarSha256": "f6b5925da3623de9e3e2ebeeb856522baa906b23df53c37e1a5a48491685bdfc",
+  "method": "Official release archive extracted locally; no installer run, no binary or ASAR modification"
+}

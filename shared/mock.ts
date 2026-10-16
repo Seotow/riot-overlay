@@ -18,7 +18,7 @@ export function createState(): State {
     events: [],
     objectives: [{ name: "BARON BUFF", endsAt: 1758 }],
     capabilities: { gold: true, xp: false },
-    theme: structuredClone(referenceTheme),
+    theme: { ...structuredClone(referenceTheme), playerCameras: false },
     players: fixture.champions.map((id, i) => ({
       id: "p" + i,
       name: fixture.names[i],
@@ -49,6 +49,28 @@ export function applyCommand(state: State, cmd: Command): State {
     if (!cmd.value) s.playing = false;
   }
   if (cmd.type === "theme") s.theme = cmd.value;
+  if (cmd.type === "ingameGraphic")
+    s.theme = {
+      ...s.theme,
+      ingameGraphics: { ...s.theme.ingameGraphics, [cmd.key]: cmd.value },
+    };
+  if (cmd.type === "draftState") s.draft = cmd.value;
+  if (cmd.type === "postgameState") s.postgame = cmd.value;
+  if (cmd.type === "broadcast") s.broadcast = cmd.value;
+  if (cmd.type === "broadcastInhibitors")
+    s.broadcast = {
+      ...(s.broadcast ?? { view: "normal", inhibitors: "auto" }),
+      inhibitors: cmd.value,
+    };
+  if (cmd.type === "broadcastWidget") {
+    s.scene = "ingame";
+    s.broadcast = {
+      ...(s.broadcast ?? { view: "normal", inhibitors: "auto" }),
+      ...(cmd.key === "minimal"
+        ? { layout: cmd.value ? "minimal" : "panel" }
+        : { [cmd.key]: cmd.value }),
+    };
+  }
   if (cmd.type === "scene") s.scene = cmd.value;
   if (cmd.type === "playing") s.playing = cmd.value;
   if (cmd.type === "seek") {

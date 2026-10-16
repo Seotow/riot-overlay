@@ -1,4 +1,5 @@
 import type { ObserverFrame, ObservedPlayer } from "./observer";
+import { presentationPitTimers } from "./pit-timers";
 
 export function latestObjectiveEvent(frame: ObserverFrame | null) {
   return (
@@ -88,7 +89,7 @@ export function livePresentation(frame: ObserverFrame | null, now: number) {
                   : ("even" as const),
           };
     }),
-    pitTimers: sample?.pitTimers ?? [],
+    pitTimers: presentationPitTimers(sample),
     time,
     clockMode: sample ? ("projected" as const) : ("unavailable" as const),
     clockSource:

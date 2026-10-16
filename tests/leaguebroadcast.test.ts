@@ -6,6 +6,17 @@ import {
 } from "../server/leaguebroadcast";
 
 const now = "2026-09-19T12:00:00.000Z";
+test("LB stacksData is direct for all supported champions, missing is not zero",()=>{
+ for(const id of [432,75,136,901,45,235,31,14,412,200,203]){
+  const raw:any=frame();raw.scoreboardBottom.teams[0].players[0].champion.id=id;
+  raw.tabs.Order.players[0].stacksData=152;
+  assert.equal(normalizeLeagueBroadcast(raw,now)!.players[0].championStacks?.value,152);
+  raw.tabs.Order.players[0].stacksData=0;
+  assert.equal(normalizeLeagueBroadcast(raw,now)!.players[0].championStacks?.value,0);
+  delete raw.tabs.Order.players[0].stacksData;
+  assert.equal(normalizeLeagueBroadcast(raw,now)!.players[0].championStacks?.value,null);
+ }
+});
 test("first turret is global 0→1, never the other team's first or a multi-turret jump", () => {
   for (const jump of [1, 2]) {
     let clock = Date.parse(now);
@@ -354,7 +365,8 @@ test("LeagueBroadcast adapter allowlists a real frame and labels provenance", ()
     { role: "top", itemId: 1220, completed: true, progress: null },
   ]);
   const exported = JSON.stringify(sample);
-  assert.ok(!exported.includes("private-player-name"));
+  assert.ok(exported.includes('"playerName"'));
+  assert.equal(sample.players[0].playerName?.value, "private-player-name");
   assert.ok(!exported.includes("untrusted-name"));
   assert.ok(!exported.includes("untrusted-rune-name"));
   assert.ok(!exported.includes("https://untrusted"));

@@ -1,0 +1,173 @@
+export class ToolsData {
+  public seriesInfo: ISeriesInfo = {
+    needed: 1,
+    wonLeft: 0,
+    wonRight: 0,
+    mapInfo: [],
+  };
+  public seedingInfo: ISeedingInfo = {
+    left: "",
+    right: "",
+  };
+  public tournamentInfo: ITournamentInfo = {
+    name: "",
+    logoUrl: "",
+    backdropUrl: "",
+  };
+  public timeoutDuration: number = 60;
+  public timeoutCounter: ITimeoutInfo = {
+    max: 2,
+    left: 2,
+    right: 2,
+  };
+  public timeoutCancellationGracePeriod: number = 10;
+  public sponsorInfo: ISponsorInfo = {
+    enabled: false,
+    duration: 5,
+    sponsors: [],
+  };
+  public watermarkInfo: IWatermarkInfo = {
+    spectraWatermark: true,
+    customTextEnabled: false,
+    customText: "",
+  };
+  public playercamsInfo: IPlayercamsInfo = {
+    enable: false,
+    removeTricodes: false,
+    identifier: "",
+    secret: "",
+    endTime: 0,
+    enabledPlayers: [],
+  };
+  public nameOverrides: INameOverrides = {
+    overrides: "[]",
+  };
+  public roundWinBox: IRoundWinBox = {
+    type: "disabled",
+    sponsors: [],
+  };
+
+  public constructor(init?: Partial<ToolsData>) {
+    Object.assign(this, init);
+    this.timeoutCounter.left = this.timeoutCounter.max;
+    this.timeoutCounter.right = this.timeoutCounter.max;
+  }
+}
+
+export type ISeriesInfo = {
+  needed: number;
+  wonLeft: number;
+  wonRight: number;
+  mapInfo: MapPoolInfo[];
+};
+
+export type ISeedingInfo = {
+  left: string;
+  right: string;
+};
+
+export type ITournamentInfo = {
+  name: string;
+  logoUrl: string;
+  backdropUrl: string;
+};
+
+export type ITimeoutInfo = {
+  max: number;
+  left: number;
+  right: number;
+};
+
+export type ISponsorInfo = {
+  enabled: boolean;
+  duration: number;
+  sponsors: string[];
+};
+
+export type IWatermarkInfo = {
+  spectraWatermark: boolean;
+  customTextEnabled: boolean;
+  customText: string;
+};
+
+export type IPlayercamsInfo = {
+  enable: boolean;
+  removeTricodes: boolean;
+  identifier: string;
+  secret: string;
+  endTime: number;
+  enabledPlayers: string[];
+};
+
+export type INameOverrides = {
+  overrides: string; // JSON representation of Map<string, string> for easier transfer
+};
+
+export type IRoundWinBox = {
+  type: "disabled" | "tournamentInfo" | "sponsors";
+  sponsors: IRoundWinBoxSponsors[];
+};
+
+export type IRoundWinBoxSponsors = {
+  wonTeam: "all" | "left" | "right";
+  roundCeremony: ("all" | "normal" | "ace" | "clutch" | "teamAce" | "flawless" | "thrifty")[];
+  iconUrl: string;
+  backdropUrl: string;
+};
+
+export type IOverridesPlayercamsData = {
+  nameOverrides: string; // JSON representation of Map<string, string> for easier transfer
+  enabledPlayers: string[];
+};
+
+export type IToastInfo = {
+  duration: number | null;
+  message: string;
+  eventLogoEnabled: boolean;
+  selectedTeam?: "left" | "right";
+  active: boolean;
+};
+
+export type IPlayerMMRInfo = {
+  puuid: string;
+  currentMMRTier: number;
+  peakMMRTier: number;
+};
+
+type BaseMapPoolInfo = {
+  type: "past" | "present" | "future" | "disabled";
+};
+
+type PastMapPoolInfo = BaseMapPoolInfo & {
+  type: "past";
+  map: string;
+  left: {
+    logo: string;
+    score: number;
+  };
+  right: {
+    logo: string;
+    score: number;
+  };
+};
+
+type PresentMapPoolInfo = BaseMapPoolInfo & {
+  type: "present";
+  logo: string;
+};
+
+type FutureMapPoolInfo = BaseMapPoolInfo & {
+  type: "future";
+  map: string;
+  logo: string;
+};
+
+type DisabledMapPoolInfo = BaseMapPoolInfo & {
+  type: "disabled";
+};
+
+export type MapPoolInfo =
+  | PastMapPoolInfo
+  | PresentMapPoolInfo
+  | FutureMapPoolInfo
+  | DisabledMapPoolInfo;

@@ -98,7 +98,8 @@ test("adapter preserves item slots, maps identities and keeps missing stats null
           isDead: false,
           respawnTimer: 0,
           scores: { wardScore: 0 },
-          riotId: "SECRET",
+          riotId: "BroadcastName#VN2",
+          token: "SECRET",
         },
       ],
     },
@@ -126,6 +127,8 @@ test("adapter preserves item slots, maps identities and keeps missing stats null
   assert.ok(html.includes(liveSpell("SummonerSnowball")!.icon));
   assert.ok(!html.includes(">3086<"));
   assert.ok(!html.includes("SECRET"));
+  assert.ok(html.includes("BroadcastName"));
+  assert.ok(!html.includes("#VN2"));
 });
 test("unknown item fallback is explicit and old recording fields remain readable", () => {
   const sample = normalizeIngame(

@@ -1,5 +1,79 @@
 # Audit giao diện LoL — 18/09/2026
 
+## Các số đo bổ sung — 17/10/2026
+
+Ảnh cyan Elder `codex-clipboard-31a4f690-8762-4de5-a093-1c83c4a30c13.png`:
+crop icon123,15,34,38 có319 pixel cyan sáng, median RGB30,228,222 (#1EE4DE).
+Màu là median ảnh nén/composited, không khẳng định màu source production tuyệt đối.
+Mẫu player bars `codex-clipboard-fef32d02-cc29-488e-8b2e-6e673520d533.png`:
+XP median126,60,117 (#7E3C75),energy200,217,75 (#C8D94B). Script
+`measure-player-bars.mjs`; crop zoom `player-bars-reference.png`.
+
+Simple giữ58px portrait,29px icon vàstrip29px,không gap giữa2spell. Geometry
+đo sau animation, không đo lúc minimal-spread đang scale .86. Full/simpleXP
+cùng widthHP, cao3.59375px thực so6px mục tiêu3.6/6; số cấp nằm cùng strip.
+Powerplay track5px chạy toàn panel bên trongborder1px, màu icon. Bloom chỉ
+từviền mờ30% vào trong; center40% được giữ. Các số đo này không là điểm giống
+tổng thể hoặc xác nhận telemetry trận mới.
+
+## PNG objective và thanh XP — 16/10/2026
+
+Đối chiếu atlas `esportsneutraltimersatlas.png` Riot16.20 với ảnh hạ rồng và
+Baron powerplay: giữ silhouette spectator gốc thay SVG threshold scanline cũ.
+Hextech/Hóa kỹ/Herald dùng texture scoreboard; grub dùng glyph mặt từ sprite
+match-history (không dùng vòng tròn minimap). Source/crop/hash trong manifest.
+Ảnh tổng hợp trước/sau ở `.npm-cache/visual-audit/riot-objectives-sheet.png`
+và `objective-candidates/contact.png`. Chưa đo IoU hoặc độ giống tổng thể.
+Leaderboard286px không đổi; thanh XP từ152→190px bằng thanh gold, số cấp
+đưa lên cùng hàng tên. Các icon ngoài hai họ mục tiêu được giữ nguyên.
+
+## Motion và màu phụ — 16/10/2026
+
+Đo ảnh `codex-clipboard-2dfc8320-7763-4bac-bd4e-ceb706315268.png`
+1920×1080 bằng `scripts/measure-motion-layout.mjs`: line góc xanh 5px,
+đỏ 5–6px; median màu xanh đã compositing RGB(76,143,179), logo xanh
+RGB(19,105,189). Không coi màu pixel ghép nền là màu asset nguyên bản.
+Minimal dùng line 5px và màu phụ configurable (#69afd4/#df7d86 mặc định).
+
+Kiểm tra Edge 1920×1080 không ảnh nền: no-camera width 1346px;
+row trái items x327/w154, quest491/w22, rune525/w18, spell555/w26,
+champ589/w47, tên/HP647/w202, CS/KDA859/w62. Các cụm không chồng nhau.
+Arrow inset -1px, strip rộng2px/inset4px; gold delta neo số tiền không neo
+icon. Màu chính đã lưu của user được giữ; màu phụ tách riêng trong Config.
+Ảnh PNG và JSON đo nằm `.npm-cache/visual-audit/`. Motion được kiểm tra
+DOM/tương tác và ảnh trạng thái; chưa đo độ giống tổng thể95–98% hay video
+animation từng frame. Giữ baseline cũ, không tuyên bố pixel-perfect.
+
+## Nền HUD in-game — 12/10/2026
+
+Đối chiếu trực tiếp ingame new.png: footage còn thấy sau nền HUD. CSS cũ chồng
+scoreboard92%+91% thành gần99%, nên chỉnh thành một surface xám than; base72%,
+main scoreboard78% (PNG alpha modal199/255), sub59%. Rank/row/rune bỏ layering
+gần kín; timer/inhibitor/buff/minimal cũng dùng độ trong suốt phù hợp. Đây là số
+đo renderer, không suy được alpha chính xác của Riot từ ảnh nén/nền khác nhau.
+Preview composited dùng game-only crop không có HUD/camera, chỉ minh họa; OBS
+không thêm ảnh nền. Font/ảnh/gauge giữ opacity, không thay đổi geometry.
+
+## Layout simple cho caster — 12/10/2026
+
+Geometry RCVolus layout-simple, giữ style project: header(0,0,1920,150), picks
+x0/1520,y183,w400,h690; mỗi pick400×130, không mở rộng hover. Bans x45/1155,
+y900,w720,h130; icon/khung giữ hiện tại. Vùng cam giữa1120×690 trong suốt;
+đã kiểm tra screenshot alpha0 và xem ảnh render, không có nền reference.
+Lựa chọn lưu cùng theme, bản broadcast không đổi geometry. Không đo95–98%.
+
+## Cấm chọn production — 12/10/2026
+
+Yêu cầu mới mở phần draft để hoàn thiện module. Đã xem `images/Cấm chọn.png`
+và ảnh render OBS độc lập, không dùng footage/reference làm nền: bans xanh
+(0,667,360,112), đỏ(1560,667,360,112), dải pick(0,790,1920,290), center
+(800,790,320,290). Hover320px, các ô cùng phía120px; phía còn lại160px.
+Timer strip ở x461/w998/y781. Branding từ config, sponsor-free và logo tùy chọn.
+Base loading portraits có crop/skin khác ảnh; ban fixture vẫn là diễn giải cũ.
+Không hiện số stats bịa. Module nhập tay/bộ mẫu; draft live chưa xác minh.
+Kiểm tra font/asset/transparency1920×1080 và Studio1280px đạt; không kết luận
+95–98% từ geometry. Screenshot ignored `.npm-cache/visual-audit/draft-production.png`.
+
 **Cập nhật sau audit:** người dùng đã xác nhận draft và in-game đạt yêu cầu ban đầu. Hai scene là baseline được duyệt để tiếp tục kết nối dữ liệu. Các khác biệt bên dưới được ghi nhận, không phải yêu cầu mở lại vòng thiết kế.
 
 Nguồn chuẩn là `ingame.png` và `overlay.png` do người dùng cung cấp, kích thước 1920×1080. Đã đo vùng chính trên DOM của renderer độc lập ở cùng độ phân giải; không dùng ảnh nền để đánh giá thành phần đã vẽ.

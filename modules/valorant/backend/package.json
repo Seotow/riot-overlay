@@ -1,0 +1,74 @@
+{
+  "name": "spectra-server",
+  "version": "0.3.5",
+  "author": {
+    "name": "Purple Shark UG (haftungsbeschränkt)",
+    "url": "https://valospectra.com"
+  },
+  "description": "Server that ingests data from the Spectra Client for processing",
+  "private": true,
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "yarn run dev",
+    "start_single": "tsx ./src/index.ts",
+    "dev": "tsx watch ./src/index.ts",
+    "prepare": "husky",
+    "build": "tsc",
+    "lint": "eslint src/",
+    "lint-fix": "eslint --fix src/",
+    "format": "prettier --write src/",
+    "lint-staged": "lint-staged",
+    "replay": "tsx ./src/replay/replay.ts",
+    "replay_instant": "tsx ./src/replay/replay.ts -instant",
+    "replay_delay": "tsx ./src/replay/replay.ts -delay",
+    "replay_timestamps": "tsx ./src/replay/replay.ts -timestamps",
+    "replay_manual": "tsx ./src/replay/replay.ts -manual",
+    "replay_file": "yarn run replay_instant -- -game customGameTest.replay"
+  },
+  "license": "GPL-3.0-only",
+  "devDependencies": {
+    "@eslint/js": "^9.23.0",
+    "@types/cors": "^2",
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.14.0",
+    "@types/semver": "^7.7.0",
+    "eslint": "^9.23.0",
+    "eslint-config-prettier": "^10.1.1",
+    "globals": "^15.15.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.5.2",
+    "prettier": "3.5.3",
+    "rimraf": "^6.0.1",
+    "ts-loader": "^9.5.2",
+    "tsx": "^4.20.4",
+    "typescript": "^5.8.2",
+    "typescript-eslint": "^8.29.0",
+    "webpack": "^5.98.0"
+  },
+  "dependencies": {
+    "body-parser": "^2.2.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "eventsource": "^2.0.2",
+    "express": "^4.21.2",
+    "lodash": "^4.17.21",
+    "pkginfo": "^0.4.1",
+    "semver": "^7.7.1",
+    "socket.io": "^4.8.1",
+    "socket.io-client": "^4.8.1"
+  },
+  "optionalDependencies": {
+    "bufferutil": "^4.0.9",
+    "utf-8-validate": "^6.0.5"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md,yml,yaml}": [
+      "prettier --write"
+    ]
+  },
+  "packageManager": "yarn@4.7.0"
+}

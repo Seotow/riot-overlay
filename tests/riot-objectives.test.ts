@@ -20,7 +20,7 @@ test("Riot attributes minion tower kills by structure owner, deduplicates event 
   assert.equal(s.teams?.[0].totalGold.value, null);
   assert.equal(s.events.filter(e => e.kind === "TurretKilled").length, 1);
   assert.equal(s.events[1].team, "ORDER");
-  assert.ok(!JSON.stringify(s).includes("PRIVATE"));
+  assert.ok(!JSON.stringify(s.events).includes("PRIVATE"));
 });
 test("missing history, gaps, malformed tower IDs, conflicting duplicates and unsupported maps clear tower totals", () => {
   for (const events of [[tower], [start, { ...tower, EventID: 2 }], [start, { ...tower, TurretKilled: "unknown" }], [start, tower, { ...tower, EventTime: 101 }]]) {

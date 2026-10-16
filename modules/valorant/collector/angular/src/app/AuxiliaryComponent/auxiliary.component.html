@@ -1,0 +1,34 @@
+<p-toast />
+<div class="m-4 grid grid-cols-6 gap-4">
+  <div class="border-surface col-span-3 flex flex-col justify-around rounded-lg border p-5">
+    <p-floatlabel variant="on">
+      <input class="w-full" pInputText disabled id="ValorantNameInput" [value]="playername" />
+      <label for="ValorantNameInput" class="text-sm">Please double-check your Valorant name</label>
+    </p-floatlabel>
+    <p-floatlabel variant="on">
+      <p-select
+        fluid
+        [(ngModel)]="ingestServerIp"
+        [options]="ingestServerOptions"
+        [readonly]="!editable"
+        [editable]="true"
+        id="IngestIpInput"
+      ></p-select>
+      <label for="IngestIpInput">Spectra Server</label>
+    </p-floatlabel>
+    <app-options id="optionsPanelId" class="col-span-3" [isAux]="true"></app-options>
+  </div>
+  <div class="border-surface col-span-3 flex flex-col justify-between rounded-lg border p-5">
+    <p-button
+      class="absolute h-10 w-10 self-end"
+      severity="contrast"
+      [icon]="darkModeEnabled ? 'pi pi-sun' : 'pi pi-moon'"
+      (onClick)="toggleDarkMode()"
+    />
+    <img class="h-60 self-center" src="assets/icon.webp" />
+    <p class="text-md text-color my-2">
+      Status:
+      <p-tag [value]="spectraStatus.message | titlecase" [severity]="spectraStatus.statusType" />
+    </p>
+  </div>
+</div>

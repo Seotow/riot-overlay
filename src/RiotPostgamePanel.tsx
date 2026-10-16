@@ -1,0 +1,304 @@
+import { useEffect, useState } from "react";
+import type { State } from "../shared/schema";
+import { riotPostgameSchema, type RiotPostgameState } from "../shared/postgame";
+import { Surface } from "./overlay/Surface";
+type Status = {
+  configured: boolean;
+  mode: "standard" | "rso";
+  storage: string;
+  retryAfter: number;
+  candidate: RiotPostgameState | null;
+};
+const errors: Record<string, string> = {
+  "no-credential": "Chưa có key/token. Nhập và lưu vào phiên backend trước.",
+  "upstream-401": "Riot trả 401: key hoặc token không hợp lệ/hết hạn.",
+  "upstream-403":
+    "Riot trả 403: key không có quyền hoặc chưa được chấp nhận. Không tự chuyển sang nguồn khác.",
+  "upstream-404":
+    "Riot trả 404: kiểm tra match ID, routing hoặc phạm vi truy cập custom. Key Standard không thay token RSO.",
+  "rate-limit":
+    "Đang bị giới hạn request. Chờ thời gian Riot yêu cầu rồi thử lại; không tự retry.",
+  busy: "Backend đang tải một trận. Chờ request hiện tại hoàn tất.",
+  cancelled: "Đã hủy tải vì cấu hình key thay đổi.",
+  network:
+    "Không kết nối được Riot hoặc request quá thời gian. Key không được ghi vào lỗi.",
+  "invalid-data":
+    "Dữ liệu không hợp lệ: cần trận VN2, đủ 10 người hai đội và đúng match ID.",
+  "no-candidate": "Chưa có bản dữ liệu đã tải khớp match ID để phát.",
+};
+export function RiotPostgamePanel({
+  state,
+  connected,
+}: {
+  state: State;
+  connected: boolean;
+}) {
+  const [status, setStatus] = useState<Status | null>(null);
+  const [mode, setMode] = useState<"standard" | "rso">("standard");
+  const [secret, setSecret] = useState("");
+  const [matchId, setMatchId] = useState("");
+  const [gameNumber, setGameNumber] = useState(1);
+  const [busy, setBusy] = useState(false);
+  const [notice, setNotice] = useState("");
+  const [showCandidate, setShowCandidate] = useState(false);
+  const [reviewed, setReviewed] = useState(false);
+  useEffect(() => {
+    const controller = new AbortController();
+    fetch("/api/riot-postgame/status", {
+      cache: "no-store",
+      signal: controller.signal,
+    })
+      .then((r) => {
+        if (!r.ok) throw Error();
+        return r.json();
+      })
+      .then((s: Status) => {
+        setStatus(s);
+        setMode(s.mode);
+      })
+      .catch(() => {
+        if (!controller.signal.aborted)
+          setNotice(
+            "Chưa đọc được cấu hình Riot. Khởi động lại backend sau khi cập nhật source.",
+          );
+      });
+    return () => controller.abort();
+  }, []);
+  const action = async (route: string, value: unknown) => {
+    setBusy(true);
+    setNotice("");
+    try {
+      const response = await fetch(`/api/riot-postgame/${route}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(value),
+      });
+      const result = await response.json();
+      if (!response.ok) {
+        setNotice(
+          `${errors[result.error] ?? "Request thất bại; chưa thay dữ liệu đang phát."}${result.retryAfter ? ` Thử lại sau ${result.retryAfter}s.` : ""}`,
+        );
+        return;
+      }
+      if (route === "publish")
+        setNotice(
+          `Đã đưa ${result.matchId} lên postgame. Studio/OBS nhận cùng snapshot.`,
+        );
+      else {
+        if (result.candidate)
+          result.candidate = riotPostgameSchema.parse(result.candidate);
+        setStatus(result);
+        setReviewed(false);
+        if (route === "credential") {
+          setSecret("");
+          setShowCandidate(false);
+          setNotice(
+            value && typeof value === "object" && "clear" in value
+              ? "Đã xóa key/token và dữ liệu chờ tải khỏi RAM backend. Kết quả đang phát không bị xóa."
+              : "Đã nhận key/token trong RAM. Chưa kiểm chứng quyền; tải một match để kiểm tra.",
+          );
+        } else {
+          setShowCandidate(true);
+          setNotice(
+            "Đã tải dữ liệu Riot vào vùng duyệt. Chưa thay overlay đang phát.",
+          );
+        }
+      }
+    } catch {
+      setNotice(
+        "Backend không phản hồi hoặc dữ liệu không đúng contract. Chưa thay overlay đang phát.",
+      );
+    } finally {
+      setBusy(false);
+    }
+  };
+  const candidate = status?.candidate;
+  return (
+    <section className="riot-postgame-panel">
+      <div className="section-heading">
+        <div>
+          <h3>Nguồn Riot API · sau trận</h3>
+          <p>
+            VN2 → SEA · API key Standard hoặc RSO token · chỉ backend gọi Riot
+          </p>
+        </div>
+        <span className="riot-key-status">
+          {status?.configured
+            ? "Đã có key/token trong RAM"
+            : "Chưa nhập key/token"}
+        </span>
+      </div>
+      <fieldset disabled={!connected || busy}>
+        <div className="riot-config-grid">
+          <label>
+            Kiểu xác thực
+            <select
+              aria-label="Kiểu xác thực Riot"
+              value={mode}
+              onChange={(e) => {
+                setMode(e.target.value as typeof mode);
+                setSecret("");
+              }}
+            >
+              <option value="standard">
+                Production Standard · X-Riot-Token
+              </option>
+              <option value="rso">RSO · Bearer access token đã được cấp</option>
+            </select>
+          </label>
+          <label>
+            {mode === "standard" ? "Riot API key" : "RSO access token"}
+            <input
+              aria-label="Riot key hoặc token"
+              type="password"
+              autoComplete="off"
+              spellCheck={false}
+              value={secret}
+              placeholder={
+                status?.configured
+                  ? "Để trống nếu giữ key phiên hiện tại"
+                  : "Nhập tại đây; không gửi qua chat"
+              }
+              onChange={(e) => setSecret(e.target.value)}
+            />
+          </label>
+        </div>
+        <div className="config-actions">
+          <button
+            disabled={secret.trim().length < 12}
+            onClick={() =>
+              action("credential", { mode, secret: secret.trim() })
+            }
+          >
+            Lưu key/token trong phiên
+          </button>
+          <button
+            className="secondary"
+            disabled={!status?.configured}
+            onClick={() => action("credential", { clear: true })}
+          >
+            Xóa key/token
+          </button>
+        </div>
+        <p className="riot-security-note">
+          Không lưu key xuống đĩa, theme, localStorage hoặc bản export. Restart
+          backend cần nhập lại. Ô nhập được xóa sau khi backend nhận; key không
+          gửi qua WebSocket/OBS. Việc lưu chưa chứng minh key có quyền truy cập
+          trận.
+        </p>
+        {mode === "rso" && (
+          <p>
+            Nhập access token RSO đã cấp; không phải API key hay client secret.
+            Phần này không tự đăng nhập, refresh token hoặc xin quyền Riot.
+          </p>
+        )}
+        <div className="riot-config-grid">
+          <label>
+            Riot match ID
+            <input
+              aria-label="Riot match ID"
+              value={matchId}
+              placeholder="VN2_123456789"
+              spellCheck={false}
+              onChange={(e) => setMatchId(e.target.value)}
+            />
+          </label>
+          <label>
+            Ván trong loạt trận
+            <input
+              aria-label="Ván Riot"
+              type="number"
+              min={1}
+              max={99}
+              value={gameNumber}
+              onChange={(e) => setGameNumber(Number(e.target.value))}
+            />
+          </label>
+        </div>
+        <div className="config-actions">
+          <button
+            disabled={
+              !status?.configured ||
+              !/^VN2_\d{1,20}$/.test(matchId.trim()) ||
+              !Number.isInteger(gameNumber) ||
+              gameNumber < 1 ||
+              gameNumber > 99 ||
+              mode !== status?.mode
+            }
+            onClick={() =>
+              action("load", { matchId: matchId.trim(), gameNumber })
+            }
+          >
+            {busy ? "Đang tải…" : "Tải match + timeline / kiểm tra quyền"}
+          </button>
+          <button
+            className="secondary"
+            disabled={!candidate}
+            onClick={() => setShowCandidate((v) => !v)}
+          >
+            {showCandidate ? "Ẩn" : "Hiện"} bản chờ duyệt
+          </button>
+        </div>
+        <p>
+          Standard không mặc định truy cập custom thường. Nếu 404/403, giữ dữ
+          liệu đang phát và kiểm tra quyền RSO/Tournament; không tự đoán ID hay
+          tạo dữ liệu giả. LB gameId nội bộ không phải Riot match ID.
+        </p>
+      </fieldset>
+      {notice && (
+        <p role="status" className="riot-notice">
+          {notice}
+        </p>
+      )}
+      {candidate && showCandidate && (
+        <div className="riot-candidate">
+          <h4>
+            Bản chờ duyệt · {candidate.evidence.matchId} · chưa lên chương trình
+          </h4>
+          <p>
+            {candidate.evidence.isFinal
+              ? "Kết quả có winner/thời lượng"
+              : "Dữ liệu kết quả chưa đầy đủ"}{" "}
+            · Patch {candidate.evidence.patch || "—"} ·{" "}
+            {candidate.evidence.timelineAvailable
+              ? "Có timeline"
+              : "Thiếu timeline"}{" "}
+            · {candidate.evidence.mode.toUpperCase()}
+          </p>
+          <div className="program-monitor">
+            <Surface
+              state={{
+                ...state,
+                scene: "postgame",
+                mockVisible: false,
+                postgame: candidate,
+                rehearsal: undefined,
+              }}
+            />
+          </div>
+          <ul>
+            {candidate.evidence.warnings.map((w, i) => (
+              <li key={i}>{w}</li>
+            ))}
+          </ul>
+          <label className="riot-review-check">
+            <input
+              type="checkbox"
+              checked={reviewed}
+              onChange={(e) => setReviewed(e.target.checked)}
+            />{" "}
+            Tôi đã đối chiếu match, hai đội và các mục còn thiếu trước khi phát
+          </label>
+          <button
+            disabled={!connected || busy || !reviewed}
+            onClick={() =>
+              action("publish", { matchId: candidate.evidence.matchId })
+            }
+          >
+            Dùng dữ liệu Riot cho postgame
+          </button>
+        </div>
+      )}
+    </section>
+  );
+}

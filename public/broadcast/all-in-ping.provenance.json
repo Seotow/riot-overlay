@@ -1,0 +1,8 @@
+{
+  "asset": "all-in-ping.png",
+  "source": "https://raw.communitydragon.org/16.20/game/assets/ux/minimap/pings/all_in.png",
+  "reference": "https://leagueoflegends.fandom.com/wiki/Ping?file=All_In_ping.png",
+  "patch": "16.20",
+  "sha256": "0c1de49d6105b54079932a84c237ce24f17a0e153302d92f4e6acd07b9667abf",
+  "notice": "Original Riot game asset via CommunityDragon. White presentation uses CSS alpha mask; source pixels are unchanged. Verify redistribution rights before publishing."
+}

@@ -1,0 +1,1370 @@
+{
+  "Alistar": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/12.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/alistar/skins/base/images/alistar_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "0bb70350bc716046ece51d67440a9dfe8398258f69d39a0b9fcd46bc8770ba8f",
+    "outputSha256": "211a372a60d153f4cdde238996c57d5c87fe3fe20b045f474b90546190254cfc",
+    "bytes": 18302
+  },
+  "Aatrox": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/266.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/aatrox/skins/base/images/aatrox_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "4a51eb093c8b2b0fa55c81e9a70dfce9d2f106f5bb02e4e78997e2bc19a238d2",
+    "outputSha256": "843948b8a7c18b60187f68c4e696e780566143c8309240fb83394840cb7b7761",
+    "bytes": 22458
+  },
+  "Akali": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/84.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/akali/skins/base/images/akali_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "7ca5aa834b2dfb043413717eaed70d72d92bd3f863402ee1ea54116e21b17ded",
+    "outputSha256": "e662765e925f41c14b603eb9bf1b4e3691b027732a57d1d2ced43013f1b033c8",
+    "bytes": 16654
+  },
+  "Ambessa": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/799.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/ambessa/skins/base/images/ambessa_splash_centered_0.domina.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "b7a7103a1932885d7383fe6aead7f34df14a89d3c1223f631900c0f53dedda76",
+    "outputSha256": "06c322935139b047de906ddb5f7a97c3df731fa0c1473d5f29168a4e4e65266e",
+    "bytes": 15590
+  },
+  "Ahri": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/103.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/ahri/skins/base/images/ahri_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "d945d22eb73def929754393aebf55f52ac2aebbbc219c300816ddca68bbae187",
+    "outputSha256": "5013c02e9a47c619f3b7be37cbda2b922e2c506be98b94ed05da800a2bd49514",
+    "bytes": 28726
+  },
+  "Akshan": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/166.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/akshan/skins/base/images/akshan_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "b50bf84682ef9fb089b6e55a32ad3fb9e0b9b8ad60ede3001b9b2748432d1d27",
+    "outputSha256": "bbf5da2512835bd83f6eee98ff324ad8152d55da9a4200a7a9f44e10aa52f677",
+    "bytes": 26740
+  },
+  "Amumu": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/32.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/amumu/skins/base/images/amumu_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "201f6fd135c887b3128b573fcbff7484f92e6578127a9556e48c4ea64ac7bd7b",
+    "outputSha256": "1cb0ba2072fe0f7a08c2a8b6402a781153eb68b167c5f4f62006e84f5e903e66",
+    "bytes": 18624
+  },
+  "Aphelios": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/523.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/aphelios/skins/base/images/aphelios_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "1c1db4608602c06c394a25cc53993ab33968607ddc99f38b64c8450f0857b1d1",
+    "outputSha256": "a4c0d6e4e8e696e556390bd0f104be9718ad63e8eff8da5cfbb17f5b698cbac7",
+    "bytes": 21554
+  },
+  "Annie": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/1.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/annie/skins/base/images/annie_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "af0c11c71a7f9bce81460297c16aae96389f21f99952f6dcad6221b36c4b30c3",
+    "outputSha256": "d5a4fca647a2ee74c7cd8c36610a061d800632c6307a0bef3856d4e63b7b1f92",
+    "bytes": 20048
+  },
+  "AurelionSol": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/136.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/aurelionsol/skins/base/images/aurelionsol_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "51d8513b2ec4cfebf5f61ec61950520de05ac8fb4cd53130f84bf0fb171258f8",
+    "outputSha256": "1c8bc0e318eec535ae353e34be925594ba1d58425c912d482ec2a2de17f13312",
+    "bytes": 19526
+  },
+  "Ashe": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/22.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/ashe/skins/base/images/ashe_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "4ed95284f1b744204c9bcf4a93743343833fe964b4ba8d71868851dc25b0a5a4",
+    "outputSha256": "a122fe5b9778e6a3d3678521e397be150fd8ffe3c3e060b9ad90690a57ee7e49",
+    "bytes": 19792
+  },
+  "Anivia": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/34.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/anivia/skins/base/images/anivia_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "6b7d13da5cd1fc64095da05f9819339a92a691d399bbd4186e8272cd5c2648d0",
+    "outputSha256": "3401fedeed704fe4e2dff25677196f8d473ea0950fcac7641875b2cb257747af",
+    "bytes": 29636
+  },
+  "Bard": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/432.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/bard/skins/base/images/bard_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "c458e8ab4255f3c167d98ef663b4eae2b33b4ec26d1a72b084d48060a90b5ab6",
+    "outputSha256": "9c264293aa8a08e27ada71152f9ace22913ecf5a4a421a3485123a729e674368",
+    "bytes": 21868
+  },
+  "Belveth": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/200.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/belveth/skins/base/images/belveth_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "8766586d0277da95f8293f75b86b63c760f3a661740d5d64fbf3a8b0726f8ff0",
+    "outputSha256": "4d5c35d2004d2c86752f08ba258350e2b98c1bce2053d37c69764cee39fd47f2",
+    "bytes": 20888
+  },
+  "Aurora": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/893.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/aurora/skins/base/images/aurora_splash_centered_0.aurora.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "cbe3050197f9cdcb4104487183bae8211de4539c3cdf0c193eeb7276c28d42c0",
+    "outputSha256": "077433ce84da1fec0dcf8fdf7eca5e61ff1bafc241b2a6fd97b6bab5dd20dee7",
+    "bytes": 24614
+  },
+  "Azir": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/268.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/azir/skins/base/images/azir_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "b971b01aff7ca7a42daf003420dde46c4123d1dc939ff4960374490b975ab4d3",
+    "outputSha256": "74cc0b64233c196978c3860a5c1492d3404a89b28662c35e19bca6bcf72221f3",
+    "bytes": 19298
+  },
+  "Brand": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/63.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/brand/skins/base/images/brand_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "93ff8610c5d0a74924538c935a18f321f5154171033ce37f002d04c150c755c7",
+    "outputSha256": "db1e3167f2b52208ae3c761df866f7b74d71c35ebc447f83cf9cb30164473b5f",
+    "bytes": 23788
+  },
+  "Blitzcrank": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/53.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/blitzcrank/skins/base/images/blitzcrank_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "151ed98422d7128361bf397a2b556355b80831ce7cfffa3587c1ca55d022ba3b",
+    "outputSha256": "b0efcd1f0349ccac9ee053f31b4345ee0e87560aed094ce9092d60694c68e198",
+    "bytes": 25196
+  },
+  "Braum": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/201.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/braum/skins/base/images/braum_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "c48543a5f457abe8c2d302bb958e17d52c724019950272b4c03e1270e028821e",
+    "outputSha256": "6afbe1aa1e219eb17663738fdc0edce1a131640103a62f834bdc4a78584afb99",
+    "bytes": 17150
+  },
+  "Briar": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/233.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/briar/skins/base/images/briar_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "531d17470bc8a442aa1d8e59898d231edc1a6c7792db30dbface4edc63d229df",
+    "outputSha256": "0856c9a2b3dcf38edaba93de53ebbfc8ffcb32e1020366cd64a550a106a4b918",
+    "bytes": 20076
+  },
+  "Cassiopeia": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/69.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/cassiopeia/skins/base/images/cassiopeia_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "d807d677293c527e1226ed5cb580f600f38e9b27d8b08bc7bf7eb59abdb5b42e",
+    "outputSha256": "98017df3c39d21874407e031049c72e6dc90eb711659097a67bd7f732dd80059",
+    "bytes": 20712
+  },
+  "Caitlyn": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/51.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/caitlyn/skins/base/images/caitlyn_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "40a7ffc70645cd3085bed3b9fc3b6995314669b8a04bb725c622ace015eb388a",
+    "outputSha256": "fb7d8f5741f6e5cbc2ffd6e187da6c111bee77ef28f55f8923e7186a876211ca",
+    "bytes": 18268
+  },
+  "Camille": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/164.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/camille/skins/base/images/camille_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "aa8e64c68a64b07b68564f0253d69712b28c5076e67f216aae7f45d6be56300d",
+    "outputSha256": "2cfa96b50d8b831690491a9d7a22a3491112ff912d83c361266b364594acd47e",
+    "bytes": 18482
+  },
+  "Chogath": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/31.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/chogath/skins/base/images/chogath_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "b05b28d8ffa31bda27e7dfa9f4e7bc0c43cb8fc31a985d4b6b304bc00ee2b5de",
+    "outputSha256": "48ae24e39346cd6ac3f88e0e292ced4d12b756eb7e1b9639765d05f6f7b586a0",
+    "bytes": 21640
+  },
+  "Corki": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/42.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/corki/skins/base/images/corki_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "5854cf288e0509bb4ae9d820df91520eba284376b330723acded0fd18b9e1ddb",
+    "outputSha256": "d6bfccc96b0fadf6091d2523507c32262bb8cb6fef4cb53840af4224221fde8b",
+    "bytes": 24272
+  },
+  "Darius": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/122.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/darius/skins/base/images/darius_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "67418220ae4fa7e8557091f2175401ee2be92f865a6f733d9bc8de2fe909cc82",
+    "outputSha256": "034d0d8d63a2ae1ff4a09b7ae09e4710a54790e71d8c3b3ad2481dba9b37997a",
+    "bytes": 19318
+  },
+  "Draven": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/119.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/draven/skins/base/images/draven_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "d01484939c6f62d980628a5669ec0e1df891148d8473c630f25e774fcad0570b",
+    "outputSha256": "f38e73bd8fce1a7005796cdfe131141241ed3b5742e6f6b3d286e6e7cba65fde",
+    "bytes": 16354
+  },
+  "Diana": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/131.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/diana/skins/base/images/diana_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "37da4a103e4c533676d1a8cd9ed03767d3d5abb831b457ae643d30dc128bf19e",
+    "outputSha256": "fcf92c85c0b6801284dc6858cb0feb26f7bc1204e3c1a6ba27dfb33853d92dbc",
+    "bytes": 18370
+  },
+  "DrMundo": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/36.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/drmundo/skins/base/images/drmundo_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "9fe341d0179bf9a3fa87e9eb023791d8ae601e70cdb061c931e9a377829b82c6",
+    "outputSha256": "730ed855d14921e803ed480626282ecab2b3bde43930e484e4cac13484680fcf",
+    "bytes": 23216
+  },
+  "Ekko": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/245.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/ekko/skins/base/images/ekko_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "7c99c7eaf0d41c11ea253dc429064d4aa683ddd749f039281ba5dfc85967c6fe",
+    "outputSha256": "b14a13c4fc9fe6c4132c5a9fb40b57a64edfc46db7f93b1b368addaa0189ea79",
+    "bytes": 18114
+  },
+  "Elise": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/60.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/elise/skins/base/images/elise_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "34203cbb37febb38907581c44e8cf1244d5ac69668dd2075428f5da2d7621a06",
+    "outputSha256": "26bc70ea9da97f51429be2f7fff13ae3917cf2a8da52636962ea86225ad74e49",
+    "bytes": 15786
+  },
+  "Evelynn": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/28.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/evelynn/skins/base/images/evelynn_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "80598ac1ed5ec1cf6e4d8f47b839b8a73f8b89177d00e5e5a6f9e2d73fbd3e51",
+    "outputSha256": "24dd832f1f43a813ed8293ed23b88a7edcd422e7fcd496cd506287b8a932b710",
+    "bytes": 15284
+  },
+  "Ezreal": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/81.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/ezreal/skins/base/images/ezreal_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "14d65725fb87147fa752bd7f10fbdfa7d98c89048538a2d24e72048a6c14cbf0",
+    "outputSha256": "5c79ed9b31c135878fb7223329d514add396be405f09748eeb3d7a9d9c3b38f9",
+    "bytes": 28828
+  },
+  "Fiddlesticks": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/9.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/fiddlesticks/skins/base/images/fiddlesticks_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "aea5386de9362cbaa0e5bbc4d4df4bfbf0842ffa023ab8b3a7cb4a9d1ee1e279",
+    "outputSha256": "c9d3222e3297d68ac7ccbe62bae2a9070c322e0a5c66696d1e8239f984df26ff",
+    "bytes": 18244
+  },
+  "Fizz": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/105.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/fizz/skins/base/images/fizz_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "60200779d878dec48191dae615689c2e35fa9117f7d46502c2cd5f4675e92801",
+    "outputSha256": "3d6765ad69c0d61af7894b37c9e21729cc9aaab12f807cf737aebe4f6fc621cd",
+    "bytes": 18852
+  },
+  "Fiora": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/114.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/fiora/skins/base/images/fiora_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "809e4cfe1fb0ca2a738a608f4276dc964a5b48b18611c0d492cb90fb3976429d",
+    "outputSha256": "7cb43e524a4104deef96df21e965f734f8f2511eed31b9303def766f1ca0d367",
+    "bytes": 22784
+  },
+  "Galio": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/3.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/galio/skins/base/images/galio_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "ddf6d12e3e50696f194a369ab0479a229a8a3dc83484a88ddffe868732203b93",
+    "outputSha256": "94dc4ef7ee1f588d03ad5afe8ecda7b5624c65118872d17254d6f333d6eb8229",
+    "bytes": 24880
+  },
+  "Gnar": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/150.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/gnar/skins/base/images/gnar_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "635919adf075f7a27c6f17d5d2a98e78dfa865c38832e8141c77a0bdbf1ec449",
+    "outputSha256": "ee20d70445bc4b451a42ddb29acbaeaa115f130175631e3998927a1595b6e985",
+    "bytes": 17846
+  },
+  "Gangplank": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/41.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/gangplank/skins/base/images/gangplank_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "03955066105fd74761715bf34c466fcb51d2ebe8035d7f50a0d56d329064a88c",
+    "outputSha256": "706e8efa1d3fb735750318b09da0432e01bcb96fa0238b86f7d491606af13ad2",
+    "bytes": 26392
+  },
+  "Gragas": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/79.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/gragas/skins/base/images/gragas_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "18f740ae715a71dfe9db25f80c31b957e885b0a284616f35ea8064ff09ea9348",
+    "outputSha256": "385dcfc174ed1763167cce01694fb78b2c4883a4de32b5f62c2afbf1bac9bab8",
+    "bytes": 18724
+  },
+  "Garen": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/86.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/garen/skins/base/images/garen_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "067251a4f632b62d8fdfda3efe83845ba57a6f7c8f79f130a5e202414193c868",
+    "outputSha256": "33b34d43449d703a684687f697f9c736753e55af79ce9e217c1f5d2726b2a1ee",
+    "bytes": 24542
+  },
+  "Graves": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/104.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/graves/skins/base/images/graves_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "7c2c4f9dd16605a3f65fed331443bed0cc2dc3f7951c91638c9a2f5d5de9738a",
+    "outputSha256": "361091fd2d9c30b12d9aac200f1eb6169dfdd02c286ddb126dfcd396438a6a12",
+    "bytes": 17020
+  },
+  "Heimerdinger": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/74.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/heimerdinger/skins/base/images/heimerdinger_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "30ed1514aa7289b77ca89a4e066dcfc79db51129f8063d67672a76ebc3e9da94",
+    "outputSha256": "4472fdcef1d33441e6cab00b3d1f9faeb9177bec96d1f9cd405ca2443a398f80",
+    "bytes": 24678
+  },
+  "Hecarim": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/120.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/hecarim/skins/base/images/hecarim_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "cb1349c692c79ce892beb0991bd329f9f2b120ed49a73799d19fc847e72a9bb4",
+    "outputSha256": "e0a922e4c9eba986312fc10a00ac39530a838856ded7d865191874f655bbb096",
+    "bytes": 20188
+  },
+  "Gwen": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/887.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/gwen/skins/base/images/gwen_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "f4e24f1adbe105ca86f5814d40f3673346b18e4732af5ef4ae3d072f2f853c80",
+    "outputSha256": "d8dba1912d548ff92ce9101f880856e0d6aac709ed437d41453aace6c78c48f7",
+    "bytes": 28088
+  },
+  "Illaoi": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/420.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/illaoi/skins/base/images/illaoi_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "37024200205edd2642c935dccf9fac2bd74519898f21e7352dd9ed7ed7b91b8a",
+    "outputSha256": "09ce24293a72533bafe1939e7dfffd7676905a5178c5e6f355fb4f79d89655d9",
+    "bytes": 19968
+  },
+  "Hwei": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/910.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/hwei/skins/skin0/images/hwei_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "4d9e161693e01c1e4b6e65a123631d88f46d593bbb6f2e9c06b27d4603e7fbfa",
+    "outputSha256": "322d3aad7d47a906d52e775369020ec8c919b75cf1e973d97707cce9e78a07b8",
+    "bytes": 23306
+  },
+  "Irelia": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/39.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/irelia/skins/base/images/irelia_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "af195709df0f538edc3a0ae327da9fb52a5e4c77bdf1697170666034e4be0a36",
+    "outputSha256": "0b5c32384b66fa1519f63dc432b17eddeb2d1a2ad19d06f26251573238e46201",
+    "bytes": 19400
+  },
+  "Ivern": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/427.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/ivern/skins/base/images/ivern_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "b6c941716abd4ddadd4637a70366a9cb8d69ba34f64a49037a281dd239a228ca",
+    "outputSha256": "c24a7002f06e2e48a5cba8597769b34a8c9a5a439774377c96ce1bdfdba33b79",
+    "bytes": 23694
+  },
+  "Janna": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/40.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/janna/skins/base/images/janna_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "f4e773f60f50e230b4601068708d6fba8c2064c966ba1c02d0e7e032d9e26b74",
+    "outputSha256": "154fbf9d1db93757924fb35aa73a37371ad9d1e05f65fd0dfaf8d49ac711637c",
+    "bytes": 19174
+  },
+  "JarvanIV": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/59.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/jarvaniv/skins/base/images/jarvaniv_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "ba02b045ec14a150f49ef5185a77e5caa74304825d5472a3f4b6b976494d85d7",
+    "outputSha256": "b7e3fd5fe5b01df05f3d915cd7d75bd62573776d312a3ab4421e56e68d3d3c9a",
+    "bytes": 21396
+  },
+  "Jax": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/24.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/jax/skins/base/images/jax_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "5d1ad9d6c45fe6c2f97758cb58df9668b64e1dfc3a8b9f18e261116dafee7c57",
+    "outputSha256": "f9f42d229ae20940cc73f09c8c69bf41d686e30ff544883c93b6302a3651fcd0",
+    "bytes": 18118
+  },
+  "Jayce": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/126.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/jayce/skins/base/images/jayce_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "e7a4faa7f538e7bf895dcfaeb9f0502c03ab8cb099681217d97f19134ddaad04",
+    "outputSha256": "b50a546718317e02dc7a5ad595703d46ca6f9685e139a63b940451d05dffd6a9",
+    "bytes": 16908
+  },
+  "Jhin": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/202.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/jhin/skins/base/images/jhin_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "28af6d250f6d4e51bd0ee45975d1c5a8b7f3f7fbee633b8f51c66cfe18bb5a22",
+    "outputSha256": "97e7e96c7e73fc63cc754532220e20774bdcf5ab92fe2b58bed86e177b3faeaf",
+    "bytes": 18584
+  },
+  "Kaisa": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/145.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/kaisa/skins/base/images/kaisa_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "4753afcd35b03ec1440363179d85249a6504ba92e9a90483ec16088a2d8a656b",
+    "outputSha256": "42e4fc8a3738c387730b014d14058bf2f5a7b260b38f6ac5727693325e0a2d85",
+    "bytes": 17886
+  },
+  "Jinx": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/222.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/jinx/skins/base/images/jinx_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "f8ac5c1ba0bc5545e083489291f9834d75aa7f5fdd9ad1cf29fe447d2ebb8667",
+    "outputSha256": "906e153fc4286faee42b44a63ac391029afa4ed7d72ea46838cf2b178e45c1f8",
+    "bytes": 20624
+  },
+  "Kalista": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/429.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/kalista/skins/base/images/kalista_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "9e50cda482e87e3f606faae32d01590b5db9bda2ed26d38f8e5d8617bf3c20e8",
+    "outputSha256": "b09ec22926f345c61004203919bb9fd533c9d5e85fea4f0aa1a404df05aede42",
+    "bytes": 20852
+  },
+  "Karma": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/43.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/karma/skins/base/images/karma_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "d695a7ee704e2a43a42509b1bb2b77b7ee84ddbe7b7c55814c377c369916e700",
+    "outputSha256": "f21f45228494e06696b21b10415cc0d0d89332d7e8c5165ff087498ae1b75ce0",
+    "bytes": 19820
+  },
+  "Karthus": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/30.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/karthus/skins/base/images/karthus_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "e71f4b75645444641adfce1c6f35618b32c96e1612451a3145c554ddbacd7d78",
+    "outputSha256": "8ccf6f0399988e35f8a0d3569c00acdb79b91f230f0d0edaa7a9b0058cfc0f6c",
+    "bytes": 15766
+  },
+  "Kassadin": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/38.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/kassadin/skins/base/images/kassadin_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "f56436bd018e0c146da23225d1376046159e3cd1f5c6988896b5a5f585c1e6cf",
+    "outputSha256": "73b6dad81e9b118754e64d160f065a61f7d67a224869b8f1659ab7323835a32f",
+    "bytes": 24260
+  },
+  "Kayle": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/10.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/kayle/skins/base/images/kayle_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "89b09b1c2d8f499189dfc1894eac39979b51988be50b0dcb86e84db40a3315ad",
+    "outputSha256": "95f31a2ce53e1bcb6aebcd08547bbabb745a0298a7327d578c6ac82afee0e8c9",
+    "bytes": 21336
+  },
+  "Katarina": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/55.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/katarina/skins/base/images/katarina_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "51501fb517226563de89d3df679be4279e67fa4d9ed35820929cc1f5adab09bc",
+    "outputSha256": "71976277b7875083f16aaa07614e9c3c52c0106a87a0d3539f8208e38474b410",
+    "bytes": 27872
+  },
+  "Kayn": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/141.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/kayn/skins/base/images/kayn_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "b14c84669cd8668584103656ba156f94f5d7909a7f8b430522c6357b8aedd51c",
+    "outputSha256": "afb5bb4b440fbb53dcdb1215ac9c5539a2e8570dba9aeff2afb025fc7c87a376",
+    "bytes": 17468
+  },
+  "Kennen": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/85.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/kennen/skins/base/images/kennen_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "05b8b6207d44d1ad2904ed488ca3843ce0363e29ceb9ec9eb438b4d76d075eb1",
+    "outputSha256": "008f94cd8d81f582d1f6e2bf97960383127f34c72871a5c610a3f2a3ce7abb5f",
+    "bytes": 20550
+  },
+  "Khazix": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/121.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/khazix/skins/base/images/khazix_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "dab2d1f78ed9d4feab00e33a0fbee7fa9950240a3b0986d37d670a2d2567d498",
+    "outputSha256": "6b3e5d4e228677c17848405f8893584b82ce179595baf9a148f366957b8728e5",
+    "bytes": 17776
+  },
+  "Kindred": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/203.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/kindred/skins/base/images/kindred_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "60cfc15e2007b69e12270d506b7cbca2f520e161e8a2fa2d6166d9221d47c0e6",
+    "outputSha256": "9c94d712c121b86004ff8df1c8aa9c175b15fe7c1764eb95f16c20977aff842a",
+    "bytes": 12366
+  },
+  "Kled": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/240.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/kled/skins/base/images/kled_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "913f29f61c74515f24ac0c33db083e01163b46265fe1321cbaee419c6042175e",
+    "outputSha256": "1c677040a8b7398f8f8aa48bce6e5e729528123b527cdfa9bfd158e58daef5d4",
+    "bytes": 21274
+  },
+  "KogMaw": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/96.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/kogmaw/skins/base/images/kogmaw_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "67f4fecf2d2a0df8a5e5c42f28bd3eeca0c3dedf002f122c07382486f38b4089",
+    "outputSha256": "9b5925fae5066d1e39747ef63d150fdd92a177993623134f16eea028a1cf41bf",
+    "bytes": 16788
+  },
+  "KSante": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/897.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/ksante/skins/base/images/ksante_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "25c6ce716dd670a9dfdc2329d9d504f5465d21a4d0b0a90b59309e798f262316",
+    "outputSha256": "6e325bea8fe6894557803efc6f44bcb40c743eb165c81e4ff349a75e7062ff03",
+    "bytes": 26662
+  },
+  "Leblanc": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/7.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/leblanc/skins/base/images/leblanc_splash_centered_0.leblanc_rework.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "2d6ed1de12ece9c7c8a0c428c6eff5e9ad9864245d7dc20b3ade008109db82e1",
+    "outputSha256": "a7fb336d7a083ef70917603d9c03613cfca6ba962a3b8b841524526ef9aa2081",
+    "bytes": 23866
+  },
+  "Leona": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/89.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/leona/skins/base/images/leona_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "53fc589942b60213434cac05e3b7551f5f2b752ada2f1c5b8d5f16b6fbc9ba7a",
+    "outputSha256": "d706717a983abe50d277582bcca7645d8ff1e9fefbb893faa3287b34a143e4bb",
+    "bytes": 21320
+  },
+  "LeeSin": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/64.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/leesin/skins/base/images/leesin_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "e8ca768fd8a09c4040645bcc473521272de7c2985c4e9323da8cfebc977ba047",
+    "outputSha256": "b51005853db89e009d7325e0e9238480059406c97ecb1c60f8d2a3958039aa74",
+    "bytes": 16276
+  },
+  "Lillia": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/876.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/lillia/skins/base/images/lillia_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "fb85c7ad823d60b1c48f021d1f8116d0aa41da901f48c0e15686836330ecf9af",
+    "outputSha256": "977324528f94de792c27a123ea7c90954e825ca0a652923551d541a4c6d68247",
+    "bytes": 21498
+  },
+  "Lissandra": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/127.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/lissandra/skins/base/images/lissandra_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "44ac6ad830025bf6f25a264d6bf7d491ec5b5fdf179e46eaa3ff169f4e6b2dd8",
+    "outputSha256": "dedb556842603caa9f8c9b9d31af6e6c0444a241ba2295981a7e85972b96b197",
+    "bytes": 17436
+  },
+  "Lucian": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/236.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/lucian/skins/base/images/lucian_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "14ceb3caec6e8c6b789ff201921886b697488ef23775b65a17364c40c83b19aa",
+    "outputSha256": "24f2b2bcca3054b68717e19d5a8bf9e5623d7fbf443694b89a11279b7e0ccad3",
+    "bytes": 16012
+  },
+  "Lulu": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/117.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/lulu/skins/base/images/lulu_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "94b55e96564497d3a5f9de51fd2c7caaaae208605673e2ddcae0351884321ce9",
+    "outputSha256": "df8a09f8dc1725d2f59442639c7c7e874f09f423b706513b6ac09e2b32fd6434",
+    "bytes": 24826
+  },
+  "Lux": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/99.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/lux/skins/base/images/lux_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "0d62ed3f0e6b51abf9ca2bce33ff4638a02e5c726f046cdd78f654ef7fe939b5",
+    "outputSha256": "4fcc9eda4870beabfdcbe359de0f20fbb45a5e2da2b15330b14c566d2ef51f88",
+    "bytes": 28192
+  },
+  "Malphite": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/54.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/malphite/skins/base/images/malphite_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "36de75bbf0674103623b27d0ef2377ce3efee02a09c97aa51b69d212c3369fb9",
+    "outputSha256": "9f97b3b944345a2680b145a0504a1b77506d9dd3abba09acefeeb73aa5935696",
+    "bytes": 18562
+  },
+  "Malzahar": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/90.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/malzahar/skins/base/images/malzahar_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "83bb9b0bafeb5ae1625c366a3cd1e0fc84c0007d6d5f8c866f1807064acaa11d",
+    "outputSha256": "affa3e0cc6f8db11c9ba3109d4569899f61b8c77ef08d1d9011a63f97d48b314",
+    "bytes": 21142
+  },
+  "Maokai": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/57.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/maokai/skins/base/images/maokai_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "d7d1f68f1b47f9446f7a706404af7dec5cb9a882da6f2591ee4fa722eb650d14",
+    "outputSha256": "b7355fc11f917c2bd1cf31895558e6e18c3ea37cefff0a717eb51bfdeb18ae46",
+    "bytes": 20452
+  },
+  "MasterYi": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/11.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/masteryi/skins/base/images/masteryi_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "4e4a54ebb2f8d99bdcde6122b090331b26957dbac5cc95e32d4e2baeff6d2659",
+    "outputSha256": "f74891f28246423c13a97fb17bf7a677d09225d85ad463fb2cbcc0d558f98519",
+    "bytes": 21962
+  },
+  "Mel": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/800.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/mel/skins/base/images/mel_splash_centered_0.mel.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "66a80a15a04dabce957e6db9ca6ad4144c3413cbc5e134456404aaafa5d8fcfb",
+    "outputSha256": "f39efa33102d3183432a487653fb5f07f6f7aa0ba7847ac9c87347b2f63ac368",
+    "bytes": 21406
+  },
+  "MonkeyKing": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/62.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/monkeyking/skins/base/images/monkeyking_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "70dd2ec5680f3a005d5a3d108ac6d41c0841c075d566c9b066c1f1e8c354686d",
+    "outputSha256": "3f78feaa206c1aa70aff83a8fef108590ea4e125266a09cc2cf316e4e2f8e102",
+    "bytes": 24276
+  },
+  "Milio": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/902.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/milio/skins/base/images/milio_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "c97ac949d45281cabcf2f3ba4396764d2795583c4d2fc6cee86022f96e131993",
+    "outputSha256": "6ef2b52c5dc7cff25d0e07e224dd8470c63678f3149d757d08bd7f72039c2931",
+    "bytes": 31234
+  },
+  "Mordekaiser": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/82.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/mordekaiser/skins/base/images/mordekaiser_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "43de8e132465062ca385ec11a4c2c1ebee0d59bc41d8b06ab3f9f1b17f321a24",
+    "outputSha256": "6199f566fb9c062ee3b053c0834fb9f65b757bcc6bfc16b5d40809f38b0432f5",
+    "bytes": 15992
+  },
+  "MissFortune": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/21.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/missfortune/skins/base/images/missfortune_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "def3c8d0b83f0f991b9782117a2fa30d10a3eee2c6b26d172ea6e0c8d7124609",
+    "outputSha256": "9c4c1a013c06c05f43e10e76bf30b918493a874776a296ee7616c873ddadd3c3",
+    "bytes": 25930
+  },
+  "Morgana": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/25.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/morgana/skins/base/images/morgana_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "381d15f5705a9c8ff6b20d51ba44019b2737b6c68577799693891f83233be45b",
+    "outputSha256": "f848066e65408488408adea57f8bc6064a122a014b6447b3ceed1807c51ad10b",
+    "bytes": 16454
+  },
+  "Naafiri": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/950.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/naafiri/skins/base/images/naafiri_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "6b8104b0df4b494486c083fe9ae46cea148a04f1b95a3991a7a2c90073301215",
+    "outputSha256": "2e5bb9cf1419d4383db1cc480afa317eac4332146ffac496d66b5eea315646a9",
+    "bytes": 21202
+  },
+  "Nami": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/267.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/nami/skins/base/images/nami_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "4986be0a2e264d43fdc60d5efb717370fcfa23f940e673790518334168be134d",
+    "outputSha256": "48bd48012317f917f4c958114a4ee41920ffa309c1195ff1a21bfc5b7419e333",
+    "bytes": 23510
+  },
+  "Nautilus": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/111.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/nautilus/skins/base/images/nautilus_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "ab131333c372401380ffb84cf3a512e40b2f35602cddfd4a544f622de463c2fa",
+    "outputSha256": "02eaf7b2e1001072623f0be64c224dba833c36f20c1e76cc5ee21d053caa36f1",
+    "bytes": 18448
+  },
+  "Nasus": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/75.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/nasus/skins/base/images/nasus_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "42b7133f9232f23945b301ad41f2f6133ff1f3ba3f32cde1689f15d523314d8d",
+    "outputSha256": "74c03befa4592a1162fe7557ae73116ba8892d110b4d92abf9dd3c1bdd6ffdea",
+    "bytes": 23590
+  },
+  "Nidalee": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/76.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/nidalee/skins/base/images/nidalee_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "632595c82a0e6cf2b77ee8c379bf0c5b3e698a3fafe07f0d712a562e50152531",
+    "outputSha256": "868388af36a0d196101822a02a08311b969ae27081effa3da1b1386d620c292e",
+    "bytes": 21234
+  },
+  "Neeko": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/518.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/neeko/skins/base/images/neeko_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "962a58375551a90ef05c634df800c36de3464ed30238acd16e57e5ccd1b15f38",
+    "outputSha256": "81458e06542182cd4093bc9509c2a0c440952962b73c58be57bd77c43b5b15b4",
+    "bytes": 27782
+  },
+  "Nilah": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/895.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/nilah/skins/base/images/nilah_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "d51526175170f954710112e761b8b1801d226a583f56458d9ac2663190db53c0",
+    "outputSha256": "95fd67577ddcfae6e384c231f7de7fd4677b3bbdeda8acecdc0063ce0cf6966e",
+    "bytes": 24410
+  },
+  "Nocturne": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/56.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/nocturne/skins/base/images/nocturne_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "81f0bbc9539d37410fdaa65c11b2ee37f7d4765fee80d07d085a31f98f051eb8",
+    "outputSha256": "ef5ce40679fa9ba4ecf38ff69b1c402d30081208259064a54c25e85ec8b646b9",
+    "bytes": 14766
+  },
+  "Nunu": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/20.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/nunu/skins/base/images/nunu_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "f22cdb483884190276e9ae05d91c92d6d255889c7b665c82ff4d12c68ec502f2",
+    "outputSha256": "56081134b6e48401cbb5af3e80090e4c326efb7393da2d9b2c449a7ba19f340f",
+    "bytes": 22040
+  },
+  "Ornn": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/516.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/ornn/skins/base/images/ornn_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "4bfa004f904e3bc40b4795483857da3514f7fee005b17a3c53322a787cd46486",
+    "outputSha256": "b7e3474639ddd522bcccb8a288fe82e49ad22e4e5bd53608123fd2bbf84de1ff",
+    "bytes": 18590
+  },
+  "Olaf": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/2.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/olaf/skins/base/images/olaf_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "e65e7084f2a37b47a9d6657a07dd6e1ff5a328fa63ffb2903df3a8751bab0496",
+    "outputSha256": "b28489313369b1f67452e41e073e53da3a2eabd73b3a374f1496c3d5a5d71a23",
+    "bytes": 24144
+  },
+  "Orianna": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/61.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/orianna/skins/base/images/orianna_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "65c4f208931f6b4027caf5f03b0b65556aca3eb550871e8317225ce6d0a656de",
+    "outputSha256": "6db609e5f37da7271746865c29e38a50d7bcf072730fa1535187d23ca339c3a7",
+    "bytes": 18566
+  },
+  "Pantheon": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/80.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/pantheon/skins/base/images/pantheon_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "2239c7abfd581d4216144e48327fd5639130a2eb74cefae227b0f8e4e4ad7488",
+    "outputSha256": "1fb62f1c3119594145f24bf3c9be0fec253b8341b30937820cceb92c48bb97be",
+    "bytes": 19688
+  },
+  "Poppy": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/78.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/poppy/skins/base/images/poppy_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "6da81bab33fed69419ca123282a7bc4d430b1c907220bebaa682bb2f60ab14a3",
+    "outputSha256": "03cc15a4fb123e2559e03d3636108407f72381a25cd24ea82e588ef35aea3879",
+    "bytes": 21730
+  },
+  "Rakan": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/497.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/rakan/skins/base/images/rakan_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "7674b6f1622cf9357e22b7dab7044948930dd518029c367a9e08be9b7d842baf",
+    "outputSha256": "a8d48a520d5e97a08742316249addbb0980327f56a04845735c8c86e614e32dd",
+    "bytes": 23192
+  },
+  "Pyke": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/555.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/pyke/skins/base/images/pyke_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "c3e9eff46e3c2b24c5ea1a515c896fd91844aec6440332c08d98222636b7e823",
+    "outputSha256": "ce3c484b0dbe9e464c895419f1d76dda060d41392cc5c3ddcc11c1290661c942",
+    "bytes": 27488
+  },
+  "Qiyana": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/246.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/qiyana/skins/base/images/qiyana_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "2fe680376961785cb67c3b494f40737942f2f91d3c699797e5d4e0784e63194f",
+    "outputSha256": "08fc24e142cb219103f6ce535b6201de01e04c013d311522ac29ce04897a7edb",
+    "bytes": 23918
+  },
+  "Quinn": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/133.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/quinn/skins/base/images/quinn_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "b94662257bfcb84a18461d3f8d50e71d3f2f8391084a50e2f56c02448a7c0073",
+    "outputSha256": "f3eaaa01a0e6290771418d2e386f40e56bfbc9fd2f1d913046b10c90c781f3d2",
+    "bytes": 22312
+  },
+  "Rammus": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/33.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/rammus/skins/base/images/rammus_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "b4349fd7a6c889b3875f2dbd7dadf65c6df4bdecba14722504eb089d6f89ed83",
+    "outputSha256": "1f0ba11b74f51df7dc6bf6ca5ff409078dee801b999d743bbd61cbcb52b461f6",
+    "bytes": 20360
+  },
+  "RekSai": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/421.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/reksai/skins/base/images/reksai_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "c4285fc6587538b44e985ac243c0fde2842bf3315e7616bbded2536907e13536",
+    "outputSha256": "e8048d9f3a6bcc4e782eec0f5956d9cbb052bd0ae4153dd9df86ecb06e3aa319",
+    "bytes": 18222
+  },
+  "Rell": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/526.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/rell/skins/base/images/rell_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "29221e41a59f95e97829e2f512fb21f679c71c7b478b7efc4651a4b8be6eefd4",
+    "outputSha256": "ebe341a1b105ee579b276bac9e7424992fd9399b079704d97d3312ff73a7c568",
+    "bytes": 17820
+  },
+  "Renata": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/888.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/renata/skins/base/images/renata_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "9c5ac54f16b6a1c3fc67c00ca94041827aab3e9b1b8556fc00a54298a443b935",
+    "outputSha256": "43c74ea6474f1d517d370eefc8f221d43569ac3167eb47141faa4f769cac7ed9",
+    "bytes": 23072
+  },
+  "Rengar": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/107.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/rengar/skins/base/images/rengar_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "9615ccc838dfc5e0e0d9e287bcdb53011a02eb98365feea6fa29adf2b6cdb07d",
+    "outputSha256": "329aa7c92ea3ae305de4a27ab74b16dae77eacbdfb857c6461e82bd748507217",
+    "bytes": 25468
+  },
+  "Renekton": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/58.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/renekton/skins/base/images/renekton_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "6cb994224c8a06d7a2ea324bb5bd41a04f511c9935f468ee16fccabb42c2e316",
+    "outputSha256": "92d0240ee95a4b3041a2027f66f17afbe4ab8a673103bd76141069b695a54c67",
+    "bytes": 25998
+  },
+  "Riven": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/92.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/riven/skins/base/images/riven_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "af003ef09458aca83f47e5af797d461184ca4a62e24509d973f350d85964f955",
+    "outputSha256": "97ad789efe5316f7307b5945ef9b2eaae563644f5ae3876ee1d785650f3979df",
+    "bytes": 25832
+  },
+  "Rumble": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/68.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/rumble/skins/base/images/rumble_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "2cdc16251f6f097963b3587c31704c18c169875034cd51ad771550db9a582d97",
+    "outputSha256": "e17243b048df237fa9a5af6bdf4a4df1ae3c0a4a40c8651c1aa29a0f74be89e5",
+    "bytes": 29254
+  },
+  "Samira": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/360.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/samira/skins/base/images/samira_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "8207480071538a4dfb0babfde38e9659496a704fe526a1686f279cdb4c750445",
+    "outputSha256": "ef56b6a7e1f4dcb212834360de3cb6c297cf630bd8b080f6929c44209a6b32f8",
+    "bytes": 21926
+  },
+  "Senna": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/235.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/senna/skins/base/images/senna_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "7347de198b3cdc9ff62d360ffe554d2a77102dced63366620ee882c9880390f1",
+    "outputSha256": "9c8e50be8fe92589ab7e04761a51ad5dd5537bc6c531943ddf5c74ba0b1948e5",
+    "bytes": 18428
+  },
+  "Sejuani": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/113.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/sejuani/skins/base/images/sejuani_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "b53834df4fb2f119d78fa6afe9dda89f1b6c2e08cd4787d0ff6d366d477c59ee",
+    "outputSha256": "35f9e7e95bf575f930c14a02910315e11db1fe7b1fe14c1b7522bc71d3bb2c6c",
+    "bytes": 23302
+  },
+  "Ryze": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/13.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/ryze/skins/base/images/ryze_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "ca47373269b4a6a053a424a4d0ef085a24bfbdc4659876735c91ff6019399337",
+    "outputSha256": "9e84113033f9fab6b82b8bb371d2ebaf09b61577d7e52c9cf66f1d2adb0583f6",
+    "bytes": 17400
+  },
+  "Seraphine": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/147.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/seraphine/skins/base/images/seraphine_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "ca259ea071bad267bd839bde86845bb7f5948ab76d6b6f5d45e1f6ba7401d306",
+    "outputSha256": "68a2082f848bb79991ed3639eb69bc3cb41a3c1f1075e7160332f775c6e5400c",
+    "bytes": 22614
+  },
+  "Shaco": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/35.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/shaco/skins/base/images/shaco_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "8458ae1c916856839113334a2fb957fcdda7ec98fb025c330a239572f84ac736",
+    "outputSha256": "b4934021f550acb0b95590072c5bc20feaf2e58441a3ec525454cde7aca50bdf",
+    "bytes": 18498
+  },
+  "Sett": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/875.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/sett/skins/base/images/sett_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "2eea0c363f8ba1eee675f7dfd6f02c3b467cc1e4884cd252ae0f28ccb14ae2eb",
+    "outputSha256": "c1824c203447e0ead39d7e4eedefe282814a831f33a4488c645f614e54cbe21e",
+    "bytes": 27998
+  },
+  "Shen": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/98.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/shen/skins/base/images/shen_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "46e609ca34e2f3029cb4af3fd60ea9689d0fa9a62d0912dcfa8e575023175ce2",
+    "outputSha256": "75d5ddeba31524d48f4e8b55dc7f593cd6327dc26ca9cac96d1be3bfadc48ce4",
+    "bytes": 19148
+  },
+  "Shyvana": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/102.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/shyvana/skins/base/images/shyvana_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "19c0f8ec969fb5fd06bb0eee85a5a754856634b642e16a466b48857470152ae7",
+    "outputSha256": "046fc05ee26872406a407cb2df74e575080fbf4c26a1cb8296d2615d93fe0243",
+    "bytes": 24592
+  },
+  "Sion": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/14.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/sion/skins/base/images/sion_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "67f2e77fb77b612e3fd29a8e0a5ec94e423587763f6f40246299f169f3a60fec",
+    "outputSha256": "ac8c5e5bc6a25bacdcedffb0a4bf119b1fe43431ab609fa599dffad379b4190b",
+    "bytes": 18794
+  },
+  "Singed": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/27.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/singed/skins/base/images/singed_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "f7d4992fd4a0586c8097204b9c2ab8f69fbf4cdd7591296bb8548955862749b6",
+    "outputSha256": "fe2b80d03dfe6cd1de62cad0bd127b2f125ffabcc5b8ffc7daf4e5c8c2221942",
+    "bytes": 24596
+  },
+  "Sivir": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/15.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/sivir/skins/base/images/sivir_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "c60d43f5b4d420ec2017449815df1c749dd290ab64f4c95f315570b5942dd196",
+    "outputSha256": "2b1ad3a26127121457ae096091545ce0546dcf269f258ad59ec37d457c1063c0",
+    "bytes": 17746
+  },
+  "Skarner": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/72.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/skarner/skins/base/images/skarner_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "8a0e8a032723993491e81163c7febb71ca6b403c5d48c1e77d0c4c2339826256",
+    "outputSha256": "f20fa73255b5a223a5afdf41d78fe0e819256cde1d880a36d0aa2b6cedcf0374",
+    "bytes": 17228
+  },
+  "Smolder": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/901.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/smolder/skins/base/images/smolder_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "1623e3389b0e610daadda270d7a9d4c2f936808027da11f65964f20aac76103a",
+    "outputSha256": "49161a341fc9e2d43d5d843c85981086ac1384a1fe51e301f66ab9d2a8b9cfa7",
+    "bytes": 22898
+  },
+  "Sona": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/37.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/sona/skins/base/images/sona_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "655cc4b955657ffa88620686bef68f150aa6ade6d5b7c8bf4f8d963b37cb8b1f",
+    "outputSha256": "5fd3778d41faf67313fe5c67b441f6f56743d1236f1a28eebfa11bf1e88d619b",
+    "bytes": 21000
+  },
+  "Soraka": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/16.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/soraka/skins/base/images/soraka_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "591b00d7513d4deadb4d815711e33641c1b3f7ce1f0c883b8b05bc2569abf163",
+    "outputSha256": "09de46559b31e0230182e16222a844403471a52f36e8ae3756ac38fe6ed3bada",
+    "bytes": 25102
+  },
+  "Swain": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/50.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/swain/skins/base/images/swain_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "b4294bf68344862c011ec1f363591afdeeb0c518410801054c3cf5a8a3f610a0",
+    "outputSha256": "d9ca701fbb22d7b9892ce4c890fc6db0462c8ea0ce40754e42d8149e70320fc5",
+    "bytes": 17854
+  },
+  "Sylas": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/517.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/sylas/skins/base/images/sylas_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "ebc577f6e920b8aae02c2c56c72975b2d56080107cc104b30101242374f8810e",
+    "outputSha256": "3a901fedbaf20ebaa74890415a91718f170f98a1bc7b793ab605272c3a585886",
+    "bytes": 19060
+  },
+  "TahmKench": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/223.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/tahmkench/skins/base/images/tahmkench_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "c8938e83c831cee1648ae69ecd8f0917a344b40b41c06d5325b810c8c40ce800",
+    "outputSha256": "faba8d2d4fbdc25b18d4c11fc3b28be999f9355af870fc0d8bd9bca95cb374db",
+    "bytes": 12336
+  },
+  "Syndra": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/134.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/syndra/skins/base/images/syndra_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "45b3b0a3d0687de5d3b65a1d2370cde05539fc573147398707a30b61fe224d9e",
+    "outputSha256": "17885db84b0445f3878274cea3c7b064320ec7ff69ff9430998443ff6d7df8ee",
+    "bytes": 27540
+  },
+  "Taliyah": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/163.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/taliyah/skins/base/images/taliyah_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "a9439ea2276067331536a4a7bac976f06e9a477e6f73da47facbe561fb9a4c7d",
+    "outputSha256": "40f9080d035d3b12734ccc504c930438df928fffac2d0ea66eadc9da8f99720c",
+    "bytes": 19512
+  },
+  "Taric": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/44.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/taric/skins/base/images/taric_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "a45c2aa2624966d09e53c3c804d9a3eb7aeabb0199804eda0f1826a4eed74887",
+    "outputSha256": "e8fc61b6f9f4c49b441d6c06b6ee57b69e36d0d0be431f28f99a49805e560d10",
+    "bytes": 17634
+  },
+  "Talon": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/91.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/talon/skins/base/images/talon_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "9a6d0ecb6b9bd34b728645575289fcbd23ca43b11e0c063f0a05a7761a83da7c",
+    "outputSha256": "c14b5297c86602c2315a7e3e751600697f462b56aa2ad1561b6ab35ace4e88a0",
+    "bytes": 23788
+  },
+  "Tristana": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/18.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/tristana/skins/base/images/tristana_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "0e4361b93871fb4a349f9fb75bf5ce182e8dba58c863dbee0805f67652300fbe",
+    "outputSha256": "919fcd2ad433aac93e6b055cd6d801264c197f194c9c32ffd06368802ea5726d",
+    "bytes": 16234
+  },
+  "Teemo": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/17.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/teemo/skins/base/images/teemo_splash_centered_0.asu_teemo.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "09299535bc04cc1bfecc2aa867004b1ac0b62f22fa84326efb3f18eced1d43fc",
+    "outputSha256": "01a9491a4b536e68b37f627b8dd34247f2394451c97e96d1ec6ceb825da5ea4a",
+    "bytes": 27000
+  },
+  "Trundle": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/48.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/trundle/skins/base/images/trundle_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "db9e36b18a9f47e060bd28802b28e1d2e615498a2e9093a514ec1d4c8abf51d5",
+    "outputSha256": "ebda6aceaacc58aafb544b42613323067d717b8e91cbcb8626e4d8012c0b86b3",
+    "bytes": 21240
+  },
+  "Thresh": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/412.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/thresh/skins/base/images/thresh_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "84c812540225929bbd1ff7842e392b5e87a35245559f24bda84fb8ab3eba880c",
+    "outputSha256": "6c7ffe499e7a7f37e1a9d6a9b81a1251cfcae5ba3e7c27d52304abbf658acdf6",
+    "bytes": 27744
+  },
+  "Tryndamere": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/23.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/tryndamere/skins/base/images/tryndamere_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "7b15fd6d028a9654293550170d98207f4e19e89386f8f24cd1a579a034b8c37f",
+    "outputSha256": "00be07cf5d0b8a4ac02ca64b639bb264ca4d0e38f96f59ac7492a93a34eba96f",
+    "bytes": 27686
+  },
+  "TwistedFate": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/4.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/twistedfate/skins/base/images/twistedfate_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "38159603405cae4642d8b28692eff10f76bf2d674f6bc1b8147f67933a58c5e4",
+    "outputSha256": "21ed6e86d7b48c12680e1e5b5e7d87c40295438cecdad8b85f17d223869b1a54",
+    "bytes": 20012
+  },
+  "Udyr": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/77.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/udyr/skins/base/images/udyr_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "1008097a50fa04d637037f2f4c67b8d2fa4295c42dbca568eb2d3a8ff8d07975",
+    "outputSha256": "e0d394f05d104f17e073489bc689036b5001c1f2ac5002b51a07a4e37bc1fdf6",
+    "bytes": 13644
+  },
+  "Urgot": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/6.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/urgot/skins/base/images/urgot_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "8771541bcdb53b7a1ab3686627fce61b5fa2b0c384440751bc95997248a72762",
+    "outputSha256": "3a7b80b43bd5ac41583d0a1c008f358ce68c19729188199678461d931dce9076",
+    "bytes": 18294
+  },
+  "Twitch": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/29.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/twitch/skins/base/images/twitch_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "fc76bc066df7efc43a47e19916fa7fd5537663f6e48ef1c678ef5438bc1c5e68",
+    "outputSha256": "a1515f9603e7078855ee168e7970ad1a2ca3c96d2886cf993e1bbbd4dc8164e4",
+    "bytes": 23684
+  },
+  "Varus": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/110.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/varus/skins/base/images/varus_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "725a0fcc7d9252ca3fb1b97f46ef0fc181d0a53e9196a087361f1530d7f7fde2",
+    "outputSha256": "058f74f8f001ccaaae0f11674d1ec8a1f29205f049b60ec5820073005f485fa3",
+    "bytes": 20292
+  },
+  "Vayne": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/67.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/vayne/skins/base/images/vayne_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "a9267aaa4e27067e6869c993581b47866b9bc4b51cc73588ccccc9932d38fb6c",
+    "outputSha256": "35b6a466a8422d21c9b2d9962e9529ee7968585d84d83d1d53e1dfb42c3fb47d",
+    "bytes": 26926
+  },
+  "Veigar": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/45.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/veigar/skins/base/images/veigar_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "f5dc8c44f33f40ed37991a4e50cf176fb87399972780105bec26daef2a92b233",
+    "outputSha256": "6c282477dc2a544c2bfc6ef820a27f292c6f9db266a7fda768e36ea6ec4ffe7b",
+    "bytes": 23602
+  },
+  "Velkoz": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/161.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/velkoz/skins/base/images/velkoz_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "6841f9dfe2678e8d3fe59863e99af147ff16078ccea88f7b2ec66bc213864395",
+    "outputSha256": "dac5dc9fe98ee38b4b712488ce1d3c38046f3a8aab9fbd994100db2727f3eddf",
+    "bytes": 21512
+  },
+  "Vex": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/711.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/vex/skins/base/images/vex_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "e81893244d0ce1d158385477e82a02082fcf5433621250578af801e645e76de0",
+    "outputSha256": "86c94b194a541a5943d60d467a596d6faed9c1e480afec36f9dc23e3312cf6c2",
+    "bytes": 20148
+  },
+  "Vi": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/254.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/vi/skins/base/images/vi_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "f98a4db779e32e7cad0bbd9e45704907cbed1c4fae4354ee2be32a0943031687",
+    "outputSha256": "2509c6ab4a6d2803b05b3e82eddf0fe55cad306f7149c55ed47d29ec0c754cd3",
+    "bytes": 28170
+  },
+  "Viego": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/234.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/viego/skins/base/images/viego_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "bd6fda97fbbe381964b8def4400d2e0c42056de25925d6307be139471a70ddd5",
+    "outputSha256": "b414e5bd8f5dd98a54517adf7c3d5c80849ffb6d889e5218e63c26587aec2cbe",
+    "bytes": 29764
+  },
+  "Viktor": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/112.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/viktor/skins/base/images/viktor_splash_centered_0.viktorvgu.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "3286a4ad75f5fe6981d783bbe13b49ad736cae020b94d9ba11b106c59ab3493f",
+    "outputSha256": "30d5d2b9ef7c0828be456497355bf2bdbf723a471da6d9739017c81b98c78533",
+    "bytes": 21348
+  },
+  "Volibear": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/106.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/volibear/skins/base/images/volibear_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "7586edd233da44082cd9ab1d6fc11fccd38ba824d205023fb37d5d6b277e74de",
+    "outputSha256": "37e2cf6ace6015be938deaa3030cc0695c948cdb8d1b712f007658835caec5b7",
+    "bytes": 19530
+  },
+  "Vladimir": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/8.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/vladimir/skins/base/images/vladimir_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "1e964700cfedb3004476ba29c3bde9869912568accc85ae62a78057ca47caf87",
+    "outputSha256": "ed721791196b2ce5858f974eddab21ee9cf509afd67984046d87b6cb9f84eebf",
+    "bytes": 26280
+  },
+  "Warwick": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/19.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/warwick/skins/base/images/warwick_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "8231b5579f758a578d9d2005073efaa5119c7072ef86a7607d7ecffd523a1b84",
+    "outputSha256": "a5bddafe86ac1f10464b7c78df705a11bf4f45744849a0b7bd71f2179a663f28",
+    "bytes": 19356
+  },
+  "Xayah": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/498.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/xayah/skins/base/images/xayah_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "e108135602ae0c4f828cb14bb276f531078735de7b4a9403d8495824376f0665",
+    "outputSha256": "9c6c1e921f1d9bad5afb0525ca27531fc8608f6142b37bd4b1a993712d958b60",
+    "bytes": 21306
+  },
+  "Xerath": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/101.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/xerath/skins/base/images/xerath_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "0df29b8394866527b103e40ce82586987687af66f2d72f11ca2db91216eab10f",
+    "outputSha256": "f775ef0fb7423f0fd22865c412642583915b33f7a9934a5e610e9d7d24ad9760",
+    "bytes": 29468
+  },
+  "XinZhao": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/5.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/xinzhao/skins/base/images/xinzhaorework_splash_centered_0.xinzhaorework.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "2a757e0076fd546ab978914e601495cce754a1053b93b3fdc612cb4b682d3ca4",
+    "outputSha256": "cde4c7a9b5409c161567dfd5f048d6ff93028380c41ae5a8f4fa7517382ce8b7",
+    "bytes": 19238
+  },
+  "Yone": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/777.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/yone/skins/base/images/yone_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "203f51f8fb0f82635b59adfa45d0a583ca36861125302367f422b4e61e72d9c3",
+    "outputSha256": "6f604ac30798d07378c691f2fb0058e1c4dac9fdf68ff64795475306de75b26c",
+    "bytes": 20788
+  },
+  "Yasuo": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/157.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/yasuo/skins/base/images/yasuo_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "c4290995256a86edeb01183dd28a9a753fefcded26ab16a8ecc74b1ef271e22e",
+    "outputSha256": "660fadef69b63abec853f234d9d6cd2da3d63dd4b9a19c544a5c06afb0fe3a97",
+    "bytes": 25026
+  },
+  "Yorick": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/83.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/yorick/skins/base/images/yorick_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "c8a12f5b1dc3f849ba1c52daf26b79c2570c934f4adc6fd269f7767799ed8fab",
+    "outputSha256": "2d8bdb0e90f864b08c83333bea716480ddeedb05455f9e80c5ca60183fc38d63",
+    "bytes": 16292
+  },
+  "Yunara": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/804.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/yunara/skins/base/images/yunara_splash_centered_0.yunara.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "7ba0ac7e8dcb704679411614f470f7f23fc974e63f36396154da2f7efbedf1a8",
+    "outputSha256": "73cb7bc0e8b81a3547d612a9f89e1f7f48bb3fa7b1d1aa030635e8d9cace9de6",
+    "bytes": 26832
+  },
+  "Yuumi": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/350.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/yuumi/skins/base/images/yuumi_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "d01796eb914065fc2c2ba63a41820d665e4389aca01bf7c3e85529c88bb6c7dd",
+    "outputSha256": "fd1125b07ec7e47d8d26bd234f4d71b7efac243ac23c58def825b8dd05cf95a3",
+    "bytes": 24612
+  },
+  "Zed": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/238.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/zed/skins/base/images/zed_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "4b8b36f4c02d96d97dc0760bf90cb404a8e2632037147887a7dd72005d3d1186",
+    "outputSha256": "521ad7630dd3c2a6a14156ccf12a81173abb8f763dd5f9fff7de4e9fb87d9d7c",
+    "bytes": 24780
+  },
+  "Zac": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/154.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/zac/skins/base/images/zac_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "bb826b55addff89a21c75f36353a213f36f14fb9af2aebe35130f3d6534bb1ad",
+    "outputSha256": "5c5ca66e2b64ac46df1068de2d6767602cacb55e2386f33b62b8da4f247b39b3",
+    "bytes": 14680
+  },
+  "Zeri": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/221.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/zeri/skins/base/images/zeri_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "3c13a6a470fe901c9ff314f3f090f184a8ff70fd1d292fd5e2528bcce48fd589",
+    "outputSha256": "b582c6c745cfb00edf42e9225ae5b61ae6ba76b8183bd14b70b08780b76f7017",
+    "bytes": 23684
+  },
+  "Ziggs": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/115.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/ziggs/skins/base/images/ziggs_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "a1fb939c274f6e8491068f72c2d60d48102e9eba2c96122457a3bb05fb85b702",
+    "outputSha256": "5b9440c206814e52eebf2139daace508294b210182d3ede1a7f6e9bfccef3365",
+    "bytes": 24484
+  },
+  "Zilean": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/26.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/zilean/skins/base/images/zilean_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "375bd971be02496da1a005301834216826157234bdef5118286b53a633af6fc2",
+    "outputSha256": "1d9a93572e1f1a50b05a051abe621777ae0904dfc4f1db4e31c7017a244d6ed3",
+    "bytes": 27342
+  },
+  "Zoe": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/142.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/zoe/skins/base/images/zoe_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "5ab95a84c8b27db3a499056df9dfecc57dc6f24ea0ed7db5d878bd4293c85d17",
+    "outputSha256": "b7a14e389a1cb0997ab49ac37226c1e485200ff624891a4a7de2a6496e24c483",
+    "bytes": 24016
+  },
+  "Zyra": {
+    "metadataUrl": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/v1/champions/143.json",
+    "url": "https://raw.communitydragon.org/15.20/plugins/rcp-be-lol-game-data/global/default/assets/characters/zyra/skins/base/images/zyra_splash_centered_0.jpg",
+    "kind": "Riot centered splash via CommunityDragon 15.20",
+    "inputSha256": "653f9ece2366e7c8485ebacb662aa1fde1bd090a1abd6d9738dcff5bb764cd2f",
+    "outputSha256": "a6b41798df423cc50509f4f86deca3fa28d52ef419e3ff82e0bba99fff15a5ec",
+    "bytes": 21632
+  }
+}

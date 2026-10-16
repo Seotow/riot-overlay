@@ -4,6 +4,8 @@ import {
   resolveSpell,
 } from "../shared/live-assets";
 import { createHash } from "node:crypto";
+import { cleanPlayerName } from "../shared/player-name";
+import { projectItemCounters } from "../shared/item-counters";
 import {
   ingameSampleSchema,
   observedEventSchema,
@@ -47,14 +49,51 @@ export function normalizeIngame(
     replay = object(playback);
   const sourcePlayers = Array.isArray(root.allPlayers) ? root.allPlayers : [];
   const sourceEvents = object(root.events).Events;
+  const slotFor = (name: unknown) => {
+    if (typeof name !== "string" || !name) return undefined;
+    const slots = sourcePlayers.slice(0, 10).flatMap((raw, slot) => {
+      const p = object(raw);
+      return [p.riotId, p.summonerName, p.riotIdGameName].includes(name)
+        ? [slot]
+        : [];
+    });
+    return slots.length === 1 ? slots[0] : undefined;
+  };
   const events = (Array.isArray(sourceEvents) ? sourceEvents : [])
     .slice(-4096)
     .flatMap((raw) => {
       const e = object(raw);
+      const killerSlot = slotFor(e.KillerName),
+        victimSlot = slotFor(e.VictimName);
+      const killerTeam =
+        killerSlot === undefined
+          ? undefined
+          : object(sourcePlayers[killerSlot]).team;
       const parsed = observedEventSchema.safeParse({
         id: e.EventID,
         at: e.EventTime,
         kind: e.EventName,
+        ...(killerSlot !== undefined ? { killerSlot } : {}),
+        ...(killerTeam === "ORDER" || killerTeam === "CHAOS"
+          ? { team: killerTeam }
+          : {}),
+        ...(victimSlot !== undefined ? { victimSlot } : {}),
+        ...(Array.isArray(e.Assisters)
+          ? {
+              assistSlots: [
+                ...new Set(
+                  e.Assisters.flatMap((name) => {
+                    const slot = slotFor(name);
+                    return slot !== undefined &&
+                      slot !== killerSlot &&
+                      slot !== victimSlot
+                      ? [slot]
+                      : [];
+                  }),
+                ),
+              ].slice(0, 4),
+            }
+          : {}),
       });
       return parsed.success ? [parsed.data] : [];
     });
@@ -115,6 +154,10 @@ export function normalizeIngame(
         resourceMax = numeric(stats.resourceMax);
       return {
         slot,
+        playerName: observed(cleanPlayerName(p.riotIdGameName) ?? cleanPlayerName(p.riotId) ?? cleanPlayerName(p.summonerName), capturedAt),
+        itemCounters: observed(projectItemCounters(Array.isArray(p.items) ? p.items.map(raw=>{
+          const i=object(raw);return {id:i.itemID,slot:i.slot,count:i.count};
+        }) : null),capturedAt),
         team: observed(
           p.team === "ORDER" || p.team === "CHAOS" ? p.team : null,
           capturedAt,

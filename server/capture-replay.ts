@@ -4,6 +4,7 @@ import { createInterface } from "node:readline";
 import { resolve } from "node:path";
 import { z } from "zod";
 import { BARON_BUFF_SECONDS } from "../shared/game-rules";
+import { COLLECTOR_REPLAY_MAX_SAMPLES } from "../shared/capture-rules";
 import {
   rehearsalButtons,
   type RehearsalKind,
@@ -40,11 +41,13 @@ export async function listCaptures() {
               id: d.name,
               frames:
                 Number(
-                  manifest.ingameStateFrames ??
+                  manifest.observerFrames ??
+                    manifest.ingameStateFrames ??
                     manifest.frames ??
                     manifest.websocket?.frames,
                 ) || 0,
               hasState:
+                manifest.observerFrames > 0 ||
                 manifest.ingameStateFrames > 0 ||
                 (Array.isArray(
                   manifest.messageTypes ?? manifest.websocket?.messageTypes,
@@ -81,6 +84,24 @@ function captureParser() {
     last = timestamp;
     clock = timestamp;
     const message = record.message;
+    if (message?.type === "collector-sample") {
+      const sample = ingameSampleSchema.parse(message.sample);
+      if (
+        sample.gameTime.source !== "league-collector" ||
+        sample.players.length !== 10
+      )
+        throw Error("Bản ghi collector không hợp lệ.");
+      baseline ??= timestamp;
+      entries.push({
+        offsetMs: timestamp - baseline,
+        recordedAt: sample.capturedAt,
+        sample,
+      });
+      // Up to four hours at 2Hz; retain the existing 512MB file cap.
+      if (entries.length > COLLECTOR_REPLAY_MAX_SAMPLES)
+        throw Error("Bản ghi collector vượt 30.000 sample.");
+      return;
+    }
     // LB emits an empty bootstrap state before its first complete roster.
     if (
       message?.type === "ingame-state-update" &&
@@ -363,8 +384,10 @@ export class CaptureReplay {
   private playing = false;
   private speed = 1;
   private generation = 0;
+  private loadGeneration = 0;
   constructor(private clock = Date.now) {}
   loadEntries(id: string, entries: Entry[]) {
+    this.loadGeneration++;
     this.cue = undefined;
     if (!entries.length) throw Error("Bản ghi trống.");
     this.id = id;
@@ -378,7 +401,16 @@ export class CaptureReplay {
   }
   async prepare(id: string) {
     captureIdSchema.parse(id);
-    const path = resolve(captureRoot, id, "leaguebroadcast-ws.ndjson");
+    const manifest = JSON.parse(
+      await readFile(resolve(captureRoot, id, "manifest.json"), "utf8"),
+    );
+    const path = resolve(
+      captureRoot,
+      id,
+      manifest.kind === "collector-match-capture"
+        ? "observer-samples.ndjson"
+        : "leaguebroadcast-ws.ndjson",
+    );
     if ((await stat(path)).size > 512 * 1024 * 1024)
       throw Error("Bản ghi vượt giới hạn 512 MB.");
     const parser = captureParser();
@@ -401,6 +433,19 @@ export class CaptureReplay {
   private duration() {
     return this.entries.at(-1)?.offsetMs ?? 0;
   }
+  private entryAt(position: number) {
+    let low = 0,
+      high = this.entries.length - 1,
+      index = -1;
+    while (low <= high) {
+      const mid = Math.floor((low + high) / 2);
+      if (this.entries[mid].offsetMs <= position) {
+        index = mid;
+        low = mid + 1;
+      } else high = mid - 1;
+    }
+    return index < 0 ? undefined : this.entries[index];
+  }
   control(action: { playing?: boolean; speed?: number; positionMs?: number }) {
     if (!this.id) throw Error("Chưa chọn bản ghi.");
     this.anchorMs =
@@ -414,24 +459,35 @@ export class CaptureReplay {
   }
   snapshot() {
     const positionMs = this.position();
+    const entry = this.entryAt(positionMs);
+    const gameTime =
+      entry &&
+      positionMs - entry.offsetMs < 5000 &&
+      entry.sample.gameTime.value !== null
+        ? entry.sample.gameTime.value +
+          (entry.sample.replay.paused.value
+            ? 0
+            : ((positionMs - entry.offsetMs) / 1000) *
+              (entry.sample.replay.speed.value ?? 1))
+        : null;
     return {
       id: this.id,
+      loadGeneration: this.loadGeneration,
       frames: this.entries.length,
       positionMs,
       durationMs: this.duration(),
       playing: this.playing && positionMs < this.duration(),
       speed: this.speed,
+      gameTime,
+      firstGameTime: this.entries[0]?.sample.gameTime.value ?? null,
+      lastGameTime: this.entries.at(-1)?.sample.gameTime.value ?? null,
     };
   }
   observe() {
     const wall = this.clock(),
       now = new Date(wall).toISOString();
     const position = this.position();
-    let entry: Entry | undefined;
-    for (const candidate of this.entries) {
-      if (candidate.offsetMs > position) break;
-      entry = candidate;
-    }
+    const entry = this.entryAt(position);
     if (!entry || position - entry.offsetMs >= 5000)
       return this.session.ingest(null, "capture", now);
     const sample = structuredClone(entry.sample);

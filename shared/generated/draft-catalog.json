@@ -1,0 +1,1374 @@
+{
+  "version": "15.20.1",
+  "source": "https://ddragon.leagueoflegends.com",
+  "champions": {
+    "Aatrox": {
+      "id": "Aatrox",
+      "key": "266",
+      "name": "Aatrox",
+      "icon": "/ddragon/15.20.1/champion/Aatrox.png",
+      "portrait": "/ddragon/15.20.1/loading/Aatrox_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Aatrox_0.webp"
+    },
+    "Ahri": {
+      "id": "Ahri",
+      "key": "103",
+      "name": "Ahri",
+      "icon": "/ddragon/15.20.1/champion/Ahri.png",
+      "portrait": "/ddragon/15.20.1/loading/Ahri_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Ahri_0.webp"
+    },
+    "Akali": {
+      "id": "Akali",
+      "key": "84",
+      "name": "Akali",
+      "icon": "/ddragon/15.20.1/champion/Akali.png",
+      "portrait": "/ddragon/15.20.1/loading/Akali_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Akali_0.webp"
+    },
+    "Akshan": {
+      "id": "Akshan",
+      "key": "166",
+      "name": "Akshan",
+      "icon": "/ddragon/15.20.1/champion/Akshan.png",
+      "portrait": "/ddragon/15.20.1/loading/Akshan_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Akshan_0.webp"
+    },
+    "Alistar": {
+      "id": "Alistar",
+      "key": "12",
+      "name": "Alistar",
+      "icon": "/ddragon/15.20.1/champion/Alistar.png",
+      "portrait": "/ddragon/15.20.1/loading/Alistar_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Alistar_0.webp"
+    },
+    "Ambessa": {
+      "id": "Ambessa",
+      "key": "799",
+      "name": "Ambessa",
+      "icon": "/ddragon/15.20.1/champion/Ambessa.png",
+      "portrait": "/ddragon/15.20.1/loading/Ambessa_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Ambessa_0.webp"
+    },
+    "Amumu": {
+      "id": "Amumu",
+      "key": "32",
+      "name": "Amumu",
+      "icon": "/ddragon/15.20.1/champion/Amumu.png",
+      "portrait": "/ddragon/15.20.1/loading/Amumu_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Amumu_0.webp"
+    },
+    "Anivia": {
+      "id": "Anivia",
+      "key": "34",
+      "name": "Anivia",
+      "icon": "/ddragon/15.20.1/champion/Anivia.png",
+      "portrait": "/ddragon/15.20.1/loading/Anivia_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Anivia_0.webp"
+    },
+    "Annie": {
+      "id": "Annie",
+      "key": "1",
+      "name": "Annie",
+      "icon": "/ddragon/15.20.1/champion/Annie.png",
+      "portrait": "/ddragon/15.20.1/loading/Annie_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Annie_0.webp"
+    },
+    "Aphelios": {
+      "id": "Aphelios",
+      "key": "523",
+      "name": "Aphelios",
+      "icon": "/ddragon/15.20.1/champion/Aphelios.png",
+      "portrait": "/ddragon/15.20.1/loading/Aphelios_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Aphelios_0.webp"
+    },
+    "Ashe": {
+      "id": "Ashe",
+      "key": "22",
+      "name": "Ashe",
+      "icon": "/ddragon/15.20.1/champion/Ashe.png",
+      "portrait": "/ddragon/15.20.1/loading/Ashe_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Ashe_0.webp"
+    },
+    "AurelionSol": {
+      "id": "AurelionSol",
+      "key": "136",
+      "name": "Aurelion Sol",
+      "icon": "/ddragon/15.20.1/champion/AurelionSol.png",
+      "portrait": "/ddragon/15.20.1/loading/AurelionSol_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/AurelionSol_0.webp"
+    },
+    "Aurora": {
+      "id": "Aurora",
+      "key": "893",
+      "name": "Aurora",
+      "icon": "/ddragon/15.20.1/champion/Aurora.png",
+      "portrait": "/ddragon/15.20.1/loading/Aurora_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Aurora_0.webp"
+    },
+    "Azir": {
+      "id": "Azir",
+      "key": "268",
+      "name": "Azir",
+      "icon": "/ddragon/15.20.1/champion/Azir.png",
+      "portrait": "/ddragon/15.20.1/loading/Azir_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Azir_0.webp"
+    },
+    "Bard": {
+      "id": "Bard",
+      "key": "432",
+      "name": "Bard",
+      "icon": "/ddragon/15.20.1/champion/Bard.png",
+      "portrait": "/ddragon/15.20.1/loading/Bard_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Bard_0.webp"
+    },
+    "Belveth": {
+      "id": "Belveth",
+      "key": "200",
+      "name": "Bel'Veth",
+      "icon": "/ddragon/15.20.1/champion/Belveth.png",
+      "portrait": "/ddragon/15.20.1/loading/Belveth_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Belveth_0.webp"
+    },
+    "Blitzcrank": {
+      "id": "Blitzcrank",
+      "key": "53",
+      "name": "Blitzcrank",
+      "icon": "/ddragon/15.20.1/champion/Blitzcrank.png",
+      "portrait": "/ddragon/15.20.1/loading/Blitzcrank_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Blitzcrank_0.webp"
+    },
+    "Brand": {
+      "id": "Brand",
+      "key": "63",
+      "name": "Brand",
+      "icon": "/ddragon/15.20.1/champion/Brand.png",
+      "portrait": "/ddragon/15.20.1/loading/Brand_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Brand_0.webp"
+    },
+    "Braum": {
+      "id": "Braum",
+      "key": "201",
+      "name": "Braum",
+      "icon": "/ddragon/15.20.1/champion/Braum.png",
+      "portrait": "/ddragon/15.20.1/loading/Braum_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Braum_0.webp"
+    },
+    "Briar": {
+      "id": "Briar",
+      "key": "233",
+      "name": "Briar",
+      "icon": "/ddragon/15.20.1/champion/Briar.png",
+      "portrait": "/ddragon/15.20.1/loading/Briar_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Briar_0.webp"
+    },
+    "Caitlyn": {
+      "id": "Caitlyn",
+      "key": "51",
+      "name": "Caitlyn",
+      "icon": "/ddragon/15.20.1/champion/Caitlyn.png",
+      "portrait": "/ddragon/15.20.1/loading/Caitlyn_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Caitlyn_0.webp"
+    },
+    "Camille": {
+      "id": "Camille",
+      "key": "164",
+      "name": "Camille",
+      "icon": "/ddragon/15.20.1/champion/Camille.png",
+      "portrait": "/ddragon/15.20.1/loading/Camille_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Camille_0.webp"
+    },
+    "Cassiopeia": {
+      "id": "Cassiopeia",
+      "key": "69",
+      "name": "Cassiopeia",
+      "icon": "/ddragon/15.20.1/champion/Cassiopeia.png",
+      "portrait": "/ddragon/15.20.1/loading/Cassiopeia_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Cassiopeia_0.webp"
+    },
+    "Chogath": {
+      "id": "Chogath",
+      "key": "31",
+      "name": "Cho'Gath",
+      "icon": "/ddragon/15.20.1/champion/Chogath.png",
+      "portrait": "/ddragon/15.20.1/loading/Chogath_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Chogath_0.webp"
+    },
+    "Corki": {
+      "id": "Corki",
+      "key": "42",
+      "name": "Corki",
+      "icon": "/ddragon/15.20.1/champion/Corki.png",
+      "portrait": "/ddragon/15.20.1/loading/Corki_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Corki_0.webp"
+    },
+    "Darius": {
+      "id": "Darius",
+      "key": "122",
+      "name": "Darius",
+      "icon": "/ddragon/15.20.1/champion/Darius.png",
+      "portrait": "/ddragon/15.20.1/loading/Darius_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Darius_0.webp"
+    },
+    "Diana": {
+      "id": "Diana",
+      "key": "131",
+      "name": "Diana",
+      "icon": "/ddragon/15.20.1/champion/Diana.png",
+      "portrait": "/ddragon/15.20.1/loading/Diana_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Diana_0.webp"
+    },
+    "Draven": {
+      "id": "Draven",
+      "key": "119",
+      "name": "Draven",
+      "icon": "/ddragon/15.20.1/champion/Draven.png",
+      "portrait": "/ddragon/15.20.1/loading/Draven_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Draven_0.webp"
+    },
+    "DrMundo": {
+      "id": "DrMundo",
+      "key": "36",
+      "name": "Dr. Mundo",
+      "icon": "/ddragon/15.20.1/champion/DrMundo.png",
+      "portrait": "/ddragon/15.20.1/loading/DrMundo_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/DrMundo_0.webp"
+    },
+    "Ekko": {
+      "id": "Ekko",
+      "key": "245",
+      "name": "Ekko",
+      "icon": "/ddragon/15.20.1/champion/Ekko.png",
+      "portrait": "/ddragon/15.20.1/loading/Ekko_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Ekko_0.webp"
+    },
+    "Elise": {
+      "id": "Elise",
+      "key": "60",
+      "name": "Elise",
+      "icon": "/ddragon/15.20.1/champion/Elise.png",
+      "portrait": "/ddragon/15.20.1/loading/Elise_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Elise_0.webp"
+    },
+    "Evelynn": {
+      "id": "Evelynn",
+      "key": "28",
+      "name": "Evelynn",
+      "icon": "/ddragon/15.20.1/champion/Evelynn.png",
+      "portrait": "/ddragon/15.20.1/loading/Evelynn_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Evelynn_0.webp"
+    },
+    "Ezreal": {
+      "id": "Ezreal",
+      "key": "81",
+      "name": "Ezreal",
+      "icon": "/ddragon/15.20.1/champion/Ezreal.png",
+      "portrait": "/ddragon/15.20.1/loading/Ezreal_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Ezreal_0.webp"
+    },
+    "Fiddlesticks": {
+      "id": "Fiddlesticks",
+      "key": "9",
+      "name": "Fiddlesticks",
+      "icon": "/ddragon/15.20.1/champion/Fiddlesticks.png",
+      "portrait": "/ddragon/15.20.1/loading/Fiddlesticks_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Fiddlesticks_0.webp"
+    },
+    "Fiora": {
+      "id": "Fiora",
+      "key": "114",
+      "name": "Fiora",
+      "icon": "/ddragon/15.20.1/champion/Fiora.png",
+      "portrait": "/ddragon/15.20.1/loading/Fiora_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Fiora_0.webp"
+    },
+    "Fizz": {
+      "id": "Fizz",
+      "key": "105",
+      "name": "Fizz",
+      "icon": "/ddragon/15.20.1/champion/Fizz.png",
+      "portrait": "/ddragon/15.20.1/loading/Fizz_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Fizz_0.webp"
+    },
+    "Galio": {
+      "id": "Galio",
+      "key": "3",
+      "name": "Galio",
+      "icon": "/ddragon/15.20.1/champion/Galio.png",
+      "portrait": "/ddragon/15.20.1/loading/Galio_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Galio_0.webp"
+    },
+    "Gangplank": {
+      "id": "Gangplank",
+      "key": "41",
+      "name": "Gangplank",
+      "icon": "/ddragon/15.20.1/champion/Gangplank.png",
+      "portrait": "/ddragon/15.20.1/loading/Gangplank_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Gangplank_0.webp"
+    },
+    "Garen": {
+      "id": "Garen",
+      "key": "86",
+      "name": "Garen",
+      "icon": "/ddragon/15.20.1/champion/Garen.png",
+      "portrait": "/ddragon/15.20.1/loading/Garen_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Garen_0.webp"
+    },
+    "Gnar": {
+      "id": "Gnar",
+      "key": "150",
+      "name": "Gnar",
+      "icon": "/ddragon/15.20.1/champion/Gnar.png",
+      "portrait": "/ddragon/15.20.1/loading/Gnar_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Gnar_0.webp"
+    },
+    "Gragas": {
+      "id": "Gragas",
+      "key": "79",
+      "name": "Gragas",
+      "icon": "/ddragon/15.20.1/champion/Gragas.png",
+      "portrait": "/ddragon/15.20.1/loading/Gragas_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Gragas_0.webp"
+    },
+    "Graves": {
+      "id": "Graves",
+      "key": "104",
+      "name": "Graves",
+      "icon": "/ddragon/15.20.1/champion/Graves.png",
+      "portrait": "/ddragon/15.20.1/loading/Graves_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Graves_0.webp"
+    },
+    "Gwen": {
+      "id": "Gwen",
+      "key": "887",
+      "name": "Gwen",
+      "icon": "/ddragon/15.20.1/champion/Gwen.png",
+      "portrait": "/ddragon/15.20.1/loading/Gwen_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Gwen_0.webp"
+    },
+    "Hecarim": {
+      "id": "Hecarim",
+      "key": "120",
+      "name": "Hecarim",
+      "icon": "/ddragon/15.20.1/champion/Hecarim.png",
+      "portrait": "/ddragon/15.20.1/loading/Hecarim_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Hecarim_0.webp"
+    },
+    "Heimerdinger": {
+      "id": "Heimerdinger",
+      "key": "74",
+      "name": "Heimerdinger",
+      "icon": "/ddragon/15.20.1/champion/Heimerdinger.png",
+      "portrait": "/ddragon/15.20.1/loading/Heimerdinger_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Heimerdinger_0.webp"
+    },
+    "Hwei": {
+      "id": "Hwei",
+      "key": "910",
+      "name": "Hwei",
+      "icon": "/ddragon/15.20.1/champion/Hwei.png",
+      "portrait": "/ddragon/15.20.1/loading/Hwei_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Hwei_0.webp"
+    },
+    "Illaoi": {
+      "id": "Illaoi",
+      "key": "420",
+      "name": "Illaoi",
+      "icon": "/ddragon/15.20.1/champion/Illaoi.png",
+      "portrait": "/ddragon/15.20.1/loading/Illaoi_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Illaoi_0.webp"
+    },
+    "Irelia": {
+      "id": "Irelia",
+      "key": "39",
+      "name": "Irelia",
+      "icon": "/ddragon/15.20.1/champion/Irelia.png",
+      "portrait": "/ddragon/15.20.1/loading/Irelia_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Irelia_0.webp"
+    },
+    "Ivern": {
+      "id": "Ivern",
+      "key": "427",
+      "name": "Ivern",
+      "icon": "/ddragon/15.20.1/champion/Ivern.png",
+      "portrait": "/ddragon/15.20.1/loading/Ivern_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Ivern_0.webp"
+    },
+    "Janna": {
+      "id": "Janna",
+      "key": "40",
+      "name": "Janna",
+      "icon": "/ddragon/15.20.1/champion/Janna.png",
+      "portrait": "/ddragon/15.20.1/loading/Janna_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Janna_0.webp"
+    },
+    "JarvanIV": {
+      "id": "JarvanIV",
+      "key": "59",
+      "name": "Jarvan IV",
+      "icon": "/ddragon/15.20.1/champion/JarvanIV.png",
+      "portrait": "/ddragon/15.20.1/loading/JarvanIV_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/JarvanIV_0.webp"
+    },
+    "Jax": {
+      "id": "Jax",
+      "key": "24",
+      "name": "Jax",
+      "icon": "/ddragon/15.20.1/champion/Jax.png",
+      "portrait": "/ddragon/15.20.1/loading/Jax_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Jax_0.webp"
+    },
+    "Jayce": {
+      "id": "Jayce",
+      "key": "126",
+      "name": "Jayce",
+      "icon": "/ddragon/15.20.1/champion/Jayce.png",
+      "portrait": "/ddragon/15.20.1/loading/Jayce_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Jayce_0.webp"
+    },
+    "Jhin": {
+      "id": "Jhin",
+      "key": "202",
+      "name": "Jhin",
+      "icon": "/ddragon/15.20.1/champion/Jhin.png",
+      "portrait": "/ddragon/15.20.1/loading/Jhin_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Jhin_0.webp"
+    },
+    "Jinx": {
+      "id": "Jinx",
+      "key": "222",
+      "name": "Jinx",
+      "icon": "/ddragon/15.20.1/champion/Jinx.png",
+      "portrait": "/ddragon/15.20.1/loading/Jinx_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Jinx_0.webp"
+    },
+    "Kaisa": {
+      "id": "Kaisa",
+      "key": "145",
+      "name": "Kai'Sa",
+      "icon": "/ddragon/15.20.1/champion/Kaisa.png",
+      "portrait": "/ddragon/15.20.1/loading/Kaisa_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Kaisa_0.webp"
+    },
+    "Kalista": {
+      "id": "Kalista",
+      "key": "429",
+      "name": "Kalista",
+      "icon": "/ddragon/15.20.1/champion/Kalista.png",
+      "portrait": "/ddragon/15.20.1/loading/Kalista_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Kalista_0.webp"
+    },
+    "Karma": {
+      "id": "Karma",
+      "key": "43",
+      "name": "Karma",
+      "icon": "/ddragon/15.20.1/champion/Karma.png",
+      "portrait": "/ddragon/15.20.1/loading/Karma_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Karma_0.webp"
+    },
+    "Karthus": {
+      "id": "Karthus",
+      "key": "30",
+      "name": "Karthus",
+      "icon": "/ddragon/15.20.1/champion/Karthus.png",
+      "portrait": "/ddragon/15.20.1/loading/Karthus_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Karthus_0.webp"
+    },
+    "Kassadin": {
+      "id": "Kassadin",
+      "key": "38",
+      "name": "Kassadin",
+      "icon": "/ddragon/15.20.1/champion/Kassadin.png",
+      "portrait": "/ddragon/15.20.1/loading/Kassadin_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Kassadin_0.webp"
+    },
+    "Katarina": {
+      "id": "Katarina",
+      "key": "55",
+      "name": "Katarina",
+      "icon": "/ddragon/15.20.1/champion/Katarina.png",
+      "portrait": "/ddragon/15.20.1/loading/Katarina_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Katarina_0.webp"
+    },
+    "Kayle": {
+      "id": "Kayle",
+      "key": "10",
+      "name": "Kayle",
+      "icon": "/ddragon/15.20.1/champion/Kayle.png",
+      "portrait": "/ddragon/15.20.1/loading/Kayle_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Kayle_0.webp"
+    },
+    "Kayn": {
+      "id": "Kayn",
+      "key": "141",
+      "name": "Kayn",
+      "icon": "/ddragon/15.20.1/champion/Kayn.png",
+      "portrait": "/ddragon/15.20.1/loading/Kayn_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Kayn_0.webp"
+    },
+    "Kennen": {
+      "id": "Kennen",
+      "key": "85",
+      "name": "Kennen",
+      "icon": "/ddragon/15.20.1/champion/Kennen.png",
+      "portrait": "/ddragon/15.20.1/loading/Kennen_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Kennen_0.webp"
+    },
+    "Khazix": {
+      "id": "Khazix",
+      "key": "121",
+      "name": "Kha'Zix",
+      "icon": "/ddragon/15.20.1/champion/Khazix.png",
+      "portrait": "/ddragon/15.20.1/loading/Khazix_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Khazix_0.webp"
+    },
+    "Kindred": {
+      "id": "Kindred",
+      "key": "203",
+      "name": "Kindred",
+      "icon": "/ddragon/15.20.1/champion/Kindred.png",
+      "portrait": "/ddragon/15.20.1/loading/Kindred_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Kindred_0.webp"
+    },
+    "Kled": {
+      "id": "Kled",
+      "key": "240",
+      "name": "Kled",
+      "icon": "/ddragon/15.20.1/champion/Kled.png",
+      "portrait": "/ddragon/15.20.1/loading/Kled_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Kled_0.webp"
+    },
+    "KogMaw": {
+      "id": "KogMaw",
+      "key": "96",
+      "name": "Kog'Maw",
+      "icon": "/ddragon/15.20.1/champion/KogMaw.png",
+      "portrait": "/ddragon/15.20.1/loading/KogMaw_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/KogMaw_0.webp"
+    },
+    "KSante": {
+      "id": "KSante",
+      "key": "897",
+      "name": "K'Sante",
+      "icon": "/ddragon/15.20.1/champion/KSante.png",
+      "portrait": "/ddragon/15.20.1/loading/KSante_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/KSante_0.webp"
+    },
+    "Leblanc": {
+      "id": "Leblanc",
+      "key": "7",
+      "name": "LeBlanc",
+      "icon": "/ddragon/15.20.1/champion/Leblanc.png",
+      "portrait": "/ddragon/15.20.1/loading/Leblanc_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Leblanc_0.webp"
+    },
+    "LeeSin": {
+      "id": "LeeSin",
+      "key": "64",
+      "name": "Lee Sin",
+      "icon": "/ddragon/15.20.1/champion/LeeSin.png",
+      "portrait": "/ddragon/15.20.1/loading/LeeSin_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/LeeSin_0.webp"
+    },
+    "Leona": {
+      "id": "Leona",
+      "key": "89",
+      "name": "Leona",
+      "icon": "/ddragon/15.20.1/champion/Leona.png",
+      "portrait": "/ddragon/15.20.1/loading/Leona_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Leona_0.webp"
+    },
+    "Lillia": {
+      "id": "Lillia",
+      "key": "876",
+      "name": "Lillia",
+      "icon": "/ddragon/15.20.1/champion/Lillia.png",
+      "portrait": "/ddragon/15.20.1/loading/Lillia_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Lillia_0.webp"
+    },
+    "Lissandra": {
+      "id": "Lissandra",
+      "key": "127",
+      "name": "Lissandra",
+      "icon": "/ddragon/15.20.1/champion/Lissandra.png",
+      "portrait": "/ddragon/15.20.1/loading/Lissandra_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Lissandra_0.webp"
+    },
+    "Lucian": {
+      "id": "Lucian",
+      "key": "236",
+      "name": "Lucian",
+      "icon": "/ddragon/15.20.1/champion/Lucian.png",
+      "portrait": "/ddragon/15.20.1/loading/Lucian_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Lucian_0.webp"
+    },
+    "Lulu": {
+      "id": "Lulu",
+      "key": "117",
+      "name": "Lulu",
+      "icon": "/ddragon/15.20.1/champion/Lulu.png",
+      "portrait": "/ddragon/15.20.1/loading/Lulu_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Lulu_0.webp"
+    },
+    "Lux": {
+      "id": "Lux",
+      "key": "99",
+      "name": "Lux",
+      "icon": "/ddragon/15.20.1/champion/Lux.png",
+      "portrait": "/ddragon/15.20.1/loading/Lux_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Lux_0.webp"
+    },
+    "Malphite": {
+      "id": "Malphite",
+      "key": "54",
+      "name": "Malphite",
+      "icon": "/ddragon/15.20.1/champion/Malphite.png",
+      "portrait": "/ddragon/15.20.1/loading/Malphite_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Malphite_0.webp"
+    },
+    "Malzahar": {
+      "id": "Malzahar",
+      "key": "90",
+      "name": "Malzahar",
+      "icon": "/ddragon/15.20.1/champion/Malzahar.png",
+      "portrait": "/ddragon/15.20.1/loading/Malzahar_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Malzahar_0.webp"
+    },
+    "Maokai": {
+      "id": "Maokai",
+      "key": "57",
+      "name": "Maokai",
+      "icon": "/ddragon/15.20.1/champion/Maokai.png",
+      "portrait": "/ddragon/15.20.1/loading/Maokai_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Maokai_0.webp"
+    },
+    "MasterYi": {
+      "id": "MasterYi",
+      "key": "11",
+      "name": "Master Yi",
+      "icon": "/ddragon/15.20.1/champion/MasterYi.png",
+      "portrait": "/ddragon/15.20.1/loading/MasterYi_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/MasterYi_0.webp"
+    },
+    "Mel": {
+      "id": "Mel",
+      "key": "800",
+      "name": "Mel",
+      "icon": "/ddragon/15.20.1/champion/Mel.png",
+      "portrait": "/ddragon/15.20.1/loading/Mel_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Mel_0.webp"
+    },
+    "Milio": {
+      "id": "Milio",
+      "key": "902",
+      "name": "Milio",
+      "icon": "/ddragon/15.20.1/champion/Milio.png",
+      "portrait": "/ddragon/15.20.1/loading/Milio_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Milio_0.webp"
+    },
+    "MissFortune": {
+      "id": "MissFortune",
+      "key": "21",
+      "name": "Miss Fortune",
+      "icon": "/ddragon/15.20.1/champion/MissFortune.png",
+      "portrait": "/ddragon/15.20.1/loading/MissFortune_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/MissFortune_0.webp"
+    },
+    "MonkeyKing": {
+      "id": "MonkeyKing",
+      "key": "62",
+      "name": "Wukong",
+      "icon": "/ddragon/15.20.1/champion/MonkeyKing.png",
+      "portrait": "/ddragon/15.20.1/loading/MonkeyKing_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/MonkeyKing_0.webp"
+    },
+    "Mordekaiser": {
+      "id": "Mordekaiser",
+      "key": "82",
+      "name": "Mordekaiser",
+      "icon": "/ddragon/15.20.1/champion/Mordekaiser.png",
+      "portrait": "/ddragon/15.20.1/loading/Mordekaiser_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Mordekaiser_0.webp"
+    },
+    "Morgana": {
+      "id": "Morgana",
+      "key": "25",
+      "name": "Morgana",
+      "icon": "/ddragon/15.20.1/champion/Morgana.png",
+      "portrait": "/ddragon/15.20.1/loading/Morgana_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Morgana_0.webp"
+    },
+    "Naafiri": {
+      "id": "Naafiri",
+      "key": "950",
+      "name": "Naafiri",
+      "icon": "/ddragon/15.20.1/champion/Naafiri.png",
+      "portrait": "/ddragon/15.20.1/loading/Naafiri_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Naafiri_0.webp"
+    },
+    "Nami": {
+      "id": "Nami",
+      "key": "267",
+      "name": "Nami",
+      "icon": "/ddragon/15.20.1/champion/Nami.png",
+      "portrait": "/ddragon/15.20.1/loading/Nami_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Nami_0.webp"
+    },
+    "Nasus": {
+      "id": "Nasus",
+      "key": "75",
+      "name": "Nasus",
+      "icon": "/ddragon/15.20.1/champion/Nasus.png",
+      "portrait": "/ddragon/15.20.1/loading/Nasus_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Nasus_0.webp"
+    },
+    "Nautilus": {
+      "id": "Nautilus",
+      "key": "111",
+      "name": "Nautilus",
+      "icon": "/ddragon/15.20.1/champion/Nautilus.png",
+      "portrait": "/ddragon/15.20.1/loading/Nautilus_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Nautilus_0.webp"
+    },
+    "Neeko": {
+      "id": "Neeko",
+      "key": "518",
+      "name": "Neeko",
+      "icon": "/ddragon/15.20.1/champion/Neeko.png",
+      "portrait": "/ddragon/15.20.1/loading/Neeko_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Neeko_0.webp"
+    },
+    "Nidalee": {
+      "id": "Nidalee",
+      "key": "76",
+      "name": "Nidalee",
+      "icon": "/ddragon/15.20.1/champion/Nidalee.png",
+      "portrait": "/ddragon/15.20.1/loading/Nidalee_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Nidalee_0.webp"
+    },
+    "Nilah": {
+      "id": "Nilah",
+      "key": "895",
+      "name": "Nilah",
+      "icon": "/ddragon/15.20.1/champion/Nilah.png",
+      "portrait": "/ddragon/15.20.1/loading/Nilah_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Nilah_0.webp"
+    },
+    "Nocturne": {
+      "id": "Nocturne",
+      "key": "56",
+      "name": "Nocturne",
+      "icon": "/ddragon/15.20.1/champion/Nocturne.png",
+      "portrait": "/ddragon/15.20.1/loading/Nocturne_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Nocturne_0.webp"
+    },
+    "Nunu": {
+      "id": "Nunu",
+      "key": "20",
+      "name": "Nunu & Willump",
+      "icon": "/ddragon/15.20.1/champion/Nunu.png",
+      "portrait": "/ddragon/15.20.1/loading/Nunu_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Nunu_0.webp"
+    },
+    "Olaf": {
+      "id": "Olaf",
+      "key": "2",
+      "name": "Olaf",
+      "icon": "/ddragon/15.20.1/champion/Olaf.png",
+      "portrait": "/ddragon/15.20.1/loading/Olaf_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Olaf_0.webp"
+    },
+    "Orianna": {
+      "id": "Orianna",
+      "key": "61",
+      "name": "Orianna",
+      "icon": "/ddragon/15.20.1/champion/Orianna.png",
+      "portrait": "/ddragon/15.20.1/loading/Orianna_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Orianna_0.webp"
+    },
+    "Ornn": {
+      "id": "Ornn",
+      "key": "516",
+      "name": "Ornn",
+      "icon": "/ddragon/15.20.1/champion/Ornn.png",
+      "portrait": "/ddragon/15.20.1/loading/Ornn_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Ornn_0.webp"
+    },
+    "Pantheon": {
+      "id": "Pantheon",
+      "key": "80",
+      "name": "Pantheon",
+      "icon": "/ddragon/15.20.1/champion/Pantheon.png",
+      "portrait": "/ddragon/15.20.1/loading/Pantheon_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Pantheon_0.webp"
+    },
+    "Poppy": {
+      "id": "Poppy",
+      "key": "78",
+      "name": "Poppy",
+      "icon": "/ddragon/15.20.1/champion/Poppy.png",
+      "portrait": "/ddragon/15.20.1/loading/Poppy_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Poppy_0.webp"
+    },
+    "Pyke": {
+      "id": "Pyke",
+      "key": "555",
+      "name": "Pyke",
+      "icon": "/ddragon/15.20.1/champion/Pyke.png",
+      "portrait": "/ddragon/15.20.1/loading/Pyke_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Pyke_0.webp"
+    },
+    "Qiyana": {
+      "id": "Qiyana",
+      "key": "246",
+      "name": "Qiyana",
+      "icon": "/ddragon/15.20.1/champion/Qiyana.png",
+      "portrait": "/ddragon/15.20.1/loading/Qiyana_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Qiyana_0.webp"
+    },
+    "Quinn": {
+      "id": "Quinn",
+      "key": "133",
+      "name": "Quinn",
+      "icon": "/ddragon/15.20.1/champion/Quinn.png",
+      "portrait": "/ddragon/15.20.1/loading/Quinn_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Quinn_0.webp"
+    },
+    "Rakan": {
+      "id": "Rakan",
+      "key": "497",
+      "name": "Rakan",
+      "icon": "/ddragon/15.20.1/champion/Rakan.png",
+      "portrait": "/ddragon/15.20.1/loading/Rakan_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Rakan_0.webp"
+    },
+    "Rammus": {
+      "id": "Rammus",
+      "key": "33",
+      "name": "Rammus",
+      "icon": "/ddragon/15.20.1/champion/Rammus.png",
+      "portrait": "/ddragon/15.20.1/loading/Rammus_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Rammus_0.webp"
+    },
+    "RekSai": {
+      "id": "RekSai",
+      "key": "421",
+      "name": "Rek'Sai",
+      "icon": "/ddragon/15.20.1/champion/RekSai.png",
+      "portrait": "/ddragon/15.20.1/loading/RekSai_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/RekSai_0.webp"
+    },
+    "Rell": {
+      "id": "Rell",
+      "key": "526",
+      "name": "Rell",
+      "icon": "/ddragon/15.20.1/champion/Rell.png",
+      "portrait": "/ddragon/15.20.1/loading/Rell_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Rell_0.webp"
+    },
+    "Renata": {
+      "id": "Renata",
+      "key": "888",
+      "name": "Renata Glasc",
+      "icon": "/ddragon/15.20.1/champion/Renata.png",
+      "portrait": "/ddragon/15.20.1/loading/Renata_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Renata_0.webp"
+    },
+    "Renekton": {
+      "id": "Renekton",
+      "key": "58",
+      "name": "Renekton",
+      "icon": "/ddragon/15.20.1/champion/Renekton.png",
+      "portrait": "/ddragon/15.20.1/loading/Renekton_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Renekton_0.webp"
+    },
+    "Rengar": {
+      "id": "Rengar",
+      "key": "107",
+      "name": "Rengar",
+      "icon": "/ddragon/15.20.1/champion/Rengar.png",
+      "portrait": "/ddragon/15.20.1/loading/Rengar_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Rengar_0.webp"
+    },
+    "Riven": {
+      "id": "Riven",
+      "key": "92",
+      "name": "Riven",
+      "icon": "/ddragon/15.20.1/champion/Riven.png",
+      "portrait": "/ddragon/15.20.1/loading/Riven_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Riven_0.webp"
+    },
+    "Rumble": {
+      "id": "Rumble",
+      "key": "68",
+      "name": "Rumble",
+      "icon": "/ddragon/15.20.1/champion/Rumble.png",
+      "portrait": "/ddragon/15.20.1/loading/Rumble_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Rumble_0.webp"
+    },
+    "Ryze": {
+      "id": "Ryze",
+      "key": "13",
+      "name": "Ryze",
+      "icon": "/ddragon/15.20.1/champion/Ryze.png",
+      "portrait": "/ddragon/15.20.1/loading/Ryze_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Ryze_0.webp"
+    },
+    "Samira": {
+      "id": "Samira",
+      "key": "360",
+      "name": "Samira",
+      "icon": "/ddragon/15.20.1/champion/Samira.png",
+      "portrait": "/ddragon/15.20.1/loading/Samira_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Samira_0.webp"
+    },
+    "Sejuani": {
+      "id": "Sejuani",
+      "key": "113",
+      "name": "Sejuani",
+      "icon": "/ddragon/15.20.1/champion/Sejuani.png",
+      "portrait": "/ddragon/15.20.1/loading/Sejuani_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Sejuani_0.webp"
+    },
+    "Senna": {
+      "id": "Senna",
+      "key": "235",
+      "name": "Senna",
+      "icon": "/ddragon/15.20.1/champion/Senna.png",
+      "portrait": "/ddragon/15.20.1/loading/Senna_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Senna_0.webp"
+    },
+    "Seraphine": {
+      "id": "Seraphine",
+      "key": "147",
+      "name": "Seraphine",
+      "icon": "/ddragon/15.20.1/champion/Seraphine.png",
+      "portrait": "/ddragon/15.20.1/loading/Seraphine_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Seraphine_0.webp"
+    },
+    "Sett": {
+      "id": "Sett",
+      "key": "875",
+      "name": "Sett",
+      "icon": "/ddragon/15.20.1/champion/Sett.png",
+      "portrait": "/ddragon/15.20.1/loading/Sett_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Sett_0.webp"
+    },
+    "Shaco": {
+      "id": "Shaco",
+      "key": "35",
+      "name": "Shaco",
+      "icon": "/ddragon/15.20.1/champion/Shaco.png",
+      "portrait": "/ddragon/15.20.1/loading/Shaco_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Shaco_0.webp"
+    },
+    "Shen": {
+      "id": "Shen",
+      "key": "98",
+      "name": "Shen",
+      "icon": "/ddragon/15.20.1/champion/Shen.png",
+      "portrait": "/ddragon/15.20.1/loading/Shen_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Shen_0.webp"
+    },
+    "Shyvana": {
+      "id": "Shyvana",
+      "key": "102",
+      "name": "Shyvana",
+      "icon": "/ddragon/15.20.1/champion/Shyvana.png",
+      "portrait": "/ddragon/15.20.1/loading/Shyvana_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Shyvana_0.webp"
+    },
+    "Singed": {
+      "id": "Singed",
+      "key": "27",
+      "name": "Singed",
+      "icon": "/ddragon/15.20.1/champion/Singed.png",
+      "portrait": "/ddragon/15.20.1/loading/Singed_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Singed_0.webp"
+    },
+    "Sion": {
+      "id": "Sion",
+      "key": "14",
+      "name": "Sion",
+      "icon": "/ddragon/15.20.1/champion/Sion.png",
+      "portrait": "/ddragon/15.20.1/loading/Sion_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Sion_0.webp"
+    },
+    "Sivir": {
+      "id": "Sivir",
+      "key": "15",
+      "name": "Sivir",
+      "icon": "/ddragon/15.20.1/champion/Sivir.png",
+      "portrait": "/ddragon/15.20.1/loading/Sivir_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Sivir_0.webp"
+    },
+    "Skarner": {
+      "id": "Skarner",
+      "key": "72",
+      "name": "Skarner",
+      "icon": "/ddragon/15.20.1/champion/Skarner.png",
+      "portrait": "/ddragon/15.20.1/loading/Skarner_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Skarner_0.webp"
+    },
+    "Smolder": {
+      "id": "Smolder",
+      "key": "901",
+      "name": "Smolder",
+      "icon": "/ddragon/15.20.1/champion/Smolder.png",
+      "portrait": "/ddragon/15.20.1/loading/Smolder_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Smolder_0.webp"
+    },
+    "Sona": {
+      "id": "Sona",
+      "key": "37",
+      "name": "Sona",
+      "icon": "/ddragon/15.20.1/champion/Sona.png",
+      "portrait": "/ddragon/15.20.1/loading/Sona_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Sona_0.webp"
+    },
+    "Soraka": {
+      "id": "Soraka",
+      "key": "16",
+      "name": "Soraka",
+      "icon": "/ddragon/15.20.1/champion/Soraka.png",
+      "portrait": "/ddragon/15.20.1/loading/Soraka_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Soraka_0.webp"
+    },
+    "Swain": {
+      "id": "Swain",
+      "key": "50",
+      "name": "Swain",
+      "icon": "/ddragon/15.20.1/champion/Swain.png",
+      "portrait": "/ddragon/15.20.1/loading/Swain_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Swain_0.webp"
+    },
+    "Sylas": {
+      "id": "Sylas",
+      "key": "517",
+      "name": "Sylas",
+      "icon": "/ddragon/15.20.1/champion/Sylas.png",
+      "portrait": "/ddragon/15.20.1/loading/Sylas_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Sylas_0.webp"
+    },
+    "Syndra": {
+      "id": "Syndra",
+      "key": "134",
+      "name": "Syndra",
+      "icon": "/ddragon/15.20.1/champion/Syndra.png",
+      "portrait": "/ddragon/15.20.1/loading/Syndra_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Syndra_0.webp"
+    },
+    "TahmKench": {
+      "id": "TahmKench",
+      "key": "223",
+      "name": "Tahm Kench",
+      "icon": "/ddragon/15.20.1/champion/TahmKench.png",
+      "portrait": "/ddragon/15.20.1/loading/TahmKench_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/TahmKench_0.webp"
+    },
+    "Taliyah": {
+      "id": "Taliyah",
+      "key": "163",
+      "name": "Taliyah",
+      "icon": "/ddragon/15.20.1/champion/Taliyah.png",
+      "portrait": "/ddragon/15.20.1/loading/Taliyah_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Taliyah_0.webp"
+    },
+    "Talon": {
+      "id": "Talon",
+      "key": "91",
+      "name": "Talon",
+      "icon": "/ddragon/15.20.1/champion/Talon.png",
+      "portrait": "/ddragon/15.20.1/loading/Talon_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Talon_0.webp"
+    },
+    "Taric": {
+      "id": "Taric",
+      "key": "44",
+      "name": "Taric",
+      "icon": "/ddragon/15.20.1/champion/Taric.png",
+      "portrait": "/ddragon/15.20.1/loading/Taric_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Taric_0.webp"
+    },
+    "Teemo": {
+      "id": "Teemo",
+      "key": "17",
+      "name": "Teemo",
+      "icon": "/ddragon/15.20.1/champion/Teemo.png",
+      "portrait": "/ddragon/15.20.1/loading/Teemo_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Teemo_0.webp"
+    },
+    "Thresh": {
+      "id": "Thresh",
+      "key": "412",
+      "name": "Thresh",
+      "icon": "/ddragon/15.20.1/champion/Thresh.png",
+      "portrait": "/ddragon/15.20.1/loading/Thresh_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Thresh_0.webp"
+    },
+    "Tristana": {
+      "id": "Tristana",
+      "key": "18",
+      "name": "Tristana",
+      "icon": "/ddragon/15.20.1/champion/Tristana.png",
+      "portrait": "/ddragon/15.20.1/loading/Tristana_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Tristana_0.webp"
+    },
+    "Trundle": {
+      "id": "Trundle",
+      "key": "48",
+      "name": "Trundle",
+      "icon": "/ddragon/15.20.1/champion/Trundle.png",
+      "portrait": "/ddragon/15.20.1/loading/Trundle_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Trundle_0.webp"
+    },
+    "Tryndamere": {
+      "id": "Tryndamere",
+      "key": "23",
+      "name": "Tryndamere",
+      "icon": "/ddragon/15.20.1/champion/Tryndamere.png",
+      "portrait": "/ddragon/15.20.1/loading/Tryndamere_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Tryndamere_0.webp"
+    },
+    "TwistedFate": {
+      "id": "TwistedFate",
+      "key": "4",
+      "name": "Twisted Fate",
+      "icon": "/ddragon/15.20.1/champion/TwistedFate.png",
+      "portrait": "/ddragon/15.20.1/loading/TwistedFate_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/TwistedFate_0.webp"
+    },
+    "Twitch": {
+      "id": "Twitch",
+      "key": "29",
+      "name": "Twitch",
+      "icon": "/ddragon/15.20.1/champion/Twitch.png",
+      "portrait": "/ddragon/15.20.1/loading/Twitch_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Twitch_0.webp"
+    },
+    "Udyr": {
+      "id": "Udyr",
+      "key": "77",
+      "name": "Udyr",
+      "icon": "/ddragon/15.20.1/champion/Udyr.png",
+      "portrait": "/ddragon/15.20.1/loading/Udyr_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Udyr_0.webp"
+    },
+    "Urgot": {
+      "id": "Urgot",
+      "key": "6",
+      "name": "Urgot",
+      "icon": "/ddragon/15.20.1/champion/Urgot.png",
+      "portrait": "/ddragon/15.20.1/loading/Urgot_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Urgot_0.webp"
+    },
+    "Varus": {
+      "id": "Varus",
+      "key": "110",
+      "name": "Varus",
+      "icon": "/ddragon/15.20.1/champion/Varus.png",
+      "portrait": "/ddragon/15.20.1/loading/Varus_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Varus_0.webp"
+    },
+    "Vayne": {
+      "id": "Vayne",
+      "key": "67",
+      "name": "Vayne",
+      "icon": "/ddragon/15.20.1/champion/Vayne.png",
+      "portrait": "/ddragon/15.20.1/loading/Vayne_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Vayne_0.webp"
+    },
+    "Veigar": {
+      "id": "Veigar",
+      "key": "45",
+      "name": "Veigar",
+      "icon": "/ddragon/15.20.1/champion/Veigar.png",
+      "portrait": "/ddragon/15.20.1/loading/Veigar_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Veigar_0.webp"
+    },
+    "Velkoz": {
+      "id": "Velkoz",
+      "key": "161",
+      "name": "Vel'Koz",
+      "icon": "/ddragon/15.20.1/champion/Velkoz.png",
+      "portrait": "/ddragon/15.20.1/loading/Velkoz_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Velkoz_0.webp"
+    },
+    "Vex": {
+      "id": "Vex",
+      "key": "711",
+      "name": "Vex",
+      "icon": "/ddragon/15.20.1/champion/Vex.png",
+      "portrait": "/ddragon/15.20.1/loading/Vex_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Vex_0.webp"
+    },
+    "Vi": {
+      "id": "Vi",
+      "key": "254",
+      "name": "Vi",
+      "icon": "/ddragon/15.20.1/champion/Vi.png",
+      "portrait": "/ddragon/15.20.1/loading/Vi_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Vi_0.webp"
+    },
+    "Viego": {
+      "id": "Viego",
+      "key": "234",
+      "name": "Viego",
+      "icon": "/ddragon/15.20.1/champion/Viego.png",
+      "portrait": "/ddragon/15.20.1/loading/Viego_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Viego_0.webp"
+    },
+    "Viktor": {
+      "id": "Viktor",
+      "key": "112",
+      "name": "Viktor",
+      "icon": "/ddragon/15.20.1/champion/Viktor.png",
+      "portrait": "/ddragon/15.20.1/loading/Viktor_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Viktor_0.webp"
+    },
+    "Vladimir": {
+      "id": "Vladimir",
+      "key": "8",
+      "name": "Vladimir",
+      "icon": "/ddragon/15.20.1/champion/Vladimir.png",
+      "portrait": "/ddragon/15.20.1/loading/Vladimir_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Vladimir_0.webp"
+    },
+    "Volibear": {
+      "id": "Volibear",
+      "key": "106",
+      "name": "Volibear",
+      "icon": "/ddragon/15.20.1/champion/Volibear.png",
+      "portrait": "/ddragon/15.20.1/loading/Volibear_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Volibear_0.webp"
+    },
+    "Warwick": {
+      "id": "Warwick",
+      "key": "19",
+      "name": "Warwick",
+      "icon": "/ddragon/15.20.1/champion/Warwick.png",
+      "portrait": "/ddragon/15.20.1/loading/Warwick_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Warwick_0.webp"
+    },
+    "Xayah": {
+      "id": "Xayah",
+      "key": "498",
+      "name": "Xayah",
+      "icon": "/ddragon/15.20.1/champion/Xayah.png",
+      "portrait": "/ddragon/15.20.1/loading/Xayah_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Xayah_0.webp"
+    },
+    "Xerath": {
+      "id": "Xerath",
+      "key": "101",
+      "name": "Xerath",
+      "icon": "/ddragon/15.20.1/champion/Xerath.png",
+      "portrait": "/ddragon/15.20.1/loading/Xerath_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Xerath_0.webp"
+    },
+    "XinZhao": {
+      "id": "XinZhao",
+      "key": "5",
+      "name": "Xin Zhao",
+      "icon": "/ddragon/15.20.1/champion/XinZhao.png",
+      "portrait": "/ddragon/15.20.1/loading/XinZhao_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/XinZhao_0.webp"
+    },
+    "Yasuo": {
+      "id": "Yasuo",
+      "key": "157",
+      "name": "Yasuo",
+      "icon": "/ddragon/15.20.1/champion/Yasuo.png",
+      "portrait": "/ddragon/15.20.1/loading/Yasuo_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Yasuo_0.webp"
+    },
+    "Yone": {
+      "id": "Yone",
+      "key": "777",
+      "name": "Yone",
+      "icon": "/ddragon/15.20.1/champion/Yone.png",
+      "portrait": "/ddragon/15.20.1/loading/Yone_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Yone_0.webp"
+    },
+    "Yorick": {
+      "id": "Yorick",
+      "key": "83",
+      "name": "Yorick",
+      "icon": "/ddragon/15.20.1/champion/Yorick.png",
+      "portrait": "/ddragon/15.20.1/loading/Yorick_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Yorick_0.webp"
+    },
+    "Yunara": {
+      "id": "Yunara",
+      "key": "804",
+      "name": "Yunara",
+      "icon": "/ddragon/15.20.1/champion/Yunara.png",
+      "portrait": "/ddragon/15.20.1/loading/Yunara_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Yunara_0.webp"
+    },
+    "Yuumi": {
+      "id": "Yuumi",
+      "key": "350",
+      "name": "Yuumi",
+      "icon": "/ddragon/15.20.1/champion/Yuumi.png",
+      "portrait": "/ddragon/15.20.1/loading/Yuumi_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Yuumi_0.webp"
+    },
+    "Zac": {
+      "id": "Zac",
+      "key": "154",
+      "name": "Zac",
+      "icon": "/ddragon/15.20.1/champion/Zac.png",
+      "portrait": "/ddragon/15.20.1/loading/Zac_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Zac_0.webp"
+    },
+    "Zed": {
+      "id": "Zed",
+      "key": "238",
+      "name": "Zed",
+      "icon": "/ddragon/15.20.1/champion/Zed.png",
+      "portrait": "/ddragon/15.20.1/loading/Zed_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Zed_0.webp"
+    },
+    "Zeri": {
+      "id": "Zeri",
+      "key": "221",
+      "name": "Zeri",
+      "icon": "/ddragon/15.20.1/champion/Zeri.png",
+      "portrait": "/ddragon/15.20.1/loading/Zeri_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Zeri_0.webp"
+    },
+    "Ziggs": {
+      "id": "Ziggs",
+      "key": "115",
+      "name": "Ziggs",
+      "icon": "/ddragon/15.20.1/champion/Ziggs.png",
+      "portrait": "/ddragon/15.20.1/loading/Ziggs_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Ziggs_0.webp"
+    },
+    "Zilean": {
+      "id": "Zilean",
+      "key": "26",
+      "name": "Zilean",
+      "icon": "/ddragon/15.20.1/champion/Zilean.png",
+      "portrait": "/ddragon/15.20.1/loading/Zilean_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Zilean_0.webp"
+    },
+    "Zoe": {
+      "id": "Zoe",
+      "key": "142",
+      "name": "Zoe",
+      "icon": "/ddragon/15.20.1/champion/Zoe.png",
+      "portrait": "/ddragon/15.20.1/loading/Zoe_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Zoe_0.webp"
+    },
+    "Zyra": {
+      "id": "Zyra",
+      "key": "143",
+      "name": "Zyra",
+      "icon": "/ddragon/15.20.1/champion/Zyra.png",
+      "portrait": "/ddragon/15.20.1/loading/Zyra_0.jpg",
+      "splash": "/ddragon/15.20.1/splash-centered/Zyra_0.webp"
+    }
+  }
+}

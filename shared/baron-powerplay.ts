@@ -20,22 +20,43 @@ export function advanceBaronWindow(
   previous: BaronWindow | null,
   frame: ObserverFrame | null,
 ): BaronWindow | null {
-  if (
-    !frame?.sample ||
-    ["lost", "seek", "reconnected", "source-changed"].includes(frame.transition)
-  )
-    return null;
+  if (!frame?.sample || frame.transition === "lost") return null;
   const s = frame.sample;
-  const event = [...frame.newEvents]
+  const freshEvent = [...frame.newEvents]
     .reverse()
     .find((e) => e.kind === "BaronKill" && e.team);
+  const reset = ["seek", "reconnected", "source-changed"].includes(
+    frame.transition,
+  );
+  const event =
+    freshEvent ??
+    (!previous || reset
+      ? [...(s.events ?? [])]
+          .reverse()
+          .find(
+            (e) =>
+              e.kind === "BaronKill" &&
+              e.team &&
+              s.gameTime.value !== null &&
+              e.at <= s.gameTime.value &&
+              s.gameTime.value < e.at + BARON_BUFF_SECONDS &&
+              !allBaronLost(s, e.team),
+          )
+      : undefined);
   if (event?.team)
     return {
       team: event.team,
       startedAt: event.at,
-      ownGold: teamGold(s, event.team),
-      enemyGold: teamGold(s, event.team === "ORDER" ? "CHAOS" : "ORDER"),
+      ownGold:
+        event.goldBaseline?.own ??
+        (freshEvent ? teamGold(s, event.team) : null),
+      enemyGold:
+        event.goldBaseline?.enemy ??
+        (freshEvent
+          ? teamGold(s, event.team === "ORDER" ? "CHAOS" : "ORDER")
+          : null),
     };
+  if (reset) return null;
   return previous &&
     ((s.gameTime.value != null &&
       s.gameTime.value >= previous.startedAt + BARON_BUFF_SECONDS) ||
@@ -67,17 +88,32 @@ export function advanceElderWindow(
   previous: ElderWindow | null,
   frame: ObserverFrame | null,
 ): ElderWindow | null {
-  if (
-    !frame?.sample ||
-    ["lost", "seek", "reconnected", "source-changed"].includes(frame.transition)
-  )
-    return null;
-  const event = [...frame.newEvents]
-    .reverse()
-    .find(
-      (e) => e.kind === "DragonKill" && e.objectiveType === "elder" && e.team,
-    );
+  if (!frame?.sample || frame.transition === "lost") return null;
+  const reset = ["seek", "reconnected", "source-changed"].includes(
+    frame.transition,
+  );
+  const event =
+    [...frame.newEvents]
+      .reverse()
+      .find(
+        (e) => e.kind === "DragonKill" && e.objectiveType === "elder" && e.team,
+      ) ??
+    (!previous || reset
+      ? [...(frame.sample.events ?? [])]
+          .reverse()
+          .find(
+            (e) =>
+              e.kind === "DragonKill" &&
+              e.objectiveType === "elder" &&
+              e.team &&
+              frame.sample!.gameTime.value !== null &&
+              e.at <= frame.sample!.gameTime.value &&
+              frame.sample!.gameTime.value < e.at + ELDER_BUFF_SECONDS &&
+              !allElderLost(frame.sample!, e.team),
+          )
+      : undefined);
   if (event?.team) return { team: event.team, startedAt: event.at };
+  if (reset) return null;
   return previous &&
     ((frame.sample.gameTime.value != null &&
       frame.sample.gameTime.value >= previous.startedAt + ELDER_BUFF_SECONDS) ||

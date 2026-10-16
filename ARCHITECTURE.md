@@ -1,6 +1,64 @@
 # Kiến trúc LoL — bản khung 0.1
 
+### Native events Collector — 15/10/2026
+
+Typed native event → exact object lookup → sanitized ObservedEvent → bounded
+queue của source → `broadcastFrame()` dùng chung cho Studio/OBS. Queue tránh mất
+event giữa tick100ms và poll750ms; HTTP observe chỉ đọc. Baseline/seek/reconnect/
+loss reset, expiry theo game time và wall time5s; không history completeness
+hoặc counter derive. Mapping vẫn source-derived, game semantics chưa xác minh.
+
+### Provider và launcher LeagueCollector — 15/10/2026
+
+`server/index.ts` chọn `league-collector` → `Collector/runtime/supervisor.ts`
+khởi động host .NET dùng DLL LB gốc → WS loopback `/ws` → adapter →
+ObserverFrame chung cho Studio/OBS. Supervisor sở hữu process, không xác nhận
+telemetry; adapter xác minh envelope/roster/freshness riêng. Không đưa env/token
+điều khiển sang frontend. Đổi nguồn/demo/shutdown dừng owned host; external
+mode không sở hữu host. Parent worker đã kiểm chứng host idle dừng khi launcher
+thử thoát không cleanup. Fixture đã chứng minh routing; game toàn tuyến còn chờ.
+
+### LeagueCollector adapter riêng — 14/10/2026
+
+`Collector/adapter` đọc envelope native từ host .NET qua `/ws` loopback và
+allowlistnormalize sang shared ObserverFrame. Không nhập vendorFarsight/DLL
+vào backendTS, khônglaunch/auth/gamecontrol. `ObserverSession` quảnlý epoch/
+session, adapter loại duplicate/stale/invalid và xóa output khi mấtnguồn.
+Source mới chưaregister providerselectorStudio; LBproduction giữ baseline.
+Fieldmatrix/capabilities tách supportedprojection khỏi runtimeverification và
+productionreadiness. Xem Collector/docs/ADAPTER.vi.md và FIELD-MATRIX.vi.md.
+
+### Riot postgame staged / secrets RAM — 13/10/2026
+
+`RiotPostgamePanel` POST local credential → `RiotPostgameService` RAM vault
+(không persist/WS), rồi explicit load Match+Timeline qua SEA GET. Adapter
+allowlist → candidate normalized v2. Review cùng Surface/PostgameOverlay;
+explicit publish chỉ gửi matchId và backend lấy candidate do nó đã tải, rồi
+broadcast state chung. Command/import bộ mẫu chỉ nhận v1/source sample.
+Không raw provider/secret/PUUID vào widget. Clear/config generation hủy pending,
+giữ result đã publish; lỗi tải không thay chương trình. Cả key/candidate/result
+không tự tồn tại qua restart. Header/Origin/body/egress/rate limits tại
+`docs/RIOT_API_SETUP.md`. Chưa authenticated test bằng key người dùng.
+
+### Postgame sample review — 13/10/2026
+
+`shared/postgame.ts` định nghĩa contract mẫu version 1 và validation Zod.
+Studio `PostgameDesk` gửi command `postgameState` vào backend reducer;
+snapshot chung được renderer `PostgameOverlay` và iframe OBS nhận-only đọc.
+Không lấy raw payload provider, không có adapter live hoặc auto GameEnd.
+Branding vẫn đọc theme chung; source sample được ghi nhãn ở cả Studio/graphic.
+Gold history null tách segment thay vì tự nối; stat null khác zero.
+Chi tiết và bước nối nguồn sau duyệt tại `docs/POSTGAME_UI_REVIEW.md`.
+
 ## Đã thực hiện
+
+Cấm chọn production: `shared/draft.ts` là schema/trình tự 20 lượt và helpers;
+command `draftState` cập nhật state có revision qua WS. `DraftDesk` điều khiển
+nguồn nhập tay/bộ mẫu, `DraftOverlay` render snapshot nhận-only cho OBS và iframe.
+Draft không đọc provider raw, không dùng in-game player để đoán pick/ban. Catalog
+asset riêng giữ 15.20.1. Chưa có collector draft live; phiên draft RAM/export JSON,
+theme vẫn persistence riêng. Scene cố định và scene theo chương trình tách rõ;
+widget preview in-game luôn ép đúng scene.
 
 Mock reducer → backend state → WebSocket → Studio và Overlay Renderer. Schema Zod v1 kiểm tra command/theme tại backend. Mỗi cập nhật có revision; kết nối mới nhận snapshot đầy đủ. Scene và theme nằm trong state, nên các cửa sổ dùng cùng trạng thái. Overlay dùng chế độ nhận-only. Backend ghi theme theo hàng đợi và đổi tên file tạm.
 
@@ -51,7 +109,7 @@ Collector → normalized frame → WebSocket observer → LiveOverlay ở Studio
 
 ## Module nguồn và mở rộng game
 
-Cập nhật mục tiêu Valorant 11/10/2026: tích hợp collector Spectra Client/Overwolf Electron và fork BE/FE ValoSpectra vào project, quản lý startup/readiness/shutdown chung. Ban đầu giữ BE Node và FE Angular thành package/process riêng trong workspace, nối với Studio React; chưa hợp nhất framework hoặc triển khai runtime. Chi tiết ở `VALOSPECTRA_FEASIBILITY.md`.
+Mốc Valorant 13/10/2026: đã fork local Client/Server/Frontend trong `modules/valorant`, BE Node/FE Angular có dependency/build riêng, launcher quản lý port/ownership/readiness/shutdown và executable collector tùy cấu hình. Runtime không nhập code Valorant vào contract/build LoL; Studio React chưa nhúng FE Angular. Chưa build collector hoặc xác minh game telemetry. Xem `docs/VALORANT_MODULE.md` và `VALOSPECTRA_FEASIBILITY.md`.
 
 Dashboard tách Tổng quan, Nguồn dữ liệu, Studio/OBS, Demo, Theme và Lộ trình. Workspace game là lớp điều hướng; LoL đang hoạt động, Valorant mới là khung mở rộng và không dùng chung contract trận.
 
@@ -82,3 +140,17 @@ không AI/runtime 3D. Damage tiếp tục unavailable.
 Quyết định production 26/09/2026: LeagueBroadcast là provider bắt buộc cho chế độ giải đấu đầy đủ vì đây là nguồn đã xác minh cung cấp gold, HP/resource, rune, ability và objective của đủ 10 người. Riot local không thay thế LB; nó là provider replay/diagnostic và chế độ giới hạn. Nếu LB mất kết nối, overlay phải báo thiếu nguồn và hết hạn dữ liệu, không âm thầm hạ xuống Riot local hoặc điền mock.
 
 Ranh giới Vanguard: chỉ dùng API, game client, spectator/replay service và feed local do ứng dụng LeagueBroadcast cung cấp. Không đọc memory, inject DLL, hook process, thay đổi Vanguard hoặc nghiên cứu cách vượt anti-cheat. Việc tái tạo độ phủ dữ liệu của LeagueBroadcast nằm ở phase nghiên cứu riêng và chỉ tiếp tục nếu có giao diện được Riot cho phép.
+
+## Engine LoL riêng — nền độc lập 14/10/2026
+
+`scripts/start-independent-engine.ts` → `IndependentEngine` (instance
+`IngameCollector` riêng, API2999) → `startIndependentEngineServer` → loopback4313.
+GET health/snapshot/capabilities và WS nhận-only, không nối provider production.
+Tái sử dụng adapter/session/event enrichment nội bộ; không import DLL, login,
+private IPC hoặc feed LB. Field source vẫn là Riot API thật, không đổi nhãn
+thành nguồn native riêng. Capability chỉ nói về sample hiện tại, không parity.
+
+Core có collector interface để thay acquisition sau khi có nguồn thật được
+kiểm chứng. Prototype luôn `replacementReady=false`; còn thiếu acquisition đầy
+đủ và autostart/tích hợp Studio. Không coi một cổng xuất duy nhất là bằng chứng
+một nguồn telemetry đầy đủ. Xem `docs/INDEPENDENT_LOL_ENGINE.md`.

@@ -44,6 +44,26 @@ try {
     deviceScaleFactor: 1,
   });
   await studio.goto(base + "/?page=demo");
+  // Choose a full-match recording explicitly, rather than inheriting a short gold-only capture.
+  const recordings = await (await fetch(base + "/api/captures")).json();
+  const full = recordings
+    .filter((c) => c.hasState)
+    .sort((a, b) => b.frames - a.frames)[0];
+  assert.ok(full, "Full recorded match required");
+  await studio
+    .getByLabel("Bộ dữ liệu thật", { exact: true })
+    .selectOption(full.id);
+  await studio
+    .getByRole("button", { name: "Mở bộ dữ liệu thật", exact: true })
+    .click();
+  await studio.waitForFunction(
+    () =>
+      [...document.querySelectorAll("button")].some(
+        (b) => b.textContent.includes("Hạ rồng") && !b.disabled,
+      ),
+    undefined,
+    { timeout: 45000 },
+  );
   await studio
     .getByRole("button", { name: "Leaderboard gold", exact: false })
     .waitFor();
@@ -52,6 +72,7 @@ try {
       [...document.querySelectorAll("button")].some(
         (b) => b.textContent.includes("Leaderboard gold") && !b.disabled,
       ),
+    undefined,
     { timeout: 45000 },
   );
   const renderer = await browser.newPage({
@@ -129,7 +150,7 @@ try {
       await renderer.locator(".quest-completion").first().waitFor();
       assert.equal(await renderer.locator(".quest-completion").count(), 1);
       assert.ok(
-        (await renderer.locator(".row-secondary.quest-reward img").count()) > 0,
+        (await renderer.locator(".row-lane-quest .quest-reward, .row-secondary.quest-reward").count()) > 0,
       );
       const questBoxes = await renderer
         .locator(".quest-completion")
