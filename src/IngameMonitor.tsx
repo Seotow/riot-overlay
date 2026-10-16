@@ -1,3 +1,4 @@
+import { Button } from "./components/ui/button";
 import { liveCatalog, liveChampion, liveItem } from "../shared/live-assets";
 import { useEffect, useRef, useState } from "react";
 import {
@@ -89,7 +90,7 @@ export function IngameMonitor() {
         Overlay nhận dữ liệu local khi tắt chế độ demo. Có thể bật theo dõi
         trước khi mở replay; công cụ sẽ thử lại khi chưa có nguồn.
       </p>
-      <button
+      <Button
         onClick={() => {
           setFrame(null);
           setError("");
@@ -97,13 +98,13 @@ export function IngameMonitor() {
         }}
       >
         {running ? "Dừng theo dõi" : "Bắt đầu theo dõi"}
-      </button>
-      <button onClick={exportRecording}>Xuất bản ghi đã lọc</button>
+      </Button>
+      <Button onClick={exportRecording}>Xuất bản ghi đã lọc</Button>
       <p role="status">
         {!running
           ? "Đã dừng"
           : !frame
-            ? "Đang chờ nguồn…"
+            ? "Đang chờ nguồn..."
             : age >= 5000
               ? "Mẫu đã cũ, dữ liệu đang ẩn"
               : frame.status === "observed"

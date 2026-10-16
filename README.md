@@ -162,6 +162,12 @@ còn thiếu tại [INDEPENDENT_LOL_ENGINE](docs/INDEPENDENT_LOL_ENGINE.md).
 
 Phase UI trên bản ghi thật và counters đã chốt ngày17/10/2026. Xem
 [báo cáo tổng hợp](docs/PHASE_HANDOFF_2026-10-17.md) và
-[trạng thái](PROJECT_STATUS.md) trước khi tiếp tục. Studio đang chuyển sang
-shadcn theo yêu cầu mới; layout overlay OBS đã duyệt được giữ nguyên.
+[trạng thái](PROJECT_STATUS.md) trước khi tiếp tục. Studio đã chuyển sang
+shadcn; layout overlay OBS đã duyệt được giữ nguyên.
+
+## Studio mới
+
+Studio dùng shadcn/ui, bố cục vận hành gọn và theme tối trung tính.
+[Hướng dẫn Studio](docs/STUDIO_UI.md). Sau khi cập nhật source, chạy
+`npm ci`, `npm run build` rồi tải lại trang. Layout overlay OBS giữ nguyên.
 

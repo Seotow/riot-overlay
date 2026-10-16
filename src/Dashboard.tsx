@@ -1,3 +1,7 @@
+import { NativeSelect } from "./components/ui/native-select";
+import { Input } from "./components/ui/input";
+import { Card } from "./components/ui/card";
+import { Button } from "./components/ui/button";
 import React, { useEffect, useState } from "react";
 import {
   providerReportSchema,
@@ -145,23 +149,29 @@ export function SourcePanel({
   send,
 }: Props) {
   const sample = useFresh(connected ? observation : null);
-  const bb = connected ? report?.leaguebroadcast : null;
   const coverage = sourceCoverage(sample);
+  const choices = [
+    ["riot", "Riot Live Client"],
+    ["leaguebroadcast", "LeagueBroadcast"],
+    ["league-collector", "Collector có tài khoản"],
+    ["collector-accountless", "Collector không tài khoản (thử nghiệm)"],
+    ["recording", "Bản ghi"],
+  ];
   return (
     <section className="source-panel">
-      <div className="dashboard-heading">
+      <div className="section-heading">
         <div>
-          <small>DATA ROUTING</small>
-          <h2>Nguồn cấp cho chương trình</h2>
+          <h2>Kết nối trận đấu</h2>
+          <p>Chọn nguồn dữ liệu cho Studio và overlay.</p>
         </div>
-        <span className={`status-pill ${state.mockVisible ? "amber" : ""}`}>
-          {state.mockVisible ? "DEMO ĐANG PHÁT" : sourceNames[state.provider]}
+        <span className="status-pill">
+          {sample ? `${sample.players.length}/10 người chơi` : "Chờ dữ liệu"}
         </span>
       </div>
       <div className="source-routing">
         <label>
           Nguồn trận đấu
-          <select
+          <NativeSelect
             aria-label="Nguồn trận đấu"
             value={state.provider}
             disabled={!connected}
@@ -172,33 +182,15 @@ export function SourcePanel({
               })
             }
           >
-            <option value="riot">Riot local: dữ liệu giới hạn</option>
-            <option value="leaguebroadcast">
-              LeagueBroadcast gốc: nguồn ngoài dự phòng
-            </option>
-            <option value="recording">Bản ghi offline</option>
-            <option value="league-collector">
-              Collector có tài khoản LB (cấu hình local)
-            </option>
-            <option value="collector-accountless">
-              Collector không tài khoản LB (DLL cache · thử nghiệm)
-            </option>
-          </select>
-          {state.provider === "league-collector" && (
-            <small>
-              Dùng tài khoản đã cấu hình trong Collector/config/collector.env;
-              không cần mở LB gốc.
-            </small>
-          )}
-          {state.provider === "collector-accountless" && (
-            <small>
-              Dùng DLL cache, không đọc tài khoản đã cấu hình. Đã đo
-              HP/resource/vàng trên SR spectator với cache hiện tại.
-            </small>
-          )}
+            {choices.map(([value, label]) => (
+              <option key={value} value={value}>
+                {label}
+              </option>
+            ))}
+          </NativeSelect>
         </label>
         <label className="demo-switch">
-          <input
+          <Input
             type="checkbox"
             checked={state.mockVisible}
             disabled={!connected}
@@ -206,123 +198,38 @@ export function SourcePanel({
               send({ type: "mockVisible", value: e.target.checked })
             }
           />
-          Dùng dữ liệu demo<span>Áp dụng cho Studio và OBS</span>
+          Dùng dữ liệu mẫu
         </label>
       </div>
-      <CapturePanel
-        connected={connected}
-        state={state}
-        report={report}
-        send={send}
-      />
-      <div className="source-cards">
-        <article>
-          <span className="module-icon">C</span>
-          <h3>LeagueCollector local</h3>
-          <small>
-            {state.provider === "collector-accountless"
-              ? "DLL cache · Không dùng tài khoản LB"
-              : "Chế độ tài khoản LB trên máy"}
-          </small>
-          <p>
-            {connected && report?.collector
-              ? `${report.collector.runtime.status} · dữ liệu ${report.collector.status}`
-              : "Chọn nguồn để project chạy collector, không cần mở LB gốc"}
-          </p>
-          <small>
-            {report?.collector
-              ? `${report.collector.players}/10 người · ${report.collector.acceptedFrames} frame`
-              : "Credentials giữ trên máy collector"}
-          </small>
-          {report?.collector?.runtime.error && (
-            <small>
-              Lỗi:{" "}
-              {report.collector.runtime.error ===
-              "accountless-external-not-supported"
-                ? "Chế độ không tài khoản cần host do app quản lý. Hãy bỏ cấu hình collector ngoài và khởi động lại backend."
-                : report.collector.runtime.error}
-            </small>
-          )}
-          <small>
-            {
-              " · CS chưa xác minh · thứ tự đường chưa chốt · objective chưa đủ · event chưa kiểm chứng"
-            }
-          </small>
-          <code>127.0.0.1:{report?.collector?.runtime.port ?? 18799}</code>
-        </article>
-        <article>
-          <span className="module-icon">R</span>
-          <h3>Riot local</h3>
-          <p>
-            Replay và kiểm thử giới hạn
-            <br />
-            Thiếu telemetry production quan trọng
-          </p>
-          <small>
-            {state.provider === "riot" && sample
-              ? "Đang cấp frame quan sát giới hạn"
-              : "Dùng khi replay hoặc LB chưa sẵn sàng"}
-          </small>
-          <code>127.0.0.1:2999</code>
-        </article>
-        <article>
-          <span className="module-icon">B</span>
-          <h3>LeagueBroadcast gốc</h3>
-          <p>
-            {bb ? statuses[bb.status] : "Nguồn LB ngoài chưa được kiểm tra"}
-          </p>
-          <small>
-            {bb
-              ? `${bb.players}/10 người, ${bb.frames} frame hợp lệ`
-              : "Cần cho gold, HP, resource, rune và objective đầy đủ"}
-          </small>
-          {bb && (
-            <small>
-              Trạng thái game: {bb.gameStatus}; telemetry:{" "}
-              {bb.telemetry
-                ? `${bb.telemetry.status}, ${bb.telemetry.updatesPerSecond}/s`
-                : "chưa có"}
-            </small>
-          )}
-          {bb?.assetCache && (
-            <small>
-              Asset {bb.assetCache.version ?? ""}: {bb.assetCache.state},{" "}
-              {bb.assetCache.progressPercent == null
-                ? "chưa rõ"
-                : `${bb.assetCache.progressPercent.toFixed(1)}%`}
-            </small>
-          )}
-          <code>127.0.0.1:58869 /ws/in</code>
-        </article>
-        <article>
-          <span className="module-icon">D</span>
-          <h3>Data Dragon</h3>
-          <p>Icon và tên, lưu trên máy</p>
-          <small>Live {liveCatalog.version} / demo 15.20.1</small>
-          <code>Không cung cấp chỉ số realtime</code>
-        </article>
+      {state.mockVisible && (
+        <p className="note" role="status">
+          Dữ liệu mẫu đang được dùng cho cả Studio và OBS.
+        </p>
+      )}
+      {state.provider === "recording" && (
+        <a className="button secondary" href="/?page=demo">
+          Mở phòng thử
+        </a>
+      )}
+      <div className="session-cards">
+        <Card>
+          <small>Kết nối Studio</small>
+          <strong>{connected ? "Sẵn sàng" : "Mất kết nối"}</strong>
+        </Card>
+        <Card>
+          <small>Dữ liệu trận</small>
+          <strong>{sample ? "Đang nhận" : "Chưa có"}</strong>
+        </Card>
+        <Card>
+          <small>Cập nhật cuối</small>
+          <strong>
+            {sample
+              ? new Date(sample.capturedAt).toLocaleTimeString("vi-VN")
+              : "Chưa có"}
+          </strong>
+        </Card>
       </div>
-      <p className="module-note">
-        {state.provider === "riot"
-          ? "Chế độ giới hạn. LeagueCollector local cung cấp telemetry đã đo; các field chưa hỗ trợ vẫn được đánh dấu thiếu."
-          : state.provider === "collector-accountless"
-            ? "DLL cache không đăng nhập LB: đã nhận HP/resource/vàng trên SR spectator và cùng sample ở Studio/OBS. Chưa đối chiếu số liệu với HUD hoặc xác minh đầy đủ tính năng và độ ổn định. Dữ liệu thiếu để trống, không tự chuyển nguồn."
-            : state.provider === "league-collector"
-              ? "Collector được project quản lý. Dữ liệu thiếu giữ null; CS, lane và objective/event chưa hoàn tất kiểm chứng."
-              : state.provider === "recording"
-                ? "Đang dùng dữ liệu lịch sử. Bản ghi không phản ánh trận đang chạy; nguồn trong bảng là nguồn đã tạo bản ghi."
-                : "Nguồn production đầy đủ. LeagueBroadcast, quyền tài khoản và custom spectator được hỗ trợ là bắt buộc; mất kết nối không tự chuyển nguồn."}
-      </p>
-      <div className="dashboard-heading">
-        <h3>Dữ liệu đang vào overlay</h3>
-        <small>
-          {state.mockVisible
-            ? "Fixture demo"
-            : sample
-              ? `Cập nhật ${new Date(sample.capturedAt).toLocaleTimeString("vi-VN")}`
-              : "Chờ nguồn, số liệu cũ đã ẩn"}
-        </small>
-      </div>
+      <h3>Dữ liệu khả dụng</h3>
       <div className="table-scroll">
         <table className="provenance-table">
           <thead>
@@ -337,242 +244,29 @@ export function SourcePanel({
               <tr key={row.id}>
                 <td>{row.title}</td>
                 <td>
-                  {state.mockVisible
-                    ? "Demo"
-                    : `${row.available}/${row.expected}`}
+                  {row.available}/{row.expected}
                 </td>
-                <td>
-                  {state.mockVisible ? (
-                    "Demo nội bộ"
-                  ) : (
-                    <>
-                      {row.sources.join(", ") || "Chưa có dữ liệu"}
-                      {row.note && (
-                        <small className="coverage-note">{row.note}</small>
-                      )}
-                    </>
-                  )}
-                </td>
-              </tr>
-            ))}
-            <tr>
-              <td>Thời gian trận</td>
-              <td>
-                {state.mockVisible
-                  ? "Demo"
-                  : sample?.gameTime.value != null
-                    ? `${sample.gameTime.value.toFixed(1)} s`
-                    : "N/A"}
-              </td>
-              <td>
-                {state.mockVisible
-                  ? "Demo nội bộ"
-                  : sample?.gameTime.value != null
-                    ? sourceNames[sample.gameTime.source]
-                    : "Chưa có dữ liệu"}
-              </td>
-            </tr>
-            <tr>
-              <td>Pause / tốc độ replay</td>
-              <td>
-                {state.mockVisible
-                  ? "Demo"
-                  : sample?.replay.speed.value != null
-                    ? `${sample.replay.speed.value}×`
-                    : "N/A"}
-              </td>
-              <td>
-                {state.mockVisible
-                  ? "Demo nội bộ"
-                  : sample?.replay.speed.value != null
-                    ? sourceNames[sample.replay.speed.source]
-                    : "Chưa có dữ liệu"}
-              </td>
-            </tr>
-            <tr>
-              <td>Tên đội / nhận diện</td>
-              <td>Cấu hình thủ công</td>
-              <td>Theme trên máy</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div className="dashboard-heading source-research-heading">
-        <div>
-          <small>SOURCE RESEARCH</small>
-          <h3>Nguồn bổ sung có thể triển khai</h3>
-        </div>
-        <small>Không tự động ghép dữ liệu chưa xác minh</small>
-      </div>
-      <div className="table-scroll">
-        <table className="provenance-table source-candidate-table">
-          <thead>
-            <tr>
-              <th>Nguồn</th>
-              <th>Trạng thái</th>
-              <th>Đường lấy dữ liệu</th>
-              <th>Độ phủ thực tế</th>
-              <th>Điều kiện</th>
-            </tr>
-          </thead>
-          <tbody>
-            {sourceCandidates.map((candidate) => (
-              <tr key={candidate.id}>
-                <td>
-                  <strong>{candidate.name}</strong>
-                </td>
-                <td>
-                  <span className={`source-stage ${candidate.stage}`}>
-                    {candidateStages[candidate.stage]}
-                  </span>
-                </td>
-                <td>{candidate.route}</td>
-                <td>{candidate.coverage}</td>
-                <td>{candidate.requirement}</td>
+                <td>{row.sources.join(", ") || "Chưa có"}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className="research-boundary">
-        <div>
-          <small>CÓ THỂ NGHIÊN CỨU</small>
-          {researchBoundary.allowed.map((item) => (
-            <p key={item}>{item}</p>
-          ))}
-        </div>
-        <div>
-          <small>LOẠI KHỎI PHƯƠNG ÁN</small>
-          {researchBoundary.excluded.map((item) => (
-            <p key={item}>{item}</p>
-          ))}
-        </div>
-      </div>
+      <details className="diagnostic-details">
+        <summary>Thông tin kỹ thuật</summary>
+        <pre>
+          {JSON.stringify(
+            {
+              provider: state.provider,
+              collector: report?.collector,
+              leaguebroadcast: report?.leaguebroadcast,
+            },
+            null,
+            2,
+          )}
+        </pre>
+      </details>
     </section>
-  );
-}
-function CapturePanel({
-  connected,
-  state,
-  report,
-  send,
-}: Pick<Props, "connected" | "state" | "report" | "send">) {
-  const [captures, setCaptures] = useState<
-    { id: string; frames: number; hasState: boolean }[]
-  >([]);
-  const [selected, setSelected] = useState("");
-  const [error, setError] = useState("");
-  const refresh = async () => {
-    try {
-      const response = await fetch("/api/captures");
-      if (!response.ok) throw Error();
-      const data = await response.json();
-      setCaptures(data);
-      setSelected(
-        (previous) =>
-          previous ||
-          data.find((r: { hasState: boolean }) => r.hasState)?.id ||
-          "",
-      );
-      setError("");
-    } catch {
-      setError("Chưa đọc được danh sách bản ghi.");
-    }
-  };
-  useEffect(() => {
-    if (connected) void refresh();
-  }, [connected]);
-  const replay = report?.recording;
-  return (
-    <details className="capture-panel" open={state.provider === "recording"}>
-      <summary>Kiểm thử bằng bản ghi đã lưu</summary>
-      <p>
-        Không cần game hoặc LeagueBroadcast. Bản ghi được mở ở trạng thái tạm
-        dừng.
-      </p>
-      <div className="capture-actions">
-        <select
-          aria-label="Bản ghi"
-          value={selected}
-          onChange={(e) => setSelected(e.target.value)}
-          disabled={!connected}
-        >
-          <option value="">Chọn bản ghi</option>
-          {captures.map((c) => (
-            <option key={c.id} value={c.id} disabled={!c.hasState}>
-              {c.id} ({c.frames} frame{c.hasState ? "" : ", không có state"})
-            </option>
-          ))}
-        </select>
-        <button
-          disabled={!connected || !selected}
-          onClick={() => send({ type: "captureLoad", id: selected })}
-        >
-          Mở bản ghi
-        </button>
-        <button disabled={!connected} onClick={() => void refresh()}>
-          Tải lại danh sách
-        </button>
-      </div>
-      {error && <p role="alert">{error}</p>}
-      {state.provider === "recording" && replay?.id && (
-        <div className="capture-controls">
-          <p>
-            {replay.id} / {replay.frames} frame /{" "}
-            {(replay.positionMs / 1000).toFixed(1)} trên{" "}
-            {(replay.durationMs / 1000).toFixed(1)} giây
-          </p>
-          <div className="capture-actions">
-            <button
-              disabled={!connected}
-              onClick={() =>
-                send({ type: "captureControl", playing: !replay.playing })
-              }
-            >
-              {replay.playing ? "Tạm dừng bản ghi" : "Phát bản ghi"}
-            </button>
-            <button
-              disabled={!connected}
-              onClick={() =>
-                send({ type: "captureControl", positionMs: 0, playing: false })
-              }
-            >
-              Về đầu
-            </button>
-            <select
-              aria-label="Tốc độ bản ghi"
-              value={replay.speed}
-              disabled={!connected}
-              onChange={(e) =>
-                send({ type: "captureControl", speed: Number(e.target.value) })
-              }
-            >
-              {[0.25, 0.5, 1, 2, 4].map((speed) => (
-                <option key={speed} value={speed}>
-                  {speed}x
-                </option>
-              ))}
-            </select>
-          </div>
-          <input
-            aria-label="Vị trí bản ghi"
-            type="range"
-            min={0}
-            max={replay.durationMs}
-            step={100}
-            value={replay.positionMs}
-            disabled={!connected}
-            onChange={(e) =>
-              send({
-                type: "captureControl",
-                positionMs: Number(e.target.value),
-                playing: false,
-              })
-            }
-          />
-        </div>
-      )}
-    </details>
   );
 }
 export function Dashboard(
@@ -583,74 +277,63 @@ export function Dashboard(
     <div className="dashboard">
       <div className="dashboard-heading">
         <div>
-          <small>PRODUCTION WORKSPACE</small>
-          <h2>Điều hành phiên phát sóng</h2>
-          <p>Kết nối nguồn, kiểm tra dữ liệu và đưa đồ họa lên sóng.</p>
+          <h2>{props.state.theme.tournament}</h2>
+          <p>
+            {props.state.theme.blueName} gặp {props.state.theme.redName}
+          </p>
         </div>
-        <button onClick={() => props.navigate("studio")}>Mở Studio</button>
+        <Button onClick={() => props.navigate("studio")}>
+          Mở bàn phát sóng
+        </Button>
       </div>
       <div className="session-cards">
-        <article>
-          <small>ĐẦU RA HIỆN TẠI</small>
+        <Card>
+          <small>Nguồn đang dùng</small>
           <strong>
             {props.state.mockVisible
-              ? "Demo"
+              ? "Dữ liệu mẫu"
               : sourceNames[props.state.provider]}
           </strong>
-          <span>
-            {props.connected ? "Backend đã kết nối" : "Backend mất kết nối"}
-          </span>
-        </article>
-        <article>
-          <small>NGƯỜI CHƠI QUAN SÁT</small>
+          <span>{props.connected ? "Đã kết nối" : "Mất kết nối"}</span>
+        </Card>
+        <Card>
+          <small>Người chơi</small>
           <strong>
             {sample?.players.length ?? 0}
             <em> / 10</em>
           </strong>
-          <span>{sample ? "Frame còn mới" : "Chưa có frame hợp lệ"}</span>
-        </article>
-        <article>
-          <small>OBS BROWSER SOURCE</small>
+          <span>{sample ? "Đang nhận dữ liệu" : "Chờ dữ liệu trận"}</span>
+        </Card>
+        <Card>
+          <small>Đầu ra OBS</small>
           <strong>1920 × 1080</strong>
           <a href="/overlay" target="_blank" rel="noreferrer">
-            Mở đầu ra trong suốt
+            Mở overlay
           </a>
-        </article>
+        </Card>
       </div>
-      <h3>Module sản xuất</h3>
+      <h3>Thao tác nhanh</h3>
       <div className="module-grid">
-        {studioModules
-          .filter((m) => m.id !== "overview")
-          .map((m) => (
-            <button
-              key={m.id}
-              className="module-card"
-              onClick={() => props.navigate(m.id)}
-            >
-              <span className="module-icon">{m.icon}</span>
-              <b>{m.title}</b>
-              <p>{m.description}</p>
-              <small>Mở module</small>
-            </button>
-          ))}
-      </div>
-      <div className="quick-controls">
-        <label>
-          <input
-            type="checkbox"
-            disabled={!props.connected}
-            checked={props.state.mockVisible}
-            onChange={(e) =>
-              props.send({ type: "mockVisible", value: e.target.checked })
-            }
-          />{" "}
-          Bật dữ liệu demo cho Studio + OBS
-        </label>
-        <span>
-          {props.state.mockVisible
-            ? "Đang dùng fixture thử nghiệm"
-            : "Đang dùng nguồn trận đã chọn"}
-        </span>
+        {(
+          [
+            [
+              "theme",
+              "Cấu hình trận đấu",
+              "Tên đội, tỉ số, logo và giao diện.",
+            ],
+            ["sources", "Nguồn dữ liệu", "Kết nối và kiểm tra dữ liệu trận."],
+            ["demo", "Phòng thử", "Phát lại trận đã lưu."],
+          ] as const
+        ).map(([id, title, description]) => (
+          <Button
+            className="module-card"
+            key={id}
+            onClick={() => props.navigate(id)}
+          >
+            <b>{title}</b>
+            <p>{description}</p>
+          </Button>
+        ))}
       </div>
     </div>
   );
@@ -668,31 +351,31 @@ export function Roadmap({ valorant = false }: { valorant?: boolean }) {
           : "Các module dùng chung nằm ở Studio; dữ liệu và renderer được triển khai riêng theo từng game."}
       </p>
       <div className="module-grid">
-        <article>
+        <Card>
           <small>HIỆN TẠI</small>
           <h3>LoL production với LeagueBroadcast</h3>
           <p>
             LeagueBroadcast là nguồn bắt buộc cho telemetry giải đấu đầy đủ.
             Riot local giữ vai trò replay, kiểm thử và chế độ giới hạn.
           </p>
-        </article>
-        <article>
+        </Card>
+        <Card>
           <small>PHASE TIẾP THEO</small>
           <h3>Sự kiện và scene giải đấu</h3>
           <p>
             Hoàn thiện event contract, trigger, animation và scene theo video
             tham chiếu; giữ provenance và chống phát trùng.
           </p>
-        </article>
-        <article>
+        </Card>
+        <Card>
           <small>PHASE SAU</small>
           <h3>Giao diện và vận hành</h3>
           <p>
             Đối chiếu HUD, scoreboard, objective, replay, transition và công cụ
             điều khiển production theo audit đã duyệt.
           </p>
-        </article>
-        <article>
+        </Card>
+        <Card>
           <small>PHASE MỞ RỘNG</small>
           <h3>VALORANT</h3>
           <p>
@@ -700,7 +383,7 @@ export function Roadmap({ valorant = false }: { valorant?: boolean }) {
             được phép và yêu cầu phê duyệt. Chưa có nguồn hay overlay Valorant
             hoạt động.
           </p>
-        </article>
+        </Card>
       </div>
     </section>
   );

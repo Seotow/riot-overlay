@@ -1,3 +1,7 @@
+import { NativeSelect } from "./components/ui/native-select";
+import { Button } from "./components/ui/button";
+import { Card } from "./components/ui/card";
+import { Input } from "./components/ui/input";
 import { useState } from "react";
 import { catalog } from "../shared/assets";
 import { draftCatalog } from "../shared/draft-assets";
@@ -42,8 +46,8 @@ export function DraftDesk({
           <h2>Cấm chọn</h2>
           <p>
             {d.source === "reference"
-              ? "BỘ MẪU UI · Không phải dữ liệu live"
-              : "NHẬP TAY · Nguồn cấm chọn live chưa được kiểm chứng"}
+              ? "BỘ MẪU UI , Không phải dữ liệu live"
+              : "NHẬP TAY , Nguồn cấm chọn live chưa được kiểm chứng"}
           </p>
         </div>
         <a
@@ -61,7 +65,7 @@ export function DraftDesk({
       <fieldset disabled={!connected}>
         <label className="draft-layout-selector">
           Layout cấm chọn
-          <select
+          <NativeSelect
             aria-label="Layout cấm chọn"
             value={state.theme.draftLayout ?? "broadcast"}
             onChange={(e) =>
@@ -75,21 +79,21 @@ export function DraftDesk({
             }
           >
             <option value="broadcast">
-              Cam tuyển thủ · dải picks phía dưới
+              Cam tuyển thủ , dải picks phía dưới
             </option>
-            <option value="simple">Simple · cam caster ở giữa</option>
-          </select>
+            <option value="simple">Simple , cam caster ở giữa</option>
+          </NativeSelect>
         </label>
         <div className="config-actions">
-          <button
+          <Button
             onClick={() => {
               send({ type: "mockVisible", value: false });
               send({ type: "scene", value: "draft" });
             }}
           >
             Đưa cấm chọn lên chương trình
-          </button>
-          <button
+          </Button>
+          <Button
             onClick={() =>
               navigator.clipboard
                 .writeText(location.origin + url)
@@ -98,7 +102,7 @@ export function DraftDesk({
             }
           >
             Copy URL OBS
-          </button>
+          </Button>
           <a className="button secondary" href="/?page=studio">
             Đến in-game →
           </a>
@@ -110,15 +114,15 @@ export function DraftDesk({
           </p>
         )}
         <div className="draft-controls">
-          <article className="panel">
+          <Card className="panel">
             <h3>
               {turn
-                ? `Lượt ${d.step + 1}/20 · ${turn[0] ? state.theme.redName : state.theme.blueName} · ${turn[1] === "ban" ? "CẤM" : "CHỌN"} ${turn[2] + 1}`
+                ? `Lượt ${d.step + 1}/20 , ${turn[0] ? state.theme.redName : state.theme.blueName} , ${turn[1] === "ban" ? "CẤM" : "CHỌN"} ${turn[2] + 1}`
                 : "Đội hình hoàn tất"}
             </h3>
             <label>
               Tướng đang hover
-              <select
+              <NativeSelect
                 aria-label="Tướng đang hover"
                 value={d.hover ?? ""}
                 disabled={!turn}
@@ -138,10 +142,10 @@ export function DraftDesk({
                       {c.name}
                     </option>
                   ))}
-              </select>
+              </NativeSelect>
             </label>
             <div className="config-actions">
-              <button
+              <Button
                 disabled={!turn || !d.hover}
                 onClick={() => {
                   try {
@@ -152,8 +156,8 @@ export function DraftDesk({
                 }}
               >
                 Khóa & lượt tiếp
-              </button>
-              <button
+              </Button>
+              <Button
                 disabled={!turn}
                 onClick={() =>
                   update({
@@ -166,14 +170,14 @@ export function DraftDesk({
                 }
               >
                 Bỏ lượt
-              </button>
-              <button disabled={!d.step} onClick={() => update(undoDraft(d))}>
+              </Button>
+              <Button disabled={!d.step} onClick={() => update(undoDraft(d))}>
                 Lùi một lượt
-              </button>
+              </Button>
             </div>
             <label>
               Thời gian mỗi lượt (giây)
-              <input
+              <Input
                 type="number"
                 min="5"
                 max="120"
@@ -188,34 +192,34 @@ export function DraftDesk({
               />
             </label>
             <div className="config-actions">
-              <button
+              <Button
                 disabled={!turn}
                 onClick={() =>
                   update({ ...d, deadline: Date.now() + d.duration * 1000 })
                 }
               >
                 Bắt đầu timer
-              </button>
-              <button onClick={() => update({ ...d, deadline: null })}>
+              </Button>
+              <Button onClick={() => update({ ...d, deadline: null })}>
                 Ẩn timer
-              </button>
+              </Button>
             </div>
             <p>Timer về 0 sẽ chờ khóa tay. Bỏ lượt giữ ô trống.</p>
             <label>
               Patch hiển thị
-              <input
+              <Input
                 value={d.patch}
                 maxLength={20}
                 onChange={(e) => update({ ...d, patch: e.target.value })}
               />
             </label>
-          </article>
+          </Card>
           {[0, 1].map((side) => (
-            <article className="panel" key={side}>
+            <Card className="panel" key={side}>
               <h3>{side ? state.theme.redName : state.theme.blueName}</h3>
               <label>
                 HLV
-                <input
+                <Input
                   aria-label={`HLV ${side ? "đỏ" : "xanh"}`}
                   value={d.coaches[side]}
                   maxLength={40}
@@ -230,7 +234,7 @@ export function DraftDesk({
                 <div className="draft-player-config" key={i}>
                   <label>
                     {["TOP", "JUNGLE", "MID", "BOT", "SUPPORT"][i]}
-                    <input
+                    <Input
                       aria-label={`Tên ${side ? "R" : "B"}${i + 1}`}
                       maxLength={30}
                       value={d.names[side * 5 + i]}
@@ -243,7 +247,7 @@ export function DraftDesk({
                   </label>
                   <label>
                     Lượt chọn
-                    <select
+                    <NativeSelect
                       aria-label={`Vị trí ${side ? "R" : "B"}${i + 1}`}
                       value={d.order[side][i]}
                       onChange={(e) => {
@@ -267,17 +271,17 @@ export function DraftDesk({
                           {n + 1}
                         </option>
                       ))}
-                    </select>
+                    </NativeSelect>
                   </label>
                 </div>
               ))}
-            </article>
+            </Card>
           ))}
         </div>
         <details>
           <summary>Bộ mẫu và lưu phiên cấm chọn</summary>
           <div className="config-actions">
-            <button
+            <Button
               onClick={() => {
                 const sample = emptyDraft();
                 sample.source = "reference";
@@ -302,9 +306,9 @@ export function DraftDesk({
                 send({ type: "mockVisible", value: false });
               }}
             >
-              Nạp ảnh mẫu · UI test
-            </button>
-            <button
+              Nạp ảnh mẫu , UI test
+            </Button>
+            <Button
               onClick={() =>
                 update({
                   ...emptyDraft(),
@@ -315,8 +319,8 @@ export function DraftDesk({
               }
             >
               Xóa lượt cấm/chọn
-            </button>
-            <button
+            </Button>
+            <Button
               onClick={() => {
                 const link = document.createElement("a");
                 link.href = URL.createObjectURL(
@@ -330,10 +334,10 @@ export function DraftDesk({
               }}
             >
               Export phiên
-            </button>
+            </Button>
             <label className="button secondary">
               Import phiên
-              <input
+              <Input
                 type="file"
                 accept=".json"
                 onChange={async (e) => {

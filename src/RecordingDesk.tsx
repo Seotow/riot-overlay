@@ -1,3 +1,6 @@
+import { NativeSelect } from "./components/ui/native-select";
+import { Button } from "./components/ui/button";
+import { Input } from "./components/ui/input";
 import { useEffect, useState } from "react";
 import type { Command, State } from "../shared/schema";
 import type { ObserverFrame } from "../shared/observer";
@@ -117,17 +120,14 @@ export function RecordingDesk({
     <section className="recording-desk">
       <div className="section-heading">
         <div>
-          <h2>Phòng thử · phát lại bản ghi thật</h2>
-          <p>
-            Điều khiển như phát sóng. Không cần marker hoặc nút giả lập sự kiện;
-            field thiếu vẫn để trống.
-          </p>
+          <h2>Phát lại trận đấu</h2>
+          <p>Chọn bản ghi, tua đến thời điểm cần kiểm tra.</p>
         </div>
       </div>
       <div className="recording-picker">
         <label>
           Bộ dữ liệu thật
-          <select
+          <NativeSelect
             aria-label="Bộ dữ liệu thật"
             value={id}
             onChange={(e) => setId(e.target.value)}
@@ -135,12 +135,12 @@ export function RecordingDesk({
             <option value="">Chọn bản ghi</option>
             {captures.map((c) => (
               <option key={c.id} value={c.id}>
-                {c.id} · {c.frames} sample
+                {c.id} , {c.frames} sample
               </option>
             ))}
-          </select>
+          </NativeSelect>
         </label>
-        <button
+        <Button
           disabled={!connected || !id || !!pending}
           onClick={() => {
             setPending({ id, generation: recording?.loadGeneration ?? 0 });
@@ -149,16 +149,19 @@ export function RecordingDesk({
           }}
         >
           Tải bản ghi
-        </button>
-        <button onClick={refresh}>Làm mới danh sách</button>
+        </Button>
+        <Button onClick={refresh}>Làm mới danh sách</Button>
       </div>
       {error && <p role="alert">{error}</p>}
-      {pending && <p role="status">Đang tải {pending.id}…</p>}
-      <section className="recording-comparison" aria-label="Đối chiếu ảnh ingame">
+      {pending && <p role="status">Đang tải {pending.id}...</p>}
+      <section
+        className="recording-comparison"
+        aria-label="Đối chiếu ảnh ingame"
+      >
         <h2>Đối chiếu ảnh ingame</h2>
         <p>
-          Tải ảnh chụp trận đấu để đặt dưới overlay. Có thể tải ảnh ngay cả
-          khi chưa chọn bản ghi; ảnh không xuất sang OBS.
+          Tải ảnh chụp trận đấu để đặt dưới overlay. Có thể tải ảnh ngay cả khi
+          chưa chọn bản ghi; ảnh không xuất sang OBS.
         </p>
         <ProgramMonitor url={outputUrl} />
       </section>
@@ -172,7 +175,7 @@ export function RecordingDesk({
         <>
           <div className="recording-transport">
             <div className="config-actions">
-              <button
+              <Button
                 onClick={() =>
                   send({
                     type: "captureControl",
@@ -184,17 +187,17 @@ export function RecordingDesk({
                 }
               >
                 {recording.playing ? "Tạm dừng bản ghi" : "Phát bản ghi"}
-              </button>
-              <button onClick={() => seek(0)}>Về đầu bản ghi</button>
-              <button onClick={() => seek(recording.positionMs - 10000)}>
+              </Button>
+              <Button onClick={() => seek(0)}>Về đầu bản ghi</Button>
+              <Button onClick={() => seek(recording.positionMs - 10000)}>
                 −10 giây
-              </button>
-              <button onClick={() => seek(recording.positionMs + 10000)}>
+              </Button>
+              <Button onClick={() => seek(recording.positionMs + 10000)}>
                 +10 giây
-              </button>
+              </Button>
               <label>
                 Tốc độ
-                <select
+                <NativeSelect
                   aria-label="Tốc độ bản ghi"
                   value={recording.speed}
                   onChange={(e) =>
@@ -209,7 +212,7 @@ export function RecordingDesk({
                       {speed}×
                     </option>
                   ))}
-                </select>
+                </NativeSelect>
               </label>
               <strong>
                 Timer game:{" "}
@@ -220,7 +223,7 @@ export function RecordingDesk({
                 </time>
               </strong>
             </div>
-            <input
+            <Input
               className="recording-scrubber"
               aria-label="Tiến độ bản ghi thật"
               aria-valuetext={`Timer game ${recordedClock(recording.gameTime)}`}
@@ -249,18 +252,14 @@ export function RecordingDesk({
               <span>Game đầu: {recordedClock(recording.firstGameTime)}</span>
               <span>
                 Đã chạy: {recordedClock((drag ?? recording.positionMs) / 1000)}{" "}
-                / {recordedClock(recording.durationMs / 1000)} ·{" "}
+                / {recordedClock(recording.durationMs / 1000)} ,{" "}
                 {recording.frames} sample
               </span>
               <span>Game cuối: {recordedClock(recording.lastGameTime)}</span>
             </div>
-            <p>
-              Thanh chạy theo thứ tự sample đã ghi; timer game giữ cả
-              pause/seek/tăng tốc trong nguồn. Không tạo dữ liệu bù. Các bộ giả
-              lập UI tạm ẩn.
-            </p>
+            <p>Kéo thanh tiến độ để chọn thời điểm.</p>
             {state.rehearsal && (
-              <button
+              <Button
                 onClick={() =>
                   send({
                     type: "captureControl",
@@ -269,8 +268,8 @@ export function RecordingDesk({
                   })
                 }
               >
-                Thoát cue thử cũ · dùng dữ liệu tại vị trí này
-              </button>
+                Thoát cue thử cũ , dùng dữ liệu tại vị trí này
+              </Button>
             )}
           </div>
           <p className="note">
@@ -285,14 +284,7 @@ export function RecordingDesk({
             mode="recording"
           />
           <details className="recording-source-data">
-            <summary>
-              Toàn bộ dữ liệu chuẩn hóa tại mốc hiện tại (không ẩn field)
-            </summary>
-            <p>
-              CS = lính đường + quái rừng từ native. Số mục tiêu tính từ các
-              event đã ghi. Null nghĩa là nguồn chưa cung cấp, không phải dữ
-              liệu bị tắt vì đối chiếu lệch.
-            </p>
+            <summary>Dữ liệu tại thời điểm này</summary>
             <pre
               style={{
                 maxHeight: 600,

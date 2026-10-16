@@ -1,3 +1,4 @@
+import { Button } from "./components/ui/button";
 import { IngameMonitor } from "./IngameMonitor";
 import { useEffect, useState } from "react";
 import type { DiagnosticReport } from "../shared/diagnostics";
@@ -51,10 +52,10 @@ export function Diagnostics() {
         Ưu tiên mở replay, chạy, pause, rồi tua tiến hoặc lùi. Bấm kiểm tra và xuất
         một báo cáo ở từng bước.
       </p>
-      <button disabled={busy} onClick={scan}>
-        {busy ? "Đang kiểm tra…" : "Kiểm tra nguồn"}
-      </button>
-      {report && <button onClick={download}>Xuất báo cáo JSON</button>}
+      <Button disabled={busy} onClick={scan}>
+        {busy ? "Đang kiểm tra..." : "Kiểm tra nguồn"}
+      </Button>
+      {report && <Button onClick={download}>Xuất báo cáo JSON</Button>}
       {error && <p role="alert">{error}</p>}
       {report && (
         <>

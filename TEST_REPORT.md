@@ -1,5 +1,19 @@
 # Kiểm chứng chốt phase UI/phòng thử — 11/10/2026
 
+## Studio shadcn, 17/10/2026
+
+Build đạt. Bộ unit có 213 test: 212 đạt, 1 bỏ qua, không lỗi.
+System integration đạt trên phiên test riêng; nhánh capture legacy thiếu file
+được bỏ qua, không dùng để khẳng định nguồn live. Browser QA Edge kiểm đủ
+8 trang, lưu config, toggle leaderboard, phát/tạm dừng bản ghi, responsive
+900px và OBS 1920×1080 nền trong suốt; không page error hoặc tràn ngang.
+Ảnh và report: `.npm-cache/studio-shadcn-qa/`.
+
+`npm audit` không báo lỗ hổng sau cập nhật dependency. Source overlay,
+backend và shared contracts không đổi trong lần trùng tu Studio này.
+Theme cá nhân và capture gốc giữ nguyên. Các giới hạn damage/EOG/native
+stack đã ghi ở báo cáo bàn giao vẫn còn, không được coi là đã giải quyết.
+
 ## Mix icon + powerplay + simple + XP/resource — 17/10/2026
 
 Build và193 unit đạt192pass/1skip/0fail. Native resourceType1 và0 giữ nguyên

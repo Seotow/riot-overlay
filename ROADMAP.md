@@ -2,11 +2,11 @@
 
 ## Ưu tiên hiện hành 17/10/2026
 
-Chốt phase snapshot/UI bằng commit trước. Tiếp theo trùng tu toàn bộ Studio
-bằng shadcn theo luồng vận hành: cấu hình, nguồn, phát sóng, bản ghi, cấm chọn,
-sau trận và HUD. Giảm thông tin thừa/debug, giữ availability và cảnh báo cần
-thiết; không thay layout phát sóng đã duyệt. Sau đó mới tiếp tục custom/EOG
-và các telemetry còn thiếu trong `docs/PHASE_HANDOFF_2026-10-17.md`.
+Đã chốt phase snapshot/UI bằng commit `7c79bb1` và trùng tu Studio bằng
+shadcn theo luồng vận hành: cấu hình, nguồn, phát sóng, bản ghi, cấm chọn,
+sau trận và HUD. Đã giảm thông tin thừa, giữ cảnh báo cần thiết và layout
+phát sóng đã duyệt. Hướng tiếp theo là custom/EOG và các telemetry còn thiếu
+trong `docs/PHASE_HANDOFF_2026-10-17.md`; không phải thêm mock UI.
 
 ## Collector tích hợp — ưu tiên hiện tại 15/10/2026
 

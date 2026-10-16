@@ -1,3 +1,5 @@
+import { Button } from "./components/ui/button";
+import { Input } from "./components/ui/input";
 import { useEffect, useState } from "react";
 import type { State, Command } from "../shared/schema";
 import {
@@ -53,7 +55,7 @@ export function ReplayHud({
   }, []);
   async function apply() {
     setBusy(true);
-    setMessage("Đang áp dụng và đọc lại trạng thái…");
+    setMessage("Đang áp dụng và đọc lại trạng thái...");
     try {
       const r = await fetch("/api/replay-hud/apply", {
         method: "POST",
@@ -76,16 +78,13 @@ export function ReplayHud({
   }
   return (
     <section className="match-config replay-hud">
-      <h2>HUD game · League Director / Replay API</h2>
-      <p>
-        Chỉ điều khiển giao diện qua API local 2999. Không điều khiển camera,
-        tốc độ hay timeline trận; không cần cài League Director.
-      </p>
+      <h2>HUD game , League Director / Replay API</h2>
+      <p>Chọn các thành phần muốn hiển thị trong game.</p>
       <div className="config-actions">
-        <button disabled={busy} onClick={refresh}>
+        <Button disabled={busy} onClick={refresh}>
           Kiểm tra kết nối HUD
-        </button>
-        <button
+        </Button>
+        <Button
           disabled={busy || !connected}
           onClick={() => {
             setPending(JSON.stringify(draft));
@@ -93,15 +92,15 @@ export function ReplayHud({
               type: "theme",
               value: { ...state.theme, replayHud: draft },
             });
-            setMessage("Đang lưu preset…");
+            setMessage("Đang lưu preset...");
           }}
         >
           Lưu preset HUD
-        </button>
-        <button disabled={busy || !status?.connected} onClick={apply}>
+        </Button>
+        <Button disabled={busy || !status?.connected} onClick={apply}>
           Áp dụng vào game đang mở
-        </button>
-        <button
+        </Button>
+        <Button
           disabled={busy}
           onClick={() => {
             setDraft(defaultHud);
@@ -109,8 +108,8 @@ export function ReplayHud({
           }}
         >
           Nạp preset overlay
-        </button>
-        <button
+        </Button>
+        <Button
           disabled={busy}
           onClick={() => {
             setDraft({
@@ -127,7 +126,7 @@ export function ReplayHud({
           }}
         >
           Nạp preset hiện HUD
-        </button>
+        </Button>
       </div>
       <p role="status">
         {message ||
@@ -148,7 +147,7 @@ export function ReplayHud({
             ].includes(key);
             return (
               <label key={key} className="hud-option">
-                <input
+                <Input
                   type="checkbox"
                   checked={draft[key]}
                   disabled={locked || busy}
@@ -159,13 +158,13 @@ export function ReplayHud({
                 <span>
                   {hudFields[key]}
                   <small>
-                    {key} · Game:{" "}
+                    Game:{" "}
                     {status?.fields[key] === undefined
                       ? "chưa có dữ liệu"
                       : status.fields[key]
                         ? "hiện"
                         : "ẩn"}
-                    {locked ? " · giữ bật để bảo vệ thông báo" : ""}
+                    {locked ? " (luôn bật)" : ""}
                   </small>
                 </span>
               </label>
@@ -175,27 +174,17 @@ export function ReplayHud({
         <fieldset>
           <legend>Giới hạn cần biết</legend>
           <p>
-            <b>Killfeed gốc:</b> chưa xác minh cờ riêng biệt với banner hạ
-            gục/double kill. Preset không tắt Announcements/Kill Callouts, tránh
-            làm mất các thông báo cần giữ. Bật killfeed overlay tại trang cấu
-            hình trước trận; chỉ thay hoàn toàn khi nguồn có đủ event và đã đối
-            chiếu HUD thật.
+            Thông báo hạ gục và chuỗi hạ gục luôn được giữ lại. Chưa hỗ trợ ẩn
+            riêng killfeed gốc.
           </p>
-          <p>
-            <b>Dấu 18+ VNG:</b> chưa có field riêng trong API/League Director;
-            chưa hỗ trợ ẩn riêng, không sửa file game hay patch client.
-          </p>
+          <p>Chưa hỗ trợ ẩn riêng dấu 18+ VNG.</p>
           <p>
             Chỉ hỗ trợ khi bản game đang mở cung cấp Replay API. Chưa xác nhận
             spectator trực tiếp trên patch hiện tại. Nếu chưa kết nối: mở
             replay, kiểm tra <code>[General] EnableReplayApi=1</code> trong{" "}
             <code>Config/game.cfg</code> rồi khởi động lại replay nếu cần.
           </p>
-          <p>
-            Lưu chỉ lưu preset; mỗi phiên game bấm Áp dụng một lần. Không tự áp
-            dụng khi vào trang/kết nối lại. Hãy kiểm tra minimap và thông báo
-            giữa màn hình trước khi phát sóng.
-          </p>
+          <p>Lưu cấu hình, sau đó bấm Áp dụng khi game đã mở.</p>
           <a
             href="https://github.com/RiotGames/leaguedirector"
             target="_blank"
@@ -203,7 +192,7 @@ export function ReplayHud({
           >
             Mã nguồn League Director
           </a>{" "}
-          ·{" "}
+          ,{" "}
           <a
             href="https://developer.riotgames.com/docs/lol#game-client-api_replay-api"
             target="_blank"

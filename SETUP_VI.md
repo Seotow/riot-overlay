@@ -1,5 +1,13 @@
 # Cài đặt, chuyển máy và đưa lên Git
 
+## Studio shadcn, cập nhật 17/10/2026
+
+Chạy `npm ci` rồi `npm run build` để cài đủ các dependency giao diện mới.
+Không cần chạy lại shadcn CLI; component đã được lưu trong repository.
+Sau khi khởi động backend, mở `/?page=studio` để vận hành hoặc
+`/?page=theme` để cấu hình trước trận. Hướng dẫn: [Studio](docs/STUDIO_UI.md).
+Không sao chép theme QA vào `data/theme.json` của người vận hành.
+
 **Chế độ DLL cache không tài khoản:** build, restart backend rồi chọn tại
 `/?page=sources` → **Nguồn trận đấu**; tắt demo. Không cần sửa/xóa file tài khoản.
 Phải có runtime/cache đã restore; bỏ `RIOT_OVERLAY_COLLECTOR_EXTERNAL=1` nếu có.

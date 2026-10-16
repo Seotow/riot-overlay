@@ -1,5 +1,29 @@
 # Trạng thái bàn giao
 
+## Trùng tu Studio shadcn, 17/10/2026
+
+Checkpoint trước sửa UI: `7c79bb1` (local, không push). Mốc counters/UI trên
+bản ghi và tài liệu trước đó được bảo toàn trong commit này, không có captures,
+theme cá nhân hoặc credentials.
+
+Studio đã dùng 7 component shadcn/ui chính thức, Tailwind 4 không preflight,
+Lucide và font Segoe UI; theme xám trung tính scope `.studio-shell`. Menu 8 trang
+LoL chia theo thao tác, bỏ menu kế hoạch/placeholder game khác khỏi luồng chính.
+Preview phát sóng và điều khiển đặt cạnh nhau, card có preview widget nhỏ;
+nút hiện/ẩn có trạng thái bật. Cấu hình theo lưới, giữ đủ tên/tỉ số/logo/override.
+Xóa màn hình legacy không còn dùng; bỏ nội dung lấp chỗ trống, session/sequence/revision
+trên màn vận hành, em dash/dấu chấm giữa từ và ghi chú sửa lỗi dư. Giữ lỗi,
+cảnh báo dữ liệu mẫu/mất nguồn và khả dụng. Chẩn đoán chi tiết thu gọn, không tắt field.
+
+Tám route đã kiểm bằng trình duyệt: overview/theme/sources/studio/demo/draft/postgame/hud.
+Lưu config, bật/tắt vàng, phát/tạm dừng bản ghi và responsive 900px đạt,
+không tràn ngang hoặc page error. OBS 1920×1080 nền trong suốt. Source overlay,
+backend/shared không đổi so checkpoint; Data Dragon/stack/damage không đổi.
+Audit không báo lỗ hổng sau cập nhật source-map-js. Build đạt; 213 unit test
+(212 đạt, 1 bỏ qua); system integration đạt. Báo cáo/ảnh `.npm-cache/studio-shadcn-qa/`.
+Hướng dẫn: `docs/STUDIO_UI.md`. Các giới hạn thật ở báo cáo phase vẫn còn;
+không tuyên bố damage/native 9 champion đã được giải quyết bằng sửa giao diện.
+
 ## Mốc trước trùng tu Studio bằng shadcn — 17/10/2026
 
 Theo yêu cầu user, chốt tài liệu và commit trạng thái hiện tại trước khi đổi

@@ -1,5 +1,14 @@
 # Kiến trúc LoL — bản khung 0.1
 
+## Studio shadcn — 17/10/2026
+
+`src/main.tsx` là shell LoL với 8 route; các trang dùng chung component shadcn
+local `src/components/ui`. Vite/Tailwind 4 xử lý `src/studio.css`, không preflight.
+Scope Studio không áp vào OBS `/overlay`; Surface/renderer và transport contracts
+giữ nguyên. State/persistence vẫn ở backend, không nhân bản config trong UI.
+Preview dùng iframe output URL thật; ảnh đối chiếu ở máy operator.
+Xem `docs/STUDIO_UI.md`.
+
 ### Native events Collector — 15/10/2026
 
 Typed native event → exact object lookup → sanitized ObservedEvent → bounded

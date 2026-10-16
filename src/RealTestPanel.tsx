@@ -1,3 +1,5 @@
+import { NativeSelect } from "./components/ui/native-select";
+import { Button } from "./components/ui/button";
 import { useEffect, useState } from "react";
 import type { Command, State } from "../shared/schema";
 import {
@@ -32,7 +34,7 @@ const groups: Array<{
       { value: "recorded", label: "Theo bản ghi thật", kind: "timers" },
       {
         value: "preview",
-        label: "Chọn loại mục tiêu · giả lập UI",
+        label: "Chọn loại mục tiêu , giả lập UI",
         kind: "timers",
         variant: { pit: "GRUB", dragon: "earth" },
       },
@@ -74,8 +76,8 @@ const groups: Array<{
       ...(["baron", "elder", "both"] as const).map((buffs) => ({
         value: buffs,
         label: {
-          baron: "Chỉ Baron · 180s",
-          elder: "Chỉ Elder · 150s",
+          baron: "Chỉ Baron , 180s",
+          elder: "Chỉ Elder , 150s",
           both: "Baron + Elder",
         }[buffs],
         kind: "baron" as const,
@@ -109,13 +111,13 @@ const groups: Array<{
       { value: "recorded", label: "Theo bản ghi thật", kind: "inhibitor" },
       {
         value: "ORDER",
-        label: "Đội xanh · đường giữa",
+        label: "Đội xanh , đường giữa",
         kind: "inhibitor",
         variant: { inhibitorTeam: "ORDER" },
       },
       {
         value: "CHAOS",
-        label: "Đội đỏ · đường giữa",
+        label: "Đội đỏ , đường giữa",
         kind: "inhibitor",
         variant: { inhibitorTeam: "CHAOS" },
       },
@@ -214,7 +216,7 @@ export function RealTestPanel({
   const ready = state.provider === "recording" && !state.mockVisible;
   return (
     <section className="real-test-panel">
-      <div className="eyebrow">PHÒNG THỬ · SNAPSHOT THẬT</div>
+      <div className="eyebrow">PHÒNG THỬ , SNAPSHOT THẬT</div>
       <h3>Thử toàn bộ đồ họa</h3>
       <p>
         Nền là snapshot thật. Chọn “Theo bản ghi thật” để xem dữ liệu đã ghi;
@@ -223,21 +225,21 @@ export function RealTestPanel({
       </p>
       <label className="field">
         Bộ dữ liệu thật
-        <select
+        <NativeSelect
           aria-label="Bộ dữ liệu thật"
           value={id}
           onChange={(e) => setId(e.target.value)}
         >
           {captures.map((c) => (
             <option key={c.id} value={c.id}>
-              {c.id} · {c.frames} frame
+              {c.id} , {c.frames} frame
             </option>
           ))}
-        </select>
+        </NativeSelect>
       </label>
-      <button disabled={!id} onClick={() => send({ type: "captureLoad", id })}>
+      <Button disabled={!id} onClick={() => send({ type: "captureLoad", id })}>
         Mở bộ dữ liệu thật
-      </button>
+      </Button>
       {!ready && (
         <p role="status">
           Đang chờ bản ghi thật. Không bật demo; hãy mở bộ dữ liệu phía trên.
@@ -268,8 +270,8 @@ export function RealTestPanel({
             <div className="rehearsal-group" key={group.id}>
               <label className="field">
                 {group.label}
-                <select
-                  aria-label={group.label + " · loại"}
+                <NativeSelect
+                  aria-label={group.label + " , loại"}
                   value={selected.value}
                   onChange={(e) =>
                     setSelections((s) => ({ ...s, [group.id]: e.target.value }))
@@ -280,14 +282,14 @@ export function RealTestPanel({
                       {o.label}
                     </option>
                   ))}
-                </select>
+                </NativeSelect>
               </label>
               {group.id === "timers" && (
                 <>
                   <label className="field">
                     Hang Baron
-                    <select
-                      aria-label="Hang Baron · loại"
+                    <NativeSelect
+                      aria-label="Hang Baron , loại"
                       value={selections.pit ?? "GRUB"}
                       onChange={(e) =>
                         setSelections((s) => ({
@@ -300,12 +302,12 @@ export function RealTestPanel({
                       <option value="GRUB">Sâu hư không</option>
                       <option value="HERALD">Sứ giả khe nứt</option>
                       <option value="BARON">Baron Nashor</option>
-                    </select>
+                    </NativeSelect>
                   </label>
                   <label className="field">
                     Hang rồng
-                    <select
-                      aria-label="Hang rồng · loại"
+                    <NativeSelect
+                      aria-label="Hang rồng , loại"
                       value={selections.dragonType ?? "earth"}
                       onChange={(e) =>
                         setSelections((s) => ({
@@ -320,11 +322,11 @@ export function RealTestPanel({
                           {dragonLabels[d]}
                         </option>
                       ))}
-                    </select>
+                    </NativeSelect>
                   </label>
                 </>
               )}
-              <button
+              <Button
                 disabled={!enabled}
                 onClick={() =>
                   send({
@@ -338,12 +340,12 @@ export function RealTestPanel({
                   <b>{group.label}</b>
                   <small>
                     {selected.variant
-                      ? "Giả lập UI · nền snapshot thật"
+                      ? "Giả lập UI , nền snapshot thật"
                       : "Sự kiện / dữ liệu trong bản ghi"}
                   </small>
                 </div>
                 <span>▶</span>
-              </button>
+              </Button>
             </div>
           );
         })}
@@ -353,7 +355,7 @@ export function RealTestPanel({
             const capability = buttons.find((c) => c.kind === b.kind);
             const enabled = ready && capability?.available === true;
             return (
-              <button
+              <Button
                 key={b.kind}
                 disabled={!enabled}
                 title={
@@ -367,30 +369,30 @@ export function RealTestPanel({
                   <b>{b.label}</b>
                   <small>
                     {enabled
-                      ? "Dữ liệu thật · kích hoạt thử"
+                      ? "Dữ liệu thật , kích hoạt thử"
                       : (capability?.reason ?? "Đang đọc bản ghi")}
                   </small>
                 </div>
-                <span>{enabled ? "▶" : "—"}</span>
-              </button>
+                <span>{enabled ? "▶" : "Chưa có"}</span>
+              </Button>
             );
           })}
       </div>
       <div className="divider" />
-      <button
+      <Button
         disabled={!ready}
         onClick={() =>
           send({ type: "captureControl", playing: true, speed: 1 })
         }
       >
         Phát tiếp timer / bản ghi
-      </button>
-      <button
+      </Button>
+      <Button
         disabled={!ready}
         onClick={() => send({ type: "captureControl", playing: false })}
       >
         Tạm dừng
-      </button>
+      </Button>
       <p className="muted">
         Baron Power Play bắt đầu +1.500 G rồi cộng biến động chênh lệch vàng
         ròng hai đội sau khi nhận buff, đây là số suy ra; thời lượng mặc định

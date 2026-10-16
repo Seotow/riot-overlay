@@ -1,3 +1,6 @@
+import { NativeSelect } from "./components/ui/native-select";
+import { Input } from "./components/ui/input";
+import { Button } from "./components/ui/button";
 import { useEffect, useState } from "react";
 import type { State } from "../shared/schema";
 import { riotPostgameSchema, type RiotPostgameState } from "../shared/postgame";
@@ -117,22 +120,18 @@ export function RiotPostgamePanel({
     <section className="riot-postgame-panel">
       <div className="section-heading">
         <div>
-          <h3>Nguồn Riot API · sau trận</h3>
-          <p>
-            VN2 → SEA · API key Standard hoặc RSO token · chỉ backend gọi Riot
-          </p>
+          <h3>Riot API</h3>
+          <p>Nhập API key hoặc RSO token để tải kết quả trận.</p>
         </div>
         <span className="riot-key-status">
-          {status?.configured
-            ? "Đã có key/token trong RAM"
-            : "Chưa nhập key/token"}
+          {status?.configured ? "Đã cấu hình" : "Chưa cấu hình"}
         </span>
       </div>
       <fieldset disabled={!connected || busy}>
         <div className="riot-config-grid">
           <label>
             Kiểu xác thực
-            <select
+            <NativeSelect
               aria-label="Kiểu xác thực Riot"
               value={mode}
               onChange={(e) => {
@@ -141,14 +140,14 @@ export function RiotPostgamePanel({
               }}
             >
               <option value="standard">
-                Production Standard · X-Riot-Token
+                Production Standard , X-Riot-Token
               </option>
-              <option value="rso">RSO · Bearer access token đã được cấp</option>
-            </select>
+              <option value="rso">RSO , Bearer access token đã được cấp</option>
+            </NativeSelect>
           </label>
           <label>
             {mode === "standard" ? "Riot API key" : "RSO access token"}
-            <input
+            <Input
               aria-label="Riot key hoặc token"
               type="password"
               autoComplete="off"
@@ -164,21 +163,21 @@ export function RiotPostgamePanel({
           </label>
         </div>
         <div className="config-actions">
-          <button
+          <Button
             disabled={secret.trim().length < 12}
             onClick={() =>
               action("credential", { mode, secret: secret.trim() })
             }
           >
             Lưu key/token trong phiên
-          </button>
-          <button
+          </Button>
+          <Button
             className="secondary"
             disabled={!status?.configured}
             onClick={() => action("credential", { clear: true })}
           >
             Xóa key/token
-          </button>
+          </Button>
         </div>
         <p className="riot-security-note">
           Không lưu key xuống đĩa, theme, localStorage hoặc bản export. Restart
@@ -195,7 +194,7 @@ export function RiotPostgamePanel({
         <div className="riot-config-grid">
           <label>
             Riot match ID
-            <input
+            <Input
               aria-label="Riot match ID"
               value={matchId}
               placeholder="VN2_123456789"
@@ -205,7 +204,7 @@ export function RiotPostgamePanel({
           </label>
           <label>
             Ván trong loạt trận
-            <input
+            <Input
               aria-label="Ván Riot"
               type="number"
               min={1}
@@ -216,7 +215,7 @@ export function RiotPostgamePanel({
           </label>
         </div>
         <div className="config-actions">
-          <button
+          <Button
             disabled={
               !status?.configured ||
               !/^VN2_\d{1,20}$/.test(matchId.trim()) ||
@@ -229,15 +228,15 @@ export function RiotPostgamePanel({
               action("load", { matchId: matchId.trim(), gameNumber })
             }
           >
-            {busy ? "Đang tải…" : "Tải match + timeline / kiểm tra quyền"}
-          </button>
-          <button
+            {busy ? "Đang tải..." : "Tải match + timeline / kiểm tra quyền"}
+          </Button>
+          <Button
             className="secondary"
             disabled={!candidate}
             onClick={() => setShowCandidate((v) => !v)}
           >
             {showCandidate ? "Ẩn" : "Hiện"} bản chờ duyệt
-          </button>
+          </Button>
         </div>
         <p>
           Standard không mặc định truy cập custom thường. Nếu 404/403, giữ dữ
@@ -253,17 +252,17 @@ export function RiotPostgamePanel({
       {candidate && showCandidate && (
         <div className="riot-candidate">
           <h4>
-            Bản chờ duyệt · {candidate.evidence.matchId} · chưa lên chương trình
+            Bản chờ duyệt , {candidate.evidence.matchId} , chưa lên chương trình
           </h4>
           <p>
             {candidate.evidence.isFinal
               ? "Kết quả có winner/thời lượng"
               : "Dữ liệu kết quả chưa đầy đủ"}{" "}
-            · Patch {candidate.evidence.patch || "—"} ·{" "}
+            , Patch {candidate.evidence.patch || "Chưa có"} ,{" "}
             {candidate.evidence.timelineAvailable
               ? "Có timeline"
               : "Thiếu timeline"}{" "}
-            · {candidate.evidence.mode.toUpperCase()}
+            , {candidate.evidence.mode.toUpperCase()}
           </p>
           <div className="program-monitor">
             <Surface
@@ -282,21 +281,21 @@ export function RiotPostgamePanel({
             ))}
           </ul>
           <label className="riot-review-check">
-            <input
+            <Input
               type="checkbox"
               checked={reviewed}
               onChange={(e) => setReviewed(e.target.checked)}
             />{" "}
             Tôi đã đối chiếu match, hai đội và các mục còn thiếu trước khi phát
           </label>
-          <button
+          <Button
             disabled={!connected || busy || !reviewed}
             onClick={() =>
               action("publish", { matchId: candidate.evidence.matchId })
             }
           >
             Dùng dữ liệu Riot cho postgame
-          </button>
+          </Button>
         </div>
       )}
     </section>

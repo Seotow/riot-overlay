@@ -1,3 +1,5 @@
+import { Button } from "./components/ui/button";
+import { Input } from "./components/ui/input";
 import { useState } from "react";
 import { postgameSampleSchema, samplePostgame } from "../shared/postgame";
 import type { Command, State } from "../shared/schema";
@@ -23,11 +25,11 @@ export function PostgameDesk({
     <section className="postgame-desk">
       <div className="section-heading">
         <div>
-          <h2>Sau trận · nguồn dữ liệu và thiết kế</h2>
+          <h2>Kết quả sau trận</h2>
           <p>
             {data?.source === "riot"
-              ? `RIOT · ${data.evidence.matchId} · ${data.evidence.isFinal ? "kết quả sau trận" : "dữ liệu chưa đầy đủ"}`
-              : "DỮ LIỆU MẪU · Không tự kích hoạt khi trận kết thúc."}
+              ? `RIOT , ${data.evidence.matchId} , ${data.evidence.isFinal ? "kết quả sau trận" : "dữ liệu chưa đầy đủ"}`
+              : "DỮ LIỆU MẪU , Không tự kích hoạt khi trận kết thúc."}
           </p>
         </div>
         <a
@@ -40,16 +42,16 @@ export function PostgameDesk({
         </a>
       </div>
       <RiotPostgamePanel state={state} connected={connected} />
-      <h3>Overlay đang phát · cùng dữ liệu với OBS</h3>
+      <h3>Xem trước</h3>
       <div className="program-monitor">
         <iframe title="Preview postgame OBS" src="/overlay?scene=postgame" />
       </div>
       <fieldset disabled={!connected}>
         <div className="config-actions">
-          <button onClick={() => update(samplePostgame())}>
+          <Button onClick={() => update(samplePostgame())}>
             Nạp bộ mẫu theo ảnh
-          </button>
-          <button
+          </Button>
+          <Button
             className="secondary"
             disabled={!data || data.source !== "sample"}
             onClick={() =>
@@ -61,8 +63,8 @@ export function PostgameDesk({
             }
           >
             Đổi đội thắng
-          </button>
-          <button
+          </Button>
+          <Button
             className="secondary"
             disabled={!data || data.source !== "sample"}
             onClick={() => {
@@ -76,19 +78,19 @@ export function PostgameDesk({
             }}
           >
             Thử thiếu dữ liệu
-          </button>
-          <button className="secondary" onClick={() => update(null)}>
+          </Button>
+          <Button className="secondary" onClick={() => update(null)}>
             Xóa bộ mẫu
-          </button>
+          </Button>
         </div>
         <details className="postgame-data">
-          <summary>Dữ liệu JSON · xuất kết quả / nhập bộ mẫu</summary>
+          <summary>Dữ liệu JSON , xuất kết quả / nhập bộ mẫu</summary>
           <p>
             Đội xanh trước, đội đỏ sau. Người chơi theo TOP → JUNGLE → MID → BOT
             → SUPPORT. Vàng chênh lệch = xanh − đỏ. Giá trị chưa có dùng null.
           </p>
           <div className="config-actions">
-            <button
+            <Button
               disabled={!data}
               onClick={() => {
                 if (!data) return;
@@ -108,10 +110,10 @@ export function PostgameDesk({
               }}
             >
               {data?.source === "riot" ? "Xuất JSON kết quả" : "Xuất JSON mẫu"}
-            </button>
+            </Button>
             <label className="button secondary">
               Nhập JSON mẫu
-              <input
+              <Input
                 aria-label="Nhập JSON postgame"
                 type="file"
                 accept=".json,application/json"
@@ -138,12 +140,6 @@ export function PostgameDesk({
         </details>
       </fieldset>
       {message && <p role="alert">{message}</p>}
-      <p className="postgame-note">
-        Tên đội, logo, màu và tên giải dùng chung cấu hình trước trận. Thống kê
-        mẫu phỏng theo ảnh; tướng, bans và đường vàng chỉ minh họa. Không dùng
-        sponsor Riot/AWS. Riot API phải được thử bằng key và trận thật của bạn;
-        test tổng hợp không chứng minh quyền custom.
-      </p>
     </section>
   );
 }

@@ -1,3 +1,5 @@
+import { Input } from "./components/ui/input";
+import { Button } from "./components/ui/button";
 import { useEffect, useRef, useState } from "react";
 // Local comparison only: never serialized to theme, transport or the OBS page.
 export function ProgramMonitor({ url }: { url: string }) {
@@ -23,8 +25,8 @@ export function ProgramMonitor({ url }: { url: string }) {
     <>
       <div className="monitor-tools">
         <label>
-          Ảnh ingame đối chiếu (chỉ trên máy này)
-          <input
+          Ảnh đối chiếu
+          <Input
             aria-label="Upload ảnh ingame đối chiếu"
             type="file"
             accept="image/png,image/jpeg,image/webp"
@@ -54,7 +56,7 @@ export function ProgramMonitor({ url }: { url: string }) {
           <>
             <label>
               Độ hiện overlay {Math.round(opacity * 100)}%
-              <input
+              <Input
                 aria-label="Độ hiện overlay đối chiếu"
                 type="range"
                 min="0"
@@ -64,11 +66,8 @@ export function ProgramMonitor({ url }: { url: string }) {
                 onChange={(e) => setOpacity(+e.target.value)}
               />
             </label>
-            <button onClick={clear}>Bỏ ảnh đối chiếu</button>
-            <small>
-              {name} · 0% xem ảnh gốc, 100% đặt overlay lên ảnh. Ảnh có HUD cũ
-              không chứng minh độ giống.
-            </small>
+            <Button onClick={clear}>Bỏ ảnh đối chiếu</Button>
+            <small>{name}</small>
           </>
         )}
         {error && <span role="alert">{error}</span>}
