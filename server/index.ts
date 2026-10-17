@@ -2,6 +2,7 @@ import { observeIngame, observerRecording } from "./observer";
 import { diagnose } from "./diagnostics";
 import { leagueBroadcast } from "./leaguebroadcast";
 import { DraftLcu } from "./draft-lcu";
+import { EogLcu } from "./eog-lcu";
 import { emptyDraft } from "../shared/draft";
 import { LeagueCollectorSource } from "../collector/adapter";
 import { CollectorRuntime } from "../collector/supervisor/supervisor";
@@ -139,10 +140,20 @@ const server = createServer(async (req, res) => {
       "/api/riot-postgame/load",
       "/api/riot-postgame/publish",
       "/api/riot-postgame/import-eog",
+      "/api/riot-postgame/eog-files",
     ];
     if (!routes.includes(req.url)) {
       res.writeHead(404);
       res.end("{}");
+      return;
+    }
+    if (req.url === routes[5]) {
+      if (req.method !== "GET") {
+        res.writeHead(405, { Allow: "GET" });
+        res.end("{}");
+        return;
+      }
+      res.end(JSON.stringify({ files: await riotPostgame.listEogFiles() }));
       return;
     }
     if (req.url === routes[0]) {
@@ -183,7 +194,8 @@ const server = createServer(async (req, res) => {
           riotPostgame.clear();
           res.end(JSON.stringify(riotPostgame.status()));
         } else res.end(JSON.stringify(riotPostgame.configure(input)));
-      } else if (req.url === routes[4]) res.end(JSON.stringify(riotPostgame.importEog(input)));
+      } else if (req.url === routes[4])
+        res.end(JSON.stringify(await riotPostgame.importEog(input)));
       else if (req.url === routes[2]) res.end(JSON.stringify(await riotPostgame.load(input)));
       else {
         if (!input || typeof input.matchId !== "string" || Object.keys(input).length !== 1)
@@ -470,6 +482,19 @@ setInterval(async () => {
     lcuBusy = false;
   }
 }, 600);
+// A participant's client has the end-of-game block as soon as the match ends: stage it for review.
+const eogLcu = new EogLcu();
+let eogBusy = false;
+setInterval(async () => {
+  if (eogBusy || shuttingDown || wss.clients.size === 0) return;
+  eogBusy = true;
+  try {
+    const block = await eogLcu.read();
+    if (block) riotPostgame.stageLiveEog(block);
+  } finally {
+    eogBusy = false;
+  }
+}, 4000);
 setInterval(() => {
   if (state.playing) {
     state = tick(state);

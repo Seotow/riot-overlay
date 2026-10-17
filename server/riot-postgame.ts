@@ -1,4 +1,6 @@
 import { z } from "zod";
+import { readdir, readFile, stat } from "node:fs/promises";
+import { resolve } from "node:path";
 import { liveCatalog } from "../shared/live-assets";
 import { riotPostgameSchema, type RiotPostgameState } from "../shared/postgame";
 import { normalizeEog } from "../shared/eog-postgame";
@@ -24,12 +26,15 @@ export const riotLoadSchema = z
     gameNumber: z.number().int().min(1).max(99),
   })
   .strict();
-export const eogImportSchema = z
-  .object({
-    gameNumber: z.number().int().min(1).max(99),
-    payload: z.unknown(),
-  })
-  .strict();
+const EOG_DIR = resolve(".npm-cache/lcu-eog");
+const EOG_FILE = /^[\w.-]{1,120}-eog-stats-block\.json$/;
+export const eogImportSchema = z.union([
+  z.object({ gameNumber: z.number().int().min(1).max(99), payload: z.unknown() }).strict(),
+  // A block saved on this machine by the EOG probe; only plain file names are accepted.
+  z
+    .object({ gameNumber: z.number().int().min(1).max(99), file: z.string().regex(EOG_FILE) })
+    .strict(),
+]);
 const obj = (v: unknown): Record<string, any> =>
   v && typeof v === "object" && !Array.isArray(v) ? (v as Record<string, any>) : {};
 const num = (v: unknown): number | null =>
@@ -309,11 +314,52 @@ export class RiotPostgameService {
   }
   // Stages an LCU end-of-game block (a file saved by the EOG probe or a participant machine).
   // The payload is redacted again here and only its numbers and champion ids are kept.
-  importEog(input: unknown) {
+  async importEog(input: unknown) {
     const value = eogImportSchema.parse(input);
     if (this.controller) throw new RiotError(409, "busy");
-    this.candidate = normalizeEog(redactEog(value.payload).value, value.gameNumber);
+    let payload: unknown;
+    if ("file" in value) {
+      const path = resolve(EOG_DIR, value.file);
+      try {
+        if ((await stat(path)).size > 1_048_576) throw Error();
+        payload = JSON.parse(await readFile(path, "utf8"));
+      } catch {
+        throw new RiotError(404, "no-file");
+      }
+    } else payload = value.payload;
+    this.candidate = normalizeEog(redactEog(payload).value, value.gameNumber);
     return this.status();
+  }
+  async listEogFiles() {
+    try {
+      const names = (await readdir(EOG_DIR))
+        .filter((n) => EOG_FILE.test(n))
+        .sort()
+        .reverse();
+      return Promise.all(
+        names.slice(0, 30).map(async (name) => {
+          const info = await stat(resolve(EOG_DIR, name));
+          return { name, size: info.size, modified: info.mtime.toISOString() };
+        }),
+      );
+    } catch {
+      return [];
+    }
+  }
+  private liveGameId = 0;
+  // Stages a block read from this machine's own client, once per game, never over a review in
+  // progress for the same game and never published automatically.
+  stageLiveEog(payload: unknown) {
+    const gameId = Number((payload as { gameId?: unknown } | null)?.gameId);
+    if (!Number.isInteger(gameId) || gameId <= 0 || gameId === this.liveGameId || this.controller)
+      return false;
+    try {
+      this.candidate = normalizeEog(redactEog(payload).value, this.candidate?.gameNumber ?? 1);
+      this.liveGameId = gameId;
+      return true;
+    } catch {
+      return false;
+    }
   }
   async load(input: unknown) {
     const value = riotLoadSchema.parse(input);
