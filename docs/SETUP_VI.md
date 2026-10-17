@@ -58,7 +58,7 @@ bộ live dùng catalog riêng. Không tự đổi version baseline khi cập nh
 
 Collector tích hợp không được đóng gói trong Git: DLL, runtime, cache và
 source vendor được quản lý riêng. Người quản trị cần chuẩn bị các thành phần
-đã được phép sử dụng theo [runbook collector](Collector/docs/PROJECT-RUNBOOK.vi.md).
+đã được phép sử dụng theo [runbook collector](../Collector/docs/PROJECT-RUNBOOK.vi.md).
 Không tải DLL từ nguồn không rõ hoặc chép credentials vào repository.
 
 Sau khi chuẩn bị:
@@ -75,7 +75,7 @@ xong là có thể thu dữ liệu.
 Tại **Nguồn dữ liệu**, ứng dụng phải xác nhận spectator hoặc replay trước
 khi mở collector. Đang chơi trận hoặc không xác nhận được chế độ thì bị chặn.
 Không sửa chốt để dùng trên máy người đang thi đấu.
-Xem [chốt an toàn](docs/COLLECTOR_SAFETY.md).
+Xem [chốt an toàn](COLLECTOR_SAFETY.md).
 
 Nếu dùng LB gốc, chạy LB riêng rồi chọn **LeagueBroadcast**.
 Ứng dụng có thể ngắt kết nối feed nhưng không quản lý tiến trình LB bên ngoài.
@@ -89,13 +89,13 @@ Nếu dùng LB gốc, chạy LB riêng rồi chọn **LeagueBroadcast**.
 
 Nhịp mục tiêu là 500 ms, không phải bảo đảm tuyệt đối dưới mọi tải máy.
 Capture tự dừng nếu chốt không còn xác nhận spectator/replay.
-Cách đối chiếu raw và bản dựng: [bàn giao dữ liệu](docs/UI_COLLECTOR_HANDOFF.md).
+Cách đối chiếu raw và bản dựng: [bàn giao dữ liệu](UI_COLLECTOR_HANDOFF.md).
 
 ## Sau trận và bảo mật
 
 Trang **Sau trận** có ô nhập Riot API key, lưu trong RAM của backend.
 Khởi động lại cần nhập lại. Không đưa key vào theme, file ghi trận, frontend
-hoặc Git. Xem [thiết lập Riot API](docs/RIOT_API_SETUP.md).
+hoặc Git. Xem [thiết lập Riot API](RIOT_API_SETUP.md).
 
 LCU/ROFL cho custom vẫn là hướng nghiên cứu, chưa có bước tự động trong
 quy trình vận hành. File ROFL đã thử do người chơi tải trước đó; không xem
@@ -118,4 +118,4 @@ Không chạy `tests/transport.integration.ts` trực tiếp trên phiên phát 
 vì bài đó thay đổi mock state.
 
 Giữ theme, credentials, captures, cache, binary và thư mục REA riêng khi chuyển
-máy. Trạng thái hiện hành nằm ở [PROJECT_STATUS.md](PROJECT_STATUS.md).
+máy. Trạng thái hiện hành nằm ở [PROJECT_STATUS.md](../PROJECT_STATUS.md).

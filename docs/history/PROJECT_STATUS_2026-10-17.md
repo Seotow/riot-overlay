@@ -1253,7 +1253,7 @@ Fork BE chỉ bind loopback, giữ auth, hạn chế browser Origin/payload, t�
 
 Kiểm chứng: `build:valorant` đạt, 5/5 lifecycle/Socket.IO test đạt (source synthetic, không game); browser Edge headless 1920×1080 đạt status/routes, OBS alpha=0 khi thiếu nguồn, không request ngoài/JS errors, đã xem ảnh trang status. Root build, 104/104 unit test và `test:integration` LoL cô lập đạt. CLI start/Ctrl+C thực tế đã giải phóng owner/cổng; không phải đảm bảo process tồn tại lâu dài. Sandbox từng vướng EPERM/loopback, đã chạy lại bằng quyền môi trường bình thường, không né bằng đổi LoL source.
 
-Chưa tìm thấy Spectra Client executable ở process/install location/Downloads đã kiểm tra; không kết luận chưa cài ở vị trí khác. Cần người dùng cung cấp path/version hoặc xác nhận cần cài để tiếp tục khởi động collector thật. Module service có thể chạy không collector, status ghi thiếu executable/telemetry chưa xác minh. Chưa đo game, chưa xác minh 10 người/HP/abilities/spike live, chưa custom toàn FE/BE hoặc build/package collector. Hướng thao tác tại [docs/VALORANT_MODULE.md](../../docs/VALORANT_MODULE.md); không yêu cầu Riot API key, không đưa key local vào chat.
+Chưa tìm thấy Spectra Client executable ở process/install location/Downloads đã kiểm tra; không kết luận chưa cài ở vị trí khác. Cần người dùng cung cấp path/version hoặc xác nhận cần cài để tiếp tục khởi động collector thật. Module service có thể chạy không collector, status ghi thiếu executable/telemetry chưa xác minh. Chưa đo game, chưa xác minh 10 người/HP/abilities/spike live, chưa custom toàn FE/BE hoặc build/package collector. Hướng thao tác tại [docs/VALORANT_MODULE.md](../VALORANT_MODULE.md); không yêu cầu Riot API key, không đưa key local vào chat.
 
 ## Đo lại tone nền theo ảnh thực tế — 13/10/2026
 
@@ -1498,7 +1498,7 @@ emblem khi có nguồn tranh rồng lửa/Hextech đúng danh tính.
 
 ## Làm rõ mục tiêu tích hợp Valorant — 11/10/2026
 
-Người dùng muốn gắn collector vào ứng dụng, khởi động cùng project và fork/custom BE/FE ValoSpectra trong workspace; không chỉ xây UI từ output của stack bên ngoài. Đã sửa hướng nghiên cứu tại `VALOSPECTRA_FEASIBILITY.md`: giữ collector Overwolf Electron là process do launcher quản lý, fork BE Node/FE Angular thành package riêng trước khi hợp nhất sâu với Studio React. Có thể dùng collector sẵn, chưa yêu cầu viết acquisition từ đầu. REA đã được đọc để tham khảo; skill hướng dẫn dùng normal source tools khi repository đầy đủ nên chưa cài/chạy REA.
+Người dùng muốn gắn collector vào ứng dụng, khởi động cùng project và fork/custom BE/FE ValoSpectra trong workspace; không chỉ xây UI từ output của stack bên ngoài. Đã sửa hướng nghiên cứu tại `docs/VALOSPECTRA_FEASIBILITY.md`: giữ collector Overwolf Electron là process do launcher quản lý, fork BE Node/FE Angular thành package riêng trước khi hợp nhất sâu với Studio React. Có thể dùng collector sẵn, chưa yêu cầu viết acquisition từ đầu. REA đã được đọc để tham khảo; skill hướng dẫn dùng normal source tools khi repository đầy đủ nên chưa cài/chạy REA.
 
 Đã đối chiếu manifest và license/source công khai; chưa fork source vào runtime, chưa viết launcher, chưa cài dependency hoặc chạy game. Mốc này chỉ sửa tài liệu, không chạy test ứng dụng. Việc tiếp theo: pin/import source có provenance/LICENSE, xác định binary collector local, build baseline rồi triển khai startup/readiness/shutdown và custom module Valorant. Giữ các thay đổi LoL đang có.
 
@@ -1568,7 +1568,7 @@ Kiểm chứng: build production đạt; **77/77 test**, không skip; integratio
 
 ## Điều tra Valorant / ValoSpectra local, 11/10/2026
 
-Người dùng yêu cầu nghiên cứu Valorant bên cạnh LoL và xác nhận dùng ba project ValoSpectra local. Đã đọc source Client/Server công khai, ghi revision và ma trận field tại [VALOSPECTRA_FEASIBILITY.md](../../VALOSPECTRA_FEASIBILITY.md). Xác nhận acquisition qua Overwolf GEP, output Socket.IO 5200 (`logon` → `match_data`); HP/abilities có nhánh auxiliary, HP 100 có thể là default, timer/plant có logic derived/manual. Không coi schema provider là bằng chứng telemetry trực tiếp đủ 10 người.
+Người dùng yêu cầu nghiên cứu Valorant bên cạnh LoL và xác nhận dùng ba project ValoSpectra local. Đã đọc source Client/Server công khai, ghi revision và ma trận field tại [VALOSPECTRA_FEASIBILITY.md](../VALOSPECTRA_FEASIBILITY.md). Xác nhận acquisition qua Overwolf GEP, output Socket.IO 5200 (`logon` → `match_data`); HP/abilities có nhánh auxiliary, HP 100 có thể là default, timer/plant có logic derived/manual. Không coi schema provider là bằng chứng telemetry trực tiếp đủ 10 người.
 
 Trên máy có compose Server/Frontend dưới `../spectra`, frontend trỏ localhost:5200; chưa xác minh image đang chạy, binary Client hoặc mẫu custom live. Workspace Valorant vẫn là placeholder; chưa đổi runtime/UI/contract LoL, chưa cài dependency hoặc nối nguồn. Kiểm chứng mốc này bằng source và cấu hình allowlist chỉ đọc; thay tài liệu nên không chạy test ứng dụng. Bước tiếp theo: mở stack local, xác định version/digest rồi thu output chỉ nhận, đã ẩn danh theo phase custom observer để chốt capability trước adapter Valorant.
 
@@ -1590,11 +1590,11 @@ Custom thứ hai lặp lại đúng lifecycle: Loading 03:37:36 UTC, NamedPipe/R
 
 ## Baseline dynamic LeagueBroadcast OutOfGame, 26/09/2026
 
-Đã chụp baseline khi LB + Riot/League Client đang mở nhưng chưa vào replay/custom. `BlueBottleClient.Interface.exe` sở hữu cổng 58869; process đã nạp `Farsight.dll` và `BlueBottleClient.GameLib.dll`, chưa thấy `lblib.dll`, và chưa có `League of Legends.exe`. Log cho biết `LocalFarsightDataSource` đang chờ game; public `/ws/in` trong 5 giây chỉ trả một `gameStatus` với `gameState=0`. LB kết nối LCU loopback và `wss://broadcast.bluebottle.gg/ws/rpc`; chưa có bằng chứng gameplay đi qua cloud. Chi tiết/hash nằm trong `LEAGUEBROADCAST_FEASIBILITY.md`; capture cục bộ bị Git ignore. Bước tiếp theo cần người dùng vào custom spectator hoặc replay để chụp Loading/Running và diff module/network/IPC. Không attach, debug, đọc memory, mở pipe riêng hoặc thay runtime.
+Đã chụp baseline khi LB + Riot/League Client đang mở nhưng chưa vào replay/custom. `BlueBottleClient.Interface.exe` sở hữu cổng 58869; process đã nạp `Farsight.dll` và `BlueBottleClient.GameLib.dll`, chưa thấy `lblib.dll`, và chưa có `League of Legends.exe`. Log cho biết `LocalFarsightDataSource` đang chờ game; public `/ws/in` trong 5 giây chỉ trả một `gameStatus` với `gameState=0`. LB kết nối LCU loopback và `wss://broadcast.bluebottle.gg/ws/rpc`; chưa có bằng chứng gameplay đi qua cloud. Chi tiết/hash nằm trong `docs/LEAGUEBROADCAST_FEASIBILITY.md`; capture cục bộ bị Git ignore. Bước tiếp theo cần người dùng vào custom spectator hoặc replay để chụp Loading/Running và diff module/network/IPC. Không attach, debug, đọc memory, mở pipe riêng hoặc thay runtime.
 
 ## Ghi chú điều tra BlueBottle và lab laptop, 26/09/2026
 
-Đã hợp nhất nội dung trao đổi bổ sung vào `LEAGUEBROADCAST_FEASIBILITY.md` và cập nhật ma trận trong `DATA_SOURCES.md`, không tạo file nghiên cứu mới. Kết luận được giữ có giới hạn: xác nhận Discord do người dùng cung cấp cùng artifact cài đặt tạo **STRONG EVIDENCE** cho khả năng collector hiện hành đọc state/memory, nhưng logic native lấy từng field và lý do tương thích Vanguard vẫn chưa được xác nhận. Frontend JS `/ws/in` là consumer, không phải acquisition backend.
+Đã hợp nhất nội dung trao đổi bổ sung vào `docs/LEAGUEBROADCAST_FEASIBILITY.md` và cập nhật ma trận trong `docs/DATA_SOURCES.md`, không tạo file nghiên cứu mới. Kết luận được giữ có giới hạn: xác nhận Discord do người dùng cung cấp cùng artifact cài đặt tạo **STRONG EVIDENCE** cho khả năng collector hiện hành đọc state/memory, nhưng logic native lấy từng field và lý do tương thích Vanguard vẫn chưa được xác nhận. Frontend JS `/ws/in` là consumer, không phải acquisition backend.
 
 Kế hoạch tiếp theo chỉ dùng laptop/account test: baseline, process tree và owner cổng 58869, Procmon, snapshot qua chuyển trạng thái spectator, module diff, inventory handle, network/IPC và schema WebSocket; sau đó mới triage DIE/PE-bear, ILSpy/dnSpyEx hoặc Ghidra có mục tiêu. Risk model: GREEN quan sát, YELLOW phân tích file trên đĩa, RED không injection/hook mới, patch, memory read/write, chiếm IPC hoặc bypass anti-cheat. Sáu câu hỏi điều tra và nhãn **CONFIRMED / STRONG EVIDENCE / HYPOTHESIS / UNKNOWN** đã được ghi trong tài liệu feasibility. Đây là cập nhật tài liệu thuần túy; không chạy BlueBottle/LoL, không kết nối 58869 và không thay runtime.
 
@@ -1632,7 +1632,7 @@ Xây bộ kit overlay cho game Riot, bắt đầu với LoL. Người dùng mu�
 
 ## Mốc đã được duyệt
 
-Người dùng đã xác nhận **hai bản draft và in-game đạt yêu cầu ban đầu** sau vòng chỉnh theo `ingame.png` và `overlay.png`. Đây là baseline được duyệt về sản phẩm, không phải kết quả đo chứng minh độ giống 90%. Những khác biệt ở `VISUAL_AUDIT.md` vẫn được giữ làm ghi chú, không chặn chuyển sang khảo sát live data.
+Người dùng đã xác nhận **hai bản draft và in-game đạt yêu cầu ban đầu** sau vòng chỉnh theo `ingame.png` và `overlay.png`. Đây là baseline được duyệt về sản phẩm, không phải kết quả đo chứng minh độ giống 90%. Những khác biệt ở `docs/VISUAL_AUDIT.md` vẫn được giữ làm ghi chú, không chặn chuyển sang khảo sát live data.
 
 ## Đã có trong source
 
@@ -1665,11 +1665,11 @@ Các kết quả trên là lần kiểm tra trước bàn giao, không phải ki
 
 ## Việc tiếp theo
 
-Triển khai **giai đoạn 1 trong `ROADMAP.md`**: màn hình chẩn đoán nguồn dữ liệu local chỉ đọc. Chuẩn bị công cụ trước, sau đó hướng dẫn người dùng mở client, vào chọn tướng và spectator để thu mẫu đã loại bỏ credentials. Chưa cần Riot API key cho mock hiện tại; chỉ yêu cầu thông tin thật khi adapter cụ thể cần.
+Triển khai **giai đoạn 1 trong `docs/ROADMAP.md`**: màn hình chẩn đoán nguồn dữ liệu local chỉ đọc. Chuẩn bị công cụ trước, sau đó hướng dẫn người dùng mở client, vào chọn tướng và spectator để thu mẫu đã loại bỏ credentials. Chưa cần Riot API key cho mock hiện tại; chỉ yêu cầu thông tin thật khi adapter cụ thể cần.
 
 ## Tiếp tục trên máy khác
 
-Đọc `AGENTS.md`, làm theo `SETUP_VI.md`, xác minh baseline và tiếp tục giai đoạn 1. Không cần tái nghiên cứu toàn bộ hoặc dựng lại UI từ đầu. Không giả định thư mục `.research`, theme cá nhân hoặc lịch sử chat có trong Git.
+Đọc `AGENTS.md`, làm theo `docs/SETUP_VI.md`, xác minh baseline và tiếp tục giai đoạn 1. Không cần tái nghiên cứu toàn bộ hoặc dựng lại UI từ đầu. Không giả định thư mục `.research`, theme cá nhân hoặc lịch sử chat có trong Git.
 
 ## Tiến độ chẩn đoán — 19/09/2026
 
@@ -1679,7 +1679,7 @@ Báo cáo có nguồn, đường dẫn field ứng viên, kiểu, availability, 
 
 Kiểm chứng phiên này: production build đạt; 9 unit tests và transport integration đạt khi chạy bản biên dịch tạm bằng esbuild + Node. `npm test` trực tiếp vướng lỗi môi trường `uv_os_get_passwd ENOMEM` của tsx trên Windows sandbox; không thay dependency hoặc script project để né lỗi. HTTP GET/405/cross-origin 403 đã kiểm tra. Trình duyệt hiển thị báo cáo thiếu nguồn đúng trạng thái.
 
-Probe thực tế ở phiên này: Live Client không kết nối được; chưa tìm thấy lockfile LCU hợp lệ. Đây không phải bằng chứng API không hỗ trợ. Chưa thu mẫu lobby/champ-select/spectator/postgame trên client thật, chưa hoàn tất giai đoạn 1. Tiếp theo: người dùng mở LoL Client, kiểm tra lại, cấu hình đường dẫn lockfile nếu cần, rồi thu báo cáo từng phase theo `SETUP_VI.md`. Chưa triển khai Observer Agent hoặc adapter live.
+Probe thực tế ở phiên này: Live Client không kết nối được; chưa tìm thấy lockfile LCU hợp lệ. Đây không phải bằng chứng API không hỗ trợ. Chưa thu mẫu lobby/champ-select/spectator/postgame trên client thật, chưa hoàn tất giai đoạn 1. Tiếp theo: người dùng mở LoL Client, kiểm tra lại, cấu hình đường dẫn lockfile nếu cần, rồi thu báo cáo từng phase theo `docs/SETUP_VI.md`. Chưa triển khai Observer Agent hoặc adapter live.
 
 ## In-game / replay — phần chuẩn bị trước client (19/09/2026)
 
@@ -1740,7 +1740,7 @@ Ranh giới an toàn được ghi vào kiến trúc và setup: không đọc mem
 
 ## Hướng nguồn thay thế và reverse engineering an toàn, 20/09/2026
 
-Đã xác minh giới hạn nguồn hiện có và ghi ma trận tại `DATA_SOURCES.md`. Overwolf GEP là lựa chọn hợp lệ nhưng tài liệu gold áp dụng cho người chơi cục bộ; chưa có bằng chứng cung cấp telemetry đầy đủ của 10 observer. Public LeagueBroadcast JS client chỉ bọc WebSocket, không chứa collector. Vì vậy không thêm hai nguồn này như provider hoạt động khi chưa có frame thật.
+Đã xác minh giới hạn nguồn hiện có và ghi ma trận tại `docs/DATA_SOURCES.md`. Overwolf GEP là lựa chọn hợp lệ nhưng tài liệu gold áp dụng cho người chơi cục bộ; chưa có bằng chứng cung cấp telemetry đầy đủ của 10 observer. Public LeagueBroadcast JS client chỉ bọc WebSocket, không chứa collector. Vì vậy không thêm hai nguồn này như provider hoạt động khi chưa có frame thật.
 
 Phase tiếp theo là OBS capture + OCR cho những giá trị nhìn thấy trên HUD, trước hết team gold, kills, objectives và clock. Kết quả OCR phải có confidence, timestamp, profile vùng ảnh và hết hạn khi HUD đổi hoặc bị ẩn. Không suy total gold từng người từ team gold và không tuyên bố HP/resource 10 người từ ảnh không hiển thị chúng.
 
@@ -1748,7 +1748,7 @@ Dashboard Nguồn dữ liệu có thêm bảng ứng viên, yêu cầu cài đ�
 
 ## Presentation clock, 20/09/2026
 
-Đã thêm lớp nội suy clock theo mô hình public LeagueBroadcast client: snapshot Riot là anchor, renderer cộng tuổi snapshot nhân playback speed; pause giữ nguyên và frame từ 5 giây trở lên chuyển unavailable. Kills, gold, item và các state rời rạc không bị nội suy. Session/sequence/epoch và seek detection hiện có tiếp tục kiểm soát event ordering. Thiết kế và điều kiện để dùng nhãn frame accurate được ghi tại `FRAME_ACCURATE_STATE.md`.
+Đã thêm lớp nội suy clock theo mô hình public LeagueBroadcast client: snapshot Riot là anchor, renderer cộng tuổi snapshot nhân playback speed; pause giữ nguyên và frame từ 5 giây trở lên chuyển unavailable. Kills, gold, item và các state rời rạc không bị nội suy. Session/sequence/epoch và seek detection hiện có tiếp tục kiểm soát event ordering. Thiết kế và điều kiện để dùng nhãn frame accurate được ghi tại `docs/FRAME_ACCURATE_STATE.md`.
 
 ## LeagueBroadcast custom tournament xác minh thành công, 20/09/2026
 
@@ -1760,7 +1760,7 @@ Payload đã quan sát còn có team gold/kills/towers/tower plates/dragons/grub
 
 ## Scoreboard, objective và snapshot live, 20/09/2026
 
-Ghi chú nghiên cứu mới nhất 24/09/2026: xem `LEAGUEBROADCAST_FEASIBILITY.md`. Chỉ nghiên cứu, chưa triển khai thay collector. Capture mới `data/captures/2026-09-24T15-14-32-437Z` chỉ có Riot map 12/10 players và LeagueBroadcast OutOfGame, sau đó Loading/idle; backend 4310 không phản hồi. `latest.json` là lần chụp mới nhất, không phải lần chụp đầy đủ nhất. Bản tournament đầy đủ để kiểm thử vẫn là `2026-09-19T18-57-45-942Z`. Chưa xác minh nguồn free độc lập đủ state 10 người; SDK công khai chỉ là client. Người dùng ưu tiên bất kỳ phương pháp hợp lệ nào lấy đủ dữ liệu in-game, cần nghiên cứu kỹ trước triển khai.
+Ghi chú nghiên cứu mới nhất 24/09/2026: xem `docs/LEAGUEBROADCAST_FEASIBILITY.md`. Chỉ nghiên cứu, chưa triển khai thay collector. Capture mới `data/captures/2026-09-24T15-14-32-437Z` chỉ có Riot map 12/10 players và LeagueBroadcast OutOfGame, sau đó Loading/idle; backend 4310 không phản hồi. `latest.json` là lần chụp mới nhất, không phải lần chụp đầy đủ nhất. Bản tournament đầy đủ để kiểm thử vẫn là `2026-09-19T18-57-45-942Z`. Chưa xác minh nguồn free độc lập đủ state 10 người; SDK công khai chỉ là client. Người dùng ưu tiên bất kỳ phương pháp hợp lệ nào lấy đủ dữ liệu in-game, cần nghiên cứu kỹ trước triển khai.
 
 Đã normalize scoreboard theo đội và timer hai hố từ LeagueBroadcast. Overlay đặt chênh lệch vàng dưới đội đang dẫn với dấu cộng, hiển thị chênh lệch vàng từng vị trí theo màu đội dẫn, số trụ, số rồng bằng icon và timer Baron/Rồng. Thứ tự item đã đặt slot gần tướng theo từng phía; vision score dạng số thực được làm tròn xuống để bỏ số lạ ở đầu hàng. Dashboard Nguồn dữ liệu báo riêng độ phủ vàng/kills/trụ, rồng và timer objective.
 
@@ -1794,7 +1794,7 @@ Kiểm chứng: browser desktop và viewport hẹp đạt; bật demo, phát kil
 
 Đã sửa ba sai khác thấy ngay khi so với `images/ingame new.png`: renderer luôn giữ đủ năm slot Role Quest mỗi đội, dragon token lấy màu theo loại và toàn bộ typography live chuyển sang Beaufort/Spiegel thay Arial. Bản ghi xác minh một level-up 15→16 ở frame 23, inhibitor Red L1 còn khoảng 208 giây, chín perk mỗi player và cooldown Luden's Echo 12 giây chạy về 0,11 giây. Không có inventory transition, Baron buff, fourth dragon hoặc damage physical/magic/true trong cửa sổ 20 giây.
 
-Kết luận UI/data: scoreboard thường và chênh lệch vàng đã có dữ liệu phù hợp; gold ranking, team runes, combat minimal/cooldown, inhibitor respawn có raw data nhưng chưa có scene/contract đầy đủ; damage dealt không có telemetry trong snapshot; Baron Power Play và Dragon Soul cần capture đúng thời điểm. Draft không thể xác minh bằng capture in-game này. Chi tiết theo từng ảnh nằm trong `VISUAL_AUDIT.md`.
+Kết luận UI/data: scoreboard thường và chênh lệch vàng đã có dữ liệu phù hợp; gold ranking, team runes, combat minimal/cooldown, inhibitor respawn có raw data nhưng chưa có scene/contract đầy đủ; damage dealt không có telemetry trong snapshot; Baron Power Play và Dragon Soul cần capture đúng thời điểm. Draft không thể xác minh bằng capture in-game này. Chi tiết theo từng ảnh nằm trong `docs/VISUAL_AUDIT.md`.
 
 Kiểm chứng sau chỉnh sửa: production build đạt; 54/54 test đạt, gồm kiểm tra đủ 10 icon Role Quest và class màu elemental dragon.
 
@@ -1822,7 +1822,7 @@ Theo yêu cầu mới, tạm bỏ các mốc thiếu và triển khai phần đ�
 
 Live minimal chuyển thành 10 thẻ nhỏ ở dưới qua **Giao diện & đội → Biến thể**, giữ HP/resource/phép/ultimate và item cooldown/GA; chưa auto combat. Giữ baseline mock/draft. Seek/reconnect/loss xóa hiệu ứng lịch sử, stale 5 giây bỏ dữ liệu và buff. Parser capture stream tối đa 512 MB/10.000 frame và hỗ trợ ID `lb-`; bản 194 MB đã nạp 2.303 frame hợp lệ (bỏ bootstrap trống), qua cùng adapter để phát event, không chỉ normalize tĩnh.
 
-Kiểm chứng: `npm test` trực tiếp đạt **63/63**, không skip (gồm regression toàn bản ghi thật và validate mọi sample); `npm run build` đạt; `npm run test:integration` đạt HTTP/recording/6 probes/origin/method guard, WS đồng bộ và OBS read-only, scene/mock controls, validation, theme persistence/reset, provider, bản ghi lớn/pause/4×/seek. Test tích hợp tự mở backend 4311 và theme tạm; `RIOT_OVERLAY_THEME_PATH` giữ nguyên `data/theme.json` của người dùng. Browser kiểm tra panel/minimal với nguồn recording, đủ 10 slot, không icon hỏng, không background reference và không control trong renderer, body/canvas trong suốt. Canvas CSS 1920×1080 nhưng ảnh in-app bị giới hạn vùng preview; chưa có full-size OBS 1:1 và chưa kết luận pixel-perfect. Báo cáo đầy đủ ở `TEST_REPORT.md`.
+Kiểm chứng: `npm test` trực tiếp đạt **63/63**, không skip (gồm regression toàn bản ghi thật và validate mọi sample); `npm run build` đạt; `npm run test:integration` đạt HTTP/recording/6 probes/origin/method guard, WS đồng bộ và OBS read-only, scene/mock controls, validation, theme persistence/reset, provider, bản ghi lớn/pause/4×/seek. Test tích hợp tự mở backend 4311 và theme tạm; `RIOT_OVERLAY_THEME_PATH` giữ nguyên `data/theme.json` của người dùng. Browser kiểm tra panel/minimal với nguồn recording, đủ 10 slot, không icon hỏng, không background reference và không control trong renderer, body/canvas trong suốt. Canvas CSS 1920×1080 nhưng ảnh in-app bị giới hạn vùng preview; chưa có full-size OBS 1:1 và chưa kết luận pixel-perfect. Báo cáo đầy đủ ở `docs/TEST_REPORT.md`.
 
 Chưa làm: mọi item lớn ngoài allowlist; damage/combat trigger tự động; activation Zhonya/end-game thật; gold ranking/team rune scene; Soul takeover/Baron Power Play gold delta và transition production. Không coi nhãn buff là Power Play đầy đủ. Asset live vẫn 16.18.1, patch capture 16.20.0 chưa match được xác minh. Bước tiếp theo có thể test OBS 1920×1080 thực tế và hoàn thiện các scene còn lại bằng dữ liệu đã có; mốc telemetry thiếu chờ mẫu bổ sung khi người dùng sẵn sàng, không yêu cầu vào custom ở mốc này. Không push/publish.
 
@@ -1848,7 +1848,7 @@ Nhánh live hiệu chỉnh scoreboard896×98 ở(512,10), hàng chính60px, time
 
 Live assets cập nhật Data Dragon **16.20.1** từ danh sách version Riot chính thức:173 champion,870 item,34 spell,72 rune/tree/shard,173 iconR; tổng1.322 PNG có manifestSHA256. MetadataR cùng patch; stat shard theo RiotCDN. Demo15.20.1 giữ nguyên. Font live thay thế Anton/OFL, không gọi là fontRiot gốc. Nhãn TOTAL GOLD đo15 biến thể chọn27px/padding9px; mask tĩnh dung sai1px đạtF1 **99,521%**. **Không phải điểm tương đồng toàn overlay; chưa chứng minh đạt95–98%.** Rectangle chính khớpDOM nhưng alpha/icon/cột con/branding và Soul takeover còn thiếu.
 
-Kiểm chứng lượt cuối: `npm run build` đạt, `npm test`64/64 không skip, integration cô lập đạt; 7ảnh OBS không broken image/reference/control, rectangle khớp như báo cáo. GRUB chưa có glyph rõ nên giữ nhãn loại quan sát, không gán iconBaron choGRUB. Chi tiết phương pháp, giới hạn, kiểm chứng, lệnh tái chạy và phần tiếp theo ở `VISUAL_MEASUREMENTS.md`; artifact local trong `.npm-cache/visual-audit/`. Soul hiện vẫn banner/status, chưa artwork takeover; Damage vẫn unavailable. Đã hỏi người dùng chọn giữ sponsorRiot trongSoul hay chỉ giữ bố cục/nhận diện riêng, và xin asset gốc nếu có. Tiếp tục đo nội bộ từng vùng, không gộp điểm chữ thành95–98% toànUI. Không push/publish.
+Kiểm chứng lượt cuối: `npm run build` đạt, `npm test`64/64 không skip, integration cô lập đạt; 7ảnh OBS không broken image/reference/control, rectangle khớp như báo cáo. GRUB chưa có glyph rõ nên giữ nhãn loại quan sát, không gán iconBaron choGRUB. Chi tiết phương pháp, giới hạn, kiểm chứng, lệnh tái chạy và phần tiếp theo ở `docs/VISUAL_MEASUREMENTS.md`; artifact local trong `.npm-cache/visual-audit/`. Soul hiện vẫn banner/status, chưa artwork takeover; Damage vẫn unavailable. Đã hỏi người dùng chọn giữ sponsorRiot trongSoul hay chỉ giữ bố cục/nhận diện riêng, và xin asset gốc nếu có. Tiếp tục đo nội bộ từng vùng, không gộp điểm chữ thành95–98% toànUI. Không push/publish.
 
 ## Collector headless — phương án 2, nhánh nghiên cứu riêng — 11/10/2026
 
@@ -1866,7 +1866,7 @@ Bước tiếp theo cần người dùng: tắt LB hoàn toàn (tránh hai colle
 
 Người dùng bổ sung điều tra telemetry khi spectate replay `.rofl`, đánh dấu **ưu tiên thấp**. Live headless vẫn là việc chính; thay hướng “mở replay trước” trong bàn giao cũ và README thử nghiệm bằng spectator custom live trước. Không yêu cầu vào trận/replay riêng cho nhánh thấp lúc này.
 
-Điều tra tĩnh thư viện đang cài: detector cửa sổ kiểm tra PID/tên executable, chưa thấy phân biệt replay/live trong chính hàm đó; log “inactive game” thuộc nhánh database và có thử StartNextGameAsync, không tự chứng minh native từ chối replay. Có Replay API và GameRewind ở lớp controller; vẫn có NotSpectatorException riêng. Chưa biết điểm ngăn `.rofl`, chưa có dữ liệu thật từ replay khi LB UI tắt. Chỉ sửa tài liệu/thứ tự kiểm thử, không thay collector/UI hoặc bỏ kiểm tra mode/version/auth. Kế hoạch và bằng chứng theo tầng tại `LEAGUEBROADCAST_FEASIBILITY.md`, ưu tiên tại `ROADMAP.md`; không cần chạy test ứng dụng cho lượt tài liệu này.
+Điều tra tĩnh thư viện đang cài: detector cửa sổ kiểm tra PID/tên executable, chưa thấy phân biệt replay/live trong chính hàm đó; log “inactive game” thuộc nhánh database và có thử StartNextGameAsync, không tự chứng minh native từ chối replay. Có Replay API và GameRewind ở lớp controller; vẫn có NotSpectatorException riêng. Chưa biết điểm ngăn `.rofl`, chưa có dữ liệu thật từ replay khi LB UI tắt. Chỉ sửa tài liệu/thứ tự kiểm thử, không thay collector/UI hoặc bỏ kiểm tra mode/version/auth. Kế hoạch và bằng chứng theo tầng tại `docs/LEAGUEBROADCAST_FEASIBILITY.md`, ưu tiên tại `docs/ROADMAP.md`; không cần chạy test ứng dụng cho lượt tài liệu này.
 
 ### Tiếp tục điều tra với skill REA — 11/10/2026
 

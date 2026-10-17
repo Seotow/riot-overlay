@@ -1,4 +1,4 @@
-/* Reference geometry: ingame.png + overlay.png, 1920x1080.
+/* Reference geometry: public/references/ingame.png + draft.png, 1920x1080.
    Architecture references: RCV ingame.css (#tab, .sb-middle, .sb-team),
    champselect variables.less / picks.less / bans.less. Rules below are authored
    for the supplied Worlds layout; no dependency on the toolkit runtime. */

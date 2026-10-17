@@ -3,7 +3,7 @@
 ## Mốc hiện hành 11/10/2026
 
 Phase UI/phòng thử trên snapshot thật được chốt theo PROJECT_STATUS.md và
-TEST_REPORT.md. Không quay lại các bước khảo sát cũ như thể chưa triển khai.
+docs/TEST_REPORT.md. Không quay lại các bước khảo sát cũ như thể chưa triển khai.
 Giữ nhánh REA/collector và tài liệu Valorant để tiếp tục riêng; chưa có
 collector headless thay LB hoặc runtime Valorant. Các mốc thiếu telemetry
 đã hoãn (damage/combat/end-game/Elder live) phải tiếp tục ghi rõ, không
@@ -12,10 +12,10 @@ biến preview giả lập UI thành dữ liệu thật. Không tuyên bố 95�
 ## Đọc trước khi tiếp tục
 
 1. `PROJECT_STATUS.md`: trạng thái bàn giao, quyết định người dùng đã chốt.
-2. `README.md` và `SETUP_VI.md`: cách cài, chạy, kiểm tra và chuyển máy.
-3. `ARCHITECTURE.md`: phần đang có và kiến trúc mục tiêu.
-4. `ROADMAP.md`: trình tự triển khai tiếp theo.
-5. `VISUAL_AUDIT.md`: số đo và khác biệt của UI tham chiếu.
+2. `README.md` và `docs/SETUP_VI.md`: cách cài, chạy, kiểm tra và chuyển máy.
+3. `docs/ARCHITECTURE.md`: phần đang có và kiến trúc mục tiêu.
+4. `docs/ROADMAP.md`: trình tự triển khai tiếp theo.
+5. `docs/VISUAL_AUDIT.md`: số đo và khác biệt của UI tham chiếu.
 
 Các tài liệu này giúp tiếp tục công việc mà không cần lịch sử chat. Luôn kiểm tra source và trạng thái workspace thực tế trước khi sửa; tài liệu bàn giao không thay thế kiểm chứng trên máy mới.
 

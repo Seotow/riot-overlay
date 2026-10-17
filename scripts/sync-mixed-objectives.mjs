@@ -2,19 +2,18 @@ import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { createHash } from "node:crypto";
 const root = "public/broadcast/objectives/mixed";
 await mkdir(root, { recursive: true });
-const baron = await readFile("baron.svg");
+const baron = await readFile(`${root}/baron.svg`);
 if (
   /<script|<foreignObject|\bon\w+\s*=|(?:href|src)\s*=\s*["']https?:/i.test(
     baron.toString(),
   )
 )
   throw Error("Unsupported active/external SVG content");
-await writeFile(`${root}/baron.svg`, baron);
 const entries = [
   {
     id: "baron",
     path: `${root}/baron.svg`,
-    source: "baron.svg (user-provided, copied without modification)",
+    source: "User-provided Baron SVG, retained without modification",
   },
   {
     id: "grubs",
@@ -46,4 +45,4 @@ await writeFile(
     2,
   ) + "\n",
 );
-console.log("Mixed objective assets ready; root baron.svg unchanged");
+console.log("Mixed objective assets ready; canonical Baron SVG unchanged");

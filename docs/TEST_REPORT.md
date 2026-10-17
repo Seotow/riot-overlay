@@ -1,5 +1,14 @@
 # Kiểm thử bản nội bộ
 
+## Sau khi dọn thư mục gốc, 17/10/2026
+
+Đã chuyển 10 tài liệu vào docs/, cập nhật liên kết và hướng dẫn AGENTS.
+Hai PNG tham chiếu và Baron SVG ở gốc trùng SHA-256 với bản trong public/;
+giữ bản public, bỏ bản trùng. Baron trắng không có tham chiếu sử dụng.
+Script/test dùng SVG chuẩn và kiểm hash gốc để không đổi artwork.
+Kiểm 14 tài liệu không có liên kết local bị thiếu. Chạy lại npm test:
+221 đạt, 1 bỏ qua do thiếu bản ghi cũ; build đạt. Không thay giao diện hoặc telemetry.
+
 Ngày 17/10/2026. Backend test dùng port/theme riêng, không sửa cấu hình cá nhân
 hoặc raw capture. Test nguồn dùng fixture; không khởi động DLL native trong trận.
 
@@ -47,7 +56,7 @@ kích hoạt thử hoặc giả lập UI trên đầu ra.
 
 Draft đã chạy lại smoke 20 lượt, hover/lock/undo/skip/swap, hai layout, giảm
 chuyển động, asset/font và vùng cam trong suốt. Chi tiết giữ trong
-[nhật ký kiểm thử](docs/history/TEST_REPORT_2026-10-17.md).
+[nhật ký kiểm thử](history/TEST_REPORT_2026-10-17.md).
 
 ## Giới hạn còn lại
 

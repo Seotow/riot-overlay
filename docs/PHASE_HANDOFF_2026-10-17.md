@@ -72,4 +72,4 @@ tướng stack chưa xác minh và giày3008; chỉ cần game time + ảnh HUD 
 trước/sau thay đổi. Mục tiêu là xác minh nguồn, không dựng lại UI đã duyệt.
 
 Chi tiết: `CHAMPION_ITEM_COUNTERS.md`, `NATIVE_STACKS_DAMAGE_FINDINGS.md`,
-`RIOT_POSTGAME_API_FINDINGS.md`, `PROJECT_STATUS.md`, `TEST_REPORT.md`.
+`RIOT_POSTGAME_API_FINDINGS.md`, `PROJECT_STATUS.md`, `docs/TEST_REPORT.md`.

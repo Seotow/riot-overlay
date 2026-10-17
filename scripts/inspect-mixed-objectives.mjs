@@ -9,5 +9,5 @@ const{data,info}=await sharp(input).extract({left:123,top:15,width:34,height:38}
 const colors=[];for(let p=0;p<data.length;p+=3){const[r,g,b]=data.subarray(p,p+3);if(g>150&&b>150&&r<90&&Math.abs(g-b)<70)colors.push([r,g,b]);}
 const median=[0,1,2].map(i=>colors.map(c=>c[i]).sort((a,b)=>a-b)[Math.floor(colors.length/2)]);
 console.log(JSON.stringify({cyanPixels:colors.length,median,hex:"#"+median.map(c=>c.toString(16).padStart(2,"0")).join("")}));
-await sharp(await readFile("baron.svg")).resize(300,300).png().toFile(root+"/baron-user.png");
+await sharp(await readFile("public/broadcast/objectives/mixed/baron.svg")).resize(300,300).png().toFile(root+"/baron-user.png");
 await sharp("public/broadcast/objectives/grubs.svg").resize(180,180).png().toFile(root+"/grubs-old.png");

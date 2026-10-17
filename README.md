@@ -103,11 +103,12 @@ npm run test:collector-validation
 Integration dùng backend/theme test riêng; không chạy script đổi mock trên
 phiên đang phát sóng. Hướng dẫn chi tiết:
 
-- [Cài đặt và chuyển máy](SETUP_VI.md)
+- [Mục lục tài liệu](docs/README.md)
+- [Cài đặt và chuyển máy](docs/SETUP_VI.md)
 - [Trạng thái bàn giao](PROJECT_STATUS.md)
-- [Kết quả kiểm thử](TEST_REPORT.md)
-- [Kiến trúc](ARCHITECTURE.md)
-- [Lộ trình](ROADMAP.md)
+- [Kết quả kiểm thử](docs/TEST_REPORT.md)
+- [Kiến trúc](docs/ARCHITECTURE.md)
+- [Lộ trình](docs/ROADMAP.md)
 - [Hướng dẫn Studio](docs/STUDIO_UI.md)
 
 Theme cá nhân, captures và credentials không theo Git. Không gửi API key hoặc

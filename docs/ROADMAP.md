@@ -22,14 +22,14 @@ Launcher/provider/Studio/OBS đã nối và test offline, kể cả launcher th�
 không cleanup ở host idle. Khi game sẵn sàng, kiểm tuyến thật không mở LB gốc rồi đối chiếu
 CS, lane, HP/gold/cooldown và stability qua session. Ngọc/buff/objective/event
 vẫn là phần thiếu của mục tiêu đầy đủ. Xem
-[runbook](Collector/docs/PROJECT-RUNBOOK.vi.md); không quay lại khảo sát UI baseline.
+[runbook](../Collector/docs/PROJECT-RUNBOOK.vi.md); không quay lại khảo sát UI baseline.
 
 ## Postgame UI đang chờ duyệt — 13/10/2026
 
 Đã dựng trang `/?page=postgame` và contract mẫu phiên bản 1 theo ảnh người dùng.
 Chưa nối nguồn thật, chưa tự activate theo GameEnd. Người dùng duyệt bố cục
 trước; sau đó mới kiểm chứng nguồn winner, damage và lịch sử vàng. Xem
-[POSTGAME_UI_REVIEW](docs/POSTGAME_UI_REVIEW.md). Giữ baseline draft/in-game
+[POSTGAME_UI_REVIEW](POSTGAME_UI_REVIEW.md). Giữ baseline draft/in-game
 và nhánh REA độc lập.
 
 ## Ưu tiên 12/10/2026
@@ -74,7 +74,7 @@ Logo/font riêng, vị trí/kích thước từng widget, preset có migration, 
 
 ## Ngoài phạm vi hiện tại
 
-Valorant được nghiên cứu song song với LoL theo yêu cầu 11/10/2026; mốc 13/10 đã fork local BE/FE/Client và triển khai launcher độc lập, build/lifecycle/browser kiểm chứng đạt. Tiếp theo cần executable collector để chạy nguồn thật, rồi chốt capability và nhúng/custom module trong Studio. Chưa xác minh telemetry game hoặc collector fork; TFT vẫn để sau. Xem [runbook module](docs/VALORANT_MODULE.md) và [nghiên cứu nguồn](VALOSPECTRA_FEASIBILITY.md). Thông tin API/chính sách cần kiểm chứng từ nguồn chính thức khi mở rộng.
+Valorant được nghiên cứu song song với LoL theo yêu cầu 11/10/2026; mốc 13/10 đã fork local BE/FE/Client và triển khai launcher độc lập, build/lifecycle/browser kiểm chứng đạt. Tiếp theo cần executable collector để chạy nguồn thật, rồi chốt capability và nhúng/custom module trong Studio. Chưa xác minh telemetry game hoặc collector fork; TFT vẫn để sau. Xem [runbook module](VALORANT_MODULE.md) và [nghiên cứu nguồn](VALOSPECTRA_FEASIBILITY.md). Thông tin API/chính sách cần kiểm chứng từ nguồn chính thức khi mở rộng.
 
 ## Phase provider và game module
 
@@ -85,7 +85,7 @@ Valorant được nghiên cứu song song với LoL theo yêu cầu 11/10/2026; 
 5. Xây bộ phát bản ghi regression để kiểm tra toàn bộ trigger/animation mà không cần custom mới ở mỗi lần sửa.
 6. Tạo contract và renderer riêng cho Valorant sau khi đường production LoL hoàn tất.
 
-Ma trận chi tiết và ranh giới nghiên cứu nằm tại `DATA_SOURCES.md`.
+Ma trận chi tiết và ranh giới nghiên cứu nằm tại `docs/DATA_SOURCES.md`.
 
 Mốc chốt phase UI/phòng thử 11/10/2026: đã có gold/level ranking 10 người,
 rune scene, Soul takeover sáu artwork tĩnh và copy có nguồn, Baron Power Play
@@ -112,4 +112,4 @@ giữ làm lịch sử, không phải yêu cầu chạy lại host chưa có tha
 
 Ưu tiên chính: xác minh CollectorHost headless lấy dữ liệu spectator **live** khi LB UI tắt, sau đó adapter và autostart cùng app. Cập nhật này thay thứ tự “replay trước” của các mốc cũ đối với nhánh collector.
 
-**Ưu tiên thấp:** điều tra collector có thu telemetry đầy đủ khi xem replay `.rofl` hay không. Phân biệt replay trận trong LoL với phát lại snapshot NDJSON của overlay và tua trong spectator live. Kiểm tra từng tầng: phát hiện cửa sổ → kết nối/auth/version → GameStarted/capture → GameInfo → normalized state. Không chỉ dựa vào Replay API có clock hoặc UI báo Loading. Điều kiện đạt: dữ liệu 10 player/field bắt buộc có mẫu thật, pause/tốc độ/seek không giữ stale hoặc phát event lịch sử sai. Không yêu cầu người dùng vào trận riêng cho nhánh thấp này trước khi đường live đạt. Xem mục mới trong `LEAGUEBROADCAST_FEASIBILITY.md`.
+**Ưu tiên thấp:** điều tra collector có thu telemetry đầy đủ khi xem replay `.rofl` hay không. Phân biệt replay trận trong LoL với phát lại snapshot NDJSON của overlay và tua trong spectator live. Kiểm tra từng tầng: phát hiện cửa sổ → kết nối/auth/version → GameStarted/capture → GameInfo → normalized state. Không chỉ dựa vào Replay API có clock hoặc UI báo Loading. Điều kiện đạt: dữ liệu 10 player/field bắt buộc có mẫu thật, pause/tốc độ/seek không giữ stale hoặc phát event lịch sử sai. Không yêu cầu người dùng vào trận riêng cho nhánh thấp này trước khi đường live đạt. Xem mục mới trong `docs/LEAGUEBROADCAST_FEASIBILITY.md`.

@@ -18,7 +18,7 @@ Data Dragon chỉ dùng để đổi ID/token thành tên và ảnh. Nó không 
 
 ## Ma trận bằng chứng BlueBottle
 
-Nhãn dùng trong nghiên cứu: **CONFIRMED** = artifact/log/capture trực tiếp; **STRONG EVIDENCE** = nhiều dấu vết độc lập nhưng thiếu phép thử quyết định; **HYPOTHESIS** = cần phép thử phân biệt; **UNKNOWN** = chưa đủ bằng chứng. Quy trình lab, risk model và sáu câu hỏi điều tra nằm trong `LEAGUEBROADCAST_FEASIBILITY.md`.
+Nhãn dùng trong nghiên cứu: **CONFIRMED** = artifact/log/capture trực tiếp; **STRONG EVIDENCE** = nhiều dấu vết độc lập nhưng thiếu phép thử quyết định; **HYPOTHESIS** = cần phép thử phân biệt; **UNKNOWN** = chưa đủ bằng chứng. Quy trình lab, risk model và sáu câu hỏi điều tra nằm trong `docs/LEAGUEBROADCAST_FEASIBILITY.md`.
 
 | Mệnh đề | Nhãn | Bằng chứng hiện có | Khoảng trống |
 | --- | --- | --- | --- |
@@ -39,7 +39,7 @@ LiveEvents không được Riot công bố như API được hỗ trợ. Tài li
 
 Tham khảo trực tiếp: [Riot Live Client Data API](https://developer.riotgames.com/docs/lol), [Overwolf LoL GEP](https://dev.overwolf.com/ow-native/live-game-data-gep/supported-games/league-of-legends/), [Overwolf GEP model](https://dev.overwolf.com/ow-native/live-game-data-gep/live-game-data-gep-intro/), [LiveEvents community repository](https://github.com/SkinSpotlights/LiveEventsDocumentation). GEP không công bố cadence/timestamp đủ để kết luận frame accuracy; thử nghiệm phải giữ provenance, đo jitter/staleness, và tôn trọng trạng thái feature.
 
-Thiết kế đồng bộ snapshot, event và presentation clock nằm tại `FRAME_ACCURATE_STATE.md`.
+Thiết kế đồng bộ snapshot, event và presentation clock nằm tại `docs/FRAME_ACCURATE_STATE.md`.
 
 ## Có thể tái tạo phần nào của LeagueBroadcast
 

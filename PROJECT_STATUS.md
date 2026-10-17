@@ -56,14 +56,20 @@ Chi tiết: [LCU](docs/LCU_POSTGAME_FINDINGS.md),
 
 ## Cài và chuyển máy
 
-Làm theo [SETUP_VI.md](SETUP_VI.md). Git không chứa credentials, theme cá nhân,
+Tài liệu cài đặt, kiến trúc, kiểm thử và nghiên cứu đã gom vào docs/;
+gốc chỉ giữ README.md, AGENTS.md và PROJECT_STATUS.md. Ảnh tham chiếu dùng
+bản trong public/references, Baron SVG dùng bản trong public/broadcast.
+Đã bỏ các bản trùng ở gốc và baron-white.png không có tham chiếu sử dụng.
+Không xóa ảnh mẫu trong images/, dữ liệu trận hoặc tài liệu REA/Valorant.
+
+Làm theo [SETUP_VI.md](docs/SETUP_VI.md). Git không chứa credentials, theme cá nhân,
 captures, DLL/runtime/cache collector hoặc vendor source. Máy mới cần được
 chuẩn bị runtime riêng nếu dùng collector tích hợp. Backend chỉ bind loopback,
 không triển khai LAN/public. Chưa phải bộ cài độc lập.
 
 ## Kiểm chứng và bước tiếp
 
-Kết quả các bài kiểm tra được ghi trong [TEST_REPORT.md](TEST_REPORT.md).
+Kết quả các bài kiểm tra được ghi trong [TEST_REPORT.md](docs/TEST_REPORT.md).
 Gate được kiểm bằng fixture cho player, spectator, replay, mất xác nhận và
 chuyển trạng thái trong lúc chạy. Cần thêm một phiên spectator live để kiểm
 đầu cuối trên máy vận hành; không coi fixture là test game thật.

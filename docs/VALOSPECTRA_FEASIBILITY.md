@@ -1,6 +1,6 @@
 # Điều tra module Valorant / ValoSpectra
 
-Cập nhật triển khai 13/10/2026: đã fork local source và có runtime/lifecycle độc lập, xem [runbook](docs/VALORANT_MODULE.md) và `modules/valorant/MODIFICATIONS.md`. Chưa chạy collector thật hoặc xác minh telemetry game. Các phân tích/kế hoạch dưới đây là mốc nghiên cứu 11/10, được giữ để truy nguồn.
+Cập nhật triển khai 13/10/2026: đã fork local source và có runtime/lifecycle độc lập, xem [runbook](VALORANT_MODULE.md) và `modules/valorant/MODIFICATIONS.md`. Chưa chạy collector thật hoặc xác minh telemetry game. Các phân tích/kế hoạch dưới đây là mốc nghiên cứu 11/10, được giữ để truy nguồn.
 
 ## Mục tiêu được làm rõ — 11/10/2026
 

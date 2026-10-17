@@ -32,9 +32,9 @@ test("mixed selection preserves user Baron SVG exactly and restores previous gru
     "/broadcast/objectives/mixed/baron.svg",
   );
   assert.equal(objectiveIconUrl("grubs"), "/broadcast/objectives/grubs.svg");
-  assert.deepEqual(
-    readFileSync("public/broadcast/objectives/mixed/baron.svg"),
-    readFileSync("baron.svg"),
+  assert.equal(
+    createHash("sha256").update(readFileSync("public/broadcast/objectives/mixed/baron.svg")).digest("hex"),
+    "c258b0a50db98fc3270d7f71b0864ff6e867384b3dfedfac1a14fe1e2c4b1d2c",
   );
   const m = JSON.parse(
     readFileSync("public/broadcast/objectives/mixed/provenance.json", "utf8"),

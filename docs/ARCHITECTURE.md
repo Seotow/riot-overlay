@@ -7,7 +7,7 @@ chế độ tiến trình hoặc LCU. Mặc định từ chối khi thiếu bằ
 kiểm trước khi mở/đọc nguồn live; supervisor kiểm trước spawn và khi đang chạy.
 Capture có kiểm tra riêng. Recording không qua chốt vì chỉ đọc file đã lưu.
 Frontend chỉ nhận allowed/reason, không nhận identity/command line/credentials.
-Xem [COLLECTOR_SAFETY](docs/COLLECTOR_SAFETY.md).
+Xem [COLLECTOR_SAFETY](COLLECTOR_SAFETY.md).
 
 ## Studio shadcn — 17/10/2026
 
@@ -110,7 +110,7 @@ Theme v1 là JSON cấu hình, không thực thi JavaScript/CSS do người dùn
 4. Xây Agent, adapter và bản ghi phiên; kiểm thử reconnect, session và clock.
 5. Nối widget thật, hoàn thiện tùy biến và đóng gói. SQLite là lựa chọn tương lai, chưa phải dependency hiện tại.
 
-Chi tiết thứ tự và điều kiện hoàn thành: `ROADMAP.md`. Trạng thái bàn giao: `PROJECT_STATUS.md`.
+Chi tiết thứ tự và điều kiện hoàn thành: `docs/ROADMAP.md`. Trạng thái bàn giao: `PROJECT_STATUS.md`.
 
 ## Collector in-game hiện tại
 
@@ -127,7 +127,7 @@ Collector → normalized frame → WebSocket observer → LiveOverlay ở Studio
 
 ## Module nguồn và mở rộng game
 
-Mốc Valorant 13/10/2026: đã fork local Client/Server/Frontend trong `modules/valorant`, BE Node/FE Angular có dependency/build riêng, launcher quản lý port/ownership/readiness/shutdown và executable collector tùy cấu hình. Runtime không nhập code Valorant vào contract/build LoL; Studio React chưa nhúng FE Angular. Chưa build collector hoặc xác minh game telemetry. Xem `docs/VALORANT_MODULE.md` và `VALOSPECTRA_FEASIBILITY.md`.
+Mốc Valorant 13/10/2026: đã fork local Client/Server/Frontend trong `modules/valorant`, BE Node/FE Angular có dependency/build riêng, launcher quản lý port/ownership/readiness/shutdown và executable collector tùy cấu hình. Runtime không nhập code Valorant vào contract/build LoL; Studio React chưa nhúng FE Angular. Chưa build collector hoặc xác minh game telemetry. Xem `docs/VALORANT_MODULE.md` và `docs/VALOSPECTRA_FEASIBILITY.md`.
 
 Dashboard tách Tổng quan, Nguồn dữ liệu, Studio/OBS, Demo, Theme và Lộ trình. Workspace game là lớp điều hướng; LoL đang hoạt động, Valorant mới là khung mở rộng và không dùng chung contract trận.
 
