@@ -5225,3 +5225,38 @@
   background: #000;
   pointer-events: none;
 }
+
+/* Shutdown bounty (from 100G, steps of 50) on the top edge of the portrait, in both layouts. */
+.player-bounty {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  z-index: 5;
+  transform: translateX(-50%);
+  padding: 0 5px 1px;
+  font:
+    500 14px/15px "Spiegel",
+    sans-serif;
+  color: #f7dd9b;
+  background: #000000b3;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* The mm:ss text is 51px wide (the widest form): the space between icon and digits equals the space
+   between digits and the card edge, and shorter digits (a 1) stay centered between them. */
+.live-canvas .live-objective {
+  width: 107px;
+  padding-right: 6px;
+}
+.live-canvas .live-objective > div {
+  width: 52px;
+  max-width: 52px;
+  text-align: center;
+}
+.live-canvas .live-objective b {
+  text-align: center;
+}
+.live-canvas .live-objective.is-available {
+  padding-right: 3px;
+}

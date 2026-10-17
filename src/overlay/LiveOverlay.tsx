@@ -1,4 +1,4 @@
-import { useEffect, useState, type CSSProperties } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { MotionPresence } from "./MotionPresence";
 import { BuffTimeProgress } from "./BuffTimeProgress";
 import { portraitCueDuration } from "../../shared/portrait-motion";
@@ -12,6 +12,7 @@ import { graphicEnabled } from "../../shared/broadcast-graphics";
 import { SoulTakeover } from "./SoulTakeover";
 import { DragonBanner } from "./DragonBanner";
 import { CooldownVeil } from "./CooldownVeil";
+import { bountyLabel } from "../../shared/bounty";
 import { InhibitorTimers } from "./InhibitorTimers";
 import { QuestCompletion } from "./QuestCompletion";
 import { showItemCooldown } from "../../shared/role-quest";
@@ -225,6 +226,8 @@ function LiveRow({
   const health = player?.health?.value,
     resource = player?.resource?.value;
   const dead = player?.isDead?.value === true;
+  // A dead player's bounty is gone with the streak, whatever the last reading was.
+  const bounty = dead ? null : bountyLabel(player?.sourceStats?.value?.goldGivenOnDeath);
   const xpProgress = player ? levelProgress(player) : null;
   const resourceStyle = resourcePresentation(player);
   const compact = assetsReady ? minimalLoadout(player) : undefined;
@@ -413,6 +416,11 @@ function LiveRow({
           </span>
         )}
         <b>{value(player?.level.value)}</b>
+        {bounty !== null && (
+          <span className="player-bounty" title={`Tiền thưởng hạ gục ${bounty}G`}>
+            {bounty}G
+          </span>
+        )}
         {buffFrames &&
           (previewBuffs
             ? !dead && (previewBuffs === "baron" || previewBuffs === "both")
@@ -544,6 +552,9 @@ export function LiveOverlay({
   const portraitDuration = portraitCueDuration(
     rehearsal?.kind === "minimal" || broadcastWidgetOn(broadcast, "minimal", theme),
   );
+  // The next dragon's type arrives a moment after the kill; until then it is held back instead of
+  // flashing "unknown".
+  const dragonUnknownSince = useRef<number | null>(null);
   const [baronWindow, setBaronWindow] = useState<BaronWindow | null>(null);
   const [elderWindow, setElderWindow] = useState<ElderWindow | null>(null);
   const [objectiveAlert, setObjectiveAlert] = useState<{
@@ -1006,6 +1017,13 @@ export function LiveOverlay({
                 : variant?.dragon
                   ? `DRAGON_${variant.dragon.toUpperCase()}`
                   : timer.type.value;
+            if (timer.pit !== "baron") {
+              if (objectiveVisual(timerType)) dragonUnknownSince.current = null;
+              else {
+                dragonUnknownSince.current ??= Date.now();
+                if (Date.now() - dragonUnknownSince.current < 2500) return null;
+              }
+            }
             const at = timer.timeAlive.value;
             const destroy = timer.timeDestroy.value;
             const remaining =
