@@ -1,4 +1,13 @@
-# Kiến trúc LoL — bản khung 0.1
+# Kiến trúc LoL
+
+## Chốt nguồn live, 17/10/2026
+
+`server/collector-safety.ts` xác nhận spectator/replay theo active player và
+chế độ tiến trình hoặc LCU. Mặc định từ chối khi thiếu bằng chứng. Backend
+kiểm trước khi mở/đọc nguồn live; supervisor kiểm trước spawn và khi đang chạy.
+Capture có kiểm tra riêng. Recording không qua chốt vì chỉ đọc file đã lưu.
+Frontend chỉ nhận allowed/reason, không nhận identity/command line/credentials.
+Xem [COLLECTOR_SAFETY](docs/COLLECTOR_SAFETY.md).
 
 ## Studio shadcn — 17/10/2026
 

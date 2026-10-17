@@ -3,6 +3,7 @@ import { diagnose } from "./diagnostics";
 import { leagueBroadcast } from "./leaguebroadcast";
 import { LeagueCollectorSource } from "../Collector/adapter";
 import { CollectorRuntime } from "../Collector/runtime/supervisor";
+import { collectorSafety } from "./collector-safety";
 import { CaptureReplay, listCaptures } from "./capture-replay";
 import { createServer } from "node:http";
 import { readFile, writeFile, mkdir, rename } from "node:fs/promises";
@@ -54,8 +55,17 @@ const themePath = resolve(
 const captureReplay = new CaptureReplay();
 let shuttingDown = false;
 let captureLoadVersion = 0;
-const selectedObservation = (broadcast = false) =>
-  state.provider === "recording"
+async function selectedObservation(broadcast = false) {
+  if (state.provider !== "recording") {
+    const provider = state.provider;
+    const decision = await collectorSafety.check();
+    if (provider !== state.provider) return selectedObservation(broadcast);
+    if (!decision.allowed) {
+      await stopLiveCollection();
+      return null;
+    }
+  }
+  return state.provider === "recording"
     ? Promise.resolve(captureReplay.observe())
     : state.provider === "leaguebroadcast"
       ? Promise.resolve(leagueBroadcast.observe())
@@ -66,6 +76,14 @@ const selectedObservation = (broadcast = false) =>
               : selectedCollectorSource().observe(),
           )
         : observeIngame();
+}
+async function stopLiveCollection() {
+  localCollector.disconnect();
+  accountlessCollector.disconnect();
+  leagueBroadcast.disconnect();
+  lastObservation = null;
+  await Promise.all([collectorRuntime.stop(), accountlessRuntime.stop()]);
+}
 const selectedRecording = () =>
   state.provider === "recording"
     ? captureReplay.recording()
@@ -271,6 +289,7 @@ const server = createServer(async (req, res) => {
                     capturedAt: new Date().toISOString(),
                     selected: state.provider,
                     output: state.mockVisible ? "demo" : state.provider,
+                    safety: collectorSafety.snapshot(),
                     leaguebroadcast: leagueBroadcast.snapshot(),
                     collector: {
                       observerIntervalMs: COLLECTOR_SAMPLE_INTERVAL_MS,
@@ -496,6 +515,19 @@ async function pollObservation() {
   if (shuttingDown) return;
   const pollStarted = performance.now();
   try {
+    if (!state.mockVisible && state.provider !== "recording") {
+      const provider = state.provider;
+      const decision = await collectorSafety.check();
+      if (state.mockVisible || provider !== state.provider) return;
+      if (!decision.allowed) {
+        await stopLiveCollection();
+        if (state.mockVisible || provider !== state.provider) return;
+        for (const client of wss.clients)
+          if (client.readyState === WebSocket.OPEN)
+            client.send(JSON.stringify({ type: "observer", frame: null }));
+        return;
+      }
+    }
     if (usesCollector() && !state.mockVisible) {
       const provider = state.provider;
       const runtime = selectedCollectorRuntime();

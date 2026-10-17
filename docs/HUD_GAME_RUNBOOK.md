@@ -1,5 +1,24 @@
 # HUD game và killfeed — 16/10/2026
 
+## Kiểm tra dấu 18+ VNG, 17/10/2026
+
+**Đã tạm hoãn theo yêu cầu người dùng.** Lưu hướng điều tra, chưa thay game.
+Ảnh cung cấp xác nhận sign native góc (0,0), khoảng 168×28px ở 1920×1080.
+Không chọn phương án che OBS. Thư mục cài từ metadata Riot:
+`E:/Riot Games/League of Legends`; chưa kiểm config/tài nguyên ở thư mục này.
+
+Đã GET `/replay/render` thật khi replay hoạt động. Có các cờ interface hiện
+được allowlist, không có field riêng age/rating/VNG/watermark. `banners=false`
+đã có sẵn; chưa có đối chiếu hình để kết luận dấu 18+ chịu cờ nào. Không gửi
+POST hoặc tắt interfaceAll/Announce/KillCallouts để thử che dấu này.
+
+Thảo luận PenguLoader #8 năm 2023 có selector `vng-age-rating ember-view`
+nhưng là LoL Client dạng web, không phải HUD renderer trong trận; không dùng
+nó làm bằng chứng có thể ẩn sign ingame. Chưa cài loader hoặc patch client.
+Bước cần người dùng: ảnh đầy đủ màn game có sign để định vị và thống nhất
+phương án nếu cần che ở đầu ra OBS thay vì ẩn native. Che đầu ra không được
+mô tả là đã tắt sign trong game, và sẽ che cả pixel gameplay trong vùng đó.
+
 ## Overlay killfeed
 
 Trang Cấu hình trước trận → Kiểu killfeed → Broadcast → Lưu. Checkbox

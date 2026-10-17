@@ -1,5 +1,13 @@
 # Lộ trình tiếp theo — ưu tiên LoL
 
+## Bản nội bộ, 17/10/2026
+
+Chốt UI hiện có, hướng dẫn chạy local và gate chỉ cho collector chạy ở
+spectator/replay. Bước tiếp theo là kiểm toàn trận trên máy vận hành và xác
+nhận gate với game thật. ROFL tạm hoãn: file thử do người chơi tải, không phải
+nguồn spectator tự lấy được. LCU/Standard API cho custom chưa thành luồng
+postgame tự động. Không mở lại audit layout đã duyệt.
+
 ## Ưu tiên hiện hành 17/10/2026
 
 Đã chốt phase snapshot/UI bằng commit `7c79bb1` và trùng tu Studio bằng

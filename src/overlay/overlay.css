@@ -463,7 +463,7 @@
 }
 .table-gold {
   border-left: 1px solid #8f957e;
-  border-right: 3px solid #a12b2d;
+  border-right: 1px solid #8f957e;
 }
 .table-gold > div {
   height: 51.6px;
@@ -491,7 +491,7 @@
 .live-role-quests { position:absolute; top:2px; display:flex; gap:4px; }
 .blue-role-quests { left:10px; color:var(--blue); }
 .red-role-quests { right:10px; color:var(--red); flex-direction:row-reverse; }
-.role-quest-icon { width:25px; height:25px; fill:none; stroke:currentColor; stroke-width:1.8; opacity:.5; }
+.role-quest-icon { --quest-size:25px; position:relative; width:25px; height:25px; fill:none; stroke:currentColor; stroke-width:1.8; opacity:.5; }
 .role-quest-icon.completed { fill:currentColor; opacity:1; filter:drop-shadow(0 0 5px currentColor); }
 .live-objective-stack { position:absolute; left:12px; top:12px; display:grid; gap:6px; }
 .live-objective-stack .ref-objective { position:relative; left:auto; top:auto; }
@@ -929,7 +929,6 @@
   color: #fff;
   text-shadow: 0 1px 3px #000;
 }
-.recording-watermark { position: absolute; left: 24px; top: 180px; color: #e9dbb0; background: #111b; padding: 8px 12px; font: 18px "Spiegel", sans-serif; z-index: 10; }
 .live-item-slot { position:relative; width:24px; height:24px; flex-shrink:0; }
 .live-spell-slot { position:relative; width:22px; height:22px; flex-shrink:0; }
 .live-spell-slot .item-countdown { font-size:11px; }
@@ -972,7 +971,6 @@
 .ref-canvas.minimal .live-player-row .row-champion { order:2; }
 .ref-canvas.minimal .live-player-row .row-name { width:72px; order:3; }
 .ref-canvas.minimal .live-player-row .row-name > div { display:none; }
-.rehearsal-watermark {position:absolute;left:24px;top:224px;background:#10151ee8;color:#dfc889;padding:8px 12px;font:14px "Spiegel",sans-serif;}
 .real-gold-ranking {position:absolute;left:32px;top:290px;width:310px;padding:18px;background:#0b141df5;border-top:3px solid var(--accent);font:16px "Spiegel",sans-serif;color:#ece7dc;}
 .real-gold-ranking h3,.real-powerplay h3 {font:700 28px "Beaufort for LoL",serif;margin:8px 0 14px;}
 .real-gold-ranking small,.real-powerplay small {font:12px "Spiegel",sans-serif;color:#b8bdc3;}
@@ -1004,7 +1002,7 @@
 .live-scoreboard .score-sub time { top:5px; font:400 23px/29px var(--display-font),sans-serif; }
 .live-scoreboard .score-economy small { top:27px; font:700 14px/16px "Spiegel"; }
 .live-scoreboard .live-versus { font:22px "Spiegel"; }
-.live-scoreboard .role-quest-icon { width:31px; height:31px; border:1px solid currentColor; border-radius:50%; padding:3px; opacity:.55; }
+.live-scoreboard .role-quest-icon { --quest-size:31px; width:31px; height:31px; border:1px solid currentColor; border-radius:50%; padding:3px; opacity:.55; }
 .live-scoreboard .role-quest-icon.completed { opacity:1; filter:none; }
 .live-scoreboard .live-role-quests { gap:6px; top:4px; }
 .live-scoreboard .live-dragons { top:6px; min-width:110px; }
@@ -1050,8 +1048,6 @@
 .live-canvas.minimal .live-player-row .row-champion > b { bottom:-21px; left:3px; right:auto; font-size:14px; background:none; }
 .live-canvas.minimal .live-player-row .row-items { position:absolute; top:41px; left:52px; width:auto; min-height:0; max-height:27px; flex-wrap:nowrap; justify-content:flex-start; }
 .live-canvas.minimal .live-player-row .ultimate-status { transform:none; top:0; bottom:auto; left:-8px; color:#ece8d7; }
-.live-canvas .recording-watermark { left:12px; top:120px; font:10px "Spiegel"; padding:3px 5px; }
-.live-canvas .rehearsal-watermark { left:12px; top:138px; font:9px "Spiegel"; padding:2px 5px; }
 .live-canvas .real-rune-board { left:287px; top:793px; width:1346px; height:287px; border:0; padding:0; background:linear-gradient(100deg,#090b10eb,#18171deb,#090b10eb); }
 .live-canvas .real-rune-board h3 { text-align:center; font:700 32px/45px "Spiegel"; margin:8px 0 25px; }
 .live-canvas .real-rune-board > .rune-teams { border:0; padding:0; margin:0 170px; display:flex; gap:46px; }
@@ -1170,7 +1166,7 @@
 .live-canvas .live-inhibitors { justify-items:stretch; align-items:start; }
 .live-inhibitors > section { width:263px; justify-self:start; text-align:left; }
 .inhibitor-lane-icon { clip-path:none!important; mask-size:contain; mask-position:center; mask-repeat:no-repeat; -webkit-mask-size:contain; -webkit-mask-position:center; -webkit-mask-repeat:no-repeat; }
-.quest-progress { position:absolute; inset:-1px; width:32px; height:32px; }
+.quest-progress { position:absolute; left:50%; top:50%; width:var(--quest-size); height:var(--quest-size); transform:translate(-50%,-50%); display:block; pointer-events:none; }
 .live-scoreboard .role-quest-icon { position:relative; border-color:#68716b55; opacity:1; }
 .live-scoreboard .role-quest-icon.completed { border-color:currentColor; }
 .role-quest-glyph { opacity:.65; }
@@ -1188,6 +1184,14 @@
 .traced-metric { background:currentColor; mask-position:center; mask-size:contain; mask-repeat:no-repeat; -webkit-mask-position:center; -webkit-mask-size:contain; -webkit-mask-repeat:no-repeat; flex-shrink:0; }
 .live-scoreboard .role-quest-icon { display:grid; place-items:center; }
 .role-quest-glyph { display:block; width:23px; height:24px; background:currentColor; mask-position:center; mask-size:contain; mask-repeat:no-repeat; -webkit-mask-position:center; -webkit-mask-size:contain; -webkit-mask-repeat:no-repeat; clip-path:circle(49%); }
+/* Optical centering of the traced glyph body in its original 23x24 canvas.
+   Keep the progress ring and shared lane/inhibitor assets unchanged. */
+.role-quest-icon[data-role="top"] { --quest-glyph-x:13.0435%; --quest-glyph-y:10.4167%; }
+.role-quest-icon[data-role="jungle"] { --quest-glyph-x:4.3478%; --quest-glyph-y:0%; }
+.role-quest-icon[data-role="mid"] { --quest-glyph-x:6.5217%; --quest-glyph-y:4.1667%; }
+.role-quest-icon[data-role="bot"] { --quest-glyph-x:-2.1739%; --quest-glyph-y:-2.0833%; }
+.role-quest-icon[data-role="support"] { --quest-glyph-x:4.3478%; --quest-glyph-y:6.25%; }
+.role-quest-icon > .role-quest-glyph { position:absolute; left:50%; top:50%; transform:translate(calc(-50% + var(--quest-glyph-x,0%)),calc(-50% + var(--quest-glyph-y,0%))); }
 .unavailable-objective { display:grid; place-items:center; font:700 9px "Spiegel",sans-serif; color:#c7bde0; }
 .live-canvas .table-gold > div { color:#e4e8df; text-shadow:none; position:relative; }
 .live-canvas .table-gold > .lane-gold-blue::before,
@@ -1247,9 +1251,8 @@
 .row-name .row-ultimate { flex-shrink:0; }
 .row-lane-quest { width:22px; height:44px; flex-shrink:0; display:grid; place-items:center; color:var(--blue); }
 .red-row .row-lane-quest { color:var(--red); }
-.row-lane-quest .role-quest-icon { position:relative; width:22px; height:22px; display:grid; place-items:center; opacity:1; border-radius:50%; background:#030909bc; box-shadow:inset 0 0 0 1px #68716b55; }
+.row-lane-quest .role-quest-icon { --quest-size:22px; position:relative; width:22px; height:22px; display:grid; place-items:center; opacity:1; border-radius:50%; background:#030909bc; box-shadow:inset 0 0 0 1px #68716b55; }
 .row-lane-quest .role-quest-glyph { width:16px; height:17px; }
-.row-lane-quest .quest-progress { position:absolute; inset:0; width:22px; height:22px; }
 .row-lane-quest img { width:22px; height:22px; object-fit:cover; border:1px solid currentColor; border-radius:50%; }
 .quest-unavailable { color:#707b75; border:1px solid #6d777155; border-radius:50%; width:20px; height:20px; display:grid; place-items:center; font:10px "Spiegel"; }
 .live-canvas.minimal .row-lane-quest { display:none; }
@@ -1262,6 +1265,27 @@
 .production-draft .draft-ban img { width:100%; height:100%; border:0; }
 .production-draft .draft-ban small { color:#535b5d; font:20px "Spiegel"; }
 .production-draft .draft-ban.active { border-color:var(--accent); }
+/* Draft motion keeps final geometry and the central camera window unchanged.
+   Champion/lock keys are source transitions, never the ticking draft clock. */
+.production-draft .ref-draft { animation:draft-panel-in .28s ease-out both; }
+.production-draft .draft-team { --draft-enter-x:-24px; animation:draft-team-in .5s .16s var(--broadcast-ease) both; }
+.production-draft .draft-team-1 { --draft-enter-x:24px; }
+.production-draft .ref-draft-center { animation:draft-panel-in .4s .08s ease-out both; }
+.production-draft .draft-bans { animation:draft-panel-in .4s .2s ease-out both; }
+.production-draft .draft-ban { animation:draft-panel-in .3s calc(.2s + var(--draft-delay,0ms)) ease-out both; }
+.production-draft .pick-portrait { animation:draft-art-in .45s var(--broadcast-ease) both; }
+.production-draft .draft-ban img { animation:draft-ban-in .32s ease-out both; }
+.production-draft .draft-phase { animation:draft-label-in .25s ease-out both; }
+.production-draft .draft-champion-name { animation:draft-label-in .35s .08s ease-out both; }
+.production-draft .draft-lock-flash { position:absolute; inset:0; z-index:4; pointer-events:none; background:linear-gradient(115deg,transparent 25%,#ffffff70 50%,transparent 75%); animation:draft-lock-sweep .55s ease-in-out both; }
+.production-draft .is-hover { transition:border-color .2s ease,box-shadow .2s ease; }
+@keyframes draft-panel-in { from{opacity:0;clip-path:inset(0 0 100% 0)} to{opacity:1;clip-path:inset(0)} }
+@keyframes draft-team-in { from{opacity:0;transform:translateX(var(--draft-enter-x))} to{opacity:1;transform:translateX(0)} }
+@keyframes draft-art-in { from{opacity:0;transform:translateY(16px);clip-path:inset(100% 0 0)} to{opacity:1;transform:translateY(0);clip-path:inset(0)} }
+@keyframes draft-ban-in { from{opacity:0;transform:scale(1.12)} to{opacity:1;transform:scale(1)} }
+@keyframes draft-label-in { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
+@keyframes draft-lock-sweep { 0%{opacity:0;transform:translateX(-110%)} 25%{opacity:.65} 100%{opacity:0;transform:translateX(110%)} }
+@media(prefers-reduced-motion:reduce) { .production-draft,.production-draft * { animation:none!important; transition:none!important; } }
 .production-draft .draft-progress { left:461px; width:998px; background:#3b3934; box-shadow:none; }
 .production-draft .draft-progress i { display:block; height:100%; background:var(--accent); transition:width .4s linear; }
 .production-draft .draft-progress b { position:absolute; left:50%; bottom:12px; font:26px "Broadcast Condensed"; color:#fff; background:#080b0dd9; padding:2px 12px; }
@@ -1376,6 +1400,13 @@
 .live-canvas .powerplay-symbol { background:rgb(86 44 116 / .25); }
 .live-canvas .elder-symbol { background:rgb(106 111 95 / .25); }
 .live-canvas .live-objective > span { background:rgb(24 30 32 / .15); }
+.live-canvas .live-objective { overflow:hidden; transition:width .35s var(--broadcast-ease),gap .35s var(--broadcast-ease); }
+.live-canvas .live-objective > span { width:38px; height:38px; background:color-mix(in srgb,var(--objective-color,#a3a9ac) 22%,transparent); border-color:color-mix(in srgb,var(--objective-color,#a3a9ac) 38%,#51585a); }
+.live-canvas .live-objective .metric-icon { width:28px; height:28px; }
+.live-canvas .live-objective > div { width:49px; max-width:49px; overflow:hidden; white-space:nowrap; transition:width .35s var(--broadcast-ease),max-width .35s var(--broadcast-ease),opacity .25s ease,transform .35s var(--broadcast-ease); }
+.live-canvas .live-objective.is-available { width:46px; gap:0; }
+.live-canvas .live-objective.is-available > div { width:0; max-width:0; opacity:0; transform:translateX(-8px); }
+@media(prefers-reduced-motion:reduce) { .live-canvas .live-objective,.live-canvas .live-objective > div { transition:none; } }
 .live-canvas.minimal .live-player-row .row-name { background:var(--ig-panel-soft); }
 .live-canvas .quest-completion { background:rgb(24 30 32 / .45); }
 .live-canvas .quest-completion { background:none; isolation:isolate; overflow:hidden; animation:none; }
@@ -1469,7 +1500,7 @@
 .live-canvas .real-elder-timer { display:flex; align-items:center; padding-bottom:8px; }
 .live-canvas .real-elder-timer.buff-side-blue { justify-content:flex-end; }
 .live-canvas .real-elder-timer > time { font-size:30px; line-height:40px; }
-.live-canvas .real-elder-timer .elder-symbol { background:color-mix(in srgb,var(--powerplay-color) 27%,#082125); border-color:color-mix(in srgb,var(--powerplay-color) 40%,#4b6564); }
+.live-canvas .real-elder-timer .elder-symbol { background:color-mix(in srgb,var(--powerplay-color) 17%,#082125); border-color:color-mix(in srgb,var(--powerplay-color) 40%,#4b6564); }
 .live-canvas :is(.real-powerplay,.real-elder-timer) { padding-bottom:8px; }
 .live-canvas :is(.powerplay-symbol,.elder-symbol) { height:auto; bottom:5px; }
 .buff-time-progress { position:absolute; bottom:0; left:0; width:100%; height:5px; background:#07090cbf; z-index:6; overflow:hidden; }
@@ -1571,8 +1602,6 @@
 [data-motion="enter"]:is(.real-gold-ranking,.live-level-ranking) h3 { animation-delay:.3s; }
 .live-canvas:not(.minimal) .live-player-row { animation-delay:calc(300ms + var(--row-index,0)*65ms); }
 .feed-missing { width:31px; height:31px; display:grid; place-items:center; border:1px solid #a6aaa680; color:#b3b9ba; }
-.live-canvas .recording-watermark,
-.live-canvas .rehearsal-watermark { background:var(--ig-panel-strong); }
 
 /* Minimal: one champion = exactly four 29px cells; no taper or extra gaps. */
 .live-canvas.minimal .live-player-row { width:58px; }
@@ -1587,7 +1616,7 @@
 .live-canvas.minimal .live-player-row .row-champion > b { left:-1px; right:auto; bottom:-30px; width:24px; height:29px; padding:0; display:grid; place-items:center; line-height:1; color:#fff; background:transparent; z-index:4; text-shadow:0 1px 2px #000; }
 .live-canvas.minimal .minimal-ultimate { top:-128px; }
 .live-canvas .live-player-row .row-name > div { height:25px; }
-.experience-track { display:block; width:70px; height:3.6px; margin-left:3px; background:#25282b; }
+.experience-track { display:block; width:70px; height:3.6px; margin-left:3px; background:#25282b; border-inline:1px solid #0009; }
 .experience-track > i { display:block; height:100%; background:#7e3c75; }
 .experience-track.unavailable { background:#262a2e; }
 .live-canvas .live-player-row .row-name .health-track { margin-top:1px; height:6px; }

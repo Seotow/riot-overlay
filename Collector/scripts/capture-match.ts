@@ -13,6 +13,7 @@ import { WebSocket } from "ws";
 import { observerFrameSchema, ingameSampleSchema } from "../../shared/observer";
 import { normalizeIngame } from "../../server/ingame-adapter";
 import { getLocal } from "../../server/diagnostics";
+import { collectorSafety } from "../../server/collector-safety";
 import { capturePrivacy } from "../validation/capture-privacy";
 import {
   COLLECTOR_SAMPLE_INTERVAL_MS,
@@ -76,6 +77,8 @@ if (args[0] === "--mark" || args[0] === "--stop") {
   )
     throw Error("Duration must be 5000..14400000 ms");
   const provider = await json(base + "/api/providers");
+  if (!(await collectorSafety.check()).allowed)
+    throw Error("Collector bị chặn: cần xác nhận spectator hoặc replay trước khi ghi.");
   if(provider.collector?.observerIntervalMs !== COLLECTOR_SAMPLE_INTERVAL_MS)
     throw Error('Backend chưa hỗ trợ nhịp 500ms. Khởi động lại backend từ workspace đã build trước khi ghi.');
   if (
@@ -313,6 +316,10 @@ if (args[0] === "--mark" || args[0] === "--stop") {
   const poll = async () => {
     while (!stopped) {
       const pollStarted = performance.now();
+      if (!(await collectorSafety.check()).allowed) {
+        stop("safety-blocked");
+        break;
+      }
       try {
         await access(resolve(folder, "stop.request"));
         stop("operator");

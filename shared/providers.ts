@@ -1,6 +1,12 @@
 import { z } from "zod";
 export const providerReportSchema = z.object({
   capturedAt: z.string().datetime(),
+  safety: z
+    .object({
+      allowed: z.boolean(),
+      reason: z.enum(["spectator", "replay", "player", "unverified"]),
+    })
+    .optional(),
   selected: z.enum([
     "riot",
     "leaguebroadcast",

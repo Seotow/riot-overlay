@@ -1,5 +1,15 @@
 # Nhập Riot API và tải postgame — 13/10/2026
 
+## Lượt kiểm thật 17/10/2026
+
+Key được người dùng nhập vào RAM backend ở chế độ Standard. Load custom
+VN2_1607368559 trả 404; control trận thường VN2_1607651234 trả 403. Chưa
+xác nhận key được Match-V5 chấp nhận; không kết luận 403 chỉ do custom.
+Không publish hoặc in secret, không thử biến API key thành RSO token.
+Chưa có RSO/Tournament entitlement mới nên không gọi hai nhánh đó bằng key
+Standard để thử vượt quyền. Nguồn khác đọc được là metadata replay local,
+xem [ROFL_POSTGAME_FINDINGS](ROFL_POSTGAME_FINDINGS.md).
+
 ## Bạn cần thao tác gì?
 
 1. Build và khởi động lại backend nếu phiên cũ đang chạy:

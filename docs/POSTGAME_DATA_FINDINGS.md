@@ -2,6 +2,11 @@
 
 ## Kết luận
 
+Cập nhật 17/10: hướng ROFL tạm hoãn theo quyết định người dùng. File đã thử
+do tài khoản người chơi tải từ client trước đó, không phải spectator tự lấy.
+Các kết quả LCU và ROFL giữ trong tài liệu riêng để nghiên cứu tiếp, chưa
+đưa vào quy trình sau trận tự động của bản nội bộ.
+
 Có thể tự tổng hợp phần lớn thống kê và đường vàng từ **feed in-game đã được
 cấp quyền**, không cần dùng endpoint tổng kết premium. Tuy nhiên không thể
 phục hồi damage to champions hoặc winner chỉ từ những snapshot đang có.
@@ -106,6 +111,23 @@ mapping cho adapter mới thay vì áp dụng tùy ý cho mọi nguồn.
 - Contract postgame hiện **chỉ sample**, asset 15.20.1, số/time integer. Trước
   khi nối thật phải migration/provenance/availability/coverage, patch live
   riêng và game-time float. Không đổi `source` sample thành live cho thuận tiện.
+
+## Cập nhật LCU 17/10/2026
+
+**ROFL tạm hoãn:** đã đọc metadata `.rofl` của chính trận custom, đủ final
+damage 10 người, KDA/gold/winner, đối chiếu khớp LCU player. Không cần API key
+để đọc file đã có, nhưng file do người tham gia tải từ client trước đó.
+Chưa triển khai import/publish; Elder counter có discrepancy
+và gold history vẫn cần archive. Xem [ROFL postgame](ROFL_POSTGAME_FINDINGS.md).
+
+Đã lấy chi tiết trận CUSTOM_GAME 1607368559 qua LCU match history của người
+tham gia, đủ 10 người và damage/winner/gold/KDA. Raw native chứa đúng game ID.
+Đây là nguồn khác với native damage=0 và không cần LB postgame premium.
+Đối chiếu sau khi đổi sang spectator: history không có custom; detail/timeline
+cùng game trả 404. Vì vậy không dùng LCU trên spectator làm lời hứa tự động
+lấy custom; phương án tiếp là thu/export từ client người tham gia trận.
+Chưa tích hợp production hoặc khẳng định mọi custom. Xem
+[bằng chứng và giới hạn](LCU_POSTGAME_FINDINGS.md).
 
 ## Damage và winner: hướng có thể kiểm chứng tiếp
 

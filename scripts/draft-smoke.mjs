@@ -36,7 +36,7 @@ try {
     .getByRole("button", { name: "Lưu cấu hình", exact: true })
     .click();
   await config
-    .getByText("Backend đã nhận cấu hình", { exact: false })
+    .getByText("Đã lưu cấu hình.", { exact: true })
     .waitFor();
   await page.goto(base + "/?page=draft");
   await page
@@ -114,7 +114,7 @@ try {
     .waitFor();
   assert.equal(await output.locator(".is-picked").count(), 9);
   await page
-    .getByRole("button", { name: "Nạp ảnh mẫu · UI test", exact: true })
+    .getByRole("button", { name: "Nạp ảnh mẫu , UI test", exact: true })
     .click();
   await output.locator('.production-draft[data-source="reference"]').waitFor();
   await output.locator('.is-hover img[alt="Ezreal"]').waitFor();
@@ -122,6 +122,16 @@ try {
     .getByRole("button", { name: "Bắt đầu timer", exact: true })
     .click();
   await output.locator(".draft-progress b").waitFor();
+  const hoverArt = output.locator('.is-hover .pick-portrait');
+  await hoverArt.evaluate(e => { window.__draftHoverArt = e; });
+  await output.waitForTimeout(800);
+  assert.ok(await hoverArt.evaluate(e => window.__draftHoverArt === e), "Timer ticks must not remount portrait animation");
+  assert.equal(await hoverArt.evaluate(e => getComputedStyle(e).animationName), "draft-art-in");
+  assert.ok(await output.locator('.draft-lock-flash').count() > 0);
+  await output.emulateMedia({reducedMotion:"reduce"});
+  assert.equal(await hoverArt.evaluate(e => getComputedStyle(e).animationName), "none");
+  await output.emulateMedia({reducedMotion:"no-preference"});
+  await output.waitForTimeout(800); // Media change restarts entrance animation.
   const embed = page.frameLocator('iframe[title="Preview cấm chọn OBS"]');
   await embed.locator('.is-hover img[alt="Ezreal"]').waitFor();
   await output.evaluate(() => document.fonts.ready);
@@ -161,6 +171,7 @@ try {
     .selectOption("simple");
   await output.locator(".draft-simple").waitFor();
   await embed.locator(".draft-simple").waitFor();
+  await output.waitForTimeout(800);
   await output.waitForFunction(() =>
     [...document.images].every((i) => i.complete && i.naturalWidth > 0),
   );

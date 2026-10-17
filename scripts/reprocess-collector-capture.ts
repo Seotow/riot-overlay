@@ -73,14 +73,14 @@ const manifest = {
   kind: "collector-match-capture",
   state: "stopped",
   derivedFrom: original,
-  projectionVersion: 8,
+  projectionVersion: 10,
   reprocessedAt: new Date().toISOString(),
   nativeFramesProcessed: native,
   observerFrames: records.length,
   files: ["observer-samples.ndjson"],
   originalFilesUnmodified: true,
   notes:
-    "Native-derived CS, quest, death/respawn, exact buffs and cached objective deaths. Counts cover observed history only; original raw archives remain in derivedFrom. No reference data substituted.",
+    "Native-derived CS, quest, death/respawn, exact buffs, cached objective deaths and current dragon spawn indicators/live monster identity. Counts cover observed history only; original raw archives remain in derivedFrom. No reference data substituted.",
 };
 await writeFile(
   resolve(out, "manifest.json"),

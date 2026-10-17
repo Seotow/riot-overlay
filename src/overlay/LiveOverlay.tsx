@@ -154,6 +154,7 @@ function RoleQuestIcon({
   return (
     <span
       className={`role-quest-icon ${completed ? "completed" : ""}`}
+      data-role={role}
       role="img"
       aria-label={`Role quest ${role}`}
       title={
@@ -755,13 +756,6 @@ export function LiveOverlay({
   const showRunes = !!v.sample && (rehearsal?.kind === "runes" || broadcastWidgetOn(broadcast, "runes", theme));
   return (
     <>
-      {rehearsal && v.sample && (
-        <div className="rehearsal-watermark">
-          {variant
-            ? "GIẢ LẬP UI · NỀN SNAPSHOT THẬT"
-            : "KÍCH HOẠT THỬ · SNAPSHOT THẬT"}
-        </div>
-      )}
       <MotionPresence
         show={showRunes}
       >
@@ -876,9 +870,6 @@ export function LiveOverlay({
           />
         </aside>
       </MotionPresence>
-      {frame?.playback && (
-        <div className="recording-watermark">BẢN GHI / KIỂM THỬ</div>
-      )}
       <MotionPresence show={!!showElder}>
         <aside
           className={`real-elder-timer ${elderTeam === "CHAOS" ? "buff-side-red" : "buff-side-blue"} ${showPowerPlay && powerPlay?.team === elderTeam ? "alongside-baron" : ""}`}
@@ -1130,6 +1121,8 @@ export function LiveOverlay({
             const remaining =
               rehearsal?.kind === "timers" && variant
                 ? Math.max(0, previewAt + 120 - (v.time ?? previewAt))
+                : timer.isAlive?.value === true
+                  ? 0
                 : v.time == null
                   ? null
                   : at != null && at > v.time
@@ -1148,7 +1141,10 @@ export function LiveOverlay({
                 show={!(timer.pit === "baron" ? showPowerPlay : showElder)}
               >
                 <aside
-                  className="ref-objective live-objective"
+                  className={`ref-objective live-objective${remaining === 0 ? " is-available" : ""}`}
+                  style={{ "--objective-color": objectiveVisual(timerType)?.color ?? "#a3a9ac" } as CSSProperties}
+                  data-pit={timer.pit}
+                  data-available={remaining === 0}
                   key={timer.pit}
                   title={`${label}${timer.basis === "rule-estimate" ? " · timer suy ra từ event + quy tắc SR; phòng tập có thể khác" : ""}`}
                   data-basis={timer.basis ?? "reported"}
@@ -1159,13 +1155,13 @@ export function LiveOverlay({
                       dragonType={timerType ?? undefined}
                     />
                   </span>
-                  <div>
+                  <div aria-hidden={remaining === 0}>
                     <small>{label}</small>
                     <b>
                       {remaining == null
                         ? "--:--"
                         : remaining <= 0
-                          ? "LIVE"
+                          ? ""
                           : `${Math.floor(remaining / 60)
                               .toString()
                               .padStart(2, "0")}:${Math.floor(remaining % 60)

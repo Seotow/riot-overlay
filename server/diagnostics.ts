@@ -18,7 +18,7 @@ export function parseLockfile(text: string): Credentials | null {
     ? { port, password: parts[3] }
     : null;
 }
-async function discover(): Promise<Credentials | null> {
+export async function discover(): Promise<Credentials | null> {
   const paths = process.env.LOL_LOCKFILE
     ? [process.env.LOL_LOCKFILE]
     : [

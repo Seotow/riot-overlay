@@ -214,7 +214,7 @@ test("two pit timers exist with explicitly estimated provenance; reported timers
     objectiveType: "water",
   });
   delete s.pitTimers;
-  assert.equal(presentationPitTimers(s)[1].type.value, "elder");
+  assert.equal(presentationPitTimers(s)[1].type.value, "dragon"); // Soul alone is not observed next-monster identity.
   assert.equal(presentationPitTimers(null).length, 0);
 });
 test("ultimate uses a dark clockwise veil, with numbers only in the final ten seconds", () => {

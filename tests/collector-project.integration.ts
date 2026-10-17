@@ -86,11 +86,19 @@ await new Promise<void>((yes) => probe.close(() => yes()));
 const directory = await mkdtemp(join(tmpdir(), "collector-project-"));
 const backend = spawn(
   process.execPath,
-  ["--import", "tsx", "server/index.ts", "--production", "--collector"],
+  [
+    "--import",
+    "tsx",
+    "--import",
+    "./tests/fixtures/spectator-safety-preload.ts",
+    "server/index.ts",
+    "--production",
+    "--collector",
+  ],
   {
     cwd: process.cwd(),
     windowsHide: true,
-    stdio: ["ignore", "pipe", "pipe"],
+    stdio: ["ignore", "pipe", "pipe", "ipc"],
     env: {
       ...process.env,
       PORT: String(port),
@@ -104,15 +112,16 @@ const url = `http://127.0.0.1:${port}`;
 let logs = "",
   studio: WebSocket | undefined,
   obs: WebSocket | undefined;
-backend.stdout.on("data", (b) => (logs += b));
-backend.stderr.on("data", (b) => (logs += b));
+backend.stdout!.on("data", (b) => (logs += b));
+backend.stderr!.on("data", (b) => (logs += b));
 const wait = (ms: number) => new Promise((r) => setTimeout(r, ms));
 async function until(check: () => Promise<boolean>, budget = 10000) {
+  const caller = new Error().stack;
   for (let i = 0; i < budget / 100; i++) {
     if (await check()) return;
     await wait(100);
   }
-  throw Error("Integration timeout");
+  throw Error(`Integration timeout: ${caller}`);
 }
 try {
   await until(async () => {
@@ -134,12 +143,12 @@ try {
   obs = await connect("overlay");
   const studioFrames: any[] = [];
   const obsFrames: any[] = [];
-  const collectorArrivalMs:number[]=[];
+  const collectorArrivalMs: number[] = [];
   studio.on("message", (b) => {
     const m = JSON.parse(b.toString());
     if (m.type === "observer") {
       studioFrames.push(m.frame);
-      if(m.frame?.status==='observed')collectorArrivalMs.push(Date.now());
+      if (m.frame?.status === "observed") collectorArrivalMs.push(Date.now());
     }
   });
   obs.on("message", (b) => {
@@ -162,9 +171,12 @@ try {
     { kind: "item", slot: "0", id: 3157, readyAt: 200, total: 120 },
   );
   assert.ok(obsFrames.some((f) => f?.sessionId === frame.sessionId));
-  await until(async()=>collectorArrivalMs.length>=5);
-  const cadence=(collectorArrivalMs[4]-collectorArrivalMs[0])/4;
-  assert.ok(cadence>=350&&cadence<650,`Expected collector ~500ms broadcast, measured ${cadence}ms`);
+  await until(async () => collectorArrivalMs.length >= 5);
+  const cadence = (collectorArrivalMs[4] - collectorArrivalMs[0]) / 4;
+  assert.ok(
+    cadence >= 350 && cadence < 650,
+    `Expected collector ~500ms broadcast, measured ${cadence}ms`,
+  );
   // The event-bearing native frame can pass between backend polls. Both
   // clients still receive it once; HTTP diagnostics never drain this queue.
   liveEventAt = 100 + sequence / 10;
@@ -228,6 +240,28 @@ try {
     return r.collector.players === 10;
   });
   assert.ok(feed.clients.size > 0); // selecting source again reconnects, no permanent stop
+  for (const reason of ["player", "unverified"]) {
+    backend.send(reason === "player" ? "test-player" : "test-unknown");
+    await until(async () => {
+      const r = await (await fetch(url + "/api/providers")).json();
+      return (
+        r.safety.reason === reason &&
+        r.collector.players === 0 &&
+        r.collector.runtime.status === "stopped" &&
+        feed.clients.size === 0
+      );
+    });
+    assert.equal(await (await fetch(url + "/api/observer")).json(), null);
+    await until(
+      async () => studioFrames.at(-1) === null && obsFrames.at(-1) === null,
+    );
+    backend.send("test-spectator");
+    await until(
+      async () =>
+        (await (await fetch(url + "/api/providers")).json()).collector
+          .players === 10,
+    );
+  }
   studio.send(
     JSON.stringify({ type: "provider", value: "collector-accountless" }),
   );

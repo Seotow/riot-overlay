@@ -206,6 +206,16 @@ export function SourcePanel({
           Dữ liệu mẫu đang được dùng cho cả Studio và OBS.
         </p>
       )}
+      {!state.mockVisible &&
+        state.provider !== "recording" &&
+        report?.safety &&
+        !report.safety.allowed && (
+          <p className="note" role="alert">
+            {report.safety.reason === "player"
+              ? "Collector đã bị chặn vì bạn đang là người chơi trong trận. Chỉ dùng khi xem spectator hoặc replay."
+              : "Collector đang chờ xác nhận spectator hoặc replay. Chưa thu dữ liệu trận."}
+          </p>
+        )}
       {state.provider === "recording" && (
         <a className="button secondary" href="/?page=demo">
           Mở phòng thử

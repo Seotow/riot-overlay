@@ -138,9 +138,7 @@ export function PostgameOverlay({
   if (!data)
     return (
       <section className="production-postgame pg-empty">
-        <small>POSTGAME · UI PREVIEW</small>
         <h1>CHỜ DỮ LIỆU SAU TRẬN</h1>
-        <p>Tải kết quả Riot hoặc nạp bộ mẫu từ Studio.</p>
       </section>
     );
   const stats = [
@@ -284,11 +282,6 @@ export function PostgameOverlay({
             <b title={t.tournament}>{t.tournament}</b>
             <div>
               <span>POSTGAME REPORT</span>
-              <small>
-                {data.source === "riot"
-                  ? `RIOT API · ${data.evidence.isFinal ? "POSTGAME" : "CHƯA ĐỦ KẾT QUẢ"} · ${data.evidence.patch || "PATCH —"}`
-                  : "DỮ LIỆU MẪU · CHƯA NỐI NGUỒN THẬT"}
-              </small>
             </div>
           </footer>
         </div>

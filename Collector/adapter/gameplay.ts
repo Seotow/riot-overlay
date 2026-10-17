@@ -115,6 +115,34 @@ export class CollectorGameplay {
     for (const v of Array.isArray(d.minions) ? d.minions : []) {
       register(v);
     }
+    // Current snapshot only: cached identities are for deaths, not proof of life.
+    // Do not expose a dead body or a future dragon from event history as alive.
+    const livingDragons = (Array.isArray(d.minions) ? d.minions : [])
+      .map(object)
+      .filter((u) => {
+        const c = object(u.common), code = String(c.identifier ?? "").toLowerCase();
+        return code.startsWith("sru_dragon_") && objectiveCodes[code] &&
+          typeof c.health === "number" && Number.isFinite(c.health) && c.health > 0 &&
+          !(typeof c.status === "number" && (c.status & 1) === 0);
+      });
+    const dragonTypes = [...new Set(livingDragons.map(u =>
+      objectiveCodes[String(object(u.common).identifier).toLowerCase()]))];
+    const indicatorTypes = [...new Set((Array.isArray(d.particleEmitters) ? d.particleEmitters : [])
+      .map(object)
+      .map(p => String(object(p.info).name ?? "").match(/^(?:.*[\\/])?Dragon_Indicator_(Fire|Earth|Water|Air|Hextech|Chemtech|Elder)(?:\.troy)?$/i)?.[1].toLowerCase())
+      .filter((type): type is string => !!type))];
+    // A live monster outranks the spawn marker. Conflicting live identities or
+    // multiple marker types are missing, never resolved by order or cached history.
+    const dragonType = dragonTypes.length === 1 ? dragonTypes[0]
+      : dragonTypes.length === 0 && indicatorTypes.length === 1 ? indicatorTypes[0] : null;
+    if (dragonType) {
+      const observed = <T,>(value: T | null) => ({ value,
+        availability: value === null ? "missing" as const : "observed" as const,
+        source: "league-collector" as const, observedAt: s.capturedAt });
+      s.pitTimers = [{ pit: "dragon", type: observed(dragonType),
+        isAlive: observed<boolean>(dragonTypes.length === 1 ? true : null),
+        timeAlive: observed<number>(null), timeDestroy: observed<number>(null) }];
+    }
     heroes.forEach((h, slot) => register(h, slot));
     for (const v of Array.isArray(d.turrets) ? d.turrets : [])
       register(v, undefined, "TurretKilled");

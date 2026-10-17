@@ -4,9 +4,11 @@ import { mkdtemp, rm } from "node:fs/promises";
 import { join } from "node:path";
 import { tmpdir } from "node:os";
 import { CollectorRuntime } from "../Collector/runtime/supervisor";
+const spectator = async () => ({ allowed: true, reason: "spectator" as const });
 test("accountless mode rejects an external host whose authentication cannot be isolated", async () => {
   const runtime = new CollectorRuntime({
     external: true,
+    safety: spectator,
     withoutAccount: true,
   });
   await runtime.setEnabled(true);
@@ -18,7 +20,7 @@ test("accountless mode rejects an external host whose authentication cannot be i
   await runtime.stop();
 });
 test("external collector is never owned or stopped by the project", async () => {
-  const runtime = new CollectorRuntime({ external: true });
+  const runtime = new CollectorRuntime({ external: true, safety: spectator });
   await runtime.setEnabled(true);
   assert.equal(runtime.snapshot().status, "external");
   assert.equal(runtime.snapshot().owned, false);
@@ -31,7 +33,7 @@ test("external collector is never owned or stopped by the project", async () => 
 test("missing collector build fails closed without child, retries only after explicit disable", async () => {
   const root = await mkdtemp(join(tmpdir(), "collector-missing-"));
   try {
-    const runtime = new CollectorRuntime({ root });
+    const runtime = new CollectorRuntime({ root, safety: spectator });
     await runtime.setEnabled(true);
     assert.equal(runtime.snapshot().status, "failed");
     assert.equal(runtime.snapshot().owned, false);

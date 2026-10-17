@@ -5,6 +5,10 @@ import { createServer } from "node:net";
 import http from "node:http";
 import { resolve } from "node:path";
 import { accountlessEnvironment } from "./accountless-environment";
+import {
+  collectorSafety,
+  type SafetyDecision,
+} from "../../server/collector-safety";
 
 type Status =
   "stopped" | "starting" | "running" | "external" | "failed" | "conflict";
@@ -23,6 +27,8 @@ export class CollectorRuntime {
   private root: string;
   private autoInject: boolean;
   private withoutAccount: boolean;
+  private safety: () => Promise<SafetyDecision>;
+  private safetyTimer?: ReturnType<typeof setTimeout>;
   constructor(
     options: {
       port?: number;
@@ -30,6 +36,7 @@ export class CollectorRuntime {
       root?: string;
       autoInject?: boolean;
       withoutAccount?: boolean;
+      safety?: () => Promise<SafetyDecision>;
     } = {},
   ) {
     this.port = options.port ?? 18799;
@@ -39,6 +46,7 @@ export class CollectorRuntime {
     this.root = resolve(options.root ?? process.cwd());
     this.autoInject = options.autoInject ?? true;
     this.withoutAccount = options.withoutAccount ?? false;
+    this.safety = options.safety ?? (() => collectorSafety.check());
   }
   snapshot() {
     return {
@@ -54,6 +62,13 @@ export class CollectorRuntime {
     this.desired = enabled;
     if (!enabled) {
       await this.stop();
+      return;
+    }
+    const decision = await this.safety();
+    if (!this.desired) return;
+    if (!decision.allowed) {
+      await this.stop();
+      this.error = `collector-blocked-${decision.reason}`;
       return;
     }
     if (this.external) {
@@ -157,6 +172,13 @@ export class CollectorRuntime {
         );
       });
       if (!this.desired || generation !== this.generation) return;
+      const decision = await this.safety();
+      if (!this.desired || generation !== this.generation) return;
+      if (!decision.allowed) {
+        this.state = "stopped";
+        this.error = `collector-blocked-${decision.reason}`;
+        return;
+      }
       this.token = randomBytes(32).toString("hex");
       const child = spawn(
         executable,
@@ -204,13 +226,29 @@ export class CollectorRuntime {
         }
       });
       this.state = "running"; // process ownership, never telemetry readiness
+      this.monitorSafety();
     } catch {
       if (generation !== this.generation) return;
       this.state = stage === "port-conflict" ? "conflict" : "failed";
       this.error = stage;
     }
   }
+  private monitorSafety() {
+    clearTimeout(this.safetyTimer);
+    if (!this.child || !this.desired) return;
+    this.safetyTimer = setTimeout(async () => {
+      const decision = await this.safety();
+      if (!this.desired) return;
+      if (!decision.allowed) {
+        this.child?.kill();
+        await this.stop();
+        this.error = `collector-blocked-${decision.reason}`;
+      } else this.monitorSafety();
+    }, 500);
+    this.safetyTimer.unref();
+  }
   async stop() {
+    clearTimeout(this.safetyTimer);
     this.desired = false;
     ++this.generation;
     if (this.stopping) return this.stopping;

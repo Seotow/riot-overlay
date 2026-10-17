@@ -27,7 +27,7 @@ const directory = await mkdtemp(join(tmpdir(), "riot-overlay-test-"));
 const themePath = join(directory, "theme.json");
 const server = spawn(
   process.execPath,
-  ["--import", "tsx", "--import", "./tests/fixtures/riot-api-preload.ts", "server/index.ts", "--production"],
+  ["--import", "tsx", "--import", "./tests/fixtures/spectator-safety-preload.ts", "--import", "./tests/fixtures/riot-api-preload.ts", "server/index.ts", "--production"],
   {
     env: { ...process.env, PORT: "4311", RIOT_OVERLAY_THEME_PATH: themePath },
     stdio: ["ignore", "pipe", "pipe"],

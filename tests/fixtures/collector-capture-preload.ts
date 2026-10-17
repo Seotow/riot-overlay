@@ -3,6 +3,7 @@ import https from "node:https";
 import { EventEmitter } from "node:events";
 import { Readable } from "node:stream";
 import { syncBuiltinESMExports } from "node:module";
+import "./spectator-safety-preload";
 const original = https.request;
 (https as any).request = (options: any, callback: any) => {
   if (Number(options.port) !== 2999) return original(options, callback);

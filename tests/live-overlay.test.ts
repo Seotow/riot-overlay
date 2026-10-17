@@ -13,6 +13,24 @@ import {
 import { liveCatalog } from "../shared/live-assets";
 import { objectiveIconUrl } from "../shared/objective-icons";
 const now = Date.UTC(2026, 8, 19);
+
+test("team presentation sorts observed lane quests without changing source slots or same-lane gold pairing",()=>{
+ const f=frame(),s=f.sample!,original=s.players.map(p=>p.slot);
+ const lanes=["support","bot","top","mid","jungle"] as const;
+ for(const p of s.players){
+  p.roleQuest={...p.totalGold,availability:"observed",value:{role:lanes[p.slot%5],itemId:0+1220,completed:false,progress:0,rewardItemId:null,rewardSpellId:null}};
+  p.totalGold={...p.totalGold,value:1000+p.slot*100,availability:"observed"};
+ }
+ let v=livePresentation(f,now);
+ assert.deepEqual(v.blue.map(p=>p.slot),[2,4,3,1,0]);
+ assert.deepEqual(v.red.map(p=>p.slot),[7,9,8,6,5]);
+ assert.deepEqual(s.players.map(p=>p.slot),original);
+ assert.ok(v.laneGold.every(g=>g?.value===500&&g.leader==="red"));
+ s.players[7].roleQuest!.availability="missing";
+ v=livePresentation(f,now);
+ assert.equal(v.red.at(-1)?.slot,7);
+ assert.equal(v.laneGold[0],null); // Do not compare known Top against a different role.
+});
 test("champion stack takes secondary rune/quest priority in both full layouts and overlays ultimate in simple",()=>{
  const f=frame(),p=f.sample!.players[0];f.sample!.assetVersion=liveCatalog.version;
  p.championId={...p.championId,value:901};
@@ -123,7 +141,7 @@ test("preview variants show all pit types, Baron/Elder separately or together wi
       "elder",
     ] as const) {
       const html = render({ pit, dragon });
-      assert.ok(html.includes("GIẢ LẬP UI"));
+      assert.ok(!html.includes("GIẢ LẬP UI"));
       assert.ok(
         html.includes(
           objectiveIconUrl(pit),
@@ -557,5 +575,7 @@ test("team lead, lane gaps, towers, dragons and objective timers use observed da
   assert.ok(html.includes("dragon-earth"));
   assert.ok(html.includes("HEXTECH"));
   assert.ok(html.includes("00:57"));
-  assert.ok(html.includes("LIVE"));
+  assert.ok(html.includes('data-available="true"'));
+  assert.ok(html.includes("is-available"));
+  assert.ok(!html.includes(">LIVE<"));
 });

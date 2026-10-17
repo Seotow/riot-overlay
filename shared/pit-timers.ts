@@ -15,15 +15,11 @@ export function presentationPitTimers(sample: IngameSample | null): PitTimer[] {
   });
   const dragon = [...events].reverse().find((e) => e.kind === "DragonKill");
   const soul = events.some((e) => e.kind === "DragonSoul");
-  const dragonKills = events.filter(
-    (e) => e.kind === "DragonKill" && e.objectiveType !== "elder",
-  );
-  const nextDragon =
-    dragon?.objectiveType === "elder" || soul
-      ? "elder"
-      : dragonKills.length >= 3
-        ? (dragon?.objectiveType ?? "dragon")
-        : "dragon";
+  const reportedDragon = sample.pitTimers?.find(t => t.pit === "dragon");
+  // Type comes from source only. History may estimate the clock, not identity.
+  const elderRespawn = reportedDragon?.type.value
+    ? /^(?:DRAGON_)?elder$/i.test(reportedDragon.type.value)
+    : dragon?.objectiveType === "elder" || soul;
   const baron = [...events].reverse().find((e) => e.kind === "BaronKill");
   const heraldKilled = events.some((e) => e.kind === "HeraldKill");
   const grubsKilled =
@@ -52,11 +48,11 @@ export function presentationPitTimers(sample: IngameSample | null): PitTimer[] {
     },
     {
       pit: "dragon",
-      type: field(nextDragon),
+      type: field("dragon"),
       timeAlive: field(
         dragon
           ? dragon.at +
-              (nextDragon === "elder"
+              (elderRespawn
                 ? rules.elderRespawn
                 : rules.dragonRespawn)
           : rules.dragonFirst,
@@ -68,7 +64,7 @@ export function presentationPitTimers(sample: IngameSample | null): PitTimer[] {
   return defaults.map((timer) => {
     const reported = sample.pitTimers?.find((t) => t.pit === timer.pit);
     return reported &&
-      (reported.timeAlive.value !== null || reported.timeDestroy.value !== null)
+      (reported.isAlive?.value === true || reported.timeAlive.value !== null || reported.timeDestroy.value !== null)
       ? reported
       : { ...timer, ...(reported?.type.value ? { type: reported.type } : {}) };
   });

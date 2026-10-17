@@ -193,6 +193,7 @@ const observedPitTimerSchema = z
   .object({
     pit: z.enum(["baron", "dragon"]),
     type: field(z.string().max(64)),
+    isAlive: field(z.boolean()).optional(),
     timeAlive: field(finite),
     timeDestroy: field(finite),
   })

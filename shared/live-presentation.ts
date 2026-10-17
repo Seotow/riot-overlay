@@ -1,6 +1,19 @@
 import type { ObserverFrame, ObservedPlayer } from "./observer";
 import { presentationPitTimers } from "./pit-timers";
 
+const laneOrder = ["top", "jungle", "mid", "bot", "support"] as const;
+function playerLane(player: ObservedPlayer | undefined) {
+  return player?.roleQuest?.availability === "observed" ? player.roleQuest.value?.role : undefined;
+}
+export function sortPlayersByLane(players: ObservedPlayer[]) {
+  const rank = (p: ObservedPlayer) => {
+    const lane = playerLane(p);
+    return lane === undefined ? laneOrder.length : laneOrder.indexOf(lane);
+  };
+  // Keep original slots as identity for events, nickname overrides and counters.
+  return [...players].sort((a,b) => rank(a)-rank(b) || a.slot-b.slot);
+}
+
 export function latestObjectiveEvent(frame: ObserverFrame | null) {
   return (
     [...(frame?.newEvents ?? [])]
@@ -50,8 +63,8 @@ export function livePresentation(frame: ObserverFrame | null, now: number) {
           }
         : p,
     ) ?? [];
-  const blue = players.filter((p) => p.team.value === "ORDER");
-  const red = players.filter((p) => p.team.value === "CHAOS");
+  const blue = sortPlayersByLane(players.filter((p) => p.team.value === "ORDER"));
+  const red = sortPlayersByLane(players.filter((p) => p.team.value === "CHAOS"));
   const blueTeam = sample?.teams?.find((team) => team.team === "ORDER");
   const redTeam = sample?.teams?.find((team) => team.team === "CHAOS");
   const sum = (players: ObservedPlayer[], field: "kills" | "totalGold") =>
@@ -75,6 +88,8 @@ export function livePresentation(frame: ObserverFrame | null, now: number) {
     blueRoleQuests: blueTeam?.roleQuests?.value ?? null,
     redRoleQuests: redTeam?.roleQuests?.value ?? null,
     laneGold: Array.from({ length: 5 }, (_, index) => {
+      const leftLane = playerLane(blue[index]), rightLane = playerLane(red[index]);
+      if ((leftLane || rightLane) && leftLane !== rightLane) return null;
       const left = blue[index]?.totalGold.value;
       const right = red[index]?.totalGold.value;
       return left == null || right == null

@@ -8,8 +8,57 @@ import {
 } from "../Collector/adapter";
 import { observerFrameSchema } from "../shared/observer";
 import { CollectorGameplay } from "../Collector/adapter/gameplay";
+import { presentationPitTimers } from "../shared/pit-timers";
+
+test("dragon timer uses current living native monster, not future kills or cached bodies", () => {
+ const raw=fixture(), project=new CollectorGameplay();
+ const apply=()=>project.enrich(raw,normalizeCollector(raw,base)!).sample;
+ assert.equal(apply().pitTimers,undefined);
+ const monster={info:{networkId:9000,team:0},common:{identifier:"sru_dragon_chemtech",health:3625,status:1}};
+ raw.data.minions=[monster];
+ let s=apply();
+ assert.equal(s.pitTimers?.[0].type.value,"chemtech");
+ assert.equal(s.pitTimers?.[0].isAlive?.value,true);
+ assert.equal(s.pitTimers?.[0].timeAlive.value,null);
+ assert.equal(presentationPitTimers(s)[1].type.value,"chemtech");
+ raw.data.minions=[];raw.data.gameTime++;
+ assert.equal(apply().pitTimers,undefined);
+ monster.common.health=0;raw.data.minions=[monster];
+ assert.equal(apply().pitTimers,undefined);
+ monster.common.health=3625;monster.common.identifier="sru_dragon_hextech";
+ assert.equal(apply().pitTimers?.[0].type.value,"hextech");
+ raw.data.gameTime=50;raw.data.minions=[];
+ assert.equal(apply().pitTimers,undefined);
+});
 
 const base = Date.parse("2026-10-14T15:00:00Z");
+test("next dragon comes from exact current indicator, with live priority and no marker cache",()=>{
+ const raw=fixture() as ReturnType<typeof fixture>&{data:{particleEmitters:any[]}};
+ const project=new CollectorGameplay();
+ const apply=()=>project.enrich(raw,normalizeCollector(raw,base)!).sample;
+ for(const type of ["Fire","Earth","Water","Air","Hextech","Chemtech","Elder"]){
+  for(const name of [`Dragon_Indicator_${type}`,`DATA/Particles/Dragon_Indicator_${type}.troy`]){
+   raw.data.particleEmitters=[{info:{name}}];
+   const s=apply(),t=presentationPitTimers(s)[1];
+   assert.equal(t.type.value,type.toLowerCase());
+   assert.equal(s.pitTimers?.[0].type.availability,"observed");
+   assert.equal(s.pitTimers?.[0].isAlive?.value,null);
+   assert.equal(s.pitTimers?.[0].timeAlive.value,null);
+   assert.equal(t.basis,"rule-estimate");
+  }
+ }
+ raw.data.minions=[{info:{networkId:9001,team:0},common:{identifier:"sru_dragon_water",health:100,status:1}}];
+ assert.equal(apply().pitTimers?.[0].type.value,"water"); // Live Water outranks Elder marker.
+ raw.data.minions=[];
+ raw.data.particleEmitters=[{info:{name:"Dragon_Indicator_Water"}},{info:{name:"Dragon_Indicator_Fire"}}];
+ assert.equal(apply().pitTimers,undefined);
+ for(const name of ["Dragon_Indicator_Water_Preview","Other_Dragon_Indicator_Water","Dragon_Indicator_Unknown"]){
+  raw.data.particleEmitters=[{info:{name}}];assert.equal(apply().pitTimers,undefined);
+ }
+ raw.data.gameTime=10;raw.data.particleEmitters=[];
+ assert.equal(apply().pitTimers,undefined);
+ assert.equal(presentationPitTimers(apply())[1].type.value,"dragon");
+});
 test("native champion stack contract exposes real Smolder/Veigar counters and clears on missing buff",()=>{
  const raw=fixture();const h=raw.data.heroes[0];
  h.common.identifier="Smolder";h.common.buffs=[{name:"SmolderQPassive",count:32}];

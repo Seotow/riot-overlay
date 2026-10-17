@@ -1,5 +1,12 @@
 # Cấm chọn — 12/10/2026
 
+## Animation, 17/10/2026
+
+Cả hai layout có intro khung/đội, reveal ảnh hover, sweep nhẹ khi khóa tướng/
+ban và chuyển nhãn lượt. Không đổi geometry hoặc vùng trong suốt cho cam.
+Đổi hover/lock/swap có thể chạy lại hiệu ứng ảnh; timer tick không remount ảnh.
+`prefers-reduced-motion: reduce` tắt animation/transition cấm chọn.
+
 Module production nhập tay tại `/?page=draft`; đầu ra OBS `/overlay?scene=draft`,
 1920×1080 và nền trong suốt. `/?page=theme` cung cấp tên đội, logo tùy chọn,
 tỉ số, số trận loạt đấu và tên giải cho cùng renderer. Đội không có logo dùng tên.

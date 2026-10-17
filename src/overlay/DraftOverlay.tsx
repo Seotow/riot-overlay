@@ -6,6 +6,7 @@ import {
   type DraftState,
 } from "../../shared/draft";
 import type { Theme } from "../../shared/schema";
+import type { CSSProperties } from "react";
 
 export function DraftOverlay({
   theme: t,
@@ -42,8 +43,25 @@ export function DraftOverlay({
                 turn?.[0] === side && turn[1] === "ban" && turn[2] === i;
               const c = champion(id ?? (active ? (draft.hover ?? "") : ""));
               return (
-                <span className={`draft-ban ${active ? "active" : ""}`} key={i}>
-                  {c && <img src={c.icon} alt={`Ban ${c.name}`} />}
+                <span
+                  className={`draft-ban ${active ? "active" : ""} ${id ? "is-locked" : ""}`}
+                  key={i}
+                  style={{ "--draft-delay": `${i * 45}ms` } as CSSProperties}
+                >
+                  {c && (
+                    <img
+                      key={`${c.id}:${id ? "locked" : "hover"}`}
+                      src={c.icon}
+                      alt={`Ban ${c.name}`}
+                    />
+                  )}
+                  {id && (
+                    <i
+                      className="draft-lock-flash"
+                      key={`lock:${id}`}
+                      aria-hidden="true"
+                    />
+                  )}
                   {!c && <small>{i + 1}</small>}
                 </span>
               );
@@ -76,6 +94,7 @@ export function DraftOverlay({
                   <article
                     className={`ref-pick ${id ? "is-picked" : active ? "is-hover" : "is-empty"}`}
                     data-champion={c?.id}
+                    style={{ "--draft-delay": `${i * 55}ms` } as CSSProperties}
                     key={i}
                   >
                     <span className="pick-number">
@@ -86,6 +105,7 @@ export function DraftOverlay({
                     </span>
                     {c && (
                       <img
+                        key={`${c.id}:${id ? "locked" : "hover"}`}
                         className="pick-portrait"
                         src={
                           t.draftLayout === "simple" && "splash" in c
@@ -96,6 +116,13 @@ export function DraftOverlay({
                       />
                     )}
                     <div className="pick-shade" />
+                    {id && (
+                      <i
+                        className="draft-lock-flash"
+                        key={`lock:${id}`}
+                        aria-hidden="true"
+                      />
+                    )}
                     {t.draftLayout === "simple" && c && (
                       <span className="draft-champion-name">{c.name}</span>
                     )}
@@ -167,7 +194,7 @@ export function DraftOverlay({
           {draft.patch && (
             <div className="draft-patch">PATCH {draft.patch}</div>
           )}
-          <div className="draft-phase">
+          <div className="draft-phase" key={draft.step}>
             {!turn
               ? "ĐỘI HÌNH HOÀN TẤT"
               : `${turn[0] ? t.redName : t.blueName} · ${turn[1] === "ban" ? "BAN" : "PICK"} ${turn[2] + 1}`}
