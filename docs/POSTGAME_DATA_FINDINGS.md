@@ -142,6 +142,23 @@ Seotoww, phase Lobby). Không POST, không tải file, không in token.
 | `lol-match-history` | Chi tiết/timeline theo gameId: đã xác nhận 404 với spectator |
 | Native collector | `damageDealtEvents` có nhưng `damageDealt` luôn 0 trong mọi bản ghi; không phải nguồn damage |
 
+### Probe EOG chỉ đọc (chạy trên máy spectator)
+
+```powershell
+npm run probe:eog          # tự dừng 90 giây sau khi về lobby; Ctrl+C để dừng sớm
+npm run probe:eog -- --keep   # chạy qua nhiều trận
+```
+
+Bật trước khi vào trận (hoặc lúc đang ở lobby/phòng cấm chọn). Probe chỉ GET: `gameflow-phase` và
+`gameflow/v1/session` (phase, gameId, isSpectator, queueId, gameMode), `gameclient-eog-stats-block`,
+`eog-stats-block`, rồi `lol-replays/v1/metadata/{gameId}` khi phase là WaitingForStats/PreEndOfGame/
+EndOfGame/Lobby. Thông tin đăng nhập LCU lấy từ tiến trình LeagueClientUx, chỉ nằm trong RAM.
+Kết quả ở `.npm-cache/lcu-eog/` (không theo Git): `probe-<thời gian>.ndjson` là nhật ký
+(phase, trạng thái HTTP, tóm tắt: số người, các khóa `stats`, có `DAMAGE_DEALT_TO_CHAMPIONS` hay không) và
+`<thời gian>-NN-<endpoint>.json` là payload đã lọc (bỏ PUUID, Riot ID, tên, token, dữ liệu chat; giữ
+số liệu và champion). Đọc `summary.hasDamageToChampions` và `players` để biết spectator có nhận EOG
+đủ 10 người không.
+
 Hướng thử tiếp, theo thứ tự rủi ro thấp trước:
 
 1. **Thăm dò chỉ đọc cuối trận trên máy spectator**: poll `gameflow-phase`, `gameclient-eog-stats-block`
