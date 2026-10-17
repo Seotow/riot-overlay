@@ -200,3 +200,70 @@ test("control commands are validated and forwarded with a bearer token only", as
   );
   assert.equal(calls.length, 1);
 });
+
+test("game power persists per game and defaults to LoL only", async () => {
+  const { GamePower } = await import("../server/game-power");
+  const { mkdtemp, readFile } = await import("node:fs/promises");
+  const { tmpdir } = await import("node:os");
+  const { join } = await import("node:path");
+  const path = join(await mkdtemp(join(tmpdir(), "games-")), "games.json");
+  const power = new GamePower(path);
+  await power.load();
+  assert.deepEqual(power.snapshot(), { lol: true, valorant: false });
+  await power.set("valorant", true);
+  await power.set("lol", false);
+  const again = new GamePower(path);
+  await again.load();
+  assert.deepEqual(again.snapshot(), { lol: false, valorant: true });
+  assert.deepEqual(JSON.parse(await readFile(path, "utf8")), { lol: false, valorant: true });
+});
+
+test("match config: logo is identified by file signature and stored by content hash", async () => {
+  const { saveMatchConfig, viewMatchConfig, decodeLogo } =
+    await import("../server/valorant-config");
+  const { defaultValorantMatchConfig } = await import("../shared/valorant-config");
+  const { mkdtemp, readdir } = await import("node:fs/promises");
+  const { tmpdir } = await import("node:os");
+  const { join } = await import("node:path");
+  const dir = await mkdtemp(join(tmpdir(), "val-cfg-"));
+  const paths = {
+    config: join(dir, "match-config.json"),
+    assets: join(dir, "assets"),
+    frontendPort: 5322,
+  };
+  const png = Buffer.concat([
+    Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]),
+    Buffer.from("x".repeat(20)),
+  ]);
+  const dataUrl = `data:image/png;base64,${png.toString("base64")}`;
+  assert.ok(decodeLogo(dataUrl));
+  assert.equal(
+    decodeLogo(`data:image/png;base64,${Buffer.from("not an image").toString("base64")}`),
+    null,
+  );
+  assert.equal(decodeLogo(`data:image/jpeg;base64,${png.toString("base64")}`), null);
+  const config = structuredClone(defaultValorantMatchConfig);
+  config.teams[0].name = "Alpha";
+  config.series = { needed: 2, wonLeft: 1, wonRight: 0 };
+  config.nameOverrides = [{ player: "Foo#VN1", display: "Foo" }];
+  const saved = await saveMatchConfig({ config, uploads: { left: dataUrl } }, paths);
+  assert.ok(saved.ok);
+  if (!saved.ok) return;
+  assert.match(saved.view.config.teams[0].logo, /^[a-f0-9]{16}\.png$/);
+  assert.equal(
+    saved.view.logoUrls.left,
+    `http://127.0.0.1:5322/uploads/${saved.view.config.teams[0].logo}`,
+  );
+  assert.deepEqual(await readdir(paths.assets), [saved.view.config.teams[0].logo]);
+  assert.equal((await viewMatchConfig(paths)).config.teams[0].name, "Alpha");
+  const over = structuredClone(config);
+  over.series.wonLeft = 3;
+  assert.deepEqual(await saveMatchConfig({ config: over }, paths), {
+    ok: false,
+    error: "invalid-config",
+  });
+  assert.deepEqual(
+    await saveMatchConfig({ config, uploads: { right: "data:image/png;base64,AAAA" } }, paths),
+    { ok: false, error: "invalid-logo" },
+  );
+});

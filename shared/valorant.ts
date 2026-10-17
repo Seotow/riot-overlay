@@ -114,6 +114,7 @@ export const valorantCommandSchema = z.discriminatedUnion("command", [
   z.object({ command: z.literal("switch_kda_credits") }),
   z.object({ command: z.literal("swap_left_right") }),
   z.object({ command: z.literal("swap_attacker_defender") }),
+  z.object({ command: z.literal("apply_config") }),
   z.object({
     command: z.literal("toast"),
     title: z.string().max(80),

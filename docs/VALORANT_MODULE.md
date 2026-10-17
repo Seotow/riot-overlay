@@ -154,7 +154,7 @@ Giấy phép/provenance và khác biệt manifest được ghi ở `modules/valo
 
 ## Client fork tự gắn vào app (18/10/2026)
 
-`npm run start:all` chạy Studio + backend/FE Valorant + **Client fork** (build từ source trong
+Chạy `npm start` rồi bật công tắc **Kết nối Valorant** trong Studio (chọn game Valorant ở thanh bên): Studio tự chạy backend/FE Valorant + **Client fork** (build từ source trong
 `modules/valorant/collector`), không cần mở Spectra Client hay nhập form. Fork thêm `src/headless.ts`:
 chỉ bật khi có `RIOT_OVERLAY_SPECTRA_CONFIG` (JSON do supervisor ghi vào `data/valorant/runtime/headless.json`,
 chỉ chứa ingest loopback, group code và đường dẫn tới `auth.key`; key không nằm trong config và không ghi log).
@@ -190,3 +190,14 @@ Overlay in-game dùng bản **VAL26** của nobiiVAL (`modules/valorant/frontend
 `http://127.0.0.1:5322/overlay?groupCode=RIOTLOCAL` (OBS 1920×1080). Build bằng `npm run build:valorant`
 (hoặc `npm run build` trong thư mục đó). `frontendVariant: "spectra"` trong `data/valorant/module.json` quay về bản cũ.
 Chưa audit toàn bộ widget/animation; team name/logo đang là mặc định "Team 1/Team 2" cho tới khi có cấu hình đội.
+
+## Chọn game, công tắc kết nối và cấu hình trận (18/10/2026)
+
+Studio chọn game LoL/Valorant ở thanh bên; mỗi game có công tắc kết nối riêng (lưu ở `data/studio-games.json`, mặc định LoL bật, Valorant tắt).
+Tắt LoL ngắt LeagueBroadcast, collector và các vòng poll LoL; tắt Valorant dừng toàn bộ module (backend, frontend, Client fork) và socket Spectra.
+Module Valorant do Studio quản lý (`server/valorant-module.ts`); `npm run start:valorant` vẫn dùng được khi chạy riêng, nhưng không chạy song song với công tắc (trùng owner/cổng sẽ báo lỗi).
+
+Trang Valorant có Tổng quan, Cấu hình trận (tên/mã/logo hai đội, tỉ số loạt trận, thể thức, tên và logo giải, tên thay thế người chơi) và Phát sóng
+(overlay thu nhỏ + nút điều khiển). Cấu hình lưu ở `data/valorant/match-config.json`, logo ở `data/valorant/assets` (đặt tên theo hash, kiểm tra chữ ký ảnh,
+tối đa 350KB, phục vụ ở `/uploads` của frontend module). Lưu xong, Studio gửi lệnh `apply_config`; Client fork gửi `config_update` lên backend fork để đổi giữa trận
+(Spectra gốc chỉ đọc đội lúc tạo trận). Client mới kết nối cũng đọc lại file này.

@@ -60,12 +60,6 @@ export const studioModules = [
     description: "Tên đội, màu sắc, kiểu chữ và thành phần hiển thị.",
   },
   {
-    id: "valorant",
-    title: "VALORANT",
-    icon: "07",
-    description: "Dữ liệu Spectra đã chuẩn hoá và overlay OBS riêng.",
-  },
-  {
     id: "roadmap",
     title: "Kế hoạch",
     icon: "06",

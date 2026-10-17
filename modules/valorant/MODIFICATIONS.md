@@ -59,3 +59,7 @@ local BE/FE builds. Do not enable `prepare` to install nested upstream Git hooks
   (ELv2, fork của Spectra-Frontend; ghi nguồn tại `frontend-val26/SOURCE.md`). Chỉ chạy `npm install --ignore-scripts`
   (lock upstream lệch `node-vibrant`, `package-lock.json` được cập nhật) và build; mã nguồn FE chưa sửa. Runtime chọn
   `frontendVariant` (`val26` mặc định nếu đã build, `spectra` là bản fork cũ); không đổi/vô hiệu license hay watermark.
+
+- 18/10/2026: backend fork thêm sự kiện `config_update` (`Match.handleConfigUpdate`, `Team.updateInfo`) để Studio đổi tên/mã/logo đội, tỉ số loạt trận,
+  thông tin giải và tên thay thế giữa trận; chỉ đổi dữ liệu hiển thị, giới hạn kiểu và độ dài, không đụng auth, watermark hay license. Frontend module phục vụ
+  `/uploads/<hash>.(png|jpg|webp)` từ `data/valorant/assets`. Client fork đọc `match-config.json` khi kết nối và khi nhận `apply_config`.

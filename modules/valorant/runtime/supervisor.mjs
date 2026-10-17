@@ -33,7 +33,9 @@ export async function forkCollector(config, configPath) {
   await writeFile(configFile, JSON.stringify({ ingestIp: `http://127.0.0.1:${config.ports.ingest}`, groupCode: config.groupCode,
     keyFile: resolve(dirname(configPath), 'auth.key'), observerName: 'Riot Overlay',
     controlPort: controlPort(config), controlToken: randomBytes(32).toString('hex'),
-    teamLogoUrl: `http://127.0.0.1:${config.ports.frontend}/assets/misc/logo.webp` }), { mode: 0o600 });
+    teamLogoUrl: `http://127.0.0.1:${config.ports.frontend}/assets/misc/logo.webp`,
+    matchConfigFile: resolve(dirname(configPath), 'match-config.json'),
+    assetBase: `http://127.0.0.1:${config.ports.frontend}/uploads/` }), { mode: 0o600 });
   const profile = resolve(dirname(configPath), 'collector/fork-profile');
   await mkdir(profile, { recursive: true });
   return { command: electron, args: [dir], cwd: dir,
@@ -121,7 +123,7 @@ export async function startModule({ config, configPath, servicesOnly = false, st
         collector: collectorState, observerConnected: (health?.observersConnected ?? 0) > 0, matchesRunning: health?.matchesRunning ?? 0,
         telemetry: 'not-yet-verified', ports: config.ports };
     };
-    frontend = createFrontend({ config, browserDir, getStatus });
+    frontend = createFrontend({ config, browserDir, getStatus, assetsDir: resolve(dirname(configPath), 'assets') });
     await new Promise((ok, fail) => { frontend.once('error', fail); frontend.listen(config.ports.frontend, '127.0.0.1', ok); });
     frontend.on('error', () => { fatalResolve('frontend-failed'); void stop(); });
     const fork = !servicesOnly && config.collectorMode === 'fork' ? await forkCollector(config, configPath).catch(() => null) : null;

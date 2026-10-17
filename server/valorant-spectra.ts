@@ -147,6 +147,7 @@ export function normalizeSpectra(
 export interface SpectraOptions {
   port: number;
   groupCode: string;
+  frontendPort?: number;
   now?: () => number;
   /** Chỉ dùng trong test: bỏ qua việc mở socket thật. */
   connect?: boolean;
@@ -266,11 +267,13 @@ export async function loadSpectraOptions(
   path = resolve(process.env.RIOT_OVERLAY_VALORANT_CONFIG || "data/valorant/module.json"),
 ): Promise<SpectraOptions> {
   let port = 5320,
-    groupCode = "RIOTLOCAL";
+    groupCode = "RIOTLOCAL",
+    frontendPort = 5322;
   try {
     const config = JSON.parse(await readFile(path, "utf8"));
     if (Number.isInteger(config?.ports?.output)) port = config.ports.output;
     if (typeof config?.groupCode === "string" && config.groupCode) groupCode = config.groupCode;
+    if (Number.isInteger(config?.ports?.frontend)) frontendPort = config.ports.frontend;
   } catch {}
-  return { port, groupCode };
+  return { port, groupCode, frontendPort };
 }

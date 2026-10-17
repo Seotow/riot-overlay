@@ -11,6 +11,7 @@ import {
   ChartColumn,
   PanelTop,
   Crosshair,
+  Gamepad2,
   ExternalLink,
   X,
 } from "lucide-react";
@@ -21,8 +22,11 @@ import { MatchConfig, ProductionDesk } from "./Production";
 import { DraftDesk } from "./DraftDesk";
 import { PostgameDesk } from "./PostgameDesk";
 import { ReplayHud } from "./ReplayHud";
-import { ValorantDesk } from "./ValorantDesk";
-import { ValorantOverlay } from "./overlay/ValorantOverlay";
+import { ValorantOverview, moduleText } from "./valorant/ValorantOverview";
+import { ValorantMatchConfig } from "./valorant/ValorantMatchConfig";
+import { ValorantBroadcast } from "./valorant/ValorantBroadcast";
+import { useGames, type GameId } from "./lib/useGames";
+import { useValorantConfig } from "./lib/useValorantConfig";
 import { RecordingDesk } from "./RecordingDesk";
 import {
   Dashboard,
@@ -40,12 +44,11 @@ import "./style.css";
 import "./overlay/overlay.css";
 import "./overlay/postgame.css";
 import "./studio.css";
+import "./valorant.css";
 
-const isValorantOverlay = location.pathname === "/valorant-overlay";
 const isOverlay = location.pathname === "/overlay";
-const transparent = isOverlay || isValorantOverlay;
-document.body.className = transparent ? "overlay-body" : "studio-body";
-document.documentElement.classList.toggle("overlay-body", transparent);
+document.body.className = isOverlay ? "overlay-body" : "studio-body";
+document.documentElement.classList.toggle("overlay-body", isOverlay);
 const navigation = [
   { id: "overview", label: "Tổng quan", icon: LayoutDashboard },
   { id: "theme", label: "Cấu hình trận đấu", icon: Settings2 },
@@ -55,8 +58,26 @@ const navigation = [
   { id: "draft", label: "Cấm chọn", icon: Swords },
   { id: "postgame", label: "Sau trận", icon: ChartColumn },
   { id: "hud", label: "HUD trong game", icon: PanelTop },
-  { id: "valorant", label: "VALORANT", icon: Crosshair },
 ] as const;
+const valorantNavigation = [
+  { id: "overview", label: "Tổng quan", icon: LayoutDashboard },
+  { id: "config", label: "Cấu hình trận", icon: Settings2 },
+  { id: "broadcast", label: "Phát sóng", icon: Clapperboard },
+] as const;
+type ValorantPage = (typeof valorantNavigation)[number]["id"];
+const gameLabels: Record<GameId, string> = { lol: "League of Legends", valorant: "VALORANT" };
+const readGame = (): GameId => {
+  const fromUrl = new URLSearchParams(location.search).get("game");
+  if (fromUrl === "lol" || fromUrl === "valorant") return fromUrl;
+  try {
+    const saved = localStorage.getItem("studio-game");
+    if (saved === "lol" || saved === "valorant") return saved;
+  } catch {}
+  return "lol";
+};
+const readValorantPage = (): ValorantPage =>
+  valorantNavigation.find((n) => n.id === new URLSearchParams(location.search).get("page"))?.id ??
+  "overview";
 
 function useSession() {
   const [state, setState] = useState<State | null>(null);
@@ -112,17 +133,38 @@ function App() {
     studioModules.find((m) => m.id === new URLSearchParams(location.search).get("page"))?.id ??
       "overview",
   );
+  const [game, setGameState] = useState<GameId>(readGame);
+  const [valorantPage, setValorantPage] = useState<ValorantPage>(readValorantPage);
+  const gamesPower = useGames();
+  const valorantConfig = useValorantConfig();
+  const query = (g: GameId, p: string) =>
+    g === "lol" ? `/?page=${p}` : `/?game=valorant&page=${p}`;
   const navigate = (next: StudioPage) => {
     setPage(next);
-    history.pushState(null, "", `/?page=${next}`);
+    history.pushState(null, "", query("lol", next));
     window.scrollTo(0, 0);
   };
+  const navigateValorant = (next: ValorantPage) => {
+    setValorantPage(next);
+    history.pushState(null, "", query("valorant", next));
+    window.scrollTo(0, 0);
+  };
+  const setGame = (next: GameId) => {
+    setGameState(next);
+    try {
+      localStorage.setItem("studio-game", next);
+    } catch {}
+    history.pushState(null, "", query(next, next === "lol" ? page : valorantPage));
+  };
   useEffect(() => {
-    const pop = () =>
+    const pop = () => {
+      setGameState(readGame());
+      setValorantPage(readValorantPage());
       setPage(
         studioModules.find((m) => m.id === new URLSearchParams(location.search).get("page"))?.id ??
           "overview",
       );
+    };
     addEventListener("popstate", pop);
     return () => removeEventListener("popstate", pop);
   }, []);
@@ -135,7 +177,12 @@ function App() {
         <p>Đang kết nối Studio...</p>
       </div>
     );
-  const title = navigation.find((n) => n.id === page)?.label ?? "Thông tin kỹ thuật";
+  const isVal = game === "valorant";
+  const title = isVal
+    ? (valorantNavigation.find((n) => n.id === valorantPage)?.label ?? "VALORANT")
+    : (navigation.find((n) => n.id === page)?.label ?? "Thông tin kỹ thuật");
+  const gameOn = gamesPower.report?.games[game] ?? false;
+  const valorantTeams = valorantConfig.view?.config.teams;
   const mode = state.mockVisible
     ? "Dữ liệu mẫu"
     : state.provider === "recording"
@@ -147,28 +194,74 @@ function App() {
         <a className="brand" href="/">
           <Radio size={26} />
           <span>
-            Rift Studio<small>League of Legends</small>
+            Rift Studio<small>{gameLabels[game]}</small>
           </span>
         </a>
-        <nav aria-label="Điều hướng Studio">
-          {navigation.map(({ id, label, icon: Icon }, i) => (
-            <React.Fragment key={id}>
-              {(i === 0 || i === 3 || i === 5) && (
-                <div className="nav-group-label">
-                  {i === 0 ? "Chuẩn bị" : i === 3 ? "Điều khiển" : "Công cụ"}
-                </div>
-              )}
+        <div className="rail-game">
+          <div className="games" role="group" aria-label="Chọn game">
+            {(["lol", "valorant"] as const).map((id) => (
               <Button
+                key={id}
                 variant="ghost"
-                className={`nav ${page === id ? "active" : ""}`}
-                aria-current={page === id ? "page" : undefined}
-                onClick={() => navigate(id)}
+                className={`game ${game === id ? "active" : ""}`}
+                aria-pressed={game === id}
+                onClick={() => setGame(id)}
+              >
+                {id === "lol" ? <Gamepad2 size={16} /> : <Crosshair size={16} />}
+                <span>{id === "lol" ? "LoL" : "Valorant"}</span>
+              </Button>
+            ))}
+          </div>
+          <label className="power">
+            <span>
+              Kết nối {game === "lol" ? "LoL" : "Valorant"}
+              {isVal && gamesPower.report
+                ? ` · ${moduleText[gamesPower.report.valorant.status]}`
+                : ""}
+            </span>
+            <input
+              type="checkbox"
+              role="switch"
+              aria-label={`Bật kết nối ${gameLabels[game]}`}
+              checked={gameOn}
+              disabled={gamesPower.busy || !gamesPower.report}
+              onChange={(e) => void gamesPower.toggle(game, e.target.checked)}
+            />
+          </label>
+        </div>
+        <nav aria-label="Điều hướng Studio">
+          {isVal &&
+            valorantNavigation.map(({ id, label, icon: Icon }) => (
+              <Button
+                key={id}
+                variant="ghost"
+                className={`nav ${valorantPage === id ? "active" : ""}`}
+                aria-current={valorantPage === id ? "page" : undefined}
+                onClick={() => navigateValorant(id)}
               >
                 <Icon size={18} />
                 <span>{label}</span>
               </Button>
-            </React.Fragment>
-          ))}
+            ))}
+          {!isVal &&
+            navigation.map(({ id, label, icon: Icon }, i) => (
+              <React.Fragment key={id}>
+                {(i === 0 || i === 3 || i === 5) && (
+                  <div className="nav-group-label">
+                    {i === 0 ? "Chuẩn bị" : i === 3 ? "Điều khiển" : "Công cụ"}
+                  </div>
+                )}
+                <Button
+                  variant="ghost"
+                  className={`nav ${page === id ? "active" : ""}`}
+                  aria-current={page === id ? "page" : undefined}
+                  onClick={() => navigate(id)}
+                >
+                  <Icon size={18} />
+                  <span>{label}</span>
+                </Button>
+              </React.Fragment>
+            ))}
         </nav>
         <div className="rail-bottom">
           <span className={`connection-dot ${connected ? "online" : ""}`} />
@@ -180,26 +273,50 @@ function App() {
           <div>
             <h1>{title}</h1>
             <span className="header-match">
-              {state.theme.blueName} <span>vs</span> {state.theme.redName}
+              {isVal
+                ? `${valorantTeams?.[0].name ?? "Team 1"} vs ${valorantTeams?.[1].name ?? "Team 2"}`
+                : `${state.theme.blueName} vs ${state.theme.redName}`}
             </span>
           </div>
           <div className="header-actions">
-            <Badge variant="outline">{mode}</Badge>
+            <Badge variant="outline">{isVal ? "Trực tiếp" : mode}</Badge>
             <Button asChild variant="outline">
-              <a href="/overlay" target="_blank" rel="noreferrer">
+              <a
+                href={isVal ? "http://127.0.0.1:5322/overlay?groupCode=RIOTLOCAL" : "/overlay"}
+                target="_blank"
+                rel="noreferrer"
+              >
                 <ExternalLink size={15} />
                 Mở overlay
               </a>
             </Button>
           </div>
         </header>
-        <div className={`content module-content view-${page}`}>
+        <div className={`content module-content view-${isVal ? `valorant-${valorantPage}` : page}`}>
           {!connected && (
             <div className="studio-alert" role="alert">
               Đang kết nối lại. Các nút điều khiển tạm ngưng.
             </div>
           )}
-          {page === "overview" && (
+          {isVal && valorantPage === "overview" && (
+            <ValorantOverview
+              games={gamesPower.report}
+              busy={gamesPower.busy}
+              toggle={(on) => void gamesPower.toggle("valorant", on)}
+              config={valorantConfig.view}
+            />
+          )}
+          {isVal && valorantPage === "config" && (
+            <ValorantMatchConfig view={valorantConfig.view} save={valorantConfig.save} />
+          )}
+          {isVal && valorantPage === "broadcast" && (
+            <ValorantBroadcast
+              games={gamesPower.report}
+              busy={gamesPower.busy}
+              toggle={(on) => void gamesPower.toggle("valorant", on)}
+            />
+          )}
+          {!isVal && page === "overview" && (
             <Dashboard
               state={state}
               connected={connected}
@@ -209,7 +326,7 @@ function App() {
               navigate={navigate}
             />
           )}
-          {page === "sources" && (
+          {!isVal && page === "sources" && (
             <>
               <SourcePanel
                 state={state}
@@ -224,7 +341,7 @@ function App() {
               </details>
             </>
           )}
-          {page === "theme" && (
+          {!isVal && page === "theme" && (
             <MatchConfig
               state={state}
               connected={connected}
@@ -232,7 +349,7 @@ function App() {
               next={() => navigate("studio")}
             />
           )}
-          {page === "studio" && (
+          {!isVal && page === "studio" && (
             <ProductionDesk
               state={state}
               connected={connected}
@@ -240,7 +357,7 @@ function App() {
               observation={observation}
             />
           )}
-          {page === "demo" && (
+          {!isVal && page === "demo" && (
             <RecordingDesk
               state={state}
               connected={connected}
@@ -248,11 +365,16 @@ function App() {
               observation={observation}
             />
           )}
-          {page === "draft" && <DraftDesk state={state} connected={connected} send={send} />}
-          {page === "postgame" && <PostgameDesk state={state} connected={connected} send={send} />}
-          {page === "hud" && <ReplayHud state={state} connected={connected} send={send} />}
-          {page === "valorant" && <ValorantDesk />}
-          {page === "roadmap" && <Roadmap />}
+          {!isVal && page === "draft" && (
+            <DraftDesk state={state} connected={connected} send={send} />
+          )}
+          {!isVal && page === "postgame" && (
+            <PostgameDesk state={state} connected={connected} send={send} />
+          )}
+          {!isVal && page === "hud" && (
+            <ReplayHud state={state} connected={connected} send={send} />
+          )}
+          {!isVal && page === "roadmap" && <Roadmap />}
         </div>
       </main>
       {error && (
@@ -271,6 +393,4 @@ function App() {
     </div>
   );
 }
-createRoot(document.getElementById("root")!).render(
-  isValorantOverlay ? <ValorantOverlay /> : <App />,
-);
+createRoot(document.getElementById("root")!).render(<App />);

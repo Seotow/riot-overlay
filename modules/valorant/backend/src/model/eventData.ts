@@ -187,6 +187,8 @@ export enum DataTypes {
   TOAST = "toast",
   SWAP_L_R = "swap_left_right",
   SWAP_A_D = "swap_attacker_defender",
+  // Riot Overlay: Studio cập nhật tên/logo đội, tỉ số loạt trận, giải đấu và tên thay thế giữa trận.
+  CONFIG_UPDATE = "config_update",
 }
 
 export function isAuthedData(data: object): data is IAuthedData | IAuthedAuxData {

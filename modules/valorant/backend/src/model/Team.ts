@@ -53,6 +53,13 @@ export class Team {
     this.initRoundRecord();
   }
 
+  // Riot Overlay: chỉ đổi thông tin hiển thị, không đụng phe, tỉ số round hay người chơi.
+  updateInfo(info: { name: string; tricode: string; url: string }) {
+    this.teamName = info.name;
+    this.teamTricode = info.tricode;
+    this.teamUrl = info.url;
+  }
+
   initRoundRecord() {
     for (let i = 1; i < 26; i++) {
       this.roundRecord.push({ type: "upcoming", wasAttack: this.isAttacking, round: i });

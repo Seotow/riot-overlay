@@ -22,7 +22,7 @@ import HotkeyService, { HotkeyType } from "./services/hotkeyService";
 import axios from "axios";
 import * as semver from "semver";
 import find, { ProcessInfo } from "find-process";
-import { loadHeadlessConfig, startControlServer, ControlResult } from "./headless";
+import { loadHeadlessConfig, readMatchConfig, startControlServer, ControlResult } from "./headless";
 // import { installExtension } from "electron-devtools-installer";
 
 const { app, BrowserWindow, ipcMain } = require("electron/main");
@@ -817,6 +817,9 @@ function runControlCommand(body: any): ControlResult {
     case "switch_kda_credits":
       hotkeys.trigger(HotkeyType.SWITCH_KDA_CREDITS);
       break;
+    case "apply_config":
+      sendHeadlessConfig();
+      break;
     case "swap_left_right":
     case "swap_attacker_defender":
       if (!midmatch.includes(body.command)) return { ok: false, error: "unknown-command" };
@@ -840,28 +843,47 @@ function runControlCommand(body: any): ControlResult {
   return { ok: true };
 }
 
+// Gửi lại tên/logo đội, tỉ số loạt trận, giải đấu và tên thay thế cho trận đang chạy.
+function sendHeadlessConfig() {
+  if (!headless) return;
+  const match = readMatchConfig(headless);
+  connService.sendToIngest({
+    type: "config_update",
+    data: {
+      leftTeam: match.leftTeam,
+      rightTeam: match.rightTeam,
+      series: match.series,
+      tournament: match.tournament,
+      nameOverrides: match.nameOverrides,
+    },
+  } as any);
+}
+
 // Kết nối ingest bằng config do Studio cấp, thay cho form trong renderer.
 function headlessConnect() {
   if (!headless || connService.isConnected()) return;
   log.info(`Headless connect to ${headless.ingestIp}, group ${headless.groupCode}`);
+  // Trận đã tồn tại (reconnect) không đọc lại đội từ logon, nên gửi config_update khi đã kết nối.
+  let tries = 0;
+  const push = setInterval(() => {
+    if (connService.isConnected()) {
+      clearInterval(push);
+      sendHeadlessConfig();
+    } else if (++tries > 40) clearInterval(push);
+  }, 500);
   setSpectraStatus("Connecting", StatusTypes.YELLOW);
-  const team = (name: string, tricode: string, attackStart: boolean) => ({
-    name,
-    tricode,
-    url: headless!.teamLogoUrl,
-    attackStart,
-  });
+  const match = readMatchConfig(headless);
   connService.handleAuthProcess(
     headless.ingestIp,
     headless.observerName,
     headless.groupCode,
     getMatchSecret(),
-    team("Team 1", "T1", true),
-    team("Team 2", "T2", false),
+    match.leftTeam,
+    match.rightTeam,
     headless.key,
-    { needed: 0, wonLeft: 0, wonRight: 0, mapInfo: [] },
+    { ...match.series, mapInfo: [] },
     { left: "", right: "" },
-    { logoUrl: "", backdropUrl: "", timeoutDuration: 60 },
+    { ...match.tournament, timeoutDuration: 60 } as any,
     { enabled: false, duration: 5000, sponsors: [] },
     { spectraWatermark: true, customTextEnabled: false, customText: "" },
     { enable: false, identifier: "", secret: "", endTime: 0 },

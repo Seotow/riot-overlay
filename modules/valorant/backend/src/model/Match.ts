@@ -380,6 +380,9 @@ export class Match {
       case DataTypes.SWAP_L_R:
         this.handleSwapLR();
         break;
+      case DataTypes.CONFIG_UPDATE:
+        this.handleConfigUpdate(data.data);
+        break;
     }
 
     this.eventNumber++;
@@ -536,6 +539,43 @@ export class Match {
         }, this.toastInfo.duration);
       }
       // If duration is null, the toast stays until the hotkey is pressed again
+    }
+  }
+
+  // Riot Overlay: dữ liệu đã được Studio kiểm tra, nhưng vẫn giới hạn kiểu/độ dài vì đến từ socket.
+  private handleConfigUpdate(raw: any) {
+    const str = (v: unknown, max: number) => (typeof v === "string" ? v.slice(0, max) : "");
+    const num = (v: unknown, min: number, max: number) =>
+      Math.min(max, Math.max(min, Math.trunc(Number(v)) || 0));
+    for (const [index, key] of [
+      [0, "leftTeam"],
+      [1, "rightTeam"],
+    ] as const) {
+      const team = raw?.[key];
+      if (!team || !this.teams[index]) continue;
+      this.teams[index].updateInfo({
+        name: str(team.name, 40),
+        tricode: str(team.tricode, 5),
+        url: str(team.url, 700_000),
+      });
+    }
+    if (raw?.series) {
+      const needed = num(raw.series.needed, 1, 9);
+      this.tools.seriesInfo.needed = needed;
+      this.tools.seriesInfo.wonLeft = num(raw.series.wonLeft, 0, needed);
+      this.tools.seriesInfo.wonRight = num(raw.series.wonRight, 0, needed);
+    }
+    if (raw?.tournament) {
+      this.tools.tournamentInfo.name = str(raw.tournament.name, 80);
+      this.tools.tournamentInfo.logoUrl = str(raw.tournament.logoUrl, 700_000);
+      this.tools.tournamentInfo.backdropUrl = str(raw.tournament.backdropUrl, 700_000);
+    }
+    if (Array.isArray(raw?.nameOverrides)) {
+      const pairs = raw.nameOverrides
+        .filter((p: unknown) => Array.isArray(p) && typeof p[0] === "string" && typeof p[1] === "string")
+        .slice(0, 20)
+        .map((p: string[]) => [p[0].slice(0, 60), p[1].slice(0, 40)]);
+      this.tools.nameOverrides.overrides = JSON.stringify(pairs);
     }
   }
 

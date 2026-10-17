@@ -88,7 +88,7 @@ Thư mục `Collector/` đổi thành `collector/` với `hosts/` (source native
 
 ## Adapter Valorant → Studio/OBS 18/10/2026
 
-Đã làm: `server/valorant-spectra.ts` đọc Socket.IO output Spectra (cổng/group từ `data/valorant/module.json`, không đọc key) bằng client Engine.IO tối thiểu qua `ws`, chuẩn hoá sang contract `shared/valorant.ts` (value/null + availability + provenance). Route `/api/valorant/status|frame` (loopback, nguồn mở lười khi có request đầu), trang Studio "VALORANT", renderer OBS `/valorant-overlay` (trong suốt, chỉ nhận dữ liệu). Không đổi contract/theme/renderer LoL.
+Đã làm: `server/valorant-spectra.ts` đọc Socket.IO output Spectra (cổng/group từ `data/valorant/module.json`, không đọc key) bằng client Engine.IO tối thiểu qua `ws`, chuẩn hoá sang contract `shared/valorant.ts` (value/null + availability + provenance). Route `/api/valorant/status|frame` (loopback, nguồn mở lười khi có request đầu), trang Studio Valorant (xem mục dưới); renderer OBS tối giản `/valorant-overlay` đã gỡ, thay bằng overlay VAL26. Không đổi contract/theme/renderer LoL.
 
 Quy tắc: HP/ability chỉ nhận khi `auxiliaryAvailable` xác nhận (Spectra mặc định HP 100/ability 0 nên không dùng được); HP người chết = 0 (derived); tên đội = manual; mốc hết round = derived. Scoreboard thiếu thì money/vũ khí/giáp/ult = null; KDA giữ nhưng gắn derived.
 
@@ -96,8 +96,10 @@ Kiểm chứng: `tests/valorant-spectra.test.ts` (7 ca), `npm test` 238 pass, `n
 
 Chưa làm: đủ 10 người/Auxiliary, kill feed, spike/plant thật, đổi observed player, reconnect giữa trận, giao diện overlay chưa audit (bản tối giản), `gameTelemetryVerified` vẫn false. Bước tiếp: thu mẫu có Auxiliary và nhiều người chơi.
 
-Launcher chung: `npm run start:all` (thêm `-- --services-only` khi tự mở Client) chạy Studio production + module Valorant, dừng cả hai khi một bên lỗi hoặc Ctrl+C; trùng cổng thì báo lỗi, không kill process khác (đã kiểm với Studio LoL đang giữ cổng 4310: dùng `PORT=4311`). Studio Valorant: `/?page=valorant`, OBS: `/valorant-overlay`.
+Launcher `start:all` đã bỏ: Studio tự quản lý module Valorant qua công tắc (xem mục 18/10 cuối file).
 
-Client fork gắn thẳng vào app (18/10/2026): `npm run start:all` tự chạy Client fork ẩn (`headless.ts`, `collectorMode: fork`), tự xác thực với backend; GEP 315.3.5 ready, observer=1, Studio nhận frame lobby. Chưa kiểm trong trận (HP/ability cần Auxiliary). Đã pull `origin/main` (ed83667), conflict `server/index.ts` giữ `PostgameService` + nguồn Valorant. Nhánh `backup/valorant-adapter-wip` giữ bản trước pull.
+Client fork gắn thẳng vào app (18/10/2026): Module Valorant tự chạy Client fork ẩn (`headless.ts`, `collectorMode: fork`), tự xác thực với backend; GEP 315.3.5 ready, observer=1, Studio nhận frame lobby. Chưa kiểm trong trận (HP/ability cần Auxiliary). Đã pull `origin/main` (ed83667), conflict `server/index.ts` giữ `PostgameService` + nguồn Valorant. Nhánh `backup/valorant-adapter-wip` giữ bản trước pull.
 
 Điều khiển thủ công + overlay VAL26 (18/10/2026): nút Spectra (plant, tech pause, timeout, KDA/credits, swap, toast) có trong Studio qua kênh loopback Client fork; đã kiểm tech pause, KDA/credits, toast, guard origin. Đã import `frontend-val26` (nobiiVAL, ELv2, ghi nguồn), build và render với dữ liệu trận thật. Chưa làm: kiểm plant/timeout/swap trong trận, cấu hình tên/logo/series đội từ Studio, audit widget VAL26, tắt phần phụ thuộc runtime ngoài (font/ảnh đội từ URL).
+
+Chọn game + công tắc kết nối + trang Valorant hoàn chỉnh (18/10/2026): thanh bên chọn LoL/Valorant, mỗi game có công tắc riêng (tắt thì dừng socket/process/poll của game đó); Valorant có Tổng quan, Cấu hình trận (đội, logo, tỉ số loạt trận, giải, tên thay thế) và Phát sóng (overlay thu nhỏ + nút điều khiển gọn). Cấu hình đổi được giữa trận qua `config_update` của backend fork. Đã kiểm live: bật/tắt LoL và Valorant qua API, lưu cấu hình với logo, backend nhận đúng đội/logo/series/giải/tên thay thế, `/uploads` chặn tên lạ, guard origin. Chưa kiểm: tên thay thế khớp `fullName` trong trận nhiều người, plant/timeout trong trận mới, tắt LoL khi đang có trận LoL thật.

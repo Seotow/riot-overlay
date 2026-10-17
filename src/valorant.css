@@ -1,0 +1,127 @@
+.val-page {
+  display: grid;
+  gap: 14px;
+}
+.val-card {
+  padding: 16px;
+}
+.val-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.val-row h3 {
+  margin: 0;
+  margin-right: auto;
+}
+.val-score {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 20px;
+}
+.val-score b {
+  font-size: 32px;
+}
+.val-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.val-table th,
+.val-table td {
+  padding: 4px 8px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.val-table tr.dead {
+  opacity: 0.45;
+}
+.val-config .config-grid {
+  align-items: start;
+}
+.val-override {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+.val-logo {
+  display: grid;
+  gap: 6px;
+}
+.val-broadcast {
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(260px, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+.val-preview {
+  position: relative;
+  overflow: hidden;
+  background: #101820;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+}
+.val-preview iframe {
+  position: absolute;
+  left: 0;
+  top: 0;
+  border: 0;
+  transform-origin: 0 0;
+  pointer-events: none;
+}
+.val-controls {
+  display: grid;
+  gap: 12px;
+}
+.val-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.val-buttons [data-slot="button"].active,
+.val-toast [data-slot="button"].active {
+  background: #2d8f6f;
+  color: #fff;
+}
+.val-toast {
+  display: grid;
+  gap: 8px;
+}
+.rail-game {
+  display: grid;
+  gap: 8px;
+  padding: 8px 12px 12px;
+}
+.rail-game .games {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+.rail-game [data-slot="button"].game {
+  justify-content: center;
+}
+.rail-game [data-slot="button"].game.active {
+  background: rgba(79, 209, 165, 0.18);
+  outline: 1px solid rgba(79, 209, 165, 0.6);
+}
+.power {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 13px;
+}
+.power input {
+  width: 38px;
+  height: 20px;
+  accent-color: #4fd1a5;
+  cursor: pointer;
+}
+@media (max-width: 1100px) {
+  .val-broadcast {
+    grid-template-columns: 1fr;
+  }
+}

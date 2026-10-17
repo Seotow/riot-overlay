@@ -19,6 +19,10 @@ import { PostgameService, postgameError } from "./postgame-service";
 import { ReplayHudService } from "./replay-hud";
 import { ValorantSpectraSource, loadSpectraOptions } from "./valorant-spectra";
 import { sendValorantCommand } from "./valorant-control";
+import { GamePower, type Game } from "./game-power";
+import { ValorantModule } from "./valorant-module";
+import { defaultPaths, saveMatchConfig, viewMatchConfig } from "./valorant-config";
+import { z } from "zod";
 import { COLLECTOR_SAMPLE_INTERVAL_MS, remainingSampleDelay } from "../shared/capture-rules";
 const host = "127.0.0.1",
   port = Number(process.env.PORT || 4310);
@@ -50,7 +54,13 @@ if (process.argv.includes("--collector")) state.provider = "league-collector";
 if (process.argv.includes("--collector-accountless")) state.provider = "collector-accountless";
 const postgame = new PostgameService();
 // Nguồn Valorant chỉ mở socket khi Studio/overlay Valorant hỏi lần đầu; không ảnh hưởng LoL.
-const valorant = new ValorantSpectraSource(await loadSpectraOptions());
+const spectraOptions = await loadSpectraOptions();
+const valorant = new ValorantSpectraSource(spectraOptions);
+const valorantPaths = defaultPaths(spectraOptions.frontendPort);
+// Mỗi game có công tắc riêng: tắt thì không mở socket, process hay vòng poll của game đó.
+const games = new GamePower();
+await games.load();
+const valorantModule = new ValorantModule();
 const replayHud = new ReplayHudService();
 // Isolated verification can persist a temporary theme without touching user branding.
 const themePath = resolve(process.env.RIOT_OVERLAY_THEME_PATH || "data/theme.json");
@@ -88,6 +98,28 @@ const vite = production
   : await (
       await import("vite")
     ).createServer({ server: { middlewareMode: true, host }, appType: "spa" });
+// Bật/tắt kết nối của từng game; tắt LoL ngắt mọi nguồn LoL, tắt Valorant dừng cả module.
+async function applyGame(game: Game, on: boolean) {
+  await games.set(game, on);
+  if (game === "lol" && !on) {
+    leagueBroadcast.disconnect();
+    localCollector.disconnect();
+    accountlessCollector.disconnect();
+    await collectorRuntime.setEnabled(false);
+    await accountlessRuntime.setEnabled(false);
+    lastObservation = null;
+    for (const c of wss.clients)
+      if (c.readyState === WebSocket.OPEN)
+        c.send(JSON.stringify({ type: "observer", frame: null }));
+  }
+  if (game === "valorant") {
+    if (on) void valorantModule.start();
+    else {
+      valorant.stop();
+      await valorantModule.stop();
+    }
+  }
+}
 const server = createServer(async (req, res) => {
   if (req.url?.startsWith("/api/replay-hud")) {
     res.setHeader("Content-Type", "application/json");
@@ -316,7 +348,9 @@ const server = createServer(async (req, res) => {
       res.end("{}");
       return;
     }
-    valorant.start();
+    // Chỉ mở socket Spectra khi module Valorant đang chạy.
+    if (valorantModule.snapshot().status === "running") valorant.start();
+    else valorant.stop();
     res.end(
       JSON.stringify(
         req.url === "/api/valorant/status"
@@ -333,7 +367,7 @@ const server = createServer(async (req, res) => {
     // Lệnh thay đổi hiển thị phát sóng: bắt buộc cùng origin, POST và JSON.
     if (
       ![`127.0.0.1:${port}`, `localhost:${port}`].includes(req.headers.host || "") ||
-      !allowed.includes(req.headers.origin || "") ||
+      (req.headers.origin ? !allowed.includes(req.headers.origin) : req.method !== "GET") ||
       req.headers["sec-fetch-site"] === "cross-site"
     ) {
       res.writeHead(403);
@@ -372,6 +406,110 @@ const server = createServer(async (req, res) => {
     res.end(JSON.stringify(outcome));
     return;
   }
+  if (req.url === "/api/games") {
+    res.setHeader("Content-Type", "application/json");
+    res.setHeader("Cache-Control", "no-store");
+    const allowed = [`http://${host}:${port}`, `http://localhost:${port}`];
+    if (
+      ![`127.0.0.1:${port}`, `localhost:${port}`].includes(req.headers.host || "") ||
+      (req.headers.origin ? !allowed.includes(req.headers.origin) : req.method !== "GET") ||
+      req.headers["sec-fetch-site"] === "cross-site"
+    ) {
+      res.writeHead(403);
+      res.end('{"error":"Forbidden"}');
+      return;
+    }
+    if (req.method === "GET") {
+      res.end(JSON.stringify({ games: games.snapshot(), valorant: valorantModule.snapshot() }));
+      return;
+    }
+    if (
+      req.method !== "POST" ||
+      req.headers["content-type"]?.split(";")[0] !== "application/json"
+    ) {
+      res.writeHead(405, { Allow: "GET, POST" });
+      res.end("{}");
+      return;
+    }
+    const chunks: Buffer[] = [];
+    let size = 0;
+    for await (const chunk of req) {
+      size += chunk.length;
+      if (size > 1024) {
+        res.writeHead(413);
+        res.end('{"error":"body-too-large"}');
+        return;
+      }
+      chunks.push(Buffer.from(chunk));
+    }
+    let input: unknown;
+    try {
+      input = JSON.parse(Buffer.concat(chunks).toString("utf8"));
+    } catch {
+      input = null;
+    }
+    const parsed = z
+      .object({ game: z.enum(["lol", "valorant"]), enabled: z.boolean() })
+      .safeParse(input);
+    if (!parsed.success) {
+      res.writeHead(400);
+      res.end('{"error":"invalid-request"}');
+      return;
+    }
+    await applyGame(parsed.data.game, parsed.data.enabled);
+    res.end(JSON.stringify({ games: games.snapshot(), valorant: valorantModule.snapshot() }));
+    return;
+  }
+  if (req.url === "/api/valorant/config") {
+    res.setHeader("Content-Type", "application/json");
+    res.setHeader("Cache-Control", "no-store");
+    const allowed = [`http://${host}:${port}`, `http://localhost:${port}`];
+    if (
+      ![`127.0.0.1:${port}`, `localhost:${port}`].includes(req.headers.host || "") ||
+      (req.headers.origin ? !allowed.includes(req.headers.origin) : req.method !== "GET") ||
+      req.headers["sec-fetch-site"] === "cross-site"
+    ) {
+      res.writeHead(403);
+      res.end('{"error":"Forbidden"}');
+      return;
+    }
+    if (req.method === "GET") {
+      res.end(JSON.stringify(await viewMatchConfig(valorantPaths)));
+      return;
+    }
+    if (req.method !== "PUT" || req.headers["content-type"]?.split(";")[0] !== "application/json") {
+      res.writeHead(405, { Allow: "GET, PUT" });
+      res.end("{}");
+      return;
+    }
+    const chunks: Buffer[] = [];
+    let size = 0;
+    for await (const chunk of req) {
+      size += chunk.length;
+      if (size > 1_800_000) {
+        res.writeHead(413);
+        res.end('{"error":"body-too-large"}');
+        return;
+      }
+      chunks.push(Buffer.from(chunk));
+    }
+    let input: unknown;
+    try {
+      input = JSON.parse(Buffer.concat(chunks).toString("utf8"));
+    } catch {
+      input = null;
+    }
+    const saved = await saveMatchConfig(input, valorantPaths);
+    if (!saved.ok) {
+      res.writeHead(400);
+      res.end(JSON.stringify(saved));
+      return;
+    }
+    // Client fork chưa chạy thì cấu hình vẫn được lưu và áp dụng khi nó kết nối.
+    const applied = (await sendValorantCommand({ command: "apply_config" })).ok;
+    res.end(JSON.stringify({ ...saved.view, applied }));
+    return;
+  }
   if (req.url === "/api/health") {
     res.setHeader("Content-Type", "application/json");
     res.end(
@@ -390,7 +528,7 @@ const server = createServer(async (req, res) => {
   try {
     const path = decodeURIComponent((req.url || "/").split("?")[0]);
     const file =
-      path === "/" || path === "/overlay" || path === "/valorant-overlay"
+      path === "/" || path === "/overlay"
         ? resolve("dist/index.html")
         : resolve("dist", "." + path);
     if (!file.startsWith(resolve("dist") + "/") && !file.startsWith(resolve("dist") + "\\"))
@@ -556,7 +694,7 @@ wss.on("connection", (ws, req) => {
 const draftLcu = new DraftLcu();
 let lcuBusy = false;
 setInterval(async () => {
-  if (lcuBusy || shuttingDown || wss.clients.size === 0) return;
+  if (lcuBusy || shuttingDown || !games.isOn("lol") || wss.clients.size === 0) return;
   lcuBusy = true;
   try {
     const { draft, changed } = await draftLcu.poll(state.draft ?? emptyDraft());
@@ -581,7 +719,8 @@ void ledger.load();
 const replays = new ReplayWatcher();
 let replayBusy = false;
 setInterval(async () => {
-  if (postgameLocked || replayBusy || shuttingDown || wss.clients.size === 0) return;
+  if (postgameLocked || replayBusy || shuttingDown || !games.isOn("lol") || wss.clients.size === 0)
+    return;
   replayBusy = true;
   try {
     await replays.afterMatch();
@@ -601,6 +740,7 @@ async function pollObservation() {
   if (shuttingDown) return;
   const pollStarted = performance.now();
   try {
+    if (!games.isOn("lol")) return;
     if (usesCollector() && !state.mockVisible) {
       const provider = state.provider;
       const runtime = selectedCollectorRuntime();
@@ -644,6 +784,7 @@ async function pollObservation() {
   }
 }
 void pollObservation();
+if (games.isOn("valorant")) void valorantModule.start();
 server.listen(port, host, () =>
   console.log(`Rift Studio: http://${host}:${port}\nOBS overlay: http://${host}:${port}/overlay`),
 );
@@ -654,6 +795,7 @@ async function shutdown() {
   accountlessCollector.stop();
   leagueBroadcast.stop();
   valorant.stop();
+  await valorantModule.stop();
   for (const client of wss.clients) client.terminate();
   await collectorRuntime.stop();
   await accountlessRuntime.stop();
