@@ -44,6 +44,11 @@ hoặc tự biến bộ mẫu thành dữ liệu thật.
 - Ẩn riêng dấu 18+ VNG đang nghiên cứu. REA và Valorant giữ riêng, không
   nằm trong bản vận hành LoL này.
 
+- 17/10: LCU có `gameclient-eog-stats-block`, `eog-stats-block` và `lol-replays` (tải `.rofl` theo gameId).
+  Chưa biết spectator có nhận EOG hoặc tải được replay custom không; cần thăm dò chỉ đọc trong một
+  trận spectate thật. Xem mục "Điều tra hướng cho tài khoản spectator" trong
+  [postgame](docs/POSTGAME_DATA_FINDINGS.md).
+
 Chi tiết: [LCU](docs/LCU_POSTGAME_FINDINGS.md),
 [ROFL](docs/ROFL_POSTGAME_FINDINGS.md), [postgame](docs/POSTGAME_DATA_FINDINGS.md).
 

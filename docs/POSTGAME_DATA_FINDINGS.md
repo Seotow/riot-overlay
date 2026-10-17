@@ -129,6 +129,32 @@ lấy custom; phương án tiếp là thu/export từ client người tham gia t
 Chưa tích hợp production hoặc khẳng định mọi custom. Xem
 [bằng chứng và giới hạn](LCU_POSTGAME_FINDINGS.md).
 
+## Điều tra hướng cho tài khoản spectator, 17/10/2026
+
+Đọc `/help?format=Full` của LCU (chỉ đọc, 1.447 hàm) và thử GET trên client đang mở (tài khoản
+Seotoww, phase Lobby). Không POST, không tải file, không in token.
+
+| Điểm | Kết quả |
+| --- | --- |
+| `GET /lol-end-of-game/v1/gameclient-eog-stats-block` | Có trong LCU: `{ gameId, gameMode, queueId, queueType, isRanked, statsBlock: object }`. Đây là khối game client gửi cho client khi trận kết thúc. 404 khi chưa có trận kết thúc. **Chưa biết** client spectator có nhận khối này không |
+| `GET /lol-end-of-game/v1/eog-stats-block` | Có `teams[].players[]` (champion, puuid, riotId, `stats: object`, `isLocalPlayer`), `isWinningTeam`, `gameLength`. Dựng quanh người chơi cục bộ; 404 ngoài màn kết quả |
+| `lol-replays` | `GET /lol-replays/v1/metadata/{gameId}` chỉ trả `state` (ví dụ `watch`) và `downloadProgress`. `POST /lol-replays/v1/rofls/{gameId}/download` nhận gameId + contextData; **chưa biết** spectator tải được custom của người khác. Replays có kiểu `GAMHS` chứa `totalDamageDealtToChampions` |
+| `lol-match-history` | Chi tiết/timeline theo gameId: đã xác nhận 404 với spectator |
+| Native collector | `damageDealtEvents` có nhưng `damageDealt` luôn 0 trong mọi bản ghi; không phải nguồn damage |
+
+Hướng thử tiếp, theo thứ tự rủi ro thấp trước:
+
+1. **Thăm dò chỉ đọc cuối trận trên máy spectator**: poll `gameflow-phase`, `gameclient-eog-stats-block`
+   và `eog-stats-block` từ lúc vào trận tới khi về lobby, ghi payload đã lọc (không PUUID/Riot ID).
+   Cho biết spectator có nhận khối EOG không và `stats` có damage đủ 10 người không.
+2. **Replay theo gameId**: sau trận, đọc `metadata/{gameId}`; chỉ khi người dùng đồng ý mới thử
+   `download`. Nếu tải được `.rofl`, đã có parser đọc metadata (khớp 10/10 với LCU) để lấy damage,
+   KDA, gold, winner.
+3. **Máy người tham gia**: agent chỉ đọc LCU history sau trận rồi export JSON (đã xác nhận có đủ damage).
+4. Riot Match-V5/Tournament/RSO cần quyền riêng; key Standard hiện 403/404.
+5. Dự phòng: sổ sự kiện từ collector cho KDA/vàng/mục tiêu (partial) và operator nhập damage + winner
+   với provenance thủ công.
+
 ## Damage và winner: hướng có thể kiểm chứng tiếp
 
 [SDK ingameFrontendData](https://github.com/BlueBottleGG/leaguebroadcast-js-client/blob/b8c70f1d5b9f70c5fb9d36c5ea2f37a31a91ae91/types/ingame/ingameFrontendData.ts)
