@@ -611,7 +611,10 @@ test("ultimate stays locked below level 6 even when its cooldown reads ready, an
   let html = render();
   assert.equal((html.match(/class="row-ultimate on-cooldown"/g) || []).length, 10);
   assert.match(html, /Chưa học R \(cấp 6\)/);
+  // Solid black cover on both the panel icon and the simple-layout icon of every player.
+  assert.equal((html.match(/class="ult-lock-cover"/g) || []).length, 20);
   for (const p of s.players) p.level = observed(6);
   html = render();
   assert.equal((html.match(/class="row-ultimate on-cooldown"/g) || []).length, 0);
+  assert.equal((html.match(/ult-lock-cover/g) || []).length, 0);
 });

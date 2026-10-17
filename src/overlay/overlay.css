@@ -5212,3 +5212,13 @@
   transform-origin: center;
   animation: draft-bar-out 0.5s 1.4s var(--broadcast-ease, ease-out) both;
 }
+
+/* R is not learned before level 6: a solid black cover over the whole icon in every layout. */
+.ult-lock-cover {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  border-radius: 50%;
+  background: #000;
+  pointer-events: none;
+}

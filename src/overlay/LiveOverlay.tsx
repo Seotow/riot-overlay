@@ -447,6 +447,7 @@ function LiveRow({
             {ultimateRemaining != null && ultimate && (
               <CooldownVeil remaining={ultimateRemaining} total={ultimate.total} dark />
             )}
+            {ultimateLocked && <i className="ult-lock-cover" aria-hidden="true" />}
             {stack && <ChampionStack player={player} minimal />}
           </span>
         )}
@@ -460,6 +461,7 @@ function LiveRow({
               {ultimateRemaining != null && ultimate && (
                 <CooldownVeil remaining={ultimateRemaining} total={ultimate.total} dark />
               )}
+              {ultimateLocked && <i className="ult-lock-cover" aria-hidden="true" />}
             </span>
           ) : (
             <span className="live-rune-empty" />
