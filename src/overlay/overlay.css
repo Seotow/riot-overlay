@@ -2291,15 +2291,21 @@
 .live-canvas.minimal .minimal-ultimate {
   overflow: visible;
 }
+/* The ultimate is 40px at left 10 of a 58px row: the stack icon overlaps its lower corner and sits
+   flush with the cluster edge on the portrait side (blue: right edge of the row, red: left edge). */
 .live-canvas .minimal-stack {
   position: absolute;
-  right: 0;
+  right: -8px;
   bottom: 0;
   width: 26px;
   height: 26px;
   border-radius: 50%;
   z-index: 7;
   box-sizing: border-box;
+}
+.live-canvas .red-row .minimal-stack {
+  right: auto;
+  left: -10px;
 }
 .live-canvas .minimal-stack > img {
   width: 100%;
