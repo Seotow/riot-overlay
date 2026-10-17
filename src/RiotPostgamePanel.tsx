@@ -25,6 +25,7 @@ const errors: Record<string, string> = {
   network: "Không kết nối được Riot hoặc request quá thời gian. Key không được ghi vào lỗi.",
   "invalid-data": "Dữ liệu không hợp lệ: cần trận VN2, đủ 10 người hai đội và đúng match ID.",
   "no-candidate": "Chưa có bản dữ liệu đã tải khớp match ID để phát.",
+  "no-file": "Không đọc được file EOG đã lưu (đã bị xóa hoặc quá lớn).",
   "body-too-large": "File quá lớn (tối đa 1 MB). Dùng file eog-stats-block đã lọc từ probe.",
 };
 export function RiotPostgamePanel({ state, connected }: { state: State; connected: boolean }) {
@@ -36,6 +37,8 @@ export function RiotPostgamePanel({ state, connected }: { state: State; connecte
   const [busy, setBusy] = useState(false);
   const [notice, setNotice] = useState("");
   const [showCandidate, setShowCandidate] = useState(false);
+  const [files, setFiles] = useState<{ name: string; size: number; modified: string }[]>([]);
+  const [fileName, setFileName] = useState("");
   const [reviewed, setReviewed] = useState(false);
   useEffect(() => {
     const controller = new AbortController();
@@ -56,6 +59,37 @@ export function RiotPostgamePanel({ state, connected }: { state: State; connecte
           setNotice("Chưa đọc được cấu hình Riot. Khởi động lại backend sau khi cập nhật source.");
       });
     return () => controller.abort();
+  }, []);
+  // A block staged by the server (this machine's client, end of match) shows up without a reload,
+  // and the list of blocks saved by the probe stays current.
+  useEffect(() => {
+    const refresh = () => {
+      if (document.hidden) return;
+      fetch("/api/riot-postgame/status", { cache: "no-store" })
+        .then((r) => (r.ok ? r.json() : null))
+        .then((s: Status | null) => {
+          if (!s) return;
+          setStatus((current) => {
+            if (
+              !s.candidate ||
+              current?.candidate?.evidence.matchId === s.candidate.evidence.matchId
+            )
+              return current ?? s;
+            setShowCandidate(true);
+            setReviewed(false);
+            setNotice("Có dữ liệu cuối trận mới từ client, đang chờ duyệt. Chưa lên overlay.");
+            return { ...s, candidate: riotPostgameSchema.parse(s.candidate) };
+          });
+        })
+        .catch(() => {});
+      fetch("/api/riot-postgame/eog-files", { cache: "no-store" })
+        .then((r) => (r.ok ? r.json() : null))
+        .then((r) => r && setFiles(r.files ?? []))
+        .catch(() => {});
+    };
+    refresh();
+    const timer = setInterval(refresh, 4000);
+    return () => clearInterval(timer);
   }, []);
   const action = async (route: string, value: unknown) => {
     setBusy(true);
@@ -139,6 +173,32 @@ export function RiotPostgamePanel({ state, connected }: { state: State; connecte
           trên máy người tham gia). File chỉ được đọc số liệu và tướng; không giữ tên, PUUID hay
           Riot ID. Sau khi nhập sẽ vào vùng duyệt, chưa lên overlay.
         </p>
+        <div className="riot-config-grid">
+          <label>
+            Đã lưu trên máy này (probe)
+            <NativeSelect
+              aria-label="EOG đã lưu"
+              value={fileName}
+              onChange={(e) => setFileName(e.target.value)}
+            >
+              <option value="">
+                {files.length ? "Chọn một bản đã lưu" : "Chưa có bản nào trong .npm-cache/lcu-eog"}
+              </option>
+              {files.map((f) => (
+                <option value={f.name} key={f.name}>
+                  {new Date(f.modified).toLocaleString("vi-VN")} , {f.name.slice(0, 24)}
+                </option>
+              ))}
+            </NativeSelect>
+          </label>
+          <Button
+            type="button"
+            disabled={!fileName}
+            onClick={() => action("import-eog", { gameNumber, file: fileName })}
+          >
+            Nạp bản đã lưu
+          </Button>
+        </div>
         <div className="riot-config-grid">
           <label>
             Ván trong loạt trận

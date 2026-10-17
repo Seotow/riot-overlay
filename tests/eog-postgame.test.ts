@@ -104,3 +104,22 @@ test(
     }
   },
 );
+
+test("live EOG is staged once per game for review and saved files accept plain names only", async () => {
+  const { RiotPostgameService } = await import("../server/riot-postgame");
+  const service = new RiotPostgameService();
+  assert.equal(service.stageLiveEog(null), false);
+  assert.equal(service.stageLiveEog({ gameId: 0 }), false);
+  assert.equal(service.stageLiveEog(fixture), true);
+  assert.equal(service.status().candidate?.evidence.matchId, `LCU_${fixture.gameId}`);
+  // Same game again (for example after the operator cleared it) is not staged a second time.
+  assert.equal(service.stageLiveEog(fixture), false);
+  for (const file of [
+    "../secret-eog-stats-block.json",
+    "x/y-eog-stats-block.json",
+    "notes.json",
+    "",
+  ])
+    await assert.rejects(service.importEog({ gameNumber: 1, file }));
+  await assert.rejects(service.importEog({ gameNumber: 1, file: "missing-eog-stats-block.json" }));
+});

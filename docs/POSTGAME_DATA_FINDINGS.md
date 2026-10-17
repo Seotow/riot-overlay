@@ -178,6 +178,12 @@ Studio → **Sau trận** → mục **Nhập từ file EOG (LCU)**: chọn file 
 và bấm **Dùng dữ liệu này cho postgame**. Chuẩn hóa ở `shared/eog-postgame.ts`, API
 `POST /api/riot-postgame/import-eog` (JSON tối đa 1 MB, chỉ từ Studio).
 
+Nguồn nạp: (1) chọn file bằng tay; (2) danh sách **Đã lưu trên máy này** (các bản probe lưu ở
+`.npm-cache/lcu-eog`); (3) tự động: backend đọc `eog-stats-block` của client trên máy chạy Studio
+(4 giây một lần) và đưa vào vùng duyệt một lần cho mỗi game. Chỉ máy người tham gia mới có khối này; trên
+máy spectator, mục (3) không bao giờ có gì. Không có bản nào tự lên overlay: luôn cần tích đã đối chiếu rồi
+bấm dùng.
+
 Ánh xạ: đội 100 là xanh, 200 là đỏ; winner từ `isWinningTeam`; thời lượng từ `gameLength`; người chơi
 xếp TOP/JUNGLE/MID/BOT/SUPPORT theo `detectedTeamPosition` (thiếu thì theo thứ tự client, có cảnh báo);
 damage, KDA, vàng, trụ cộng từ `stats` từng người; `botPlayer` giữ thành cờ `bot`. EOG không có cấm/chọn,
