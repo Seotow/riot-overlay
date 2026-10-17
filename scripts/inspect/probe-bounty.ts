@@ -13,6 +13,7 @@ let socket: WebSocket | undefined;
 
 type Row = {
   champion: string;
+  networkId: number | null;
   kills: number | null;
   deaths: number | null;
   series: [number, number][];
@@ -47,6 +48,7 @@ try {
       if (typeof value === "number") hasField = true;
       const row = heroes.get(i) ?? {
         champion: String(h?.common?.identifier ?? "?"),
+        networkId: typeof h?.info?.networkId === "number" ? h.info.networkId : null,
         kills: null,
         deaths: null,
         series: [],
@@ -69,6 +71,12 @@ try {
     }
   });
   await new Promise((r) => setTimeout(r, SECONDS * 1000));
+  // Events carry network ids; map them to the hero index (local file, never sent anywhere).
+  const indexOf = (id: unknown) => [...heroes.entries()].find(([, r]) => r.networkId === id)?.[0];
+  for (const e of dieEvents) {
+    e.killerIndex = indexOf(e.killerNetworkId) ?? null;
+    e.victimIndex = indexOf(e.victimNetworkId) ?? null;
+  }
   const rows = [...heroes.entries()].map(([index, row]) => ({
     index,
     ...row,

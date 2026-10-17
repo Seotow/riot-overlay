@@ -22,6 +22,7 @@ import hoặc kiểm thử adapter; nó chỉ đọc feed collector đã chạy.
 | inventory/items | items[].slot/id/count | SR220/220 matcheditems sau táchaux7/8; unique0..6, unknownslots→null; chưa map quest/boots |
 | spells D/F | spells[].index/name | Metadata D4/F5; exactcatalogcode, không đọc iconURL/nameplayer |
 | cooldown R/D/F và item | index/readyAt/maxCooldown/ammoReadyAt/ammoCooldown/ammoCount | R3/D4/F5; item slot0..6 nối spell6..12 theo Farsight source. Empty ammo chọn recharge theo GetMaxCooldown. Source-derived/fixture-tested; chưa runtime semantic proof, không suy GA activation |
+| tiền thưởng hạ gục (bounty) | heroes[].goldGivenOnDeath | Đo 18/10/2026 trên replay: Yasuo 446–454 hiển thị 450, 206 hiển thị 200 (game làm tròn mốc 50, chỉ hiện từ 100). Overlay dùng `shared/bounty.ts`; người đã chết không hiện |
 | wardScore | visionScore | Schema-only, numeric≥0 |
 | perks / keystone | perks[].id | Catalog cùng version: một keystone duy nhất; panel9 chỉ khi primary4/secondary2/shards3 hợp lệ. Không đoán order/không copy Value; source-derived/fixture-tested, chưa game verified |
 | experience | experience scalar | Không có previous/nextlevelboundary, không tạo objectXP giả |

@@ -1,3 +1,4 @@
+import { bountyLabel } from "../shared/bounty";
 import test from "node:test";
 import assert from "node:assert/strict";
 import { renderToStaticMarkup } from "react-dom/server";
@@ -626,4 +627,36 @@ test("ultimate is locked by its own skill level, not by champion level 6", () =>
   // No skill level from the source: nothing is assumed, whatever the champion level.
   setUltimate(undefined, 2);
   assert.equal(covers(render()), 0);
+});
+
+test("shutdown bounty rounds to steps of 50, shows from 100 and is hidden for dead players", () => {
+  assert.equal(bountyLabel(206.13693), 200);
+  assert.equal(bountyLabel(446), 450);
+  assert.equal(bountyLabel(453.75623), 450);
+  assert.equal(bountyLabel(99), 100);
+  assert.equal(bountyLabel(72), null);
+  assert.equal(bountyLabel(0), null);
+  assert.equal(bountyLabel(undefined), null);
+  assert.equal(bountyLabel(Number.NaN), null);
+  const f = frame(),
+    s = f.sample!;
+  s.assetVersion = liveCatalog.version;
+  const observed = <T>(value: T) => ({
+    value,
+    availability: "observed" as const,
+    source: "league-collector" as const,
+    observedAt: s.capturedAt,
+  });
+  s.players.forEach((p, i) => {
+    p.sourceStats = observed({ goldGivenOnDeath: i === 0 ? 453.7 : i === 1 ? 206 : 40 });
+  });
+  const render = () =>
+    renderToStaticMarkup(createElement(LiveOverlay, { theme: createState().theme, frame: f, now }));
+  let html = render();
+  assert.match(html, /player-bounty[^>]*>450G</);
+  assert.match(html, /player-bounty[^>]*>200G</);
+  assert.equal((html.match(/class="player-bounty"/g) || []).length, 2);
+  s.players[0].isDead = observed(true);
+  html = render();
+  assert.equal((html.match(/class="player-bounty"/g) || []).length, 1);
 });
