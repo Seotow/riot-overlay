@@ -4,6 +4,7 @@ import { leagueBroadcast } from "./leaguebroadcast";
 import { DraftLcu } from "./draft-lcu";
 import { EogLcu } from "./eog-lcu";
 import { ReplayWatcher } from "./replays";
+import { MatchLedger } from "./match-ledger";
 import { emptyDraft } from "../shared/draft";
 import { LeagueCollectorSource } from "../collector/adapter";
 import { CollectorRuntime } from "../collector/supervisor/supervisor";
@@ -218,10 +219,14 @@ const server = createServer(async (req, res) => {
       } else if (req.url === routes[7])
         res.end(
           JSON.stringify(
-            await riotPostgame.importRofl(input, async (name) => {
-              const file = (await replays.files()).find((f) => f.name === name);
-              return file ? resolve(file.dir, file.name) : null;
-            }),
+            await riotPostgame.importRofl(
+              input,
+              async (name) => {
+                const file = (await replays.files()).find((f) => f.name === name);
+                return file ? resolve(file.dir, file.name) : null;
+              },
+              ledger.snapshot(),
+            ),
           ),
         );
       else if (req.url === routes[4]) res.end(JSON.stringify(await riotPostgame.importEog(input)));
@@ -518,6 +523,9 @@ setInterval(async () => {
   }
 }, 600);
 // A participant's client has the end-of-game block as soon as the match ends: stage it for review.
+// What the collector sees during the match; fills gold over time and dragons of the replay postgame.
+const ledger = new MatchLedger();
+void ledger.load();
 const replays = new ReplayWatcher();
 let replayBusy = false;
 setInterval(async () => {
@@ -526,7 +534,7 @@ setInterval(async () => {
   try {
     await replays.afterMatch();
     for (const file of await replays.fresh())
-      await riotPostgame.stageReplayFile(resolve(file.dir, file.name));
+      await riotPostgame.stageReplayFile(resolve(file.dir, file.name), ledger.snapshot());
   } finally {
     replayBusy = false;
   }
@@ -577,6 +585,10 @@ async function pollObservation() {
       const next = await selectedObservation(true);
       if (providerAtStart !== state.provider || state.mockVisible) return;
       lastObservation = next;
+      if (state.provider !== "recording") {
+        ledger.observe(next, replays.snapshot().gameId);
+        void ledger.persist();
+      }
       const message = JSON.stringify({
         type: "observer",
         frame: lastObservation,

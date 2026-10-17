@@ -8,6 +8,7 @@ import { eogHistorySchema, type EogHistory } from "../shared/eog-history";
 import { redactEog } from "./eog-redact";
 import { normalizeRofl, roflInputSchema } from "../shared/rofl-postgame";
 import { readRofl } from "./rofl";
+import type { LedgerSnapshot } from "../shared/match-ledger";
 
 export const riotCredentialSchema = z
   .object({
@@ -353,7 +354,11 @@ export class RiotPostgameService {
     return this.status();
   }
   // `locate` maps a replay file name to a real path inside one of the allowed folders.
-  async importRofl(input: unknown, locate: (name: string) => Promise<string | null>) {
+  async importRofl(
+    input: unknown,
+    locate: (name: string) => Promise<string | null>,
+    ledger: LedgerSnapshot | null = null,
+  ) {
     const value = roflImportSchema.parse(input);
     if (this.controller) throw new RiotError(409, "busy");
     let rows;
@@ -362,16 +367,16 @@ export class RiotPostgameService {
       if (!path) throw new RiotError(404, "no-file");
       rows = await readRofl(path);
     } else rows = value.rofl;
-    this.candidate = normalizeRofl(rows, value.gameNumber);
+    this.candidate = normalizeRofl(rows, value.gameNumber, new Date(), ledger);
     return this.status();
   }
   // Automatic path: a new replay file appears (downloaded by the client). Stage it once for review.
-  async stageReplayFile(path: string) {
+  async stageReplayFile(path: string, ledger: LedgerSnapshot | null = null) {
     if (this.controller) return false;
     try {
       const rows = await readRofl(path);
       if (this.candidate?.evidence.matchId === `VN2_${rows.gameId}`) return false;
-      this.candidate = normalizeRofl(rows, this.candidate?.gameNumber ?? 1);
+      this.candidate = normalizeRofl(rows, this.candidate?.gameNumber ?? 1, new Date(), ledger);
       return true;
     } catch {
       return false;

@@ -14,6 +14,14 @@ Luồng, không nhập tay:
 3. Chỉ đọc metadata JSON ở đuôi ROFL2 (giới hạn 2 MB, không giải mã packet, không chạy replay). Giữ số liệu cuối
    trận và tướng; bỏ tên, PUUID, Riot ID. `shared/rofl-postgame.ts`, `server/rofl.ts`, `server/replays.ts`.
 
+4. **Sổ trận từ collector** (`server/match-ledger.ts`) chạy trong lúc xem trận trên máy spectator: lấy tổng vàng
+   hai đội mỗi 15 giây game time và các lượt hạ rồng (nguyên tố, Elder) từ sample collector, gắn gameId lấy từ LCU
+   (`gameflow/v1/session`) và lưu `.npm-cache/match-ledger/ledger.json` để chịu được restart. Khi replay của đúng
+   trận đó xuất hiện, sổ được ghép vào postgame: biểu đồ vàng (xanh trừ đỏ) và **rồng nguyên tố/Elder**, nhưng rồng
+   chỉ dùng khi số lượt hạ collector thấy khớp chính xác `DRAGON_KILLS` của replay cho từng đội (collector từng bỏ
+   sót event rồng), nếu không hai mục rồng giữ —. Nếu sổ không có (collector không chạy trong trận đó, như trận
+   mẫu 1607368559) thì rồng và vàng theo thời gian vẫn là —; không bịa. Cấm chọn không có trong replay.
+
 Phân tích `VN2-1607368559.rofl` (7.813.521 byte, 786,4 giây): 10 người, 200 khóa stats mỗi người. Bot là người không
 có PUUID (9/10). Winner đội 100 (xanh). Tổng đội xanh: 40/6/14, vàng 63.611, 8 trụ, 1 Baron, 1 Sứ giả, 3 Sâu;
 damage lên tướng 40.241/4.366/1.798/3.669/7.025 (khớp LCU). Không có: vị trí (TEAM_POSITION rỗng, nên hàng damage

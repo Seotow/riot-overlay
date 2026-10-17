@@ -2,6 +2,7 @@ import { z } from "zod";
 import { draftCatalog } from "./draft-assets";
 import { liveCatalog } from "./live-assets";
 import { riotPostgameSchema, type RiotPostgameState } from "./postgame";
+import type { LedgerSnapshot } from "./match-ledger";
 
 // Replay (.rofl) metadata -> postgame. The tail of a ROFL2 file holds JSON with the final stats of
 // all ten players; only the numbers and the champion are kept (no names, PUUIDs or Riot IDs).
@@ -68,10 +69,14 @@ export function reduceRofl(metadata: unknown, gameId: number): RoflInput {
 
 const positions = ["TOP", "JUNGLE", "MIDDLE", "BOTTOM", "UTILITY"];
 
+// `ledger` is what the collector observed during the same match (matched by game id, or by game
+// length when the game id was unknown). It adds dragons and gold over time; each is checked against
+// the replay before it is used.
 export function normalizeRofl(
   input: RoflInput,
   gameNumber: number,
   now: Date = new Date(),
+  ledger: LedgerSnapshot | null = null,
 ): RiotPostgameState {
   const value = roflInputSchema.parse(input);
   const sides = [100, 200].map((id) => value.rows.filter((r) => r.team === id));
@@ -110,7 +115,24 @@ export function normalizeRofl(
       : undefined;
     return c ? String(c.key) : null;
   };
-  const teams = sides.map((rows) => ({
+  const matches =
+    !!ledger &&
+    (ledger.gameId !== null
+      ? ledger.gameId === value.gameId
+      : duration !== null && Math.abs(ledger.lastGameTime - duration) <= 30);
+  const lg = matches ? ledger : null;
+  // Dragons: only when the kills the collector saw add up exactly to the replay's DRAGON_KILLS per team.
+  const dragonSplit = sides.map((rows, i) => {
+    const total = rows.reduce<number | null>(
+      (n, r) => (n === null || r.stats.DRAGON_KILLS === null ? null : n + r.stats.DRAGON_KILLS),
+      0,
+    );
+    if (!lg || total === null) return null;
+    const mine = lg.dragons.filter((d) => d.team === (i === 0 ? "ORDER" : "CHAOS"));
+    const elder = mine.filter((d) => d.type === "elder").length;
+    return mine.length === total ? { elemental: mine.length - elder, elder } : null;
+  });
+  const teams = sides.map((rows, side) => ({
     kills: sum(rows, "CHAMPIONS_KILLED"),
     deaths: sum(rows, "NUM_DEATHS"),
     assists: sum(rows, "ASSISTS"),
@@ -118,8 +140,8 @@ export function normalizeRofl(
     towers: sum(rows, "TURRETS_KILLED"),
     // DRAGON_KILLS in the file counts every dragon, and ELDER_DRAGON_KILLS contradicts the other
     // sources, so neither split is claimed.
-    drakes: null,
-    elders: null,
+    drakes: dragonSplit[side]?.elemental ?? null,
+    elders: dragonSplit[side]?.elder ?? null,
     barons: sum(rows, "BARON_KILLS"),
     heralds: sum(rows, "RIFT_HERALD_KILLS"),
     grubs: sum(rows, "HORDE_KILLS"),
@@ -133,11 +155,31 @@ export function normalizeRofl(
   if (teams.some((t) => t.players.some((p) => p.champion === null)))
     warnings.push("Có tướng ngoài bộ ảnh local (15.20.1): ô đó để trống.");
   const dragons = sides.map((rows) => sum(rows, "DRAGON_KILLS"));
-  if (dragons.some((d) => d))
+  if (dragons.some((d) => d) && dragonSplit.some((d) => d === null))
     warnings.push(
-      `Replay ghi ${dragons.join("/")} lượt hạ rồng (có thể gồm Elder); không tách nguyên tố và Elder, hai mục rồng giữ —.`,
+      lg
+        ? `Rồng collector thấy không khớp replay (${dragons.join("/")} lượt hạ); không tách nguyên tố và Elder, hai mục rồng giữ —.`
+        : `Replay ghi ${dragons.join("/")} lượt hạ rồng (có thể gồm Elder) và không có sổ collector của trận này; hai mục rồng giữ —.`,
     );
-  warnings.push("Replay không có cấm chọn và lịch sử vàng: bans và biểu đồ vàng trống.");
+  // Gold difference over time (blue - red) from the collector's own samples of this match.
+  const goldHistory: RiotPostgameState["goldHistory"] = [];
+  if (lg)
+    for (const point of lg.gold) {
+      if (duration !== null && point.at > duration + 1) continue;
+      if (goldHistory.length && point.at <= goldHistory.at(-1)!.at) continue;
+      goldHistory.push({
+        at: duration !== null ? Math.min(point.at, duration) : point.at,
+        delta: point.blue - point.red,
+      });
+    }
+  if (goldHistory.length) {
+    warnings.push("Vàng theo thời gian và rồng lấy từ collector trong trận (partial).");
+    if (lg!.firstGameTime > 60)
+      warnings.push(
+        `Collector bắt đầu thu từ ${Math.round(lg!.firstGameTime)} giây: đoạn đầu biểu đồ vàng thiếu.`,
+      );
+  } else warnings.push("Không có sổ collector của trận này: biểu đồ vàng trống.");
+  warnings.push("Replay không có cấm chọn: bans trống.");
   const bots = value.rows.filter((r) => r.bot).length;
   if (bots) warnings.push(`Có ${bots} bot trong trận (không có tài khoản).`);
   return riotPostgameSchema.parse({
@@ -148,14 +190,14 @@ export function normalizeRofl(
     duration,
     winner,
     teams,
-    goldHistory: [],
+    goldHistory,
     evidence: {
       matchId: `VN2_${value.gameId}`,
       mode: "rofl",
       fetchedAt: now.toISOString(),
       patch: "",
       roleOrderResolved,
-      timelineAvailable: false,
+      timelineAvailable: goldHistory.length > 0,
       isFinal,
       warnings,
     },
