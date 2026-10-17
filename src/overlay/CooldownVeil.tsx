@@ -7,12 +7,7 @@ export function CooldownVeil({
   total: number;
   dark?: boolean;
 }) {
-  if (
-    !Number.isFinite(remaining) ||
-    !Number.isFinite(total) ||
-    remaining <= 0 ||
-    total <= 0
-  )
+  if (!Number.isFinite(remaining) || !Number.isFinite(total) || remaining <= 0 || total <= 0)
     return null;
   const elapsed = 360 * (1 - Math.min(1, Math.max(0, remaining / total)));
   return (
@@ -24,9 +19,7 @@ export function CooldownVeil({
           background: `conic-gradient(from 0deg, transparent 0deg ${elapsed}deg, ${dark ? "#000d" : "#000a"} ${elapsed}deg 360deg)`,
         }}
       />
-      {remaining <= 10 && (
-        <b className="item-countdown">{Math.ceil(remaining)}</b>
-      )}
+      {remaining <= 10 && <b className="item-countdown">{Math.ceil(remaining)}</b>}
     </>
   );
 }

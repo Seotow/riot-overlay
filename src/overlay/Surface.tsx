@@ -38,11 +38,7 @@ function Role({ index }: { index: number }) {
 }
 function MetricIcon({ kind }: { kind: "gold" | "tower" | "dragon" | "baron" }) {
   return (
-    <svg
-      className={`metric-icon ${kind}`}
-      viewBox="0 0 30 30"
-      aria-hidden="true"
-    >
+    <svg className={`metric-icon ${kind}`} viewBox="0 0 30 30" aria-hidden="true">
       {kind === "gold" ? (
         <>
           <ellipse cx="15" cy="18" rx="12" ry="6" />
@@ -70,9 +66,7 @@ function SeriesPips() {
 function Scoreboard({ state }: { state: State }) {
   const t = state.theme;
   const totals = [0, 1].map((side) =>
-    state.players
-      .slice(side * 5, side * 5 + 5)
-      .reduce((n, p) => n + (p.gold || 0), 0),
+    state.players.slice(side * 5, side * 5 + 5).reduce((n, p) => n + (p.gold || 0), 0),
   );
   const showGold = state.capabilities.gold && t.widgets.gold;
   const difference = totals[1] - totals[0];
@@ -174,10 +168,7 @@ function PlayerRow({ p, red }: { p: Player; red: boolean }) {
         ))}
       </div>
       <div className="row-champion">
-        <img
-          src={champion(p.championId)?.icon}
-          alt={champion(p.championId)?.name}
-        />
+        <img src={champion(p.championId)?.icon} alt={champion(p.championId)?.name} />
         <b>{p.level}</b>
       </div>
       <div className="row-name">
@@ -242,11 +233,7 @@ function Draft({ state }: { state: State }) {
         <h3>COACH: {draftFixture.blueCoach}</h3>
         <div>
           {draftFixture.blueBans.map((id) => (
-            <img
-              key={id}
-              src={champion(id)?.icon}
-              alt={`Ban ${champion(id)?.name}`}
-            />
+            <img key={id} src={champion(id)?.icon} alt={`Ban ${champion(id)?.name}`} />
           ))}
         </div>
       </div>
@@ -254,11 +241,7 @@ function Draft({ state }: { state: State }) {
         <h3>COACH: {draftFixture.redCoach}</h3>
         <div>
           {draftFixture.redBans.map((id) => (
-            <img
-              key={id}
-              src={champion(id)?.icon}
-              alt={`Ban ${champion(id)?.name}`}
-            />
+            <img key={id} src={champion(id)?.icon} alt={`Ban ${champion(id)?.name}`} />
           ))}
         </div>
       </div>
@@ -283,16 +266,10 @@ function Draft({ state }: { state: State }) {
                       {i + 1}]
                     </span>
                     {(picked || hover) && (
-                      <img
-                        className="pick-portrait"
-                        src={c.portrait}
-                        alt={c.name}
-                      />
+                      <img className="pick-portrait" src={c.portrait} alt={c.name} />
                     )}
                     <div className="pick-shade" />
-                    <span className="vertical-player">
-                      {draftFixture.names[index]}
-                    </span>
+                    <span className="vertical-player">{draftFixture.names[index]}</span>
                     <Role index={i} />
                     {hover && (
                       <div className="pick-stat">
@@ -327,10 +304,7 @@ function Draft({ state }: { state: State }) {
             <b>{t.redName}</b>
           </div>
           <div className="draft-patch">PATCH {catalog.displayPatch}</div>
-          <div
-            className="reference-sponsors"
-            aria-label="Sponsor marks from supplied reference"
-          />
+          <div className="reference-sponsors" aria-label="Sponsor marks from supplied reference" />
         </div>
       </section>
     </>
@@ -365,9 +339,7 @@ export function Surface({
   const requested = new URLSearchParams(location.search).get("scene");
   const overlay = location.pathname === "/overlay";
   const active =
-    overlay && ["draft", "ingame", "postgame"].includes(requested || "")
-      ? requested
-      : state.scene;
+    overlay && ["draft", "ingame", "postgame"].includes(requested || "") ? requested : state.scene;
   const t = state.theme;
   const style = {
     "--ingame-panel-opacity": t.ingamePanelOpacity ?? 0.84,
@@ -378,11 +350,7 @@ export function Surface({
     "--accent": t.accent,
     "--panel": t.background,
     "--display-font":
-      t.font === "condensed"
-        ? '"Beaufort for LoL"'
-        : t.font === "serif"
-          ? "Georgia"
-          : '"Spiegel"',
+      t.font === "condensed" ? '"Beaufort for LoL"' : t.font === "serif" ? "Georgia" : '"Spiegel"',
     "--body-font": t.font === "serif" ? "Georgia" : '"Spiegel"',
     transform: `scale(${scale})`,
   } as CSSProperties;
@@ -402,9 +370,7 @@ export function Surface({
         {preview && !state.mockVisible && (
           <div className="stage">
             <span>VÙNG HÌNH GAME / REPLAY</span>
-            <small>
-              Không có ảnh tham chiếu. Overlay dùng dữ liệu quan sát
-            </small>
+            <small>Không có ảnh tham chiếu. Overlay dùng dữ liệu quan sát</small>
           </div>
         )}
         {state.mockVisible && preview && !reference && !compare && (
@@ -495,12 +461,7 @@ export function Surface({
                       .slice(0, 5)
                       .map((p) => (
                         <div key={p.id}>
-                          <img
-                            width="30"
-                            height="30"
-                            src={champion(p.championId).icon}
-                            alt=""
-                          />
+                          <img width="30" height="30" src={champion(p.championId).icon} alt="" />
                           <span>{p.champion}</span>
                           <b>{p.level}</b>
                         </div>
@@ -510,9 +471,7 @@ export function Surface({
               </>
             )}
             {active === "draft" && <Draft state={state} />}
-            {active === "postgame" && (
-              <PostgameOverlay theme={t} data={state.postgame} />
-            )}
+            {active === "postgame" && <PostgameOverlay theme={t} data={state.postgame} />}
           </div>
         )}
       </div>

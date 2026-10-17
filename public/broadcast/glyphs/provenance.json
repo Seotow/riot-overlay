@@ -15,63 +15,33 @@
     },
     {
       "name": "role-top",
-      "file": "ingame new.png",
-      "rect": [
-        526,
-        79,
-        23,
-        24
-      ],
-      "color": "blue",
-      "foregroundPixels": 89
+      "source": "Riot Games client vector icon via CommunityDragon: https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/svg/position-top.svg",
+      "modifications": "Removed stylesheet link and class, all fills set to white for use as CSS mask; secondary shape keeps its original 50% opacity. Riot game asset: non-commercial fan use only, review rights before distributing.",
+      "retrieved": "2026-10-17"
     },
     {
       "name": "role-jungle",
-      "file": "ingame new.png",
-      "rect": [
-        563,
-        79,
-        23,
-        24
-      ],
-      "color": "blue",
-      "foregroundPixels": 117
+      "source": "Riot Games client vector icon via CommunityDragon: https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/svg/position-jungle.svg",
+      "modifications": "Removed stylesheet link and class, all fills set to white for use as CSS mask; secondary shape keeps its original 50% opacity. Riot game asset: non-commercial fan use only, review rights before distributing.",
+      "retrieved": "2026-10-17"
     },
     {
       "name": "role-mid",
-      "file": "ingame new.png",
-      "rect": [
-        600,
-        79,
-        23,
-        24
-      ],
-      "color": "blue",
-      "foregroundPixels": 111
+      "source": "Riot Games client vector icon via CommunityDragon: https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/svg/position-middle.svg",
+      "modifications": "Removed stylesheet link and class, all fills set to white for use as CSS mask; secondary shape keeps its original 50% opacity. Riot game asset: non-commercial fan use only, review rights before distributing.",
+      "retrieved": "2026-10-17"
     },
     {
       "name": "role-bot",
-      "file": "ingame new.png",
-      "rect": [
-        637,
-        79,
-        23,
-        24
-      ],
-      "color": "blue",
-      "foregroundPixels": 75
+      "source": "Riot Games client vector icon via CommunityDragon: https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/svg/position-bottom.svg",
+      "modifications": "Removed stylesheet link and class, all fills set to white for use as CSS mask; secondary shape keeps its original 50% opacity. Riot game asset: non-commercial fan use only, review rights before distributing.",
+      "retrieved": "2026-10-17"
     },
     {
       "name": "role-support",
-      "file": "ingame new.png",
-      "rect": [
-        674,
-        79,
-        23,
-        24
-      ],
-      "color": "blue",
-      "foregroundPixels": 114
+      "source": "Riot Games client vector icon via CommunityDragon: https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/svg/position-utility.svg",
+      "modifications": "Removed stylesheet link and class, all fills set to white for use as CSS mask; secondary shape keeps its original 50% opacity. Riot game asset: non-commercial fan use only, review rights before distributing.",
+      "retrieved": "2026-10-17"
     },
     {
       "name": "baron",

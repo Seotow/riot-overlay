@@ -10,13 +10,7 @@ const benefits: Record<QuestRole, string[]> = {
   bot: ["LUMP OF GOLD", "BONUS GOLD", "BOOTS SLOT"],
   support: ["SUPPORT ITEM", "WARDS SLOT", "DISCOUNT"],
 };
-export function QuestCompletion({
-  role,
-  reward,
-}: {
-  role: QuestRole;
-  reward?: NamedAsset;
-}) {
+export function QuestCompletion({ role, reward }: { role: QuestRole; reward?: NamedAsset }) {
   return (
     <aside
       className="quest-completion"

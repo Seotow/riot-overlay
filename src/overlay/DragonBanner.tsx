@@ -11,13 +11,7 @@ const names: Record<string, string> = {
   chemtech: "CHEMTECH DRAKE",
   elder: "ELDER DRAGON",
 };
-export function DragonBanner({
-  type,
-  soul = false,
-}: {
-  type?: string;
-  soul?: boolean;
-}) {
+export function DragonBanner({ type, soul = false }: { type?: string; soul?: boolean }) {
   const key = type?.replace(/^DRAGON_/i, "").toLowerCase() ?? "";
   const visual = objectiveVisual(key);
   const effect = soul ? dragonSoulCopy(key) : undefined;

@@ -1,21 +1,12 @@
 import type { Theme } from "../../shared/schema";
-import {
-  goldSegments,
-  postgameRoles,
-  type PostgameState,
-} from "../../shared/postgame";
+import { goldSegments, postgameRoles, type PostgameState } from "../../shared/postgame";
 import { draftChampion } from "../../shared/draft-assets";
 import { liveChampion } from "../../shared/live-assets";
 
 const number = (n: number | null) => (n === null ? "—" : String(n));
-const compact = (n: number | null) =>
-  n === null ? "—" : `${(n / 1000).toFixed(1)}K`;
+const compact = (n: number | null) => (n === null ? "—" : `${(n / 1000).toFixed(1)}K`);
 function Champion({ id, live = false }: { id: string | null; live?: boolean }) {
-  const c = id
-    ? live
-      ? liveChampion(Number(id))
-      : draftChampion(id)
-    : undefined;
+  const c = id ? (live ? liveChampion(Number(id)) : draftChampion(id)) : undefined;
   return c ? (
     <img className="pg-champion" src={c.icon} alt={c.name} />
   ) : (
@@ -25,20 +16,14 @@ function Champion({ id, live = false }: { id: string | null; live?: boolean }) {
 function GoldChart({ data }: { data: PostgameState }) {
   const points = data.goldHistory;
   const end = Math.max(1, data.duration ?? points.at(-1)?.at ?? 1);
-  const hi =
-    Math.ceil(Math.max(2000, ...points.map((p) => p.delta ?? 0)) / 2000) * 2000;
-  const lo =
-    Math.floor(Math.min(0, ...points.map((p) => p.delta ?? 0)) / 2000) * 2000;
+  const hi = Math.ceil(Math.max(2000, ...points.map((p) => p.delta ?? 0)) / 2000) * 2000;
+  const lo = Math.floor(Math.min(0, ...points.map((p) => p.delta ?? 0)) / 2000) * 2000;
   const x = (at: number) => 88 + (792 * at) / end;
   const y = (delta: number) => 222 - (176 * (delta - lo)) / (hi - lo);
   const zero = y(0);
   const segments = goldSegments(points);
-  const ticks = Array.from(
-    { length: Math.floor(end / 600) + 1 },
-    (_, i) => i * 600,
-  );
-  if (!segments.length)
-    return <div className="pg-no-history">CHƯA CÓ LỊCH SỬ VÀNG</div>;
+  const ticks = Array.from({ length: Math.floor(end / 600) + 1 }, (_, i) => i * 600);
+  if (!segments.length) return <div className="pg-no-history">CHƯA CÓ LỊCH SỬ VÀNG</div>;
   return (
     <svg
       className="pg-gold-chart"
@@ -64,13 +49,7 @@ function GoldChart({ data }: { data: PostgameState }) {
       </defs>
       {[hi, 0, ...(lo < 0 ? [lo] : [])].map((v) => (
         <g key={v}>
-          <line
-            x1="88"
-            x2="880"
-            y1={y(v)}
-            y2={y(v)}
-            className={v === 0 ? "pg-zero" : "pg-grid"}
-          />
+          <line x1="88" x2="880" y1={y(v)} y2={y(v)} className={v === 0 ? "pg-zero" : "pg-grid"} />
           <text x="74" y={y(v) + 6} textAnchor="end">
             {Math.round(v).toLocaleString("en-US")}
           </text>
@@ -85,39 +64,16 @@ function GoldChart({ data }: { data: PostgameState }) {
         </g>
       ))}
       {segments.map((segment, i) => {
-        const line = segment
-          .map((p, j) => `${j ? "L" : "M"}${x(p.at)},${y(p.delta)}`)
-          .join(" ");
+        const line = segment.map((p, j) => `${j ? "L" : "M"}${x(p.at)},${y(p.delta)}`).join(" ");
         const area = `${line} L${x(segment.at(-1)!.at)},${zero} L${x(segment[0].at)},${zero} Z`;
         return (
           <g key={i} data-gold-segment>
-            <path
-              d={area}
-              fill="url(#pg-blue-fill)"
-              clipPath="url(#pg-positive)"
-            />
-            <path
-              d={area}
-              fill="url(#pg-red-fill)"
-              clipPath="url(#pg-negative)"
-            />
-            <path
-              d={line}
-              className="pg-curve pg-blue"
-              clipPath="url(#pg-positive)"
-            />
-            <path
-              d={line}
-              className="pg-curve pg-red"
-              clipPath="url(#pg-negative)"
-            />
+            <path d={area} fill="url(#pg-blue-fill)" clipPath="url(#pg-positive)" />
+            <path d={area} fill="url(#pg-red-fill)" clipPath="url(#pg-negative)" />
+            <path d={line} className="pg-curve pg-blue" clipPath="url(#pg-positive)" />
+            <path d={line} className="pg-curve pg-red" clipPath="url(#pg-negative)" />
             {segment.length === 1 && (
-              <circle
-                cx={x(segment[0].at)}
-                cy={y(segment[0].delta)}
-                r="3"
-                fill="currentColor"
-              />
+              <circle cx={x(segment[0].at)} cy={y(segment[0].delta)} r="3" fill="currentColor" />
             )}
           </g>
         );
@@ -128,13 +84,7 @@ function GoldChart({ data }: { data: PostgameState }) {
     </svg>
   );
 }
-export function PostgameOverlay({
-  theme: t,
-  data,
-}: {
-  theme: Theme;
-  data?: PostgameState | null;
-}) {
+export function PostgameOverlay({ theme: t, data }: { theme: Theme; data?: PostgameState | null }) {
   if (!data)
     return (
       <section className="production-postgame pg-empty">
@@ -142,12 +92,7 @@ export function PostgameOverlay({
       </section>
     );
   const stats = [
-    [
-      "KDA",
-      ...data.teams.map((s) =>
-        [s.kills, s.deaths, s.assists].map(number).join("/"),
-      ),
-    ],
+    ["KDA", ...data.teams.map((s) => [s.kills, s.deaths, s.assists].map(number).join("/"))],
     ["GOLD", ...data.teams.map((s) => compact(s.gold))],
     ...(
       [
@@ -160,10 +105,7 @@ export function PostgameOverlay({
       ] as const
     ).map(([label, key]) => [label, ...data.teams.map((s) => number(s[key]))]),
   ];
-  const damageMax = Math.max(
-    1,
-    ...data.teams.flatMap((s) => s.players.map((p) => p.damage ?? 0)),
-  );
+  const damageMax = Math.max(1, ...data.teams.flatMap((s) => s.players.map((p) => p.damage ?? 0)));
   return (
     <section className="production-postgame" data-source={data.source}>
       <header className="pg-header">
@@ -174,16 +116,10 @@ export function PostgameOverlay({
           >
             <div className="pg-team-brand">
               <small>{side ? "RED SIDE" : "BLUE SIDE"}</small>
-              <b title={side ? t.redName : t.blueName}>
-                {side ? t.redName : t.blueName}
-              </b>
+              <b title={side ? t.redName : t.blueName}>{side ? t.redName : t.blueName}</b>
             </div>
             {(side ? t.redLogo : t.blueLogo) && (
-              <img
-                className="pg-logo"
-                src={side ? t.redLogo : t.blueLogo}
-                alt="Logo đội"
-              />
+              <img className="pg-logo" src={side ? t.redLogo : t.blueLogo} alt="Logo đội" />
             )}
             <span className="pg-result">
               {data.winner === null
@@ -212,13 +148,9 @@ export function PostgameOverlay({
         <div className="pg-stats">
           {stats.map(([label, blue, red]) => (
             <div className="pg-stat" key={label}>
-              <b className={data.winner === "blue" ? "pg-highlight-blue" : ""}>
-                {blue}
-              </b>
+              <b className={data.winner === "blue" ? "pg-highlight-blue" : ""}>{blue}</b>
               <span>{label}</span>
-              <b className={data.winner === "red" ? "pg-highlight-red" : ""}>
-                {red}
-              </b>
+              <b className={data.winner === "red" ? "pg-highlight-red" : ""}>{red}</b>
             </div>
           ))}
           <div className="pg-bans">
@@ -243,10 +175,7 @@ export function PostgameOverlay({
                 {[0, 1].map((side) => {
                   const p = data.teams[side].players[i];
                   return (
-                    <div
-                      key={side}
-                      className={`pg-damage-side pg-side-${side}`}
-                    >
+                    <div key={side} className={`pg-damage-side pg-side-${side}`}>
                       <Champion id={p.champion} live={data.source === "riot"} />
                       <div className="pg-damage-meter">
                         <b>{compact(p.damage)}</b>
@@ -262,8 +191,7 @@ export function PostgameOverlay({
                   );
                 })}
                 <span className="pg-role">
-                  {data.source === "riot" &&
-                  data.evidence.roleOrderResolved.some((v) => !v)
+                  {data.source === "riot" && data.evidence.roleOrderResolved.some((v) => !v)
                     ? `P${i + 1}`
                     : role}
                 </span>

@@ -23,10 +23,7 @@ export function RankingBoard({
       ? rankLevels(sample?.players ?? [])
       : [...(sample?.players ?? [])]
           .filter((p) => p.totalGold.value !== null)
-          .sort(
-            (a, b) =>
-              b.totalGold.value! - a.totalGold.value! || a.slot - b.slot,
-          );
+          .sort((a, b) => b.totalGold.value! - a.totalGold.value! || a.slot - b.slot);
   const max = Math.max(1, ...players.map((p) => p.totalGold.value ?? 0));
   return (
     <MotionPresence show={show && !!sample}>
@@ -58,15 +55,13 @@ export function RankingBoard({
                   } as CSSProperties
                 }
               >
-                <div
-                  className={`rank-content ${p.team.value === "CHAOS" ? "red" : "blue"}`}
-                >
-                  {asset && (
-                    <img width="44" height="44" src={asset.icon} alt="" />
-                  )}
+                <div className={`rank-content ${p.team.value === "CHAOS" ? "red" : "blue"}`}>
+                  {asset && <img width="44" height="44" src={asset.icon} alt="" />}
                   {mode === "gold" ? (
                     <>
-                      <span title={playerDisplayName(p, playerNames)}>{playerDisplayName(p, playerNames)}</span>
+                      <span title={playerDisplayName(p, playerNames)}>
+                        {playerDisplayName(p, playerNames)}
+                      </span>
                       <b>{((p.totalGold.value ?? 0) / 1000).toFixed(1)}K</b>
                       <span className="ranking-track">
                         <i
@@ -79,13 +74,14 @@ export function RankingBoard({
                   ) : (
                     <>
                       <div className="level-summary">
-                        <span title={playerDisplayName(p, playerNames)}>{playerDisplayName(p, playerNames)}</span>
-                        <span className="xp-percent">{progress === null ? "—" : `${Math.floor(progress * 100)}%`}</span>
+                        <span title={playerDisplayName(p, playerNames)}>
+                          {playerDisplayName(p, playerNames)}
+                        </span>
+                        <span className="xp-percent">
+                          {progress === null ? "—" : `${Math.floor(progress * 100)}%`}
+                        </span>
                         {progress === null ? (
-                          <span
-                            className="level-progress unavailable"
-                            title="Chưa có dữ liệu XP"
-                          >
+                          <span className="level-progress unavailable" title="Chưa có dữ liệu XP">
                             {p.sourceStats?.value?.experience != null
                               ? `XP ${Math.floor(p.sourceStats.value.experience)}`
                               : "CHƯA CÓ XP"}

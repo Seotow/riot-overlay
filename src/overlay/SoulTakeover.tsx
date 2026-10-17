@@ -4,10 +4,7 @@ import type { Theme } from "../../shared/schema";
 import { DragonBanner } from "./DragonBanner";
 import { MotionPresence } from "./MotionPresence";
 
-const elements: Record<
-  string,
-  { name: string; crop: string; render?: boolean; color: string }
-> = {
+const elements: Record<string, { name: string; crop: string; render?: boolean; color: string }> = {
   water: { name: "RỒNG NƯỚC", crop: "78% center", color: "#155959" },
   air: { name: "RỒNG GIÓ", crop: "50% center", color: "#565f6b" },
   earth: { name: "RỒNG ĐẤT", crop: "48% center", color: "#6e543d" },
@@ -38,11 +35,7 @@ export function SoulTakeover({
   artworkVisible?: boolean;
   bannerVisible?: boolean;
 }) {
-  if (
-    event.kind !== "DragonSoul" ||
-    !["ORDER", "CHAOS"].includes(event.team ?? "")
-  )
-    return null;
+  if (event.kind !== "DragonSoul" || !["ORDER", "CHAOS"].includes(event.team ?? "")) return null;
   const team = event.team === "ORDER" ? theme.blueName : theme.redName;
   const key = event.objectiveType?.toLowerCase() ?? "";
   const element = Object.hasOwn(elements, key) ? elements[key] : undefined;
@@ -53,9 +46,7 @@ export function SoulTakeover({
           className="live-soul-takeover"
           data-region="soul-takeover"
           role="status"
-          style={
-            { "--soul-color": element?.color ?? "#343d43" } as CSSProperties
-          }
+          style={{ "--soul-color": element?.color ?? "#343d43" } as CSSProperties}
         >
           {element && (
             <img

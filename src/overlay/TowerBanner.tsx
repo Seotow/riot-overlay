@@ -1,10 +1,4 @@
-export function TowerBanner({
-  team,
-  first,
-}: {
-  team: string;
-  first?: boolean;
-}) {
+export function TowerBanner({ team, first }: { team: string; first?: boolean }) {
   return (
     <aside
       className="dragon-event-strip tower-event-strip"

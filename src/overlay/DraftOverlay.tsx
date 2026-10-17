@@ -1,10 +1,5 @@
 import { draftChampion as champion } from "../../shared/draft-assets";
-import {
-  draftSlots,
-  draftTurns,
-  emptyDraft,
-  type DraftState,
-} from "../../shared/draft";
+import { draftSlots, draftTurns, emptyDraft, type DraftState } from "../../shared/draft";
 import type { Theme } from "../../shared/schema";
 import type { CSSProperties } from "react";
 
@@ -21,10 +16,7 @@ export function DraftOverlay({
   const remaining =
     draft.deadline == null
       ? null
-      : Math.min(
-          draft.duration,
-          Math.max(0, Math.ceil((draft.deadline - now) / 1000)),
-        );
+      : Math.min(draft.duration, Math.max(0, Math.ceil((draft.deadline - now) / 1000)));
   return (
     <div
       className={`production-draft ${t.draftLayout === "simple" ? "draft-simple" : "draft-broadcast"}`}
@@ -39,8 +31,7 @@ export function DraftOverlay({
           <h3>{draft.coaches[side] ? `COACH: ${draft.coaches[side]}` : ""}</h3>
           <div>
             {draftSlots(draft, side, "ban").map((id, i) => {
-              const active =
-                turn?.[0] === side && turn[1] === "ban" && turn[2] === i;
+              const active = turn?.[0] === side && turn[1] === "ban" && turn[2] === i;
               const c = champion(id ?? (active ? (draft.hover ?? "") : ""));
               return (
                 <span
@@ -55,13 +46,7 @@ export function DraftOverlay({
                       alt={`Ban ${c.name}`}
                     />
                   )}
-                  {id && (
-                    <i
-                      className="draft-lock-flash"
-                      key={`lock:${id}`}
-                      aria-hidden="true"
-                    />
-                  )}
+                  {id && <i className="draft-lock-flash" key={`lock:${id}`} aria-hidden="true" />}
                   {!c && <small>{i + 1}</small>}
                 </span>
               );
@@ -74,9 +59,7 @@ export function DraftOverlay({
           <i
             style={{
               width:
-                remaining == null
-                  ? "0%"
-                  : `${Math.min(100, (remaining / draft.duration) * 100)}%`,
+                remaining == null ? "0%" : `${Math.min(100, (remaining / draft.duration) * 100)}%`,
             }}
           />
           {remaining != null && <b>{remaining}</b>}
@@ -86,9 +69,7 @@ export function DraftOverlay({
             <div className={`draft-team draft-team-${side}`} key={side}>
               {draftSlots(draft, side, "pick").map((id, i) => {
                 const active =
-                  turn?.[0] === side &&
-                  turn[1] === "pick" &&
-                  draft.order[side][i] === turn[2];
+                  turn?.[0] === side && turn[1] === "pick" && draft.order[side][i] === turn[2];
                 const c = champion(id ?? (active ? (draft.hover ?? "") : ""));
                 return (
                   <article
@@ -116,19 +97,11 @@ export function DraftOverlay({
                       />
                     )}
                     <div className="pick-shade" />
-                    {id && (
-                      <i
-                        className="draft-lock-flash"
-                        key={`lock:${id}`}
-                        aria-hidden="true"
-                      />
-                    )}
+                    {id && <i className="draft-lock-flash" key={`lock:${id}`} aria-hidden="true" />}
                     {t.draftLayout === "simple" && c && (
                       <span className="draft-champion-name">{c.name}</span>
                     )}
-                    <span className="vertical-player">
-                      {draft.names[side * 5 + i]}
-                    </span>
+                    <span className="vertical-player">{draft.names[side * 5 + i]}</span>
                     <i
                       className="role-symbol draft-role"
                       style={{
@@ -144,10 +117,7 @@ export function DraftOverlay({
         <div className="ref-draft-center">
           <div className="draft-series">
             {[t.blueScore ?? 0, t.redScore ?? 0].map((score, i) => (
-              <span
-                className={`series-pips ${i === 0 ? "blue-series" : "red-series"}`}
-                key={i}
-              >
+              <span className={`series-pips ${i === 0 ? "blue-series" : "red-series"}`} key={i}>
                 {Array.from({ length: t.seriesGames ?? 3 }, (_, n) => (
                   <i className={n < score ? "won" : ""} key={n} />
                 ))}
@@ -167,8 +137,7 @@ export function DraftOverlay({
                   16,
                   Math.min(
                     t.draftLayout === "simple" ? 64 : 45,
-                    (t.draftLayout === "simple" ? 1000 : 220) /
-                      t.blueName.length,
+                    (t.draftLayout === "simple" ? 1000 : 220) / t.blueName.length,
                   ),
                 ),
               }}
@@ -182,8 +151,7 @@ export function DraftOverlay({
                   16,
                   Math.min(
                     t.draftLayout === "simple" ? 64 : 45,
-                    (t.draftLayout === "simple" ? 1000 : 220) /
-                      t.redName.length,
+                    (t.draftLayout === "simple" ? 1000 : 220) / t.redName.length,
                   ),
                 ),
               }}
@@ -191,9 +159,7 @@ export function DraftOverlay({
               {t.redName}
             </b>
           </div>
-          {draft.patch && (
-            <div className="draft-patch">PATCH {draft.patch}</div>
-          )}
+          {draft.patch && <div className="draft-patch">PATCH {draft.patch}</div>}
           <div className="draft-phase" key={draft.step}>
             {!turn
               ? "ĐỘI HÌNH HOÀN TẤT"

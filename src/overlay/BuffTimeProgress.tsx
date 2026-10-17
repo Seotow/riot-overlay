@@ -34,9 +34,7 @@ export function BuffTimeProgress({
       aria-valuemin={0}
       aria-valuemax={100}
       aria-valuenow={fraction === null ? undefined : Math.round(fraction * 100)}
-      aria-valuetext={
-        fraction === null ? "Chưa có dữ liệu thời gian" : undefined
-      }
+      aria-valuetext={fraction === null ? "Chưa có dữ liệu thời gian" : undefined}
     >
       <i style={{ width: fraction === null ? "0%" : `${fraction * 100}%` }} />
     </span>

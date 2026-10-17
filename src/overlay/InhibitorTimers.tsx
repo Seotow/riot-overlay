@@ -22,9 +22,7 @@ export function InhibitorTimers({
   const candidates = (["ORDER", "CHAOS"] as const).filter(
     (t) =>
       (!team || team === t) &&
-      sample.inhibitors?.value?.some(
-        (i) => i.team === t && (time == null || i.respawnsAt > time),
-      ),
+      sample.inhibitors?.value?.some((i) => i.team === t && (time == null || i.respawnsAt > time)),
   );
   // One panel at a time, prefer the team whose next inhibitor respawns first.
   const nextRespawn = (t: string) =>
@@ -42,17 +40,9 @@ export function InhibitorTimers({
       : candidates.sort((a, b) => nextRespawn(a) - nextRespawn(b)).slice(0, 1);
   return (
     <MotionPresence show={enabled && visibleTeams.length > 0}>
-      <aside
-        className="live-inhibitors"
-        aria-label="Hồi sinh nhà lính"
-        data-region="inhibitors"
-      >
+      <aside className="live-inhibitors" aria-label="Hồi sinh nhà lính" data-region="inhibitors">
         {visibleTeams.map((t) => (
-          <section
-            key={t}
-            className={t === "ORDER" ? "blue" : "red"}
-            data-team={t}
-          >
+          <section key={t} className={t === "ORDER" ? "blue" : "red"} data-team={t}>
             <div className="inhibitor-team">
               <i className="inhibitor-emblem" aria-hidden="true" />
               <b>{t === "ORDER" ? theme.blueName : theme.redName}</b>
@@ -64,11 +54,8 @@ export function InhibitorTimers({
                   ? lane === "mid"
                     ? { respawnsAt: preview.endsAt }
                     : undefined
-                  : sample.inhibitors?.value?.find(
-                      (i) => i.team === t && i.lane === lane,
-                    );
-                const remaining =
-                  down && time != null ? down.respawnsAt - time : null;
+                  : sample.inhibitors?.value?.find((i) => i.team === t && i.lane === lane);
+                const remaining = down && time != null ? down.respawnsAt - time : null;
                 const active = remaining != null && remaining > 0;
                 const seconds = active ? Math.ceil(remaining) : 0;
                 return (
@@ -88,13 +75,10 @@ export function InhibitorTimers({
                     />
                     {active ? (
                       <time>
-                        {Math.floor(seconds / 60)}:
-                        {(seconds % 60).toString().padStart(2, "0")}
+                        {Math.floor(seconds / 60)}:{(seconds % 60).toString().padStart(2, "0")}
                       </time>
                     ) : (
-                      <span>
-                        {sample.inhibitors?.value == null ? "—" : "---"}
-                      </span>
+                      <span>{sample.inhibitors?.value == null ? "—" : "---"}</span>
                     )}
                   </div>
                 );

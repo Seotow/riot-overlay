@@ -22,8 +22,7 @@ export function BroadcastKillfeed({
   theme: Theme;
 }) {
   function portrait(slot: number | undefined, assist = false) {
-    if (slot === undefined || sample.assetVersion !== liveCatalog.version)
-      return null;
+    if (slot === undefined || sample.assetVersion !== liveCatalog.version) return null;
     const player = sample.players.find((p) => p.slot === slot),
       asset = liveChampion(player?.championId.value);
     return asset ? (
@@ -36,11 +35,7 @@ export function BroadcastKillfeed({
     ) : null;
   }
   return (
-    <aside
-      className="broadcast-killfeed"
-      aria-label="Killfeed overlay"
-      data-region="killfeed"
-    >
+    <aside className="broadcast-killfeed" aria-label="Killfeed overlay" data-region="killfeed">
       {events.map((event) => {
         const killer = portrait(event.killerSlot),
           victim = portrait(event.victimSlot);
@@ -105,8 +100,7 @@ export function BroadcastKillfeed({
                   ?
                 </span>
               ))
-            ) : event.kind === "TurretKilled" ||
-              event.kind === "InhibKilled" ? (
+            ) : event.kind === "TurretKilled" || event.kind === "InhibKilled" ? (
               <svg
                 className="feed-structure-icon"
                 viewBox="0 0 30 30"

@@ -13,19 +13,16 @@ import { presentationPitTimers } from "../shared/pit-timers";
 import { normalizeIngame } from "../server/ingame-adapter";
 import { CooldownVeil } from "../src/overlay/CooldownVeil";
 import { SoulTakeover } from "../src/overlay/SoulTakeover";
-import {
-  advanceBaronWindow,
-  advanceElderWindow,
-} from "../shared/baron-powerplay";
+import { advanceBaronWindow, advanceElderWindow } from "../shared/baron-powerplay";
 import { ObserverSession } from "../server/observer-session";
 const stamp = "2026-10-16T15:00:00.000Z";
-test("buff tint keeps current intensity and fades inward from each edge at30%, not across portrait center",()=>{
- const css=readFileSync("src/overlay/overlay.css","utf8");
- assert.match(css,/linear-gradient\(to right,#000,transparent 30%\)/);
- assert.match(css,/linear-gradient\(to left,#000,transparent 30%\)/);
- assert.match(css,/linear-gradient\(to bottom,#000,transparent 30%\)/);
- assert.match(css,/linear-gradient\(to top,#000,transparent 30%\)/);
- assert.match(css,/@keyframes buff-tint \{ from\{opacity:\.024\} to\{opacity:\.128\}/);
+test("buff aura fades inward from each edge to 40% depth, not across portrait center", () => {
+  const css = readFileSync("src/overlay/overlay.css", "utf8").replace(/\s+/g, "");
+  assert.match(css, /linear-gradient\(toright,#000,transparent40%\)/);
+  assert.match(css, /linear-gradient\(toleft,#000,transparent40%\)/);
+  assert.match(css, /linear-gradient\(tobottom,#000,transparent40%\)/);
+  assert.match(css, /linear-gradient\(totop,#000,transparent40%\)/);
+  assert.match(css, /@keyframesbuff-tint\{from\{opacity:0?\.17;?\}to\{opacity:0?\.29;?\}\}/);
 });
 test("death styling targets champion portrait only, never nested item cue images", () => {
   const css = readFileSync("src/overlay/overlay.css", "utf8");
@@ -35,10 +32,7 @@ test("death styling targets champion portrait only, never nested item cue images
 test("layout, both leaderboards and runes are independent broadcast controls", () => {
   let state = createState();
   for (const key of ["minimal", "gold", "levels", "runes"] as const)
-    state = applyCommand(
-      state,
-      commandSchema.parse({ type: "broadcastWidget", key, value: true }),
-    );
+    state = applyCommand(state, commandSchema.parse({ type: "broadcastWidget", key, value: true }));
   for (const key of ["minimal", "gold", "levels", "runes"] as const)
     assert.equal(broadcastWidgetOn(state.broadcast, key, state.theme), true);
   state = applyCommand(
@@ -49,10 +43,7 @@ test("layout, both leaderboards and runes are independent broadcast controls", (
       value: false,
     }),
   );
-  assert.equal(
-    broadcastWidgetOn(state.broadcast, "minimal", state.theme),
-    false,
-  );
+  assert.equal(broadcastWidgetOn(state.broadcast, "minimal", state.theme), false);
   assert.equal(broadcastWidgetOn(state.broadcast, "gold", state.theme), true);
   assert.equal(broadcastWidgetOn(state.broadcast, "runes", state.theme), true);
 });
@@ -92,9 +83,7 @@ test("manual inhibitor selection opens all three lanes even when none are down; 
   assert.equal(render(), "");
   assert.equal((render("ORDER").match(/class="standing"/g) ?? []).length, 3);
   assert.doesNotMatch(render("ORDER"), /<time>/);
-  s.inhibitors.value = [
-    { team: "CHAOS", lane: "mid", destroyedAt: 90, respawnsAt: 390 },
-  ];
+  s.inhibitors.value = [{ team: "CHAOS", lane: "mid", destroyedAt: 90, respawnsAt: 390 }];
   assert.match(render("CHAOS"), /4:50/);
   assert.doesNotMatch(render("ORDER"), /<time>/);
 });
@@ -219,9 +208,7 @@ test("two pit timers exist with explicitly estimated provenance; reported timers
 });
 test("ultimate uses a dark clockwise veil, with numbers only in the final ten seconds", () => {
   const render = (remaining: number) =>
-    renderToStaticMarkup(
-      createElement(CooldownVeil, { remaining, total: 100, dark: true }),
-    );
+    renderToStaticMarkup(createElement(CooldownVeil, { remaining, total: 100, dark: true }));
   assert.match(render(50), /conic-gradient/);
   assert.match(render(50), /#000d/);
   assert.doesNotMatch(render(50), /item-countdown/);

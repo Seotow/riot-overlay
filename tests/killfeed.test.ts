@@ -12,12 +12,7 @@ import { createHash } from "node:crypto";
 const at = "2026-10-16T00:00:00.000Z";
 test("all non-champion killer glyphs reuse assets as white masks", () => {
   const sample = normalizeIngame(fixture(), null, at);
-  for (const killerUnitType of [
-    "minion",
-    "monster",
-    "turret",
-    "grubs",
-  ] as const) {
+  for (const killerUnitType of ["minion", "monster", "turret", "grubs"] as const) {
     const html = renderToStaticMarkup(
       createElement(BroadcastKillfeed, {
         events: [
@@ -90,10 +85,7 @@ test("Riot event actors map exact slots; event contract excludes raw identity wh
   assert.equal(JSON.stringify(input), before);
   input.allPlayers[1].summonerName = "PRIVATE";
   input.events.Events[0].KillerName = "PRIVATE";
-  assert.equal(
-    normalizeIngame(input, null, at).events[0].killerSlot,
-    undefined,
-  );
+  assert.equal(normalizeIngame(input, null, at).events[0].killerSlot, undefined);
 });
 test("broadcast killfeed shows actual killer, victim and helpers; unknown actors stay missing", () => {
   const sample = normalizeIngame(fixture(), null, at);
@@ -147,19 +139,16 @@ test("killfeed uses the pinned original All-In PNG and translucent team-color ba
   );
   const png = readFileSync("public/broadcast/all-in-ping.png");
   assert.equal(png.subarray(1, 4).toString(), "PNG");
-  assert.equal(
-    createHash("sha256").update(png).digest("hex"),
-    provenance.sha256,
-  );
-  assert.match(
-    provenance.source,
-    /16\.20\/game\/assets\/ux\/minimap\/pings\/all_in\.png$/,
-  );
-  const css = readFileSync("src/overlay/overlay.css", "utf8");
+  assert.equal(createHash("sha256").update(png).digest("hex"), provenance.sha256);
+  assert.match(provenance.source, /16\.20\/game\/assets\/ux\/minimap\/pings\/all_in\.png$/);
+  // Whitespace and quote style are Prettier's business, not the contract.
+  const css = readFileSync("src/overlay/overlay.css", "utf8")
+    .replace(/\s+/g, "")
+    .replace(/"/g, "'");
   assert.match(css, /mask:url\('\/broadcast\/all-in-ping\.png'\)/);
   assert.match(css, /--feed-team:var\(--blue\)/);
   assert.match(css, /--feed-team:var\(--red\)/);
-  assert.match(css, /color-mix\(in srgb,var\(--feed-team\) 34%,transparent\)/);
+  assert.match(css, /color-mix\(insrgb,var\(--feed-team\)34%,transparent\)/);
 });
 test("all elemental and epic monster icons use existing assets as white masks; generic dragon has no missing URL", () => {
   const sample = normalizeIngame(fixture(), null, at);

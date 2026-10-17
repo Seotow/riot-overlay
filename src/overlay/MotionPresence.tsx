@@ -1,10 +1,4 @@
-import {
-  cloneElement,
-  useEffect,
-  useRef,
-  useState,
-  type ReactElement,
-} from "react";
+import { cloneElement, useEffect, useRef, useState, type ReactElement } from "react";
 // Preserve a mounted graphic for its exit; telemetry and event lifetimes stay separate.
 export function MotionPresence({
   show,
