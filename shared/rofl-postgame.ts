@@ -172,6 +172,12 @@ export function normalizeRofl(
         delta: point.blue - point.red,
       });
     }
+  // The collector's Nexus reading is an independent check of the replay's winner.
+  if (lg && lg.winner && winner && lg.winner !== winner)
+    warnings.push(
+      `Collector thấy Nexus đội ${lg.winner === "blue" ? "xanh" : "đỏ"} còn sống nhưng replay ghi đội ${winner === "blue" ? "xanh" : "đỏ"} thắng; dùng replay, cần đối chiếu.`,
+    );
+  else if (lg && lg.winner && winner) warnings.push("Winner khớp với Nexus collector quan sát.");
   if (goldHistory.length) {
     warnings.push("Vàng theo thời gian và rồng lấy từ collector trong trận (partial).");
     if (lg!.firstGameTime > 60)

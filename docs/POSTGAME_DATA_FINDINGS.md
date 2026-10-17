@@ -25,6 +25,16 @@ Luồng, không nhập tay:
 Hiển thị: giá trị nguồn không cung cấp được overlay postgame hiển thị **0** (không dùng dấu gạch ngang), theo lựa chọn
 của người dùng; dữ liệu và cảnh báo trong vùng duyệt vẫn nói rõ mục nào thiếu, nên 0 ở đó không có nghĩa là đã đo được 0.
 
+5. **Game end và winner từ collector** (`collector/adapter/game-end.ts`): host chỉ báo game đã kết thúc theo kiểu
+   tiến trình/kết nối đã ngắt (`game_ended`, nguyên nhân Unknown, ProcessExited hoặc ClientDisconnected), không
+   có winner. Snapshot native có `hqs` (Nexus: team, health, maxHealth, status) và `gameId`; adapter nay đọc cả
+   hai trên mọi snapshot (khoảng 10 lần mỗi giây). Đội thua là đội có Nexus về 0 máu, hoặc biến mất sau khi đã
+   thấy còn sống trong khi Nexus kia vẫn còn; chỉ đúng một đội gục thì có winner, còn lại null. Winner và gameId
+   native đi vào sổ trận; winner của replay vẫn là chính, sổ chỉ đối chiếu (khớp hoặc cảnh báo lệch).
+   **Chưa kiểm chứng trên trận thật.** Để kiểm: sau một trận xem với collector, mở
+   `.npm-cache/match-ledger/game-end-tail.json` (60 snapshot Nexus cuối, winner, thời điểm gục, gameId; không có
+   tên hay tài khoản). Cần xem Nexus về 0 hay biến mất khi game đóng và có kịp ghi trước khi tiến trình thoát không.
+
 Phân tích `VN2-1607368559.rofl` (7.813.521 byte, 786,4 giây): 10 người, 200 khóa stats mỗi người. Bot là người không
 có PUUID (9/10). Winner đội 100 (xanh). Tổng đội xanh: 40/6/14, vàng 63.611, 8 trụ, 1 Baron, 1 Sứ giả, 3 Sâu;
 damage lên tướng 40.241/4.366/1.798/3.669/7.025 (khớp LCU). Không có: vị trí (TEAM_POSITION rỗng, nên hàng damage

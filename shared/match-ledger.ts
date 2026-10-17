@@ -3,6 +3,8 @@
 export type LedgerDragon = { at: number; team: "ORDER" | "CHAOS"; type: string };
 export type LedgerSnapshot = {
   gameId: number | null;
+  // Winner seen from the Nexus of each team just before the game closed; null when ambiguous.
+  winner?: "blue" | "red" | null;
   firstGameTime: number;
   lastGameTime: number;
   gold: { at: number; blue: number; red: number }[];

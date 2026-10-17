@@ -1,5 +1,6 @@
 import { WebSocket } from "ws";
 import { CollectorGameplay } from "./gameplay";
+import { GameEndWatch, type GameEndSnapshot } from "./game-end";
 import { ObserverSession } from "../../server/observer-session";
 import type { ObserverFrame, ObservedEvent } from "../../shared/observer";
 import { normalizeCollector, object, type NormalizedCollector } from "./normalize";
@@ -16,6 +17,7 @@ export class LeagueCollectorSource {
   private normalized: NormalizedCollector | null = null;
   private session = new ObserverSession();
   private gameplay = new CollectorGameplay();
+  private gameEnd = new GameEndWatch();
   private frame: ObserverFrame;
   private lastSequence = -1;
   private lastProviderTime = -1;
@@ -63,6 +65,9 @@ export class LeagueCollectorSource {
         this.invalidate("waiting");
       return false;
     }
+    // Every native snapshot (about 10 per second) feeds the Nexus watch, so the last frames before
+    // the game closes are not lost between backend polls.
+    this.gameEnd.observe(raw);
     const normalized = normalizeCollector(raw, this.clock());
     if (!normalized) {
       this.rejected++;
@@ -104,6 +109,10 @@ export class LeagueCollectorSource {
     this.status = "receiving";
     this.accepted++;
     return true;
+  }
+  // Nexus evidence and native game id of the current game (kept after the game closes).
+  gameEndSnapshot(): GameEndSnapshot {
+    return this.gameEnd.snapshot();
   }
   disconnected() {
     this.invalidate(this.stopped ? "stopped" : "offline");

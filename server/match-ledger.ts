@@ -2,23 +2,61 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import type { LedgerSnapshot } from "../shared/match-ledger";
 import type { ObserverFrame } from "../shared/observer";
+import type { GameEndSnapshot } from "../collector/adapter/game-end";
 
 const STEP = 15; // seconds of game time between gold samples
-const FILE = resolve(".npm-cache/match-ledger/ledger.json");
+const DEFAULT_DIR = resolve(".npm-cache/match-ledger");
 
 // Accumulates what the collector sees for the current match. A new match (game id changes, or the
 // game clock jumps back) starts a fresh ledger; the last one is kept on disk for restarts.
 export class MatchLedger {
+  private FILE: string;
+  private TAIL_FILE: string;
+  constructor(dir: string = DEFAULT_DIR) {
+    this.FILE = resolve(dir, "ledger.json");
+    this.TAIL_FILE = resolve(dir, "game-end-tail.json");
+  }
   private ledger: LedgerSnapshot | null = null;
   private dragonIds = new Set<number>();
   private dirtyAt = 0;
   private saved = 0;
   async load() {
     try {
-      const data = JSON.parse(await readFile(FILE, "utf8")) as LedgerSnapshot;
+      const data = JSON.parse(await readFile(this.FILE, "utf8")) as LedgerSnapshot;
       if (Array.isArray(data.gold) && Array.isArray(data.dragons)) this.ledger = data;
     } catch {
       /* no earlier ledger */
+    }
+  }
+  private tailKey = "";
+  // Nexus evidence from the collector: the winner and the last snapshots of both Nexus, written to a
+  // file whenever they change so a real match can be checked afterwards (no names or accounts in it).
+  async observeEnd(end: GameEndSnapshot) {
+    if (this.ledger) {
+      if (this.ledger.gameId === null && end.gameId !== null) this.ledger.gameId = end.gameId;
+      if (end.gameId === null || this.ledger.gameId === end.gameId) {
+        if (this.ledger.winner !== end.winner) this.dirtyAt = Date.now();
+        this.ledger.winner = end.winner;
+      }
+    }
+    const key = JSON.stringify([end.gameId, end.winner, end.tail.at(-1)]);
+    if (!end.tail.length || key === this.tailKey) return;
+    // Only worth writing once a Nexus is hurt or a winner exists; healthy tails are routine.
+    const hurt = end.tail.some((e) =>
+      [e.nexus.ORDER, e.nexus.CHAOS].some(
+        (n) => n && n.health !== null && n.maxHealth !== null && n.health < n.maxHealth,
+      ),
+    );
+    if (!hurt && end.winner === null) return;
+    this.tailKey = key;
+    try {
+      await mkdir(dirname(this.TAIL_FILE), { recursive: true });
+      await writeFile(
+        this.TAIL_FILE,
+        JSON.stringify({ ...end, writtenAt: new Date().toISOString() }, null, 1),
+      );
+    } catch {
+      /* ignore */
     }
   }
   snapshot(): LedgerSnapshot | null {
@@ -60,8 +98,8 @@ export class MatchLedger {
     if (!this.ledger || this.dirtyAt <= this.saved || Date.now() - this.saved < 30_000) return;
     this.saved = Date.now();
     try {
-      await mkdir(dirname(FILE), { recursive: true });
-      await writeFile(FILE, JSON.stringify(this.ledger));
+      await mkdir(dirname(this.FILE), { recursive: true });
+      await writeFile(this.FILE, JSON.stringify(this.ledger));
     } catch {
       /* ignore */
     }

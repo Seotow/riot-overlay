@@ -586,7 +586,9 @@ async function pollObservation() {
       if (providerAtStart !== state.provider || state.mockVisible) return;
       lastObservation = next;
       if (state.provider !== "recording") {
-        ledger.observe(next, replays.snapshot().gameId);
+        const end = usesCollector() ? selectedCollectorSource().gameEndSnapshot() : null;
+        ledger.observe(next, end?.gameId ?? replays.snapshot().gameId);
+        if (end) void ledger.observeEnd(end);
         void ledger.persist();
       }
       const message = JSON.stringify({
