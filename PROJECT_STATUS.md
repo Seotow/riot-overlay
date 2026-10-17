@@ -45,8 +45,9 @@ hoặc tự biến bộ mẫu thành dữ liệu thật.
   nằm trong bản vận hành LoL này.
 
 - 17/10: LCU có `gameclient-eog-stats-block`, `eog-stats-block` và `lol-replays` (tải `.rofl` theo gameId).
-  Chưa biết spectator có nhận EOG hoặc tải được replay custom không; cần thăm dò chỉ đọc trong một
-  trận spectate thật. Xem mục "Điều tra hướng cho tài khoản spectator" trong
+  Đã đo game 1608102102: spectator không nhận EOG (phase InProgress → None); client người tham gia có
+  `eog-stats-block` đủ 10 người kèm damage và winner. Hướng tiếp: đọc EOG trên máy người tham gia rồi
+  chuyển sang Studio. Xem mục "Điều tra hướng cho tài khoản spectator" trong
   [postgame](docs/POSTGAME_DATA_FINDINGS.md).
 
 Chi tiết: [LCU](docs/LCU_POSTGAME_FINDINGS.md),

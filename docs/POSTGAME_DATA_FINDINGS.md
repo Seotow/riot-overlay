@@ -159,6 +159,18 @@ Kết quả ở `.npm-cache/lcu-eog/` (không theo Git): `probe-<thời gian>.nd
 số liệu và champion). Đọc `summary.hasDamageToChampions` và `players` để biết spectator có nhận EOG
 đủ 10 người không.
 
+### Kết quả đo thật, 17/10/2026 (game 1608102102, hai máy cùng trận)
+
+| Máy | Phase quan sát | Kết quả |
+| --- | --- | --- |
+| Spectator | Lobby → ChampSelect → InProgress → **None** (không có WaitingForStats/EndOfGame) | Không có payload EOG nào; metadata replay chưa có dòng hợp lệ |
+| Người tham gia | … → **EndOfGame** | `eog-stats-block` 200: 2 đội, 10 người, 183 khóa `stats` mỗi người, có `TOTAL_DAMAGE_DEALT_TO_CHAMPIONS`, KDA, vàng, winner, cờ bot; `gameclient-eog-stats-block` 404; replay metadata `state: download` |
+
+Kết luận: client spectator **không** vào luồng kết thúc trận nên không nhận EOG. Dữ liệu đầy đủ có ở client của
+người tham gia ngay khi vào EndOfGame. Hướng khả thi: đọc `eog-stats-block` trên máy người tham gia rồi chuyển
+kết quả đã lọc sang Studio (export/import hoặc kênh được cấp quyền), không chuyển token LCU. Probe ghi thêm
+`endpoint-status` để phân biệt 404 với lỗi khác và poll mỗi giây trong 60 giây sau khi trận kết thúc.
+
 Hướng thử tiếp, theo thứ tự rủi ro thấp trước:
 
 1. **Thăm dò chỉ đọc cuối trận trên máy spectator**: poll `gameflow-phase`, `gameclient-eog-stats-block`

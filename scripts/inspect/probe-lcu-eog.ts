@@ -45,6 +45,14 @@ let phase = "";
 let sawGame = false;
 let gameId: number | null = null;
 let doneAt: number | null = null;
+let leftGameAt = 0; // end-of-game data is polled every second for a minute after the match ends
+const lastStatus = new Map<string, string>();
+const noteStatus = async (id: string, status: string, httpStatus: number | null) => {
+  const key = `${status}:${httpStatus}`;
+  if (lastStatus.get(id) === key) return;
+  lastStatus.set(id, key);
+  await log({ event: "endpoint-status", endpoint: id, status, httpStatus });
+};
 const started = Date.now();
 let stopping = false;
 process.on("SIGINT", () => {
@@ -62,6 +70,7 @@ while (!stopping && Date.now() - started < maxMinutes * 60_000) {
   const flow = await get("probe-phase", "/lol-gameflow/v1/gameflow-phase");
   const current = flow.status === "ok" && typeof flow.data === "string" ? flow.data : flow.status;
   if (current !== phase) {
+    if (["InProgress", "GameStart", "Reconnect"].includes(phase)) leftGameAt = Date.now();
     phase = current;
     await log({ event: "phase", phase });
     if (["GameStart", "InProgress", "Reconnect", "WatchInProgress"].includes(phase)) sawGame = true;
@@ -84,10 +93,13 @@ while (!stopping && Date.now() - started < maxMinutes * 60_000) {
   }
 
   // End-of-game data is polled every second near the end and every few seconds otherwise.
-  const near = !["None", "Lobby", "Matchmaking", "ReadyCheck", "ChampSelect"].includes(phase);
+  const near =
+    !["None", "Lobby", "Matchmaking", "ReadyCheck", "ChampSelect"].includes(phase) ||
+    Date.now() - leftGameAt < 60_000;
   if (near || Date.now() % 5000 < 1100) {
     for (const [id, endpoint] of EOG) {
       const r = await get(`probe-${id}`, endpoint);
+      await noteStatus(id, r.status, r.httpStatus);
       if (r.status !== "ok" || r.data === undefined) continue;
       const { value, removed } = redactEog(r.data);
       const body = JSON.stringify(value);
@@ -111,6 +123,7 @@ while (!stopping && Date.now() - started < maxMinutes * 60_000) {
   // Replay metadata by game id: shows whether the client could fetch the match as a replay.
   if (gameId && ["WaitingForStats", "PreEndOfGame", "EndOfGame", "Lobby", "None"].includes(phase)) {
     const meta = await get("probe-replay", `/lol-replays/v1/metadata/${gameId}`);
+    await noteStatus("replay-metadata", meta.status, meta.httpStatus);
     const key = `replay:${JSON.stringify(meta.data)}`;
     if (meta.status === "ok" && seen.get("replay") !== key) {
       seen.set("replay", key);
