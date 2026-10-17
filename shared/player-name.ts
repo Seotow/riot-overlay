@@ -11,6 +11,11 @@ export function cleanPlayerName(value: unknown): string | null {
   return name && name.length <= 80 ? name : null;
 }
 
+// Draft: a name typed in the pre-match config wins; otherwise the exact name from the client.
+export function draftPlayerName(overrides: string[] | undefined, real: string, index: number) {
+  return cleanPlayerName(overrides?.[index]) ?? real;
+}
+
 export function playerDisplayName(
   player: ObservedPlayer | undefined,
   overrides?: string[],

@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { cleanPlayerName, playerDisplayName } from "../shared/player-name";
+import { cleanPlayerName, draftPlayerName, playerDisplayName } from "../shared/player-name";
 import { normalizeIngame } from "../server/ingame-adapter";
 import { broadcastColors, SECONDARY_BLUE, SECONDARY_RED } from "../shared/broadcast-colors";
 import { defaultTheme, themeSchema } from "../shared/schema";
@@ -49,4 +49,11 @@ test("secondary palette upgrades legacy defaults without replacing custom colors
     blue: "#123456",
     red: "#654321",
   });
+});
+
+test("draft shows the typed name and falls back to the exact client name", () => {
+  assert.equal(draftPlayerName(["Faker"], "RealName", 0), "Faker");
+  assert.equal(draftPlayerName(["  "], "RealName", 0), "RealName");
+  assert.equal(draftPlayerName(undefined, "RealName", 3), "RealName");
+  assert.equal(draftPlayerName(["", "Alias#VN2"], "RealName", 1), "Alias");
 });

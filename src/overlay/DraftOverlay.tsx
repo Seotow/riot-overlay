@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState, type CSSProperties } from "react";
 import { draftChampion as champion } from "../../shared/draft-assets";
 import { draftSlots, draftTurns, emptyDraft, type DraftState } from "../../shared/draft";
+import { draftPlayerName } from "../../shared/player-name";
 import type { Theme } from "../../shared/schema";
 
 // The line runs from the source deadline with one CSS animation: it neither steps per second nor
@@ -166,7 +167,9 @@ export function DraftOverlay({
                     {t.draftLayout === "simple" && c && (
                       <span className="draft-champion-name">{c.name}</span>
                     )}
-                    <span className="vertical-player">{draft.names[side * 5 + i]}</span>
+                    <span className="vertical-player">
+                      {draftPlayerName(t.playerNames, draft.names[side * 5 + i], side * 5 + i)}
+                    </span>
                     <i
                       className="role-symbol draft-role"
                       style={{

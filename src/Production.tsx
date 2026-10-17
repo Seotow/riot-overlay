@@ -345,8 +345,11 @@ export function MatchConfig({
         </fieldset>
       </div>
       <fieldset className="graphics-controls">
-        <legend>Tên tuyển thủ, ghi đè khi nguồn thiếu tên</legend>
-        <p>Để trống để dùng tên từ nguồn dữ liệu.</p>
+        <legend>Đổi tên tuyển thủ</legend>
+        <p>
+          Tên nhập ở đây hiện ở banpick và in-game. Để trống thì dùng đúng tên lấy từ client hoặc
+          nguồn dữ liệu.
+        </p>
         {Array.from({ length: 10 }, (_, slot) => (
           <label key={slot}>
             {slot < 5 ? draft.blueName : draft.redName}, người {(slot % 5) + 1}
