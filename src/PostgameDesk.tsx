@@ -21,6 +21,28 @@ export function PostgameDesk({
     send({ type: "postgameState", value });
     setMessage("");
   };
+  // Locked while the data source is being decided: nothing here can reach the overlay.
+  if (state.postgameLocked)
+    return (
+      <section className="postgame-desk">
+        <div className="section-heading">
+          <div>
+            <h2>Kết quả sau trận</h2>
+            <p>ĐANG PHÁT TRIỂN , tạm khóa.</p>
+          </div>
+        </div>
+        <p role="status">
+          Postgame đang được nghiên cứu nguồn dữ liệu nên overlay postgame trống và các thao tác
+          nhập, tải, phát bị khóa. Máy spectator không có màn kết thúc trận, lịch sử trận tùy chọn
+          hay EOG; dữ liệu đầy đủ hiện chỉ có ở client người tham gia. Chi tiết và các hướng đang
+          cân nhắc: docs/POSTGAME_DATA_FINDINGS.md.
+        </p>
+        <p>
+          Mở khóa để phát triển: khởi động backend với biến môi trường{" "}
+          <code>RIOT_OVERLAY_POSTGAME=1</code>.
+        </p>
+      </section>
+    );
   return (
     <section className="postgame-desk">
       <div className="section-heading">

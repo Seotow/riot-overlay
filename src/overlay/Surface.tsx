@@ -346,6 +346,7 @@ export function Surface({
   const detected = detectScene(state, observation, now);
   const draftHeld = useRef(false);
   let active: string | null = pinned ?? detected;
+  if (active === "postgame" && state.postgameLocked) active = null;
   if (!pinned && state.scene === "auto") {
     if (detected) draftHeld.current = detected === "draft";
     // A finished draft stays up until the game data arrives; a cancelled one clears.

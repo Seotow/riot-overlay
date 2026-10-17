@@ -13,12 +13,15 @@ import { resolve, extname, dirname } from "node:path";
 import { WebSocketServer, WebSocket } from "ws";
 import { commandSchema, themeSchema } from "../shared/schema";
 import { createState, applyCommand, tick } from "../shared/mock";
+import type { State } from "../shared/schema";
 import { RiotPostgameService, riotError } from "./riot-postgame";
 import { ReplayHudService } from "./replay-hud";
 import { COLLECTOR_SAMPLE_INTERVAL_MS, remainingSampleDelay } from "../shared/capture-rules";
 const host = "127.0.0.1",
   port = Number(process.env.PORT || 4310);
-let state = createState();
+// Postgame is locked while its data source is undecided; the code stays for development.
+const postgameLocked = process.env.RIOT_OVERLAY_POSTGAME !== "1";
+let state: State = { ...createState(), postgameLocked };
 const collectorPort = Number(process.env.RIOT_OVERLAY_COLLECTOR_PORT ?? 18799);
 const localCollector = new LeagueCollectorSource({ port: collectorPort });
 const accountlessCollector = new LeagueCollectorSource({ port: collectorPort });
@@ -147,6 +150,12 @@ const server = createServer(async (req, res) => {
       res.end("{}");
       return;
     }
+    // Locked: only the read-only status (with the lock flag) answers.
+    if (postgameLocked && req.url !== routes[0]) {
+      res.writeHead(423);
+      res.end('{"error":"postgame-locked"}');
+      return;
+    }
     if (req.url === routes[5]) {
       if (req.method !== "GET") {
         res.writeHead(405, { Allow: "GET" });
@@ -162,7 +171,7 @@ const server = createServer(async (req, res) => {
         res.end("{}");
         return;
       }
-      res.end(JSON.stringify(riotPostgame.status()));
+      res.end(JSON.stringify({ ...riotPostgame.status(), locked: postgameLocked }));
       return;
     }
     if (req.method !== "POST") {
@@ -367,6 +376,12 @@ wss.on("connection", (ws, req) => {
     try {
       if (readonly) throw Error();
       const cmd = commandSchema.parse(JSON.parse(raw.toString()));
+      if (
+        postgameLocked &&
+        ((cmd.type === "scene" && cmd.value === "postgame") ||
+          (cmd.type === "postgameState" && cmd.value !== null))
+      )
+        throw Error("postgame-locked");
       if (cmd.type === "rehearsal") {
         if (state.provider !== "recording" || state.mockVisible) throw Error();
         const rehearsal = captureReplay.rehearse(cmd.value, cmd.variant);
@@ -415,7 +430,7 @@ wss.on("connection", (ws, req) => {
         )
           state = { ...state, rehearsal: undefined };
       }
-      state = applyCommand(state, cmd);
+      state = { ...applyCommand(state, cmd), postgameLocked };
       if (cmd.type === "provider" || cmd.type === "mockVisible" || cmd.type === "reset")
         state.rehearsal = undefined;
       if (state.provider !== "leaguebroadcast" || state.mockVisible) leagueBroadcast.disconnect();
@@ -486,7 +501,7 @@ setInterval(async () => {
 const eogLcu = new EogLcu();
 let eogBusy = false;
 setInterval(async () => {
-  if (eogBusy || shuttingDown || wss.clients.size === 0) return;
+  if (postgameLocked || eogBusy || shuttingDown || wss.clients.size === 0) return;
   eogBusy = true;
   try {
     const block = await eogLcu.read();

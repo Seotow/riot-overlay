@@ -41,6 +41,7 @@ const server = spawn(
       PORT: "4311",
       RIOT_OVERLAY_THEME_PATH: themePath,
       RIOT_OVERLAY_PROVIDER: "riot",
+      RIOT_OVERLAY_POSTGAME: "1",
     },
     stdio: ["ignore", "pipe", "pipe"],
   },

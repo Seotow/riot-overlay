@@ -32,6 +32,10 @@ hoặc tự biến bộ mẫu thành dữ liệu thật.
 
 ## Postgame và các phần tạm hoãn
 
+**Postgame đang khóa (17/10/2026)** cho tới khi người dùng chọn hướng dữ liệu: overlay postgame trống, trang Sau
+trận chỉ báo đang phát triển, API postgame trả 423. Mở khóa khi phát triển: `RIOT_OVERLAY_POSTGAME=1`. Các hướng
+đang cân nhắc và bằng chứng đo thật nằm ở đầu docs/POSTGAME_DATA_FINDINGS.md.
+
 - LCU trả đủ damage/KDA/vàng cho trận custom 1607368559 khi dùng tài khoản
   người tham gia. Đổi sang spectator: history không có trận, detail/timeline 404.
 - ROFL đọc được damage của 10 người, khớp LCU. Người dùng xác nhận file do

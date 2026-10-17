@@ -195,6 +195,8 @@ export type Player = {
   vision: number;
 };
 export type State = {
+  // Postgame is under development and locked unless the backend starts with RIOT_OVERLAY_POSTGAME=1.
+  postgameLocked?: boolean;
   draft?: DraftState;
   draftLcu?: LcuDraftStatus;
   postgame?: PostgameState | null;

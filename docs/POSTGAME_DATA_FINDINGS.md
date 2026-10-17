@@ -1,5 +1,31 @@
 # Điều tra nguồn postgame từ dữ liệu hiện có — 13/10/2026
 
+## Trạng thái hiện tại, 17/10/2026: postgame **tạm khóa**
+
+Người dùng chọn khóa postgame cho tới khi quyết định hướng dữ liệu. Khi khóa: overlay `scene=postgame` và chế độ
+tự nhận diện không hiện postgame; Studio, trang Sau trận chỉ báo "đang phát triển"; backend trả 423 cho mọi
+`/api/riot-postgame/*` trừ `status`, từ chối lệnh WebSocket `scene=postgame` và `postgameState` có dữ liệu, và
+không đọc EOG của client. Mở khóa để phát triển: chạy backend với `RIOT_OVERLAY_POSTGAME=1` (bài test tích hợp
+đặt biến này). Mã nhập EOG, chuẩn hóa, probe và Match-V5 giữ nguyên, chỉ bị khóa.
+
+Đã xác nhận bằng đo thật (game 1608102102, hai máy): máy spectator không có phase kết thúc, không có EOG,
+không thấy lịch sử trận tùy chọn; máy người tham gia có `eog-stats-block` đủ 10 người (damage, KDA, vàng,
+winner, bot) và lịch sử trận (rồng, sâu, cấm chọn, vàng theo phút). Giải dùng lobby tùy chọn thường, không có
+tournament code; mọi bước phải tự động, không nhập tay; LB cần gói trả phí cho damage.
+
+Hướng đang cân nhắc (chưa chọn):
+
+1. **Sổ trận từ collector trên máy spectator** (partial): KDA, trụ, rồng, Sâu, vàng theo thời gian. Winner có thể
+   suy từ Nexus (loại `HQ` trong schema native), cần kiểm chứng bằng bản ghi cuối trận thật.
+2. **Replay `.rofl` theo gameId**: `POST /lol-replays/v1/rofls/{gameId}/download` rồi parse metadata (đã có
+   parser, khớp 10/10 với LCU). Chưa biết spectator tải được replay trận tùy chọn không; cần thử một lần.
+3. **Đại lý trên máy người tham gia**: probe chạy như dịch vụ, ghép nối một lần, gửi bundle sang Studio.
+4. **Riot Match-V5 tự động theo gameId**, cách của RCV
+   [league-prod-toolkit](https://github.com/RCVolus/league-prod-toolkit): lấy gameId, sau trận tải Match-V5 và
+   timeline bằng Riot API key, LCU EOG chỉ là dự phòng. Cần Production key và Tournament-V5 (tournament code)
+   hoặc RSO; lobby tùy chọn thường hiện không đủ điều kiện.
+5. Loại: LB (damage cần gói trả phí), LCU trên spectator (không có dữ liệu), nhập tay (không chấp nhận).
+
 ## Kết luận
 
 Cập nhật 17/10: hướng ROFL tạm hoãn theo quyết định người dùng. File đã thử
