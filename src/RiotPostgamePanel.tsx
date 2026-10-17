@@ -25,6 +25,7 @@ const errors: Record<string, string> = {
   network: "Không kết nối được Riot hoặc request quá thời gian. Key không được ghi vào lỗi.",
   "invalid-data": "Dữ liệu không hợp lệ: cần trận VN2, đủ 10 người hai đội và đúng match ID.",
   "no-candidate": "Chưa có bản dữ liệu đã tải khớp match ID để phát.",
+  "body-too-large": "File quá lớn (tối đa 1 MB). Dùng file eog-stats-block đã lọc từ probe.",
 };
 export function RiotPostgamePanel({ state, connected }: { state: State; connected: boolean }) {
   const [status, setStatus] = useState<Status | null>(null);
@@ -88,7 +89,11 @@ export function RiotPostgamePanel({ state, connected }: { state: State; connecte
           );
         } else {
           setShowCandidate(true);
-          setNotice("Đã tải dữ liệu Riot vào vùng duyệt. Chưa thay overlay đang phát.");
+          setNotice(
+            route === "import-eog"
+              ? "Đã nhập file EOG vào vùng duyệt. Chưa thay overlay đang phát."
+              : "Đã tải dữ liệu Riot vào vùng duyệt. Chưa thay overlay đang phát.",
+          );
         }
       }
     } catch {
@@ -99,7 +104,23 @@ export function RiotPostgamePanel({ state, connected }: { state: State; connecte
       setBusy(false);
     }
   };
+  const importEog = async (file: File | undefined) => {
+    if (!file) return;
+    if (file.size > 1_048_576) {
+      setNotice(errors["body-too-large"]);
+      return;
+    }
+    try {
+      const payload = JSON.parse(await file.text());
+      await action("import-eog", { gameNumber, payload });
+    } catch {
+      setNotice("File không phải JSON hợp lệ. Chưa thay dữ liệu đang phát.");
+    }
+  };
   const candidate = status?.candidate;
+  const bots = candidate
+    ? candidate.teams.reduce((n, t) => n + t.players.filter((p) => p.bot).length, 0)
+    : 0;
   return (
     <section className="riot-postgame-panel">
       <div className="section-heading">
@@ -112,6 +133,37 @@ export function RiotPostgamePanel({ state, connected }: { state: State; connecte
         </span>
       </div>
       <fieldset disabled={!connected || busy}>
+        <h4>Nhập từ file EOG (LCU)</h4>
+        <p>
+          Chọn file <code>eog-stats-block</code> đã lọc từ probe (<code>npm run probe:eog</code>{" "}
+          trên máy người tham gia). File chỉ được đọc số liệu và tướng; không giữ tên, PUUID hay
+          Riot ID. Sau khi nhập sẽ vào vùng duyệt, chưa lên overlay.
+        </p>
+        <div className="riot-config-grid">
+          <label>
+            Ván trong loạt trận
+            <Input
+              aria-label="Ván EOG"
+              type="number"
+              min={1}
+              max={99}
+              value={gameNumber}
+              onChange={(e) => setGameNumber(Number(e.target.value))}
+            />
+          </label>
+          <label>
+            File EOG (.json)
+            <Input
+              aria-label="File EOG"
+              type="file"
+              accept=".json,application/json"
+              onChange={(e) => {
+                void importEog(e.target.files?.[0]);
+                e.target.value = "";
+              }}
+            />
+          </label>
+        </div>
         <div className="riot-config-grid">
           <label>
             Kiểu xác thực
@@ -236,6 +288,7 @@ export function RiotPostgamePanel({ state, connected }: { state: State; connecte
             , Patch {candidate.evidence.patch || "Chưa có"} ,{" "}
             {candidate.evidence.timelineAvailable ? "Có timeline" : "Thiếu timeline"} ,{" "}
             {candidate.evidence.mode.toUpperCase()}
+            {bots ? ` , ${bots} bot` : ""}
           </p>
           <div className="program-monitor">
             <Surface
@@ -265,7 +318,7 @@ export function RiotPostgamePanel({ state, connected }: { state: State; connecte
             disabled={!connected || busy || !reviewed}
             onClick={() => action("publish", { matchId: candidate.evidence.matchId })}
           >
-            Dùng dữ liệu Riot cho postgame
+            Dùng dữ liệu này cho postgame
           </Button>
         </div>
       )}

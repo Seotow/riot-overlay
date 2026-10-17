@@ -1,6 +1,8 @@
 import { z } from "zod";
 import { liveCatalog } from "../shared/live-assets";
 import { riotPostgameSchema, type RiotPostgameState } from "../shared/postgame";
+import { normalizeEog } from "../shared/eog-postgame";
+import { redactEog } from "./eog-redact";
 
 export const riotCredentialSchema = z
   .object({
@@ -20,6 +22,12 @@ export const riotLoadSchema = z
       .trim()
       .regex(/^VN2_\d{1,20}$/, "Dùng Riot match ID dạng VN2_123456"),
     gameNumber: z.number().int().min(1).max(99),
+  })
+  .strict();
+export const eogImportSchema = z
+  .object({
+    gameNumber: z.number().int().min(1).max(99),
+    payload: z.unknown(),
   })
   .strict();
 const obj = (v: unknown): Record<string, any> =>
@@ -298,6 +306,14 @@ export class RiotPostgameService {
     if (!this.candidate || this.candidate.evidence.matchId !== matchId)
       throw new RiotError(409, "no-candidate");
     return structuredClone(this.candidate);
+  }
+  // Stages an LCU end-of-game block (a file saved by the EOG probe or a participant machine).
+  // The payload is redacted again here and only its numbers and champion ids are kept.
+  importEog(input: unknown) {
+    const value = eogImportSchema.parse(input);
+    if (this.controller) throw new RiotError(409, "busy");
+    this.candidate = normalizeEog(redactEog(value.payload).value, value.gameNumber);
+    return this.status();
   }
   async load(input: unknown) {
     const value = riotLoadSchema.parse(input);

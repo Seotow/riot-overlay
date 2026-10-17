@@ -138,6 +138,7 @@ const server = createServer(async (req, res) => {
       "/api/riot-postgame/credential",
       "/api/riot-postgame/load",
       "/api/riot-postgame/publish",
+      "/api/riot-postgame/import-eog",
     ];
     if (!routes.includes(req.url)) {
       res.writeHead(404);
@@ -168,7 +169,8 @@ const server = createServer(async (req, res) => {
       let size = 0;
       for await (const chunk of req) {
         size += chunk.length;
-        if (size > 16384) {
+        // The EOG block is a few hundred KB at most; every other body is tiny.
+        if (size > (req.url === routes[4] ? 1_048_576 : 16384)) {
           res.writeHead(413);
           res.end('{"error":"body-too-large"}');
           return;
@@ -181,7 +183,8 @@ const server = createServer(async (req, res) => {
           riotPostgame.clear();
           res.end(JSON.stringify(riotPostgame.status()));
         } else res.end(JSON.stringify(riotPostgame.configure(input)));
-      } else if (req.url === routes[2]) res.end(JSON.stringify(await riotPostgame.load(input)));
+      } else if (req.url === routes[4]) res.end(JSON.stringify(riotPostgame.importEog(input)));
+      else if (req.url === routes[2]) res.end(JSON.stringify(await riotPostgame.load(input)));
       else {
         if (!input || typeof input.matchId !== "string" || Object.keys(input).length !== 1)
           throw Error();

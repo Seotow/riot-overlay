@@ -84,6 +84,8 @@ export const riotPostgameSchema = z
                 .regex(/^\d{1,6}$/)
                 .nullable(),
               damage: count,
+              // Set only when the source says so (LCU end-of-game block: botPlayer).
+              bot: z.boolean().optional(),
             }),
           )
           .length(5),
@@ -105,6 +107,8 @@ export const riotPostgameSchema = z
                 .regex(/^\d{1,6}$/)
                 .nullable(),
               damage: count,
+              // Set only when the source says so (LCU end-of-game block: botPlayer).
+              bot: z.boolean().optional(),
             }),
           )
           .length(5),
@@ -120,8 +124,8 @@ export const riotPostgameSchema = z
       .max(2000),
     evidence: z
       .object({
-        matchId: z.string().regex(/^VN2_\d{1,20}$/),
-        mode: z.enum(["standard", "rso"]),
+        matchId: z.string().regex(/^(VN2|LCU)_\d{1,20}$/),
+        mode: z.enum(["standard", "rso", "lcu-eog"]),
         fetchedAt: z.string().datetime(),
         patch: z.string().max(40),
         roleOrderResolved: z.tuple([z.boolean(), z.boolean()]),

@@ -171,6 +171,20 @@ người tham gia ngay khi vào EndOfGame. Hướng khả thi: đọc `eog-stats
 kết quả đã lọc sang Studio (export/import hoặc kênh được cấp quyền), không chuyển token LCU. Probe ghi thêm
 `endpoint-status` để phân biệt 404 với lỗi khác và poll mỗi giây trong 60 giây sau khi trận kết thúc.
 
+### Bộ nhập EOG (đã làm)
+
+Studio → **Sau trận** → mục **Nhập từ file EOG (LCU)**: chọn file `*-eog-stats-block.json` do probe lưu
+(hoặc payload thô; server lọc lại trước khi dùng), nhập ván trong loạt, rồi xem bản chờ duyệt, tích đã đối chiếu
+và bấm **Dùng dữ liệu này cho postgame**. Chuẩn hóa ở `shared/eog-postgame.ts`, API
+`POST /api/riot-postgame/import-eog` (JSON tối đa 1 MB, chỉ từ Studio).
+
+Ánh xạ: đội 100 là xanh, 200 là đỏ; winner từ `isWinningTeam`; thời lượng từ `gameLength`; người chơi
+xếp TOP/JUNGLE/MID/BOT/SUPPORT theo `detectedTeamPosition` (thiếu thì theo thứ tự client, có cảnh báo);
+damage, KDA, vàng, trụ cộng từ `stats` từng người; `botPlayer` giữ thành cờ `bot`. EOG không có cấm/chọn,
+lịch sử vàng, rồng nguyên tố/Elder, Baron, Sứ giả, Sâu: các mục này để —, không điền 0. Định danh trận
+là `LCU_<gameId>`, nhãn nguồn `LCU-EOG`. Đã thử với game 1608102102: 10 người, winner đỏ, 15:46, overlay
+hiển thị đúng; fixture rút gọn không có tên ở `tests/fixtures/eog-stats-block.json`.
+
 Hướng thử tiếp, theo thứ tự rủi ro thấp trước:
 
 1. **Thăm dò chỉ đọc cuối trận trên máy spectator**: poll `gameflow-phase`, `gameclient-eog-stats-block`
