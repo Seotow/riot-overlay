@@ -145,15 +145,15 @@ export function normalizeEog(
     }
 
   if (teams.some((t) => t.players.some((p) => p.damage === null)))
-    warnings.push("Một số người thiếu damage to champions; giữ —, không suy từ nguồn khác.");
+    warnings.push("Một số người thiếu damage to champions; hiển thị 0, không suy từ nguồn khác.");
   if (!h)
     warnings.push(
-      "Không có lịch sử trận của client: cấm chọn, rồng, Baron, Sứ giả, Sâu và biểu đồ vàng để —.",
+      "Không có lịch sử trận của client: cấm chọn, rồng, Baron, Sứ giả, Sâu và biểu đồ vàng hiển thị 0 hoặc trống.",
     );
   else {
     if (dragons.some((d) => d === null))
       warnings.push(
-        "Không tách được rồng nguyên tố/Elder khớp bộ đếm của client; hai mục rồng giữ —.",
+        "Không tách được rồng nguyên tố/Elder khớp bộ đếm của client; hai mục rồng hiển thị 0.",
       );
     if (teams.every((t) => t.bans.every((b) => b === null)))
       warnings.push("Lịch sử trận không có cấm chọn (trận custom/practice); bans để trống.");

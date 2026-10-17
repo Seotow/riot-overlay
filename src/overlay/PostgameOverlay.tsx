@@ -3,8 +3,9 @@ import { goldSegments, postgameRoles, type PostgameState } from "../../shared/po
 import { draftChampion } from "../../shared/draft-assets";
 import { liveChampion } from "../../shared/live-assets";
 
-const number = (n: number | null) => (n === null ? "—" : String(n));
-const compact = (n: number | null) => (n === null ? "—" : `${(n / 1000).toFixed(1)}K`);
+// A value the source did not provide is shown as 0 (no dash), as chosen by the operator.
+const number = (n: number | null) => String(n ?? 0);
+const compact = (n: number | null) => (n === null ? "0" : `${(n / 1000).toFixed(1)}K`);
 function Champion({ id, live = false }: { id: string | null; live?: boolean }) {
   const c = id ? (live ? liveChampion(Number(id)) : draftChampion(id)) : undefined;
   return c ? (
@@ -122,11 +123,7 @@ export function PostgameOverlay({ theme: t, data }: { theme: Theme; data?: Postg
               <img className="pg-logo" src={side ? t.redLogo : t.blueLogo} alt="Logo đội" />
             )}
             <span className="pg-result">
-              {data.winner === null
-                ? "—"
-                : data.winner === (side ? "red" : "blue")
-                  ? "WIN"
-                  : "LOSS"}
+              {data.winner === null ? "" : data.winner === (side ? "red" : "blue") ? "WIN" : "LOSS"}
             </span>
             <strong>{number(s.kills)}</strong>
           </div>
@@ -134,7 +131,7 @@ export function PostgameOverlay({ theme: t, data }: { theme: Theme; data?: Postg
         <div className="pg-time">
           <strong>
             {data.duration === null
-              ? "—"
+              ? "0:00"
               : `${Math.floor(data.duration / 60)}:${String(data.duration % 60).padStart(2, "0")}`}
           </strong>
           <span>GAMETIME</span>

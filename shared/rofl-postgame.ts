@@ -158,8 +158,8 @@ export function normalizeRofl(
   if (dragons.some((d) => d) && dragonSplit.some((d) => d === null))
     warnings.push(
       lg
-        ? `Rồng collector thấy không khớp replay (${dragons.join("/")} lượt hạ); không tách nguyên tố và Elder, hai mục rồng giữ —.`
-        : `Replay ghi ${dragons.join("/")} lượt hạ rồng (có thể gồm Elder) và không có sổ collector của trận này; hai mục rồng giữ —.`,
+        ? `Rồng collector thấy không khớp replay (${dragons.join("/")} lượt hạ); không tách nguyên tố và Elder, hai mục rồng hiển thị 0.`
+        : `Replay ghi ${dragons.join("/")} lượt hạ rồng (có thể gồm Elder) và không có sổ collector của trận này; hai mục rồng hiển thị 0.`,
     );
   // Gold difference over time (blue - red) from the collector's own samples of this match.
   const goldHistory: RiotPostgameState["goldHistory"] = [];

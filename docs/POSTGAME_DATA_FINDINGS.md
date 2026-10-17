@@ -19,14 +19,17 @@ Luồng, không nhập tay:
    (`gameflow/v1/session`) và lưu `.npm-cache/match-ledger/ledger.json` để chịu được restart. Khi replay của đúng
    trận đó xuất hiện, sổ được ghép vào postgame: biểu đồ vàng (xanh trừ đỏ) và **rồng nguyên tố/Elder**, nhưng rồng
    chỉ dùng khi số lượt hạ collector thấy khớp chính xác `DRAGON_KILLS` của replay cho từng đội (collector từng bỏ
-   sót event rồng), nếu không hai mục rồng giữ —. Nếu sổ không có (collector không chạy trong trận đó, như trận
-   mẫu 1607368559) thì rồng và vàng theo thời gian vẫn là —; không bịa. Cấm chọn không có trong replay.
+   sót event rồng), nếu không hai mục rồng hiển thị 0. Nếu sổ không có (collector không chạy trong trận đó, như trận
+   mẫu 1607368559) thì rồng và vàng theo thời gian hiển thị 0; không bịa. Cấm chọn không có trong replay.
+
+Hiển thị: giá trị nguồn không cung cấp được overlay postgame hiển thị **0** (không dùng dấu gạch ngang), theo lựa chọn
+của người dùng; dữ liệu và cảnh báo trong vùng duyệt vẫn nói rõ mục nào thiếu, nên 0 ở đó không có nghĩa là đã đo được 0.
 
 Phân tích `VN2-1607368559.rofl` (7.813.521 byte, 786,4 giây): 10 người, 200 khóa stats mỗi người. Bot là người không
 có PUUID (9/10). Winner đội 100 (xanh). Tổng đội xanh: 40/6/14, vàng 63.611, 8 trụ, 1 Baron, 1 Sứ giả, 3 Sâu;
 damage lên tướng 40.241/4.366/1.798/3.669/7.025 (khớp LCU). Không có: vị trí (TEAM_POSITION rỗng, nên hàng damage
 theo thứ tự trong file), cấm chọn, lịch sử vàng, và rồng: `DRAGON_KILLS` = 5 nhưng `ELDER_DRAGON_KILLS` = 0 trái với
-sổ native nên hai mục rồng giữ —. Overlay đã hiển thị đúng bản này (fixture ẩn danh `tests/fixtures/rofl-rows.json`).
+sổ native nên hai mục rồng hiển thị 0. Overlay đã hiển thị đúng bản này (fixture ẩn danh `tests/fixtures/rofl-rows.json`).
 
 Các hướng khác (collector, đại lý máy tham gia, Match-V5 kiểu RCV) giữ trong ghi chú bên dưới để tham khảo.
 

@@ -69,7 +69,8 @@ test("postgame renders 10 damage players and 10 bans, missing placeholders, no s
   assert.equal((html.match(/class="pg-champion"/g) ?? []).length, 20);
   assert.equal((html.match(/data-gold-segment/g) ?? []).length, 2);
   assert.doesNotMatch(html, /DỮ LIỆU MẪU|UI PREVIEW/);
-  assert.match(html, /—/);
+  assert.doesNotMatch(html, /—/); // missing values read 0, never a dash
+  assert.match(html, /pg-damage[^]*?>0</);
   assert.doesNotMatch(html, /sponsor|powered by|AWS/);
   assert.match(
     renderToStaticMarkup(createElement(PostgameOverlay, { theme: createState().theme })),
