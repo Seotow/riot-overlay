@@ -48,9 +48,7 @@ export function PostgameDesk({
       </div>
       <fieldset disabled={!connected}>
         <div className="config-actions">
-          <Button onClick={() => update(samplePostgame())}>
-            Nạp bộ mẫu theo ảnh
-          </Button>
+          <Button onClick={() => update(samplePostgame())}>Nạp bộ mẫu theo ảnh</Button>
           <Button
             className="secondary"
             disabled={!data || data.source !== "sample"}
@@ -86,8 +84,8 @@ export function PostgameDesk({
         <details className="postgame-data">
           <summary>Dữ liệu JSON , xuất kết quả / nhập bộ mẫu</summary>
           <p>
-            Đội xanh trước, đội đỏ sau. Người chơi theo TOP → JUNGLE → MID → BOT
-            → SUPPORT. Vàng chênh lệch = xanh − đỏ. Giá trị chưa có dùng null.
+            Đội xanh trước, đội đỏ sau. Người chơi theo TOP → JUNGLE → MID → BOT → SUPPORT. Vàng
+            chênh lệch = xanh − đỏ. Giá trị chưa có dùng null.
           </p>
           <div className="config-actions">
             <Button
@@ -101,10 +99,7 @@ export function PostgameDesk({
                 );
                 const a = document.createElement("a");
                 a.href = url;
-                a.download =
-                  data.source === "riot"
-                    ? "postgame-riot.json"
-                    : "postgame-sample.json";
+                a.download = data.source === "riot" ? "postgame-riot.json" : "postgame-sample.json";
                 a.click();
                 URL.revokeObjectURL(url);
               }}
@@ -122,11 +117,8 @@ export function PostgameDesk({
                   e.target.value = "";
                   if (!file) return;
                   try {
-                    if (file.size > 500000)
-                      throw Error("File vượt giới hạn 500 KB");
-                    update(
-                      postgameSampleSchema.parse(JSON.parse(await file.text())),
-                    );
+                    if (file.size > 500000) throw Error("File vượt giới hạn 500 KB");
+                    update(postgameSampleSchema.parse(JSON.parse(await file.text())));
                   } catch {
                     setMessage(
                       "JSON không hợp lệ: kiểm tra version, source sample, tướng, số liệu và thứ tự thời gian. Giới hạn 500 KB.",

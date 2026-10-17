@@ -137,8 +137,7 @@ test("series BO3/BO5, side swap and PNG center logos survive theme roundtrip", (
   assert.deepEqual(themeSchema.parse(JSON.parse(JSON.stringify(t))), t);
   for (const key of ["minimalLogo", "scoreboardLogo"]) {
     assert.equal(
-      themeSchema.safeParse({ ...t, [key]: "data:image/svg+xml;base64,AAAA" })
-        .success,
+      themeSchema.safeParse({ ...t, [key]: "data:image/svg+xml;base64,AAAA" }).success,
       false,
     );
     assert.equal(
@@ -149,9 +148,7 @@ test("series BO3/BO5, side swap and PNG center logos survive theme roundtrip", (
       false,
     );
   }
-  const html = renderToStaticMarkup(
-    createElement(LiveOverlay, { theme: t, frame: null, now: 0 }),
-  );
+  const html = renderToStaticMarkup(createElement(LiveOverlay, { theme: t, frame: null, now: 0 }));
   assert.equal((html.match(/alt="Logo giải đấu"/g) ?? []).length, 2);
   assert.equal((html.match(/class="won"/g) ?? []).length, 3);
 });

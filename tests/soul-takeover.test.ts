@@ -33,14 +33,8 @@ test("Soul takeover uses event team/type, Riot artwork and no sponsor/stat claim
   assert.doesNotMatch(html, /mastercard|priceless|sponsor|\/references\//i);
   assert.match(html, /Damage heals 150\+ HP/);
   assert.doesNotMatch(html, /Heal 2% missing health/);
-  assert.match(
-    render({ ...event, team: "CHAOS", objectiveType: "fire" }),
-    /RED TEST/,
-  );
-  assert.match(
-    render({ ...event, team: "CHAOS", objectiveType: "fire" }),
-    /RỒNG LỬA/,
-  );
+  assert.match(render({ ...event, team: "CHAOS", objectiveType: "fire" }), /RED TEST/);
+  assert.match(render({ ...event, team: "CHAOS", objectiveType: "fire" }), /RỒNG LỬA/);
 });
 test("Soul takeover rejects missing team and non-Soul events; unknown element is neutral", () => {
   assert.equal(render({ ...event, team: undefined }), "");
@@ -54,10 +48,7 @@ test("Soul takeover rejects missing team and non-Soul events; unknown element is
 });
 test("Six distinct Riot artwork files match pinned CDN provenance; no AI fallback", () => {
   const provenance = JSON.parse(
-    readFileSync(
-      "public/broadcast/artwork/riot-dragons/provenance.json",
-      "utf8",
-    ),
+    readFileSync("public/broadcast/artwork/riot-dragons/provenance.json", "utf8"),
   );
   const hashes = new Set<string>();
   for (const type of ["water", "air", "earth", "fire", "hextech", "chemtech"]) {
@@ -65,24 +56,17 @@ test("Six distinct Riot artwork files match pinned CDN provenance; no AI fallbac
     assert.match(html, new RegExp(`riot-dragons/${type}\\.webp`));
     assert.doesNotMatch(html, /dragon-soul-v1|soul-hue/);
     assert.equal(html.includes("soul-artwork-render"), type === "fire");
-    const bytes = readFileSync(
-      `public/broadcast/artwork/riot-dragons/${type}.webp`,
-    );
+    const bytes = readFileSync(`public/broadcast/artwork/riot-dragons/${type}.webp`);
     assert.equal(bytes.subarray(0, 4).toString(), "RIFF");
     assert.equal(bytes.subarray(8, 12).toString(), "WEBP");
     if (type === "fire") {
       assert.equal(bytes.subarray(12, 16).toString(), "VP8X");
-      assert.ok(
-        bytes[20] & 0x10,
-        "Infernal must retain transparent background",
-      );
+      assert.ok(bytes[20] & 0x10, "Infernal must retain transparent background");
     }
     assert.ok(bytes.length < 150_000);
     const hash = createHash("sha256").update(bytes).digest("hex");
     hashes.add(hash);
-    const entry = provenance.assets.find(
-      (asset: { element: string }) => asset.element === type,
-    );
+    const entry = provenance.assets.find((asset: { element: string }) => asset.element === type);
     assert.equal(entry.sha256, hash);
     assert.ok(entry.bytes < entry.sourceBytes);
     assert.equal(entry.kind, type === "fire" ? "static-render" : "creature");
@@ -96,10 +80,7 @@ test("Six distinct Riot artwork files match pinned CDN provenance; no AI fallbac
       ),
     );
     const original = readFileSync(`public${entry.originalPath}`);
-    assert.equal(
-      createHash("sha256").update(original).digest("hex"),
-      entry.originalSha256,
-    );
+    assert.equal(createHash("sha256").update(original).digest("hex"), entry.originalSha256);
   }
   assert.equal(hashes.size, 6);
   assert.doesNotMatch(

@@ -7,8 +7,7 @@ export function runeSummary(
   perks: number[] | null | undefined,
   keystoneId: number | null | undefined,
 ) {
-  if (data.version !== liveCatalog.version)
-    return { keystone: undefined, secondary: undefined };
+  if (data.version !== liveCatalog.version) return { keystone: undefined, secondary: undefined };
   const key =
     keystoneId != null && paths[keystoneId]?.keystone
       ? keystoneId

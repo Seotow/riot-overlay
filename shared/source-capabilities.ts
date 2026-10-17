@@ -21,15 +21,18 @@ export const sourceCandidates: readonly SourceCandidate[] = [
     name: "LeagueBroadcast",
     stage: "conditional",
     route: "WebSocket công khai của ứng dụng",
-    coverage: "Nguồn production đã xác minh cho gold, HP, resource, rune, objective và telemetry đủ 10 người",
-    requirement: "Bắt buộc cho production đầy đủ; cần ứng dụng, quyền tài khoản và custom spectator được hỗ trợ",
+    coverage:
+      "Nguồn production đã xác minh cho gold, HP, resource, rune, objective và telemetry đủ 10 người",
+    requirement:
+      "Bắt buộc cho production đầy đủ; cần ứng dụng, quyền tài khoản và custom spectator được hỗ trợ",
   },
   {
     id: "overwolf",
     name: "Overwolf GEP",
     stage: "planned",
     route: "Game Events Provider chính thức",
-    coverage: "Sự kiện và người chơi cục bộ; không xác nhận gold, HP hoặc năng lượng của đủ 10 người",
+    coverage:
+      "Sự kiện và người chơi cục bộ; không xác nhận gold, HP hoặc năng lượng của đủ 10 người",
     requirement: "Overwolf runtime và quy trình duyệt ứng dụng",
   },
   {

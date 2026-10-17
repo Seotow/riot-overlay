@@ -2,8 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { resourcePresentation } from "../shared/ui-metrics";
 test("resource type comes from native enum, energy1 is yellow, mana0 blue, missing not guessed", () => {
-  const p = (resourceType: number) =>
-    ({ sourceStats: { value: { resourceType } } }) as any;
+  const p = (resourceType: number) => ({ sourceStats: { value: { resourceType } } }) as any;
   assert.deepEqual(resourcePresentation(p(1)), {
     kind: "energy",
     label: "Nội năng",

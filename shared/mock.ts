@@ -87,9 +87,7 @@ export function applyCommand(state: State, cmd: Command): State {
     s.players.forEach(
       (p, i) =>
         (p.gold = s.capabilities.gold
-          ? 4300 +
-            (i % 5) * 370 +
-            (cmd.value === "advantage" && i < 5 ? 1700 : 0)
+          ? 4300 + (i % 5) * 370 + (cmd.value === "advantage" && i < 5 ? 1700 : 0)
           : null),
     );
   }
@@ -106,8 +104,7 @@ export function applyCommand(state: State, cmd: Command): State {
       });
       s.events = s.events.slice(0, 4);
     }
-    if (cmd.value === "level")
-      s.players[2].level = Math.min(18, s.players[2].level + 1);
+    if (cmd.value === "level") s.players[2].level = Math.min(18, s.players[2].level + 1);
     if (cmd.value === "objective") {
       s.objectives = [{ name: "DRAGON", endsAt: s.gameTime + 300 }];
       s.events.unshift({

@@ -19,23 +19,17 @@ export class IngameCollector {
   }
   async observe(): Promise<ObserverFrame> {
     if (this.pending) return this.pending;
-    if (this.cached && this.clock() - Date.parse(this.cached.capturedAt) < 500)
-      return this.cached;
+    if (this.cached && this.clock() - Date.parse(this.cached.capturedAt) < 500) return this.cached;
     this.pending = (async () => {
       const results = await Promise.allSettled([
         this.read("live", "/liveclientdata/allgamedata"),
         this.read("playback", "/replay/playback"),
       ]);
       const live = results[0].status === "fulfilled" ? results[0].value : null;
-      const replay =
-        results[1].status === "fulfilled" ? results[1].value : null;
+      const replay = results[1].status === "fulfilled" ? results[1].value : null;
       const now = new Date(this.clock()).toISOString();
       try {
-        this.onProbes?.(
-          results.flatMap((r) =>
-            r.status === "fulfilled" ? [r.value.probe] : [],
-          ),
-        );
+        this.onProbes?.(results.flatMap((r) => (r.status === "fulfilled" ? [r.value.probe] : [])));
       } catch {
         /* Diagnostic consumers must not affect collection. */
       }
@@ -61,11 +55,7 @@ export class IngameCollector {
             ? "replay"
             : "none";
       const signature = `${live?.probe.status}:${replay?.probe.status}:${domain}:${rosterSignature(live?.probe.status === "ok" ? live.data : null)}`;
-      this.cached = this.session.ingest(
-        available ? sample : null,
-        signature,
-        now,
-      );
+      this.cached = this.session.ingest(available ? sample : null, signature, now);
       return this.cached;
     })();
     try {

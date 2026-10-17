@@ -1,10 +1,8 @@
 import type { ObservedPlayer } from "./observer";
 export function resourcePresentation(player?: ObservedPlayer) {
   const code = player?.sourceStats?.value?.resourceType;
-  if (code === 0)
-    return { kind: "mana", label: "Năng lượng", color: "#259dd9" };
-  if (code === 1)
-    return { kind: "energy", label: "Nội năng", color: "#c8d94b" };
+  if (code === 0) return { kind: "mana", label: "Năng lượng", color: "#259dd9" };
+  if (code === 1) return { kind: "energy", label: "Nội năng", color: "#c8d94b" };
   if (code === 4 || code === 5 || code === 6 || code === 8)
     return { kind: "fury", label: "Nộ", color: "#d8574c" };
   if (code === 7) return { kind: "heat", label: "Nhiệt", color: "#e5a34b" };

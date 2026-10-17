@@ -1,7 +1,4 @@
-import {
-  independentPlayerFields,
-  type IndependentEngineSnapshot,
-} from "./independent-engine";
+import { independentPlayerFields, type IndependentEngineSnapshot } from "./independent-engine";
 
 /** Allowlisted metadata recorder: deliberately excludes raw frames and player statistics/identity. */
 export class IndependentEngineEvidence {
@@ -68,13 +65,8 @@ function project(snapshot: IndependentEngineSnapshot) {
         observedAt: p.observedAt,
       })),
     coverage: Object.fromEntries(
-      independentPlayerFields.map((key) => [
-        key,
-        snapshot.capabilities.coverage[key].observed,
-      ]),
+      independentPlayerFields.map((key) => [key, snapshot.capabilities.coverage[key].observed]),
     ),
-    eventKinds: [
-      ...new Set((frame?.newEvents ?? []).map((event) => event.kind)),
-    ].sort(),
+    eventKinds: [...new Set((frame?.newEvents ?? []).map((event) => event.kind))].sort(),
   };
 }

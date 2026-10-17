@@ -50,12 +50,7 @@ export function DraftDesk({
               : "NHẬP TAY , Nguồn cấm chọn live chưa được kiểm chứng"}
           </p>
         </div>
-        <a
-          className="button secondary"
-          href={url}
-          target="_blank"
-          rel="noreferrer"
-        >
+        <a className="button secondary" href={url} target="_blank" rel="noreferrer">
           Mở overlay OBS ↗
         </a>
       </div>
@@ -78,9 +73,7 @@ export function DraftDesk({
               })
             }
           >
-            <option value="broadcast">
-              Cam tuyển thủ , dải picks phía dưới
-            </option>
+            <option value="broadcast">Cam tuyển thủ , dải picks phía dưới</option>
             <option value="simple">Simple , cam caster ở giữa</option>
           </NativeSelect>
         </label>
@@ -109,8 +102,7 @@ export function DraftDesk({
         </div>
         {state.mockVisible && (
           <p role="alert">
-            Mock đang bật. Bấm “Đưa cấm chọn lên chương trình” để preview dùng
-            dữ liệu bên dưới.
+            Mock đang bật. Bấm “Đưa cấm chọn lên chương trình” để preview dùng dữ liệu bên dưới.
           </p>
         )}
         <div className="draft-controls">
@@ -194,15 +186,11 @@ export function DraftDesk({
             <div className="config-actions">
               <Button
                 disabled={!turn}
-                onClick={() =>
-                  update({ ...d, deadline: Date.now() + d.duration * 1000 })
-                }
+                onClick={() => update({ ...d, deadline: Date.now() + d.duration * 1000 })}
               >
                 Bắt đầu timer
               </Button>
-              <Button onClick={() => update({ ...d, deadline: null })}>
-                Ẩn timer
-              </Button>
+              <Button onClick={() => update({ ...d, deadline: null })}>Ẩn timer</Button>
             </div>
             <p>Timer về 0 sẽ chờ khóa tay. Bỏ lượt giữ ô trống.</p>
             <label>
@@ -251,17 +239,9 @@ export function DraftDesk({
                       aria-label={`Vị trí ${side ? "R" : "B"}${i + 1}`}
                       value={d.order[side][i]}
                       onChange={(e) => {
-                        const order: DraftState["order"] = [
-                          [...d.order[0]],
-                          [...d.order[1]],
-                        ];
-                        const other = order[side].indexOf(
-                          Number(e.target.value),
-                        );
-                        [order[side][i], order[side][other]] = [
-                          order[side][other],
-                          order[side][i],
-                        ];
+                        const order: DraftState["order"] = [[...d.order[0]], [...d.order[1]]];
+                        const other = order[side].indexOf(Number(e.target.value));
+                        [order[side][i], order[side][other]] = [order[side][other], order[side][i]];
                         update({ ...d, order });
                       }}
                     >
@@ -286,19 +266,14 @@ export function DraftDesk({
                 const sample = emptyDraft();
                 sample.source = "reference";
                 sample.names = [...draftFixture.names];
-                sample.coaches = [
-                  draftFixture.blueCoach,
-                  draftFixture.redCoach,
-                ];
+                sample.coaches = [draftFixture.blueCoach, draftFixture.redCoach];
                 sample.patch = catalog.displayPatch;
                 sample.step = 16;
                 draftTurns.forEach(([side, kind, slot], i) => {
                   if (i < sample.step)
                     sample.actions[i] =
                       kind === "ban"
-                        ? (side ? draftFixture.redBans : draftFixture.blueBans)[
-                            slot
-                          ]
+                        ? (side ? draftFixture.redBans : draftFixture.blueBans)[slot]
                         : draftFixture.picks[side * 5 + slot];
                 });
                 sample.hover = "Ezreal";

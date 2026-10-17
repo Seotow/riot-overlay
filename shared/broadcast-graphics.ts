@@ -13,8 +13,6 @@ export type GraphicKey = keyof typeof graphicsLabels;
 export function graphicEnabled(theme: Theme, key: GraphicKey) {
   return (
     theme.ingameGraphics?.[key] ??
-    (["portraitEffects", "buffFrames"].includes(key)
-      ? true
-      : theme.widgets.objectives)
+    (["portraitEffects", "buffFrames"].includes(key) ? true : theme.widgets.objectives)
   );
 }

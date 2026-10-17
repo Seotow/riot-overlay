@@ -45,14 +45,8 @@ test("Elder lasts 150 game seconds, ends on full buff loss, never grants buff to
   assert.deepEqual(advanceElderWindow(window, frame(sample(249.99))), window);
   assert.equal(advanceElderWindow(window, frame(sample(250))), null);
   assert.equal(advanceElderWindow(window, frame(sample(110, false))), null);
-  assert.deepEqual(
-    advanceElderWindow(window, frame(sample(110, null))),
-    window,
-  );
-  assert.equal(
-    advanceElderWindow(window, { ...frame(s), transition: "seek" }),
-    null,
-  );
+  assert.deepEqual(advanceElderWindow(window, frame(sample(110, null))), window);
+  assert.equal(advanceElderWindow(window, { ...frame(s), transition: "seek" }), null);
   assert.ok(!Object.hasOwn(window!, "goldDelta"));
 });
 
@@ -72,8 +66,5 @@ test("Baron starts +1500 including dead teammate, tracks net gold and ends at 18
   assert.equal(baronGoldDelta(window, next), 2000);
   assert.equal(advanceBaronWindow(window, frame(sample(280))), null);
   assert.equal(advanceBaronWindow(window, frame(sample(110, false))), null);
-  assert.deepEqual(
-    advanceBaronWindow(window, frame(sample(110, null))),
-    window,
-  );
+  assert.deepEqual(advanceBaronWindow(window, frame(sample(110, null))), window);
 });

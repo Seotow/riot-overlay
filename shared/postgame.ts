@@ -7,13 +7,7 @@ const champion = z
   .max(40)
   .refine((id) => !!draftChampion(id), "Không có asset tướng này")
   .nullable();
-export const postgameRoles = [
-  "TOP",
-  "JUNGLE",
-  "MID",
-  "BOT",
-  "SUPPORT",
-] as const;
+export const postgameRoles = ["TOP", "JUNGLE", "MID", "BOT", "SUPPORT"] as const;
 const team = z.object({
   kills: count,
   deaths: count,
@@ -150,10 +144,7 @@ export const riotPostgameSchema = z
         });
     });
   });
-export const postgameSchema = z.union([
-  postgameSampleSchema,
-  riotPostgameSchema,
-]);
+export const postgameSchema = z.union([postgameSampleSchema, riotPostgameSchema]);
 export type PostgameState = z.infer<typeof postgameSchema>;
 export type RiotPostgameState = z.infer<typeof riotPostgameSchema>;
 export function samplePostgame(): z.infer<typeof postgameSampleSchema> {
@@ -176,9 +167,7 @@ export function samplePostgame(): z.infer<typeof postgameSampleSchema> {
       : ["Gnar", "XinZhao", "Annie", "Varus", "Alistar"]
     ).map((champion, i) => ({
       champion,
-      damage: (red
-        ? [12900, 11500, 15200, 23100, 4000]
-        : [18200, 16500, 16200, 35000, 4600])[i],
+      damage: (red ? [12900, 11500, 15200, 23100, 4000] : [18200, 16500, 16200, 35000, 4600])[i],
     })),
   });
   return postgameSampleSchema.parse({
@@ -190,13 +179,12 @@ export function samplePostgame(): z.infer<typeof postgameSampleSchema> {
     winner: "blue",
     teams: [make(false), make(true)],
     goldHistory: [
-      0, 120, 240, 360, 480, 600, 720, 840, 960, 1080, 1200, 1320, 1440, 1560,
-      1680, 1800, 1938,
+      0, 120, 240, 360, 480, 600, 720, 840, 960, 1080, 1200, 1320, 1440, 1560, 1680, 1800, 1938,
     ].map((at, i) => ({
       at,
       delta: [
-        0, 200, 900, 600, 1600, 1500, 1200, -100, 600, 1300, -300, 1800, 3200,
-        3900, 3600, 4800, 12000,
+        0, 200, 900, 600, 1600, 1500, 1200, -100, 600, 1300, -300, 1800, 3200, 3900, 3600, 4800,
+        12000,
       ][i],
     })),
   });

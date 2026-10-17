@@ -1,13 +1,8 @@
 import { Button } from "./components/ui/button";
 import { liveCatalog, liveChampion, liveItem } from "../shared/live-assets";
 import { useEffect, useRef, useState } from "react";
-import {
-  observerFrameSchema,
-  recordingSchema,
-  type ObserverFrame,
-} from "../shared/observer";
-const display = (v: number | boolean | null | undefined) =>
-  v == null ? "N/A" : String(v);
+import { observerFrameSchema, recordingSchema, type ObserverFrame } from "../shared/observer";
+const display = (v: number | boolean | null | undefined) => (v == null ? "N/A" : String(v));
 export function IngameMonitor() {
   const [running, setRunning] = useState(false);
   const [frame, setFrame] = useState<ObserverFrame | null>(null);
@@ -74,21 +69,16 @@ export function IngameMonitor() {
       setError("Không xuất được bản ghi. Hãy kiểm tra backend.");
     }
   }
-  const age = frame
-    ? Math.max(0, now - Date.parse(frame.capturedAt))
-    : Infinity;
+  const age = frame ? Math.max(0, now - Date.parse(frame.capturedAt)) : Infinity;
   const fresh = running && age < 5000 && frame?.status === "observed";
   const sample = fresh ? frame.sample : null;
   return (
     <section className="ingame-monitor">
       <h3>In-game / Replay</h3>
+      <p>Data Dragon {liveCatalog.version}. Chưa xác minh patch replay trùng phiên bản asset.</p>
       <p>
-        Data Dragon {liveCatalog.version}. Chưa xác minh patch replay trùng
-        phiên bản asset.
-      </p>
-      <p>
-        Overlay nhận dữ liệu local khi tắt chế độ demo. Có thể bật theo dõi
-        trước khi mở replay; công cụ sẽ thử lại khi chưa có nguồn.
+        Overlay nhận dữ liệu local khi tắt chế độ demo. Có thể bật theo dõi trước khi mở replay;
+        công cụ sẽ thử lại khi chưa có nguồn.
       </p>
       <Button
         onClick={() => {
@@ -114,8 +104,8 @@ export function IngameMonitor() {
       {error && <p role="alert">{error}</p>}
       {frame && (
         <p>
-          Mẫu {frame.sequence}, epoch {frame.epoch}, {Math.floor(age / 1000)}{" "}
-          giây trước, {frame.transition}
+          Mẫu {frame.sequence}, epoch {frame.epoch}, {Math.floor(age / 1000)} giây trước,{" "}
+          {frame.transition}
         </p>
       )}
       {sample && (
@@ -129,8 +119,8 @@ export function IngameMonitor() {
             </span>
           </div>
           <p>
-            {sample.players.length}/10 slot quan sát. Slot là vị trí trong mẫu;
-            chưa xác minh đủ roster. N/A nghĩa là thiếu, không thay bằng mock.
+            {sample.players.length}/10 slot quan sát. Slot là vị trí trong mẫu; chưa xác minh đủ
+            roster. N/A nghĩa là thiếu, không thay bằng mock.
           </p>
           <div className="diagnostic-table">
             <table>
@@ -147,10 +137,7 @@ export function IngameMonitor() {
                     <td>
                       {p.slot + 1}
                       <small>{p.team.value ?? "N/A"}</small>
-                      <small>
-                        {liveChampion(p.championId.value)?.name ??
-                          "Tướng chưa map"}
-                      </small>
+                      <small>{liveChampion(p.championId.value)?.name ?? "Tướng chưa map"}</small>
                     </td>
                     <td>
                       {display(p.level.value)}
@@ -167,11 +154,7 @@ export function IngameMonitor() {
                           ? "N/A"
                           : p.items.value.length
                             ? p.items.value
-                                .map(
-                                  (id) =>
-                                    liveItem(id)?.name ??
-                                    `Chưa có asset (${id})`,
-                                )
+                                .map((id) => liveItem(id)?.name ?? `Chưa có asset (${id})`)
                                 .join(", ")
                             : "Trống"}
                       </small>
@@ -182,19 +165,17 @@ export function IngameMonitor() {
             </table>
           </div>
           <p>
-            {sample.events.length} sự kiện có loại nhận diện, {" "}
-            {frame?.newEvents.length ?? 0} sự kiện mới trong mẫu. Không phát lại
-            lịch sử khi kết nối, tua hoặc đổi phiên.
+            {sample.events.length} sự kiện có loại nhận diện, {frame?.newEvents.length ?? 0} sự kiện
+            mới trong mẫu. Không phát lại lịch sử khi kết nối, tua hoặc đổi phiên.
           </p>
-          {(sample.limits.playersTruncated ||
-            sample.limits.eventsTruncated) && (
+          {(sample.limits.playersTruncated || sample.limits.eventsTruncated) && (
             <p>Mẫu vượt giới hạn; bản quan sát đã được giới hạn kích thước.</p>
           )}
         </>
       )}
       <p>
-        Replay API có thể cần EnableReplayApi=1. Đồng hồ replay không chứng minh
-        có dữ liệu người chơi. Chưa suy ra objective hoặc inhibitor timer.
+        Replay API có thể cần EnableReplayApi=1. Đồng hồ replay không chứng minh có dữ liệu người
+        chơi. Chưa suy ra objective hoặc inhibitor timer.
       </p>
     </section>
   );

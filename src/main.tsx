@@ -103,9 +103,8 @@ function App() {
   const { state, connected, observation, error, setError, send } = useSession();
   const report = useProviders(!isOverlay);
   const [page, setPage] = useState<StudioPage>(
-    studioModules.find(
-      (m) => m.id === new URLSearchParams(location.search).get("page"),
-    )?.id ?? "overview",
+    studioModules.find((m) => m.id === new URLSearchParams(location.search).get("page"))?.id ??
+      "overview",
   );
   const navigate = (next: StudioPage) => {
     setPage(next);
@@ -115,21 +114,14 @@ function App() {
   useEffect(() => {
     const pop = () =>
       setPage(
-        studioModules.find(
-          (m) => m.id === new URLSearchParams(location.search).get("page"),
-        )?.id ?? "overview",
+        studioModules.find((m) => m.id === new URLSearchParams(location.search).get("page"))?.id ??
+          "overview",
       );
     addEventListener("popstate", pop);
     return () => removeEventListener("popstate", pop);
   }, []);
   if (isOverlay)
-    return (
-      <>
-        {state && connected && (
-          <Surface state={state} observation={observation} />
-        )}
-      </>
-    );
+    return <>{state && connected && <Surface state={state} observation={observation} />}</>;
   if (!state)
     return (
       <div className="studio-loading">
@@ -137,8 +129,7 @@ function App() {
         <p>Đang kết nối Studio...</p>
       </div>
     );
-  const title =
-    navigation.find((n) => n.id === page)?.label ?? "Thông tin kỹ thuật";
+  const title = navigation.find((n) => n.id === page)?.label ?? "Thông tin kỹ thuật";
   const mode = state.mockVisible
     ? "Dữ liệu mẫu"
     : state.provider === "recording"
@@ -251,15 +242,9 @@ function App() {
               observation={observation}
             />
           )}
-          {page === "draft" && (
-            <DraftDesk state={state} connected={connected} send={send} />
-          )}
-          {page === "postgame" && (
-            <PostgameDesk state={state} connected={connected} send={send} />
-          )}
-          {page === "hud" && (
-            <ReplayHud state={state} connected={connected} send={send} />
-          )}
+          {page === "draft" && <DraftDesk state={state} connected={connected} send={send} />}
+          {page === "postgame" && <PostgameDesk state={state} connected={connected} send={send} />}
+          {page === "hud" && <ReplayHud state={state} connected={connected} send={send} />}
           {page === "roadmap" && <Roadmap />}
         </div>
       </main>

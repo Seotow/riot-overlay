@@ -41,6 +41,4 @@ studio.send(JSON.stringify({ type: "reset" }));
 await reset;
 studio.close();
 overlay.close();
-console.log(
-  "PASS: shared snapshots, kill propagation, read-only overlay and reset",
-);
+console.log("PASS: shared snapshots, kill propagation, read-only overlay and reset");

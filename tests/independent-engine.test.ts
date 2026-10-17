@@ -79,10 +79,7 @@ test("coverage requires a complete roster and nine distinct perks; empty cooldow
   };
   frame.sample!.players[0].perks = { ...field, value: [1, 2] };
   frame.sample!.players[0].cooldowns = { ...field, value: [] };
-  const engine = new IndependentEngine(
-    { observe: async () => frame },
-    () => timestamp,
-  );
+  const engine = new IndependentEngine({ observe: async () => frame }, () => timestamp);
   await engine.tick();
   const snapshot = engine.snapshot();
   assert.equal(snapshot.capabilities.roster.complete, true);
@@ -110,10 +107,7 @@ test("LB and recorded inputs cannot be labeled as independent acquisition", asyn
     source: "leaguebroadcast",
     observedAt: new Date(timestamp).toISOString(),
   };
-  const engine = new IndependentEngine(
-    { observe: async () => frame },
-    () => timestamp,
-  );
+  const engine = new IndependentEngine({ observe: async () => frame }, () => timestamp);
   await engine.tick();
   assert.equal(engine.snapshot().status, "unavailable");
   assert.equal(engine.snapshot().frame, null);
@@ -121,9 +115,7 @@ test("LB and recorded inputs cannot be labeled as independent acquisition", asyn
 test("bounded acquisition evidence retains only metadata, never values or player identities", async () => {
   const { engine } = source();
   await engine.tick();
-  const evidence = new IndependentEngineEvidence(
-    new Date(timestamp).toISOString(),
-  );
+  const evidence = new IndependentEngineEvidence(new Date(timestamp).toISOString());
   for (let i = 0; i < 1502; i++) evidence.record(engine.snapshot());
   const report = evidence.report(new Date(timestamp + 1000).toISOString());
   assert.equal(report.retained, 1500);
@@ -136,10 +128,7 @@ test("bounded acquisition evidence retains only metadata, never values or player
 });
 test("pause stays observed while samples arrive, stale data is cleared after five seconds", async () => {
   const { engine, change, advance } = source();
-  change(
-    { gameData: { gameTime: 100 } },
-    { time: 100, paused: true, speed: 1 },
-  );
+  change({ gameData: { gameTime: 100 } }, { time: 100, paused: true, speed: 1 });
   await engine.tick();
   advance(4000);
   await engine.tick();
@@ -181,10 +170,7 @@ test("collector failure discards prior sample and never logs errors in snapshot"
   fail = true;
   await engine.tick();
   assert.equal(engine.snapshot().frame?.sample, null);
-  assert.equal(
-    JSON.stringify(engine.snapshot()).includes("SYNTHETIC_SECRET"),
-    false,
-  );
+  assert.equal(JSON.stringify(engine.snapshot()).includes("SYNTHETIC_SECRET"), false);
 });
 test("source requests are exclusively official API endpoints", async () => {
   const paths: string[] = [];
@@ -232,25 +218,15 @@ test("stop suppresses in-flight publication and clears output", async () => {
   assert.equal(notifications, 0);
   assert.equal(engine.snapshot().frame, null);
 });
-function read(
-  port: number,
-  path: string,
-  headers: Record<string, string> = {},
-  method = "GET",
-) {
+function read(port: number, path: string, headers: Record<string, string> = {}, method = "GET") {
   return new Promise<{ status: number; body: any }>((resolve, reject) => {
-    const req = request(
-      { hostname: "127.0.0.1", port, path, method, headers },
-      (res) => {
-        let body = "";
-        res.on("data", (chunk) => {
-          body += chunk;
-        });
-        res.on("end", () =>
-          resolve({ status: res.statusCode!, body: JSON.parse(body) }),
-        );
-      },
-    );
+    const req = request({ hostname: "127.0.0.1", port, path, method, headers }, (res) => {
+      let body = "";
+      res.on("data", (chunk) => {
+        body += chunk;
+      });
+      res.on("end", () => resolve({ status: res.statusCode!, body: JSON.parse(body) }));
+    });
     req.on("error", reject);
     req.end();
   });
@@ -267,10 +243,7 @@ test("standalone loopback HTTP/WS output is read-only and stops cleanly", async 
     const health = await read(service.port, "/health");
     assert.equal(health.body.serverReady, true);
     assert.equal(health.body.replacementReady, false);
-    assert.equal(
-      (await read(service.port, "/snapshot")).body.status,
-      "partial",
-    );
+    assert.equal((await read(service.port, "/snapshot")).body.status, "partial");
     assert.equal(
       (
         await read(service.port, "/snapshot", {
@@ -279,15 +252,8 @@ test("standalone loopback HTTP/WS output is read-only and stops cleanly", async 
       ).status,
       403,
     );
-    assert.equal(
-      (await read(service.port, "/health", { Host: "untrusted.invalid" }))
-        .status,
-      403,
-    );
-    assert.equal(
-      (await read(service.port, "/snapshot", {}, "POST")).status,
-      405,
-    );
+    assert.equal((await read(service.port, "/health", { Host: "untrusted.invalid" })).status, 403);
+    assert.equal((await read(service.port, "/snapshot", {}, "POST")).status, 405);
     const ws = new WebSocket(`ws://127.0.0.1:${service.port}/ws`);
     try {
       const message = await new Promise<any>((resolve, reject) => {

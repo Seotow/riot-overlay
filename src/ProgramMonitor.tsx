@@ -35,9 +35,7 @@ export function ProgramMonitor({ url }: { url: string }) {
               e.target.value = "";
               if (!file) return;
               if (
-                !["image/png", "image/jpeg", "image/webp"].includes(
-                  file.type,
-                ) ||
+                !["image/png", "image/jpeg", "image/webp"].includes(file.type) ||
                 file.size > 20 * 1024 * 1024
               ) {
                 setError("Chọn PNG/JPEG/WebP tối đa 20 MB.");
@@ -74,17 +72,9 @@ export function ProgramMonitor({ url }: { url: string }) {
       </div>
       <div className={`program-monitor ${image ? "has-comparison" : ""}`}>
         {image && (
-          <img
-            className="monitor-reference"
-            src={image}
-            alt="Ảnh ingame đối chiếu cục bộ"
-          />
+          <img className="monitor-reference" src={image} alt="Ảnh ingame đối chiếu cục bộ" />
         )}
-        <iframe
-          title="Preview đầu ra OBS"
-          src={url}
-          style={{ opacity: image ? opacity : 1 }}
-        />
+        <iframe title="Preview đầu ra OBS" src={url} style={{ opacity: image ? opacity : 1 }} />
       </div>
     </>
   );

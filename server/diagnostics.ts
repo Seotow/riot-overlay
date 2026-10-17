@@ -21,10 +21,7 @@ export function parseLockfile(text: string): Credentials | null {
 export async function discover(): Promise<Credentials | null> {
   const paths = process.env.LOL_LOCKFILE
     ? [process.env.LOL_LOCKFILE]
-    : [
-        "C:/Riot Games/League of Legends/lockfile",
-        "D:/Riot Games/League of Legends/lockfile",
-      ];
+    : ["C:/Riot Games/League of Legends/lockfile", "D:/Riot Games/League of Legends/lockfile"];
   if (!process.env.LOL_LOCKFILE && process.platform === "win32") {
     try {
       const { stdout } = await promisify(execFile)(
@@ -52,19 +49,11 @@ export async function discover(): Promise<Credentials | null> {
   return null;
 }
 export type Result = { probe: Probe; data?: unknown };
-export function getLocal(
-  id: string,
-  endpoint: string,
-  credentials?: Credentials,
-): Promise<Result> {
+export function getLocal(id: string, endpoint: string, credentials?: Credentials): Promise<Result> {
   const started = performance.now();
   return new Promise((resolve) => {
     let finished = false;
-    const finish = (
-      status: Probe["status"],
-      httpStatus: number | null = null,
-      data?: unknown,
-    ) => {
+    const finish = (status: Probe["status"], httpStatus: number | null = null, data?: unknown) => {
       if (finished) return;
       finished = true;
       clearTimeout(deadline);
@@ -111,14 +100,9 @@ export function getLocal(
         });
         res.on("error", () => finish("unreachable"));
         res.on("end", () => {
-          if (res.statusCode !== 200)
-            return finish("http-error", res.statusCode);
+          if (res.statusCode !== 200) return finish("http-error", res.statusCode);
           try {
-            finish(
-              "ok",
-              200,
-              JSON.parse(Buffer.concat(chunks).toString("utf8")),
-            );
+            finish("ok", 200, JSON.parse(Buffer.concat(chunks).toString("utf8")));
           } catch {
             finish("invalid", 200);
           }
@@ -278,34 +262,25 @@ const definitions = [
   ],
 ] as const;
 export function makeReport(results: Result[]): DiagnosticReport {
-  const fields: Evidence[] = definitions.map(
-    ([id, stage, field, path, type, limitation]) => {
-      const r = results.find((r) => r.probe.id === id);
-      const raw = at(r?.data, path.split("."));
-      // Export only explicitly selected finite numeric samples. Never export provider objects or strings.
-      const values = (Array.isArray(raw) ? raw.flat(Infinity) : [raw]).filter(
-        (v) => typeof v === "number" && Number.isFinite(v),
-      );
-      return {
-        field,
-        stage,
-        source: r?.probe.source ?? "LCU",
-        path,
-        type,
-        limitation,
-        availability:
-          r?.probe.status !== "ok"
-            ? "unverified"
-            : values.length
-              ? "observed"
-              : "missing",
-        sample:
-          r?.probe.status === "ok" && values.length
-            ? values.slice(0, 50)
-            : null,
-      };
-    },
-  );
+  const fields: Evidence[] = definitions.map(([id, stage, field, path, type, limitation]) => {
+    const r = results.find((r) => r.probe.id === id);
+    const raw = at(r?.data, path.split("."));
+    // Export only explicitly selected finite numeric samples. Never export provider objects or strings.
+    const values = (Array.isArray(raw) ? raw.flat(Infinity) : [raw]).filter(
+      (v) => typeof v === "number" && Number.isFinite(v),
+    );
+    return {
+      field,
+      stage,
+      source: r?.probe.source ?? "LCU",
+      path,
+      type,
+      limitation,
+      availability:
+        r?.probe.status !== "ok" ? "unverified" : values.length ? "observed" : "missing",
+      sample: r?.probe.status === "ok" && values.length ? values.slice(0, 50) : null,
+    };
+  });
   for (const field of ["Objective state", "Inhibitor state / respawn"]) {
     fields.push({
       field,
@@ -345,8 +320,7 @@ let pending: Promise<DiagnosticReport> | undefined;
 let cached: DiagnosticReport | undefined;
 export async function diagnose(): Promise<DiagnosticReport> {
   if (pending) return pending;
-  if (cached && Date.now() - Date.parse(cached.capturedAt) < 3000)
-    return cached;
+  if (cached && Date.now() - Date.parse(cached.capturedAt) < 3000) return cached;
   pending = (async () => {
     const credentials = await discover();
     const endpoints = [

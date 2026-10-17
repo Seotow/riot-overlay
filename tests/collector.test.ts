@@ -2,11 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { IngameCollector } from "../server/observer";
 import type { Result } from "../server/diagnostics";
-function result(
-  id: string,
-  data: unknown,
-  status: Result["probe"]["status"] = "ok",
-): Result {
+function result(id: string, data: unknown, status: Result["probe"]["status"] = "ok"): Result {
   return {
     data,
     probe: {
@@ -30,9 +26,7 @@ test("collector coalesces simultaneous requests and expires its cache", async ()
       paths.push(path);
       return result(
         id,
-        id === "live"
-          ? { gameData: { gameTime: 100 } }
-          : { time: 100, paused: false, speed: 1 },
+        id === "live" ? { gameData: { gameTime: 100 } } : { time: 100, paused: false, speed: 1 },
       );
     },
     () => time,
@@ -56,9 +50,7 @@ test("collector tolerates one failed source and rotates on recovery", async () =
       if (id === "live" && failed) throw Error("SECRET");
       return result(
         id,
-        id === "live"
-          ? { gameData: { gameTime: 100 } }
-          : { time: 100, paused: true },
+        id === "live" ? { gameData: { gameTime: 100 } } : { time: 100, paused: true },
       );
     },
     () => time,

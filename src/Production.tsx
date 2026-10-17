@@ -3,23 +3,14 @@ import { NativeSelect } from "./components/ui/native-select";
 import { Button } from "./components/ui/button";
 import { Card } from "./components/ui/card";
 import React, { useEffect, useState } from "react";
-import {
-  themeSchema,
-  type Theme,
-  type State,
-  type Command,
-} from "../shared/schema";
+import { themeSchema, type Theme, type State, type Command } from "../shared/schema";
 import type { ObserverFrame } from "../shared/observer";
 import { Surface } from "./overlay/Surface";
 import { swapTeamSides } from "../shared/match-config";
 import { broadcastColors } from "../shared/broadcast-colors";
 import { ProgramMonitor } from "./ProgramMonitor";
 import { broadcastWidgetOn } from "../shared/broadcast-controls";
-import {
-  graphicsLabels,
-  graphicEnabled,
-  type GraphicKey,
-} from "../shared/broadcast-graphics";
+import { graphicsLabels, graphicEnabled, type GraphicKey } from "../shared/broadcast-graphics";
 
 export const outputUrl = "/overlay?scene=ingame";
 export const defaultBroadcast = { view: "normal", inhibitors: "auto" } as const;
@@ -53,10 +44,7 @@ export function MatchConfig({
       setMessage("Cấu hình không hợp lệ: kiểm tra tên, màu, tỉ số và logo.");
       return;
     }
-    if (
-      Math.max(draft.blueScore ?? 0, draft.redScore ?? 0) >
-      (draft.seriesGames ?? 3)
-    ) {
+    if (Math.max(draft.blueScore ?? 0, draft.redScore ?? 0) > (draft.seriesGames ?? 3)) {
       setMessage("Tỉ số không được vượt số trận thắng của thể thức đã chọn.");
       return;
     }
@@ -79,10 +67,7 @@ export function MatchConfig({
           ).map(([key, label]) => (
             <label key={key}>
               {label}
-              <Input
-                value={draft[key]}
-                onChange={(e) => patch({ [key]: e.target.value })}
-              />
+              <Input value={draft[key]} onChange={(e) => patch({ [key]: e.target.value })} />
             </label>
           ))}
           <label>
@@ -108,10 +93,7 @@ export function MatchConfig({
           <Button type="button" onClick={() => patch(swapTeamSides(draft))}>
             Đổi bên xanh ↔ đỏ
           </Button>
-          <small>
-            Đổi tên, logo và tỉ số; giữ màu theo phía bản đồ. Bấm lưu để áp
-            dụng.
-          </small>
+          <small>Đổi tên, logo và tỉ số; giữ màu theo phía bản đồ. Bấm lưu để áp dụng.</small>
         </fieldset>
         {(["blue", "red"] as const).map((side) => (
           <fieldset key={side}>
@@ -140,9 +122,7 @@ export function MatchConfig({
                 min="0"
                 max={draft.seriesGames ?? 3}
                 value={draft[`${side}Score`] ?? 0}
-                onChange={(e) =>
-                  patch({ [`${side}Score`]: Number(e.target.value) })
-                }
+                onChange={(e) => patch({ [`${side}Score`]: Number(e.target.value) })}
               />
             </label>
             <label>
@@ -155,31 +135,22 @@ export function MatchConfig({
                   if (!file) return;
                   if (
                     file.size > 350000 ||
-                    !["image/png", "image/jpeg", "image/webp"].includes(
-                      file.type,
-                    )
+                    !["image/png", "image/jpeg", "image/webp"].includes(file.type)
                   ) {
                     setMessage("Logo phải là PNG/JPEG/WebP, tối đa 350KB.");
                     return;
                   }
                   const reader = new FileReader();
-                  reader.onload = () =>
-                    patch({ [`${side}Logo`]: String(reader.result) });
+                  reader.onload = () => patch({ [`${side}Logo`]: String(reader.result) });
                   reader.readAsDataURL(file);
                   e.target.value = "";
                 }}
               />
             </label>
             {draft[`${side}Logo`] && (
-              <img
-                className="config-logo"
-                src={draft[`${side}Logo`]}
-                alt="Logo đội"
-              />
+              <img className="config-logo" src={draft[`${side}Logo`]} alt="Logo đội" />
             )}
-            <Button onClick={() => patch({ [`${side}Logo`]: "" })}>
-              Không dùng logo
-            </Button>
+            <Button onClick={() => patch({ [`${side}Logo`]: "" })}>Không dùng logo</Button>
           </fieldset>
         ))}
         <fieldset>
@@ -205,15 +176,12 @@ export function MatchConfig({
                       return;
                     }
                     const reader = new FileReader();
-                    reader.onload = () =>
-                      patch({ [key]: String(reader.result) });
+                    reader.onload = () => patch({ [key]: String(reader.result) });
                     reader.readAsDataURL(file);
                   }}
                 />
               </label>
-              {draft[key] && (
-                <img className="config-logo" src={draft[key]} alt={label} />
-              )}
+              {draft[key] && <img className="config-logo" src={draft[key]} alt={label} />}
               <Button type="button" onClick={() => patch({ [key]: "" })}>
                 Bỏ {label.toLowerCase()}
               </Button>
@@ -227,17 +195,14 @@ export function MatchConfig({
             <NativeSelect
               aria-label="Kiểu killfeed"
               value={draft.killfeedStyle ?? "text"}
-              onChange={(e) =>
-                patch({ killfeedStyle: e.target.value as "text" | "broadcast" })
-              }
+              onChange={(e) => patch({ killfeedStyle: e.target.value as "text" | "broadcast" })}
             >
               <option value="text">Thông báo chữ hiện tại</option>
               <option value="broadcast">Broadcast, icon như mẫu</option>
             </NativeSelect>
           </label>
           <label>
-            Độ đậm nền in-game,{" "}
-            {Math.round((draft.ingamePanelOpacity ?? 0.84) * 100)}%
+            Độ đậm nền in-game, {Math.round((draft.ingamePanelOpacity ?? 0.84) * 100)}%
             <Input
               aria-label="Độ đậm nền in-game"
               type="range"
@@ -245,18 +210,14 @@ export function MatchConfig({
               max="0.9"
               step="0.01"
               value={draft.ingamePanelOpacity ?? 0.84}
-              onChange={(e) =>
-                patch({ ingamePanelOpacity: Number(e.target.value) })
-              }
+              onChange={(e) => patch({ ingamePanelOpacity: Number(e.target.value) })}
             />
           </label>
           <label>
             Layout cấm chọn
             <NativeSelect
               value={draft.draftLayout ?? "broadcast"}
-              onChange={(e) =>
-                patch({ draftLayout: e.target.value as "broadcast" | "simple" })
-              }
+              onChange={(e) => patch({ draftLayout: e.target.value as "broadcast" | "simple" })}
             >
               <option value="broadcast">Cam tuyển thủ</option>
               <option value="simple">Simple, cam caster</option>
@@ -310,9 +271,7 @@ export function MatchConfig({
             Bố cục mặc định
             <NativeSelect
               value={draft.variant}
-              onChange={(e) =>
-                patch({ variant: e.target.value as Theme["variant"] })
-              }
+              onChange={(e) => patch({ variant: e.target.value as Theme["variant"] })}
             >
               <option value="panel">Đầy đủ</option>
               <option value="minimal">Tối giản</option>
@@ -323,9 +282,7 @@ export function MatchConfig({
             <NativeSelect
               aria-label="Layout tuyển thủ mặc định"
               value={draft.playerCameras === false ? "expanded" : "camera"}
-              onChange={(e) =>
-                patch({ playerCameras: e.target.value === "camera" })
-              }
+              onChange={(e) => patch({ playerCameras: e.target.value === "camera" })}
             >
               <option value="expanded">Không cam, bảng mở rộng</option>
               <option value="camera">Có cam, chừa hai vùng tuyển thủ</option>
@@ -491,25 +448,19 @@ function WidgetPreview({
   const [x, y, w, h] = regions[view];
   const scale = Math.min(145 / w, 108 / h);
   const sample =
-    observation?.status === "observed" &&
-    Date.now() - Date.parse(observation.capturedAt) < 5000
+    observation?.status === "observed" && Date.now() - Date.parse(observation.capturedAt) < 5000
       ? observation.sample
       : null;
   const empty = !sample
     ? "Chưa có dữ liệu mới"
     : inhibitors &&
         !sample.inhibitors?.value?.some(
-          (i) =>
-            i.team === inhibitors &&
-            i.respawnsAt > (sample.gameTime.value ?? Infinity),
+          (i) => i.team === inhibitors && i.respawnsAt > (sample.gameTime.value ?? Infinity),
         )
       ? "Không có timer đang chạy"
       : null;
   return (
-    <div
-      className="widget-preview"
-      style={{ width: w * scale, height: h * scale }}
-    >
+    <div className="widget-preview" style={{ width: w * scale, height: h * scale }}>
       {empty && <span className="widget-empty">{empty}</span>}
       <div
         style={{
@@ -585,15 +536,8 @@ export function ProductionDesk({
     >
       <div className="section-heading">
         <div>
-          <h2>
-            {mode === "recording"
-              ? "Điều khiển đồ họa"
-              : "Chương trình đang phát"}
-          </h2>
-          <div
-            className={`data-status ${fresh ? "ready" : "waiting"}`}
-            role="status"
-          >
+          <h2>{mode === "recording" ? "Điều khiển đồ họa" : "Chương trình đang phát"}</h2>
+          <div className={`data-status ${fresh ? "ready" : "waiting"}`} role="status">
             <i />
             {fresh ? "Đang nhận dữ liệu" : "Chờ dữ liệu trận"}
           </div>
@@ -604,13 +548,12 @@ export function ProductionDesk({
           </a>
         </Button>
       </div>
-      {mode === "live" &&
-        (state.mockVisible || state.provider === "recording") && (
-          <p className="note">
-            Đang dùng {state.mockVisible ? "dữ liệu mẫu" : "bản ghi"}. Đổi nguồn
-            khi phát trận trực tiếp.
-          </p>
-        )}
+      {mode === "live" && (state.mockVisible || state.provider === "recording") && (
+        <p className="note">
+          Đang dùng {state.mockVisible ? "dữ liệu mẫu" : "bản ghi"}. Đổi nguồn khi phát trận trực
+          tiếp.
+        </p>
+      )}
       <div className="broadcast-workspace">
         {mode === "live" && (
           <div className="broadcast-preview">
@@ -622,9 +565,7 @@ export function ProductionDesk({
               </code>
               <Button
                 onClick={() =>
-                  navigator.clipboard
-                    .writeText(location.origin + outputUrl)
-                    .catch(() => {})
+                  navigator.clipboard.writeText(location.origin + outputUrl).catch(() => {})
                 }
               >
                 Sao chép URL OBS
@@ -657,37 +598,24 @@ export function ProductionDesk({
                       })
                     }
                   >
-                    {broadcastWidgetOn(control, view, state.theme)
-                      ? "Ẩn"
-                      : "Hiển thị"}
+                    {broadcastWidgetOn(control, view, state.theme) ? "Ẩn" : "Hiển thị"}
                   </Button>
                 </div>
                 {view !== "minimal" && (
-                  <WidgetPreview
-                    state={state}
-                    observation={observation}
-                    view={view}
-                  />
+                  <WidgetPreview state={state} observation={observation} view={view} />
                 )}
               </Card>
             ))}
             {(["ORDER", "CHAOS"] as const).map((team) => (
               <Card className="operator-card" key={team}>
                 <div>
-                  <h3>
-                    Nhà lính{" "}
-                    {team === "ORDER"
-                      ? state.theme.blueName
-                      : state.theme.redName}
-                  </h3>
+                  <h3>Nhà lính {team === "ORDER" ? state.theme.blueName : state.theme.redName}</h3>
                   <Button
                     disabled={!available}
                     aria-pressed={control.inhibitors === team}
                     onClick={() => inhibitor(team)}
                   >
-                    {control.inhibitors === team
-                      ? "Ẩn timer"
-                      : "Hiển thị timer"}
+                    {control.inhibitors === team ? "Ẩn timer" : "Hiển thị timer"}
                   </Button>
                 </div>
                 <WidgetPreview
@@ -704,9 +632,7 @@ export function ProductionDesk({
             <NativeSelect
               aria-label="Layout tuyển thủ đang phát"
               disabled={!connected}
-              value={
-                state.theme.playerCameras === false ? "expanded" : "camera"
-              }
+              value={state.theme.playerCameras === false ? "expanded" : "camera"}
               onChange={(e) =>
                 send({
                   type: "theme",
@@ -746,18 +672,14 @@ export function ProductionDesk({
           <div className="config-actions">
             <Button
               disabled={!connected}
-              onClick={() =>
-                send({ type: "broadcastInhibitors", value: "auto" })
-              }
+              onClick={() => send({ type: "broadcastInhibitors", value: "auto" })}
               aria-pressed={control.inhibitors === "auto"}
             >
               Nhà lính tự động
             </Button>
             <Button
               disabled={!connected}
-              onClick={() =>
-                send({ type: "broadcastInhibitors", value: "off" })
-              }
+              onClick={() => send({ type: "broadcastInhibitors", value: "off" })}
             >
               Ẩn timer nhà lính
             </Button>

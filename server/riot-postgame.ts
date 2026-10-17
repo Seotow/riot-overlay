@@ -23,13 +23,9 @@ export const riotLoadSchema = z
   })
   .strict();
 const obj = (v: unknown): Record<string, any> =>
-  v && typeof v === "object" && !Array.isArray(v)
-    ? (v as Record<string, any>)
-    : {};
+  v && typeof v === "object" && !Array.isArray(v) ? (v as Record<string, any>) : {};
 const num = (v: unknown): number | null =>
-  typeof v === "number" && Number.isInteger(v) && v >= 0 && v <= 100000000
-    ? v
-    : null;
+  typeof v === "number" && Number.isInteger(v) && v >= 0 && v <= 100000000 ? v : null;
 const roles = ["TOP", "JUNGLE", "MIDDLE", "BOTTOM", "UTILITY"];
 export function normalizeRiotPostgame(
   raw: unknown,
@@ -66,8 +62,7 @@ export function normalizeRiotPostgame(
       ? info.gameVersion
       : "";
   const patchParts = patch.split(".").map(Number);
-  const modern =
-    patchParts[0] > 11 || (patchParts[0] === 11 && patchParts[1] >= 20);
+  const modern = patchParts[0] > 11 || (patchParts[0] === 11 && patchParts[1] >= 20);
   const durationValue = num(info.gameDuration);
   const duration =
     durationValue === null
@@ -106,8 +101,7 @@ export function normalizeRiotPostgame(
   const isFinal =
     winner !== null &&
     duration !== null &&
-    (typeof info.endOfGameResult !== "string" ||
-      !/abort|terminate/i.test(info.endOfGameResult));
+    (typeof info.endOfGameResult !== "string" || !/abort|terminate/i.test(info.endOfGameResult));
   if (!isFinal)
     warnings.push(
       "Kết quả/thời lượng chưa đầy đủ hoặc trận bị hủy; chưa coi là kết quả cuối hợp lệ.",
@@ -119,11 +113,7 @@ export function normalizeRiotPostgame(
   warnings.push(
     "Role có sẵn được xếp theo teamPosition dự đoán của Riot; cần đối chiếu roster của giải.",
   );
-  if (
-    !patch.startsWith(
-      liveCatalog.version.split(".").slice(0, 2).join(".") + ".",
-    )
-  )
+  if (!patch.startsWith(liveCatalog.version.split(".").slice(0, 2).join(".") + "."))
     warnings.push(
       "Patch trận khác bộ ảnh local; số liệu không đổi, ảnh tướng cần đối chiếu version.",
     );
@@ -139,18 +129,12 @@ export function normalizeRiotPostgame(
       if (num(frame.timestamp) === null) continue;
       const at = frame.timestamp / 1000;
       if (duration !== null && at > duration) continue;
-      if (goldHistory.length && at <= goldHistory.at(-1)!.at)
-        throw Error("invalid-timeline-order");
+      if (goldHistory.length && at <= goldHistory.at(-1)!.at) throw Error("invalid-timeline-order");
       const gold = roster.map((ps) => {
         const values = ps.map((p) =>
-          num(
-            obj(obj(frame.participantFrames)[String(p.participantId)])
-              .totalGold,
-          ),
+          num(obj(obj(frame.participantFrames)[String(p.participantId)]).totalGold),
         );
-        return values.every((v) => v !== null)
-          ? values.reduce<number>((n, v) => n + v!, 0)
-          : null;
+        return values.every((v) => v !== null) ? values.reduce<number>((n, v) => n + v!, 0) : null;
       });
       goldHistory.push({
         at,
@@ -158,9 +142,7 @@ export function normalizeRiotPostgame(
       });
     }
   } else
-    warnings.push(
-      "Không có timeline hợp lệ: chưa có biểu đồ vàng; không dùng số liệu mẫu để lấp.",
-    );
+    warnings.push("Không có timeline hợp lệ: chưa có biểu đồ vàng; không dùng số liệu mẫu để lấp.");
   // No fabricated Elder split: require complete timeline plus recognized kill details and counter agreement.
   let dragonCounts: { elemental: number; elder: number }[] | null = null;
   if (
@@ -177,11 +159,9 @@ export function normalizeRiotPostgame(
     let valid = ti.frames.every((f: any) => Array.isArray(f.events));
     for (const frame of ti.frames)
       for (const e of frame.events ?? []) {
-        if (e.type !== "ELITE_MONSTER_KILL" || e.monsterType !== "DRAGON")
-          continue;
+        if (e.type !== "ELITE_MONSTER_KILL" || e.monsterType !== "DRAGON") continue;
         const side = [100, 200].indexOf(
-          e.killerTeamId ??
-            players.find((p) => p.participantId === e.killerId)?.teamId,
+          e.killerTeamId ?? players.find((p) => p.participantId === e.killerId)?.teamId,
         );
         if (side < 0) {
           valid = false;
@@ -205,28 +185,20 @@ export function normalizeRiotPostgame(
       valid &&
       counts.every((c, i) => {
         const total = num(obj(obj(byTeam[i].objectives).dragon).kills);
-        return (
-          total !== null &&
-          (total === c.elemental || total === c.elemental + c.elder)
-        );
+        return total !== null && (total === c.elemental || total === c.elemental + c.elder);
       })
     )
       dragonCounts = counts;
   }
   if (!dragonCounts)
-    warnings.push(
-      "Chưa đủ event/counter để tách rồng nguyên tố và Elder; hai mục giữ —.",
-    );
-  const championId = (n: unknown) =>
-    num(n) && Number(n) <= 999999 ? String(n) : null;
+    warnings.push("Chưa đủ event/counter để tách rồng nguyên tố và Elder; hai mục giữ —.");
+  const championId = (n: unknown) => (num(n) && Number(n) <= 999999 ? String(n) : null);
   const teams = roster.map((ps, side) => {
     const t = byTeam[side],
       objectives = obj(t.objectives);
     const sum = (key: string) => {
       const values = ps.map((p) => num(p[key]));
-      return values.every((v) => v !== null)
-        ? values.reduce<number>((n, v) => n + v!, 0)
-        : null;
+      return values.every((v) => v !== null) ? values.reduce<number>((n, v) => n + v!, 0) : null;
     };
     const bans = Array.isArray(t.bans)
       ? [...t.bans]
@@ -258,9 +230,7 @@ export function normalizeRiotPostgame(
       "Một số player thiếu damage to champions; không suy từ HP hoặc tổng damage mọi mục tiêu.",
     );
   if (teams.some((t) => t.grubs === null))
-    warnings.push(
-      "Không có objectives.horde: số sâu giữ —; chưa xác minh patch này.",
-    );
+    warnings.push("Không có objectives.horde: số sâu giữ —; chưa xác minh patch này.");
   return riotPostgameSchema.parse({
     version: 2,
     source: "riot",
@@ -334,11 +304,7 @@ export class RiotPostgameService {
     if (!this.credential) throw new RiotError(409, "no-credential");
     if (this.controller) throw new RiotError(409, "busy");
     if (Date.now() < this.retryAt)
-      throw new RiotError(
-        429,
-        "rate-limit",
-        Math.ceil((this.retryAt - Date.now()) / 1000),
-      );
+      throw new RiotError(429, "rate-limit", Math.ceil((this.retryAt - Date.now()) / 1000));
     const generation = this.generation,
       controller = new AbortController(),
       credential = this.credential;
@@ -348,9 +314,7 @@ export class RiotPostgameService {
         ? { "X-Riot-Token": credential.secret }
         : { Authorization: `Bearer ${credential.secret}` };
     const prefix =
-      credential.mode === "standard"
-        ? "/lol/match/v5/matches/"
-        : "/lol/rso-match/v1/matches/";
+      credential.mode === "standard" ? "/lol/match/v5/matches/" : "/lol/rso-match/v1/matches/";
     const get = async (suffix: string) => {
       if (controller.signal.aborted || generation !== this.generation)
         throw new RiotError(409, "cancelled");
@@ -362,10 +326,7 @@ export class RiotPostgameService {
             method: "GET",
             headers,
             redirect: "error",
-            signal: AbortSignal.any([
-              controller.signal,
-              AbortSignal.timeout(12000),
-            ]),
+            signal: AbortSignal.any([controller.signal, AbortSignal.timeout(12000)]),
           },
         );
       } catch {
@@ -390,9 +351,7 @@ export class RiotPostgameService {
         if (retry) this.retryAt = Date.now() + retry * 1000;
         throw new RiotError(
           response.status,
-          response.status === 429
-            ? "rate-limit"
-            : `upstream-${response.status}`,
+          response.status === 429 ? "rate-limit" : `upstream-${response.status}`,
           retry,
         );
       }
@@ -420,13 +379,7 @@ export class RiotPostgameService {
     try {
       const match = await get("");
       // Validate match identity/roster before any timeline request.
-      normalizeRiotPostgame(
-        match,
-        null,
-        value.matchId,
-        credential.mode,
-        value.gameNumber,
-      );
+      normalizeRiotPostgame(match, null, value.matchId, credential.mode, value.gameNumber);
       let timeline: unknown = null,
         timelineIssue: string | null = null;
       try {

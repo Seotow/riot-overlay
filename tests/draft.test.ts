@@ -45,42 +45,27 @@ test("complete tournament draft locks 10 bans and 10 picks, rejects duplicates a
 test("draft command keeps in-game data and theme, swaps picks by slot and validates imports", () => {
   const before = createState();
   assert.equal(themeSchema.parse(before.theme).draftLayout, undefined);
-  assert.equal(
-    themeSchema.parse({ ...before.theme, draftLayout: "simple" }).draftLayout,
-    "simple",
-  );
-  assert.equal(
-    themeSchema.safeParse({ ...before.theme, draftLayout: "unknown" }).success,
-    false,
-  );
+  assert.equal(themeSchema.parse({ ...before.theme, draftLayout: "simple" }).draftLayout, "simple");
+  assert.equal(themeSchema.safeParse({ ...before.theme, draftLayout: "unknown" }).success, false);
   const d = emptyDraft();
   d.step = 7;
   d.actions[6] = "Annie";
   d.order[0] = [1, 0, 2, 3, 4];
-  const after = applyCommand(
-    before,
-    commandSchema.parse({ type: "draftState", value: d }),
-  );
+  const after = applyCommand(before, commandSchema.parse({ type: "draftState", value: d }));
   assert.deepEqual(after.players, before.players);
   assert.deepEqual(after.theme, before.theme);
   assert.equal(draftSlots(after.draft!, 0, "pick")[1], "Annie");
   assert.equal(
-    draftSchema.safeParse({ ...d, order: [[0, 0, 2, 3, 4], d.order[1]] })
-      .success,
+    draftSchema.safeParse({ ...d, order: [[0, 0, 2, 3, 4], d.order[1]] }).success,
     false,
   );
-  assert.equal(
-    draftSchema.safeParse({ ...d, hover: "UnknownChampion" }).success,
-    false,
-  );
+  assert.equal(draftSchema.safeParse({ ...d, hover: "UnknownChampion" }).success, false);
 });
 test("draft renderer has empty truthful slots, shows hover then lock, no fixture stats or reference assets", () => {
   const theme = createState().theme;
   let d = emptyDraft();
   const render = () =>
-    renderToStaticMarkup(
-      createElement(DraftOverlay, { theme, draft: d, now: 1000 }),
-    );
+    renderToStaticMarkup(createElement(DraftOverlay, { theme, draft: d, now: 1000 }));
   let html = render();
   assert.equal((html.match(/class="ref-pick /g) || []).length, 10);
   assert.doesNotMatch(html, /pick-portrait|references\/|82.3%|COACH:/);

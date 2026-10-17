@@ -44,13 +44,12 @@ export function Diagnostics() {
       <div className="divider" />
       <h3>Chẩn đoán nguồn LoL</h3>
       <p>
-        Kiểm tra chỉ đọc theo yêu cầu. Overlay dùng nguồn quan sát khi bỏ chọn
-        dữ liệu demo. Báo cáo chỉ chứa các trường đã lọc, không chứa credentials
-        hoặc tên tài khoản.
+        Kiểm tra chỉ đọc theo yêu cầu. Overlay dùng nguồn quan sát khi bỏ chọn dữ liệu demo. Báo cáo
+        chỉ chứa các trường đã lọc, không chứa credentials hoặc tên tài khoản.
       </p>
       <p>
-        Ưu tiên mở replay, chạy, pause, rồi tua tiến hoặc lùi. Bấm kiểm tra và xuất
-        một báo cáo ở từng bước.
+        Ưu tiên mở replay, chạy, pause, rồi tua tiến hoặc lùi. Bấm kiểm tra và xuất một báo cáo ở
+        từng bước.
       </p>
       <Button disabled={busy} onClick={scan}>
         {busy ? "Đang kiểm tra..." : "Kiểm tra nguồn"}
@@ -60,13 +59,10 @@ export function Diagnostics() {
       {report && (
         <>
           <p role="status">
-            Mẫu lúc {new Date(report.capturedAt).toLocaleTimeString()}, {" "}
-            {Math.max(
-              0,
-              Math.floor((now - Date.parse(report.capturedAt)) / 1000),
-            )}{" "}
-            giây trước, phase: {report.phase ?? "Chưa xác định"}. Đây là mẫu
-            tại thời điểm kiểm tra, không phải trạng thái live liên tục.
+            Mẫu lúc {new Date(report.capturedAt).toLocaleTimeString()},{" "}
+            {Math.max(0, Math.floor((now - Date.parse(report.capturedAt)) / 1000))} giây trước,
+            phase: {report.phase ?? "Chưa xác định"}. Đây là mẫu tại thời điểm kiểm tra, không phải
+            trạng thái live liên tục.
           </p>
           {report.probes.map((p) => (
             <div className="diagnostic-probe" key={p.id}>
@@ -74,15 +70,14 @@ export function Diagnostics() {
                 {p.source}: {p.id}
               </b>
               <span>
-                {p.status} {p.httpStatus ?? ""}, {" "}
+                {p.status} {p.httpStatus ?? ""},{" "}
                 {p.latencyMs === null ? "N/A" : `${p.latencyMs} ms`}
               </span>
             </div>
           ))}
           <p>
-            LCU “not-configured”: chưa tìm thấy lockfile hợp lệ. Có thể đặt biến
-            LOL_LOCKFILE ở backend theo hướng dẫn. Thời gian phản hồi HTTP không
-            phải độ trễ spectator.
+            LCU “not-configured”: chưa tìm thấy lockfile hợp lệ. Có thể đặt biến LOL_LOCKFILE ở
+            backend theo hướng dẫn. Thời gian phản hồi HTTP không phải độ trễ spectator.
           </p>
           <div className="diagnostic-table">
             <table>

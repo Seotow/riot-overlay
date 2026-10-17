@@ -37,16 +37,11 @@ export function replayRender(
         });
         res.on("end", () => {
           if (res.statusCode !== 200) {
-            finish(
-              Error("Replay API không sẵn sàng hoặc không chấp nhận cấu hình."),
-            );
+            finish(Error("Replay API không sẵn sàng hoặc không chấp nhận cấu hình."));
             return;
           }
           try {
-            finish(
-              undefined,
-              JSON.parse(Buffer.concat(chunks).toString("utf8")),
-            );
+            finish(undefined, JSON.parse(Buffer.concat(chunks).toString("utf8")));
           } catch {
             finish(Error("Replay API trả dữ liệu không hợp lệ."));
           }
@@ -54,10 +49,7 @@ export function replayRender(
         res.on("error", (error) => finish(error));
       },
     );
-    const deadline = setTimeout(
-      () => req.destroy(Error("Replay API không phản hồi.")),
-      2500,
-    );
+    const deadline = setTimeout(() => req.destroy(Error("Replay API không phản hồi.")), 2500);
     req.on("error", () =>
       finish(
         Error(
@@ -98,14 +90,10 @@ export class ReplayHudService {
       "interfaceKillCallouts",
     ] as const)
       if (typeof before[key] !== "boolean")
-        throw Error(
-          "Patch hiện tại thiếu cờ bảo vệ thông báo; chưa áp dụng HUD.",
-        );
+        throw Error("Patch hiện tại thiếu cờ bảo vệ thông báo; chưa áp dụng HUD.");
     const keys = Object.keys(config) as HudKey[];
     const supported = keys.filter((key) => typeof before[key] === "boolean");
-    const patch = Object.fromEntries(
-      supported.map((key) => [key, config[key]]),
-    );
+    const patch = Object.fromEntries(supported.map((key) => [key, config[key]]));
     await this.transport("POST", patch);
     const fields = renderHudFields(await this.transport("GET"));
     const mismatched = supported.filter((key) => fields[key] !== config[key]);

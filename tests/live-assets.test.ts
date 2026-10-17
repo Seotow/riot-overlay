@@ -86,12 +86,10 @@ test("adapter preserves item slots, maps identities and keeps missing stats null
           ],
           summonerSpells: {
             summonerSpellOne: {
-              rawDisplayName:
-                "GeneratedTip_SummonerSpell_SummonerFlash_DisplayName",
+              rawDisplayName: "GeneratedTip_SummonerSpell_SummonerFlash_DisplayName",
             },
             summonerSpellTwo: {
-              rawDisplayName:
-                "GeneratedTip_SummonerSpell_SummonerSnowball_DisplayName",
+              rawDisplayName: "GeneratedTip_SummonerSpell_SummonerSnowball_DisplayName",
             },
           },
           runes: null,

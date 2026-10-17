@@ -5,11 +5,7 @@ import { resolve } from "node:path";
 import { z } from "zod";
 import { BARON_BUFF_SECONDS } from "../shared/game-rules";
 import { COLLECTOR_REPLAY_MAX_SAMPLES } from "../shared/capture-rules";
-import {
-  rehearsalButtons,
-  type RehearsalKind,
-  type RehearsalDisplay,
-} from "../shared/rehearsal";
+import { rehearsalButtons, type RehearsalKind, type RehearsalDisplay } from "../shared/rehearsal";
 import type { ObservedEvent } from "../shared/observer";
 import { LeagueBroadcastSource } from "./leaguebroadcast";
 import { ingameSampleSchema, type IngameSample } from "../shared/observer";
@@ -26,16 +22,11 @@ export async function listCaptures() {
     const directories = await readdir(captureRoot, { withFileTypes: true });
     const records = await Promise.all(
       directories
-        .filter(
-          (d) => d.isDirectory() && captureIdSchema.safeParse(d.name).success,
-        )
+        .filter((d) => d.isDirectory() && captureIdSchema.safeParse(d.name).success)
         .map(async (d) => {
           try {
             const manifest = JSON.parse(
-              await readFile(
-                resolve(captureRoot, d.name, "manifest.json"),
-                "utf8",
-              ),
+              await readFile(resolve(captureRoot, d.name, "manifest.json"), "utf8"),
             );
             return {
               id: d.name,
@@ -49,21 +40,17 @@ export async function listCaptures() {
               hasState:
                 manifest.observerFrames > 0 ||
                 manifest.ingameStateFrames > 0 ||
-                (Array.isArray(
-                  manifest.messageTypes ?? manifest.websocket?.messageTypes,
-                ) &&
-                  (
-                    manifest.messageTypes ?? manifest.websocket?.messageTypes
-                  ).includes("ingame-state-update")),
+                (Array.isArray(manifest.messageTypes ?? manifest.websocket?.messageTypes) &&
+                  (manifest.messageTypes ?? manifest.websocket?.messageTypes).includes(
+                    "ingame-state-update",
+                  )),
             };
           } catch {
             return null;
           }
         }),
     );
-    return records
-      .filter((r) => r !== null)
-      .sort((a, b) => b.id.localeCompare(a.id));
+    return records.filter((r) => r !== null).sort((a, b) => b.id.localeCompare(a.id));
   } catch {
     return [];
   }
@@ -86,10 +73,7 @@ function captureParser() {
     const message = record.message;
     if (message?.type === "collector-sample") {
       const sample = ingameSampleSchema.parse(message.sample);
-      if (
-        sample.gameTime.source !== "league-collector" ||
-        sample.players.length !== 10
-      )
+      if (sample.gameTime.source !== "league-collector" || sample.players.length !== 10)
         throw Error("Bản ghi collector không hợp lệ.");
       baseline ??= timestamp;
       entries.push({
@@ -151,8 +135,8 @@ export class CaptureReplay {
           (event) =>
             event.kind === "RoleQuestCompleted" &&
             Math.abs(event.at - e.sample.gameTime.value!) < 0.1 &&
-            e.sample.players.find((p) => p.slot === event.playerSlot)?.roleQuest
-              ?.value?.role === questRole,
+            e.sample.players.find((p) => p.slot === event.playerSlot)?.roleQuest?.value?.role ===
+              questRole,
         ),
       );
     if (kind === "inhibitorBlue" || kind === "inhibitorRed") {
@@ -178,46 +162,31 @@ export class CaptureReplay {
       return this.entries.filter((e) =>
         e.sample.events.some(
           (event) =>
-            event.kind === eventKind &&
-            Math.abs(event.at - e.sample.gameTime.value!) < 0.1,
+            event.kind === eventKind && Math.abs(event.at - e.sample.gameTime.value!) < 0.1,
         ),
       );
     return this.entries.filter((e, index) => {
       const s = e.sample;
       if (kind === "gold")
-        return (
-          s.players.length === 10 &&
-          s.players.every((p) => p.totalGold.value != null)
-        );
+        return s.players.length === 10 && s.players.every((p) => p.totalGold.value != null);
       if (kind === "levels")
-        return (
-          s.players.length === 10 &&
-          s.players.every((p) => p.level.value != null)
-        );
-      if (kind === "timers")
-        return s.pitTimers?.some((t) => t.timeAlive.value != null);
+        return s.players.length === 10 && s.players.every((p) => p.level.value != null);
+      if (kind === "timers") return s.pitTimers?.some((t) => t.timeAlive.value != null);
       if (kind === "runes")
-        return (
-          s.players.length === 10 &&
-          s.players.every((p) => p.perks?.value?.length === 9)
-        );
+        return s.players.length === 10 && s.players.every((p) => p.perks?.value?.length === 9);
       if (kind === "cooldowns" || kind === "minimal")
         return s.players.some((p) =>
-          p.cooldowns?.value?.some(
-            (c) => c.kind === "item" && c.readyAt > s.gameTime.value!,
-          ),
+          p.cooldowns?.value?.some((c) => c.kind === "item" && c.readyAt > s.gameTime.value!),
         );
-      if (kind === "death")
-        return s.players.some((p) => p.isDead?.value === true);
+      if (kind === "death") return s.players.some((p) => p.isDead?.value === true);
       if (kind === "respawn")
         return (
           index > 0 &&
           s.players.some(
             (p) =>
               p.isDead?.value === false &&
-              this.entries[index - 1].sample.players.find(
-                (old) => old.slot === p.slot,
-              )?.isDead?.value === true,
+              this.entries[index - 1].sample.players.find((old) => old.slot === p.slot)?.isDead
+                ?.value === true,
           )
         );
       return kind === "clear";
@@ -253,13 +222,9 @@ export class CaptureReplay {
       inhibitorRed: ["inhibitorTeam"],
       tower: ["tower"],
     };
-    if (
-      variant &&
-      Object.keys(variant).some((key) => !allowed[kind]?.includes(key))
-    )
+    if (variant && Object.keys(variant).some((key) => !allowed[kind]?.includes(key)))
       throw Error("Biến thể không hợp lệ cho chức năng này.");
-    if (variant?.dragon === "elder" && kind === "soul")
-      throw Error("Elder không có linh hồn.");
+    if (variant?.dragon === "elder" && kind === "soul") throw Error("Elder không có linh hồn.");
     if (
       variant &&
       ![
@@ -279,8 +244,7 @@ export class CaptureReplay {
       return { kind };
     }
     const targets = this.targets(variant?.inhibitorTeam ? "inhibitor" : kind);
-    if (!targets.length)
-      throw Error("Bản ghi không có dữ liệu cho chức năng này.");
+    if (!targets.length) throw Error("Bản ghi không có dữ liệu cho chức năng này.");
     let entry =
       kind === "gold" || kind === "levels"
         ? targets.at(-1)!
@@ -296,17 +260,13 @@ export class CaptureReplay {
     const display: RehearsalDisplay = { kind };
     if (kind === "baron") {
       const event = entry.sample.events.find(
-        (e) =>
-          e.kind === "BaronKill" &&
-          Math.abs(e.at - entry.sample.gameTime.value!) < 0.1,
+        (e) => e.kind === "BaronKill" && Math.abs(e.at - entry.sample.gameTime.value!) < 0.1,
       )!;
       const team = event.team!;
       const next = this.entries.find(
         (e) =>
           e.offsetMs >= entry.offsetMs + 10000 &&
-          e.sample.players.some(
-            (p) => p.team.value === team && p.hasBaron?.value === true,
-          ),
+          e.sample.players.some((p) => p.team.value === team && p.hasBaron?.value === true),
       );
       const gold = (s: IngameSample, t: string) =>
         s.teams?.find((v) => v.team === t)?.totalGold.value;
@@ -359,8 +319,7 @@ export class CaptureReplay {
       (e) =>
         e.kind === eventKinds[kind] &&
         (!kind.startsWith("quest") ||
-          entry.sample.players.find((p) => p.slot === e.playerSlot)?.roleQuest
-            ?.value?.role ===
+          entry.sample.players.find((p) => p.slot === e.playerSlot)?.roleQuest?.value?.role ===
             {
               questTop: "top",
               questJungle: "jungle",
@@ -401,9 +360,7 @@ export class CaptureReplay {
   }
   async prepare(id: string) {
     captureIdSchema.parse(id);
-    const manifest = JSON.parse(
-      await readFile(resolve(captureRoot, id, "manifest.json"), "utf8"),
-    );
+    const manifest = JSON.parse(await readFile(resolve(captureRoot, id, "manifest.json"), "utf8"));
     const path = resolve(
       captureRoot,
       id,
@@ -411,8 +368,7 @@ export class CaptureReplay {
         ? "observer-samples.ndjson"
         : "leaguebroadcast-ws.ndjson",
     );
-    if ((await stat(path)).size > 512 * 1024 * 1024)
-      throw Error("Bản ghi vượt giới hạn 512 MB.");
+    if ((await stat(path)).size > 512 * 1024 * 1024) throw Error("Bản ghi vượt giới hạn 512 MB.");
     const parser = captureParser();
     const lines = createInterface({
       input: createReadStream(path, { encoding: "utf8" }),
@@ -424,10 +380,7 @@ export class CaptureReplay {
   private position() {
     return Math.min(
       this.duration(),
-      this.anchorMs +
-        (this.playing
-          ? Math.max(0, this.clock() - this.wallAnchor) * this.speed
-          : 0),
+      this.anchorMs + (this.playing ? Math.max(0, this.clock() - this.wallAnchor) * this.speed : 0),
     );
   }
   private duration() {
@@ -461,14 +414,11 @@ export class CaptureReplay {
     const positionMs = this.position();
     const entry = this.entryAt(positionMs);
     const gameTime =
-      entry &&
-      positionMs - entry.offsetMs < 5000 &&
-      entry.sample.gameTime.value !== null
+      entry && positionMs - entry.offsetMs < 5000 && entry.sample.gameTime.value !== null
         ? entry.sample.gameTime.value +
           (entry.sample.replay.paused.value
             ? 0
-            : ((positionMs - entry.offsetMs) / 1000) *
-              (entry.sample.replay.speed.value ?? 1))
+            : ((positionMs - entry.offsetMs) / 1000) * (entry.sample.replay.speed.value ?? 1))
         : null;
     return {
       id: this.id,
@@ -500,13 +450,9 @@ export class CaptureReplay {
     if (sample.replay.time.value !== null) sample.replay.time.value += advance;
     for (const player of sample.players) {
       if (player.isDead?.value === true && player.respawnSeconds?.value != null)
-        player.respawnSeconds.value = Math.max(
-          0,
-          player.respawnSeconds.value - advance,
-        );
+        player.respawnSeconds.value = Math.max(0, player.respawnSeconds.value - advance);
     }
-    sample.replay.paused.value =
-      !this.snapshot().playing || sample.replay.paused.value === true;
+    sample.replay.paused.value = !this.snapshot().playing || sample.replay.paused.value === true;
     sample.replay.paused.availability = "observed";
     // Anchor each replay frame exactly; no wall-clock drift during a pause or end.
     sample.replay.speed.value = 0;

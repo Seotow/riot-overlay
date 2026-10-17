@@ -2,11 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import {
-  postgameSchema,
-  samplePostgame,
-  goldSegments,
-} from "../shared/postgame";
+import { postgameSchema, samplePostgame, goldSegments } from "../shared/postgame";
 import { applyCommand, createState } from "../shared/mock";
 import { commandSchema } from "../shared/schema";
 import { PostgameOverlay } from "../src/overlay/PostgameOverlay";
@@ -16,10 +12,7 @@ test("postgame sample is coherent, lane ordered, and explicitly not live", () =>
   assert.equal(d.source, "sample");
   assert.equal(d.teams[0].kills, d.teams[1].deaths);
   assert.equal(d.teams[1].kills, d.teams[0].deaths);
-  assert.equal(
-    d.goldHistory.at(-1)!.delta,
-    d.teams[0].gold! - d.teams[1].gold!,
-  );
+  assert.equal(d.goldHistory.at(-1)!.delta, d.teams[0].gold! - d.teams[1].gold!);
   assert.equal(d.goldHistory.at(-1)!.at, d.duration);
   assert.equal(d.teams.flatMap((t) => t.players).length, 10);
 });
@@ -61,20 +54,10 @@ test("postgame commands do not change live/mock gameplay, theme or draft", () =>
     before,
     commandSchema.parse({ type: "postgameState", value: samplePostgame() }),
   );
-  for (const key of [
-    "players",
-    "theme",
-    "draft",
-    "scene",
-    "gameTime",
-    "provider",
-  ] as const)
+  for (const key of ["players", "theme", "draft", "scene", "gameTime", "provider"] as const)
     assert.deepEqual(after[key], before[key]);
   assert.equal(before.postgame, undefined);
-  assert.equal(
-    applyCommand(after, { type: "postgameState", value: null }).postgame,
-    null,
-  );
+  assert.equal(applyCommand(after, { type: "postgameState", value: null }).postgame, null);
 });
 test("postgame renders 10 damage players and 10 bans, missing placeholders, no sponsors", () => {
   const d = samplePostgame();
@@ -89,9 +72,7 @@ test("postgame renders 10 damage players and 10 bans, missing placeholders, no s
   assert.match(html, /—/);
   assert.doesNotMatch(html, /sponsor|powered by|AWS/);
   assert.match(
-    renderToStaticMarkup(
-      createElement(PostgameOverlay, { theme: createState().theme }),
-    ),
+    renderToStaticMarkup(createElement(PostgameOverlay, { theme: createState().theme })),
     /CHỜ DỮ LIỆU/,
   );
 });

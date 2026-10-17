@@ -2,11 +2,7 @@ import { z } from "zod";
 import { draftSchema, type DraftState } from "./draft";
 import { hudSchema } from "./replay-hud";
 import { postgameSampleSchema, type PostgameState } from "./postgame";
-import {
-  rehearsalKindSchema,
-  rehearsalVariantSchema,
-  type RehearsalDisplay,
-} from "./rehearsal";
+import { rehearsalKindSchema, rehearsalVariantSchema, type RehearsalDisplay } from "./rehearsal";
 export const sceneSchema = z.enum(["ingame", "draft", "postgame"]);
 const color = z.string().regex(/^#[0-9a-fA-F]{6}$/);
 export const themeSchema = z.object({
@@ -145,9 +141,7 @@ export const commandSchema = z.discriminatedUnion("type", [
   }),
   z.object({
     type: z.literal("captureLoad"),
-    id: z
-      .string()
-      .regex(/^(?:lb-)?\d{4}-\d{2}-\d{2}T\d{2}-\d{2}-\d{2}-\d{3}Z$/),
+    id: z.string().regex(/^(?:lb-)?\d{4}-\d{2}-\d{2}T\d{2}-\d{2}-\d{2}-\d{3}Z$/),
   }),
   z.object({
     type: z.literal("captureControl"),
@@ -214,12 +208,7 @@ export type State = {
   revision: number;
   source: "mock";
   mockVisible: boolean;
-  provider:
-    | "riot"
-    | "leaguebroadcast"
-    | "league-collector"
-    | "collector-accountless"
-    | "recording";
+  provider: "riot" | "leaguebroadcast" | "league-collector" | "collector-accountless" | "recording";
   scene: z.infer<typeof sceneSchema>;
   playing: boolean;
   gameTime: number;

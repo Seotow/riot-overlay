@@ -7,14 +7,11 @@ export function broadcastWidgetOn(
 ) {
   if (key === "minimal")
     return (
-      (control?.layout ??
-        (control?.view === "minimal" ? "minimal" : theme.variant)) === "minimal"
+      (control?.layout ?? (control?.view === "minimal" ? "minimal" : theme.variant)) === "minimal"
     );
   if (control?.[key] !== undefined) return control[key]!;
   return (
     control?.view === key ||
-    (key === "levels" &&
-      (!control || control.view === "normal") &&
-      theme.widgets.levels)
+    (key === "levels" && (!control || control.view === "normal") && theme.widgets.levels)
   );
 }

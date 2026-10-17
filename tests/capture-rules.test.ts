@@ -11,7 +11,6 @@ test("collector targets half-second samples without accumulating processing drif
   assert.equal(remainingSampleDelay(700), 0);
   assert.equal(remainingSampleDelay(20, 750), 730);
   assert.ok(
-    COLLECTOR_REPLAY_MAX_SAMPLES >=
-      (4 * 60 * 60 * 1000) / COLLECTOR_SAMPLE_INTERVAL_MS + 1,
+    COLLECTOR_REPLAY_MAX_SAMPLES >= (4 * 60 * 60 * 1000) / COLLECTOR_SAMPLE_INTERVAL_MS + 1,
   );
 });

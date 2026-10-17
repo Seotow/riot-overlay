@@ -1,0 +1,19 @@
+# Generated, vendored or binary-adjacent content: never reformat.
+node_modules/
+dist/
+data/
+images/
+public/
+shared/generated/
+package-lock.json
+.claude/
+.npm-cache/
+docs/
+*.md
+
+# Collector: native hosts, packaged bundles and vendored third-party sources
+collector/hosts/
+collector/bundles/
+
+# Valorant module is a fork of upstream projects with its own conventions
+modules/valorant/

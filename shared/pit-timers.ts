@@ -15,15 +15,14 @@ export function presentationPitTimers(sample: IngameSample | null): PitTimer[] {
   });
   const dragon = [...events].reverse().find((e) => e.kind === "DragonKill");
   const soul = events.some((e) => e.kind === "DragonSoul");
-  const reportedDragon = sample.pitTimers?.find(t => t.pit === "dragon");
+  const reportedDragon = sample.pitTimers?.find((t) => t.pit === "dragon");
   // Type comes from source only. History may estimate the clock, not identity.
   const elderRespawn = reportedDragon?.type.value
     ? /^(?:DRAGON_)?elder$/i.test(reportedDragon.type.value)
     : dragon?.objectiveType === "elder" || soul;
   const baron = [...events].reverse().find((e) => e.kind === "BaronKill");
   const heraldKilled = events.some((e) => e.kind === "HeraldKill");
-  const grubsKilled =
-    events.filter((e) => e.kind === "VoidGrubKill").length >= 3;
+  const grubsKilled = events.filter((e) => e.kind === "VoidGrubKill").length >= 3;
   const topType =
     baron || time >= rules.baronFirst || heraldKilled
       ? "baron"
@@ -51,10 +50,7 @@ export function presentationPitTimers(sample: IngameSample | null): PitTimer[] {
       type: field("dragon"),
       timeAlive: field(
         dragon
-          ? dragon.at +
-              (elderRespawn
-                ? rules.elderRespawn
-                : rules.dragonRespawn)
+          ? dragon.at + (elderRespawn ? rules.elderRespawn : rules.dragonRespawn)
           : rules.dragonFirst,
       ),
       timeDestroy: field<number>(null),
@@ -64,7 +60,9 @@ export function presentationPitTimers(sample: IngameSample | null): PitTimer[] {
   return defaults.map((timer) => {
     const reported = sample.pitTimers?.find((t) => t.pit === timer.pit);
     return reported &&
-      (reported.isAlive?.value === true || reported.timeAlive.value !== null || reported.timeDestroy.value !== null)
+      (reported.isAlive?.value === true ||
+        reported.timeAlive.value !== null ||
+        reported.timeDestroy.value !== null)
       ? reported
       : { ...timer, ...(reported?.type.value ? { type: reported.type } : {}) };
   });

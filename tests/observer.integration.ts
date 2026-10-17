@@ -4,10 +4,7 @@ import { observerFrameSchema, recordingSchema } from "../shared/observer";
 import { providerReportSchema } from "../shared/providers";
 const base = process.env.OVERLAY_TEST_URL || "http://127.0.0.1:4310";
 const started = Date.now();
-const [a, b] = await Promise.all([
-  fetch(`${base}/api/observer`),
-  fetch(`${base}/api/observer`),
-]);
+const [a, b] = await Promise.all([fetch(`${base}/api/observer`), fetch(`${base}/api/observer`)]);
 assert.equal(a.status, 200);
 assert.equal(b.status, 200);
 const first = observerFrameSchema.parse(await a.json()),
@@ -21,9 +18,7 @@ const recording = recordingSchema.parse(
 assert.ok(recording.frames.length > 0 && recording.frames.length <= 120);
 const diagnostic = await (await fetch(`${base}/api/diagnostics`)).json();
 assert.equal(diagnostic.probes.length, 6);
-const providers = providerReportSchema.parse(
-  await (await fetch(`${base}/api/providers`)).json(),
-);
+const providers = providerReportSchema.parse(await (await fetch(`${base}/api/providers`)).json());
 assert.equal(providers.selected, "riot");
 for (const path of [
   "/api/observer",
@@ -34,8 +29,7 @@ for (const path of [
 ]) {
   assert.equal((await fetch(base + path, { method: "POST" })).status, 405);
   assert.equal(
-    (await fetch(base + path, { headers: { Origin: "https://example.com" } }))
-      .status,
+    (await fetch(base + path, { headers: { Origin: "https://example.com" } })).status,
     403,
   );
   assert.equal(
@@ -48,10 +42,7 @@ for (const path of [
     403,
   );
 }
-assert.equal(
-  (await (await fetch(`${base}/api/health`)).json()).source,
-  providers.output,
-);
+assert.equal((await (await fetch(`${base}/api/health`)).json()).source, providers.output);
 console.log(
   `PASS: observer HTTP, provider report, recording, six probes, origin/method guards; source status=${first.status}`,
 );

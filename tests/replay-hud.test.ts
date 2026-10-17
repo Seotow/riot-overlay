@@ -24,21 +24,9 @@ test("HUD defaults hide redundant groups, retain minimap, announcements and pare
     "interfaceAnnounce",
     "interfaceKillCallouts",
   ])
-    assert.equal(
-      hudSchema.safeParse({ ...defaultHud, [key]: false }).success,
-      false,
-    );
-  for (const key of [
-    "cameraPosition",
-    "speed",
-    "path",
-    "vngWarning",
-    "environment",
-  ])
-    assert.equal(
-      hudSchema.safeParse({ ...defaultHud, [key]: false }).success,
-      false,
-    );
+    assert.equal(hudSchema.safeParse({ ...defaultHud, [key]: false }).success, false);
+  for (const key of ["cameraPosition", "speed", "path", "vngWarning", "environment"])
+    assert.equal(hudSchema.safeParse({ ...defaultHud, [key]: false }).success, false);
 });
 test("HUD status filters camera/private fields and never writes", async () => {
   const calls: string[] = [];
@@ -54,10 +42,7 @@ test("HUD status filters camera/private fields and never writes", async () => {
 });
 test("HUD apply validates before network, posts supported HUD keys only then verifies", async () => {
   const calls: { method: string; body?: Record<string, boolean> }[] = [];
-  let current = { ...defaultHud, interfaceFrames: true } as Record<
-    string,
-    boolean
-  >;
+  let current = { ...defaultHud, interfaceFrames: true } as Record<string, boolean>;
   delete current.interfaceQuests;
   const s = new ReplayHudService(async (method, body) => {
     calls.push({ method, body });
@@ -105,8 +90,5 @@ test("HUD profile and feed style persist in version1 without changing old themes
     killfeedStyle: "broadcast",
   });
   assert.deepEqual(themeSchema.parse(JSON.parse(JSON.stringify(t))), t);
-  assert.equal(
-    themeSchema.safeParse({ ...t, killfeedStyle: "unknown" }).success,
-    false,
-  );
+  assert.equal(themeSchema.safeParse({ ...t, killfeedStyle: "unknown" }).success, false);
 });

@@ -1,21 +1,19 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import {
-  LeagueBroadcastSource,
-  normalizeLeagueBroadcast,
-} from "../server/leaguebroadcast";
+import { LeagueBroadcastSource, normalizeLeagueBroadcast } from "../server/leaguebroadcast";
 
 const now = "2026-09-19T12:00:00.000Z";
-test("LB stacksData is direct for all supported champions, missing is not zero",()=>{
- for(const id of [432,75,136,901,45,235,31,14,412,200,203]){
-  const raw:any=frame();raw.scoreboardBottom.teams[0].players[0].champion.id=id;
-  raw.tabs.Order.players[0].stacksData=152;
-  assert.equal(normalizeLeagueBroadcast(raw,now)!.players[0].championStacks?.value,152);
-  raw.tabs.Order.players[0].stacksData=0;
-  assert.equal(normalizeLeagueBroadcast(raw,now)!.players[0].championStacks?.value,0);
-  delete raw.tabs.Order.players[0].stacksData;
-  assert.equal(normalizeLeagueBroadcast(raw,now)!.players[0].championStacks?.value,null);
- }
+test("LB stacksData is direct for all supported champions, missing is not zero", () => {
+  for (const id of [432, 75, 136, 901, 45, 235, 31, 14, 412, 200, 203]) {
+    const raw: any = frame();
+    raw.scoreboardBottom.teams[0].players[0].champion.id = id;
+    raw.tabs.Order.players[0].stacksData = 152;
+    assert.equal(normalizeLeagueBroadcast(raw, now)!.players[0].championStacks?.value, 152);
+    raw.tabs.Order.players[0].stacksData = 0;
+    assert.equal(normalizeLeagueBroadcast(raw, now)!.players[0].championStacks?.value, 0);
+    delete raw.tabs.Order.players[0].stacksData;
+    assert.equal(normalizeLeagueBroadcast(raw, now)!.players[0].championStacks?.value, null);
+  }
 });
 test("first turret is global 0→1, never the other team's first or a multi-turret jump", () => {
   for (const jump of [1, 2]) {
@@ -30,8 +28,7 @@ test("first turret is global 0→1, never the other team's first or a multi-turr
     raw.scoreboard.teams[0].towers = jump;
     source.accept({ type: "ingame-state-update", state: raw });
     assert.equal(
-      source.observe().newEvents.find((e) => e.kind === "TurretKilled")
-        ?.firstTurret,
+      source.observe().newEvents.find((e) => e.kind === "TurretKilled")?.firstTurret,
       jump === 1,
     );
     raw.gameTime += 0.5;
@@ -39,8 +36,7 @@ test("first turret is global 0→1, never the other team's first or a multi-turr
     raw.scoreboard.teams[1].towers = 1;
     source.accept({ type: "ingame-state-update", state: raw });
     assert.equal(
-      source.observe().newEvents.find((e) => e.kind === "TurretKilled")
-        ?.firstTurret,
+      source.observe().newEvents.find((e) => e.kind === "TurretKilled")?.firstTurret,
       false,
     );
     source.stop();
@@ -48,9 +44,7 @@ test("first turret is global 0→1, never the other team's first or a multi-turr
 });
 test("quest rewards preserve bot boots slot, mid inventory and support ward slot", () => {
   const raw: any = frame();
-  raw.scoreboardBottom.teams[0].players[0].items = [
-    { id: 3006, slot: 8, count: 1 },
-  ];
+  raw.scoreboardBottom.teams[0].players[0].items = [{ id: 3006, slot: 8, count: 1 }];
   let player = normalizeLeagueBroadcast(raw, now)!.players[0];
   assert.equal(player.roleQuest?.value?.role, "bot");
   assert.equal(player.roleQuest?.value?.rewardItemId, 3006);
@@ -75,44 +69,27 @@ test("quest completion emits once from observed transition, not initial complete
   let clock = Date.parse(now);
   const source = new LeagueBroadcastSource(() => clock);
   const raw: any = frame();
-  raw.scoreboardBottom.teams[0].players[0].items = [
-    { id: 1200, slot: 8, stats: [1199, 1200] },
-  ];
+  raw.scoreboardBottom.teams[0].players[0].items = [{ id: 1200, slot: 8, stats: [1199, 1200] }];
   source.accept({ type: "ingame-state-update", state: raw });
   source.observe();
   raw.gameTime += 0.5;
   clock += 500;
   raw.scoreboardBottom.teams[0].players[0].items = [{ id: 1220, slot: 8 }];
   source.accept({ type: "ingame-state-update", state: raw });
-  assert.equal(
-    source.observe().newEvents.filter((e) => e.kind === "RoleQuestCompleted")
-      .length,
-    1,
-  );
+  assert.equal(source.observe().newEvents.filter((e) => e.kind === "RoleQuestCompleted").length, 1);
   raw.gameTime += 0.5;
   clock += 500;
   source.accept({ type: "ingame-state-update", state: raw });
-  assert.equal(
-    source.observe().newEvents.filter((e) => e.kind === "RoleQuestCompleted")
-      .length,
-    0,
-  );
+  assert.equal(source.observe().newEvents.filter((e) => e.kind === "RoleQuestCompleted").length, 0);
   source.stop();
 });
 test("role quest progress uses validated current/target counters from item stats", () => {
   const raw: any = frame();
-  raw.scoreboardBottom.teams[0].players[0].items = [
-    { id: 1200, slot: 8, stats: [600, 1200] },
-  ];
-  assert.equal(
-    normalizeLeagueBroadcast(raw, now)?.teams?.[0].roleQuests?.value?.[0]
-      .progress,
-    0.5,
-  );
+  raw.scoreboardBottom.teams[0].players[0].items = [{ id: 1200, slot: 8, stats: [600, 1200] }];
+  assert.equal(normalizeLeagueBroadcast(raw, now)?.teams?.[0].roleQuests?.value?.[0].progress, 0.5);
   raw.scoreboardBottom.teams[0].players[0].items.at(-1).stats = [600, 0];
   assert.equal(
-    normalizeLeagueBroadcast(raw, now)?.teams?.[0].roleQuests?.value?.[0]
-      .progress,
+    normalizeLeagueBroadcast(raw, now)?.teams?.[0].roleQuests?.value?.[0].progress,
     null,
   );
 });
@@ -140,10 +117,7 @@ test("LB preserves validated experience and exact upgraded summoner IDs", () => 
   ]);
   assert.ok(!JSON.stringify(sample).includes("never"));
   raw.tabs.Order.players[0].experience.nextLevel = 100;
-  assert.equal(
-    normalizeLeagueBroadcast(raw, now)?.players[0].experience?.value,
-    null,
-  );
+  assert.equal(normalizeLeagueBroadcast(raw, now)?.players[0].experience?.value, null);
 });
 test("LB validates GA cooldowns and inhibitor timestamps without leaking raw metadata", () => {
   const raw: any = frame();
@@ -156,9 +130,7 @@ test("LB validates GA cooldowns and inhibitor timestamps without leaking raw met
     secret: "never",
   });
   raw.tabs.Order.players[0].hasBaron = true;
-  raw.inhibitors = [
-    { teamid: 2, inhibitors: { L1: { timeDestroy: 410, timeAlive: 710 } } },
-  ];
+  raw.inhibitors = [{ teamid: 2, inhibitors: { L1: { timeDestroy: 410, timeAlive: 710 } } }];
   const sample = normalizeLeagueBroadcast(raw, now)!;
   assert.equal(sample.players[0].hasBaron?.value, true);
   assert.deepEqual(
@@ -171,9 +143,7 @@ test("LB validates GA cooldowns and inhibitor timestamps without leaking raw met
   assert.ok(!JSON.stringify(sample).includes("never"));
   raw.scoreboardBottom.teams[0].players[0].items.at(-1).readyAt = -1;
   assert.equal(
-    normalizeLeagueBroadcast(raw, now)?.players[0].cooldowns?.value?.some(
-      (c) => c.id === 3026,
-    ),
+    normalizeLeagueBroadcast(raw, now)?.players[0].cooldowns?.value?.some((c) => c.id === 3026),
     false,
   );
 });
@@ -181,17 +151,11 @@ test("LB validates GA cooldowns and inhibitor timestamps without leaking raw met
 test("inhibitor default fills a missing timer but does not override an explicit respawn state", () => {
   const raw: any = frame();
   raw.inhibitors = [{ teamid: 2, inhibitors: { L1: { timeDestroy: 410 } } }];
-  assert.equal(
-    normalizeLeagueBroadcast(raw, now)?.inhibitors?.value?.[0].respawnsAt,
-    710,
-  );
+  assert.equal(normalizeLeagueBroadcast(raw, now)?.inhibitors?.value?.[0].respawnsAt, 710);
   raw.inhibitors[0].inhibitors.L1.timeAlive = 0;
   assert.deepEqual(normalizeLeagueBroadcast(raw, now)?.inhibitors?.value, []);
   raw.inhibitors[0].inhibitors.L1.timeAlive = 750;
-  assert.equal(
-    normalizeLeagueBroadcast(raw, now)?.inhibitors?.value?.[0].respawnsAt,
-    750,
-  );
+  assert.equal(normalizeLeagueBroadcast(raw, now)?.inhibitors?.value?.[0].respawnsAt, 750);
 });
 
 test("LB micro-events deduplicate, expire baseline on source loss, and map structures", () => {
@@ -211,9 +175,7 @@ test("LB micro-events deduplicate, expire baseline on source loss, and map struc
     count: 1,
   });
   b.scoreboard.teams[0].towers++;
-  b.inhibitors = [
-    { teamid: 2, inhibitors: { L1: { timeDestroy: 420.5, timeAlive: 720.5 } } },
-  ];
+  b.inhibitors = [{ teamid: 2, inhibitors: { L1: { timeDestroy: 420.5, timeAlive: 720.5 } } }];
   source.accept({ type: "ingame-state-update", state: b });
   assert.deepEqual(
     source.observe().newEvents.map((e) => e.kind),
@@ -339,24 +301,16 @@ test("LeagueBroadcast adapter allowlists a real frame and labels provenance", ()
     current: 200,
     max: 500,
   });
-  assert.deepEqual(sample.players[0].spells?.value, [
-    "SummonerFlash",
-    "SummonerTeleport",
-  ]);
+  assert.deepEqual(sample.players[0].spells?.value, ["SummonerFlash", "SummonerTeleport"]);
   assert.equal(sample.players[0].keystone?.value, 8005);
-  assert.deepEqual(sample.players[5].spells?.value, [
-    "SummonerDot",
-    "SummonerFlash",
-  ]);
+  assert.deepEqual(sample.players[5].spells?.value, ["SummonerDot", "SummonerFlash"]);
   assert.equal(sample.players[5].keystone?.value, 8112);
   assert.equal(sample.teams?.[0].towers.value, 2);
   assert.deepEqual(sample.teams?.[0].dragons.value, ["fire", "earth"]);
   assert.equal(sample.teams?.[1].totalGold.value, 24000);
   assert.equal(sample.pitTimers?.[0].type.value, "HERALD");
   assert.equal(sample.pitTimers?.[0].timeDestroy.value, 1185);
-  assert.deepEqual(sample.players[0].inventory?.value, [
-    { slot: 0, id: 1001, count: 1 },
-  ]);
+  assert.deepEqual(sample.players[0].inventory?.value, [{ slot: 0, id: 1001, count: 1 }]);
   assert.deepEqual(sample.players[0].items.value, [1001]);
   assert.deepEqual(sample.teams?.[0].roleQuests?.value, [
     { role: "top", itemId: 1200, completed: false, progress: null },
@@ -384,9 +338,7 @@ test("LeagueBroadcast adapter rejects demo, incomplete rosters and invalid champ
 });
 
 test("LeagueBroadcast exposes its upstream loading state without claiming a live frame", () => {
-  const source = new LeagueBroadcastSource(() =>
-    Date.parse("2026-09-20T00:00:00.000Z"),
-  );
+  const source = new LeagueBroadcastSource(() => Date.parse("2026-09-20T00:00:00.000Z"));
   source.accept({
     type: "gameStatus",
     gameState: 1,
@@ -421,9 +373,7 @@ test("LeagueBroadcast derives objective events without replaying baseline histor
   dragon.scoreboard.teams[1].dragons = [];
   source.accept({ type: "ingame-state-update", state: dragon });
   assert.deepEqual(
-    source
-      .observe()
-      .newEvents.map((event) => [event.kind, event.team, event.objectiveType]),
+    source.observe().newEvents.map((event) => [event.kind, event.team, event.objectiveType]),
     [["DragonKill", "ORDER", "fire"]],
   );
 
@@ -435,9 +385,7 @@ test("LeagueBroadcast derives objective events without replaying baseline histor
   baron.tabs.Chaos.players[0].hasBaron = true;
   source.accept({ type: "ingame-state-update", state: baron });
   assert.deepEqual(
-    source
-      .observe()
-      .newEvents.map((event) => [event.kind, event.team, event.objectiveType]),
+    source.observe().newEvents.map((event) => [event.kind, event.team, event.objectiveType]),
     [["BaronKill", "CHAOS", "baron"]],
   );
   source.stop();
@@ -452,11 +400,7 @@ test("LeagueBroadcast emits a separate Dragon Soul event on the fourth dragon", 
     isTestingEnvironment: false,
   });
   const before = frame();
-  before.scoreboard.teams[0].dragons = [
-    "DRAGON_FIRE",
-    "DRAGON_EARTH",
-    "DRAGON_WATER",
-  ];
+  before.scoreboard.teams[0].dragons = ["DRAGON_FIRE", "DRAGON_EARTH", "DRAGON_WATER"];
   before.scoreboard.teams[1].dragons = [];
   source.accept({ type: "ingame-state-update", state: before });
   source.observe();
@@ -472,9 +416,7 @@ test("LeagueBroadcast emits a separate Dragon Soul event on the fourth dragon", 
   soul.scoreboard.teams[1].dragons = [];
   source.accept({ type: "ingame-state-update", state: soul });
   assert.deepEqual(
-    source
-      .observe()
-      .newEvents.map((event) => [event.kind, event.objectiveType]),
+    source.observe().newEvents.map((event) => [event.kind, event.objectiveType]),
     [
       ["DragonKill", "water"],
       ["DragonSoul", "water"],
@@ -506,20 +448,12 @@ test("Elder is not counted toward Dragon Soul and unlearned abilities do not cla
   let clock = Date.parse(now);
   const source = new LeagueBroadcastSource(() => clock);
   const before: any = frame();
-  before.scoreboard.teams[0].dragons = [
-    "DRAGON_FIRE",
-    "DRAGON_EARTH",
-    "DRAGON_WATER",
-  ];
-  before.tabs.Order.players[0].abilities = [
-    { slot: "R", readyAt: 0, totalCooldown: 0 },
-  ];
+  before.scoreboard.teams[0].dragons = ["DRAGON_FIRE", "DRAGON_EARTH", "DRAGON_WATER"];
+  before.tabs.Order.players[0].abilities = [{ slot: "R", readyAt: 0, totalCooldown: 0 }];
   source.accept({ type: "ingame-state-update", state: before });
   source.observe();
   assert.equal(
-    source
-      .currentSample()
-      ?.players[0].cooldowns?.value?.some((c) => c.kind === "ultimate"),
+    source.currentSample()?.players[0].cooldowns?.value?.some((c) => c.kind === "ultimate"),
     false,
   );
   clock += 500;

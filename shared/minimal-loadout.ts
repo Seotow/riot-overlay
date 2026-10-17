@@ -5,8 +5,7 @@ import { showItemCooldown } from "./role-quest";
 export function minimalLoadout(player?: ObservedPlayer) {
   const cooldowns = player?.cooldowns?.value ?? [];
   const inventory =
-    player?.inventory?.value ??
-    (player?.items.value ?? []).map((id, slot) => ({ id, slot }));
+    player?.inventory?.value ?? (player?.items.value ?? []).map((id, slot) => ({ id, slot }));
   const quest = player?.roleQuest?.value;
   const reward = quest?.completed
     ? quest.rewardItemId
@@ -14,8 +13,7 @@ export function minimalLoadout(player?: ObservedPlayer) {
       : liveSpell(quest.rewardSpellId)
     : undefined;
   // A granted Teleport is not Flash's D/F cooldown. Reuse only matching evidence.
-  const teleportSlot =
-    player?.spells?.value?.findIndex((id) => /teleport/i.test(id ?? "")) ?? -1;
+  const teleportSlot = player?.spells?.value?.findIndex((id) => /teleport/i.test(id ?? "")) ?? -1;
   const rewardSpellKey = liveSpell(quest?.rewardSpellId)?.key;
   const rewardCooldown =
     reward && quest?.rewardSpellId
@@ -28,9 +26,7 @@ export function minimalLoadout(player?: ObservedPlayer) {
                 cd.slot === (teleportSlot === 0 ? "D" : "F"))),
         )
       : reward && quest?.rewardItemId
-        ? cooldowns.find(
-            (cd) => cd.kind === "item" && cd.id === quest.rewardItemId,
-          )
+        ? cooldowns.find((cd) => cd.kind === "item" && cd.id === quest.rewardItemId)
         : undefined;
   const items = inventory
     .filter((item) => item.slot >= 0 && item.slot < 6)
@@ -38,14 +34,9 @@ export function minimalLoadout(player?: ObservedPlayer) {
     .flatMap((item) => {
       const asset = liveItem(item.id);
       const cooldown = cooldowns.find(
-        (cd) =>
-          cd.kind === "item" &&
-          cd.id === item.id &&
-          cd.slot === String(item.slot),
+        (cd) => cd.kind === "item" && cd.id === item.id && cd.slot === String(item.slot),
       );
-      return asset &&
-        showItemCooldown(item.id) &&
-        (cooldown || item.id === 3026)
+      return asset && showItemCooldown(item.id) && (cooldown || item.id === 3026)
         ? [{ id: item.id, slot: item.slot, asset, cooldown }]
         : [];
     })

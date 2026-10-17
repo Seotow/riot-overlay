@@ -22,18 +22,24 @@ export const observedPlayerSchema = z
     slot: z.number().int().min(0).max(9),
     playerName: field(z.string().min(1).max(80)).optional(),
     championStacks: field(finite).optional(),
-    itemCounters: field(z.array(z.object({
-      slot:z.number().int().min(0).max(8),id:z.number().int().positive(),
-      stack:finite.nullable(),quantity:z.number().int().nonnegative().nullable(),
-    }).strict()).max(9)).optional(),
+    itemCounters: field(
+      z
+        .array(
+          z
+            .object({
+              slot: z.number().int().min(0).max(8),
+              id: z.number().int().positive(),
+              stack: finite.nullable(),
+              quantity: z.number().int().nonnegative().nullable(),
+            })
+            .strict(),
+        )
+        .max(9),
+    ).optional(),
     team: field(z.enum(["ORDER", "CHAOS"])),
     championId: field(z.number().int().positive()),
-    championMapping: z
-      .enum(["numeric-id", "raw-code", "display-name", "unmapped"])
-      .optional(),
-    spells: field(
-      z.tuple([z.string().nullable(), z.string().nullable()]),
-    ).optional(),
+    championMapping: z.enum(["numeric-id", "raw-code", "display-name", "unmapped"]).optional(),
+    spells: field(z.tuple([z.string().nullable(), z.string().nullable()])).optional(),
     keystone: field(z.number().int().positive()).optional(),
     roleQuest: field(
       z
@@ -47,9 +53,7 @@ export const observedPlayerSchema = z
         })
         .strict(),
     ).optional(),
-    sourceStats: field(
-      z.record(z.string().max(40), z.number().finite().nullable()),
-    ).optional(),
+    sourceStats: field(z.record(z.string().max(40), z.number().finite().nullable())).optional(),
     perks: field(z.array(z.number().int().positive()).max(9)).optional(),
     wardScore: field(finite).optional(),
     isDead: field(z.boolean()).optional(),
@@ -57,9 +61,7 @@ export const observedPlayerSchema = z
     hasBaron: field(z.boolean()).optional(),
     hasElder: field(z.boolean()).optional(),
     experience: field(
-      z
-        .object({ previousLevel: finite, current: finite, nextLevel: finite })
-        .strict(),
+      z.object({ previousLevel: finite, current: finite, nextLevel: finite }).strict(),
     ).optional(),
     cooldowns: field(
       z
@@ -76,12 +78,8 @@ export const observedPlayerSchema = z
         )
         .max(10),
     ).optional(),
-    health: field(
-      z.object({ current: finite, max: finite.positive() }).strict(),
-    ).optional(),
-    resource: field(
-      z.object({ current: finite, max: finite.positive() }).strict(),
-    ).optional(),
+    health: field(z.object({ current: finite, max: finite.positive() }).strict()).optional(),
+    resource: field(z.object({ current: finite, max: finite.positive() }).strict()).optional(),
     inventory: field(
       z
         .array(
@@ -130,33 +128,13 @@ export const observedEventSchema = z
     firstTurret: z.boolean().optional(),
     goldBaseline: z.object({ own: finite, enemy: finite }).strict().optional(),
     objectiveType: z
-      .enum([
-        "fire",
-        "earth",
-        "water",
-        "air",
-        "hextech",
-        "chemtech",
-        "elder",
-        "baron",
-        "herald",
-      ])
+      .enum(["fire", "earth", "water", "air", "hextech", "chemtech", "elder", "baron", "herald"])
       .optional(),
     playerSlot: z.number().int().min(0).max(9).optional(),
     killerSlot: z.number().int().min(0).max(9).optional(),
     killerUnitType: z.enum(["minion", "monster", "turret", "grubs"]).optional(),
     killerObjectiveType: z
-      .enum([
-        "fire",
-        "earth",
-        "water",
-        "air",
-        "hextech",
-        "chemtech",
-        "elder",
-        "baron",
-        "herald",
-      ])
+      .enum(["fire", "earth", "water", "air", "hextech", "chemtech", "elder", "baron", "herald"])
       .optional(),
     victimSlot: z.number().int().min(0).max(9).optional(),
     assistSlots: z.array(z.number().int().min(0).max(9)).max(4).optional(),
@@ -242,9 +220,7 @@ export const ingameSampleSchema = z
       })
       .strict()
       .optional(),
-    limits: z
-      .object({ playersTruncated: z.boolean(), eventsTruncated: z.boolean() })
-      .strict(),
+    limits: z.object({ playersTruncated: z.boolean(), eventsTruncated: z.boolean() }).strict(),
   })
   .strict();
 export type IngameSample = z.infer<typeof ingameSampleSchema>;
@@ -257,14 +233,7 @@ export const observerFrameSchema = z
     sequence: z.number().int().nonnegative(),
     epoch: z.number().int().nonnegative(),
     status: z.enum(["idle", "observed", "unavailable"]),
-    transition: z.enum([
-      "none",
-      "connected",
-      "reconnected",
-      "source-changed",
-      "seek",
-      "lost",
-    ]),
+    transition: z.enum(["none", "connected", "reconnected", "source-changed", "seek", "lost"]),
     capturedAt: z.string().datetime(),
     sample: ingameSampleSchema.nullable(),
     newEvents: z.array(observedEventSchema).max(4096),

@@ -11,7 +11,7 @@ export function sortPlayersByLane(players: ObservedPlayer[]) {
     return lane === undefined ? laneOrder.length : laneOrder.indexOf(lane);
   };
   // Keep original slots as identity for events, nickname overrides and counters.
-  return [...players].sort((a,b) => rank(a)-rank(b) || a.slot-b.slot);
+  return [...players].sort((a, b) => rank(a) - rank(b) || a.slot - b.slot);
 }
 
 export function latestObjectiveEvent(frame: ObserverFrame | null) {
@@ -20,17 +20,12 @@ export function latestObjectiveEvent(frame: ObserverFrame | null) {
       .reverse()
       .find(
         (event) =>
-          event.kind === "DragonKill" ||
-          event.kind === "DragonSoul" ||
-          event.kind === "BaronKill",
+          event.kind === "DragonKill" || event.kind === "DragonSoul" || event.kind === "BaronKill",
       ) ?? null
   );
 }
 
-export function projectedGameTime(
-  frame: ObserverFrame | null,
-  now: number,
-): number | null {
+export function projectedGameTime(frame: ObserverFrame | null, now: number): number | null {
   if (frame?.status !== "observed" || !frame.sample) return null;
   const ageMs = now - Date.parse(frame.capturedAt);
   if (ageMs < -1000 || ageMs >= 5000) return null;
@@ -43,14 +38,10 @@ export function projectedGameTime(
 
 export function livePresentation(frame: ObserverFrame | null, now: number) {
   const age = frame ? now - Date.parse(frame.capturedAt) : Infinity;
-  const sample =
-    frame?.status === "observed" && age >= -1000 && age < 5000
-      ? frame.sample
-      : null;
+  const sample = frame?.status === "observed" && age >= -1000 && age < 5000 ? frame.sample : null;
   const time = projectedGameTime(sample ? frame : null, now);
   const baseTime = sample?.gameTime.value ?? sample?.replay.time.value;
-  const advance =
-    time == null || baseTime == null ? 0 : Math.max(0, time - baseTime);
+  const advance = time == null || baseTime == null ? 0 : Math.max(0, time - baseTime);
   const players =
     sample?.players.map((p) =>
       p.isDead?.value === true && p.respawnSeconds?.value != null
@@ -88,7 +79,8 @@ export function livePresentation(frame: ObserverFrame | null, now: number) {
     blueRoleQuests: blueTeam?.roleQuests?.value ?? null,
     redRoleQuests: redTeam?.roleQuests?.value ?? null,
     laneGold: Array.from({ length: 5 }, (_, index) => {
-      const leftLane = playerLane(blue[index]), rightLane = playerLane(red[index]);
+      const leftLane = playerLane(blue[index]),
+        rightLane = playerLane(red[index]);
       if ((leftLane || rightLane) && leftLane !== rightLane) return null;
       const left = blue[index]?.totalGold.value;
       const right = red[index]?.totalGold.value;

@@ -23,9 +23,7 @@ export function sourceCoverage(sample: IngameSample | null) {
       title,
       available: available.length,
       expected,
-      sources: [
-        ...new Set(available.map((f) => sourceNames[f!.source] ?? f!.source)),
-      ],
+      sources: [...new Set(available.map((f) => sourceNames[f!.source] ?? f!.source))],
       note: available.length === expected ? "" : note,
     });
   };

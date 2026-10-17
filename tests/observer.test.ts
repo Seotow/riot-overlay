@@ -3,8 +3,7 @@ import assert from "node:assert/strict";
 import { normalizeIngame, rosterSignature } from "../server/ingame-adapter";
 import { ObserverSession } from "../server/observer-session";
 import { recordingSchema } from "../shared/observer";
-const stamp = (seconds: number) =>
-  new Date(Date.UTC(2026, 8, 19) + seconds * 1000).toISOString();
+const stamp = (seconds: number) => new Date(Date.UTC(2026, 8, 19) + seconds * 1000).toISOString();
 function fixture(clock = 100, events: unknown[] = []) {
   return {
     gameData: { gameTime: clock },
@@ -32,12 +31,8 @@ const event = (id: number, at: number) => ({
   VictimName: "PRIVATE",
   token: "SECRET",
 });
-const sample = (
-  time: number,
-  wall = time,
-  events: unknown[] = [],
-  playback: unknown = null,
-) => normalizeIngame(fixture(time, events), playback, stamp(wall));
+const sample = (time: number, wall = time, events: unknown[] = [], playback: unknown = null) =>
+  normalizeIngame(fixture(time, events), playback, stamp(wall));
 test("adapter preserves zero, empty inventory and missing gold independently", () => {
   const input = fixture();
   input.allPlayers[0].items = [];
@@ -96,18 +91,13 @@ test("replay-only sample exposes clocks without inventing player stats", () => {
   assert.ok(!JSON.stringify(result).includes("SECRET"));
 });
 test("export is allowlisted and caps player and event input", () => {
-  const input = fixture(100, [
-    event(1, 2),
-    { EventID: 2, EventTime: 3, EventName: "SECRET" },
-  ]);
+  const input = fixture(100, [event(1, 2), { EventID: 2, EventTime: 3, EventName: "SECRET" }]);
   input.allPlayers.push(input.allPlayers[0]);
   const result = normalizeIngame(input, null, stamp(1));
   assert.equal(result.players.length, 10);
   assert.equal(result.limits.playersTruncated, true);
   assert.equal(result.events.length, 1);
-  assert.ok(
-    !/SECRET|password|riotId|summonerName/.test(JSON.stringify(result)),
-  );
+  assert.ok(!/SECRET|password|riotId|summonerName/.test(JSON.stringify(result)));
   const long = normalizeIngame(
     fixture(
       5000,
@@ -121,11 +111,7 @@ test("export is allowlisted and caps player and event input", () => {
 });
 test("new connection seeds history, normal events deduplicate, future events wait", () => {
   const session = new ObserverSession();
-  const first = session.ingest(
-    sample(100, 0, [event(1, 90), event(2, 102)]),
-    "roster",
-    stamp(0),
-  );
+  const first = session.ingest(sample(100, 0, [event(1, 90), event(2, 102)]), "roster", stamp(0));
   assert.equal(first.transition, "connected");
   assert.deepEqual(first.newEvents, []);
   const second = session.ingest(
@@ -152,18 +138,10 @@ test("new connection seeds history, normal events deduplicate, future events wai
 test("pause and playback speed preserve session without wall-clock extrapolation", () => {
   const s = new ObserverSession();
   s.ingest(sample(100, 0), "r", stamp(0));
-  const paused = s.ingest(
-    sample(100, 1, [], { time: 100, paused: true, speed: 1 }),
-    "r",
-    stamp(1),
-  );
+  const paused = s.ingest(sample(100, 1, [], { time: 100, paused: true, speed: 1 }), "r", stamp(1));
   assert.equal(paused.transition, "none");
   assert.equal(paused.sample?.gameTime.value, 100);
-  const fast = s.ingest(
-    sample(120, 2, [], { time: 120, paused: false, speed: 20 }),
-    "r",
-    stamp(2),
-  );
+  const fast = s.ingest(sample(120, 2, [], { time: 120, paused: false, speed: 20 }), "r", stamp(2));
   assert.equal(fast.transition, "none");
   assert.equal(fast.epoch, 0);
 });
@@ -175,11 +153,7 @@ test("backwards and forward seeks create epochs and suppress historical alerts",
   assert.equal(back.epoch, 1);
   assert.equal(back.sessionId, a.sessionId);
   assert.deepEqual(back.newEvents, []);
-  const forward = s.ingest(
-    sample(200, 2, [event(1, 90), event(2, 150)]),
-    "r",
-    stamp(2),
-  );
+  const forward = s.ingest(sample(200, 2, [event(1, 90), event(2, 150)]), "r", stamp(2));
   assert.equal(forward.epoch, 2);
   assert.deepEqual(forward.newEvents, []);
 });
@@ -205,14 +179,8 @@ test("recording validates, stays bounded and rejects raw injected fields", () =>
   assert.ok(record.frames.length <= 120);
   assert.equal(record.frames.at(-1)?.sequence, 130);
   assert.ok(!/SECRET|password|riotId|summonerName/.test(JSON.stringify(record)));
-  assert.equal(
-    recordingSchema.safeParse({ ...record, password: "SECRET" }).success,
-    false,
-  );
-  assert.deepEqual(
-    recordingSchema.parse(JSON.parse(JSON.stringify(record))),
-    record,
-  );
+  assert.equal(recordingSchema.safeParse({ ...record, password: "SECRET" }).success, false);
+  assert.deepEqual(recordingSchema.parse(JSON.parse(JSON.stringify(record))), record);
 });
 test("roster identity is private but distinguishes a new match roster", () => {
   const a = fixture(),
@@ -233,8 +201,7 @@ test("a long observation gap starts a fresh session and seeds events", () => {
 test("recording evicts old frames by byte budget as well as frame count", () => {
   const s = new ObserverSession();
   const events = Array.from({ length: 4096 }, (_, i) => event(i, i));
-  for (let i = 0; i < 20; i++)
-    s.ingest(sample(5000 + i, i, events), "r", stamp(i));
+  for (let i = 0; i < 20; i++) s.ingest(sample(5000 + i, i, events), "r", stamp(i));
   const record = s.recording();
   assert.ok(record.frames.length < 20);
   assert.ok(Buffer.byteLength(JSON.stringify(record)) < 2_001_000);

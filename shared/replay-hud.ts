@@ -49,9 +49,7 @@ export const defaultHud: HudConfig = {
   interfaceAnnounce: true,
   interfaceKillCallouts: true,
 };
-export function renderHudFields(
-  raw: unknown,
-): Partial<Record<HudKey, boolean>> {
+export function renderHudFields(raw: unknown): Partial<Record<HudKey, boolean>> {
   if (!raw || typeof raw !== "object" || Array.isArray(raw)) return {};
   return Object.fromEntries(
     Object.keys(hudFields).flatMap((key) => {

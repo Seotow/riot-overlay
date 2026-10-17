@@ -28,25 +28,18 @@ test("pause freezes clock; reset preserves branding and increments revision", ()
 });
 test("theme boundary rejects malformed imports and unsafe color values", () => {
   const s = createState();
+  assert.equal(themeSchema.safeParse({ ...s.theme, version: 2 }).success, false);
   assert.equal(
-    themeSchema.safeParse({ ...s.theme, version: 2 }).success,
+    themeSchema.safeParse({ ...s.theme, blue: "url(https://example.com)" }).success,
     false,
   );
-  assert.equal(
-    themeSchema.safeParse({ ...s.theme, blue: "url(https://example.com)" })
-      .success,
-    false,
-  );
-  assert.equal(
-    commandSchema.safeParse({ type: "seek", value: -1 }).success,
-    false,
-  );
+  assert.equal(commandSchema.safeParse({ type: "seek", value: -1 }).success, false);
 });
 test("seeking clears transient events and resets demo timers deterministically", () => {
-  const s = applyCommand(
-    applyCommand(createState(), { type: "event", value: "kill" }),
-    { type: "seek", value: 600 },
-  );
+  const s = applyCommand(applyCommand(createState(), { type: "event", value: "kill" }), {
+    type: "seek",
+    value: 600,
+  });
   assert.equal(s.events.length, 0);
   assert.equal(s.objectives[0].endsAt, 728);
 });
@@ -66,10 +59,13 @@ test("provider selection is validated and survives a demo reset", () => {
 test("mock fixture remains a complete ten-player tournament sample", () => {
   const state = createState();
   assert.equal(state.players.length, 10);
-  assert.deepEqual(state.players.map(player => player.role), ["TOP", "JGL", "MID", "BOT", "SUP", "TOP", "JGL", "MID", "BOT", "SUP"]);
-  assert.ok(state.players.every(player => player.items.length === 6));
-  assert.ok(state.players.every(player => player.spells.length === 2));
-  assert.ok(state.players.every(player => player.gold !== null && player.gold > 0));
+  assert.deepEqual(
+    state.players.map((player) => player.role),
+    ["TOP", "JGL", "MID", "BOT", "SUP", "TOP", "JGL", "MID", "BOT", "SUP"],
+  );
+  assert.ok(state.players.every((player) => player.items.length === 6));
+  assert.ok(state.players.every((player) => player.spells.length === 2));
+  assert.ok(state.players.every((player) => player.gold !== null && player.gold > 0));
   assert.equal(themeSchema.safeParse(state.theme).success, true);
 });
 
@@ -83,5 +79,9 @@ test("every mock control produces an explicit, deterministic state change", () =
   const draft = applyCommand(base, { type: "event", value: "draft" });
   assert.equal(draft.draftStep, (base.draftStep + 1) % 11);
   const advantage = applyCommand(base, { type: "scenario", value: "advantage" });
-  assert.ok(advantage.players.slice(0, 5).every((player, index) => player.gold! > advantage.players[index + 5].gold!));
+  assert.ok(
+    advantage.players
+      .slice(0, 5)
+      .every((player, index) => player.gold! > advantage.players[index + 5].gold!),
+  );
 });

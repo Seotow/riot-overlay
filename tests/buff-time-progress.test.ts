@@ -2,10 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import {
-  buffTimeFraction,
-  BuffTimeProgress,
-} from "../src/overlay/BuffTimeProgress";
+import { buffTimeFraction, BuffTimeProgress } from "../src/overlay/BuffTimeProgress";
 import { objectiveVisual } from "../shared/ui-metrics";
 test("buff progress uses remaining game-clock seconds with fixed Baron180/Elder150 windows", () => {
   assert.equal(buffTimeFraction(280, 100, 180), 1);

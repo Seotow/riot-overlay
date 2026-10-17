@@ -10,19 +10,12 @@ export async function startIndependentEngineServer(
   } = {},
 ) {
   const requestedPort = options.port ?? 4313;
-  if (
-    !Number.isInteger(requestedPort) ||
-    requestedPort < 0 ||
-    requestedPort > 65535
-  )
+  if (!Number.isInteger(requestedPort) || requestedPort < 0 || requestedPort > 65535)
     throw Error("Invalid local port");
   const engine = options.engine ?? new IndependentEngine();
   let port = requestedPort;
   const authorized = (req: IncomingMessage) => {
-    if (
-      req.headers.host !== `127.0.0.1:${port}` &&
-      req.headers.host !== `localhost:${port}`
-    )
+    if (req.headers.host !== `127.0.0.1:${port}` && req.headers.host !== `localhost:${port}`)
       return false;
     if (req.headers.origin === undefined) return true; // non-browser local consumer
     try {
@@ -46,8 +39,7 @@ export async function startIndependentEngineServer(
       res.writeHead(status);
       res.end(JSON.stringify(data));
     };
-    if (!authorized(req))
-      return send(403, { error: "Local consumer required" });
+    if (!authorized(req)) return send(403, { error: "Local consumer required" });
     if (req.method !== "GET") return send(405, { error: "Read-only endpoint" });
     if (req.url === "/health")
       return send(200, {
@@ -58,8 +50,7 @@ export async function startIndependentEngineServer(
         replacementReady: false,
       });
     if (req.url === "/snapshot") return send(200, engine.snapshot());
-    if (req.url === "/capabilities")
-      return send(200, engine.snapshot().capabilities);
+    if (req.url === "/capabilities") return send(200, engine.snapshot().capabilities);
     return send(404, { error: "Not found" });
   });
   server.requestTimeout = 5000;
@@ -70,9 +61,7 @@ export async function startIndependentEngineServer(
       socket.end("HTTP/1.1 403 Forbidden\r\nConnection: close\r\n\r\n");
       return;
     }
-    sockets.handleUpgrade(req, socket, head, (ws) =>
-      sockets.emit("connection", ws, req),
-    );
+    sockets.handleUpgrade(req, socket, head, (ws) => sockets.emit("connection", ws, req));
   });
   const send = (ws: WebSocket) => {
     if (ws.readyState !== WebSocket.OPEN) return;
@@ -80,9 +69,7 @@ export async function startIndependentEngineServer(
       ws.terminate();
       return;
     }
-    ws.send(
-      JSON.stringify({ type: "independent-engine", ...engine.snapshot() }),
-    );
+    ws.send(JSON.stringify({ type: "independent-engine", ...engine.snapshot() }));
   };
   sockets.on("connection", (ws) => {
     ws.on("error", () => {});

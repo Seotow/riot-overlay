@@ -24,10 +24,7 @@ export class ObserverSession {
     playback?: ObserverFrame["playback"],
   ): ObserverFrame {
     let transition: ObserverFrame["transition"] = "none";
-    if (
-      this.previous &&
-      Date.parse(now) - Date.parse(this.previous.capturedAt) > 5000
-    )
+    if (this.previous && Date.parse(now) - Date.parse(this.previous.capturedAt) > 5000)
       this.lost = true;
     if (!sample) {
       if (!this.lost && this.sessionId) transition = "lost";
@@ -36,11 +33,7 @@ export class ObserverSession {
       this.seen.clear();
     } else {
       if (!this.sessionId || this.lost || this.signature !== signature) {
-        transition = !this.sessionId
-          ? "connected"
-          : this.lost
-            ? "reconnected"
-            : "source-changed";
+        transition = !this.sessionId ? "connected" : this.lost ? "reconnected" : "source-changed";
         this.sessionId = randomUUID();
         this.sequence = 0;
         this.epoch = 0;
@@ -48,8 +41,7 @@ export class ObserverSession {
         this.previous = null;
       } else if (this.previous) {
         // A discontinuity creates an epoch; do not replay old kills as new alerts.
-        const before =
-          this.previous.gameTime.value ?? this.previous.replay.time.value;
+        const before = this.previous.gameTime.value ?? this.previous.replay.time.value;
         const after = sample.gameTime.value ?? sample.replay.time.value;
         const elapsed = Math.max(
           0,
@@ -59,8 +51,7 @@ export class ObserverSession {
         if (
           before !== null &&
           after !== null &&
-          (after < before - 0.05 ||
-            after - before > Math.max(5, elapsed * Math.max(1, speed) + 2))
+          (after < before - 0.05 || after - before > Math.max(5, elapsed * Math.max(1, speed) + 2))
         ) {
           transition = "seek";
           this.epoch++;
@@ -73,9 +64,7 @@ export class ObserverSession {
     const newEvents: NonNullable<ObserverFrame["sample"]>["events"] = [];
     if (sample) {
       const clock = sample.gameTime.value ?? sample.replay.time.value;
-      const currentEvents = sample.events.filter(
-        (e) => clock !== null && e.at <= clock,
-      );
+      const currentEvents = sample.events.filter((e) => clock !== null && e.at <= clock);
       for (const e of currentEvents) {
         const key = `${e.id}:${e.at}:${e.kind}`;
         if (transition === "none" && !this.seen.has(key)) newEvents.push(e);
@@ -83,9 +72,7 @@ export class ObserverSession {
       }
       // Bound dedup memory to current provider window.
       if (this.seen.size > 8192)
-        this.seen = new Set(
-          currentEvents.map((e) => `${e.id}:${e.at}:${e.kind}`),
-        );
+        this.seen = new Set(currentEvents.map((e) => `${e.id}:${e.at}:${e.kind}`));
       this.previous = sample;
     }
     const frame = observerFrameSchema.parse({

@@ -1,5 +1,4 @@
-export type ProbeStatus =
-  "ok" | "unreachable" | "http-error" | "invalid" | "not-configured";
+export type ProbeStatus = "ok" | "unreachable" | "http-error" | "invalid" | "not-configured";
 export interface Probe {
   id: string;
   source: "LCU" | "Live Client" | "Replay API";

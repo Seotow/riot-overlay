@@ -2,12 +2,7 @@ import { Button } from "./components/ui/button";
 import { Input } from "./components/ui/input";
 import { useEffect, useState } from "react";
 import type { State, Command } from "../shared/schema";
-import {
-  defaultHud,
-  hudFields,
-  type HudConfig,
-  type HudKey,
-} from "../shared/replay-hud";
+import { defaultHud, hudFields, type HudConfig, type HudKey } from "../shared/replay-hud";
 type Status = {
   connected: boolean;
   fields: Partial<Record<HudKey, boolean>>;
@@ -25,9 +20,7 @@ export function ReplayHud({
   send: (c: Command) => void;
   connected: boolean;
 }) {
-  const [draft, setDraft] = useState<HudConfig>(
-    state.theme.replayHud ?? defaultHud,
-  );
+  const [draft, setDraft] = useState<HudConfig>(state.theme.replayHud ?? defaultHud);
   const [status, setStatus] = useState<Status | null>(null);
   const [busy, setBusy] = useState(false),
     [message, setMessage] = useState("");
@@ -131,9 +124,7 @@ export function ReplayHud({
       <p role="status">
         {message ||
           status?.message ||
-          (status?.connected
-            ? "Replay API đã kết nối."
-            : "Chưa kiểm tra kết nối.")}
+          (status?.connected ? "Replay API đã kết nối." : "Chưa kiểm tra kết nối.")}
       </p>
       <div className="config-grid">
         <fieldset>
@@ -151,9 +142,7 @@ export function ReplayHud({
                   type="checkbox"
                   checked={draft[key]}
                   disabled={locked || busy}
-                  onChange={(e) =>
-                    setDraft({ ...draft, [key]: e.target.checked })
-                  }
+                  onChange={(e) => setDraft({ ...draft, [key]: e.target.checked })}
                 />
                 <span>
                   {hudFields[key]}
@@ -174,22 +163,17 @@ export function ReplayHud({
         <fieldset>
           <legend>Giới hạn cần biết</legend>
           <p>
-            Thông báo hạ gục và chuỗi hạ gục luôn được giữ lại. Chưa hỗ trợ ẩn
-            riêng killfeed gốc.
+            Thông báo hạ gục và chuỗi hạ gục luôn được giữ lại. Chưa hỗ trợ ẩn riêng killfeed gốc.
           </p>
           <p>Chưa hỗ trợ ẩn riêng dấu 18+ VNG.</p>
           <p>
-            Chỉ hỗ trợ khi bản game đang mở cung cấp Replay API. Chưa xác nhận
-            spectator trực tiếp trên patch hiện tại. Nếu chưa kết nối: mở
-            replay, kiểm tra <code>[General] EnableReplayApi=1</code> trong{" "}
-            <code>Config/game.cfg</code> rồi khởi động lại replay nếu cần.
+            Chỉ hỗ trợ khi bản game đang mở cung cấp Replay API. Chưa xác nhận spectator trực tiếp
+            trên patch hiện tại. Nếu chưa kết nối: mở replay, kiểm tra{" "}
+            <code>[General] EnableReplayApi=1</code> trong <code>Config/game.cfg</code> rồi khởi
+            động lại replay nếu cần.
           </p>
           <p>Lưu cấu hình, sau đó bấm Áp dụng khi game đã mở.</p>
-          <a
-            href="https://github.com/RiotGames/leaguedirector"
-            target="_blank"
-            rel="noreferrer"
-          >
+          <a href="https://github.com/RiotGames/leaguedirector" target="_blank" rel="noreferrer">
             Mã nguồn League Director
           </a>{" "}
           ,{" "}

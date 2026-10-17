@@ -17,11 +17,7 @@ test(
     const entries = await replay.prepare(id);
     assert.ok(entries.length > 2200);
     for (const entry of entries) ingameSampleSchema.parse(entry.sample);
-    assert.ok(
-      entries.some((e) =>
-        e.sample.players.every((p) => p.experience?.value != null),
-      ),
-    );
+    assert.ok(entries.some((e) => e.sample.players.every((p) => p.experience?.value != null)));
     assert.ok(
       entries.some((e) =>
         e.sample.players
@@ -30,15 +26,11 @@ test(
       ),
     );
     assert.ok(
-      entries.some((e) =>
-        e.sample.pitTimers?.some((t) => t.type.value === "DRAGON_ELDER"),
-      ),
+      entries.some((e) => e.sample.pitTimers?.some((t) => t.type.value === "DRAGON_ELDER")),
     );
     assert.ok((await listCaptures()).find((c) => c.id === id)?.hasState);
     const events = [
-      ...new Map(
-        entries.flatMap((e) => e.sample.events).map((e) => [e.id, e]),
-      ).values(),
+      ...new Map(entries.flatMap((e) => e.sample.events).map((e) => [e.id, e])).values(),
     ];
     for (const kind of [
       "LevelUp",
@@ -58,9 +50,7 @@ test(
     assert.equal(events.filter((e) => e.kind === "DragonKill").length, 4);
     assert.equal(events.filter((e) => e.kind === "DragonSoul").length, 1);
     for (const itemId of [4646, 3152, 3026, 3157])
-      assert.ok(
-        events.some((e) => e.kind === "ItemCompleted" && e.itemId === itemId),
-      );
+      assert.ok(events.some((e) => e.kind === "ItemCompleted" && e.itemId === itemId));
     const ga = entries.find((e) =>
       e.sample.players.some((p) =>
         p.cooldowns?.value?.some((c) => c.id === 3026 && c.readyAt > 700),
@@ -69,9 +59,7 @@ test(
     assert.ok(ga);
     assert.equal(
       ga.sample.players
-        .find((p) =>
-          p.cooldowns?.value?.some((c) => c.id === 3026 && c.readyAt > 700),
-        )
+        .find((p) => p.cooldowns?.value?.some((c) => c.id === 3026 && c.readyAt > 700))
         ?.cooldowns?.value?.find((c) => c.id === 3026)?.total,
       300,
     );
@@ -87,20 +75,12 @@ test(
     );
     replay.loadEntries(id, entries);
     const capabilities = replay.capabilities().buttons;
-    assert.equal(
-      capabilities.find((b) => b.kind === "damage")?.available,
-      false,
-    );
+    assert.equal(capabilities.find((b) => b.kind === "damage")?.available, false);
     assert.equal(capabilities.find((b) => b.kind === "runes")?.available, true);
-    assert.equal(
-      capabilities.find((b) => b.kind === "inhibitorRed")?.available,
-      true,
-    );
+    assert.equal(capabilities.find((b) => b.kind === "inhibitorRed")?.available, true);
     assert.equal(
       capabilities.find((b) => b.kind === "inhibitorBlue")?.available,
-      entries.some((e) =>
-        e.sample.inhibitors?.value?.some((i) => i.team === "ORDER"),
-      ),
+      entries.some((e) => e.sample.inhibitors?.value?.some((i) => i.team === "ORDER")),
     );
     assert.throws(() => replay.rehearse("damage"));
     for (const button of capabilities.filter((b) => b.available)) {
@@ -109,15 +89,9 @@ test(
       assert.ok(frame.sample, button.kind);
       assert.equal(frame.sample.replay.paused.value, true);
       if (
-        [
-          "dragon",
-          "soul",
-          "level",
-          "item",
-          "tower",
-          "inhibitor",
-          "inhibitorRespawn",
-        ].includes(button.kind) ||
+        ["dragon", "soul", "level", "item", "tower", "inhibitor", "inhibitorRespawn"].includes(
+          button.kind,
+        ) ||
         button.kind.startsWith("quest")
       ) {
         assert.equal(frame.newEvents.length, 1, button.kind);

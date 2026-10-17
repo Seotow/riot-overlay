@@ -2,11 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import {
-  RiotPostgameService,
-  normalizeRiotPostgame,
-  riotError,
-} from "../server/riot-postgame";
+import { RiotPostgameService, normalizeRiotPostgame, riotError } from "../server/riot-postgame";
 import { commandSchema } from "../shared/schema";
 import { createState } from "../shared/mock";
 import { PostgameOverlay } from "../src/overlay/PostgameOverlay";
@@ -123,14 +119,10 @@ test("missing damage/role/timeline remain unknown; wrong match and non-10-roster
   assert.deepEqual(d.goldHistory, []);
   assert.equal(d.evidence.roleOrderResolved[0], false);
   assert.match(
-    renderToStaticMarkup(
-      createElement(PostgameOverlay, { theme: createState().theme, data: d }),
-    ),
+    renderToStaticMarkup(createElement(PostgameOverlay, { theme: createState().theme, data: d })),
     />P1</,
   );
-  assert.throws(() =>
-    normalizeRiotPostgame(match, null, "VN2_99", "standard", 1),
-  );
+  assert.throws(() => normalizeRiotPostgame(match, null, "VN2_99", "standard", 1));
   match.info.participants.pop();
   assert.throws(() => normalizeRiotPostgame(match, null, id, "standard", 1));
 });
@@ -149,9 +141,7 @@ test("Riot service uses only fixed SEA GETs and headers, stages until publish, d
   const calls: { url: string; options: RequestInit }[] = [];
   const service = new RiotPostgameService((async (url, options) => {
     calls.push({ url: String(url), options: options! });
-    return Response.json(
-      String(url).endsWith("/timeline") ? f.timeline : f.match,
-    );
+    return Response.json(String(url).endsWith("/timeline") ? f.timeline : f.match);
   }) as typeof fetch);
   assert.equal(service.status().configured, false);
   service.configure({ mode: "standard", secret: key });
@@ -163,18 +153,13 @@ test("Riot service uses only fixed SEA GETs and headers, stages until publish, d
   assert.ok(
     calls.every(
       (c) =>
-        c.url.startsWith(
-          "https://sea.api.riotgames.com/lol/match/v5/matches/VN2_123456",
-        ) &&
+        c.url.startsWith("https://sea.api.riotgames.com/lol/match/v5/matches/VN2_123456") &&
         !c.url.includes(key) &&
         c.options.redirect === "error" &&
         c.options.method === "GET",
     ),
   );
-  assert.equal(
-    (calls[0].options.headers as Record<string, string>)["X-Riot-Token"],
-    key,
-  );
+  assert.equal((calls[0].options.headers as Record<string, string>)["X-Riot-Token"], key);
   const published = service.publishedCandidate(id);
   published.teams[0].kills = 999;
   assert.equal(service.status().candidate?.teams[0].kills, 10);
@@ -209,10 +194,7 @@ test("Riot 403/429 errors do not leak raw payload; respects Retry-After with no 
     (e) => riotError(e).code === "upstream-403",
   );
   assert.equal(denied.status().candidate, null);
-  for (const retryHeader of [
-    "7200",
-    new Date(Date.now() + 120000).toUTCString(),
-  ]) {
+  for (const retryHeader of ["7200", new Date(Date.now() + 120000).toUTCString()]) {
     const limited = new RiotPostgameService(
       (async () =>
         new Response("", {
@@ -244,12 +226,8 @@ test("timeline failure still stages match with warning; RSO uses Bearer, no API-
   assert.match((header as Record<string, string>).Authorization, /^Bearer /);
   assert.equal((header as Record<string, string>)["X-Riot-Token"], undefined);
   assert.equal(result.candidate?.evidence.timelineAvailable, false);
-  assert.ok(
-    result.candidate?.evidence.warnings.some((w) => w.includes("upstream-404")),
-  );
-  await assert.rejects(
-    service.load({ matchId: "https://evil.test", gameNumber: 1 }),
-  );
+  assert.ok(result.candidate?.evidence.warnings.some((w) => w.includes("upstream-404")));
+  await assert.rejects(service.load({ matchId: "https://evil.test", gameNumber: 1 }));
 });
 test("clearing credentials while load is pending prevents old result from becoming a candidate", async () => {
   const f = fixture();
@@ -265,10 +243,7 @@ test("clearing credentials while load is pending prevents old result from becomi
   service.clear();
   complete(Response.json(f.match));
   // Make the following timeline fail immediately after the stale match completes.
-  const timer = setInterval(
-    () => complete(new Response("", { status: 404 })),
-    1,
-  );
+  const timer = setInterval(() => complete(new Response("", { status: 404 })), 1);
   try {
     await assert.rejects(pending);
     assert.equal(service.status().candidate, null);

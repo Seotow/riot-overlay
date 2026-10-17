@@ -1,10 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import {
-  CaptureReplay,
-  parseCapture,
-  captureIdSchema,
-} from "../server/capture-replay";
+import { CaptureReplay, parseCapture, captureIdSchema } from "../server/capture-replay";
 import { observerFrameSchema } from "../shared/observer";
 const start = Date.parse("2026-09-20T00:00:00Z");
 test("reloading the same capture produces a new load acknowledgement; seeking does not", () => {
@@ -49,9 +45,7 @@ test("capture playback advances only its clock between snapshots, pauses, seeks 
   const replay = new CaptureReplay(() => wall);
   replay.loadEntries(
     "fixture",
-    parseCapture(
-      [line(0, 100), line(1000, 101, 2), line(2000, 102, 3)].join("\n"),
-    ),
+    parseCapture([line(0, 100), line(1000, 101, 2), line(2000, 102, 3)].join("\n")),
   );
   const first = replay.observe();
   assert.equal(replay.snapshot().firstGameTime, 100);
@@ -86,10 +80,7 @@ test("capture playback advances only its clock between snapshots, pauses, seeks 
 test("capture gaps expire data instead of interpolating stats or inventing future game state", () => {
   let wall = start;
   const replay = new CaptureReplay(() => wall);
-  replay.loadEntries(
-    "gap",
-    parseCapture([line(0, 100), line(10000, 110)].join("\n")),
-  );
+  replay.loadEntries("gap", parseCapture([line(0, 100), line(10000, 110)].join("\n")));
   replay.control({ playing: true });
   wall += 6000;
   assert.equal(replay.observe().sample, null);
@@ -102,16 +93,9 @@ test("capture parser rejects empty state, reversed timestamps, demo and path tra
   assert.throws(() => parseCapture([line(1000, 100), line(0, 101)].join("\n")));
   assert.throws(() =>
     parseCapture(
-      line(0, 100).replace(
-        '"isTestingEnvironment":false',
-        '"isTestingEnvironment":true',
-      ),
+      line(0, 100).replace('"isTestingEnvironment":false', '"isTestingEnvironment":true'),
     ),
   );
-  for (const id of [
-    "../outside",
-    "C:\\secret",
-    "2026-09-19T18-57-45-942Z/../x",
-  ])
+  for (const id of ["../outside", "C:\\secret", "2026-09-19T18-57-45-942Z/../x"])
     assert.equal(captureIdSchema.safeParse(id).success, false);
 });

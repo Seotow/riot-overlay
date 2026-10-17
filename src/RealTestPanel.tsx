@@ -126,13 +126,11 @@ const groups: Array<{
   {
     id: "quest",
     label: "Hoàn thành quest",
-    options: (["Top", "Jungle", "Mid", "Bot", "Support"] as const).map(
-      (role) => ({
-        value: role,
-        label: role.toUpperCase(),
-        kind: ("quest" + role) as RehearsalKind,
-      }),
-    ),
+    options: (["Top", "Jungle", "Mid", "Bot", "Support"] as const).map((role) => ({
+      value: role,
+      label: role.toUpperCase(),
+      kind: ("quest" + role) as RehearsalKind,
+    })),
   },
 ];
 const grouped = new Set([
@@ -151,13 +149,7 @@ const grouped = new Set([
   "questBot",
   "questSupport",
 ]);
-export function RealTestPanel({
-  state,
-  send,
-}: {
-  state: State;
-  send: (cmd: Command) => void;
-}) {
+export function RealTestPanel({ state, send }: { state: State; send: (cmd: Command) => void }) {
   const [captures, setCaptures] = useState<
     Array<{ id: string; frames: number; hasState: boolean }>
   >([]);
@@ -184,9 +176,7 @@ export function RealTestPanel({
         if (state.provider !== "recording" && records[0])
           send({ type: "captureLoad", id: records[0].id });
       })
-      .catch(
-        () => !stopped && setError("Không tải được danh sách bản ghi thật."),
-      );
+      .catch(() => !stopped && setError("Không tải được danh sách bản ghi thật."));
     return () => {
       stopped = true;
     };
@@ -219,9 +209,8 @@ export function RealTestPanel({
       <div className="eyebrow">PHÒNG THỬ , SNAPSHOT THẬT</div>
       <h3>Thử toàn bộ đồ họa</h3>
       <p>
-        Nền là snapshot thật. Chọn “Theo bản ghi thật” để xem dữ liệu đã ghi;
-        các loại chọn riêng là giả lập đồ họa, có nhãn rõ trên OBS và không sửa
-        bản ghi hay nguồn live.
+        Nền là snapshot thật. Chọn “Theo bản ghi thật” để xem dữ liệu đã ghi; các loại chọn riêng là
+        giả lập đồ họa, có nhãn rõ trên OBS và không sửa bản ghi hay nguồn live.
       </p>
       <label className="field">
         Bộ dữ liệu thật
@@ -241,31 +230,25 @@ export function RealTestPanel({
         Mở bộ dữ liệu thật
       </Button>
       {!ready && (
-        <p role="status">
-          Đang chờ bản ghi thật. Không bật demo; hãy mở bộ dữ liệu phía trên.
-        </p>
+        <p role="status">Đang chờ bản ghi thật. Không bật demo; hãy mở bộ dữ liệu phía trên.</p>
       )}
       {error && <p role="alert">{error}</p>}
       <div className="event-buttons">
         {groups.map((group) => {
           const choice =
-            group.options.find((o) => o.value === selections[group.id]) ??
-            group.options[0];
+            group.options.find((o) => o.value === selections[group.id]) ?? group.options[0];
           const selected =
             group.id === "timers" && choice.variant
               ? {
                   ...choice,
                   variant: {
-                    pit: (selections.pit ?? "GRUB") as
-                      "GRUB" | "HERALD" | "BARON",
-                    dragon: (selections.dragonType ??
-                      "earth") as (typeof dragonTypes)[number],
+                    pit: (selections.pit ?? "GRUB") as "GRUB" | "HERALD" | "BARON",
+                    dragon: (selections.dragonType ?? "earth") as (typeof dragonTypes)[number],
                   },
                 }
               : choice;
           const enabled =
-            ready &&
-            buttons.find((b) => b.kind === selected.kind)?.available === true;
+            ready && buttons.find((b) => b.kind === selected.kind)?.available === true;
           return (
             <div className="rehearsal-group" key={group.id}>
               <label className="field">
@@ -273,9 +256,7 @@ export function RealTestPanel({
                 <NativeSelect
                   aria-label={group.label + " , loại"}
                   value={selected.value}
-                  onChange={(e) =>
-                    setSelections((s) => ({ ...s, [group.id]: e.target.value }))
-                  }
+                  onChange={(e) => setSelections((s) => ({ ...s, [group.id]: e.target.value }))}
                 >
                   {group.options.map((o) => (
                     <option key={o.value} value={o.value}>
@@ -359,9 +340,7 @@ export function RealTestPanel({
                 key={b.kind}
                 disabled={!enabled}
                 title={
-                  enabled
-                    ? "Mở snapshot thật phù hợp"
-                    : (capability?.reason ?? "Đang đọc bản ghi")
+                  enabled ? "Mở snapshot thật phù hợp" : (capability?.reason ?? "Đang đọc bản ghi")
                 }
                 onClick={() => send({ type: "rehearsal", value: b.kind })}
               >
@@ -381,25 +360,19 @@ export function RealTestPanel({
       <div className="divider" />
       <Button
         disabled={!ready}
-        onClick={() =>
-          send({ type: "captureControl", playing: true, speed: 1 })
-        }
+        onClick={() => send({ type: "captureControl", playing: true, speed: 1 })}
       >
         Phát tiếp timer / bản ghi
       </Button>
-      <Button
-        disabled={!ready}
-        onClick={() => send({ type: "captureControl", playing: false })}
-      >
+      <Button disabled={!ready} onClick={() => send({ type: "captureControl", playing: false })}>
         Tạm dừng
       </Button>
       <p className="muted">
-        Baron Power Play bắt đầu +1.500 G rồi cộng biến động chênh lệch vàng
-        ròng hai đội sau khi nhận buff, đây là số suy ra; thời lượng mặc định
-        Baron 180s, Elder 150s, nhà lính 300s. Biến thể UI không chứng minh
-        nguồn có loại mục tiêu/buff đó. Nhà lính chỉ hiện một đội mỗi lần; không
-        phát toast hồi sinh. Rune cần đủ perk ID cho 10 người; damage bị khóa
-        nếu nguồn chưa hỗ trợ.
+        Baron Power Play bắt đầu +1.500 G rồi cộng biến động chênh lệch vàng ròng hai đội sau khi
+        nhận buff, đây là số suy ra; thời lượng mặc định Baron 180s, Elder 150s, nhà lính 300s. Biến
+        thể UI không chứng minh nguồn có loại mục tiêu/buff đó. Nhà lính chỉ hiện một đội mỗi lần;
+        không phát toast hồi sinh. Rune cần đủ perk ID cho 10 người; damage bị khóa nếu nguồn chưa
+        hỗ trợ.
       </p>
     </section>
   );

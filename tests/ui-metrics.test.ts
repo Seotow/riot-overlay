@@ -2,11 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import {
-  levelProgress,
-  rankLevels,
-  objectiveVisual,
-} from "../shared/ui-metrics";
+import { levelProgress, rankLevels, objectiveVisual } from "../shared/ui-metrics";
 import { CooldownVeil } from "../src/overlay/CooldownVeil";
 import { liveSpell, resolveSpell } from "../shared/live-assets";
 import type { ObservedPlayer } from "../shared/observer";
@@ -49,19 +45,8 @@ test("pit identities map observed GRUB/HERALD/BARON and all seven dragons separa
   assert.equal(objectiveVisual("GRUB")?.glyph, "grubs");
   assert.equal(objectiveVisual("HERALD")?.glyph, "herald");
   assert.equal(objectiveVisual("BARON")?.glyph, "baron");
-  for (const element of [
-    "air",
-    "earth",
-    "fire",
-    "water",
-    "elder",
-    "hextech",
-    "chemtech",
-  ])
-    assert.equal(
-      objectiveVisual(`DRAGON_${element.toUpperCase()}`)?.glyph,
-      element,
-    );
+  for (const element of ["air", "earth", "fire", "water", "elder", "hextech", "chemtech"])
+    assert.equal(objectiveVisual(`DRAGON_${element.toUpperCase()}`)?.glyph, element);
   assert.equal(objectiveVisual("UNDEFINED"), null);
   assert.equal(objectiveVisual("toString"), null);
 });
@@ -85,23 +70,17 @@ test("Smite and Teleport upgrades resolve exact identifiers, never silently reve
   }
   assert.equal(
     resolveSpell({
-      rawDisplayName:
-        "GeneratedTip_SummonerSpell_UnknownSmiteUpgrade_DisplayName",
+      rawDisplayName: "GeneratedTip_SummonerSpell_UnknownSmiteUpgrade_DisplayName",
     }),
     null,
   );
 });
 test("downloaded objective PNGs retain pinned provenance and hashes", () => {
-  const manifest = JSON.parse(
-    readFileSync("public/broadcast/objectives/provenance.json", "utf8"),
-  );
+  const manifest = JSON.parse(readFileSync("public/broadcast/objectives/provenance.json", "utf8"));
   assert.equal(manifest.assets.length, 10);
   for (const asset of manifest.assets) {
     const bytes = readFileSync(asset.path);
     assert.equal(bytes.subarray(0, 8).toString("hex"), "89504e470d0a1a0a");
-    assert.equal(
-      createHash("sha256").update(bytes).digest("hex"),
-      asset.sha256,
-    );
+    assert.equal(createHash("sha256").update(bytes).digest("hex"), asset.sha256);
   }
 });

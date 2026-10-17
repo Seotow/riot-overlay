@@ -7,7 +7,12 @@ import { draftFixture, ingameFixture } from "../shared/reference";
 
 test("every mocked game entity resolves to a named, cached Data Dragon asset", () => {
   const assets = new Set<string>();
-  for (const id of [...ingameFixture.champions, ...draftFixture.picks, ...draftFixture.blueBans, ...draftFixture.redBans]) {
+  for (const id of [
+    ...ingameFixture.champions,
+    ...draftFixture.picks,
+    ...draftFixture.blueBans,
+    ...draftFixture.redBans,
+  ]) {
     const c = champion(id);
     assert.ok(c?.name, `Missing champion ${id}`);
     assets.add(c.icon);

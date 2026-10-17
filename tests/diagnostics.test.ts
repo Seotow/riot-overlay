@@ -1,11 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { makeReport, parseLockfile, type Result } from "../server/diagnostics";
-function result(
-  id: string,
-  data: unknown,
-  status: Result["probe"]["status"] = "ok",
-): Result {
+function result(id: string, data: unknown, status: Result["probe"]["status"] = "ok"): Result {
   return {
     data,
     probe: {
@@ -53,14 +49,8 @@ test("reports never expose credentials, identities or unknown provider objects",
   assert.ok(!json.includes("SECRET") && !json.includes("PRIVATE"));
   assert.equal(report.phase, null);
   assert.deepEqual(report.fields.find((f) => f.field === "Level")?.sample, [0]);
-  assert.equal(
-    report.fields.find((f) => f.field === "Total gold")?.availability,
-    "missing",
-  );
-  assert.equal(
-    report.fields.find((f) => f.field === "Champion ID")?.availability,
-    "unverified",
-  );
+  assert.equal(report.fields.find((f) => f.field === "Total gold")?.availability, "missing");
+  assert.equal(report.fields.find((f) => f.field === "Champion ID")?.availability, "unverified");
 });
 test("empty, invalid and disconnected samples do not claim availability", () => {
   for (const data of [
@@ -70,15 +60,14 @@ test("empty, invalid and disconnected samples do not claim availability", () => 
     { allPlayers: [{ level: "secret" }, { level: null }] },
   ]) {
     assert.equal(
-      makeReport([result("live", data)]).fields.find((f) => f.field === "Level")
-        ?.availability,
+      makeReport([result("live", data)]).fields.find((f) => f.field === "Level")?.availability,
       "missing",
     );
   }
   assert.equal(
-    makeReport([
-      result("live", { allPlayers: [{ level: 18 }] }, "unreachable"),
-    ]).fields.find((f) => f.field === "Level")?.availability,
+    makeReport([result("live", { allPlayers: [{ level: 18 }] }, "unreachable")]).fields.find(
+      (f) => f.field === "Level",
+    )?.availability,
     "unverified",
   );
 });

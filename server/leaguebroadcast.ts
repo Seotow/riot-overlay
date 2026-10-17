@@ -4,59 +4,38 @@ import { completedItemIds } from "../shared/completed-items";
 import { questRoles, completedQuestIds, bootIds } from "../shared/role-quest";
 import { INHIBITOR_RESPAWN_SECONDS } from "../shared/game-rules";
 import { normalizeIngame } from "./ingame-adapter";
-import {
-  ingameSampleSchema,
-  type IngameSample,
-  type ObservedEvent,
-} from "../shared/observer";
+import { ingameSampleSchema, type IngameSample, type ObservedEvent } from "../shared/observer";
 import { ObserverSession } from "./observer-session";
 import type { ProviderReport } from "../shared/providers";
-const finite = (v: unknown): v is number =>
-  typeof v === "number" && Number.isFinite(v) && v >= 0;
+const finite = (v: unknown): v is number => typeof v === "number" && Number.isFinite(v) && v >= 0;
 
 const obj = (v: unknown): Record<string, any> =>
-  v && typeof v === "object" && !Array.isArray(v)
-    ? (v as Record<string, any>)
-    : {};
-const gameStatusName = (
-  value: unknown,
-): ProviderReport["leaguebroadcast"]["gameStatus"] => {
-  const names: Record<number, ProviderReport["leaguebroadcast"]["gameStatus"]> =
-    {
-      0: "out-of-game",
-      1: "loading",
-      2: "running",
-      3: "paused",
-      4: "mocking",
-      5: "game-over",
-      6: "champion-select",
-    };
+  v && typeof v === "object" && !Array.isArray(v) ? (v as Record<string, any>) : {};
+const gameStatusName = (value: unknown): ProviderReport["leaguebroadcast"]["gameStatus"] => {
+  const names: Record<number, ProviderReport["leaguebroadcast"]["gameStatus"]> = {
+    0: "out-of-game",
+    1: "loading",
+    2: "running",
+    3: "paused",
+    4: "mocking",
+    5: "game-over",
+    6: "champion-select",
+  };
   return typeof value === "number" ? (names[value] ?? "unknown") : "unknown";
 };
 // Independent adapter for the documented JSON feed. Never executes provider URLs or code.
 // All identities/assets are discarded; the existing allowlist normalizer validates fields.
-export function normalizeLeagueBroadcast(
-  raw: unknown,
-  now: string,
-): IngameSample | null {
+export function normalizeLeagueBroadcast(raw: unknown, now: string): IngameSample | null {
   const s = obj(raw);
-  if (s.isTestingEnvironment !== false || ![2, 3].includes(s.gameStatus))
-    return null;
-  if (
-    typeof s.gameTime !== "number" ||
-    !Number.isFinite(s.gameTime) ||
-    s.gameTime < 0
-  )
-    return null;
+  if (s.isTestingEnvironment !== false || ![2, 3].includes(s.gameStatus)) return null;
+  if (typeof s.gameTime !== "number" || !Number.isFinite(s.gameTime) || s.gameTime < 0) return null;
   const teams = obj(s.scoreboardBottom).teams;
   if (!Array.isArray(teams) || teams.length !== 2) return null;
   const players: unknown[] = [];
   for (let side = 0; side < 2; side++) {
     const rows = obj(teams[side]).players;
     if (!Array.isArray(rows) || rows.length !== 5) return null;
-    const details = Array.isArray(
-      obj(obj(s.tabs)[side === 0 ? "Order" : "Chaos"]).players,
-    )
+    const details = Array.isArray(obj(obj(s.tabs)[side === 0 ? "Order" : "Chaos"]).players)
       ? (obj(obj(s.tabs)[side === 0 ? "Order" : "Chaos"]).players as unknown[])
       : [];
     for (let slot = 0; slot < rows.length; slot++) {
@@ -65,9 +44,7 @@ export function normalizeLeagueBroadcast(
       const detail = details.length === 5 ? obj(details[slot]) : {};
       const health = obj(detail.health);
       const resource = obj(detail.resource);
-      const abilities = Array.isArray(detail.abilities)
-        ? detail.abilities.map(obj)
-        : [];
+      const abilities = Array.isArray(detail.abilities) ? detail.abilities.map(obj) : [];
       const spell = (slot: "D" | "F") => {
         const ability = abilities.find((a) => a.slot === slot);
         return ability && typeof ability.identifier === "string"
@@ -77,9 +54,7 @@ export function normalizeLeagueBroadcast(
           : undefined;
       };
       const perks = Array.isArray(detail.perks) ? detail.perks.map(obj) : [];
-      const keystone = perks.find(
-        (perk) => Number.isInteger(perk.id) && Number(perk.id) > 0,
-      );
+      const keystone = perks.find((perk) => Number.isInteger(perk.id) && Number(perk.id) > 0);
       players.push({
         team: side === 0 ? "ORDER" : "CHAOS",
         riotIdGameName: p.riotIdGameName ?? detail.riotIdGameName,
@@ -109,19 +84,11 @@ export function normalizeLeagueBroadcast(
         items: Array.isArray(p.items)
           ? p.items
               .map((i: unknown) => obj(i))
-              .filter(
-                (i) =>
-                  Number.isInteger(i.slot) &&
-                  Number(i.slot) >= 0 &&
-                  Number(i.slot) <= 6,
-              )
+              .filter((i) => Number.isInteger(i.slot) && Number(i.slot) >= 0 && Number(i.slot) <= 6)
               .map((i) => ({ itemID: i.id, slot: i.slot, count: i.count }))
           : undefined,
         // respawnAt is an absolute game clock, never a wall-clock timestamp.
-        isDead:
-          typeof p.respawnAt === "number"
-            ? p.respawnAt > s.gameTime
-            : undefined,
+        isDead: typeof p.respawnAt === "number" ? p.respawnAt > s.gameTime : undefined,
         respawnTimer:
           typeof p.respawnAt === "number" && Number.isFinite(p.respawnAt)
             ? Math.max(0, p.respawnAt - s.gameTime)
@@ -147,8 +114,7 @@ export function normalizeLeagueBroadcast(
           : null;
         const observed = <T>(value: T | null) => ({
           value,
-          availability:
-            value === null ? ("missing" as const) : ("observed" as const),
+          availability: value === null ? ("missing" as const) : ("observed" as const),
           source: "leaguebroadcast" as const,
           observedAt: now,
         });
@@ -159,10 +125,7 @@ export function normalizeLeagueBroadcast(
           (!integer || Number.isInteger(value))
             ? value
             : null;
-        const roleByItem: Record<
-          number,
-          "top" | "jungle" | "mid" | "bot" | "support"
-        > = {
+        const roleByItem: Record<number, "top" | "jungle" | "mid" | "bot" | "support"> = {
           1200: "top",
           1201: "mid",
           1202: "bot",
@@ -193,10 +156,7 @@ export function normalizeLeagueBroadcast(
                 const quest = Array.isArray(obj(player).items)
                   ? obj(player)
                       .items.map(obj)
-                      .find(
-                        (item: Record<string, any>) =>
-                          item.slot === 8 && roleByItem[item.id],
-                      )
+                      .find((item: Record<string, any>) => item.slot === 8 && roleByItem[item.id])
                   : undefined;
                 return quest
                   ? [
@@ -204,9 +164,7 @@ export function normalizeLeagueBroadcast(
                         role: roleByItem[quest.id],
                         itemId: quest.id,
                         progress:
-                          [1200, 1201, 1202, 1203, 1204, 1222].includes(
-                            quest.id,
-                          ) &&
+                          [1200, 1201, 1202, 1203, 1204, 1222].includes(quest.id) &&
                           Array.isArray(quest.stats) &&
                           finite(quest.stats[0]) &&
                           finite(quest.stats[1]) &&
@@ -214,9 +172,9 @@ export function normalizeLeagueBroadcast(
                           quest.stats[0] <= quest.stats[1]
                             ? quest.stats[0] / quest.stats[1]
                             : null,
-                        completed: [
-                          1205, 1206, 1207, 1208, 1209, 1210, 1211, 1220, 1221,
-                        ].includes(quest.id),
+                        completed: [1205, 1206, 1207, 1208, 1209, 1210, 1211, 1220, 1221].includes(
+                          quest.id,
+                        ),
                       },
                     ]
                   : [];
@@ -237,8 +195,7 @@ export function normalizeLeagueBroadcast(
     }
     const observed = <T>(value: T | null) => ({
       value,
-      availability:
-        value === null ? ("missing" as const) : ("observed" as const),
+      availability: value === null ? ("missing" as const) : ("observed" as const),
       source: "leaguebroadcast" as const,
       observedAt: now,
     });
@@ -246,19 +203,13 @@ export function normalizeLeagueBroadcast(
       const side = index < 5 ? 0 : 1,
         slot = index % 5;
       const details = obj(obj(s.tabs)[side === 0 ? "Order" : "Chaos"]).players;
-      const detail =
-        Array.isArray(details) && details.length === 5
-          ? obj(details[slot])
-          : {};
+      const detail = Array.isArray(details) && details.length === 5 ? obj(details[slot]) : {};
       const row = obj(obj(teams[side]).players[slot]);
       const rowItems = Array.isArray(row.items) ? row.items.map(obj) : [];
       player.itemCounters = observed(projectItemCounters(rowItems));
       const questItem = rowItems.find(
         (i) =>
-          i.slot === 8 &&
-          (Object.hasOwn(questRoles, i.id) ||
-            bootIds.has(i.id) ||
-            i.id === 2055),
+          i.slot === 8 && (Object.hasOwn(questRoles, i.id) || bootIds.has(i.id) || i.id === 2055),
       );
       const role =
         questItem &&
@@ -271,13 +222,9 @@ export function normalizeLeagueBroadcast(
               : null);
       const completed =
         !!questItem &&
-        (completedQuestIds.has(questItem.id) ||
-          bootIds.has(questItem.id) ||
-          questItem.id === 2055);
+        (completedQuestIds.has(questItem.id) || bootIds.has(questItem.id) || questItem.id === 2055);
       const abilityIds = Array.isArray(detail.abilities)
-        ? detail.abilities
-            .map((a) => obj(a).identifier)
-            .filter((id) => typeof id === "string")
+        ? detail.abilities.map((a) => obj(a).identifier).filter((id) => typeof id === "string")
         : [];
       const rewardSpellId =
         role === "jungle"
@@ -291,8 +238,7 @@ export function normalizeLeagueBroadcast(
           : role === "support" && completed
             ? 2055
             : role === "mid" && completed
-              ? (rowItems.find((i) => i.slot < 6 && bootIds.has(i.id))?.id ??
-                null)
+              ? (rowItems.find((i) => i.slot < 6 && bootIds.has(i.id))?.id ?? null)
               : null;
       player.roleQuest = observed(
         role && questItem
@@ -314,14 +260,12 @@ export function normalizeLeagueBroadcast(
             }
           : null,
       );
-      player.hasBaron = observed(
-        typeof detail.hasBaron === "boolean" ? detail.hasBaron : null,
-      );
-      player.hasElder = observed(
-        typeof detail.hasElder === "boolean" ? detail.hasElder : null,
-      );
+      player.hasBaron = observed(typeof detail.hasBaron === "boolean" ? detail.hasBaron : null);
+      player.hasElder = observed(typeof detail.hasElder === "boolean" ? detail.hasElder : null);
       const xp = obj(detail.experience);
-      player.championStacks = observed(stackChampion(player.championId.value) ? validChampionStacks(detail.stacksData) : null);
+      player.championStacks = observed(
+        stackChampion(player.championId.value) ? validChampionStacks(detail.stacksData) : null,
+      );
       player.experience = observed(
         finite(xp.previousLevel) &&
           finite(xp.current) &&
@@ -339,15 +283,11 @@ export function normalizeLeagueBroadcast(
       player.perks = observed(
         Array.isArray(detail.perks) &&
           detail.perks.length <= 9 &&
-          detail.perks.every(
-            (raw) => Number.isInteger(obj(raw).id) && obj(raw).id > 0,
-          )
+          detail.perks.every((raw) => Number.isInteger(obj(raw).id) && obj(raw).id > 0)
           ? detail.perks.map((raw) => obj(raw).id)
           : null,
       );
-      const cooldowns: NonNullable<
-        NonNullable<typeof player.cooldowns>["value"]
-      > = [];
+      const cooldowns: NonNullable<NonNullable<typeof player.cooldowns>["value"]> = [];
       if (Array.isArray(row.items))
         for (const raw of row.items) {
           const item = obj(raw);
@@ -387,9 +327,7 @@ export function normalizeLeagueBroadcast(
             });
           }
         }
-      player.cooldowns = observed(
-        Array.isArray(row.items) ? cooldowns.slice(0, 10) : null,
-      );
+      player.cooldowns = observed(Array.isArray(row.items) ? cooldowns.slice(0, 10) : null);
     });
     for (const team of sample.teams ?? []) {
       const quests = sample.players
@@ -444,13 +382,9 @@ export function normalizeLeagueBroadcast(
         : null,
     );
     sample.pitTimers = (["baron", "dragon"] as const).map((pit) => {
-      const timer = obj(
-        s[pit === "baron" ? "baronPitTimer" : "dragonPitTimer"],
-      );
+      const timer = obj(s[pit === "baron" ? "baronPitTimer" : "dragonPitTimer"]);
       const finite = (value: unknown) =>
-        typeof value === "number" && Number.isFinite(value) && value >= 0
-          ? value
-          : null;
+        typeof value === "number" && Number.isFinite(value) && value >= 0 ? value : null;
       return {
         pit,
         type: observed(typeof timer.type === "string" ? timer.type : null),
@@ -514,13 +448,9 @@ export class LeagueBroadcastSource {
     if (gameTime === null) return;
     const scoreboardTeams = obj(state.scoreboard).teams;
     const dragons = ([0, 1] as const).map((side) => {
-      const raw = Array.isArray(scoreboardTeams)
-        ? obj(scoreboardTeams[side]).dragons
-        : null;
+      const raw = Array.isArray(scoreboardTeams) ? obj(scoreboardTeams[side]).dragons : null;
       return Array.isArray(raw)
-        ? raw
-            .filter((value): value is string => typeof value === "string")
-            .slice(0, 8)
+        ? raw.filter((value): value is string => typeof value === "string").slice(0, 8)
         : [];
     }) as [string[], string[]];
     const tabs = obj(state.tabs);
@@ -531,17 +461,16 @@ export class LeagueBroadcastSource {
         ? players.some((player) => obj(player).hasBaron === true)
         : null;
     }) as [boolean | null, boolean | null];
-    const baron = observedBaron.map(
-      (value, side) => value ?? previous?.baron[side] ?? false,
-    ) as [boolean, boolean];
+    const baron = observedBaron.map((value, side) => value ?? previous?.baron[side] ?? false) as [
+      boolean,
+      boolean,
+    ];
     const isPrefix = (before: string[], after: string[]) =>
       before.every((value, index) => after[index] === value);
     if (
       !previous ||
       gameTime < previous.gameTime - 0.05 ||
-      dragons.some(
-        (current, side) => !isPrefix(previous.dragons[side], current),
-      )
+      dragons.some((current, side) => !isPrefix(previous.dragons[side], current))
     ) {
       this.objectiveEvents = [];
       this.objectiveBaseline = { gameTime, dragons, baron };
@@ -561,9 +490,7 @@ export class LeagueBroadcastSource {
       const completedItems = completedItemIds;
       for (const player of sample.players) {
         const old = before.players.find(
-          (p) =>
-            p.slot === player.slot &&
-            p.championId.value === player.championId.value,
+          (p) => p.slot === player.slot && p.championId.value === player.championId.value,
         );
         if (!old) continue;
         if (
@@ -603,13 +530,11 @@ export class LeagueBroadcastSource {
           team.towers.value > old.towers.value
         ) {
           const previousTotal =
-            before.teams?.length === 2 &&
-            before.teams.every((t) => t.towers.value != null)
+            before.teams?.length === 2 && before.teams.every((t) => t.towers.value != null)
               ? before.teams.reduce((sum, t) => sum + t.towers.value!, 0)
               : null;
           const currentTotal =
-            sample.teams?.length === 2 &&
-            sample.teams.every((t) => t.towers.value != null)
+            sample.teams?.length === 2 && sample.teams.every((t) => t.towers.value != null)
               ? sample.teams.reduce((sum, t) => sum + t.towers.value!, 0)
               : null;
           emit({
@@ -622,11 +547,8 @@ export class LeagueBroadcastSource {
         }
       }
       if (before.inhibitors?.value && sample.inhibitors?.value) {
-        const key = (
-          i: NonNullable<
-            NonNullable<IngameSample["inhibitors"]>["value"]
-          >[number],
-        ) => `${i.team}:${i.lane}`;
+        const key = (i: NonNullable<NonNullable<IngameSample["inhibitors"]>["value"]>[number]) =>
+          `${i.team}:${i.lane}`;
         for (const i of sample.inhibitors.value)
           if (!before.inhibitors.value.some((p) => key(p) === key(i)))
             emit({
@@ -639,9 +561,7 @@ export class LeagueBroadcastSource {
       }
     }
     for (const side of [0, 1] as const) {
-      for (const rawType of dragons[side].slice(
-        previous.dragons[side].length,
-      )) {
+      for (const rawType of dragons[side].slice(previous.dragons[side].length)) {
         const normalized = rawType.toLowerCase().replace(/^dragon_/, "");
         const objectiveType = [
           "fire",
@@ -665,24 +585,12 @@ export class LeagueBroadcastSource {
       const elemental = (list: string[]) =>
         list
           .map((d) => d.toLowerCase().replace(/^dragon_/, ""))
-          .filter((d) =>
-            ["fire", "earth", "water", "air", "hextech", "chemtech"].includes(
-              d,
-            ),
-          );
-      if (
-        elemental(previous.dragons[side]).length < 4 &&
-        elemental(dragons[side]).length >= 4
-      ) {
+          .filter((d) => ["fire", "earth", "water", "air", "hextech", "chemtech"].includes(d));
+      if (elemental(previous.dragons[side]).length < 4 && elemental(dragons[side]).length >= 4) {
         const normalized = elemental(dragons[side])[3];
-        const objectiveType = [
-          "fire",
-          "earth",
-          "water",
-          "air",
-          "hextech",
-          "chemtech",
-        ].includes(normalized)
+        const objectiveType = ["fire", "earth", "water", "air", "hextech", "chemtech"].includes(
+          normalized,
+        )
           ? (normalized as ObservedEvent["objectiveType"])
           : undefined;
         this.objectiveEvents.push({
@@ -734,9 +642,7 @@ export class LeagueBroadcastSource {
       }
     });
     ws.on("unexpected-response", (_req, res) => {
-      this.report.status = [401, 403].includes(res.statusCode ?? 0)
-        ? "restricted"
-        : "offline";
+      this.report.status = [401, 403].includes(res.statusCode ?? 0) ? "restricted" : "offline";
       res.resume();
       ws.terminate();
     });
@@ -759,9 +665,7 @@ export class LeagueBroadcastSource {
     const m = obj(message);
     if (m.type === "gameStatus") {
       this.testing =
-        typeof m.isTestingEnvironment === "boolean"
-          ? m.isTestingEnvironment
-          : undefined;
+        typeof m.isTestingEnvironment === "boolean" ? m.isTestingEnvironment : undefined;
       this.gameStatus = m.gameState;
       this.report.testingEnvironment = this.testing ?? null;
       this.report.gameStatus = gameStatusName(this.gameStatus);
@@ -778,10 +682,7 @@ export class LeagueBroadcastSource {
       return;
     }
     if (m.type !== "ingame-state-update") return;
-    if (
-      this.report.lastFrameAt &&
-      this.clock() - Date.parse(this.report.lastFrameAt) >= 5000
-    )
+    if (this.report.lastFrameAt && this.clock() - Date.parse(this.report.lastFrameAt) >= 5000)
       this.resetObjectives();
     const s = obj(m.state);
     const merged = {
@@ -789,16 +690,11 @@ export class LeagueBroadcastSource {
       isTestingEnvironment: s.isTestingEnvironment ?? this.testing,
       gameStatus: s.gameStatus ?? this.gameStatus,
     };
-    this.sample = normalizeLeagueBroadcast(
-      merged,
-      new Date(this.clock()).toISOString(),
-    );
+    this.sample = normalizeLeagueBroadcast(merged, new Date(this.clock()).toISOString());
     if (!this.sample) {
       this.resetObjectives();
       this.report.status =
-        merged.isTestingEnvironment === true || merged.gameStatus === 4
-          ? "mock"
-          : "invalid";
+        merged.isTestingEnvironment === true || merged.gameStatus === 4 ? "mock" : "invalid";
       return;
     }
     this.addObjectiveEvents(s, this.sample);
@@ -808,8 +704,7 @@ export class LeagueBroadcastSource {
     this.report.lastFrameAt = this.sample.capturedAt;
   }
   snapshot() {
-    const fresh =
-      this.sample && this.clock() - Date.parse(this.sample.capturedAt) < 5000;
+    const fresh = this.sample && this.clock() - Date.parse(this.sample.capturedAt) < 5000;
     const fields = fresh
       ? [
           ...new Set(
@@ -830,9 +725,7 @@ export class LeagueBroadcastSource {
     return {
       ...this.report,
       status:
-        !fresh && this.report.status === "receiving"
-          ? ("stale" as const)
-          : this.report.status,
+        !fresh && this.report.status === "receiving" ? ("stale" as const) : this.report.status,
       players: fresh ? this.sample!.players.length : 0,
       fields,
     };
@@ -854,8 +747,7 @@ export class LeagueBroadcastSource {
         safeJson("/api/settings/patches/job"),
       ]);
       this.report.telemetry = {
-        status:
-          typeof telemetry.status === "string" ? telemetry.status : "unknown",
+        status: typeof telemetry.status === "string" ? telemetry.status : "unknown",
         updatesPerSecond:
           typeof telemetry.updatesPerSecond === "number" &&
           Number.isFinite(telemetry.updatesPerSecond)
@@ -866,17 +758,13 @@ export class LeagueBroadcastSource {
         version: typeof cache.version === "string" ? cache.version : null,
         state: typeof cache.state === "string" ? cache.state : "unknown",
         phase: typeof cache.phase === "string" ? cache.phase : "unknown",
-        readiness:
-          typeof cache.readiness === "string" ? cache.readiness : "unknown",
+        readiness: typeof cache.readiness === "string" ? cache.readiness : "unknown",
         progressPercent:
-          typeof cache.progressPercent === "number" &&
-          Number.isFinite(cache.progressPercent)
+          typeof cache.progressPercent === "number" && Number.isFinite(cache.progressPercent)
             ? Math.max(0, Math.min(100, cache.progressPercent))
             : null,
         failedAssets:
-          Number.isInteger(cache.failedAssets) && cache.failedAssets >= 0
-            ? cache.failedAssets
-            : 0,
+          Number.isInteger(cache.failedAssets) && cache.failedAssets >= 0 ? cache.failedAssets : 0,
       };
     } catch {
       this.report.telemetry = null;
@@ -890,14 +778,8 @@ export class LeagueBroadcastSource {
     const sample = fresh ? this.sample : null;
     const signature =
       "leaguebroadcast:" +
-      (sample?.players
-        .map((p) => `${p.team.value}:${p.championId.value}`)
-        .join(",") ?? "none");
-    return this.session.ingest(
-      sample,
-      signature,
-      new Date(this.clock()).toISOString(),
-    );
+      (sample?.players.map((p) => `${p.team.value}:${p.championId.value}`).join(",") ?? "none");
+    return this.session.ingest(sample, signature, new Date(this.clock()).toISOString());
   }
   recording() {
     return this.session.recording();

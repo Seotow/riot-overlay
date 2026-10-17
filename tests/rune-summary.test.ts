@@ -5,16 +5,12 @@ import { liveCatalog } from "../shared/live-assets";
 import { readFileSync, existsSync } from "node:fs";
 import data from "../shared/generated/rune-paths.json";
 test("rune summary uses keystone and secondary TREE, never a secondary minor rune or shard", () => {
-  const result = runeSummary(
-    [8112, 8143, 8140, 8106, 8017, 8009, 5005, 5008, 5011],
-    8112,
-  );
+  const result = runeSummary([8112, 8143, 8140, 8106, 8017, 8009, 5005, 5008, 5011], 8112);
   assert.equal(result.keystone?.name, "Electrocute");
   assert.equal(result.secondary?.name, "Precision");
   assert.match(result.secondary!.icon, /\/8000\.png$/);
   assert.equal(
-    runeSummary([8437, 8446, 8444, 8451, 8224, 8237, 5008, 5001, 5001], 8437)
-      .secondary?.name,
+    runeSummary([8437, 8446, 8444, 8451, 8224, 8237, 5008, 5001, 5001], 8437).secondary?.name,
     "Sorcery",
   );
 });
@@ -33,13 +29,9 @@ test("missing, unknown or conflicting secondary rune IDs remain unavailable", ()
 test("rune membership and keystone classification match pinned cached Riot metadata", () => {
   assert.equal(data.version, liveCatalog.version);
   const trees = JSON.parse(
-    readFileSync(
-      `public/ddragon/${data.version}/data/runesReforged.json`,
-      "utf8",
-    ),
+    readFileSync(`public/ddragon/${data.version}/data/runesReforged.json`, "utf8"),
   );
-  const paths: Record<number, { treeId: number; keystone: boolean }> =
-    data.paths;
+  const paths: Record<number, { treeId: number; keystone: boolean }> = data.paths;
   for (const tree of trees) {
     assert.ok(existsSync("public" + liveCatalog.runes[tree.id].icon));
     tree.slots.forEach((slot: any, index: number) =>

@@ -34,21 +34,15 @@ export function RecordingDesk({
     [error, setError] = useState("");
   const [recording, setRecording] = useState<ProviderReport["recording"]>();
   const [drag, setDrag] = useState<number | null>(null),
-    [pending, setPending] = useState<{ id: string; generation: number } | null>(
-      null,
-    );
+    [pending, setPending] = useState<{ id: string; generation: number } | null>(null);
   async function refresh() {
     try {
       const r = await fetch("/api/captures");
       if (!r.ok) throw Error();
-      const records = (await r.json()).filter(
-        (c: { hasState: boolean }) => c.hasState,
-      );
+      const records = (await r.json()).filter((c: { hasState: boolean }) => c.hasState);
       setCaptures(records);
       setId((previous) =>
-        records.some((c: { id: string }) => c.id === previous)
-          ? previous
-          : (records[0]?.id ?? ""),
+        records.some((c: { id: string }) => c.id === previous) ? previous : (records[0]?.id ?? ""),
       );
       setError("");
     } catch {
@@ -70,8 +64,7 @@ export function RecordingDesk({
           setRecording(data.recording);
           if (data.recording?.id && state.provider === "recording")
             setPending((p) =>
-              p?.id === data.recording!.id &&
-              (data.recording!.loadGeneration ?? 0) > p.generation
+              p?.id === data.recording!.id && (data.recording!.loadGeneration ?? 0) > p.generation
                 ? null
                 : p,
             );
@@ -92,9 +85,7 @@ export function RecordingDesk({
     if (!pending) return;
     const timer = setTimeout(() => {
       setPending(null);
-      setError(
-        "Chưa xác nhận tải xong bản ghi; kiểm tra thông báo backend hoặc tải lại.",
-      );
+      setError("Chưa xác nhận tải xong bản ghi; kiểm tra thông báo backend hoặc tải lại.");
     }, 60000);
     return () => clearTimeout(timer);
   }, [pending]);
@@ -108,10 +99,7 @@ export function RecordingDesk({
     if (ready) {
       send({
         type: "captureControl",
-        positionMs: Math.max(
-          0,
-          Math.min(recording?.durationMs ?? 0, positionMs),
-        ),
+        positionMs: Math.max(0, Math.min(recording?.durationMs ?? 0, positionMs)),
       });
       setDrag(null);
     }
@@ -154,21 +142,17 @@ export function RecordingDesk({
       </div>
       {error && <p role="alert">{error}</p>}
       {pending && <p role="status">Đang tải {pending.id}...</p>}
-      <section
-        className="recording-comparison"
-        aria-label="Đối chiếu ảnh ingame"
-      >
+      <section className="recording-comparison" aria-label="Đối chiếu ảnh ingame">
         <h2>Đối chiếu ảnh ingame</h2>
         <p>
-          Tải ảnh chụp trận đấu để đặt dưới overlay. Có thể tải ảnh ngay cả khi
-          chưa chọn bản ghi; ảnh không xuất sang OBS.
+          Tải ảnh chụp trận đấu để đặt dưới overlay. Có thể tải ảnh ngay cả khi chưa chọn bản ghi;
+          ảnh không xuất sang OBS.
         </p>
         <ProgramMonitor url={outputUrl} />
       </section>
       {!ready && !pending && (
         <p role="status">
-          Chọn và tải bản ghi để bắt đầu. Trang này không tự chuyển nguồn đang
-          phát.
+          Chọn và tải bản ghi để bắt đầu. Trang này không tự chuyển nguồn đang phát.
         </p>
       )}
       {ready && recording && (
@@ -180,21 +164,15 @@ export function RecordingDesk({
                   send({
                     type: "captureControl",
                     playing: !recording.playing,
-                    ...(state.rehearsal
-                      ? { positionMs: recording.positionMs }
-                      : {}),
+                    ...(state.rehearsal ? { positionMs: recording.positionMs } : {}),
                   })
                 }
               >
                 {recording.playing ? "Tạm dừng bản ghi" : "Phát bản ghi"}
               </Button>
               <Button onClick={() => seek(0)}>Về đầu bản ghi</Button>
-              <Button onClick={() => seek(recording.positionMs - 10000)}>
-                −10 giây
-              </Button>
-              <Button onClick={() => seek(recording.positionMs + 10000)}>
-                +10 giây
-              </Button>
+              <Button onClick={() => seek(recording.positionMs - 10000)}>−10 giây</Button>
+              <Button onClick={() => seek(recording.positionMs + 10000)}>+10 giây</Button>
               <label>
                 Tốc độ
                 <NativeSelect
@@ -217,9 +195,7 @@ export function RecordingDesk({
               <strong>
                 Timer game:{" "}
                 <time data-testid="recorded-game-time">
-                  {recordedClock(
-                    recording.gameTime ?? observation?.sample?.gameTime.value,
-                  )}
+                  {recordedClock(recording.gameTime ?? observation?.sample?.gameTime.value)}
                 </time>
               </strong>
             </div>
@@ -236,14 +212,7 @@ export function RecordingDesk({
               onPointerUp={(e) => seek(Number(e.currentTarget.value))}
               onKeyUp={(e) => {
                 if (
-                  [
-                    "ArrowLeft",
-                    "ArrowRight",
-                    "Home",
-                    "End",
-                    "PageUp",
-                    "PageDown",
-                  ].includes(e.key)
+                  ["ArrowLeft", "ArrowRight", "Home", "End", "PageUp", "PageDown"].includes(e.key)
                 )
                   seek(Number(e.currentTarget.value));
               }}
@@ -251,9 +220,8 @@ export function RecordingDesk({
             <div className="recording-time-labels">
               <span>Game đầu: {recordedClock(recording.firstGameTime)}</span>
               <span>
-                Đã chạy: {recordedClock((drag ?? recording.positionMs) / 1000)}{" "}
-                / {recordedClock(recording.durationMs / 1000)} ,{" "}
-                {recording.frames} sample
+                Đã chạy: {recordedClock((drag ?? recording.positionMs) / 1000)} /{" "}
+                {recordedClock(recording.durationMs / 1000)} , {recording.frames} sample
               </span>
               <span>Game cuối: {recordedClock(recording.lastGameTime)}</span>
             </div>
@@ -273,8 +241,8 @@ export function RecordingDesk({
             )}
           </div>
           <p className="note">
-            Đang phát lại {recording.id}. Preview và overlay chính dùng chung
-            bản ghi này; đây không phải nguồn live.
+            Đang phát lại {recording.id}. Preview và overlay chính dùng chung bản ghi này; đây không
+            phải nguồn live.
           </p>
           <ProductionDesk
             state={state}

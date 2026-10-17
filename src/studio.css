@@ -442,23 +442,62 @@ body.studio-body {
 .studio-shell .config-grid label {
   display: flex;
   flex-direction: column;
-  align-items:stretch;
-  justify-content:flex-start;
-  text-align:left;
-  margin:0;
+  align-items: stretch;
+  justify-content: flex-start;
+  text-align: left;
+  margin: 0;
   gap: 7px;
 }
-.studio-shell .match-config input:not([type=checkbox]),.studio-shell .match-config select { max-width:100%; }
-.studio-shell .match-config fieldset label { text-align:left; }
-.studio-shell .match-config .config-grid>fieldset:first-child { grid-column:1/-1; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); align-items:start; }
-.studio-shell .match-config .config-grid>fieldset:first-child>small { grid-column:2/-1; align-self:center; }
-.studio-shell .match-config .config-grid>fieldset:nth-child(4) { grid-column:1/-1; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px; }
-.studio-shell .match-config .config-grid>fieldset:nth-child(4)>div { min-width:0; }
-.studio-shell .match-config .config-grid>fieldset:last-child { grid-column:1/-1; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); align-items:start; gap:20px; }
-.studio-shell .match-config .graphics-controls>p { grid-column:1/-1; margin:0; }
-.studio-shell .match-config .graphics-controls label { justify-content:flex-start; margin:0; align-items:flex-start; gap:8px; }
-.studio-shell .match-config .graphics-controls label:has(input:not([type=checkbox])) { align-items:stretch; }
-.studio-shell .match-config fieldset:has(input[type=checkbox]) label:has(input[type=checkbox]) { justify-content:flex-start; align-items:center; }
+.studio-shell .match-config input:not([type="checkbox"]),
+.studio-shell .match-config select {
+  max-width: 100%;
+}
+.studio-shell .match-config fieldset label {
+  text-align: left;
+}
+.studio-shell .match-config .config-grid > fieldset:first-child {
+  grid-column: 1/-1;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: start;
+}
+.studio-shell .match-config .config-grid > fieldset:first-child > small {
+  grid-column: 2/-1;
+  align-self: center;
+}
+.studio-shell .match-config .config-grid > fieldset:nth-child(4) {
+  grid-column: 1/-1;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+.studio-shell .match-config .config-grid > fieldset:nth-child(4) > div {
+  min-width: 0;
+}
+.studio-shell .match-config .config-grid > fieldset:last-child {
+  grid-column: 1/-1;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: start;
+  gap: 20px;
+}
+.studio-shell .match-config .graphics-controls > p {
+  grid-column: 1/-1;
+  margin: 0;
+}
+.studio-shell .match-config .graphics-controls label {
+  justify-content: flex-start;
+  margin: 0;
+  align-items: flex-start;
+  gap: 8px;
+}
+.studio-shell .match-config .graphics-controls label:has(input:not([type="checkbox"])) {
+  align-items: stretch;
+}
+.studio-shell .match-config fieldset:has(input[type="checkbox"]) label:has(input[type="checkbox"]) {
+  justify-content: flex-start;
+  align-items: center;
+}
 .studio-shell .config-grid label:has(input[type="checkbox"]) {
   flex-direction: row;
   align-items: center;
@@ -499,9 +538,7 @@ body.studio-body {
   align-items: center;
   gap: 6px;
 }
-.studio-shell
-  fieldset.graphics-controls
-  label:has(input:not([type="checkbox"])) {
+.studio-shell fieldset.graphics-controls label:has(input:not([type="checkbox"])) {
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -904,8 +941,25 @@ body.studio-body {
     grid-template-columns: 1fr;
   }
 }
-@media(max-width:960px){.studio-shell .match-config .config-grid>fieldset:first-child,.studio-shell .match-config .config-grid>fieldset:last-child { grid-template-columns:repeat(2,minmax(0,1fr)); }.studio-shell .match-config .config-grid>fieldset:first-child>small{grid-column:1/-1;}}
-@media(max-width:700px){.studio-shell .match-config .config-grid>fieldset:first-child,.studio-shell .match-config .config-grid>fieldset:last-child,.studio-shell .match-config .config-grid>fieldset:nth-child(4) {grid-template-columns:1fr;}.studio-shell .match-config .config-grid>fieldset:first-child>small{grid-column:auto;}}
+@media (max-width: 960px) {
+  .studio-shell .match-config .config-grid > fieldset:first-child,
+  .studio-shell .match-config .config-grid > fieldset:last-child {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .studio-shell .match-config .config-grid > fieldset:first-child > small {
+    grid-column: 1/-1;
+  }
+}
+@media (max-width: 700px) {
+  .studio-shell .match-config .config-grid > fieldset:first-child,
+  .studio-shell .match-config .config-grid > fieldset:last-child,
+  .studio-shell .match-config .config-grid > fieldset:nth-child(4) {
+    grid-template-columns: 1fr;
+  }
+  .studio-shell .match-config .config-grid > fieldset:first-child > small {
+    grid-column: auto;
+  }
+}
 @media (max-width: 700px) {
   .studio-shell .rail {
     position: static;

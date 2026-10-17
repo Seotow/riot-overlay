@@ -8,8 +8,5 @@ import {
 test("simple holds item/level cues750ms, full holds3000ms, entrance/exit stay unchanged", () => {
   assert.equal(portraitCueDuration(true), 1590);
   assert.equal(portraitCueDuration(false), 3840);
-  assert.equal(
-    portraitCueDuration(true) - PORTRAIT_ENTER_MS - PORTRAIT_EXIT_MS,
-    750,
-  );
+  assert.equal(portraitCueDuration(true) - PORTRAIT_ENTER_MS - PORTRAIT_EXIT_MS, 750);
 });

@@ -1,9 +1,5 @@
 import { IngameCollector } from "./observer";
-import {
-  observerFrameSchema,
-  type ObserverFrame,
-  type ObservedPlayer,
-} from "../shared/observer";
+import { observerFrameSchema, type ObserverFrame, type ObservedPlayer } from "../shared/observer";
 import type { Probe } from "../shared/diagnostics";
 
 type Collector = { observe(): Promise<ObserverFrame> };
@@ -57,8 +53,7 @@ export class IndependentEngine {
   }
   snapshot() {
     const now = this.clock();
-    const stale =
-      this.frame !== null && now - Date.parse(this.frame.capturedAt) > 5000;
+    const stale = this.frame !== null && now - Date.parse(this.frame.capturedAt) > 5000;
     const frame = !stale
       ? this.frame
       : this.frame && {
@@ -87,8 +82,7 @@ export class IndependentEngine {
                 (Array.isArray(value.value) &&
                   value.value.length === 9 &&
                   new Set<unknown>(value.value).size === 9)) &&
-              (key !== "cooldowns" ||
-                (Array.isArray(value.value) && value.value.length > 0))
+              (key !== "cooldowns" || (Array.isArray(value.value) && value.value.length > 0))
             );
           }).length,
           expected: 10,
@@ -104,11 +98,7 @@ export class IndependentEngine {
         (f) => f.availability === "observed" && f.value !== null,
       ),
     );
-    const status = !sample
-      ? "unavailable"
-      : hasPlayers
-        ? "partial"
-        : "clock-only";
+    const status = !sample ? "unavailable" : hasPlayers ? "partial" : "clock-only";
     const orderPlayers = players.filter(
       (p) => p.team.availability === "observed" && p.team.value === "ORDER",
     ).length;
@@ -136,10 +126,7 @@ export class IndependentEngine {
           orderPlayers,
           chaosPlayers,
           complete:
-            players.length === 10 &&
-            uniqueSlots === 10 &&
-            orderPlayers === 5 &&
-            chaosPlayers === 5,
+            players.length === 10 && uniqueSlots === 10 && orderPlayers === 5 && chaosPlayers === 5,
         },
         clockAlignment:
           gameTime === null || replayTime === null
@@ -148,12 +135,7 @@ export class IndependentEngine {
               ? "near"
               : "divergent",
         coverage,
-        missing: [
-          ...missing,
-          "currentGold",
-          "damageToChampions",
-          "combatWindow",
-        ],
+        missing: [...missing, "currentGold", "damageToChampions", "combatWindow"],
         gameClock: sample?.gameTime.availability === "observed",
         replayClock: sample?.replay.time.availability === "observed",
         mapNumber: sample?.mapNumber?.value ?? null,
@@ -176,14 +158,10 @@ export class IndependentEngine {
         const fields = Object.entries(frame.sample ?? {});
         const hasForeignSource = (value: unknown): boolean => {
           if (value === null || typeof value !== "object") return false;
-          if ("source" in value && value.source === "leaguebroadcast")
-            return true;
+          if ("source" in value && value.source === "leaguebroadcast") return true;
           return Object.values(value).some(hasForeignSource);
         };
-        if (
-          frame.playback ||
-          fields.some(([, value]) => hasForeignSource(value))
-        )
+        if (frame.playback || fields.some(([, value]) => hasForeignSource(value)))
           throw Error("Foreign acquisition source");
         if (generation !== this.generation) return;
         this.frame = frame;
@@ -220,8 +198,7 @@ export class IndependentEngine {
     const loop = async () => {
       if (!this.active || generation !== this.generation) return;
       await this.tick();
-      if (this.active && generation === this.generation)
-        this.timer = setTimeout(loop, 500);
+      if (this.active && generation === this.generation) this.timer = setTimeout(loop, 500);
     };
     void loop();
   }
@@ -234,6 +211,4 @@ export class IndependentEngine {
     this.probes = [];
   }
 }
-export type IndependentEngineSnapshot = ReturnType<
-  IndependentEngine["snapshot"]
->;
+export type IndependentEngineSnapshot = ReturnType<IndependentEngine["snapshot"]>;

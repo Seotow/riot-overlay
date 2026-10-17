@@ -10,9 +10,7 @@ export type BaronWindow = {
 };
 export function allBaronLost(sample: IngameSample, team: "ORDER" | "CHAOS") {
   const players = sample.players.filter((p) => p.team.value === team);
-  return (
-    players.length === 5 && players.every((p) => p.hasBaron?.value === false)
-  );
+  return players.length === 5 && players.every((p) => p.hasBaron?.value === false);
 }
 const teamGold = (s: IngameSample, team: string) =>
   s.teams?.find((t) => t.team === team)?.totalGold.value ?? null;
@@ -22,12 +20,8 @@ export function advanceBaronWindow(
 ): BaronWindow | null {
   if (!frame?.sample || frame.transition === "lost") return null;
   const s = frame.sample;
-  const freshEvent = [...frame.newEvents]
-    .reverse()
-    .find((e) => e.kind === "BaronKill" && e.team);
-  const reset = ["seek", "reconnected", "source-changed"].includes(
-    frame.transition,
-  );
+  const freshEvent = [...frame.newEvents].reverse().find((e) => e.kind === "BaronKill" && e.team);
+  const reset = ["seek", "reconnected", "source-changed"].includes(frame.transition);
   const event =
     freshEvent ??
     (!previous || reset
@@ -47,57 +41,40 @@ export function advanceBaronWindow(
     return {
       team: event.team,
       startedAt: event.at,
-      ownGold:
-        event.goldBaseline?.own ??
-        (freshEvent ? teamGold(s, event.team) : null),
+      ownGold: event.goldBaseline?.own ?? (freshEvent ? teamGold(s, event.team) : null),
       enemyGold:
         event.goldBaseline?.enemy ??
-        (freshEvent
-          ? teamGold(s, event.team === "ORDER" ? "CHAOS" : "ORDER")
-          : null),
+        (freshEvent ? teamGold(s, event.team === "ORDER" ? "CHAOS" : "ORDER") : null),
     };
   if (reset) return null;
   return previous &&
-    ((s.gameTime.value != null &&
-      s.gameTime.value >= previous.startedAt + BARON_BUFF_SECONDS) ||
+    ((s.gameTime.value != null && s.gameTime.value >= previous.startedAt + BARON_BUFF_SECONDS) ||
       allBaronLost(s, previous.team))
     ? null
     : previous;
 }
-export function baronGoldDelta(
-  window: BaronWindow,
-  sample: IngameSample,
-): number | null {
+export function baronGoldDelta(window: BaronWindow, sample: IngameSample): number | null {
   const own = teamGold(sample, window.team),
     enemy = teamGold(sample, window.team === "ORDER" ? "CHAOS" : "ORDER");
-  return window.ownGold == null ||
-    window.enemyGold == null ||
-    own == null ||
-    enemy == null
+  return window.ownGold == null || window.enemyGold == null || own == null || enemy == null
     ? null
     : 1500 + (own - enemy) - (window.ownGold - window.enemyGold);
 }
 export type ElderWindow = { team: "ORDER" | "CHAOS"; startedAt: number };
 export function allElderLost(sample: IngameSample, team: "ORDER" | "CHAOS") {
   const players = sample.players.filter((p) => p.team.value === team);
-  return (
-    players.length === 5 && players.every((p) => p.hasElder?.value === false)
-  );
+  return players.length === 5 && players.every((p) => p.hasElder?.value === false);
 }
 export function advanceElderWindow(
   previous: ElderWindow | null,
   frame: ObserverFrame | null,
 ): ElderWindow | null {
   if (!frame?.sample || frame.transition === "lost") return null;
-  const reset = ["seek", "reconnected", "source-changed"].includes(
-    frame.transition,
-  );
+  const reset = ["seek", "reconnected", "source-changed"].includes(frame.transition);
   const event =
     [...frame.newEvents]
       .reverse()
-      .find(
-        (e) => e.kind === "DragonKill" && e.objectiveType === "elder" && e.team,
-      ) ??
+      .find((e) => e.kind === "DragonKill" && e.objectiveType === "elder" && e.team) ??
     (!previous || reset
       ? [...(frame.sample.events ?? [])]
           .reverse()
