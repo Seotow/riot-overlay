@@ -5105,20 +5105,23 @@
   height: 20px;
 }
 
-/* Timer line: one linear animation from the real deadline. */
+/* Timer line: one linear animation from the real deadline. It scales instead of resizing, so every
+   frame is composited and the line does not stutter. */
 .production-draft .draft-progress i.draft-timer-fill {
   width: 100%;
   transition: none;
+  transform-origin: center;
+  will-change: transform;
   animation-name: draft-timer-run;
   animation-timing-function: linear;
   animation-fill-mode: forwards;
 }
 @keyframes draft-timer-run {
   from {
-    width: 100%;
+    transform: scaleX(1);
   }
   to {
-    width: 0;
+    transform: scaleX(0);
   }
 }
 /* Locking keeps the same artwork element and eases the cell back instead of snapping. */

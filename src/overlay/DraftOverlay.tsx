@@ -70,10 +70,19 @@ export function DraftOverlay({
   now: number;
 }) {
   const turn = draftTurns[draft.step];
+  // The number counts on its own 200 ms clock: the shared overlay clock ticks every 500 ms, which
+  // made the seconds skip and repeat.
+  const counting = draft.deadline != null;
+  const [clock, setClock] = useState<number | null>(null);
+  useEffect(() => {
+    if (!counting) return;
+    const timer = setInterval(() => setClock(Date.now()), 200);
+    return () => clearInterval(timer);
+  }, [counting]);
   const remaining =
     draft.deadline == null
       ? null
-      : Math.min(draft.duration, Math.max(0, Math.ceil((draft.deadline - now) / 1000)));
+      : Math.min(draft.duration, Math.max(0, Math.ceil((draft.deadline - (clock ?? now)) / 1000)));
   // The staged intro only runs on mount; afterwards state changes never replay it.
   const [intro, setIntro] = useState(true);
   useEffect(() => {

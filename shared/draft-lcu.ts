@@ -117,7 +117,13 @@ export function mapChampSelect(
       : current.duration;
   let deadline: number | null = null;
   if (!finished && timer.isInfinite !== true && left !== null && left > 0) {
-    const proposed = Math.round(now + left);
+    // The client reports its own clock with the timer snapshot. That snapshot is not refreshed on
+    // every request, so "time left" alone looks later at each poll; the snapshot time plus the time
+    // left is the same deadline every time. Only trusted when it is close to this machine's clock.
+    const stamp =
+      typeof timer.internalNowInEpochMs === "number" ? timer.internalNowInEpochMs : null;
+    const anchored = stamp !== null && Math.abs(stamp - now) < 10_000;
+    const proposed = Math.round((anchored ? stamp : now) + left);
     // Keep the same deadline while the source only jitters, so the overlay does not restart.
     deadline =
       current.deadline !== null &&

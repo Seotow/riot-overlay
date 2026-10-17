@@ -157,3 +157,27 @@ test("automatic scene: empty without data, draft in champ select, in-game when d
   assert.equal(detectScene({ ...base, scene: "draft" }, frame(1000), now), "draft");
   assert.equal(detectScene({ ...base, scene: "ingame" }, null, now), "ingame");
 });
+
+test("a timer snapshot that is not refreshed keeps one deadline instead of drifting later", () => {
+  const T = 5_000_000;
+  const snapshot = (stamp?: number) => ({
+    ...session(8),
+    timer: {
+      adjustedTimeLeftInPhase: 25000,
+      totalTimeInPhase: 30000,
+      isInfinite: false,
+      ...(stamp === undefined ? {} : { internalNowInEpochMs: stamp }),
+    },
+  });
+  const first = mapChampSelect(snapshot(T), emptyDraft(), T + 150)!;
+  assert.equal(first.deadline, T + 25000);
+  // Same stale snapshot read 4 s later: the deadline does not move with the local clock.
+  const later = mapChampSelect(snapshot(T), first, T + 4150)!;
+  assert.equal(later.deadline, T + 25000);
+  // A new phase snapshot moves it.
+  const next = mapChampSelect(snapshot(T + 30_000), later, T + 30_100)!;
+  assert.equal(next.deadline, T + 55_000);
+  // A client clock far from this machine's is not trusted: fall back to local time.
+  const far = mapChampSelect(snapshot(T + 3_600_000), emptyDraft(), T)!;
+  assert.equal(far.deadline, T + 25000);
+});
