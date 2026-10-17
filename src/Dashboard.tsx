@@ -137,12 +137,12 @@ export function SourcePanel({ state, observation, report, connected, send }: Pro
   const sample = useFresh(connected ? observation : null);
   const coverage = sourceCoverage(sample);
   const choices = [
+    ["collector-accountless", "LeagueCollector"],
     ["riot", "Riot Live Client"],
-    ["leaguebroadcast", "LeagueBroadcast"],
-    ["league-collector", "Collector có tài khoản"],
-    ["collector-accountless", "Collector không tài khoản (thử nghiệm)"],
     ["recording", "Bản ghi"],
   ];
+  // LeagueBroadcast and the account-based collector stay supported by the server but are not offered.
+  const hidden = ["leaguebroadcast", "league-collector"];
   return (
     <section className="source-panel">
       <div className="section-heading">
@@ -168,6 +168,11 @@ export function SourcePanel({ state, observation, report, connected, send }: Pro
               })
             }
           >
+            {hidden.includes(state.provider) && (
+              <option value={state.provider}>
+                {sourceNames[state.provider] ?? state.provider}
+              </option>
+            )}
             {choices.map(([value, label]) => (
               <option key={value} value={value}>
                 {label}
@@ -319,10 +324,10 @@ export function Roadmap({ valorant = false }: { valorant?: boolean }) {
       <div className="module-grid">
         <Card>
           <small>HIỆN TẠI</small>
-          <h3>LoL production với LeagueBroadcast</h3>
+          <h3>LoL production với LeagueCollector</h3>
           <p>
-            LeagueBroadcast là nguồn bắt buộc cho telemetry giải đấu đầy đủ. Riot local giữ vai trò
-            replay, kiểm thử và chế độ giới hạn.
+            LeagueCollector (không tài khoản) là nguồn mặc định cho telemetry giải đấu. Riot local
+            giữ vai trò replay, kiểm thử và chế độ giới hạn.
           </p>
         </Card>
         <Card>

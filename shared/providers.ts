@@ -122,7 +122,7 @@ export const sourceNames: Record<string, string> = {
   riot: "Riot local",
   demo: "Demo nội bộ",
   "league-collector": "Collector có tài khoản LB",
-  "collector-accountless": "Collector không tài khoản LB (thử nghiệm)",
+  "collector-accountless": "LeagueCollector",
   recording: "Bản ghi offline",
 };
 export const gameModules = [
