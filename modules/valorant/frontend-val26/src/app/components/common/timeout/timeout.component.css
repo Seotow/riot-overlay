@@ -1,0 +1,18 @@
+@keyframes transition {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+.animate-transition {
+  animation: transition;
+  will-change: transform;
+}
+.animate-transition-out {
+  animation: transition reverse;
+  will-change: transform;
+}

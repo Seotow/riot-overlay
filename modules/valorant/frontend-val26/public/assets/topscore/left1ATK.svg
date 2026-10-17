@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="334.1" height="143.381" viewBox="0 0 334.1 143.381">
+  <defs>
+    <linearGradient id="linear-gradient" y1="0.473" x2="1" y2="0.465" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#101823" stop-opacity="0"/>
+      <stop offset="0.521" stop-color="#fd4756" stop-opacity="0.902"/>
+      <stop offset="0.688" stop-color="#fd4756" stop-opacity="0.902"/>
+      <stop offset="1" stop-color="#101823"/>
+    </linearGradient>
+  </defs>
+  <path id="Left_Team_Color_ATK_" data-name="Left Team Color (ATK)" d="M2496.371-250.439c5.21,0,16.431-21.8,27.33-21.8s108.421.037,119.088.037,20.559,21.73,26.432,21.795,40.779,0,40.779,0V-393.76l-334.1.956V-250.52S2491.161-250.439,2496.371-250.439Z" transform="translate(-2375.9 393.76)" fill="url(#linear-gradient)"/>
+</svg>

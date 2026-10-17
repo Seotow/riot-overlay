@@ -1,0 +1,83 @@
+<div class="relative h-32 w-32">
+  <!-- Background Circle -->
+  <div
+    class="absolute top-1/2 left-1/2 h-9.75 w-9.75 -translate-x-1/2 -translate-y-1/2 transform rounded-full bg-[rgba(24,24,24,0.63)] opacity-40"
+  ></div>
+
+  <!-- Ultimate Ready Video Background -->
+  <div
+    class="absolute top-1/2 left-1/2 h-9 w-9 -translate-x-1/2 -translate-y-1/2 transform overflow-hidden rounded-full transition-opacity duration-200"
+    [class.opacity-0]="!player.ultReady"
+    [class.opacity-100]="player.ultReady"
+  >
+    <video
+      #ultimateVideo
+      class="h-full w-full object-cover opacity-15"
+      muted
+      loop
+      playsinline
+      preload="auto"
+      src="assets/ultimates/media/ultimate_smoke.webm"
+    ></video>
+  </div>
+
+  <!-- Dashed Circle SVG -->
+  <svg
+    class="absolute top-1/2 left-1/2 h-32 w-32 -translate-x-1/2 -translate-y-1/2 transform"
+    [class.scale-x-[-1]]="side === 'right'"
+    width="128"
+    height="128"
+    viewBox="0 0 128 128"
+  >
+    <defs>
+      <filter id="glow" x="-100%" y="-100%" width="300%" height="300%">
+        <feDropShadow dx="0" dy="0" stdDeviation="7" flood-color="white" flood-opacity="1">
+          <animate
+            attributeName="stdDeviation"
+            values="7;18;18;7"
+            keyTimes="0;0.4;0.5;1"
+            calcMode="spline"
+            keySplines="0.42 0 0.58 1;0 0 1 1;0.42 0 0.58 1"
+            dur="5s"
+            repeatCount="indefinite"
+          />
+        </feDropShadow>
+      </filter>
+    </defs>
+
+    <!-- ultimate ready -->
+    <ng-container *ngIf="player.ultReady">
+      <circle
+        cx="64"
+        cy="64"
+        r="18"
+        stroke="white"
+        stroke-width="3"
+        fill="none"
+        filter="url(#glow)"
+      />
+    </ng-container>
+
+    <!-- render ultimate progress -->
+    <ng-container *ngIf="!player.ultReady">
+      <ng-container *ngFor="let dash of dashes">
+        <path
+          [attr.d]="computePath(dash.angle)"
+          [ngClass]="{ collected: dash.collected }"
+          [attr.stroke]="dash.collected ? '#fff' : 'rgba(163,163,163,0.5)'"
+          stroke-width="3"
+          fill="none"
+          stroke-linecap="butt"
+        ></path>
+      </ng-container>
+    </ng-container>
+  </svg>
+
+  <!-- Centered Icon -->
+  <div class="absolute top-1/2 left-1/2 z-10 h-5 w-5 -translate-x-1/2 -translate-y-1/2 transform">
+    <img
+      class="w-full translate-x-[-0.2px]"
+      src="{{ assets }}/ultimates/{{ player.agentInternal }}Ultimate.webp"
+    />
+  </div>
+</div>

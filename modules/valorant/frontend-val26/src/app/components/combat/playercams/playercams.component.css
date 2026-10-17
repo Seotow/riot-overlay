@@ -1,0 +1,27 @@
+.team-accent {
+  &.defender {
+    background-color: var(--color-defender-primary);
+  }
+  &.attacker {
+    background-color: var(--color-attacker-primary);
+  }
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+.killbox-slide-in {
+  animation-name: slide;
+  animation-timing-function: ease-in-out;
+}
+.killbox-slide-out {
+  animation-name: slide;
+  animation-timing-function: ease-in-out;
+  animation-direction: reverse;
+}

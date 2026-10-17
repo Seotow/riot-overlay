@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="397.857" height="154.857" viewBox="0 0 397.857 154.857">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.921" y1="0.019" x2="1.002" y2="0.5" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#c7c7c7" stop-opacity="0.282"/>
+      <stop offset="1" stop-color="#c7c7c7" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <g id="Timer_Accent" data-name="Timer Accent" transform="translate(-1719.795 -18)">
+    <g id="Timer_Accent_Left" data-name="Timer Accent Left">
+      <rect id="Rectangle_2" data-name="Rectangle 2" width="218" height="1" transform="translate(1720.502 18) rotate(45)" fill="url(#linear-gradient)"/>
+      <rect id="Rectangle_3" data-name="Rectangle 3" width="13" height="1" transform="translate(1720.502 18) rotate(45)" fill="#fff"/>
+    </g>
+    <g id="Timer_Accent_Right" data-name="Timer Accent Right">
+      <rect id="Rectangle_4" data-name="Rectangle 4" width="218" height="1" transform="translate(2117.652 18.707) rotate(135)" fill="url(#linear-gradient)"/>
+      <rect id="Rectangle_5" data-name="Rectangle 5" width="13" height="1" transform="translate(2107.753 27.192) rotate(-45)" fill="#fff"/>
+    </g>
+  </g>
+</svg>

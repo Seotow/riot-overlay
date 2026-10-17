@@ -1,0 +1,260 @@
+/* Endround mask as a data-URI SVG mask-image (Chrome 115+ compatible) */
+.endround-mask {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 732.5 184.619'%3E%3Cdefs%3E%3ClinearGradient id='g' y1='0.5' x2='1' y2='0.5' gradientUnits='objectBoundingBox'%3E%3Cstop offset='0' stop-color='white' stop-opacity='0'/%3E%3Cstop offset='0.297' stop-color='white' stop-opacity='1'/%3E%3Cstop offset='0.694' stop-color='white' stop-opacity='1'/%3E%3Cstop offset='1' stop-color='white' stop-opacity='0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M-2104.892,3074.024l220.574.058,18.448-17.244h261.459l19.972,17.244,212.049-.058v142.54h-732.5Z' transform='translate(2104.892 -3056.837)' fill='url(%23g)'/%3E%3C/svg%3E");
+  -webkit-mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 732.5 184.619'%3E%3Cdefs%3E%3ClinearGradient id='g' y1='0.5' x2='1' y2='0.5' gradientUnits='objectBoundingBox'%3E%3Cstop offset='0' stop-color='white' stop-opacity='0'/%3E%3Cstop offset='0.297' stop-color='white' stop-opacity='1'/%3E%3Cstop offset='0.694' stop-color='white' stop-opacity='1'/%3E%3Cstop offset='1' stop-color='white' stop-opacity='0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M-2104.892,3074.024l220.574.058,18.448-17.244h261.459l19.972,17.244,212.049-.058v142.54h-732.5Z' transform='translate(2104.892 -3056.837)' fill='url(%23g)'/%3E%3C/svg%3E");
+  mask-size: 100% 100%;
+  mask-repeat: no-repeat;
+}
+
+/* Banner reveal using clip-path */
+.banner-wrapper {
+  overflow: visible;
+}
+
+.banner-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  clip-path: inset(0 0 0 0);
+}
+
+.banner-inner.is-closed {
+  clip-path: inset(0 50% 0 50%);
+}
+
+@keyframes bannerClipReveal {
+  from {
+    clip-path: inset(0 50% 0 50%);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes bannerClipClose {
+  from {
+    clip-path: inset(0 0 0 0);
+  }
+  to {
+    clip-path: inset(0 50% 0 50%);
+  }
+}
+
+.banner-inner.banner-reveal-animation {
+  animation: bannerClipReveal 130ms ease-out forwards;
+}
+
+.banner-inner.banner-close-animation {
+  animation: bannerClipClose 260ms ease-in-out forwards;
+}
+
+/* Reveal square animations - timed to 300ms */
+@keyframes revealSquareLeft {
+  0% {
+    transform: translateX(-50%);
+    width: 1.56vw;
+    opacity: 1;
+  }
+  50% {
+    transform: translateX(calc(-50% - 8.03vw));
+    width: 14.06vw;
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(calc(-50% - 17.06vw));
+    width: 0vw;
+    opacity: 1;
+  }
+}
+
+@keyframes revealSquareRight {
+  0% {
+    transform: translateX(-50%);
+    width: 1.56vw;
+    opacity: 1;
+  }
+  50% {
+    transform: translateX(calc(-50% + 8.03vw));
+    width: 14.06vw;
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(calc(-50% + 17.06vw));
+    width: 0vw;
+    opacity: 1;
+  }
+}
+
+/* Reverse animations - squares come back from outside-in to hide content */
+@keyframes reverseSquareLeft {
+  0% {
+    transform: translateX(calc(-50% - 17.06vw));
+    width: 0vw;
+    opacity: 1;
+  }
+  50% {
+    transform: translateX(calc(-50% - 8.03vw));
+    width: 14.06vw;
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-50%);
+    width: 0vw;
+    opacity: 1;
+  }
+}
+
+@keyframes reverseSquareRight {
+  0% {
+    transform: translateX(calc(-50% + 17.06vw));
+    width: 0vw;
+    opacity: 1;
+  }
+  50% {
+    transform: translateX(calc(-50% + 8.03vw));
+    width: 14.06vw;
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-50%);
+    width: 0vw;
+    opacity: 1;
+  }
+}
+
+.reveal-square-left,
+.reveal-square-right {
+  /* Initially invisible */
+  width: 0;
+  transform: translateX(-50%);
+  opacity: 0;
+  will-change: transform, width, opacity;
+  backface-visibility: hidden;
+}
+
+.reveal-square-left.animate {
+  animation: revealSquareLeft 130ms ease-out forwards;
+  transform-origin: right center;
+}
+
+.reveal-square-right.animate {
+  animation: revealSquareRight 130ms ease-out forwards;
+  transform-origin: left center;
+}
+
+.reveal-square-left.reverse {
+  animation: reverseSquareLeft 260ms ease-in-out forwards;
+  transform-origin: right center;
+}
+
+.reveal-square-right.reverse {
+  animation: reverseSquareRight 260ms ease-in-out forwards;
+  transform-origin: left center;
+}
+
+.gradient-head-to-head-attacker,
+.gradient-head-to-head-defender,
+.gradient-left-attacker,
+.gradient-right-attacker,
+.gradient-left-defender,
+.gradient-right-defender {
+  background: rgba(15, 25, 35, 1);
+}
+
+/* Event logo should not be clipped or masked */
+.event-logo {
+  mask: none !important;
+  -webkit-mask: none !important;
+  clip-path: none !important;
+  overflow: visible;
+  pointer-events: none; /* purely decorative */
+}
+
+/* Flash background animations with staggered delays */
+@keyframes flashOpacity {
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  36% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  99% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes logoRevealAndFade {
+  0% {
+    opacity: 0;
+  }
+  0.17% {
+    opacity: 1;
+  }
+  99.17% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.tournament-icon-flash {
+  opacity: 0;
+}
+
+.tournament-icon-flash.animate {
+  animation: flashOpacity 230ms ease-out forwards;
+  animation-delay: 100ms;
+}
+
+/* Round Win Text Flash - starts at 160ms (100ms + 60ms), duration 230ms */
+.round-win-text-flash {
+  opacity: 0;
+}
+
+.round-win-text-flash.animate {
+  animation: flashOpacity 230ms ease-out forwards;
+  animation-delay: 160ms;
+}
+
+/* Text Background Flash - starts at 220ms (160ms + 60ms), duration 230ms */
+.text-bg-flash {
+  opacity: 0;
+}
+
+.text-bg-flash.animate {
+  animation: flashOpacity 230ms ease-out forwards;
+  animation-delay: 220ms;
+}
+
+.reveal-logo {
+  animation: logoRevealAndFade 5700ms ease-out 330ms forwards;
+}
+
+.reveal-text {
+  animation: reveal 10ms ease-out 550ms forwards;
+}
+
+.reveal-background {
+  animation: reveal 10ms ease-out 550ms forwards;
+}

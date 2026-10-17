@@ -1,0 +1,50 @@
+@keyframes teamLogoAnimation {
+  from {
+    transform: scale(1.15);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes deciderLogoAnimation {
+  from {
+    transform: scale(1.05);
+  }
+  to {
+    transform: scale(0.9);
+  }
+}
+
+@keyframes mapbanCardReveal {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-mapban-card-in {
+  opacity: 0;
+  animation-name: mapbanCardReveal;
+  animation-duration: 220ms;
+  animation-timing-function: cubic-bezier(0.42, 0, 0.58, 1);
+  animation-fill-mode: both;
+}
+
+.animate-team-logo {
+  animation-name: teamLogoAnimation;
+  animation-duration: 0.16s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: both;
+}
+
+.animate-decider-logo {
+  animation-name: deciderLogoAnimation;
+  animation-duration: 0.16s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: both;
+}

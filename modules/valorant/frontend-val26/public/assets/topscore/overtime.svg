@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="438.138" height="47" viewBox="0 0 438.138 47">
+  <defs>
+    <radialGradient id="radial-gradient" cx="0.484" cy="-0.058" r="0.503" gradientTransform="translate(0 0.047) scale(1 1.816)" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#a01f1f"/>
+      <stop offset="1" stop-color="#0f1923" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <g id="Overtime" transform="translate(-1490.964 0.24)">
+    <rect id="OT_Gradient" data-name="OT Gradient" width="433" height="47" transform="translate(1495 -0.24)" fill="url(#radial-gradient)"/>
+    <path id="Path_27" data-name="Path 27" d="M-10.295,0h2.557l5.075,5H-5.147Z" transform="translate(1605.397 9.26)" fill="#e60404"/>
+    <path id="Path_28" data-name="Path 28" d="M-2.663,0H-5.22l-5.075,5h2.484Z" transform="translate(1827.396 9.26)" fill="#e60404"/>
+    <path id="Path_29" data-name="Path 29" d="M-10.295,0h9.207L4.4,5.965H-4.293Z" transform="translate(1573.7 -0.24)" fill="#e60404"/>
+    <path id="Path_39" data-name="Path 39" d="M-10.295,0h9.207L4.4,5.965H-4.293Z" transform="translate(1525.406 -0.24)" fill="rgba(230,4,4,0.4)"/>
+    <path id="Path_37" data-name="Path 37" d="M-10.295,0h9.207L4.4,5.965H-4.293Z" transform="translate(1549.553 -0.24)" fill="rgba(230,4,4,0.7)"/>
+    <path id="Path_38" data-name="Path 38" d="M-10.295,0h9.207L4.4,5.965H-4.293Z" transform="translate(1501.259 -0.24)" fill="rgba(230,4,4,0.2)"/>
+    <path id="Path_40" data-name="Path 40" d="M4.4,0H-4.806l-5.489,5.965H-1.6Z" transform="translate(1852.259 -0.24)" fill="#e60404"/>
+    <path id="Path_41" data-name="Path 41" d="M4.4,0H-4.806l-5.489,5.965H-1.6Z" transform="translate(1900.553 -0.24)" fill="rgba(230,4,4,0.4)"/>
+    <path id="Path_42" data-name="Path 42" d="M4.4,0H-4.806l-5.489,5.965H-1.6Z" transform="translate(1876.406 -0.24)" fill="rgba(230,4,4,0.7)"/>
+    <path id="Path_43" data-name="Path 43" d="M4.4,0H-4.806l-5.489,5.965H-1.6Z" transform="translate(1924.7 -0.24)" fill="rgba(230,4,4,0.2)"/>
+  </g>
+</svg>

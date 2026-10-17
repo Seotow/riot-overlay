@@ -1,0 +1,52 @@
+<div class="pos-x-center absolute bottom-28 h-62.5 w-max overflow-visible">
+  <div class="flex h-full w-max flex-row">
+    @for (map of selectedMaps; track mapCardAnimationRun + '-' + $index; let isLast = $last) {
+    <div
+      class="animate-mapban-card-in flex h-62.5 w-52.5 shrink-0 flex-col bg-[#171717]"
+      [style.animation-delay.ms]="$index * 110"
+    >
+      <div
+        class="font-replica h-16.5 w-full bg-white/80 text-center text-lg text-[#263156] uppercase"
+      >
+        <div class="flex h-full flex-col items-center justify-center">
+          @if(isLast && hasDecider) {
+          <span>DECIDER<br />MAP</span>
+          } @else {
+          <span>{{ teams[getActionTeam($index, map)!].tricode }}</span>
+          @if(getActionType($index, map) === "ban") {
+          <span>VETO MAP</span>
+          } @else if(getActionType($index, map) === "pick") {
+          <span>SELECT MAP</span>
+          } }
+        </div>
+      </div>
+      @if(isLast && hasDecider) {
+      <div class="flex flex-1 items-center justify-center">
+        <img
+          src="assets/misc/V_Logomark_White.png"
+          class="animate-decider-logo h-full w-full scale-90 object-contain"
+          [style.animation-delay.ms]="$index * 110 + 180"
+        />
+      </div>
+      } @else {
+      <div class="flex flex-1 items-center justify-center">
+        <img
+          src="{{ teams[getActionTeam($index, map)!].url }}"
+          class="animate-team-logo h-26 w-full object-contain"
+          [style.animation-delay.ms]="$index * 110 + 180"
+        />
+      </div>
+      }
+      <app-mapban-map
+        class="absolute top-16.5 h-46 w-52.5 overflow-hidden"
+        [index]="$index"
+        [map]="selectedMaps[$index]"
+        [teams]="[teams[0], teams[1]]"
+        [availableMapNames]="availableMapNames"
+        [actingTeam]="getActionTeam($index, selectedMaps[$index])"
+        [stage]="stage"
+      ></app-mapban-map>
+    </div>
+    }
+  </div>
+</div>

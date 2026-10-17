@@ -1,0 +1,281 @@
+@if (isShown()) {
+  <div
+    class="max-vw-615 vh-100 relative flex flex-row items-center overflow-visible py-0.5"
+    animate.enter="animate-reasons-in animate-duration-330"
+    animate.leave="animate-reasons-out animate-duration-330"
+  >
+    <!-- Main background element underneath everything -->
+    <div
+      class="absolute top-1/2 left-1/2 -z-20 -translate-x-[53.5%] -translate-y-[52%] transform"
+      style="height: 130px; background-color: rgba(23, 28, 34, 0.7)"
+      [style.width]="backgroundWidth()"
+      [style.left]="backgroundLeft()"
+    ></div>
+    <div
+      class="vw-100 items-around relative flex h-full shrink-0 flex-col justify-around gap-1"
+      [style.left]="isInOT() ? '-2px' : dataModel.match().roundNumber > 12 ? '-230px' : '0px'"
+    >
+      @for (team of dataModel.match().teams; track $index; let teamIndex = $index) {
+        <div class="relative">
+          <!-- Team side color bar -->
+          <div
+            class="absolute z-10"
+            style="width: 4px; height: 40px; left: -46px; top: -22px"
+            [style.background-color]="
+              dataModel.match().teams[teamIndex].isAttacking
+                ? 'var(--color-attacker-primary)'
+                : 'var(--color-defender-primary)'
+            "
+          ></div>
+          <!-- Team logo -->
+          <img
+            class="absolute z-10"
+            style="width: 30px; height: 30px; left: -34px; top: -18px; object-fit: contain"
+            [src]="team.teamUrl"
+            [alt]="team.teamName"
+          />
+          <p
+            class="font-foundry-extrabold absolute -top-4 left-0.5 z-10 text-[20px] text-[#BABABA]"
+          >
+            {{ team.teamTricode }}
+          </p>
+
+          <!-- Timeout squares -->
+          <div class="absolute z-10 flex flex-col gap-1" style="left: 66px; top: -16px">
+            @for (square of [0, 1]; track square) {
+              <div
+                class="border-2 transition-colors duration-100"
+                [class.timeout-square-animate]="shouldTimeoutSquareAnimate(teamIndex, square)"
+                style="width: 8px; height: 8px; border-color: #6e7d84"
+                [style.background-color]="
+                  isTimeoutSquareFilled(teamIndex, square) ? '#6E7D84' : 'transparent'
+                "
+              ></div>
+            }
+          </div>
+          <!-- Rectangle under team name -->
+          <div
+            class="absolute -top-[28px] left-0 -z-10 transform border border-[#707070]"
+            style="
+              width: 141px;
+              height: 50px;
+              background-color: rgba(20, 29, 38, 0.95);
+              margin-left: -53px;
+            "
+          ></div>
+        </div>
+      }
+    </div>
+    <div
+      class="relative flex h-full flex-row justify-center"
+      [style.min-width]="isInOT() ? 'auto' : '451px'"
+      [style.left]="isInOT() ? '36px' : '0px'"
+    >
+      @for (r of dataModel.teams()[0].roundRecord; track $index; let recordIndex = $index) {
+        @if (
+          isInOT()
+            ? $index >= otStartIndex() && $index < otStartIndex() + maxRoundsToShow()
+            : $index < dataModel.match().roundNumber || $index < maxRoundsToShow()
+        ) {
+          <div
+            class="relative flex -translate-y-1 transform flex-col items-center"
+            [style.margin-right]="
+              isInOT()
+                ? '3px'
+                : dataModel.match().roundNumber > 12 && recordIndex === 11
+                  ? '18px'
+                  : '3px'
+            "
+          >
+            <!-- Current round highlight rectangle -->
+            @if (recordIndex === dataModel.match().roundNumber - 1) {
+              <div
+                class="current-round-animate absolute z-20"
+                style="
+                  width: 42px;
+                  height: 102px;
+                  top: 0px;
+                  left: 50%;
+                  transform: translateX(-50%);
+                  border: 4px solid #eadeae;
+                  box-sizing: border-box;
+                  background: transparent;
+                  filter: drop-shadow(0 0 8px #e9d06d);
+                "
+              ></div>
+            }
+
+            <!-- Round number above both teams -->
+            <p class="font-foundry-extrabold mb-0.1 text-[15px] text-[#BABABA]">
+              {{ r.round }}
+            </p>
+
+            <!-- Team round reasons -->
+            <div class="flex flex-col" style="gap: 3px; margin-bottom: 36px">
+              @for (team of dataModel.teams(); track teamIndex; let teamIndex = $index) {
+                @let record = team.roundRecord![recordIndex];
+
+                @if (record.type === "upcoming" || record.type === "lost") {
+                  <!-- Upcoming/Lost round square -->
+                  <div
+                    class="flex items-center justify-center border-2 border-[#8D8D8D5E]"
+                    style="width: 33px; height: 33px; background-color: rgba(26, 36, 45, 0.75)"
+                  ></div>
+                } @else {
+                  <!-- Won round with reason icon -->
+                  <div
+                    class="flex items-center justify-center border-2 {{
+                      record.wasAttack ? 'attacker-round-won' : 'defender-round-won'
+                    }}"
+                    style="width: 33px; height: 33px"
+                  >
+                    @switch (record.type) {
+                      @case ("defused") {
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="18.193"
+                          height="21.001"
+                          viewBox="0 0 18.193 21.001"
+                          class="h-6 w-6"
+                        >
+                          <path
+                            id="Defused"
+                            d="M2.643,21H0V19.864H1.142l0-.015c.167-.783,1.654-7.676,2.28-8.459A3.262,3.262,0,0,1,4.673,10.4a2.125,2.125,0,0,1,.82-.183.88.88,0,0,1,.1,0V9.087L3.751,7.932V3.392L6.792,0H7.917V6.329L9.088,7.4l1.149-1.073V0h1.057l2.958,3.392v4.54l-1.77,1.155v1.131h0a1.243,1.243,0,0,1,.239-.022,2.822,2.822,0,0,1,2.1,1.2c1.051,1.238,2.217,8.394,2.229,8.466h1.137V21H15.877L9.088,11.935,2.643,21ZM9.072,8.54a1.137,1.137,0,1,0,1.137,1.137A1.138,1.138,0,0,0,9.072,8.54Z"
+                            [attr.fill]="
+                              record.wasAttack
+                                ? 'var(--color-attacker-primary)'
+                                : 'var(--color-defender-primary)'
+                            "
+                          />
+                        </svg>
+                      }
+                      @case ("detonated") {
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="22.702"
+                          height="21.002"
+                          viewBox="0 0 22.702 21.002"
+                          class="h-6 w-6"
+                        >
+                          <path
+                            id="Detonated"
+                            d="M6105.684,1044h-4.229l-3.091-7.458,4.917,1.381-1.826-7.981,5.12,4.2L6109.6,1023l3.52,11.145,5.1-4.2-1.827,7.981,4.672-1.381-3.273,7.458h-4.2l1.827-3.292-2.773.9,1.391-3.682-2.74,1.818-1.7-6.063-1.6,5.674-2.312-1.429.891,3.682-2.34-.9Z"
+                            transform="translate(-6098.363 -1022.997)"
+                            [attr.fill]="
+                              record.wasAttack
+                                ? 'var(--color-attacker-primary)'
+                                : 'var(--color-defender-primary)'
+                            "
+                          />
+                        </svg>
+                      }
+                      @case ("kills") {
+                        <svg
+                          id="Kills"
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="21.221"
+                          height="21.002"
+                          viewBox="0 0 21.221 21.002"
+                          class="h-6 w-6"
+                        >
+                          <path
+                            id="Path_48"
+                            data-name="Path 48"
+                            d="M0,0H3.243l0,26.456H0Z"
+                            transform="translate(18.928 0) rotate(45)"
+                            [attr.fill]="
+                              record.wasAttack
+                                ? 'var(--color-attacker-primary)'
+                                : 'var(--color-defender-primary)'
+                            "
+                          />
+                          <path
+                            id="Path_49"
+                            data-name="Path 49"
+                            d="M0,0H3.24l0,26.456H0Z"
+                            transform="translate(0 2.294) rotate(-45)"
+                            [attr.fill]="
+                              record.wasAttack
+                                ? 'var(--color-attacker-primary)'
+                                : 'var(--color-defender-primary)'
+                            "
+                          />
+                          <g
+                            id="Ellipse_1"
+                            data-name="Ellipse 1"
+                            transform="translate(1.656 1.528)"
+                            fill="none"
+                            [attr.stroke]="
+                              record.wasAttack
+                                ? 'var(--color-attacker-primary)'
+                                : 'var(--color-defender-primary)'
+                            "
+                            stroke-width="3.25"
+                          >
+                            <ellipse cx="8.976" cy="8.973" rx="8.976" ry="8.973" stroke="none" />
+                            <ellipse cx="8.976" cy="8.973" rx="7.351" ry="7.348" fill="none" />
+                          </g>
+                        </svg>
+                      }
+                      @case ("timeout") {
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="20.991"
+                          height="21.001"
+                          viewBox="0 0 20.991 21.001"
+                          class="h-6 w-6"
+                        >
+                          <path
+                            id="Timeout"
+                            d="M20.978,21H.045L7.5,10.751,0,0,20.991,0l-7.5,10.751L20.978,21ZM5.012,2.685h0l5.5,7.816L15.98,2.685H5.012Z"
+                            [attr.fill]="
+                              record.wasAttack
+                                ? 'var(--color-attacker-primary)'
+                                : 'var(--color-defender-primary)'
+                            "
+                          />
+                        </svg>
+                      }
+                    }
+                  </div>
+                }
+              }
+            </div>
+          </div>
+        }
+      }
+      <!-- Rectangle under round reasons list -->
+      <div
+        class="absolute bottom-0 left-0 -z-10 border border-[#707070]"
+        [style.width]="bottomRectangleWidth()"
+        [style.left]="isInOT() ? '-38px' : dataModel.match().roundNumber > 12 ? '-230px' : '0px'"
+        style="height: 102px; background-color: rgba(20, 29, 38, 0.95); margin-left: -10px"
+      >
+        @if (dataModel.match().roundNumber >= dataModel.match().firstOtRound) {
+          <div
+            class="font-foundry-extrabold absolute -rotate-90 text-[14px] text-[#E60404]"
+            style="left: -8px; top: 40%; transform: translateY(-50%)"
+          >
+            <p>OVERTIME</p>
+          </div>
+        }
+      </div>
+    </div>
+
+    <!-- Overtime SVG wrapper - uses flexbox to align to right edge of background -->
+    @if (dataModel.match().roundNumber >= dataModel.match().firstOtRound) {
+      <div
+        class="absolute top-1/2 left-1/2 flex -translate-x-[53.5%] -translate-y-[52%] transform justify-end"
+        [style.width]="backgroundWidth()"
+        [style.left]="backgroundLeft()"
+        style="z-index: -15"
+      >
+        <img
+          src="./assets/roundWinReason/overtime_roundReasons.svg"
+          alt="Overtime"
+          style="scale: 1; display: block"
+        />
+      </div>
+    }
+  </div>
+}

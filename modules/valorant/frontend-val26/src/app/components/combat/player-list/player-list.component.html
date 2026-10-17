@@ -1,0 +1,36 @@
+<div class="vw-1920 vh-520 flex flex-row justify-between">
+  @for (team of dataModel.teams(); track $index; let tIdx = $index) {
+    <div class="flex flex-col justify-end gap-6">
+      @for (player of team.players; track $index) {
+        @if (isShown()) {
+          @if (!dataModel.minimalMode()) {
+            <app-player-combat-card
+              [player]="player"
+              [playerHealth]="player.health"
+              [isObserved]="player.isObserved"
+              [isAlive]="player.isAlive"
+              [right]="tIdx === 1"
+              [color]="team.isAttacking ? 'attacker' : 'defender'"
+              animate.enter="animate-slide-in animate-duration-230"
+              animate.leave="animate-slide-out animate-duration-150"
+              [class]="tIdx === 0 ? 'left' : 'right'"
+            ></app-player-combat-card>
+          } @else {
+            <app-player-combat-card-minimal
+              [player]="player"
+              [playerHealth]="player.health"
+              [isObserved]="player.isObserved"
+              [isAlive]="player.isAlive"
+              [right]="tIdx === 1"
+              [color]="team.isAttacking ? 'attacker' : 'defender'"
+              animate.enter="animate-slide-in animate-duration-230"
+              animate.leave="animate-slide-out animate-duration-150"
+              [class]="tIdx === 0 ? 'left' : 'right'"
+            >
+            </app-player-combat-card-minimal>
+          }
+        }
+      }
+    </div>
+  }
+</div>

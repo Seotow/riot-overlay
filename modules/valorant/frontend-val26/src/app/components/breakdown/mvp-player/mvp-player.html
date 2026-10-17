@@ -1,0 +1,52 @@
+<div
+  class="relative grid h-full w-full grid-cols-3 overflow-hidden"
+  [style.direction]="isRight ? 'rtl' : 'ltr'"
+>
+  <!-- MVP Badge -->
+  <div
+    class="bg-postmatch-primary absolute top-0 z-10 flex h-[56px] w-[128px] items-center justify-center"
+    [class]="isRight ? 'right-0 rounded-bl-lg' : 'left-0 rounded-br-lg'"
+  >
+    <span class="font-replica text-center text-3xl text-white"
+      >{{TranslateKeys.Breakdown_MVP | translate}}</span
+    >
+  </div>
+  <!-- Names -->
+  <div
+    class="z-1 col-span-1 flex flex-col justify-end gap-1.5 pb-4"
+    [class]="isRight ? 'items-end text-right pr-4' : 'items-start text-left pl-4'"
+    [style.direction]="'ltr'"
+  >
+    <span class="font-replica text-3xl text-white uppercase">{{player.agent.name}}</span>
+    <span class="font-replica text-5xl text-white uppercase">{{player.name}}</span>
+  </div>
+  <!-- Agent Portrait -->
+  <div class="relative z-0 col-span-1">
+    <img
+      class="absolute -top-20 left-1/2 h-[250%] w-auto -translate-x-[47%] object-top"
+      src="/assets/agent-portraits/{{agentInternalName}}Portrait.webp"
+    />
+  </div>
+  <!-- Numbers -->
+  <div
+    class="z-1 col-span-1 flex h-full w-full flex-col justify-center"
+    [class]="isRight ? 'text-left items-start pl-4' : 'text-right items-end pr-4'"
+    [style.direction]="'ltr'"
+  >
+    <span
+      class="font-foundry-extrabold text-[3.5rem] text-white"
+      [class]="isRight ? 'ml-6' : 'mr-6'"
+      >{{player.stats.kills}}/{{player.stats.deaths}}/{{player.stats.assists}}</span
+    >
+    <span
+      class="font-foundry-extrabold text-[3.5rem] text-white"
+      [class]="isRight ? 'ml-6' : 'mr-6'"
+      >{{player.stats.acs}}</span
+    >
+    <span
+      class="font-foundry-extrabold text-[3.5rem] text-white"
+      [class]="isRight ? 'ml-6' : 'mr-6'"
+      >{{player.stats.firstKills}}</span
+    >
+  </div>
+</div>
