@@ -103,6 +103,11 @@ export default class HotkeyService {
     }
   }
 
+  // Riot Overlay: Studio kích hoạt đúng hành động của phím nóng tương ứng.
+  public trigger(type: HotkeyType) {
+    this.hotkeys[type].action();
+  }
+
   private _spikePlantedHotkeyAction() {
     if (this.currentRoundPhase != "combat") return;
     const toSend = { type: DataTypes.SPIKE_PLANTED, data: true };

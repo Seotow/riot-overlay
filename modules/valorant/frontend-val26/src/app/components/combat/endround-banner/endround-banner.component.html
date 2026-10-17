@@ -1,0 +1,207 @@
+@if (dataModel.roundWinBox().type !== "disabled") {
+  <div
+    class="relative flex items-center justify-center"
+    [class.hidden]="hide && !preload"
+    [class.opacity-0]="preload"
+  >
+    <!-- Reveal Squares - Always present, controlled by CSS -->
+    <div class="absolute inset-0 z-50 flex items-center justify-center">
+      <!-- Left Square -->
+      <div
+        class="reveal-square-left absolute"
+        [class.animate]="showRevealSquares"
+        [class.reverse]="showReverseSquares"
+        style="background-color: #db3131; height: 225px; left: 50%"
+      ></div>
+      <!-- Right Square -->
+      <div
+        class="reveal-square-right absolute"
+        [class.animate]="showRevealSquares"
+        [class.reverse]="showReverseSquares"
+        style="background-color: #db3131; height: 225px; left: 50%"
+      ></div>
+    </div>
+
+    <div class="banner-wrapper relative" style="width: 732.5px; height: 184.619px">
+      <div
+        class="banner-inner"
+        [class.is-closed]="clipClosed"
+        [class.banner-reveal-animation]="showAnimation"
+        [class.banner-close-animation]="clipClosing"
+      >
+        <!-- Tournament Background -->
+        <div class="endround-mask absolute inset-0 z-0">
+          @if (bannerBackgroundUrl()) {
+            <div
+              class="h-full w-full bg-cover bg-center"
+              [style.background-image]="'url(\'' + bannerBackgroundUrl() + '\')'"
+            ></div>
+          } @else {
+            <div class="h-full w-full" [class]="waitingBackgroundClass()"></div>
+          }
+        </div>
+
+        <!-- Round Win Accent -->
+        <div class="endround-mask absolute inset-0 z-10">
+          <div class="absolute" style="top: -50px; left: 15%; transform: scale(0.9)">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="516.603"
+              height="329.123"
+              viewBox="0 0 516.603 329.123"
+            >
+              <g id="round-win-accent" transform="translate(-701.164 -134)">
+                <path
+                  id="Path_71"
+                  data-name="Path 71"
+                  d="M-1909.208,3107.448l-25.979-15.016h-22.633l5.4-10.279-19.449-10.92s-21.785,31.727-19.263,54.236c-.449,4.184,2.436,16.073,8.64,28.989,31.9,55.8,103.5,182.163,103.5,182.163l59.317-35.6s-88.423-152.066-97.933-169.121c-2.205-4.587.085-9.294,2.073-13.617Z"
+                  transform="translate(2693 -2874)"
+                  fill="none"
+                  stroke="#616564"
+                  stroke-width="1"
+                />
+                <path
+                  id="Path_72"
+                  data-name="Path 72"
+                  d="M-1901.788,3107.448l24.38-12.063,23.682.349-4.673-9.26,22.087-10.909s5.619,9.24,9.4,16.965c3.694,6.96,8.121,20.392,6.5,33.109-.232,4.321-2.1,15.911-8.3,28.827-31.9,55.8-106.7,180.387-106.7,180.387l-55.907-33.826s87.9-152.135,97.414-169.19c2.205-4.587.434-9.225-1.553-13.548Z"
+                  transform="translate(3037.331 -2873)"
+                  fill="none"
+                  stroke="#616564"
+                  stroke-width="1"
+                />
+                <path
+                  id="Path_73"
+                  data-name="Path 73"
+                  d="M8-1.016,17.693,14H0Z"
+                  transform="translate(739 202)"
+                  fill="#d0d0d0"
+                />
+                <path
+                  id="Path_74"
+                  data-name="Path 74"
+                  d="M9.7-1.016,0,14H17.693Z"
+                  transform="translate(1161.5 206.016)"
+                  fill="#d0d0d0"
+                />
+                <path
+                  id="Path_75"
+                  data-name="Path 75"
+                  d="M-1950.859,3079.582l5.336-9.474,11.888,19.077,26.365,15.565s7.928-17.386,14.954-19.952c1.123-.447,4.5-1.346,11.556-1.227l117.24-.221,6.769-6.935,18.3.085v-68h-153.867c-8.266.093-22.479,3.631-41.319,18.019s-36.67,42.183-36.67,42.183Z"
+                  transform="translate(2693 -2874)"
+                  fill="none"
+                  stroke="#707070"
+                  stroke-width="1"
+                />
+                <path
+                  id="Path_76"
+                  data-name="Path 76"
+                  d="M-1756.51,3080.449l-6.6-10.341-11.888,19.077-25.262,12.112s-7.928-17.386-14.954-19.952c-1.123-.447-4.374-1.884-11.429-1.765h-117.271l-7.066-6.868-18.481-.213v-68h150c9.706.42,28.975,7.487,46.1,21.23s38.665,43.445,38.665,43.445Z"
+                  transform="translate(2934 -2870)"
+                  fill="none"
+                  stroke="#707070"
+                  stroke-width="1"
+                />
+              </g>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Text Background (positioned half inside/outside mask) -->
+        <div class="absolute bottom-7 left-1/2 z-20 -translate-x-1/2 translate-y-1/2 transform">
+          <svg
+            class="reveal-background opacity-0"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            width="485"
+            height="55"
+            viewBox="0 0 485 55"
+          >
+            <defs>
+              <linearGradient
+                id="text-bg-gradient"
+                y1="0.5"
+                x2="1"
+                y2="0.5"
+                gradientUnits="objectBoundingBox"
+              >
+                <stop offset="0" stop-color="#121b26" stop-opacity="0" />
+                <stop offset="0.237" stop-color="#121b26" />
+                <stop offset="0.759" stop-color="#121b26" />
+                <stop offset="1" stop-color="#121b26" stop-opacity="0" />
+              </linearGradient>
+            </defs>
+            <rect
+              id="Rectangle_78"
+              data-name="Rectangle 78"
+              width="485"
+              height="55"
+              fill="url(#text-bg-gradient)"
+            />
+          </svg>
+          <div
+            class="absolute top-7.5 left-1/2 flex -translate-x-1/2 -translate-y-1/2 transform flex-row items-center justify-around gap-6"
+            style="max-width: 300px"
+          >
+            <p
+              class="font-foundry-extrabold reveal-background whitespace-nowrap text-white uppercase opacity-0"
+              style="font-size: clamp(1rem, 2vw, 1.5rem)"
+            >
+              {{ teamWonSide() }}
+            </p>
+            <img
+              class="reveal-background h-full w-10 flex-shrink-0 -translate-y-[0.25vh] transform opacity-0"
+              [src]="teamWonLogoUrl()"
+            />
+            <p
+              class="font-foundry-extrabold reveal-background whitespace-nowrap text-white uppercase opacity-0"
+              style="font-size: clamp(1rem, 2vw, 1.5rem)"
+            >
+              {{ teamWonTricode() }}
+            </p>
+          </div>
+
+          <!-- Animated flash background - above content -->
+          <div
+            class="text-bg-flash absolute inset-0 z-10"
+            [class.animate]="showAnimation"
+            style="background-color: #db3131"
+          ></div>
+        </div>
+
+        <div
+          class="absolute top-0 left-1/2 z-20 flex -translate-x-1/2 translate-y-1/2 transform justify-center"
+          style="width: 100vw; max-width: 100vw"
+        >
+          <p
+            class="font-foundry-extrabold reveal-text whitespace-nowrap text-white uppercase opacity-0"
+            style="font-size: clamp(1.5rem, 5vw, 3.5rem); text-align: center"
+          >
+            {{ roundWonType() | translate }}
+          </p>
+
+          <!-- Animated flash background - above content -->
+          <div
+            class="round-win-text-flash absolute z-10"
+            [class.animate]="showAnimation"
+            style="background-color: #db3131; left: -20px; right: -20px; top: -10px; bottom: -10px"
+          ></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="absolute -top-8 left-1/2 z-20 -translate-x-1/2 transform">
+      <img
+        class="reveal-logo h-full w-[6vh] max-w-[6vh] opacity-0"
+        [src]="bannerTopIconUrl()"
+        (load)="onImageLoad()"
+      />
+
+      <!-- Animated flash background - above content -->
+      <div
+        class="tournament-icon-flash absolute z-10"
+        [class.animate]="showAnimation"
+        style="background-color: #db3131; left: -20px; right: -20px; top: -10px; bottom: -10px"
+      ></div>
+    </div>
+  </div>
+}

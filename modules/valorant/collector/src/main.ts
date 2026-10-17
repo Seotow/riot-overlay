@@ -22,10 +22,17 @@ import HotkeyService, { HotkeyType } from "./services/hotkeyService";
 import axios from "axios";
 import * as semver from "semver";
 import find, { ProcessInfo } from "find-process";
+import { loadHeadlessConfig, startControlServer, ControlResult } from "./headless";
 // import { installExtension } from "electron-devtools-installer";
 
 const { app, BrowserWindow, ipcMain } = require("electron/main");
 const storage = require("electron-json-storage");
+
+// Riot Overlay: profile riêng cho bản do Studio quản lý, tách khỏi Client cài sẵn.
+if (process.env.RIOT_OVERLAY_SPECTRA_PROFILE) {
+  app.setPath("userData", process.env.RIOT_OVERLAY_SPECTRA_PROFILE);
+}
+const headless = loadHeadlessConfig();
 
 //check for second instance //KEEP UP HERE
 //#region SingleInstanceLock
@@ -119,6 +126,7 @@ const createWindow = () => {
 
   win.once("ready-to-show", () => {
     // Only show immediately if not configured to start minimized
+    if (headless) return;
     if (!(runAtStartupSetting.enabled && runAtStartupSetting.startMinimized)) {
       win.show();
     } else {
@@ -170,6 +178,7 @@ const createWindow = () => {
   if (!isAuxiliary) {
     // Observer mode
     if (
+      !headless &&
       (traySetting || (runAtStartupSetting.enabled && runAtStartupSetting.startMinimized)) &&
       !tray
     ) {
@@ -311,7 +320,7 @@ app.whenReady().then(async () => {
   });
 
   createWindow();
-  const updateAvailable = await updateCheck();
+  const updateAvailable = headless ? false : await updateCheck();
   if (updateAvailable) {
     shell.openExternal(`https://valospectra.com/download`);
     app.quit();
@@ -322,6 +331,10 @@ app.whenReady().then(async () => {
   gepService = new GameEventsService(isAuxiliary);
   overwolfSetup();
   deeplinkSetup();
+  if (headless) {
+    setTimeout(headlessConnect, 3000);
+    startControlServer(headless, runControlCommand);
+  }
 
   // if (isDev()) {
   //   // Install Angular DevTools
@@ -779,7 +792,83 @@ export function setLoadingStatus(loading: boolean) {
 export function fireConnect() {
   connService.stopAttempts();
   if (connService.isConnected()) return;
+  if (headless) return headlessConnect();
   win.webContents.send("fire-connect");
+}
+
+// Lệnh thủ công của Spectra (cùng dữ liệu với phím nóng/nút Client) do Studio gửi qua kênh loopback.
+function runControlCommand(body: any): ControlResult {
+  if (!connService.isConnected()) return { ok: false, error: "not-connected" };
+  const hotkeys = HotkeyService.getInstance();
+  const midmatch = [DataTypes.SWAP_L_R, DataTypes.SWAP_A_D];
+  switch (body?.command) {
+    case "spike_planted":
+      hotkeys.trigger(HotkeyType.SPIKE_PLANTED);
+      break;
+    case "tech_pause":
+      hotkeys.trigger(HotkeyType.TECH_PAUSE);
+      break;
+    case "left_timeout":
+      hotkeys.trigger(HotkeyType.LEFT_TIMEOUT);
+      break;
+    case "right_timeout":
+      hotkeys.trigger(HotkeyType.RIGHT_TIMEOUT);
+      break;
+    case "switch_kda_credits":
+      hotkeys.trigger(HotkeyType.SWITCH_KDA_CREDITS);
+      break;
+    case "swap_left_right":
+    case "swap_attacker_defender":
+      if (!midmatch.includes(body.command)) return { ok: false, error: "unknown-command" };
+      connService.sendToIngest({ type: body.command, data: true });
+      break;
+    case "toast": {
+      const title = String(body.title ?? "").slice(0, 80);
+      const message = String(body.message ?? "").slice(0, 200);
+      const duration = body.duration === null ? null : Number(body.duration);
+      if (duration !== null && !(duration >= 1000 && duration <= 60000))
+        return { ok: false, error: "bad-duration" };
+      connService.sendToIngest({
+        type: DataTypes.TOAST,
+        data: { title, message, duration, eventLogoEnabled: true, active: true },
+      } as any);
+      break;
+    }
+    default:
+      return { ok: false, error: "unknown-command" };
+  }
+  return { ok: true };
+}
+
+// Kết nối ingest bằng config do Studio cấp, thay cho form trong renderer.
+function headlessConnect() {
+  if (!headless || connService.isConnected()) return;
+  log.info(`Headless connect to ${headless.ingestIp}, group ${headless.groupCode}`);
+  setSpectraStatus("Connecting", StatusTypes.YELLOW);
+  const team = (name: string, tricode: string, attackStart: boolean) => ({
+    name,
+    tricode,
+    url: headless!.teamLogoUrl,
+    attackStart,
+  });
+  connService.handleAuthProcess(
+    headless.ingestIp,
+    headless.observerName,
+    headless.groupCode,
+    getMatchSecret(),
+    team("Team 1", "T1", true),
+    team("Team 2", "T2", false),
+    headless.key,
+    { needed: 0, wonLeft: 0, wonRight: 0, mapInfo: [] },
+    { left: "", right: "" },
+    { logoUrl: "", backdropUrl: "", timeoutDuration: 60 },
+    { enabled: false, duration: 5000, sponsors: [] },
+    { spectraWatermark: true, customTextEnabled: false, customText: "" },
+    { enable: false, identifier: "", secret: "", endTime: 0 },
+    { max: 2, left: 2, right: 2 },
+    { type: "disabled", sponsors: [] },
+    win,
+  );
 }
 
 function setTraySetting(_event: any, setting: boolean) {
@@ -887,6 +976,10 @@ export function messageBox(
   type: messageBoxType,
   buttons: string[] = ["OK"],
 ): number {
+  if (headless) {
+    log.warn(`Headless dialog suppressed: ${title}: ${message}`);
+    return 0;
+  }
   return dialog.showMessageBoxSync(win, {
     title: title,
     message: message,

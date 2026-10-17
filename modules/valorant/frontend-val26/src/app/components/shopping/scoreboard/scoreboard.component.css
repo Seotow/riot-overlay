@@ -1,0 +1,46 @@
+.bg-header-fade-left {
+  background: linear-gradient(
+    90deg,
+    rgba(15, 25, 35, 0.65) 0%,
+    rgba(15, 25, 35, 0.53) 53%,
+    rgba(15, 25, 35, 0) 75%,
+    rgba(15, 25, 35, 0) 100%
+  );
+}
+
+.bg-header-fade-right {
+  background: linear-gradient(
+    270deg,
+    rgba(15, 25, 35, 0.65) 0%,
+    rgba(15, 25, 35, 0.53) 53%,
+    rgba(15, 25, 35, 0) 75%,
+    rgba(15, 25, 35, 0) 100%
+  );
+}
+
+@keyframes animations-scoreboard {
+  0% {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+  0.1% {
+    opacity: 0.7;
+  }
+  60% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(18rem);
+  }
+}
+
+.animate-scoreboard-in {
+  animation: animations-scoreboard 0.1s reverse ease-in-out;
+  will-change: opacity, transform;
+}
+
+.animate-scoreboard-out {
+  animation: animations-scoreboard 0.1s ease-in-out;
+  will-change: opacity, transform;
+}

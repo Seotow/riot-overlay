@@ -1,6 +1,6 @@
 import { access } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { defaultConfigPath, initConfig, loadConfig, moduleRoot, setCollectorPath } from './config.mjs';
+import { defaultConfigPath, frontendBrowserDir, initConfig, loadConfig, moduleRoot, setCollectorPath } from './config.mjs';
 import { startModule, availablePort } from './supervisor.mjs';
 
 const args = process.argv.slice(2);
@@ -20,7 +20,7 @@ try {
     const config = await loadConfig(configPath);
     const result = { config: 'valid', backendBuild: false, frontendBuild: false, collector: config.collectorPath ? 'missing' : 'not-configured', ports: {} };
     try { await access(resolve(moduleRoot, 'backend/dist/index.js')); result.backendBuild = true; } catch {}
-    try { await access(resolve(moduleRoot, 'frontend/dist/spectra-frontend/browser/index.html')); result.frontendBuild = true; } catch {}
+    try { const { dir, variant } = await frontendBrowserDir(config); await access(resolve(dir, 'index.html')); result.frontendBuild = true; result.frontendVariant = variant; } catch {}
     if (config.collectorPath) { try { await access(config.collectorPath); result.collector = 'executable-found-gep-unverified'; } catch {} }
     for (const [name, port] of Object.entries(config.ports)) { try { await availablePort(port); result.ports[name] = 'free'; } catch { result.ports[name] = 'occupied'; } }
     console.log(JSON.stringify(result, null, 2));

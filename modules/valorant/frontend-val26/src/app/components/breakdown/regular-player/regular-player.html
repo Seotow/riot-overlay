@@ -1,0 +1,33 @@
+<div class="grid h-full w-full grid-cols-[2fr_1fr]" [style.direction]="isRight ? 'rtl' : 'ltr'">
+  <!-- Image + Name-->
+  <div class="col-span-1 flex h-full min-h-0 flex-row overflow-hidden">
+    <img
+      class="h-[120px] w-[120px] shrink-0 bg-[#111111] object-cover"
+      [class.-scale-x-100]="isRight"
+      src="/assets/agents/{{agentInternalName}}Icon.webp"
+    />
+    <div class="@container flex h-full min-w-0 flex-1 flex-col items-start justify-center px-2">
+      <span
+        class="font-replica overflow-hidden text-[clamp(1rem,7.5cqi,1.125rem)] whitespace-nowrap text-white uppercase"
+        >{{player.agent.name}}</span
+      >
+      <span
+        class="font-replica overflow-hidden text-[clamp(1.125rem,12.4cqi,1.3125rem)] whitespace-nowrap text-white uppercase"
+        >{{player.name}}</span
+      >
+    </div>
+  </div>
+  <!-- Numbers -->
+  <div
+    class="col-span-1 mx-2 flex h-full w-full flex-col justify-center"
+    [class]="isRight ? 'text-left items-start' : 'text-right items-end'"
+    [style.direction]="'ltr'"
+  >
+    <span class="font-foundry-extrabold text-[2rem] text-white" [class]="isRight ? 'ml-8' : 'mr-8'"
+      >{{player.stats.kills}}/{{player.stats.deaths}}/{{player.stats.assists}}</span
+    >
+    <span class="font-foundry-extrabold text-[2rem] text-white" [class]="isRight ? 'ml-8' : 'mr-8'"
+      >{{player.stats.acs}}</span
+    >
+  </div>
+</div>

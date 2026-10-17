@@ -1,0 +1,494 @@
+<div
+  class="vh-82 relative flex overflow-visible"
+  [class]="[right() ? 'right-4' : 'left-4', right() ? 'flex-row-reverse' : 'flex-row']"
+  [class.opacity-78]="!isAlive()"
+>
+  <div class="vw-312 vh-90 absolute overflow-visible" [class.flip]="right()" id="background">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="312"
+      height="90"
+      viewBox="0 0 312 90"
+      class="absolute overflow-visible"
+      style="overflow: visible"
+    >
+      <defs>
+        <clipPath id="playercard-clip-path">
+          <path
+            d="M 1.000388145446777 88.91619873046875 L 1.027167558670044 19.88751411437988 L 20.88487243652344 0.9163172841072083 L 311 0.9579496383666992 L 311 88.89649200439453 L 1.000388145446777 88.91619873046875 Z"
+          />
+        </clipPath>
+        <filter [id]="'observed-shadow-' + uniqueId" x="-50%" y="-50%" width="300%" height="300%">
+          <feDropShadow dx="0" dy="0" stdDeviation="8" flood-color="#E9D06D" flood-opacity="1" />
+        </filter>
+        <mask [id]="'fade-mask-' + uniqueId">
+          <linearGradient [id]="'fade-gradient-' + uniqueId" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="white" stop-opacity="1" />
+            <stop offset="100%" stop-color="white" stop-opacity="0" />
+          </linearGradient>
+          <rect
+            x="0"
+            y="0"
+            width="312"
+            height="90"
+            [attr.fill]="'url(#fade-gradient-' + uniqueId + ')'"
+          />
+        </mask>
+      </defs>
+      <g
+        id="Playercard_BG"
+        data-name="Playercard BG"
+        transform="translate(0 0.084)"
+        fill="rgba(18,25,33,0.91)"
+        [attr.mask]="!isAlive() ? 'url(#fade-mask-' + uniqueId + ')' : null"
+      >
+        <path
+          d="M 1.000388145446777 88.91619873046875 L 1.027167558670044 19.88751411437988 L 20.88487243652344 0.9163172841072083 L 311 0.9579496383666992 L 311 88.89649200439453 L 1.000388145446777 88.91619873046875 Z"
+          stroke="none"
+        />
+        <path
+          d="M 21.28573608398438 1.916374206542969 L 2.026947021484375 20.31535339355469 L 2.000762939453125 87.91613006591797 L 310 87.89651489257812 L 310 1.957809448242188 L 21.28573608398438 1.916374206542969 M 20.48403930664062 -0.083740234375 L 312 -0.04190826416015625 L 312 89.89638519287109 L 0 89.916259765625 L 0.02728271484375 19.459716796875 L 20.48403930664062 -0.083740234375 Z"
+          stroke="none"
+          [attr.fill]="isObserved() && player.isAlive ? '#EADEAE' : '#71787e'"
+          [attr.filter]="
+            isObserved() && player.isAlive ? 'url(#observed-shadow-' + uniqueId + ')' : null
+          "
+        />
+      </g>
+    </svg>
+  </div>
+  @if (player.isAlive) {
+    <div
+      class="absolute top-9.25"
+      [class.flip]="right()"
+      [class]="right() ? 'right-0.5' : 'left-0.5'"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        width="309.87"
+        height="51.334"
+        viewBox="0 0 309.87 51.334"
+      >
+        <defs>
+          <linearGradient
+            [id]="'linear-gradient-team-' + uniqueId"
+            x1="1"
+            y1="0.5"
+            x2="0"
+            y2="0.5"
+            gradientUnits="objectBoundingBox"
+          >
+            <stop offset="0" stop-color="#111922" stop-opacity="0" />
+            <stop
+              offset="1"
+              [attr.stop-color]="
+                color() === 'attacker'
+                  ? 'var(--color-attacker-primary)'
+                  : 'var(--color-defender-primary)'
+              "
+              [attr.stop-opacity]="player.ultReady ? 0.35 : 0.15"
+            />
+          </linearGradient>
+        </defs>
+        <rect
+          id="Team_Color_Gradient"
+          data-name="Team Color Gradient"
+          width="309.87"
+          height="51.334"
+          [attr.fill]="'url(#linear-gradient-team-' + uniqueId + ')'"
+        />
+      </svg>
+      @if (player.ultReady) {
+        <div class="absolute top-0 left-0 h-full w-full">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            width="116.018"
+            height="53.107"
+            viewBox="0 0 116.018 53.107"
+          >
+            <defs>
+              <linearGradient
+                id="line-accent-gradient"
+                y1="0.5"
+                x2="0.812"
+                y2="0.5"
+                gradientUnits="objectBoundingBox"
+              >
+                <stop offset="0" stop-color="#868686" stop-opacity="0.35" />
+                <stop offset="1" stop-color="#868686" stop-opacity="0" />
+              </linearGradient>
+            </defs>
+            <path
+              id="Union_5_-_Outline"
+              data-name="Union 5 - Outline"
+              d="M2807.495-94.446l-28.247-25.769h0l-22.628,20.2,4.886,4.457-1.011,1.108-5-4.561-3.995,3.567-1-1.119,3.88-3.464-22.134-20.191h0l-16.67,14.884,8.916,7.766-.985,1.131-9.059-7.89-9.95,8.884-1-1.119,9.809-8.758-16.416-14.3-3.381,3.163-1.025-1.1,2.888-2.7H2693v-1.5h1.442l-1.935-1.685.985-1.131,3.233,2.816h.253l16.582-15.512-10.067-9.184,1.011-1.108,10.155,9.264,8.828-8.258,1.025,1.1-8.741,8.177,16.486,15.04,22.628-20.2-4.391-4.006,1.011-1.108,4.505,4.11,3.49-3.116,1,1.119-3.375,3.013,22.133,20.191,27.242-24.323,1,1.119-26.534,23.691H2801v1.5h-19.564l27.07,24.7Zm-73.059-25.8,21.07,19.221,21.528-19.221Zm-35.988,0,15.989,13.925,15.6-13.925Zm35.518-1.5h43.6L2756-141.423Zm-34.791,0h31.39l-15.892-14.5Z"
+              transform="translate(-2692.487 147.554)"
+              fill="url(#line-accent-gradient)"
+            />
+          </svg>
+        </div>
+      }
+    </div>
+  }
+  @if (player.auxiliaryAvailable.health && player.isAlive && playerHealth <= 20) {
+    <div
+      class="absolute top-0.5 z-15 h-full w-full"
+      [class.flip]="right()"
+      [class]="right() ? 'right-0.5' : 'left-0.5'"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        width="153.111"
+        height="44.364"
+        viewBox="0 0 153.111 44.364"
+      >
+        <defs>
+          <linearGradient
+            id="health-gradient"
+            x1="1"
+            y1="0.5"
+            x2="0"
+            y2="0.5"
+            gradientUnits="objectBoundingBox"
+          >
+            <stop offset="0" stop-color="#951111" stop-opacity="0" />
+            <stop offset="1" stop-color="#951111" stop-opacity="0.698" />
+          </linearGradient>
+        </defs>
+        <path
+          id="Low_Health"
+          data-name="Low Health"
+          d="M152.664-.082,19.422-.075-.437,18.919-.446,34.979v.958l51.308,0a28.793,28.793,0,0,0,.172,4.244,8.837,8.837,0,0,0,.688,2.181,10.283,10.283,0,0,0,1.125,1.918H55.67l96.995-.005V42.351l-98.726-.075a7.767,7.767,0,0,1-.973-2.759,31.761,31.761,0,0,1-.072-3.25l99.771-.005V-.082Z"
+          transform="translate(0.446 0.082)"
+          fill="url(#health-gradient)"
+        />
+      </svg>
+    </div>
+  }
+  @if (isObserved() && player.isAlive) {
+    <div
+      class="absolute h-full w-full"
+      [class]="right() ? 'left-0' : 'right-0'"
+      [class.flip]="right()"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        width="312"
+        height="90"
+        viewBox="0 0 312 90"
+      >
+        <defs>
+          <linearGradient
+            id="spectator-in-box-gradient"
+            x1="1"
+            y1="0.537"
+            x2="0"
+            y2="0.55"
+            gradientUnits="objectBoundingBox"
+          >
+            <stop offset="0" stop-color="#b69f58" stop-opacity="0.42" />
+            <stop offset="0.465" stop-color="#8c7f52" stop-opacity="0.078" />
+            <stop offset="0.814" stop-color="#8e8052" stop-opacity="0" />
+            <stop offset="1" stop-color="#b69f58" stop-opacity="0.42" />
+          </linearGradient>
+        </defs>
+        <path
+          id="Spectator_In-Box_Gradient"
+          data-name="Spectator In-Box Gradient"
+          d="M313.955,2,22.046,1.981,1.97,21.229l.013,70.752,311.987-.013Z"
+          transform="translate(-1.97 -1.981)"
+          fill="url(#spectator-in-box-gradient)"
+        />
+      </svg>
+    </div>
+  }
+  <div class="vh-35 vw-90 absolute overflow-hidden">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="67.568"
+      height="35.072"
+      viewBox="0 0 67.568 35.072"
+    >
+      <defs>
+        <clipPath id="agent-icon-mask">
+          <path
+            id="Agent_Mask"
+            data-name="Agent Mask"
+            d="M67.535-.089,19.875-.1-.023,18.885l.012,16.09,67.556-.007Z"
+            transform="translate(2 18)"
+            fill="none"
+          />
+        </clipPath>
+      </defs>
+    </svg>
+    <img
+      class="vh-64 vw-64 absolute -top-4 z-20 rounded-sm"
+      [class.grayscale]="!player.isAlive"
+      [class.flip]="right()"
+      [class]="right() ? 'right-0' : 'left-0'"
+      src="assets/agents/{{ player.agentInternal }}{{ player.iconNameSuffix }}Icon.webp"
+      style="clip-path: url(#agent-icon-mask)"
+    />
+  </div>
+
+  <!-- playername container -->
+  <div
+    class="vw-180 relative box-border flex flex-col items-start"
+    [class.border-transparent]="!player.isAlive"
+    [class]="[playerinfoBackgroundClass(), right() ? 'rounded-tr-md' : 'rounded-tl-md']"
+    [class.!items-end]="right()"
+  >
+    <div class="h-full w-full">
+      <div
+        class="absolute -top-0.25 flex flex-row items-center"
+        [class]="right() ? '-right-9' : '-left-9'"
+        [class.flip]="right()"
+      >
+        <app-ultimate
+          class="scale-[1.2]"
+          [player]="player"
+          [color]="color() === 'attacker' ? 'attacker' : 'defender'"
+          [match]="dataModel.match()"
+          [side]="right() ? 'right' : 'left'"
+          [hideAuxiliary]="dataModel.hideAuxiliary()"
+        >
+        </app-ultimate>
+        @if (isAlive()) {
+          <app-abilities-new-prototype
+            class="w-3/5 -translate-x-[30%] scale-[0.9] transform"
+            [class.flip]="right()"
+            [player]="player"
+          ></app-abilities-new-prototype>
+        } @else {
+          <div
+            [animate.enter]="
+              right() ? 'animate-combat-stats-in-right' : 'animate-combat-stats-in-left'
+            "
+          >
+            <div
+              class="font-foundry-bold flex -translate-x-5 translate-y-0.5 transform flex-row items-center gap-14 text-[1.2em] text-white"
+              [class]="right() ? 'scale-x-[-1] transform' : ''"
+            >
+              <div class="flex flex-row items-center gap-1">
+                <p>{{ player.kills }}</p>
+                <p class="transform text-xs text-white/50">/</p>
+                <p>{{ player.deaths }}</p>
+                <p class="transform text-xs text-white/50">/</p>
+                <p>{{ player.assists }}</p>
+              </div>
+              <div
+                class="absolute flex flex-row items-center"
+                [class]="right() ? 'right-30' : 'left-30'"
+              >
+                <img class="vw-12 vh-12" src="assets/misc/ValorantCreditsWhite.svg" />
+                <p>{{ formatNumber(player.money) }}</p>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+
+      <div
+        class="font-foundry-bold vw-146 absolute top-2 z-20 flex flex-row items-end gap-1 truncate text-white"
+        [class.flex-row-reverse!]="right()"
+        [class]="right() ? 'right-17' : 'left-17'"
+      >
+        {{ getDisplayName(player.fullName, player.name) }}
+        @if (player.isCaptain) {
+          <img class="vw-17 vh-17 self-baseline" src="assets/misc/TeamCaptain.svg" />
+        }
+      </div>
+    </div>
+  </div>
+  <!-- weapon container -->
+  @if (player.isAlive) {
+    <div
+      class="vw-120 border-timer relative flex flex-col justify-center"
+      [class.items-end]="right()"
+      [class]="[weaponInfoBackgroundClass(), right() ? 'rounded-tl-sm' : 'rounded-tr-sm']"
+      [class.right]="right()"
+    >
+      <div
+        class="vh-19 absolute top-13.5 flex w-full object-contain"
+        [class]="right() ? 'right-0 justify-end' : 'left-0 justify-start'"
+      >
+        <img
+          class="w-full object-contain object-right"
+          [class.flip]="!right()"
+          src="assets/weapons/{{ player.highestWeapon }}Killfeed.webp"
+        />
+      </div>
+
+      <div
+        class="vh-112 absolute bottom-1 flex flex-row items-center gap-1 transition-all duration-300"
+        [class.flex-row-reverse]="right()"
+        [class.grow-0!]="!player.isAlive"
+        [class.w-0!]="!player.isAlive"
+        [class]="right() ? '-left-1' : 'right-0'"
+      >
+        <div class="flex items-center">
+          <app-shield-icon [type]="player.armorName" [side]="color()"></app-shield-icon>
+        </div>
+
+        @if (!dataModel.hideAuxiliary() && player.auxiliaryAvailable.health) {
+          <div class="flex items-center">
+            <p
+              class="font-foundry-extrabold vw-35 translate-y-[-10%] transform text-center text-[2vh] leading-none text-white"
+              [class]="right() ? 'mr-1' : 'ml-0.5'"
+            >
+              {{ player.health }}
+            </p>
+          </div>
+        }
+      </div>
+    </div>
+  }
+  <!-- Creds/KDA container -->
+  @if (!dataModel.hideAuxiliaryText()) {
+    <div
+      class="absolute top-17 flex h-3 flex-row items-center justify-center gap-1"
+      [class]="right() ? '-left-1' : '-right-1'"
+    >
+      @if (!dataModel.match().showAliveKDA && player.isAlive) {
+        <img class="w-full object-contain" src="assets/misc/ValorantCredits.webp" />
+        <span class="font-foundry-bold text-center text-lg text-white">
+          {{ formatNumber(player.money) }}
+        </span>
+      } @else if (dataModel.match().showAliveKDA && player.isAlive) {
+        <span
+          class="font-foundry-bold text-center text-white"
+          [class.text-md]="(player.kills + '/' + player.deaths + '/' + player.assists).length > 6"
+          [class.text-lg]="(player.kills + '/' + player.deaths + '/' + player.assists).length <= 6"
+        >
+          {{ player.kills }}/{{ player.deaths }}/{{ player.assists }}
+        </span>
+      }
+    </div>
+  }
+  <div
+    class="vh-10 vw-256 absolute top-9"
+    [class.flip]="right()"
+    [style]="right() ? 'right: 2.75vw;' : 'left: 2.75vw;'"
+    [attr.mask]="!isAlive() ? 'url(#fade-mask-' + uniqueId + ')' : null"
+  >
+    <div class="absolute top-0.5 left-0.5 z-0 h-full w-full">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        width="253.166"
+        height="6.083"
+        viewBox="0 0 253.166 6.083"
+      >
+        <defs>
+          <linearGradient
+            [id]="'health-gradient-' + uniqueId"
+            x1="1"
+            y1="0.5"
+            x2="0"
+            y2="0.5"
+            gradientUnits="objectBoundingBox"
+          >
+            <stop
+              offset="0"
+              [attr.stop-color]="
+                !player.isAlive
+                  ? '#010204'
+                  : color() === 'defender'
+                    ? 'var(--color-defender-healthbarAccent)'
+                    : 'var(--color-attacker-healthbarAccent)'
+              "
+              [attr.stop-opacity]="!player.isAlive ? 0 : 1"
+            />
+            <stop offset="1" [attr.stop-color]="!player.isAlive ? '#010204' : '#000000'" />
+          </linearGradient>
+        </defs>
+        <path
+          id="Under_Healthbar"
+          data-name="Under Healthbar"
+          d="M253.166,0,0,.043V2.456a8.125,8.125,0,0,0,.436,2.27,14.141,14.141,0,0,0,.631,1.349l252.1.007Z"
+          [attr.fill]="'url(#health-gradient-' + uniqueId + ')'"
+        />
+      </svg>
+    </div>
+    @if (player.isAlive) {
+      <div
+        class="absolute top-0.5 left-0.5 z-1 overflow-hidden transition-all"
+        animate.enter="animate-hpbar-in animate-duration-200"
+        animate.leave="animate-hpbar-out animate-duration-300"
+        [style.width.%]="clamp(player.health, 0, 100)"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="253.166"
+          height="6.1"
+          viewBox="0 0 253.166 6.1"
+        >
+          <path
+            id="Healthbar"
+            d="M0,0,253.166.043V6.1L0,6.066Z"
+            transform="translate(0)"
+            [attr.fill]="
+              color() === 'attacker'
+                ? 'var(--color-attacker-primary)'
+                : 'var(--color-defender-primary)'
+            "
+          />
+        </svg>
+      </div>
+    }
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="256"
+      height="10.101"
+      viewBox="0 0 256 10.101"
+      class="relative z-10"
+    >
+      <defs>
+        <linearGradient
+          id="border-gradient"
+          y1="0.5"
+          x2="0.812"
+          y2="0.5"
+          gradientUnits="objectBoundingBox"
+        >
+          <stop offset="0" stop-color="#0E1317" stop-opacity="0.6" />
+          <stop offset="1" stop-color="#0E1317" stop-opacity="0" />
+        </linearGradient>
+      </defs>
+      <g id="Healthbar_Border" data-name="Healthbar Border" transform="translate(0)" fill="none">
+        <path
+          d="M256,0,0,.071v4A9.6,9.6,0,0,0,.6,7.544,11.282,11.282,0,0,0,1.982,10.1L256,10.073Z"
+          stroke="none"
+        />
+        <path
+          d="M 254 2.000565528869629 L 2.001922607421875 2.070850372314453 L 2.000747680664062 4.137462139129639 C 1.998947143554688 4.219206809997559 1.977020263671875 5.609071254730225 2.455825805664062 6.795407772064209 C 2.67071533203125 7.327887535095215 2.890228271484375 7.766461372375488 3.076400756835938 8.101219177246094 L 254 8.073230743408203 L 254 2.000565528869629 M 256 7.62939453125e-06 L 256 10.07300758361816 L 1.982467651367188 10.10134124755859 C 1.982467651367188 10.10134124755859 1.267990112304688 9.196208000183105 0.601165771484375 7.54390811920166 C -0.065673828125 5.891641139984131 0.001922607421875 4.067374229431152 0.001922607421875 4.067374229431152 L 0.001922607421875 0.07140731811523438 L 256 7.62939453125e-06 Z"
+          stroke="none"
+          [attr.fill]="!player.isAlive ? 'url(#border-gradient)' : '#111a23'"
+        />
+      </g>
+    </svg>
+  </div>
+
+  @if (player.hasSpike) {
+    <div
+      class="vw-32 vh-32 absolute -top-2 z-50 flex items-center justify-center"
+      [style.right]="right() ? '-0.5rem' : 'auto'"
+      [style.left]="right() ? 'auto' : '-0.5rem'"
+      animate.enter="animate-fade-in animate-duration-150"
+      animate.leave="animate-fade-out animate-duration-150"
+    >
+      <!-- White circle background -->
+      <div class="vw-32 vh-32 absolute rounded-full bg-white opacity-70"></div>
+      <!-- Spike icon with black filter -->
+      <img
+        class="vw-28 vh-28 relative top-0.5 z-10"
+        src="assets/misc/Spike_Icon.svg"
+        style="filter: brightness(0)"
+      />
+    </div>
+  }
+</div>

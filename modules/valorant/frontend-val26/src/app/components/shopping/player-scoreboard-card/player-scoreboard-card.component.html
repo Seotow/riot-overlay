@@ -1,0 +1,283 @@
+<div class="vh-54 flex w-full flex-row items-center gap-1" [class.flex-row-reverse!]="right">
+  <div
+    class="flex h-[50px] w-[164px] items-center justify-center border border-[#707070] bg-[#141D26]/90"
+  >
+    <div
+      class="font-foundry-bold flex w-full flex-row justify-around text-center text-[19px]"
+      [class.flex-row-reverse]="right"
+    >
+      <div
+        class="text-credits-negative/80 flex flex-row justify-center gap-0.5"
+        [style.opacity]="player.moneySpent === 0 ? '0.7' : '1'"
+      >
+        <p>-</p>
+        <p>{{ formatNumber(player.moneySpent) }}</p>
+      </div>
+      <div class="flex flex-row items-center justify-center gap-0.5 text-white/80">
+        <img class="h-3 w-3" src="assets/misc/ValorantCreditsWhite.svg" />
+        <p>{{ formatNumber(player.money) }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="flex h-[50px] w-[144px] items-center justify-center border border-[#707070] bg-[#141D26]/90"
+  >
+    <app-abilities-new-prototype class="scale-90" [player]="player"></app-abilities-new-prototype>
+  </div>
+
+  <div
+    class="relative"
+    [class]="player.ultReady ? 'h-[52px] w-[224px]' : 'h-[50px] w-[222px] pr-0.5'"
+  >
+    @if (!player.ultReady) {
+      <div
+        class="h-full w-full -translate-y-[1px] transform border border-[#707070] bg-[#141D26]/90"
+      ></div>
+    } @else {
+      <svg
+        class="absolute inset-0"
+        [class.scale-x-[-1]]="right"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        width="224"
+        height="52"
+        viewBox="0 0 224 52"
+      >
+        <defs>
+          <linearGradient
+            [attr.id]="'ult-bg-gradient-' + uniqueId"
+            x1="0.508"
+            y1="0.5"
+            x2="0"
+            y2="0.5"
+            gradientUnits="objectBoundingBox"
+          >
+            <stop offset="0" stop-color="#141d26" stop-opacity="0.949" />
+            <stop offset="1" stop-color="#141d26" stop-opacity="0" />
+          </linearGradient>
+          <linearGradient
+            [attr.id]="'ult-bg-gradient-flipped-' + uniqueId"
+            x1="0.492"
+            y1="0.5"
+            x2="1"
+            y2="0.5"
+            gradientUnits="objectBoundingBox"
+          >
+            <stop offset="0" stop-color="#141d26" stop-opacity="0.949" />
+            <stop offset="1" stop-color="#141d26" stop-opacity="0" />
+          </linearGradient>
+          <linearGradient
+            [attr.id]="'ult-team-gradient-' + uniqueId"
+            y1="0.5"
+            x2="1"
+            y2="0.5"
+            gradientUnits="objectBoundingBox"
+          >
+            <stop offset="0" [attr.stop-color]="getTeamColor()" stop-opacity="0" />
+            <stop offset="1" [attr.stop-color]="getTeamColor()" stop-opacity="0.302" />
+          </linearGradient>
+          <linearGradient
+            [attr.id]="'ult-overlay-gradient-' + uniqueId"
+            x1="0.492"
+            x2="1"
+            y1="0.5"
+            y2="0.5"
+            gradientUnits="objectBoundingBox"
+          >
+            <stop offset="0" stop-color="#141d26" stop-opacity="0.949" />
+            <stop offset="1" stop-color="#141d26" stop-opacity="0" />
+          </linearGradient>
+        </defs>
+
+        <rect
+          width="224"
+          height="52"
+          stroke="#707070"
+          stroke-width="1"
+          [attr.fill]="'url(#ult-bg-gradient-' + uniqueId + ')'"
+        />
+
+        <rect width="223" height="52" [attr.fill]="'url(#ult-team-gradient-' + uniqueId + ')'" />
+
+        <rect
+          width="224"
+          height="52"
+          stroke="#707070"
+          stroke-width="1"
+          [attr.fill]="'url(#ult-bg-gradient-flipped-' + uniqueId + ')'"
+          fill-opacity="0.8"
+        />
+
+        <path
+          d="M74.9,36.13,47.361,8.654,20.941,35.131,35.819,49.977,20.941,35.131,6.02,50.084,20.941,35.131.52,14.754,20.941,35.131,47.361,8.654,39.058.369l8.3,8.285L55.628.369,47.361,8.654,74.9,36.13,102.562,8.4,94.51.369,102.562,8.4,110.58.369,102.562,8.4l41.663,41.573L102.562,8.4,74.9,36.13,88.774,49.977,74.9,36.13,60.972,50.084ZM4.083,0,0,4.03Z"
+          transform="translate(222.108 51.575) rotate(180)"
+          fill="none"
+          stroke="rgba(195,195,195,0.2)"
+          stroke-width="1"
+          opacity="0.4"
+        />
+
+        <rect
+          x="0.5"
+          y="0.5"
+          width="223"
+          height="51"
+          fill="none"
+          stroke="#707070"
+          stroke-width="1"
+        />
+      </svg>
+    }
+
+    <div class="absolute inset-0 z-10">
+      <img
+        class="absolute top-1/2 h-6 w-6 -translate-y-1/2 transform"
+        [class]="right ? 'right-2' : 'left-2'"
+        src="assets/shields/{{ player.armorName }}.webp"
+      />
+
+      <div
+        class="absolute top-1/2 flex h-6 -translate-y-1/2 transform items-center"
+        [class]="right ? 'right-10 w-32 justify-end' : 'left-10 w-24 justify-start'"
+      >
+        <img
+          class="max-h-6 w-auto object-contain"
+          [class.flip]="!right"
+          src="assets/weapons/{{ player.highestWeapon }}Killfeed.webp"
+        />
+      </div>
+
+      <div
+        class="absolute top-1/2 -translate-y-1/2 scale-110 transform"
+        [class]="right ? '-left-8' : '-right-8'"
+      >
+        <app-ultimate
+          [player]="player"
+          [color]="color() === 'attacker' ? 'attacker' : 'defender'"
+          [match]="dataModel.match()"
+          [side]="right ? 'right' : 'left'"
+          [hideAuxiliary]="dataModel.hideAuxiliary()"
+        >
+        </app-ultimate>
+      </div>
+    </div>
+  </div>
+
+  <div class="relative h-[52px] w-[382px]">
+    <svg
+      class="absolute inset-0"
+      [class.scale-x-[-1]]="right"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      width="382"
+      height="52"
+      viewBox="0 0 382 52"
+    >
+      <defs>
+        <linearGradient
+          [attr.id]="'bg-gradient-' + uniqueId"
+          x1="0.492"
+          y1="0.5"
+          x2="1"
+          y2="0.5"
+          gradientUnits="objectBoundingBox"
+        >
+          <stop offset="0" stop-color="#141d26" stop-opacity="1" />
+          <stop offset="1" stop-color="#141d26" stop-opacity="0" />
+        </linearGradient>
+        <linearGradient
+          [attr.id]="'bg-gradient-flipped-' + uniqueId"
+          x1="0.508"
+          y1="0.5"
+          x2="0"
+          y2="0.5"
+          gradientUnits="objectBoundingBox"
+        >
+          <stop offset="0" stop-color="#141d26" stop-opacity="1" />
+          <stop offset="1" stop-color="#141d26" stop-opacity="0" />
+        </linearGradient>
+        <linearGradient
+          [attr.id]="'team-gradient-' + uniqueId"
+          x1="1"
+          y1="0.5"
+          x2="0"
+          y2="0.5"
+          gradientUnits="objectBoundingBox"
+        >
+          <stop offset="0" [attr.stop-color]="getTeamColor()" stop-opacity="0" />
+          <stop offset="1" [attr.stop-color]="getTeamColor()" stop-opacity="0.302" />
+        </linearGradient>
+      </defs>
+
+      <rect
+        width="382"
+        height="52"
+        stroke="#707070"
+        stroke-width="1"
+        [attr.fill]="'url(#bg-gradient-' + uniqueId + ')'"
+      />
+
+      <rect width="253" height="52" [attr.fill]="'url(#team-gradient-' + uniqueId + ')'" />
+
+      <rect
+        width="382"
+        height="52"
+        stroke="#707070"
+        stroke-width="1"
+        [attr.fill]="'url(#bg-gradient-flipped-' + uniqueId + ')'"
+        fill-opacity="0.8"
+      />
+
+      <path
+        d="M0,46.094l4.086,4.034ZM184.714,12.717l-28.061,28,9.023,9.042-9.023-9.042-9.062,9.042,9.062-9.042-26.443-26.5-27.56,27.5,8.024,8.042-8.024-8.042-8.06,8.042,8.06-8.042-27.69-27.75L47.4,41.467l8.274,8.292L47.4,41.467l-8.31,8.292,8.31-8.292-26.443-26.5L.521,35.362,20.959,14.967,6.025,0,20.959,14.967,35.85.108,20.959,14.967,47.4,41.467l27.56-27.5L61.025,0,74.961,13.967,88.85.108,74.961,13.967l27.69,27.75,27.56-27.5L116.025,0l14.186,14.217L144.35.108,130.211,14.217l26.443,26.5,28.061-28L172.025,0l12.689,12.717L197.35.108,184.714,12.717l36.962,37.042Z"
+        transform="translate(0.68 1.192)"
+        fill="none"
+        stroke="rgba(195,195,195,0.2)"
+        stroke-width="1"
+        opacity="0.2"
+      />
+
+      <rect x="0.5" y="0.5" width="381" height="51" fill="none" stroke="#707070" stroke-width="1" />
+    </svg>
+
+    <div class="absolute inset-0 z-10 overflow-hidden">
+      <img
+        class="absolute top-1/2 h-18 w-18 translate-y-[-46%] transform"
+        [class]="right ? 'right-0' : 'left-0'"
+        [class.flip]="right"
+        src="assets/agents/{{ player.agentInternal }}Icon.webp"
+      />
+
+      <div
+        class="absolute top-1/2 flex w-42 -translate-y-1/2 transform items-center"
+        [class]="right ? 'right-20 justify-end' : 'left-20 justify-start'"
+      >
+        <p
+          class="font-foundry-bold text-nowrap text-white"
+          [class]="right ? 'text-right' : 'text-left'"
+          [class]="
+            getDisplayName(player.fullName, player.name).length > 15
+              ? 'text-[13px]'
+              : getDisplayName(player.fullName, player.name).length > 12
+                ? 'text-[17px]'
+                : 'text-[19px]'
+          "
+        >
+          {{ getDisplayName(player.fullName, player.name) }}
+        </p>
+      </div>
+
+      <div
+        class="font-foundry-bold absolute top-1/2 flex -translate-y-1/2 transform flex-row justify-center gap-1.5 text-[19px] text-white"
+        [class]="right ? 'left-4' : 'right-4'"
+      >
+        <p>{{ player.kills }}</p>
+        <p class="translate-y-1.5 transform text-xs text-white/50">/</p>
+        <p>{{ player.deaths }}</p>
+        <p class="translate-y-1.5 transform text-xs text-white/50">/</p>
+        <p>{{ player.assists }}</p>
+      </div>
+    </div>
+  </div>
+</div>

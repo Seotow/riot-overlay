@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
 export const workspace = resolve(dirname(fileURLToPath(import.meta.url)), '../../..');
 export const moduleRoot = resolve(workspace, 'modules/valorant');
 export const defaultConfigPath = resolve(workspace, 'data/valorant/module.json');
-export const defaults = Object.freeze({ schemaVersion: 1, groupCode: 'RIOTLOCAL', collectorPath: null,
+export const defaults = Object.freeze({ schemaVersion: 1, groupCode: 'RIOTLOCAL', collectorPath: null, collectorMode: 'fork', frontendVariant: 'val26',
   ports: { ingest: 5310, extras: 5311, output: 5320, frontend: 5322 } });
 
 export function validateConfig(input) {
@@ -14,6 +14,10 @@ export function validateConfig(input) {
   if (typeof input.groupCode !== 'string' || !/^[A-Z0-9_-]{1,32}$/.test(input.groupCode)) throw new Error('Invalid group code');
   if (input.collectorPath !== null && (typeof input.collectorPath !== 'string' || !input.collectorPath.toLowerCase().endsWith('.exe'))) throw new Error('collectorPath must be an absolute .exe path or null');
   if (input.collectorPath && !/^(?:[A-Za-z]:[\\/]|\/)/.test(input.collectorPath)) throw new Error('Collector path must be absolute');
+  const collectorMode = input.collectorMode ?? 'fork';
+  if (!['fork', 'official'].includes(collectorMode)) throw new Error('collectorMode must be fork or official');
+  const frontendVariant = input.frontendVariant ?? 'val26';
+  if (!['val26', 'spectra'].includes(frontendVariant)) throw new Error('frontendVariant must be val26 or spectra');
   const ports = {};
   for (const name of Object.keys(defaults.ports)) {
     const value = input.ports?.[name];
@@ -22,7 +26,7 @@ export function validateConfig(input) {
   }
   if (new Set(Object.values(ports)).size !== 4) throw new Error('Valorant ports must be distinct');
   if (Object.values(ports).some(port => [2999, 4310, 4311, 58869].includes(port))) throw new Error('Reserved LoL port');
-  return { schemaVersion: 1, groupCode: input.groupCode, collectorPath: input.collectorPath, ports };
+  return { schemaVersion: 1, groupCode: input.groupCode, collectorPath: input.collectorPath, collectorMode, frontendVariant, ports };
 }
 
 export async function initConfig(path = defaultConfigPath, collectorPath = null) {
@@ -55,4 +59,14 @@ export async function setCollectorPath(configPath, collectorPath) {
   await writeFile(temporary, `${JSON.stringify(config, null, 2)}\n`, { flag: 'wx', mode: 0o600 });
   await rename(temporary, configPath);
   return config;
+}
+
+// Overlay in-game: bản VAL26 (nobiiVAL, ELv2) nếu đã build, ngược lại về bản Spectra Frontend gốc.
+export async function frontendBrowserDir(config) {
+  const val26 = resolve(moduleRoot, 'frontend-val26/dist/spectra-frontend/browser');
+  const spectra = resolve(moduleRoot, 'frontend/dist/spectra-frontend/browser');
+  if (config.frontendVariant === 'val26') {
+    try { await access(resolve(val26, 'index.html')); return { variant: 'val26', dir: val26 }; } catch {}
+  }
+  return { variant: 'spectra', dir: spectra };
 }

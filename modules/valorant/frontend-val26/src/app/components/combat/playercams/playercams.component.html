@@ -1,0 +1,66 @@
+@if (dataModel.playercamsInfo().enable && !isOneVersusOne()) {
+  <div [class.hidden]="dataModel.match().roundPhase !== 'combat'">
+    @for (team of dataModel.teams(); track $index; let teamIndex = $index) {
+      @for (player of team.players; track $index) {
+        @if (this.enabledPlayers().includes(player.fullName)) {
+          <div
+            class="absolute box-border flex aspect-video h-44 flex-col justify-end overflow-clip border-black/65 bg-black/65"
+            [class.hidden]="!player.isObserved"
+          >
+            <div class="absolute top-1 left-1 h-42 w-76.25 overflow-hidden">
+              <iframe
+                allow="camera;fullscreen;autoplay;"
+                [src]="getStream(player.fullName)"
+                class="aspect-video w-full"
+              ></iframe>
+            </div>
+            @if (player.killsThisRound > 1) {
+              <div
+                class="flex h-7 w-13 -translate-y-1 transform flex-row items-center gap-1.5 pl-2"
+                [animate.enter]="'killbox-slide-in animate-duration-250'"
+                [animate.leave]="'killbox-slide-out animate-duration-250'"
+              >
+                <svg
+                  class="absolute left-1 z-0 opacity-90"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="50"
+                  height="27"
+                  viewBox="0 0 50 27"
+                >
+                  <path
+                    id="killcounter"
+                    d="M-2164,6228v-18l-9-9h-41v27Z"
+                    transform="translate(2214 -6201)"
+                    [attr.fill]="
+                      team.isAttacking
+                        ? 'var(--color-attacker-primary)'
+                        : 'var(--color-defender-primary)'
+                    "
+                  />
+                </svg>
+                <img class="z-1 aspect-square h-6/10" src="assets/misc/crosshair.svg" />
+                <p class="font-dinnext-medium z-1 text-xl text-white">
+                  {{ player.killsThisRound }}
+                </p>
+              </div>
+            }
+            <div class="relative bottom-1 left-1 flex h-10 w-76.25 items-center bg-black/70">
+              <div
+                class="team-accent h-10 w-2 opacity-70"
+                [class]="team.isAttacking ? 'attacker' : 'defender'"
+              ></div>
+              <div
+                class="font-dinnext-bold w-full max-w-85 overflow-clip px-2 text-left text-lg whitespace-nowrap text-white"
+              >
+                {{ getDisplayName(player.fullName, player.name) }}
+              </div>
+              <div class="font-foundry-bold w-full px-3 text-right text-lg text-white">
+                {{ player.kills }} / {{ player.deaths }} / {{ player.assists }}
+              </div>
+            </div>
+          </div>
+        }
+      }
+    }
+  </div>
+}

@@ -45,3 +45,17 @@ preserves auth and watermark functionality.
 Excluded import files: GitHub CI, Husky hooks and editor settings, recorded in
 `upstream.json`. Upstream yarn locks remain as reference; npm locks govern these
 local BE/FE builds. Do not enable `prepare` to install nested upstream Git hooks.
+
+- 18/10/2026: thêm `collector/src/headless.ts` và các nhánh `headless` trong `src/main.ts`
+  (profile riêng, ẩn cửa sổ/tray, bỏ update check, nuốt dialog, tự kết nối ingest loopback bằng key từ file).
+  Chỉ hoạt động khi có biến môi trường; không đổi giao thức, không bỏ qua auth/watermark. Supervisor có
+  `collectorMode: fork`. Fork đã build local (không dùng bản official 0.3.4).
+
+- 18/10/2026: kênh điều khiển loopback trong Client fork (`headless.ts`: `startControlServer`, bearer token, chỉ
+  `127.0.0.1`) cho các lệnh thủ công sẵn có của Spectra (spike planted, tech pause, timeout trái/phải, đổi KDA/credits,
+  đổi trái-phải, đổi tấn công-thủ, toast) qua `HotkeyService.trigger` và `sendToIngest`; logo đội mặc định trỏ tới asset
+  loopback của frontend. Studio gửi lệnh qua `POST /api/valorant/control`.
+- 18/10/2026: import `frontend-val26` từ https://github.com/nobiiVAL/Spectra-Frontend-VAL26 @ `938cf70`
+  (ELv2, fork của Spectra-Frontend; ghi nguồn tại `frontend-val26/SOURCE.md`). Chỉ chạy `npm install --ignore-scripts`
+  (lock upstream lệch `node-vibrant`, `package-lock.json` được cập nhật) và build; mã nguồn FE chưa sửa. Runtime chọn
+  `frontendVariant` (`val26` mặc định nếu đã build, `spectra` là bản fork cũ); không đổi/vô hiệu license hay watermark.

@@ -1,0 +1,281 @@
+.bg-agentselect-player-attacker {
+  background: rgba(var(--attacker-color-rgb), 1);
+}
+
+.bg-agentselect-player-defender {
+  background: rgba(var(--defender-color-rgb), 1);
+}
+
+.edge-fade-overlay-unlocked {
+  background:
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 9%),
+    linear-gradient(to top, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 9%),
+    linear-gradient(to right, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 9%),
+    linear-gradient(to left, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 9%);
+}
+
+.bottom-fade-overlay-unlocked {
+  background: linear-gradient(to top, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 70%);
+}
+
+.edge-fade-overlay-locked-attacker {
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(var(--color-attacker-primary-rgb), 0.5) 0%,
+      rgba(255, 255, 255, 0) 9%
+    ),
+    linear-gradient(
+      to top,
+      rgba(var(--color-attacker-primary-rgb), 0.5) 0%,
+      rgba(255, 255, 255, 0) 9%
+    ),
+    linear-gradient(
+      to right,
+      rgba(var(--color-attacker-primary-rgb), 0.5) 0%,
+      rgba(255, 255, 255, 0) 9%
+    ),
+    linear-gradient(
+      to left,
+      rgba(var(--color-attacker-primary-rgb), 0.5) 0%,
+      rgba(255, 255, 255, 0) 9%
+    );
+}
+
+.bottom-fade-overlay-locked-attacker {
+  background: linear-gradient(
+    to top,
+    rgba(var(--color-attacker-primary-rgb), 0.5) 0%,
+    rgba(255, 255, 255, 0) 70%
+  );
+}
+
+.edge-fade-overlay-locked-defender {
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(var(--color-defender-primary-rgb), 0.5) 0%,
+      rgba(255, 255, 255, 0) 9%
+    ),
+    linear-gradient(
+      to top,
+      rgba(var(--color-defender-primary-rgb), 0.5) 0%,
+      rgba(255, 255, 255, 0) 9%
+    ),
+    linear-gradient(
+      to right,
+      rgba(var(--color-defender-primary-rgb), 0.5) 0%,
+      rgba(255, 255, 255, 0) 9%
+    ),
+    linear-gradient(
+      to left,
+      rgba(var(--color-defender-primary-rgb), 0.5) 0%,
+      rgba(255, 255, 255, 0) 9%
+    );
+}
+
+.bottom-fade-overlay-locked-defender {
+  background: linear-gradient(
+    to top,
+    rgba(var(--color-defender-primary-rgb), 0.5) 0%,
+    rgba(255, 255, 255, 0) 70%
+  );
+}
+
+@keyframes switchAnimation {
+  0% {
+    opacity: 0;
+  }
+  80% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.animate-switch {
+  animation: switchAnimation 100ms ease-out;
+  will-change: opacity;
+}
+
+@keyframes lockAnimation {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes lockAnimationAttacker {
+  0% {
+    opacity: 0.1;
+  }
+  50% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes lockAnimationDefender {
+  0% {
+    opacity: 0.1;
+  }
+  50% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.animate-lock-attacker {
+  background:
+    linear-gradient(to bottom, rgba(var(--attacker-color-rgb), 0.5) 0%, rgba(255, 255, 255, 0) 9%),
+    linear-gradient(to top, rgba(var(--attacker-color-rgb), 0.5) 0%, rgba(255, 255, 255, 0) 9%),
+    linear-gradient(to right, rgba(var(--attacker-color-rgb), 0.5) 0%, rgba(255, 255, 255, 0) 9%),
+    linear-gradient(to left, rgba(var(--attacker-color-rgb), 0.5) 0%, rgba(255, 255, 255, 0) 9%);
+  animation: lockAnimationAttacker 1900ms ease-in-out !important;
+  animation-fill-mode: both;
+  will-change: opacity;
+}
+
+.animate-lock-defender {
+  background:
+    linear-gradient(to bottom, rgba(var(--defender-color-rgb), 0.5) 0%, rgba(255, 255, 255, 0) 9%),
+    linear-gradient(to top, rgba(var(--defender-color-rgb), 0.5) 0%, rgba(255, 255, 255, 0) 9%),
+    linear-gradient(to right, rgba(var(--defender-color-rgb), 0.5) 0%, rgba(255, 255, 255, 0) 9%),
+    linear-gradient(to left, rgba(var(--defender-color-rgb), 0.5) 0%, rgba(255, 255, 255, 0) 9%);
+  animation: lockAnimationDefender 1900ms ease-in-out !important;
+  animation-fill-mode: both;
+  will-change: opacity;
+}
+
+@keyframes lockAnimationBottomAttacker {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes lockAnimationBottomDefender {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.animate-lock-bottom-attacker {
+  background: linear-gradient(
+    to top,
+    rgba(var(--attacker-color-rgb), 0.5) 0%,
+    rgba(255, 255, 255, 0) 70%
+  );
+  animation: lockAnimationBottomAttacker 1900ms ease-in-out !important;
+  animation-fill-mode: both;
+  will-change: opacity;
+}
+
+.animate-lock-bottom-defender {
+  background: linear-gradient(
+    to top,
+    rgba(var(--defender-color-rgb), 0.5) 0%,
+    rgba(255, 255, 255, 0) 70%
+  );
+  animation: lockAnimationBottomDefender 1900ms ease-in-out !important;
+  animation-fill-mode: both;
+  will-change: opacity;
+}
+
+@keyframes pulseAnimation {
+  0% {
+    opacity: 0.1;
+  }
+  50% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.1;
+  }
+}
+
+.animate-unlocked {
+  animation: pulseAnimation 1900ms ease-in-out infinite;
+  will-change: opacity;
+}
+
+@keyframes coverAnimation {
+  0% {
+    opacity: 1;
+  }
+  82.3% {
+    scale: 1;
+    transform: translateY(0) translateX(0);
+  }
+  82.4% {
+    scale: 0.1;
+    transform: translateY(55%) translateX(-40%);
+  }
+  99.9% {
+    scale: 0.1;
+    transform: translateY(55%) translateX(-40%);
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.coverAnimation {
+  animation: coverAnimation 0.28s calc(0.4s + (var(--player-animation-delay-ms, 0) * 1ms)) ease-out;
+  animation-fill-mode: forwards;
+  will-change: opacity, transform;
+}
+
+@keyframes reveal {
+  0% {
+    opacity: 0;
+  }
+  99.9% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.reveal {
+  animation: reveal 0.02s calc(0.12s + (var(--player-animation-delay-ms, 0) * 1ms));
+  animation-fill-mode: both;
+  will-change: opacity;
+}

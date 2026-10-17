@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="245.405" height="8.109" viewBox="0 0 245.405 8.109">
+  <defs>
+    <linearGradient id="linear-gradient" x1="1" y1="0.5" x2="0.014" y2="0.5" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#fd4756" stop-opacity="0"/>
+      <stop offset="1" stop-color="#fd4756"/>
+    </linearGradient>
+  </defs>
+  <path id="Right_Team_Bar_ATK_" data-name="Right Team Bar (ATK)" d="M2261.331-257s6.962,8.122,9.656,8.108,235.749-.143,235.749-.143V-257Z" transform="translate(-2261.331 257)" fill="url(#linear-gradient)"/>
+</svg>

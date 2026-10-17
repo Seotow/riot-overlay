@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1504" height="98.071" viewBox="0 0 1504 98.071">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.002" y1="0.965" x2="0.454" y2="0.957" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#6e6e6e" stop-opacity="0"/>
+      <stop offset="1" stop-color="#6e6e6e"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="0.015" x2="0.954" y2="0.914" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#6e6e6e"/>
+      <stop offset="0.83" stop-color="#6e6e6e"/>
+      <stop offset="1" stop-color="#6e6e6e" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-3" x1="0.998" y1="0.965" x2="0.546" y2="0.957" xlink:href="#linear-gradient"/>
+    <linearGradient id="linear-gradient-4" x1="0.985" x2="0.046" y2="0.914" xlink:href="#linear-gradient-2"/>
+  </defs>
+  <g id="Accents" transform="translate(-1168 -46)">
+    <g id="Left_Accent" data-name="Left Accent">
+      <g id="Component_2_5" data-name="Component 2 – 5" transform="translate(1168.032 48)">
+        <path id="Path_4" data-name="Path 4" d="M2261.005-248.985v-1.975s231.7.113,235.744-.091S2515.209-272.971,2521-273s121.877.075,125.9.035,18.44,21.938,22.182,21.965S2701-251,2701-251v2s-29.607-.033-33,0-18.407-22.044-22-22-119.114-.106-124.236-.026-19.521,22.036-25.23,22.079S2261.005-248.985,2261.005-248.985Z" transform="translate(-2099.032 345)" fill="url(#linear-gradient)"/>
+        <path id="Path_5" data-name="Path 5" d="M1168.032,49.961V48H1249l48.957,46v14L1331,142.027,1330,144l-33.986-35.217-.115-14.139L1248.063,49.96Z" transform="translate(-1168.032 -48)" fill="url(#linear-gradient-2)"/>
+      </g>
+      <rect id="Rectangle_6" data-name="Rectangle 6" width="24" height="4" transform="translate(1746 140)" fill="#fff"/>
+      <rect id="Rectangle_7" data-name="Rectangle 7" width="24" height="4" transform="translate(1168 46)" fill="#fff"/>
+    </g>
+    <g id="Right_Accent" data-name="Right Accent" transform="translate(2305 46)">
+      <g id="Component_2_6" data-name="Component 2 – 6" transform="translate(-235 2)">
+        <path id="Path_4-2" data-name="Path 4" d="M2701-248.985v-1.975s-231.7.113-235.744-.091-18.459-21.92-24.25-21.949-121.278.054-125.9.035S2296.51-251.019,2292.923-251s-31.917,0-31.917,0v2s29.607-.033,33,0,18.407-22.044,22-22,119.114-.106,124.236-.026,19.521,22.036,25.23,22.079S2701-248.985,2701-248.985Z" transform="translate(-2261.005 345.005)" fill="url(#linear-gradient-3)"/>
+        <path id="Path_5-2" data-name="Path 5" d="M1331,49.961V48h-80.97l-48.957,46v14l-33.041,34.027,1,1.973,33.986-35.217.115-14.139L1250.97,49.96Z" transform="translate(-729.032 -48)" fill="url(#linear-gradient-4)"/>
+      </g>
+      <rect id="Rectangle_6-2" data-name="Rectangle 6" width="24" height="4" transform="translate(-235 94)" fill="#fff"/>
+      <rect id="Rectangle_7-2" data-name="Rectangle 7" width="24" height="4" transform="translate(343)" fill="#fff"/>
+    </g>
+  </g>
+</svg>

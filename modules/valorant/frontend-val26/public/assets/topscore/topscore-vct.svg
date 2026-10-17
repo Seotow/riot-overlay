@@ -1,0 +1,124 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="3350" height="186.54" viewBox="0 0 3350 186.54">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.014" y1="0.487" x2="0.413" y2="0.479" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#0f1923" stop-opacity="0"/>
+      <stop offset="1" stop-color="#0f1923"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="0.595" y1="0.448" x2="1" y2="0.453" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#0f1923"/>
+      <stop offset="1" stop-color="#0f1923" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-3" x1="0.796" y1="0.448" x2="0" y2="0.476" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#fd4756" stop-opacity="0"/>
+      <stop offset="0.386" stop-color="#fd4756" stop-opacity="0.902"/>
+      <stop offset="0.558" stop-color="#fd4756" stop-opacity="0.902"/>
+      <stop offset="1" stop-color="#101823"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-4" y1="0.473" x2="1" y2="0.465" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#101823" stop-opacity="0"/>
+      <stop offset="0.521" stop-color="#21fec5" stop-opacity="0.902"/>
+      <stop offset="0.688" stop-color="#21fec5" stop-opacity="0.902"/>
+      <stop offset="1" stop-color="#101823"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-5" y1="0.5" x2="1.013" y2="0.5" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0.4"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-6" x1="1" x2="-0.013" xlink:href="#linear-gradient-5"/>
+    <linearGradient id="linear-gradient-7" y1="0.5" x2="1" y2="0.5" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#292929" stop-opacity="0.6"/>
+      <stop offset="0.316" stop-color="#292929" stop-opacity="0.6"/>
+      <stop offset="0.381" stop-color="#1b222d" stop-opacity="0.878"/>
+      <stop offset="0.438" stop-color="#1b222d" stop-opacity="0.949"/>
+      <stop offset="0.462" stop-color="#1b222d" stop-opacity="0.949"/>
+      <stop offset="0.488" stop-color="#1b222d" stop-opacity="0.627"/>
+      <stop offset="0.534" stop-color="#1b222d" stop-opacity="0"/>
+      <stop offset="0.603" stop-color="#101823" stop-opacity="0"/>
+      <stop offset="0.664" stop-color="#101823" stop-opacity="0.82"/>
+      <stop offset="0.681" stop-color="#101823" stop-opacity="0.949"/>
+      <stop offset="0.701" stop-color="#101823" stop-opacity="0.949"/>
+      <stop offset="0.755" stop-color="#101823" stop-opacity="0.878"/>
+      <stop offset="0.816" stop-color="#292929" stop-opacity="0.6"/>
+      <stop offset="1" stop-color="#292929" stop-opacity="0.6"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-8" x1="0.025" y1="0.425" x2="0.973" y2="0.429" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#101823" stop-opacity="0"/>
+      <stop offset="0.218" stop-color="#0f1923"/>
+      <stop offset="0.497" stop-color="#0f1923"/>
+      <stop offset="0.79" stop-color="#0f1923"/>
+      <stop offset="1" stop-color="#101823" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-9" x1="0.921" y1="0.019" x2="1.002" y2="0.5" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#c7c7c7" stop-opacity="0.282"/>
+      <stop offset="1" stop-color="#c7c7c7" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-11" x1="0.002" y1="0.965" x2="0.454" y2="0.957" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#6e6e6e" stop-opacity="0"/>
+      <stop offset="1" stop-color="#6e6e6e"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-12" x1="0.015" x2="0.954" y2="0.914" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#6e6e6e"/>
+      <stop offset="0.83" stop-color="#6e6e6e"/>
+      <stop offset="1" stop-color="#6e6e6e" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-13" x1="0.998" y1="0.965" x2="0.546" y2="0.957" xlink:href="#linear-gradient-11"/>
+    <linearGradient id="linear-gradient-14" x1="0.985" x2="0.046" y2="0.914" xlink:href="#linear-gradient-12"/>
+    <linearGradient id="linear-gradient-15" y1="0.5" x2="0.986" y2="0.5" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#21fec5" stop-opacity="0"/>
+      <stop offset="1" stop-color="#21fec5"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-16" x1="1" y1="0.5" x2="0.014" y2="0.5" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#fd4756" stop-opacity="0"/>
+      <stop offset="1" stop-color="#fd4756"/>
+    </linearGradient>
+  </defs>
+  <g id="Bar_Components" data-name="Bar Components" transform="translate(0 0.24)">
+    <path id="Left_Team_Gradient" data-name="Left Team Gradient" d="M2496.371-250.439c5.21,0,16.431-21.8,27.33-21.8s108.421.037,119.088.037,20.559,21.73,26.432,21.795,40.779,0,40.779,0V-393.76l-334.1.956V-250.52S2491.161-250.439,2496.371-250.439Z" transform="translate(-930 393.52)" fill="url(#linear-gradient)"/>
+    <path id="Right_Team_Gradient" data-name="Right Team Gradient" d="M2752.326-250.748c-6.991-.07-15.956-22.021-28.48-22.189s-110.832-.2-120.842-.046-19.01,22.234-24.029,22.234H2537v-143.24h334.123V-251S2759.317-250.678,2752.326-250.748Z" transform="translate(-477 393.748)" fill="url(#linear-gradient-2)"/>
+    <path id="Right_Team_Color_ATK_" data-name="Right Team Color (ATK)" d="M2752.326-250.748c-6.991-.07-15.956-22.021-28.48-22.189s-110.832-.2-120.842-.046-19.01,22.234-24.029,22.234H2537v-143.24h334.123V-251S2759.317-250.678,2752.326-250.748Z" transform="translate(-477 393.748)" fill="url(#linear-gradient-3)"/>
+    <path id="Left_Team_Color_DEF_" data-name="Left Team Color (DEF)" d="M2496.371-250.439c5.21,0,16.431-21.8,27.33-21.8s108.421.037,119.088.037,20.559,21.73,26.432,21.795,40.779,0,40.779,0V-393.76l-334.1.956V-250.52S2491.161-250.439,2496.371-250.439Z" transform="translate(-930 393.52)" fill="url(#linear-gradient-4)"/>
+    <g id="Line_Accent" data-name="Line Accent">
+      <g id="Line_Accent_Left" data-name="Line Accent Left">
+        <path id="Union_1" data-name="Union 1" d="M-681.669-1717.888l-25.881-26.069-6.559,6.281-.692-.722,6.546-6.269-48.345-48.695-49.024,48.936,5.93,5.974-.71.7-5.928-5.972-5.973,5.963-.706-.708,5.975-5.965-49.882-50.254-73.731,72.848-.7-.711,73.729-72.846-60.047-60.5.71-.7,60.049,60.5,49.268-48.678-12.027-12.114.71-.7,12.028,12.115,12.266-12.119.7.711-12.264,12.117,49.63,49.99,51.625-51.533-10.7-10.574.7-.711,10.7,10.578,10.6-10.577.707.708-10.591,10.572,49.911,49.345,2.545-2.437.692.722-2.525,2.419,2.862,2.83-.7.711-2.882-2.849-53.176,50.925,25.869,26.056Zm-174.537-77.5,49.878,50.25,49.024-48.936-49.633-49.993Zm100.314,1.318,48.359,48.709,53.169-50.918-49.9-49.331Z" transform="translate(2429.814 1857.74)" fill="rgba(255,255,255,0.5)"/>
+        <rect id="Rectangle_8" data-name="Rectangle 8" width="223" height="2" transform="translate(1547 112)" fill="url(#linear-gradient-5)"/>
+      </g>
+      <g id="Line_Accent_Right" data-name="Line Accent Right" transform="translate(1991.22 0.5)">
+        <path id="Union_2" data-name="Union 2" d="M-2893.247-1718.388l-.709-.7,25.745-25.932-51.9-49.282-1.745,1.808-.72-.694,1.74-1.8-1.143-1.085.688-.725,1.148,1.09,49.035-50.818-10.844-10.855.708-.707,10.832,10.842,10.455-10.836.72.694-10.468,10.849,51.3,51.353,49.685-50.045-12.233-12.149.7-.709,12.233,12.149,12.059-12.146.709.7-12.059,12.147,49.2,48.856,60.154-60.707.71.7-60.154,60.708,73.139,72.635-.7.709-73.139-72.634-49.834,50.292,5.783,5.788-.708.707-5.78-5.785-5.527,5.577-.71-.7,5.53-5.581-49.053-49.1-48.378,48.729,6.928,6.578-.688.725-6.945-6.594Zm75.549-76.1,49.053,49.1,49.831-50.29-49.2-48.857Zm-101.722-.542,51.914,49.292,48.4-48.748-51.295-51.343Z" transform="translate(2991.602 1857.74)" fill="rgba(255,255,255,0.5)"/>
+        <rect id="Rectangle_9" data-name="Rectangle 9" width="223" height="2" transform="translate(78.78 111.5)" fill="url(#linear-gradient-6)"/>
+      </g>
+    </g>
+    <path id="Bar_Main" data-name="Bar Main" d="M931-345.188l1247.98.026,48.068,46.2v13.987l34.1,34.24s230.679.173,236.176.073,16.386-21.844,27.559-21.834,107.677-.026,118.7,0,20.69,21.826,26.559,21.833,318.462-.073,362.853-.073c5.159.039,13.654-22.084,24.018-22.241s108.05.077,120.565,0,21.936,22.208,28.7,22.239h232.707l35.952-36.479V-299.1l46.071-45.837,759.994-.2v-48.6H931Z" transform="translate(-931 393.732)" fill="url(#linear-gradient-7)"/>
+    <path id="Timer_Main" data-name="Timer Main" d="M2602.611-393.066,2684.542-314v20.564l62.708,61.866,77.492.017,12.91,12.915,20.387-.005,12.025,11.872,11.753-11.872h20.413l12.918-12.915,77.486.005,62.406-62.369v-19.391l80.561-79.757-125.591-.241,0,144h-280v-144Z" transform="translate(-950.011 393.066)" fill="url(#linear-gradient-8)"/>
+    <g id="Timer_Accent" data-name="Timer Accent">
+      <g id="Timer_Accent_Left" data-name="Timer Accent Left">
+        <rect id="Rectangle_2" data-name="Rectangle 2" width="218" height="1" transform="translate(1720.502 18) rotate(45)" fill="url(#linear-gradient-9)"/>
+        <rect id="Rectangle_3" data-name="Rectangle 3" width="13" height="1" transform="translate(1720.502 18) rotate(45)" fill="#fff"/>
+      </g>
+      <g id="Timer_Accent_Right" data-name="Timer Accent Right">
+        <rect id="Rectangle_4" data-name="Rectangle 4" width="218" height="1" transform="translate(2117.652 18.707) rotate(135)" fill="url(#linear-gradient-9)"/>
+        <rect id="Rectangle_5" data-name="Rectangle 5" width="13" height="1" transform="translate(2107.753 27.192) rotate(-45)" fill="#fff"/>
+      </g>
+    </g>
+    <g id="Accents">
+      <g id="Left_Accent" data-name="Left Accent">
+        <g id="Component_2_5" data-name="Component 2 – 5" transform="translate(1168.032 48)">
+          <path id="Path_4" data-name="Path 4" d="M2261.005-248.985v-1.975s231.7.113,235.744-.091S2515.209-272.971,2521-273s121.877.075,125.9.035,18.44,21.938,22.182,21.965S2701-251,2701-251v2s-29.607-.033-33,0-18.407-22.044-22-22-119.114-.106-124.236-.026-19.521,22.036-25.23,22.079S2261.005-248.985,2261.005-248.985Z" transform="translate(-2099.032 345)" fill="url(#linear-gradient-11)"/>
+          <path id="Path_5" data-name="Path 5" d="M1168.032,49.961V48H1249l48.957,46v14L1331,142.027,1330,144l-33.986-35.217-.115-14.139L1248.063,49.96Z" transform="translate(-1168.032 -48)" fill="url(#linear-gradient-12)"/>
+        </g>
+        <rect id="Rectangle_6" data-name="Rectangle 6" width="24" height="4" transform="translate(1746 140)" fill="#fff"/>
+        <rect id="Rectangle_7" data-name="Rectangle 7" width="24" height="4" transform="translate(1168 46)" fill="#fff"/>
+      </g>
+      <g id="Right_Accent" data-name="Right Accent" transform="translate(2305 46)">
+        <g id="Component_2_6" data-name="Component 2 – 6" transform="translate(-235 2)">
+          <path id="Path_4-2" data-name="Path 4" d="M2701-248.985v-1.975s-231.7.113-235.744-.091-18.459-21.92-24.25-21.949-121.278.054-125.9.035S2296.51-251.019,2292.923-251s-31.917,0-31.917,0v2s29.607-.033,33,0,18.407-22.044,22-22,119.114-.106,124.236-.026,19.521,22.036,25.23,22.079S2701-248.985,2701-248.985Z" transform="translate(-2261.005 345.005)" fill="url(#linear-gradient-13)"/>
+          <path id="Path_5-2" data-name="Path 5" d="M1331,49.961V48h-80.97l-48.957,46v14l-33.041,34.027,1,1.973,33.986-35.217.115-14.139L1250.97,49.96Z" transform="translate(-729.032 -48)" fill="url(#linear-gradient-14)"/>
+        </g>
+        <rect id="Rectangle_6-2" data-name="Rectangle 6" width="24" height="4" transform="translate(-235 94)" fill="#fff"/>
+        <rect id="Rectangle_7-2" data-name="Rectangle 7" width="24" height="4" transform="translate(343)" fill="#fff"/>
+      </g>
+    </g>
+    <path id="Left_Team_Bar_DEF_" data-name="Left Team Bar (DEF)" d="M2506.736-257s-7.227,8.122-9.921,8.108-235.749-.143-235.749-.143V-257Z" transform="translate(-931 393)" fill="url(#linear-gradient-15)"/>
+    <path id="Right_Team_Bar_ATK_" data-name="Right Team Bar (ATK)" d="M2261.331-257s6.962,8.122,9.656,8.108,235.749-.143,235.749-.143V-257Z" transform="translate(3 393)" fill="url(#linear-gradient-16)"/>
+    <text id="Round_Number" data-name="Round Number" transform="translate(1920 37)" fill="#a1a9ac" font-size="28" font-family="FoundryGridnikW03-Bold" font-weight="700" letter-spacing="0.14em"><tspan x="-69.874" y="0">ROUND 0</tspan></text>
+  </g>
+</svg>

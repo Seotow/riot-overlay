@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="281.284" height="139.708" viewBox="0 0 281.284 139.708">
+  <defs>
+    <linearGradient id="linear-gradient" y1="0.5" x2="1.013" y2="0.5" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0.4"/>
+    </linearGradient>
+  </defs>
+  <g id="Line_Accent_Left" data-name="Line Accent Left" transform="translate(-1498.463 -0.144)">
+    <path id="Path_12" data-name="Path 12" d="M0,0,138,139" transform="translate(1610.5 0.5)" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1"/>
+    <path id="Path_11" data-name="Path 11" d="M-1.344,119.13,118,0" transform="translate(1618.5 0.5)" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1"/>
+    <path id="Path_10" data-name="Path 10" d="M0,0,117.266,118.141" transform="translate(1512.5 1.5)" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1"/>
+    <path id="Path_9" data-name="Path 9" d="M-2.686,135.049,134,0" transform="translate(1501.5 0.5)" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1"/>
+    <path id="Path_8" data-name="Path 8" d="M-1.141,119.2,62.564,58.2" transform="translate(1716.5 0.5)" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1"/>
+    <path id="Path_7" data-name="Path 7" d="M0,0,64.9,64.16" transform="translate(1714.5 0.5)" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1"/>
+    <rect id="Rectangle_8" data-name="Rectangle 8" width="223" height="2" transform="translate(1547 112)" fill="url(#linear-gradient)"/>
+  </g>
+</svg>

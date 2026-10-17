@@ -1,0 +1,18 @@
+<p
+  class="font-foundry-bold font-weight-700 relative z-20 text-[0.83vw] tracking-[0.08em] text-nowrap text-[#A1A9AC]"
+>
+  @if (isOvertime()) {
+    @if (overtimeNumber() > 1) {
+      {{ TranslateKeys.Top_Overtime | translate }} {{ overtimeNumber() }}
+    } @else {
+      {{ TranslateKeys.Top_Overtime | translate }}
+    }
+  } @else {
+    {{ TranslateKeys.Top_RoundNumber | translate: { rounds: dataModel.match().roundNumber } }}
+  }
+</p>
+@if (dataModel.match().roundNumber >= dataModel.match().firstOtRound) {
+  <div class="absolute top-[-0.5vh] -left-[9.1vw] z-10">
+    <img src="assets/topscore/overtime.svg" />
+  </div>
+}

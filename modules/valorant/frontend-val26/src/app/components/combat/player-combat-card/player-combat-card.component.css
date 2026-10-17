@@ -1,0 +1,74 @@
+@keyframes hpbar-in {
+  0% {
+    width: 0%;
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes hpbar-out-collapse {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    width: 0%;
+    opacity: 0.6;
+  }
+}
+
+@keyframes hpbar-out-gray {
+  0% {
+    filter: grayscale(0%);
+  }
+  100% {
+    filter: grayscale(100%);
+  }
+}
+
+.animate-hpbar-in {
+  animation-name: hpbar-in;
+}
+
+.animate-hpbar-out {
+  animation:
+    hpbar-out-gray 0.1s,
+    hpbar-out-collapse 0.1s 0.2s;
+}
+
+@keyframes combat-stats-in-left {
+  0% {
+    opacity: 0;
+    translate: 130px 0;
+    filter: blur(10px);
+  }
+  100% {
+    opacity: 1;
+    translate: 0 0;
+    filter: blur(0);
+  }
+}
+
+@keyframes combat-stats-in-right {
+  0% {
+    opacity: 0;
+    translate: -130px 0;
+    filter: blur(10px);
+  }
+  100% {
+    opacity: 1;
+    translate: 0 0;
+    filter: blur(0);
+  }
+}
+
+.animate-combat-stats-in-left {
+  animation: combat-stats-in-left 133ms;
+  animation-timing-function: cubic-bezier(0.01, 0.67, 0.554, 0.997);
+}
+
+.animate-combat-stats-in-right {
+  animation: combat-stats-in-right 133ms;
+  animation-timing-function: cubic-bezier(0.01, 0.67, 0.554, 0.997);
+}

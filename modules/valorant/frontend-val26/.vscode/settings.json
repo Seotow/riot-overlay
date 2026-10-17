@@ -1,0 +1,16 @@
+{
+  "angular-schematics.schematicsDefaultOptions": {
+    "angular-*": {
+      "externalTemplate": true
+    }
+  },
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+  "symbols.files.associations": {
+    "*.css": "tailwindcss"
+  },
+  "editor.quickSuggestions": {
+    "strings": "on"
+  }
+}

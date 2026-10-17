@@ -10,6 +10,7 @@ import {
   Swords,
   ChartColumn,
   PanelTop,
+  Crosshair,
   ExternalLink,
   X,
 } from "lucide-react";
@@ -20,6 +21,8 @@ import { MatchConfig, ProductionDesk } from "./Production";
 import { DraftDesk } from "./DraftDesk";
 import { PostgameDesk } from "./PostgameDesk";
 import { ReplayHud } from "./ReplayHud";
+import { ValorantDesk } from "./ValorantDesk";
+import { ValorantOverlay } from "./overlay/ValorantOverlay";
 import { RecordingDesk } from "./RecordingDesk";
 import {
   Dashboard,
@@ -38,9 +41,11 @@ import "./overlay/overlay.css";
 import "./overlay/postgame.css";
 import "./studio.css";
 
+const isValorantOverlay = location.pathname === "/valorant-overlay";
 const isOverlay = location.pathname === "/overlay";
-document.body.className = isOverlay ? "overlay-body" : "studio-body";
-document.documentElement.classList.toggle("overlay-body", isOverlay);
+const transparent = isOverlay || isValorantOverlay;
+document.body.className = transparent ? "overlay-body" : "studio-body";
+document.documentElement.classList.toggle("overlay-body", transparent);
 const navigation = [
   { id: "overview", label: "Tổng quan", icon: LayoutDashboard },
   { id: "theme", label: "Cấu hình trận đấu", icon: Settings2 },
@@ -50,6 +55,7 @@ const navigation = [
   { id: "draft", label: "Cấm chọn", icon: Swords },
   { id: "postgame", label: "Sau trận", icon: ChartColumn },
   { id: "hud", label: "HUD trong game", icon: PanelTop },
+  { id: "valorant", label: "VALORANT", icon: Crosshair },
 ] as const;
 
 function useSession() {
@@ -245,6 +251,7 @@ function App() {
           {page === "draft" && <DraftDesk state={state} connected={connected} send={send} />}
           {page === "postgame" && <PostgameDesk state={state} connected={connected} send={send} />}
           {page === "hud" && <ReplayHud state={state} connected={connected} send={send} />}
+          {page === "valorant" && <ValorantDesk />}
           {page === "roadmap" && <Roadmap />}
         </div>
       </main>
@@ -264,4 +271,6 @@ function App() {
     </div>
   );
 }
-createRoot(document.getElementById("root")!).render(<App />);
+createRoot(document.getElementById("root")!).render(
+  isValorantOverlay ? <ValorantOverlay /> : <App />,
+);

@@ -1,0 +1,278 @@
+/* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans&family=Montserrat:wght@400;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Unbounded:wght@200..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap");
+@font-face {
+  font-family: "Noto Sans JP";
+  font-weight: 400;
+  src: url("/assets/fonts/NotoSansMono/NotoSansJP-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Noto Sans JP";
+  font-weight: 500;
+  src: url("/assets/fonts/NotoSansMono/NotoSansJP-Medium.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Noto Sans JP";
+  font-weight: 700;
+  src: url("/assets/fonts/NotoSansMono/NotoSansJP-Bold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Noto Sans KR";
+  font-weight: 400;
+  src: url("/assets/fonts/NotoSansMono/NotoSansKR-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Noto Sans KR";
+  font-weight: 500;
+  src: url("/assets/fonts/NotoSansMono/NotoSansKR-Medium.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Noto Sans KR";
+  font-weight: 700;
+  src: url("/assets/fonts/NotoSansMono/NotoSansKR-Bold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Noto Sans SC";
+  font-weight: 400;
+  src: url("/assets/fonts/NotoSansMono/NotoSansSC-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Noto Sans SC";
+  font-weight: 500;
+  src: url("/assets/fonts/NotoSansMono/NotoSansSC-Medium.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Noto Sans SC";
+  font-weight: 700;
+  src: url("/assets/fonts/NotoSansMono/NotoSansSC-Bold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "DIN Next W1G Medium";
+  src: url("/assets/fonts/DINNextW1G/dinnextw1g_medium.otf") format("opentype");
+}
+@font-face {
+  font-family: "DIN Next W1G Bold";
+  src: url("/assets/fonts/DINNextW1G/dinnextw1g_bold.otf") format("opentype");
+}
+@font-face {
+  font-family: "DIN Next W1G Regular";
+  src: url("/assets/fonts/DINNextW1G/dinnextw1g_regular.otf") format("opentype");
+}
+@font-face {
+  font-family: "DIN Next W1G Light";
+  src: url("/assets/fonts/DINNextW1G/dinnextw1g_light.otf") format("opentype");
+}
+@font-face {
+  font-family: "Foundry Gridnik W03 Bold";
+  src: url("/assets/fonts/FoundryGridnikW03/Foundry Gridnik W03 Bold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Foundry Gridnik W03 Extra Bold";
+  src: url("/assets/fonts/FoundryGridnikW03/FoundryGridnikW03-ExtraBold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "DIN Condensed";
+  src: url("/assets/fonts/DINCondensed/din-condensed-vf.otf") format("opentype");
+}
+@font-face {
+  font-family: "Replica";
+  src: url("/assets/fonts/Replica/Replica-Bold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Tungsten";
+  src: url("/assets/fonts/Tungsten/Tungsten-Bold.ttf") format("truetype");
+}
+
+@import "tailwindcss";
+@import "./animations.css";
+
+@theme static {
+  --color-pill: linear-gradient(
+    90deg,
+    rgba(15, 25, 35, 0.85) 0%,
+    rgba(31.14, 37.75, 40.58, 0.85) 100%
+  );
+  --color-timer: #0f1923;
+  --color-background: #0f1923cc;
+  --color-credits-negative: #eadeae;
+
+  --color-defender-primary: #21fec5;
+  --color-defender-secondary: #61eab6;
+  --color-defender-healthbarAccent: #0f3f32;
+  --color-defender-shield: #61eab6;
+  --color-defender-scoreboard: #1ffec1;
+  --color-defender-roundReasons: #0b100f;
+
+  --color-attacker-primary: #fd4756;
+  --color-attacker-secondary: #ff4557;
+  --color-attacker-healthbarAccent: #3c0d11;
+  --color-attacker-shield: #ff838f;
+  --color-attacker-scoreboard: #ff1e31;
+  --color-attacker-roundReasons: #1d1414;
+
+  --color-postmatch-primary: #ae2a2a;
+  --color-postmatch-secondary: #ffd075;
+}
+
+/* Latin glyphs keep the brand fonts; CJK glyphs fall through to the Noto Sans variant for the active language */
+:root {
+  --font-cjk: "Noto Sans SC";
+}
+:root:lang(ja) {
+  --font-cjk: "Noto Sans JP";
+}
+:root:lang(ko) {
+  --font-cjk: "Noto Sans KR";
+}
+:root:lang(zh-Hant) {
+  --font-cjk: "Noto Sans TC", "Noto Sans SC";
+}
+
+@utility font-montserrat {
+  font-family: Montserrat, var(--font-cjk), Helvetica;
+}
+@utility font-unbounded {
+  font-family: Unbounded, var(--font-cjk), Helvetica;
+}
+@utility font-dinnext-light {
+  font-family: "DIN Next W1G Light", var(--font-cjk), Helvetica;
+}
+@utility font-dinnext-regular {
+  font-family: "DIN Next W1G Regular", var(--font-cjk), Helvetica;
+}
+@utility font-dinnext-medium {
+  font-family: "DIN Next W1G Medium", var(--font-cjk), Helvetica;
+}
+@utility font-dinnext-bold {
+  font-family: "DIN Next W1G Bold", var(--font-cjk), Helvetica;
+}
+@utility font-dincondensed-light {
+  font-family: "DIN Condensed", var(--font-cjk), Helvetica;
+  font-weight: 300;
+}
+@utility font-dincondensed-regular {
+  font-family: "DIN Condensed", var(--font-cjk), Helvetica;
+  font-weight: 400;
+}
+@utility font-dincondensed-bold {
+  font-family: "DIN Condensed", var(--font-cjk), Helvetica;
+  font-weight: 600;
+}
+@utility font-foundry-bold {
+  font-family: "Foundry Gridnik W03 Bold", var(--font-cjk), Helvetica;
+}
+@utility font-foundry-extrabold {
+  font-family: "Foundry Gridnik W03 Extra Bold", var(--font-cjk), Helvetica;
+}
+@utility font-replica {
+  font-family: Replica, var(--font-cjk), Helvetica;
+}
+@utility font-tungsten {
+  font-family: Tungsten, var(--font-cjk), Helvetica;
+}
+
+/* Custom classes to size a component according to its relative size within a 1080p screen */
+@utility vw-* {
+  width: calc((--value(integer) / 1920) * 100vw);
+}
+@utility vh-* {
+  height: calc((--value(integer) / 1080) * 100vh);
+}
+@utility max-vw-* {
+  max-width: calc((--value(integer) / 1920) * 100vw);
+}
+@utility max-vh-* {
+  max-height: calc((--value(integer) / 1080) * 100vh);
+}
+@utility min-vw-* {
+  min-width: calc((--value(integer) / 1920) * 100vw);
+}
+@utility min-vh-* {
+  min-height: calc((--value(integer) / 1080) * 100vh);
+}
+
+/* Custom classes to position components on an overlay screen */
+@utility pos-x-center {
+  position: absolute;
+  left: 50vw;
+  translate: -50%;
+}
+@utility pos-x-* {
+  position: absolute;
+  left: calc((--value(integer) / 1920) * 100vw);
+}
+@utility pos-y-bottom {
+  position: absolute;
+  bottom: 0;
+}
+@utility pos-y-* {
+  position: absolute;
+  top: calc((--value(integer) / 1080) * 100vh);
+}
+
+@utility pos-b-* {
+  position: absolute;
+  bottom: calc((--value(integer) / 1080) * 100vh);
+}
+
+@utility pill-background {
+  background: linear-gradient(
+    90deg,
+    rgba(15, 25, 35, 0.85) 0%,
+    rgba(31.14, 37.75, 40.58, 0.85) 100%
+  );
+}
+
+@utility flip {
+  transform: rotateY(180deg);
+}
+
+/* Disabled for tailwind rebuild */
+/* * {
+  font-family: "Inter", sans-serif;
+  color: #1e1e1e;
+  box-sizing: unset;
+} */
+
+img {
+  max-width: unset;
+  vertical-align: unset;
+}
+
+html {
+  background-color: rgba(0, 0, 0, 0);
+  display: flex;
+  justify-content: center;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+* {
+  box-sizing: unset;
+}
+
+:root {
+  --color-timer-rgb: 15, 25, 35; /* matches --color-timer: #0f1923 */
+  --light: #ffffff;
+  --dark: #000000;
+  --less-dark: #0f0f0f;
+  --chat-msg: #dbdee1;
+  --cerise: #e52e5e;
+  --slate: #262626;
+  --blue-dodger: #24affe;
+  --tile-dark: #ffc700;
+  --tile-light: #fffbd3;
+  --grunge-slate: #262626;
+}
+
+.marker-square {
+  fill: yellow !important;
+  opacity: 0.5 !important;
+}

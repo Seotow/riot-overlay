@@ -1,0 +1,486 @@
+<div
+  class="fixed top-0 left-0 translate-x-[-50vw] translate-y-[-1vh]"
+  [class]="
+    'fixed top-0 left-0 translate-x-[-50vw] translate-y-[-1vh] ' +
+    (dataModel.sponsorInfo().enabled ? 'vw-1675' : 'vw-1920') +
+    ' vh-93.27'
+  "
+>
+  <svg
+    id="Bar_Components"
+    data-name="Bar Components"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    class="h-full w-full"
+    [attr.viewBox]="dataModel.sponsorInfo().enabled ? '0 0 1675 93.27' : '0 0 1920 93.27'"
+    preserveAspectRatio="none"
+  >
+    <defs>
+      <linearGradient
+        id="linear-gradient"
+        x1="0.014"
+        y1="0.487"
+        x2="0.413"
+        y2="0.479"
+        gradientUnits="objectBoundingBox"
+      >
+        <stop offset="0" stop-color="#0f1923" stop-opacity="0" />
+        <stop offset="1" stop-color="#0f1923" />
+      </linearGradient>
+      <linearGradient
+        id="linear-gradient-2"
+        x1="0.595"
+        y1="0.448"
+        x2="1"
+        y2="0.453"
+        gradientUnits="objectBoundingBox"
+      >
+        <stop offset="0" stop-color="#0f1923" />
+        <stop offset="1" stop-color="#0f1923" stop-opacity="0" />
+      </linearGradient>
+      <linearGradient
+        id="linear-gradient-3"
+        x1="0.796"
+        y1="0.448"
+        x2="0"
+        y2="0.476"
+        gradientUnits="objectBoundingBox"
+      >
+        <stop offset="0" stop-color="#101823" stop-opacity="0" />
+        <stop
+          offset="0.386"
+          [attr.stop-color]="
+            dataModel.teams()[1].isAttacking
+              ? 'var(--color-attacker-primary)'
+              : 'var(--color-defender-primary)'
+          "
+          stop-opacity="0.902"
+        />
+        <stop
+          offset="0.558"
+          [attr.stop-color]="
+            dataModel.teams()[1].isAttacking
+              ? 'var(--color-attacker-primary)'
+              : 'var(--color-defender-primary)'
+          "
+          stop-opacity="0.902"
+        />
+        <stop offset="1" stop-color="#101823" />
+      </linearGradient>
+      <linearGradient
+        id="linear-gradient-4"
+        y1="0.473"
+        x2="1"
+        y2="0.465"
+        gradientUnits="objectBoundingBox"
+      >
+        <stop offset="0" stop-color="#101823" stop-opacity="0" />
+        <stop
+          offset="0.521"
+          [attr.stop-color]="
+            dataModel.teams()[0].isAttacking
+              ? 'var(--color-attacker-primary)'
+              : 'var(--color-defender-primary)'
+          "
+          stop-opacity="0.902"
+        />
+        <stop
+          offset="0.688"
+          [attr.stop-color]="
+            dataModel.teams()[0].isAttacking
+              ? 'var(--color-attacker-primary)'
+              : 'var(--color-defender-primary)'
+          "
+          stop-opacity="0.902"
+        />
+        <stop offset="1" stop-color="#101823" />
+      </linearGradient>
+      <linearGradient
+        id="linear-gradient-5"
+        y1="0.5"
+        x2="1.013"
+        y2="0.5"
+        gradientUnits="objectBoundingBox"
+      >
+        <stop offset="0" stop-color="#fff" stop-opacity="0" />
+        <stop offset="1" stop-color="#fff" stop-opacity="0.4" />
+      </linearGradient>
+      <linearGradient id="linear-gradient-6" x1="1" x2="-0.013" xlink:href="#linear-gradient-5" />
+      <linearGradient
+        id="linear-gradient-7"
+        y1="0.5"
+        [attr.x2]="dataModel.sponsorInfo().enabled ? '1' : '0.873'"
+        y2="0.5"
+        gradientUnits="objectBoundingBox"
+      >
+        <stop offset="0" stop-color="#292929" stop-opacity="0.6" />
+        <stop offset="0.316" stop-color="#292929" stop-opacity="0.6" />
+        <stop offset="0.381" stop-color="#1b222d" stop-opacity="0.878" />
+        <stop offset="0.438" stop-color="#1b222d" stop-opacity="0.949" />
+        <stop offset="0.462" stop-color="#1b222d" stop-opacity="0.949" />
+        <stop offset="0.488" stop-color="#1b222d" stop-opacity="0.627" />
+        <stop offset="0.534" stop-color="#1b222d" stop-opacity="0" />
+        <stop offset="0.603" stop-color="#101823" stop-opacity="0" />
+        <stop offset="0.664" stop-color="#101823" stop-opacity="0.82" />
+        <stop offset="0.681" stop-color="#101823" stop-opacity="0.949" />
+        <stop offset="0.701" stop-color="#101823" stop-opacity="0.949" />
+        <stop offset="0.755" stop-color="#101823" stop-opacity="0.878" />
+        <stop offset="0.816" stop-color="#292929" stop-opacity="0.6" />
+        <stop offset="1" stop-color="#292929" stop-opacity="0.6" />
+      </linearGradient>
+      <linearGradient
+        id="linear-gradient-8"
+        x1="0.025"
+        y1="0.425"
+        x2="0.973"
+        y2="0.429"
+        gradientUnits="objectBoundingBox"
+      >
+        <stop offset="0" stop-color="#101823" stop-opacity="0" />
+        <stop offset="0.218" stop-color="#0f1923" />
+        <stop offset="0.497" stop-color="#0f1923" />
+        <stop offset="0.79" stop-color="#0f1923" />
+        <stop offset="1" stop-color="#101823" stop-opacity="0" />
+      </linearGradient>
+      <linearGradient
+        id="linear-gradient-9"
+        x1="0.921"
+        y1="0.019"
+        x2="1.002"
+        y2="0.5"
+        gradientUnits="objectBoundingBox"
+      >
+        <stop offset="0" stop-color="#c7c7c7" stop-opacity="0.282" />
+        <stop offset="1" stop-color="#c7c7c7" stop-opacity="0" />
+      </linearGradient>
+      <linearGradient
+        id="linear-gradient-11"
+        x1="0.086"
+        y1="1"
+        x2="0.915"
+        y2="1"
+        gradientUnits="objectBoundingBox"
+      >
+        <stop offset="0" stop-color="#6e6e6e" />
+        <stop offset="0.041" stop-color="#6e6e6e" stop-opacity="0" />
+        <stop offset="0.181" stop-color="#6e6e6e" />
+        <stop offset="0.826" stop-color="#6e6e6e" />
+        <stop offset="0.953" stop-color="#6e6e6e" stop-opacity="0" />
+        <stop offset="1" stop-color="#6e6e6e" />
+      </linearGradient>
+      <linearGradient
+        id="linear-gradient-12"
+        y1="0.5"
+        x2="0.986"
+        y2="0.5"
+        gradientUnits="objectBoundingBox"
+      >
+        <stop
+          offset="0"
+          [attr.stop-color]="
+            dataModel.teams()[0].isAttacking
+              ? 'var(--color-attacker-primary)'
+              : 'var(--color-defender-primary)'
+          "
+          stop-opacity="0"
+        />
+        <stop
+          offset="1"
+          [attr.stop-color]="
+            dataModel.teams()[0].isAttacking
+              ? 'var(--color-attacker-primary)'
+              : 'var(--color-defender-primary)'
+          "
+        />
+      </linearGradient>
+      <linearGradient
+        id="linear-gradient-13"
+        x1="1"
+        y1="0.5"
+        x2="0.014"
+        y2="0.5"
+        gradientUnits="objectBoundingBox"
+      >
+        <stop
+          offset="0"
+          [attr.stop-color]="
+            dataModel.teams()[1].isAttacking
+              ? 'var(--color-attacker-primary)'
+              : 'var(--color-defender-primary)'
+          "
+          stop-opacity="0"
+        />
+        <stop
+          offset="1"
+          [attr.stop-color]="
+            dataModel.teams()[1].isAttacking
+              ? 'var(--color-attacker-primary)'
+              : 'var(--color-defender-primary)'
+          "
+        />
+      </linearGradient>
+    </defs>
+    <path
+      id="Left_Team_Gradient"
+      data-name="Left Team Gradient"
+      d="M2436.135-322.1c2.6,0,8.215-10.9,13.665-10.9s54.21.019,59.544.019,10.28,10.865,13.216,10.9,20.39,0,20.39,0V-393.76l-167.05.478v71.142S2433.531-322.1,2436.135-322.1Z"
+      transform="translate(-1652.95 393.76)"
+      fill="url(#linear-gradient)"
+    />
+    <path
+      id="Right_Team_Gradient"
+      data-name="Right Team Gradient"
+      d="M2644.663-322.368c-3.5-.035-7.978-11.011-14.24-11.094s-55.416-.1-60.421-.023-9.5,11.117-12.014,11.117H2537v-71.62h167.061v71.494S2648.158-322.333,2644.663-322.368Z"
+      transform="translate(-1507 393.988)"
+      fill="url(#linear-gradient-2)"
+    />
+    <path
+      id="Right_Team_Color_ATK_"
+      data-name="Right Team Color (ATK)"
+      d="M2644.663-322.368c-3.5-.035-7.978-11.011-14.24-11.094s-55.416-.1-60.421-.023-9.5,11.117-12.014,11.117H2537v-71.62h167.061v71.494S2648.158-322.333,2644.663-322.368Z"
+      transform="translate(-1507 393.988)"
+      fill="url(#linear-gradient-3)"
+    />
+    <path
+      id="Left_Team_Color_DEF_"
+      data-name="Left Team Color (DEF)"
+      d="M2436.135-322.1c2.6,0,8.215-10.9,13.665-10.9s54.21.019,59.544.019,10.28,10.865,13.216,10.9,20.39,0,20.39,0V-393.76l-167.05.478v71.142S2433.531-322.1,2436.135-322.1Z"
+      transform="translate(-1652.95 393.76)"
+      fill="url(#linear-gradient-4)"
+    />
+    <g id="Line_Accent" data-name="Line Accent" transform="translate(749.407 0.37)">
+      <g id="Line_Accent_Left" data-name="Line Accent Left" transform="translate(0 0)">
+        <path
+          id="Union_1"
+          data-name="Union 1"
+          d="M111.729,56.291l-3.457,3.31,3.457-3.31L87.2,31.585,62.335,56.406l3.14,3.164-3.14-3.164-3.164,3.158,3.164-3.158L37.043,30.925,0,67.525l37.043-36.6L6.843.5l30.2,30.425L62.033,6.235,55.843,0l6.19,6.235L68.343,0l-6.31,6.235L87.2,31.585,113.369,5.464,107.843,0l5.527,5.464L118.843,0l-5.474,5.464,25.307,25.021,1.448-1.387-1.448,1.387,1.614,1.6-1.614-1.6L111.729,56.291,124.843,69.5Zm-49.394.115L87.2,31.585,62.033,6.235,37.043,30.925Zm49.394-.115,26.947-25.807L113.369,5.464,87.2,31.585Z"
+          fill="none"
+          stroke="rgba(255,255,255,0.10)"
+          stroke-width="1"
+        />
+        <rect
+          id="Rectangle_8"
+          data-name="Rectangle 8"
+          width="111.5"
+          height="1"
+          transform="translate(24.093 55.75)"
+          fill="url(#linear-gradient-5)"
+        />
+      </g>
+      <g id="Line_Accent_Right" data-name="Line Accent Right" transform="translate(280.894)">
+        <path
+          id="Union_2"
+          data-name="Union 2"
+          d="M27.362,56.353,1.045,31.365,0,32.448l1.045-1.083-.754-.716.754.716L25.9,5.6,20.309,0l5.6,5.6,5.4-5.6L25.9,5.6l26,26.028L77.1,6.251,70.809,0,77.1,6.251,83.309,0,77.1,6.251l24.953,24.781L132.309.5,102.056,31.031,138.8,67.525,102.056,31.031l-25.268,25.5,3.067,3.07-3.067-3.07L73.848,59.5l2.94-2.967-24.88-24.9L27.362,56.353l3.65,3.465-3.65-3.465L14.309,69.5Zm49.426.179,25.268-25.5L77.1,6.251l-25.2,25.378Zm-49.426-.179L51.908,31.629,25.9,5.6,1.045,31.365Z"
+          fill="none"
+          stroke="rgba(255,255,255,0.10)"
+          stroke-width="1"
+        />
+        <rect
+          id="Rectangle_9"
+          data-name="Rectangle 9"
+          width="111.5"
+          height="1"
+          transform="translate(4.699 55.75)"
+          fill="url(#linear-gradient-6)"
+        />
+      </g>
+    </g>
+    <path
+      id="Bar_Main"
+      data-name="Bar Main"
+      [attr.d]="
+        dataModel.sponsorInfo().enabled
+          ? 'M931-369.46l623.99.013,24.034,23.1v6.993l17.048,17.12s115.339.087,118.088.037,8.193-10.922,13.779-10.917,53.838-.013,59.35,0,10.345,10.913,13.279,10.917,159.231-.037,181.427-.037c2.58.02,6.827-11.042,12.009-11.12s54.025.039,60.282,0,10.968,11.1,14.352,11.12h116.353l17.976-18.24v-5.942L2226-369.333l380-.1v-24.3H931Z'
+          : 'M931-369.46l623.99.013,24.034,23.1v6.993l17.048,17.12s115.339.087,118.088.037,8.193-10.922,13.779-10.917,53.838-.013,59.35,0,10.345,10.913,13.279,10.917,159.231-.037,181.427-.037c2.58.02,6.827-11.042,12.009-11.12s54.025.039,60.282,0,10.968,11.1,14.352,11.12h116.353l17.976-18.24v-5.942L2226-369.333l625-.1v-24.3H931Z'
+      "
+      transform="translate(-931 393.853)"
+      fill="url(#linear-gradient-7)"
+    />
+    <path
+      id="Timer_Main"
+      data-name="Timer Main"
+      d="M2602.611-393.186l40.966,39.535v10.282l31.354,30.933,38.746.008,6.455,6.458,10.194,0,6.013,5.936,5.876-5.936h10.206l6.459-6.458,38.743,0,31.2-31.184v-9.7l40.28-39.879-64.8-.12v71h-136v-71Z"
+      transform="translate(-1776.311 393.307)"
+      fill="url(#linear-gradient-8)"
+    />
+    <g id="Timer_Accent" data-name="Timer Accent" transform="translate(859.898 9.12)">
+      <g id="Timer_Accent_Left" data-name="Timer Accent Left" transform="translate(0 0)">
+        <rect
+          id="Rectangle_2"
+          data-name="Rectangle 2"
+          width="109"
+          height="0.5"
+          transform="translate(0.354 0) rotate(45)"
+          fill="url(#linear-gradient-9)"
+        />
+        <rect
+          id="Rectangle_3"
+          data-name="Rectangle 3"
+          width="6.5"
+          height="0.5"
+          transform="translate(0.354 0) rotate(45)"
+          fill="#fff"
+        />
+      </g>
+      <g id="Timer_Accent_Right" data-name="Timer Accent Right" transform="translate(121.5 0)">
+        <rect
+          id="Rectangle_4"
+          data-name="Rectangle 4"
+          width="109"
+          height="0.5"
+          transform="translate(77.428 0.354) rotate(135)"
+          fill="url(#linear-gradient-9)"
+        />
+        <rect
+          id="Rectangle_5"
+          data-name="Rectangle 5"
+          width="6.5"
+          height="0.5"
+          transform="translate(72.478 4.596) rotate(-45)"
+          fill="#fff"
+        />
+      </g>
+    </g>
+    <g id="Accents" transform="translate(584 23.12)">
+      <path
+        id="Union_4"
+        data-name="Union 4"
+        d="M553.217,48.029c-2.854-.022-10.053-11-12.615-11.04-1.39-.022-19.017-.01-35.145,0-13.608.01-26.151.021-26.973.011-.9-.011-3.226,2.744-5.539,5.5s-4.613,5.508-5.461,5.5c-1.7-.016-16.5,0-16.5,0V47s14.165.008,15.958,0,8.779-10.992,11.091-10.982c1.092,0,14.564,0,28.776-.01,15.862-.008,32.647-.016,34.174-.008,2.9.014,10.1,10.872,12.125,10.975,1.947.1,109.2.049,117.38.046l0-.01L687,30V23L711.482,0h40.485V.981H711.952L688.034,23.322l-.057,7.069L670.984,48l0-.005v.016s-71.621.025-103.18.025C559.386,48.036,553.817,48.034,553.217,48.029ZM80.986,48.008v-.013l0,.005L63.99,30.391l-.057-7.069L40.015.98H0V0H40.485L64.963,23v7l16.52,17.014,0,.007c8.192,0,115.431.053,117.378-.046,2.025-.1,9.229-10.96,12.125-10.975,1.4-.007,15.615,0,30.192.009,15.652.009,31.717.018,32.759.008,2.011-.02,9.22,10.969,11.091,10.982s15.958,0,15.958,0v1s-14.8-.016-16.5,0c-.848.008-3.148-2.746-5.461-5.5s-4.641-5.511-5.539-5.5c-.822.01-13.365,0-26.973-.011-16.129-.012-33.756-.024-35.145,0-2.561.04-9.76,11.018-12.615,11.04-.6,0-6.169.006-14.584.006C152.607,48.033,80.986,48.008,80.986,48.008Z"
+        transform="translate(0.016 1)"
+        fill="url(#linear-gradient-11)"
+      />
+      <g id="Left_Accent" data-name="Left Accent">
+        <rect
+          id="Rectangle_6"
+          data-name="Rectangle 6"
+          width="12"
+          height="2"
+          transform="translate(289 47)"
+          fill="#fff"
+        />
+        <rect id="Rectangle_7" data-name="Rectangle 7" width="12" height="2" fill="#fff" />
+      </g>
+      <g id="Right_Accent" data-name="Right Accent" transform="translate(451)">
+        <rect
+          id="Rectangle_6-2"
+          data-name="Rectangle 6"
+          width="12"
+          height="2"
+          transform="translate(0 47)"
+          fill="#fff"
+        />
+        <rect
+          id="Rectangle_7-2"
+          data-name="Rectangle 7"
+          width="12"
+          height="2"
+          transform="translate(289)"
+          fill="#fff"
+        />
+      </g>
+    </g>
+    <path
+      id="Left_Team_Bar_DEF_"
+      data-name="Left Team Bar (DEF)"
+      d="M2383.9-257s-3.614,4.061-4.961,4.054-117.874-.072-117.874-.072V-257Z"
+      transform="translate(-1596.033 325.12)"
+      fill="url(#linear-gradient-12)"
+    />
+    <path
+      id="Right_Team_Bar_ATK_"
+      data-name="Right Team Bar (ATK)"
+      d="M2261.331-257s3.481,4.061,4.828,4.054,117.875-.072,117.875-.072V-257Z"
+      transform="translate(-1129.165 325.12)"
+      fill="url(#linear-gradient-13)"
+    />
+  </svg>
+
+  <!-- Team 0 (Left) Components -->
+  <div class="absolute top-[1vh] left-[34.3vw]">
+    <img
+      [src]="dataModel.teams()[0].teamUrl"
+      class="h-[4vh] max-h-[4vh] w-[4vh] max-w-[4vh] object-contain"
+    />
+  </div>
+
+  <div
+    class="absolute left-[37.5vw]"
+    [class]="dataModel.seedingInfo().left ? 'top-[0.8vh]' : 'top-[1.6vh]'"
+  >
+    <div class="flex flex-col items-center justify-center">
+      <span class="font-tungsten text-[3vh] leading-none text-white">{{
+        dataModel.teams()[0].teamTricode
+      }}</span>
+      @if (dataModel.seedingInfo().left) {
+        <span class="font-dinnext-medium text-[1.2vh] leading-none text-[#A1A9AC]">{{
+          dataModel.seedingInfo().left.toUpperCase()
+        }}</span>
+      }
+    </div>
+  </div>
+
+  <div class="absolute top-[0.8vh] left-[43vw] -translate-x-1/2">
+    <span class="font-foundry-extrabold text-center text-[4.3vh] leading-none text-white">{{
+      dataModel.teams()[0].roundsWon
+    }}</span>
+  </div>
+
+  <!-- Team 1 (Right) Components -->
+  <div
+    class="absolute top-[0.8vh] translate-x-1/2"
+    [class]="dataModel.sponsorInfo().enabled ? 'right-[30.2vw]' : 'right-[43vw]'"
+  >
+    <span class="font-foundry-extrabold text-center text-[4.3vh] leading-none text-white">{{
+      dataModel.teams()[1].roundsWon
+    }}</span>
+  </div>
+
+  <div
+    class="absolute"
+    [class]="
+      (dataModel.sponsorInfo().enabled ? 'right-[25vw]' : 'right-[38vw]') +
+      ' ' +
+      (dataModel.seedingInfo().right ? 'top-[0.8vh]' : 'top-[1.6vh]')
+    "
+  >
+    <div class="flex flex-col items-center justify-center">
+      <span class="font-tungsten text-[3vh] leading-none text-white">{{
+        dataModel.teams()[1].teamTricode
+      }}</span>
+      @if (dataModel.seedingInfo().right) {
+        <span class="font-dinnext-medium text-[1.2vh] leading-none text-[#A1A9AC]">{{
+          dataModel.seedingInfo().right.toUpperCase()
+        }}</span>
+      }
+    </div>
+  </div>
+
+  <div
+    class="absolute top-[1vh]"
+    [class]="dataModel.sponsorInfo().enabled ? 'right-[21.7vw]' : 'right-[34.5vw]'"
+  >
+    <img
+      [src]="dataModel.teams()[1].teamUrl"
+      class="h-[4vh] max-h-[4vh] w-[4vh] max-w-[4vh] object-contain"
+    />
+  </div>
+  <div class="absolute top-[8.5vh] left-[50vw] -translate-x-1/2">
+    <div class="relative flex items-center">
+      <div
+        class="spike-side absolute"
+        [class]="dataModel.teams()[0].isAttacking ? 'left-[-15px]' : 'right-[-15px] scale-x-[-1]'"
+      ></div>
+      <img
+        src="assets/misc/Spike_Icon.svg"
+        [class]="
+          dataModel.spikeState().planted
+            ? 'opacity-0'
+            : dataModel.spikeState().defused || dataModel.spikeState().detonated
+              ? 'opacity-100 delay-300'
+              : 'opacity-100'
+        "
+      />
+    </div>
+  </div>
+</div>

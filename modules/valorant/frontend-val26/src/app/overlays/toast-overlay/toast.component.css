@@ -1,0 +1,35 @@
+@keyframes toast-slide {
+  from {
+    transform: translateY(150%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes card-expand {
+  from {
+    clip-path: inset(0 87.2% 0 0);
+  }
+  to {
+    clip-path: inset(0 0% 0 0);
+  }
+}
+
+.toast-in {
+  animation: toast-slide 283ms ease-out;
+  will-change: transform;
+}
+
+.toast-out {
+  animation: toast-slide 283ms ease-in 384ms reverse both;
+  will-change: transform;
+}
+
+.card-expand {
+  animation: card-expand 384ms ease-out 283ms both;
+}
+
+.card-collapse {
+  animation: card-expand 384ms ease-in reverse both;
+}

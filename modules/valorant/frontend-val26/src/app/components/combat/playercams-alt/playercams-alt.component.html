@@ -1,0 +1,31 @@
+@if (dataModel.playercamsInfo().enable && !isOneVersusOne()) {
+  <div [class.hidden]="dataModel.match().roundPhase !== 'combat'">
+    @for (team of dataModel.teams(); track $index; let teamIndex = $index) {
+      @for (player of team.players; track $index) {
+        @if (this.enabledPlayers().includes(player.fullName)) {
+          <div
+            class="absolute box-border flex aspect-video h-44 flex-col justify-end overflow-clip border-black/65 bg-black/65"
+            [class.hidden]="!player.isObserved"
+          >
+            <div class="absolute top-1 left-1 h-42 w-76.25 overflow-hidden">
+              <iframe
+                allow="camera;fullscreen;autoplay;"
+                [src]="getStream(player.fullName)"
+                class="aspect-video w-full"
+              ></iframe>
+            </div>
+            <div
+              class="relative bottom-1 left-1 flex h-40 w-76.25 items-center bg-gradient-to-t from-black/80 to-transparent"
+            >
+              <div
+                class="font-dincondensed-bold absolute bottom-2 w-full max-w-85 overflow-clip text-center text-2xl whitespace-nowrap text-white uppercase"
+              >
+                {{ getDisplayName(player.fullName, player.name) }}
+              </div>
+            </div>
+          </div>
+        }
+      }
+    }
+  </div>
+}

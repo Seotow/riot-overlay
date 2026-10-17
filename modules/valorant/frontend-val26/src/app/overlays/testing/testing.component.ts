@@ -1,0 +1,890 @@
+import { Component, inject, OnInit, signal } from "@angular/core";
+import { MatchOverlayComponent } from "../match-overlay/match-overlay.component";
+import { DataModelService, initialMatchData } from "../../services/dataModel.service";
+import { IMatchData } from "../../services/Types";
+import { LiveToastComponent } from "../toast-overlay/toast.component";
+import { PlayercamsAltComponent } from "../../components/combat/playercams-alt/playercams-alt.component";
+
+@Component({
+  selector: "app-testing-new",
+  imports: [MatchOverlayComponent, LiveToastComponent, PlayercamsAltComponent],
+  templateUrl: "./testing.component.html",
+  styleUrl: "./testing.component.css",
+})
+export class TestingComponent implements OnInit {
+  dataModel = inject(DataModelService);
+  private toastTimerRef?: ReturnType<typeof setTimeout>;
+  match: IMatchData = initialMatchData;
+
+  ngOnInit(): void {
+    this.match = {
+      groupCode: "A",
+      isRanked: false,
+      isRunning: true,
+      roundNumber: 14,
+      roundPhase: "combat",
+      spikeState: { planted: false, defused: false, detonated: false },
+      map: "Ascent",
+      switchRound: 12,
+      firstOtRound: 25,
+      attackersWon: false,
+      showAliveKDA: false,
+      agentSelectStartTime: 0,
+      tools: {
+        seriesInfo: {
+          needed: 3,
+          wonLeft: 2,
+          wonRight: 1,
+          mapInfo: [
+            {
+              type: "past",
+              map: "Fracture",
+              left: {
+                score: 13,
+                logo: "assets/misc/icon.webp",
+              },
+              right: {
+                score: 9,
+                logo: "assets/misc/icon.webp",
+              },
+            },
+            {
+              type: "present",
+              logo: "assets/misc/icon.webp",
+            },
+            {
+              type: "future",
+              map: "Haven",
+              logo: "assets/misc/icon.webp",
+            },
+          ],
+        },
+        seedingInfo: {
+          left: "Group A",
+          right: "Group B",
+        },
+        tournamentInfo: {
+          name: "",
+          logoUrl: "",
+          backdropUrl: "",
+        },
+        timeoutDuration: 60,
+        timeoutCounter: {
+          max: 2,
+          left: 2,
+          right: 2,
+        },
+        timeoutCancellationGracePeriod: 10,
+        sponsorInfo: {
+          enabled: true,
+          duration: 5000,
+          sponsors: ["assets/misc/logo.webp", "assets/misc/icon.webp"],
+        },
+        watermarkInfo: {
+          customText: "SPECTRA INVITATIONAL: GRAND FINAL",
+          customTextEnabled: true,
+          spectraWatermark: true,
+        },
+        playercamsInfo: {
+          enable: true,
+          enabledPlayers: ["MrFoxy#DEBUG", "TTV RedStone201#DEBUG"],
+          removeTricodes: false,
+          identifier: "SPPCEDVACI",
+          secret: "f5bE6fYn",
+          endTime: 0,
+          listenIn: false,
+        },
+        nameOverrides: { overrides: [] },
+        roundWinBox: {
+          type: "tournamentInfo",
+          sponsors: [],
+        },
+        agentSelectActive: false,
+      },
+      toastInfo: {
+        active: false,
+        duration: 10000,
+        title: "",
+        message: "",
+        selectedTeam: "left",
+        eventLogoEnabled: true,
+      },
+      timeoutState: {
+        techPause: false,
+        leftTeam: false,
+        rightTeam: false,
+        timeRemaining: 0,
+      },
+      teams: [
+        {
+          players: [
+            {
+              name: "MrFoxy",
+              fullName: "MrFoxy#DEBUG",
+              playerId: 0,
+              isAlive: true,
+              agentInternal: "Stealth",
+              isObserved: false,
+              armorName: "Heavy",
+              money: 900,
+              moneySpent: 0,
+              highestWeapon: "Operator",
+              isCaptain: false,
+              maxUltPoints: Math.floor(Math.random() * 3) + 6,
+              currUltPoints: Math.floor(Math.random() * 3) + 4,
+              ultReady: false,
+              hasSpike: false,
+              scoreboardAvailable: true,
+              auxiliaryAvailable: {
+                health: true,
+                abilities: false,
+                scoreboard: true,
+              },
+              kills: 0,
+              deaths: 0,
+              assists: 0,
+              killsThisRound: 1,
+              deathsThisRound: 0,
+              killedPlayerNames: [],
+              health: 100,
+              abilities: {
+                grenade: 1,
+                ability1: 1,
+                ability2: 0,
+              },
+              iconNameSuffix: "",
+              locked: false,
+            },
+            {
+              name: "RedStone201",
+              fullName: "TTV RedStone201#DEBUG",
+              playerId: 0,
+              isAlive: true,
+              agentInternal: "Smonk",
+              isObserved: false,
+              armorName: "Heavy",
+              money: 2100,
+              moneySpent: 2900,
+              highestWeapon: "Vandal",
+              isCaptain: false,
+              maxUltPoints: Math.floor(Math.random() * 3) + 6,
+              currUltPoints: Math.floor(Math.random() * 3) + 2,
+              ultReady: false,
+              hasSpike: false,
+              scoreboardAvailable: true,
+              auxiliaryAvailable: {
+                health: true,
+                abilities: true,
+                scoreboard: true,
+              },
+              kills: 0,
+              deaths: 0,
+              assists: 0,
+              killsThisRound: 0,
+              deathsThisRound: 0,
+              killedPlayerNames: [],
+              health: 100,
+              abilities: {
+                grenade: 1,
+                ability1: 1,
+                ability2: 0,
+              },
+              iconNameSuffix: "",
+              locked: false,
+            },
+            {
+              name: "ThreeOfLife",
+              fullName: "ThreeOfLife#DEBUG",
+              playerId: 0,
+              isAlive: true,
+              agentInternal: "BountyHunter",
+              isObserved: false,
+              armorName: "Heavy",
+              money: 2100,
+              moneySpent: 2900,
+              highestWeapon: "Vandal",
+              isCaptain: false,
+              maxUltPoints: Math.floor(Math.random() * 3) + 6,
+              currUltPoints: Math.floor(Math.random() * 3) + 2,
+              ultReady: false,
+              hasSpike: false,
+              scoreboardAvailable: true,
+              auxiliaryAvailable: {
+                health: true,
+                abilities: true,
+                scoreboard: true,
+              },
+              kills: 0,
+              deaths: 0,
+              assists: 0,
+              killsThisRound: 1,
+              deathsThisRound: 0,
+              killedPlayerNames: [],
+              health: 100,
+              abilities: {
+                grenade: 1,
+                ability1: 1,
+                ability2: 0,
+              },
+              iconNameSuffix: "",
+              locked: false,
+            },
+            {
+              name: "Fourcefield",
+              fullName: "Fourcefield#DEBUG",
+              playerId: 0,
+              isAlive: true,
+              agentInternal: "Killjoy",
+              isObserved: false,
+              armorName: "Heavy",
+              money: 2100,
+              moneySpent: 2900,
+              highestWeapon: "Vandal",
+              isCaptain: false,
+              maxUltPoints: Math.floor(Math.random() * 3) + 6,
+              currUltPoints: Math.floor(Math.random() * 3) + 2,
+              ultReady: false,
+              hasSpike: false,
+              scoreboardAvailable: true,
+              auxiliaryAvailable: {
+                health: true,
+                abilities: true,
+                scoreboard: true,
+              },
+              kills: 0,
+              deaths: 0,
+              assists: 0,
+              killsThisRound: 0,
+              deathsThisRound: 0,
+              killedPlayerNames: [],
+              health: 100,
+              abilities: {
+                grenade: 1,
+                ability1: 1,
+                ability2: 0,
+              },
+              iconNameSuffix: "",
+              locked: false,
+            },
+            {
+              name: "FIVEbyFIVE",
+              fullName: "FIVEbyFIVE#DEBUG",
+              playerId: 0,
+              isAlive: true,
+              agentInternal: "Iris",
+              isObserved: false,
+              armorName: "Heavy",
+              money: 2100,
+              moneySpent: 2900,
+              highestWeapon: "Vandal",
+              isCaptain: false,
+              maxUltPoints: Math.floor(Math.random() * 3) + 6,
+              currUltPoints: Math.floor(Math.random() * 3) + 2,
+              ultReady: false,
+              hasSpike: false,
+              scoreboardAvailable: true,
+              auxiliaryAvailable: {
+                health: true,
+                abilities: true,
+                scoreboard: true,
+              },
+              kills: 0,
+              deaths: 0,
+              assists: 0,
+              killsThisRound: 0,
+              deathsThisRound: 0,
+              killedPlayerNames: [],
+              health: 100,
+              abilities: {
+                grenade: 1,
+                ability1: 1,
+                ability2: 0,
+              },
+              iconNameSuffix: "",
+              locked: false,
+            },
+          ],
+          teamName: "The Naturals",
+          teamUrl: "assets/misc/icon.webp",
+          teamTricode: "INT",
+          spentThisRound: 1000,
+          isAttacking: false,
+          roundsWon: 5,
+          roundRecord: [
+            { type: "detonated", wasAttack: true, round: 1 },
+            { type: "lost", wasAttack: true, round: 2 },
+            { type: "kills", wasAttack: true, round: 3 },
+            { type: "timeout", wasAttack: true, round: 4 },
+            { type: "lost", wasAttack: true, round: 5 },
+            { type: "kills", wasAttack: true, round: 6 },
+            { type: "lost", wasAttack: true, round: 7 },
+            { type: "defused", wasAttack: true, round: 8 },
+            { type: "lost", wasAttack: true, round: 9 },
+            { type: "lost", wasAttack: true, round: 10 },
+            { type: "lost", wasAttack: true, round: 11 },
+            { type: "lost", wasAttack: true, round: 12 },
+            { type: "lost", wasAttack: false, round: 13 },
+            { type: "upcoming", wasAttack: false, round: 14 },
+            { type: "upcoming", wasAttack: false, round: 15 },
+            { type: "upcoming", wasAttack: false, round: 16 },
+            { type: "upcoming", wasAttack: false, round: 17 },
+            { type: "upcoming", wasAttack: false, round: 18 },
+            { type: "upcoming", wasAttack: false, round: 19 },
+            { type: "upcoming", wasAttack: false, round: 20 },
+            { type: "upcoming", wasAttack: true, round: 21 },
+            { type: "upcoming", wasAttack: false, round: 22 },
+            { type: "upcoming", wasAttack: false, round: 23 },
+            { type: "upcoming", wasAttack: false, round: 24 },
+            { type: "upcoming", wasAttack: true, round: 25 },
+            { type: "upcoming", wasAttack: false, round: 26 },
+            { type: "upcoming", wasAttack: true, round: 27 },
+            { type: "upcoming", wasAttack: false, round: 28 },
+            { type: "upcoming", wasAttack: true, round: 29 },
+            { type: "upcoming", wasAttack: false, round: 30 },
+          ],
+        },
+        {
+          players: [
+            {
+              name: "nobii",
+              fullName: "nobii#DEBUG",
+              playerId: 0,
+              isAlive: true,
+              agentInternal: "Grenadier",
+              isObserved: false,
+              armorName: "Heavy",
+              money: 2100,
+              moneySpent: 2900,
+              highestWeapon: "Vandal",
+              isCaptain: false,
+              maxUltPoints: Math.floor(Math.random() * 3) + 6,
+              currUltPoints: Math.floor(Math.random() * 3) + 2,
+              ultReady: false,
+              hasSpike: false,
+              scoreboardAvailable: true,
+              auxiliaryAvailable: {
+                health: true,
+                abilities: true,
+                scoreboard: true,
+              },
+              kills: 0,
+              deaths: 0,
+              assists: 0,
+              killsThisRound: 0,
+              deathsThisRound: 0,
+              killedPlayerNames: [],
+              health: 100,
+              abilities: {
+                grenade: 1,
+                ability1: 1,
+                ability2: 0,
+              },
+              iconNameSuffix: "",
+              locked: false,
+            },
+            {
+              name: "delusion",
+              fullName: "delusion#DEBUG",
+              playerId: 0,
+              isAlive: true,
+              agentInternal: "Rift",
+              isObserved: false,
+              armorName: "Heavy",
+              money: 2100,
+              moneySpent: 2900,
+              highestWeapon: "Vandal",
+              isCaptain: false,
+              maxUltPoints: Math.floor(Math.random() * 3) + 6,
+              currUltPoints: Math.floor(Math.random() * 3) + 2,
+              ultReady: false,
+              hasSpike: false,
+              scoreboardAvailable: true,
+              auxiliaryAvailable: {
+                health: true,
+                abilities: true,
+                scoreboard: true,
+              },
+              kills: 0,
+              deaths: 0,
+              assists: 0,
+              killsThisRound: 1,
+              deathsThisRound: 0,
+              killedPlayerNames: [],
+              health: 100,
+              abilities: {
+                grenade: 1,
+                ability1: 1,
+                ability2: 0,
+              },
+              iconNameSuffix: "",
+              locked: false,
+            },
+            {
+              name: "CowTipper",
+              fullName: "CowTipper#DEBUG",
+              playerId: 0,
+              isAlive: true,
+              agentInternal: "Sprinter",
+              isObserved: false,
+              armorName: "Heavy",
+              money: 2100,
+              moneySpent: 2900,
+              highestWeapon: "Vandal",
+              isCaptain: false,
+              maxUltPoints: Math.floor(Math.random() * 3) + 6,
+              currUltPoints: Math.floor(Math.random() * 3) + 2,
+              ultReady: false,
+              hasSpike: false,
+              scoreboardAvailable: true,
+              auxiliaryAvailable: {
+                health: true,
+                abilities: true,
+                scoreboard: true,
+              },
+              kills: 0,
+              deaths: 0,
+              assists: 0,
+              killsThisRound: 1,
+              deathsThisRound: 0,
+              killedPlayerNames: [],
+              health: 100,
+              abilities: {
+                grenade: 1,
+                ability1: 1,
+                ability2: 0,
+              },
+              iconNameSuffix: "",
+              locked: false,
+            },
+            {
+              name: "DodoDaniel",
+              fullName: "DodoDaniel#DEBUG",
+              playerId: 0,
+              isAlive: true,
+              agentInternal: "BountyHunter",
+              isObserved: false,
+              armorName: "Heavy",
+              money: 2100,
+              moneySpent: 2900,
+              highestWeapon: "Vandal",
+              isCaptain: false,
+              maxUltPoints: Math.floor(Math.random() * 3) + 6,
+              currUltPoints: Math.floor(Math.random() * 3) + 2,
+              ultReady: false,
+              hasSpike: false,
+              scoreboardAvailable: true,
+              auxiliaryAvailable: {
+                health: true,
+                abilities: true,
+                scoreboard: true,
+              },
+              kills: 0,
+              deaths: 0,
+              assists: 0,
+              killsThisRound: 1,
+              deathsThisRound: 0,
+              killedPlayerNames: [],
+              health: 100,
+              abilities: {
+                grenade: 1,
+                ability1: 1,
+                ability2: 0,
+              },
+              iconNameSuffix: "",
+              locked: false,
+            },
+            {
+              name: "Eeliminator",
+              fullName: "Eeliminator#DEBUG",
+              playerId: 0,
+              isAlive: true,
+              agentInternal: "Stealth",
+              isObserved: false,
+              armorName: "Heavy",
+              money: 2100,
+              moneySpent: 2900,
+              highestWeapon: "Vandal",
+              isCaptain: false,
+              maxUltPoints: Math.floor(Math.random() * 3) + 6,
+              currUltPoints: Math.floor(Math.random() * 3) + 2,
+              ultReady: false,
+              hasSpike: false,
+              scoreboardAvailable: true,
+              auxiliaryAvailable: {
+                health: true,
+                abilities: true,
+                scoreboard: true,
+              },
+              kills: 0,
+              deaths: 0,
+              assists: 0,
+              killsThisRound: 0,
+              deathsThisRound: 0,
+              killedPlayerNames: [],
+              health: 100,
+              abilities: {
+                grenade: 1,
+                ability1: 1,
+                ability2: 0,
+              },
+              iconNameSuffix: "",
+              locked: false,
+            },
+          ],
+          teamName: "The Zoologists",
+          teamUrl: "assets/misc/icon.webp",
+          teamTricode: "ZOO",
+          spentThisRound: 1000,
+          isAttacking: true,
+          roundsWon: 8,
+          roundRecord: [
+            { type: "lost", wasAttack: false, round: 1 },
+            { type: "defused", wasAttack: false, round: 2 },
+            { type: "lost", wasAttack: false, round: 3 },
+            { type: "lost", wasAttack: false, round: 4 },
+            { type: "kills", wasAttack: false, round: 5 },
+            { type: "lost", wasAttack: false, round: 6 },
+            { type: "detonated", wasAttack: false, round: 7 },
+            { type: "lost", wasAttack: false, round: 8 },
+            { type: "kills", wasAttack: false, round: 9 },
+            { type: "defused", wasAttack: false, round: 10 },
+            { type: "kills", wasAttack: false, round: 11 },
+            { type: "kills", wasAttack: false, round: 12 },
+            { type: "detonated", wasAttack: true, round: 13 },
+            { type: "upcoming", wasAttack: true, round: 14 },
+            { type: "upcoming", wasAttack: true, round: 15 },
+            { type: "upcoming", wasAttack: true, round: 16 },
+            { type: "upcoming", wasAttack: true, round: 17 },
+            { type: "upcoming", wasAttack: true, round: 18 },
+            { type: "upcoming", wasAttack: true, round: 19 },
+            { type: "upcoming", wasAttack: true, round: 20 },
+            { type: "upcoming", wasAttack: true, round: 21 },
+            { type: "upcoming", wasAttack: true, round: 22 },
+            { type: "upcoming", wasAttack: true, round: 23 },
+            { type: "upcoming", wasAttack: true, round: 24 },
+            { type: "upcoming", wasAttack: false, round: 25 },
+            { type: "upcoming", wasAttack: true, round: 26 },
+            { type: "upcoming", wasAttack: false, round: 27 },
+            { type: "upcoming", wasAttack: true, round: 28 },
+            { type: "upcoming", wasAttack: false, round: 29 },
+            { type: "upcoming", wasAttack: true, round: 30 },
+          ],
+        },
+      ],
+    };
+    this.dataModel.match.set(this.match);
+  }
+
+  //#region General button handlers
+  changeRoundPhase() {
+    this.dataModel.match.update((v) => {
+      const ret = v;
+      if (ret.roundPhase == "shopping") {
+        ret.roundPhase = "combat";
+      } else if (ret.roundPhase == "combat") {
+        ret.roundPhase = "end";
+      } else if (ret.roundPhase == "LOBBY") {
+        ret.roundPhase = "end";
+      } else {
+        ret.roundPhase = "shopping";
+        ret.teams.forEach((team) => {
+          team.players.forEach((player) => {
+            player.isAlive = true;
+            player.health = 100;
+            player.deathsThisRound = 0;
+          });
+        });
+      }
+      return ret;
+    });
+  }
+
+  swapTeamColors() {
+    this.dataModel.match.update((v) => {
+      const ret = v;
+      ret.teams.forEach((team: any) => {
+        team.isAttacking = !team.isAttacking;
+        team.players.forEach((player: any) => {
+          player.hasSpike = false;
+        });
+      });
+      return ret;
+    });
+  }
+
+  spikeTimer?: ReturnType<typeof setTimeout>;
+
+  plantSpike() {
+    this.dataModel.match.update((v) => {
+      const ret = v;
+      ret.spikeState.planted = true;
+      ret.spikeState.defused = false;
+      ret.spikeState.detonated = false;
+      return ret;
+    });
+    this.spikeTimer = setTimeout(() => {
+      this.defuseSpike();
+    }, 45 * 1000);
+  }
+
+  defuseSpike() {
+    this.dataModel.match.update((v) => {
+      const ret = v;
+      ret.spikeState.planted = false;
+      ret.spikeState.defused = true;
+      ret.spikeState.detonated = false;
+      return ret;
+    });
+    clearTimeout(this.spikeTimer);
+    this.spikeTimer = undefined;
+  }
+
+  showInterface = signal(true);
+  toggleInterface() {
+    this.showInterface.update((v) => !v);
+  }
+
+  currentBackground = signal(1);
+  switchBackground() {
+    this.currentBackground.update((v) => {
+      return v >= 4 ? 1 : v + 1;
+    });
+  }
+
+  techPause() {
+    const currentState = this.dataModel.match().timeoutState;
+    const isCurrentlyActive = currentState.techPause;
+
+    if (isCurrentlyActive) {
+      // End tech pause
+      this.stopTimeoutTimer();
+    } else {
+      // Start tech pause
+      this.stopTimeoutTimer(); // Stop any existing timeout first
+      this.dataModel.match.update((v) => {
+        const ret = v;
+        ret.timeoutState.techPause = true;
+        ret.timeoutState.leftTeam = false;
+        ret.timeoutState.rightTeam = false;
+        ret.timeoutState.timeRemaining = 0;
+        return ret;
+      });
+    }
+  }
+  //#endregion
+
+  //#region Team button handlers
+
+  winRound(teamIndex: number) {
+    this.dataModel.match.update((v) => {
+      const ret = v;
+      const team = ret.teams[teamIndex];
+      team.roundsWon++;
+      team.roundsWon %= 13;
+      ret.roundNumber = ret.teams[0].roundsWon + ret.teams[1].roundsWon + 1;
+      return ret;
+    });
+  }
+
+  timeout(teamIndex: number) {
+    const currentState = this.dataModel.match().timeoutState;
+    const isLeftActive = currentState.leftTeam;
+    const isRightActive = currentState.rightTeam;
+
+    if ((teamIndex == 0 && isLeftActive) || (teamIndex == 1 && isRightActive)) {
+      // End the timeout for this team
+      this.stopTimeoutTimer();
+      return;
+    }
+
+    // Start timeout for the team
+    this.stopTimeoutTimer(); // Stop any existing timeout first
+    this.dataModel.match.update((v) => {
+      const ret = v;
+      ret.timeoutState.techPause = false;
+      ret.timeoutState.leftTeam = teamIndex == 0;
+      ret.timeoutState.rightTeam = teamIndex == 1;
+      ret.timeoutState.timeRemaining = ret.tools.timeoutDuration;
+      return ret;
+    });
+    this.startTimeoutTimer();
+  }
+  //#endregion
+
+  //#region Player button handlers
+  killPlayer(teamIndex: number, playerIndex: number) {
+    this.dataModel.match.update((v) => {
+      const ret = v;
+      ret.teams[teamIndex].players[playerIndex].isAlive = false;
+      ret.teams[teamIndex].players[playerIndex].health = 0;
+      ret.teams[teamIndex].players[playerIndex].deaths += 1;
+      ret.teams[teamIndex].players[playerIndex].deathsThisRound += 1;
+      return ret;
+    });
+  }
+
+  revivePlayer(teamIndex: number, playerIndex: number) {
+    this.dataModel.match.update((v) => {
+      const ret = v;
+      ret.teams[teamIndex].players[playerIndex].isAlive = true;
+      ret.teams[teamIndex].players[playerIndex].health = 100;
+      return ret;
+    });
+  }
+
+  giveUltPoint(teamIndex: number, playerIndex: number) {
+    this.dataModel.match.update((v) => {
+      const ret = v;
+      const player = ret.teams[teamIndex].players[playerIndex];
+      player.currUltPoints++;
+      player.ultReady = player.currUltPoints == player.maxUltPoints;
+      return ret;
+    });
+  }
+
+  useUltimate(teamIndex: number, playerIndex: number) {
+    this.dataModel.match.update((v) => {
+      const ret = v;
+      const player = ret.teams[teamIndex].players[playerIndex];
+      player.currUltPoints = 0;
+      player.ultReady = false;
+      return ret;
+    });
+  }
+
+  armorOrder = ["Heavy", "Regen", "Light", "None"];
+  changeShield(teamIndex: number, playerIndex: number) {
+    this.dataModel.match.update((v) => {
+      const ret = v;
+      const player = ret.teams[teamIndex].players[playerIndex];
+      let i = this.armorOrder.findIndex((e) => e == player.armorName);
+      i++;
+      i %= this.armorOrder.length;
+      player.armorName = this.armorOrder[i];
+      player.health = Math.floor(Math.random() * 100) + 1;
+      return ret;
+    });
+  }
+
+  weaponOrder = ["Vandal", "Operator", "Classic", "Spectre"];
+  changeWeapon(teamIndex: number, playerIndex: number) {
+    this.dataModel.match.update((v) => {
+      const ret = v;
+      const player = ret.teams[teamIndex].players[playerIndex];
+      let i = this.weaponOrder.findIndex((e) => e == player.highestWeapon);
+      i++;
+      i %= this.weaponOrder.length;
+      player.highestWeapon = this.weaponOrder[i];
+      return ret;
+    });
+  }
+
+  makeCaptain(teamIndex: number, playerIndex: number) {
+    this.dataModel.match.update((v) => {
+      const ret = v;
+      const player = ret.teams[teamIndex].players[playerIndex];
+      ret.teams[teamIndex].players.forEach((e: any) => (e.isCaptain = false));
+      player.isCaptain = true;
+      return ret;
+    });
+  }
+
+  spectate(teamIndex: number, playerIndex: number) {
+    this.dataModel.match.update((v) => {
+      const ret = v;
+      const player = ret.teams[teamIndex].players[playerIndex];
+      ret.teams[0].players.forEach((e: any) => (e.isObserved = false));
+      ret.teams[1].players.forEach((e: any) => (e.isObserved = false));
+      player.isObserved = true;
+      return ret;
+    });
+  }
+
+  giveSpike(teamIndex: number, playerIndex: number) {
+    this.dataModel.match.update((v) => {
+      const ret = v;
+      const player = ret.teams[teamIndex].players[playerIndex];
+      ret.teams[teamIndex].players.forEach((e: any) => (e.hasSpike = false));
+      player.hasSpike = true;
+      return ret;
+    });
+  }
+
+  changeStats(teamIndex: number, playerIndex: number) {
+    this.dataModel.match.update((v) => {
+      const ret = v;
+      const player = ret.teams[teamIndex].players[playerIndex];
+      player.kills = Math.floor(Math.random() * 20);
+      player.deaths = Math.floor(Math.random() * 20);
+      player.assists = Math.floor(Math.random() * 20);
+      return ret;
+    });
+  }
+  //#endregion
+
+  timeoutTimerRef?: ReturnType<typeof setInterval>;
+  startTimeoutTimer() {
+    this.timeoutTimerRef = setInterval(() => {
+      this.dataModel.match.update((v) => {
+        const ret = v;
+        ret.timeoutState.timeRemaining--;
+        return ret;
+      });
+      if (this.dataModel.timeoutState().timeRemaining <= 0) {
+        this.stopTimeoutTimer();
+      }
+    }, 1000);
+  }
+
+  stopTimeoutTimer() {
+    clearInterval(this.timeoutTimerRef);
+    this.dataModel.match.update((v) => {
+      const ret = v;
+      ret.timeoutState.techPause = false;
+      ret.timeoutState.leftTeam = false;
+      ret.timeoutState.rightTeam = false;
+      ret.timeoutState.timeRemaining = 0;
+      return ret;
+    });
+  }
+
+  showToast() {
+    const currentlyActive = this.dataModel.match().toastInfo.active;
+
+    if (currentlyActive) {
+      // Deactivate immediately (mimics pressing the hotkey again)
+      clearTimeout(this.toastTimerRef);
+      this.toastTimerRef = undefined;
+      this.dataModel.match.update((v) => {
+        const ret = v;
+        ret.toastInfo.active = false;
+        return ret;
+      });
+    } else {
+      // Activate
+      this.dataModel.match.update((v) => {
+        const ret = v;
+        ret.toastInfo.active = true;
+        ret.toastInfo.title = "";
+        ret.toastInfo.message = "This is a live toast preview. Thanks for using Spectra!";
+        ret.toastInfo.selectedTeam = "left";
+        ret.toastInfo.duration = null;
+        ret.toastInfo.eventLogoEnabled = true;
+        return ret;
+      });
+
+      const duration = this.dataModel.match().toastInfo.duration;
+      if (duration !== null) {
+        clearTimeout(this.toastTimerRef);
+        this.toastTimerRef = setTimeout(() => {
+          this.dataModel.match.update((v) => {
+            const ret = v;
+            ret.toastInfo.active = false;
+            return ret;
+          });
+          this.toastTimerRef = undefined;
+        }, duration);
+      }
+    }
+  }
+}
