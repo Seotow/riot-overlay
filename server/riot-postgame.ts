@@ -4,6 +4,7 @@ import { resolve } from "node:path";
 import { liveCatalog } from "../shared/live-assets";
 import { riotPostgameSchema, type RiotPostgameState } from "../shared/postgame";
 import { normalizeEog } from "../shared/eog-postgame";
+import { eogHistorySchema, type EogHistory } from "../shared/eog-history";
 import { redactEog } from "./eog-redact";
 
 export const riotCredentialSchema = z
@@ -27,7 +28,14 @@ export const riotLoadSchema = z
   })
   .strict();
 const EOG_DIR = resolve(".npm-cache/lcu-eog");
-const EOG_FILE = /^[\w.-]{1,120}-eog-stats-block\.json$/;
+const EOG_FILE = /^[\w.-]{1,120}-(?:eog-stats-block|postgame-bundle)\.json$/;
+// A saved bundle is { eog, history } from the probe; a plain block has no history.
+function split(payload: unknown): { eog: unknown; history: EogHistory | null } {
+  const root = payload && typeof payload === "object" ? (payload as Record<string, unknown>) : {};
+  if (!("eog" in root)) return { eog: payload, history: null };
+  const parsed = eogHistorySchema.safeParse(root.history);
+  return { eog: root.eog, history: parsed.success ? parsed.data : null };
+}
 export const eogImportSchema = z.union([
   z.object({ gameNumber: z.number().int().min(1).max(99), payload: z.unknown() }).strict(),
   // A block saved on this machine by the EOG probe; only plain file names are accepted.
@@ -327,7 +335,8 @@ export class RiotPostgameService {
         throw new RiotError(404, "no-file");
       }
     } else payload = value.payload;
-    this.candidate = normalizeEog(redactEog(payload).value, value.gameNumber);
+    const { eog, history } = split(payload);
+    this.candidate = normalizeEog(redactEog(eog).value, value.gameNumber, new Date(), history);
     return this.status();
   }
   async listEogFiles() {
@@ -349,13 +358,24 @@ export class RiotPostgameService {
   private liveGameId = 0;
   // Stages a block read from this machine's own client, once per game, never over a review in
   // progress for the same game and never published automatically.
-  stageLiveEog(payload: unknown) {
+  private liveHasHistory = false;
+  needsLiveHistory(gameId: number) {
+    return gameId !== this.liveGameId || !this.liveHasHistory;
+  }
+  // Called again when the match history arrives later than the end-of-game block.
+  stageLiveEog(payload: unknown, history: EogHistory | null = null) {
     const gameId = Number((payload as { gameId?: unknown } | null)?.gameId);
-    if (!Number.isInteger(gameId) || gameId <= 0 || gameId === this.liveGameId || this.controller)
-      return false;
+    if (!Number.isInteger(gameId) || gameId <= 0 || this.controller) return false;
+    if (gameId === this.liveGameId && !(history && !this.liveHasHistory)) return false;
     try {
-      this.candidate = normalizeEog(redactEog(payload).value, this.candidate?.gameNumber ?? 1);
+      this.candidate = normalizeEog(
+        redactEog(payload).value,
+        this.candidate?.gameNumber ?? 1,
+        new Date(),
+        history,
+      );
       this.liveGameId = gameId;
+      this.liveHasHistory = !!history;
       return true;
     } catch {
       return false;

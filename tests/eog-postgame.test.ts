@@ -123,3 +123,32 @@ test("live EOG is staged once per game for review and saved files accept plain n
     await assert.rejects(service.importEog({ gameNumber: 1, file }));
   await assert.rejects(service.importEog({ gameNumber: 1, file: "missing-eog-stats-block.json" }));
 });
+
+test("match history fills dragons, heralds, grubs, gold per minute and patch; no history leaves them empty", async () => {
+  const { eogHistorySchema } = await import("../shared/eog-history");
+  const history = eogHistorySchema.parse(
+    JSON.parse(readFileSync("tests/fixtures/eog-history.json", "utf8")),
+  );
+  const withHistory = normalizeEog(fixture, 1, now, history);
+  assert.ok(postgameSchema.safeParse(withHistory).success);
+  const [blue, red] = withHistory.teams;
+  assert.deepEqual([blue.drakes, blue.elders, red.drakes, red.elders], [0, 0, 1, 0]);
+  assert.deepEqual([blue.grubs, red.grubs], [1, 2]);
+  assert.deepEqual([blue.heralds, red.heralds, blue.barons, red.barons], [0, 0, 0, 0]);
+  assert.equal(withHistory.goldHistory.length, history.frames.length);
+  assert.ok(
+    withHistory.goldHistory.every((p, i) => i === 0 || p.at > withHistory.goldHistory[i - 1].at),
+  );
+  assert.equal(withHistory.goldHistory.at(-1)!.at <= (withHistory.duration ?? 0), true);
+  assert.equal(withHistory.evidence.timelineAvailable, true);
+  assert.match(withHistory.evidence.patch, /^\d+\.\d+/);
+  // A dragon counter that the events cannot explain keeps both dragon fields empty.
+  const wrong = structuredClone(history);
+  wrong.teams[1].dragonKills = 3;
+  const mismatch = normalizeEog(fixture, 1, now, wrong);
+  assert.equal(mismatch.teams[1].drakes, null);
+  assert.equal(mismatch.teams[1].elders, null);
+  const plain = normalizeEog(fixture, 1, now);
+  assert.equal(plain.teams[1].drakes, null);
+  assert.deepEqual(plain.goldHistory, []);
+});

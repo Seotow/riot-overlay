@@ -173,7 +173,7 @@ kết quả đã lọc sang Studio (export/import hoặc kênh được cấp qu
 
 ### Bộ nhập EOG (đã làm)
 
-Studio → **Sau trận** → mục **Nhập từ file EOG (LCU)**: chọn file `*-eog-stats-block.json` do probe lưu
+Studio → **Sau trận** → mục **Nhập từ file EOG (LCU)**: chọn file `*-postgame-bundle.json` (đủ dữ liệu) hoặc `*-eog-stats-block.json` do probe lưu
 (hoặc payload thô; server lọc lại trước khi dùng), nhập ván trong loạt, rồi xem bản chờ duyệt, tích đã đối chiếu
 và bấm **Dùng dữ liệu này cho postgame**. Chuẩn hóa ở `shared/eog-postgame.ts`, API
 `POST /api/riot-postgame/import-eog` (JSON tối đa 1 MB, chỉ từ Studio).
@@ -183,6 +183,14 @@ Nguồn nạp: (1) chọn file bằng tay; (2) danh sách **Đã lưu trên máy
 (4 giây một lần) và đưa vào vùng duyệt một lần cho mỗi game. Chỉ máy người tham gia mới có khối này; trên
 máy spectator, mục (3) không bao giờ có gì. Không có bản nào tự lên overlay: luôn cần tích đã đối chiếu rồi
 bấm dùng.
+
+Bổ sung từ lịch sử trận của client người tham gia (`/lol-match-history/v1/games/{id}` và
+`/game-timelines/{id}`, chỉ đọc, rút gọn ở `shared/eog-history.ts`, không giữ tên hay ID tài khoản): bộ đếm
+rồng/Baron/Sứ giả/Sâu/trụ, cấm chọn, biểu đồ vàng theo phút (mỗi khung timeline), patch, và tách rồng
+nguyên tố/Elder từ event `ELITE_MONSTER_KILL` chỉ khi mọi event có đội và tổng khớp bộ đếm. Backend tự lấy
+phần này khi đưa EOG vào vùng duyệt (thử lại khi lịch sử đến trễ); probe lưu thêm file
+`*-postgame-bundle.json` gồm `{ eog, history }` để nhập trên máy khác. Đã thử với game 1608102102: rồng
+đỏ 1 (Hextech), sâu 1/2, 17 điểm vàng, các mục khác 0; trận practice nên không có cấm chọn.
 
 Ánh xạ: đội 100 là xanh, 200 là đỏ; winner từ `isWinningTeam`; thời lượng từ `gameLength`; người chơi
 xếp TOP/JUNGLE/MID/BOT/SUPPORT theo `detectedTeamPosition` (thiếu thì theo thứ tự client, có cảnh báo);

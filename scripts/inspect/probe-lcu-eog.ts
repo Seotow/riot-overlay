@@ -10,6 +10,7 @@ import { appendFile, mkdir, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { discover, getLocal, type Credentials } from "../../server/diagnostics";
 import { describeEog, redactEog } from "../../server/eog-redact";
+import { reduceHistory } from "../../shared/eog-history";
 
 const keep = process.argv.includes("--keep");
 const maxMinutes = Number(
@@ -45,6 +46,9 @@ let phase = "";
 let sawGame = false;
 let gameId: number | null = null;
 let doneAt: number | null = null;
+// After an end-of-game block is saved, the participant client's match history (objectives, bans,
+// gold per minute, dragon kinds) is fetched, reduced and stored next to it as a postgame bundle.
+let bundle: { gameId: number; eog: unknown; startedAt: number; tries: number } | null = null;
 let leftGameAt = 0; // end-of-game data is polled every second for a minute after the match ends
 const lastStatus = new Map<string, string>();
 const noteStatus = async (id: string, status: string, httpStatus: number | null) => {
@@ -109,6 +113,9 @@ while (!stopping && Date.now() - started < maxMinutes * 60_000) {
       saved++;
       const file = resolve(outDir, `${stamp}-${String(saved).padStart(2, "0")}-${id}.json`);
       await writeFile(file, JSON.stringify(value, null, 2));
+      const eogGameId = Number((value as { gameId?: unknown } | null)?.gameId);
+      if (id === "eog-stats-block" && eogGameId > 0)
+        bundle = { gameId: eogGameId, eog: value, startedAt: Date.now(), tries: 0 };
       await log({
         event: "payload",
         endpoint: id,
@@ -117,6 +124,35 @@ while (!stopping && Date.now() - started < maxMinutes * 60_000) {
         saved: file.replace(resolve(".") + "\\", ""),
         summary: describeEog(r.data),
       });
+    }
+  }
+
+  if (bundle && Date.now() - bundle.startedAt < 300_000 && bundle.tries++ % 5 === 0) {
+    const detail = await get("probe-history", `/lol-match-history/v1/games/${bundle.gameId}`);
+    await noteStatus("match-history", detail.status, detail.httpStatus);
+    if (detail.status === "ok") {
+      const timeline = await get(
+        "probe-timeline",
+        `/lol-match-history/v1/game-timelines/${bundle.gameId}`,
+      );
+      await noteStatus("game-timeline", timeline.status, timeline.httpStatus);
+      const history = reduceHistory(detail.data, timeline.status === "ok" ? timeline.data : null);
+      if (history) {
+        saved++;
+        const file = resolve(
+          outDir,
+          `${stamp}-${String(saved).padStart(2, "0")}-postgame-bundle.json`,
+        );
+        await writeFile(file, JSON.stringify({ eog: bundle.eog, history }, null, 2));
+        await log({
+          event: "bundle",
+          saved: file.replace(resolve(".") + "\\", ""),
+          frames: history.frames.length,
+          dragonEvents: history.dragonEvents.length,
+          bans: history.teams.map((t) => t.bans.length),
+        });
+        bundle = null;
+      }
     }
   }
 

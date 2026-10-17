@@ -490,7 +490,14 @@ setInterval(async () => {
   eogBusy = true;
   try {
     const block = await eogLcu.read();
-    if (block) riotPostgame.stageLiveEog(block);
+    if (block) {
+      const gameId = Number((block as { gameId?: unknown }).gameId);
+      // History can lag a little behind the end-of-game block; try again on later polls.
+      riotPostgame.stageLiveEog(
+        block,
+        riotPostgame.needsLiveHistory(gameId) ? await eogLcu.readHistory(gameId) : null,
+      );
+    }
   } finally {
     eogBusy = false;
   }

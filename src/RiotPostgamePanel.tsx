@@ -72,7 +72,7 @@ export function RiotPostgamePanel({ state, connected }: { state: State; connecte
           setStatus((current) => {
             if (
               !s.candidate ||
-              current?.candidate?.evidence.matchId === s.candidate.evidence.matchId
+              current?.candidate?.evidence.fetchedAt === s.candidate.evidence.fetchedAt
             )
               return current ?? s;
             setShowCandidate(true);
