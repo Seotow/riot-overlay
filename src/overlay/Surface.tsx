@@ -356,8 +356,8 @@ export function Surface({
   const t = state.theme;
   const style = {
     "--ingame-panel-opacity": t.ingamePanelOpacity ?? 0.84,
-    "--blue": t.blue,
-    "--red": t.red,
+    "--blue": broadcastColors(t).blue,
+    "--red": broadcastColors(t).red,
     "--broadcast-blue": broadcastColors(t).blue,
     "--broadcast-red": broadcastColors(t).red,
     "--accent": t.accent,

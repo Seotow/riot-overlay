@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { cleanPlayerName, draftPlayerName, playerDisplayName } from "../shared/player-name";
 import { normalizeIngame } from "../server/ingame-adapter";
-import { broadcastColors, SECONDARY_BLUE, SECONDARY_RED } from "../shared/broadcast-colors";
+import { broadcastColors, SECONDARY_BLUE } from "../shared/broadcast-colors";
 import { defaultTheme, themeSchema } from "../shared/schema";
 import { swapTeamSides } from "../shared/match-config";
 test("nickname uses Riot game name, strips tag, permits Unicode and preserves missing", () => {
@@ -40,12 +40,16 @@ test("ten explicit nicknames round-trip config and follow team side swap", () =>
   assert.deepEqual(swapTeamSides(swapTeamSides(t)).playerNames, t.playerNames);
   assert.equal(themeSchema.safeParse({ ...t, playerNames: ["OnlyOne"] }).success, false);
 });
-test("secondary palette upgrades legacy defaults without replacing custom colors", () => {
-  assert.deepEqual(broadcastColors({ blueSecondary: "#69afd4", redSecondary: "#df7d86" }), {
+test("team colours are the light blue and the dark red, ignoring the old dark blue and light red", () => {
+  assert.deepEqual(broadcastColors({ blueSecondary: "#69afd4", red: "#c42b35" }), {
     blue: SECONDARY_BLUE,
-    red: SECONDARY_RED,
+    red: "#c42b35",
   });
-  assert.deepEqual(broadcastColors({ blueSecondary: "#123456", redSecondary: "#654321" }), {
+  assert.deepEqual(broadcastColors({ blueSecondary: undefined, red: "#bb243b" }), {
+    blue: SECONDARY_BLUE,
+    red: "#bb243b",
+  });
+  assert.deepEqual(broadcastColors({ blueSecondary: "#123456", red: "#654321" }), {
     blue: "#123456",
     red: "#654321",
   });
