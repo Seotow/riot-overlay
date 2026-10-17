@@ -1,6 +1,8 @@
 import { observeIngame, observerRecording } from "./observer";
 import { diagnose } from "./diagnostics";
 import { leagueBroadcast } from "./leaguebroadcast";
+import { DraftLcu } from "./draft-lcu";
+import { emptyDraft } from "../shared/draft";
 import { LeagueCollectorSource } from "../collector/adapter";
 import { CollectorRuntime } from "../collector/supervisor/supervisor";
 import { CaptureReplay, listCaptures } from "./capture-replay";
@@ -34,6 +36,9 @@ const selectedCollectorRuntime = () =>
   state.provider === "collector-accountless" ? accountlessRuntime : collectorRuntime;
 const selectedCollectorSource = () =>
   state.provider === "collector-accountless" ? accountlessCollector : localCollector;
+// Isolated runs (tests) can pick another starting source without launching a collector host.
+const startProvider = process.env.RIOT_OVERLAY_PROVIDER;
+if (startProvider === "riot" || startProvider === "recording") state.provider = startProvider;
 if (process.argv.includes("--collector")) state.provider = "league-collector";
 if (process.argv.includes("--collector-accountless")) state.provider = "collector-accountless";
 const riotPostgame = new RiotPostgameService();
@@ -412,7 +417,7 @@ wss.on("connection", (ws, req) => {
             c.send(JSON.stringify({ type: "observer", frame: null }));
       }
       broadcast();
-      if (cmd.type === "theme" || cmd.type === "ingameGraphic") {
+      if (cmd.type === "theme" || cmd.type === "ingameGraphic" || cmd.type === "swapSides") {
         const json = JSON.stringify(state.theme, null, 2);
         saves = saves
           .then(async () => {
@@ -439,6 +444,29 @@ wss.on("connection", (ws, req) => {
     }
   });
 });
+// Champ select comes only from the LCU; the poll never writes team configuration.
+const draftLcu = new DraftLcu();
+let lcuBusy = false;
+setInterval(async () => {
+  if (lcuBusy || shuttingDown || wss.clients.size === 0) return;
+  lcuBusy = true;
+  try {
+    const { draft, changed } = await draftLcu.poll(state.draft ?? emptyDraft());
+    const status = draftLcu.snapshot();
+    const draftChanged = !!draft && JSON.stringify(draft) !== JSON.stringify(state.draft);
+    if (draftChanged || changed) {
+      state = {
+        ...state,
+        revision: state.revision + 1,
+        draftLcu: status,
+        ...(draftChanged ? { draft: draft! } : {}),
+      };
+      broadcast();
+    }
+  } finally {
+    lcuBusy = false;
+  }
+}, 600);
 setInterval(() => {
   if (state.playing) {
     state = tick(state);

@@ -90,10 +90,21 @@ export function MatchConfig({
               ))}
             </NativeSelect>
           </label>
-          <Button type="button" onClick={() => patch(swapTeamSides(draft))}>
+          <Button
+            type="button"
+            onClick={() => {
+              // Same action as the draft desk button; the form follows the saved swap.
+              send({ type: "swapSides" });
+              setDraft((current) => swapTeamSides(current));
+              setMessage("Đã đổi bên.");
+            }}
+          >
             Đổi bên xanh ↔ đỏ
           </Button>
-          <small>Đổi tên, logo và tỉ số; giữ màu theo phía bản đồ. Bấm lưu để áp dụng.</small>
+          <small>
+            Đổi tên, logo, tỉ số, HLV, tên người chơi và series ban; giữ màu theo phía bản đồ. Áp
+            dụng ngay.
+          </small>
         </fieldset>
         {(["blue", "red"] as const).map((side) => (
           <fieldset key={side}>

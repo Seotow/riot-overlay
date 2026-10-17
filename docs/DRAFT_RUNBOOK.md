@@ -7,7 +7,7 @@ ban và chuyển nhãn lượt. Không đổi geometry hoặc vùng trong suốt
 Đổi hover/lock/swap có thể chạy lại hiệu ứng ảnh; timer tick không remount ảnh.
 `prefers-reduced-motion: reduce` tắt animation/transition cấm chọn.
 
-Module production nhập tay tại `/?page=draft`; đầu ra OBS `/overlay?scene=draft`,
+Module production tại `/?page=draft`; đầu ra OBS `/overlay?scene=draft`,
 1920×1080 và nền trong suốt. `/?page=theme` cung cấp tên đội, logo tùy chọn,
 tỉ số, số trận loạt đấu và tên giải cho cùng renderer. Đội không có logo dùng tên.
 Preview iframe nhận cùng snapshot với OBS. `/overlay` không khóa scene sẽ đi theo
@@ -23,20 +23,30 @@ OBS dùng cùng URL, không cần tạo nguồn mới. Đặt cam caster ở sou
 overlay, trong vùng giữa x400–1520/y183–873 (1120×690); renderer không nhúng camera.
 
 1. Lưu branding trước trận ở trang config; mở Cấm chọn.
-2. Nhập HLV, 10 tên hiển thị và patch. Chỉ nhập tên được phép công khai lên stream.
-3. Bấm **Đưa cấm chọn lên chương trình** để tắt mock và chọn scene draft.
-4. Chọn tướng đang hover, bắt đầu timer nếu cần, bấm **Khóa & lượt tiếp**.
-   Trình tự 20 lượt: 6 ban → 6 pick → 4 ban → 4 pick. Vòng ban thứ hai
-   và vòng pick cuối bắt đầu ở đỏ. Timer hết chỉ về 0, chờ operator khóa.
-5. **Bỏ lượt** để giữ ô trống, **Lùi một lượt** xóa lựa chọn cuối và trở lại lượt đó.
-   Không tự gán tướng cho lượt trống. Một tướng không được ban/pick hai lần.
-6. Cột **Lượt chọn** đổi tướng giữa các vị trí trong cùng đội (swap hai ô),
-   giữ tên/role ở vị trí hiện hành. Có thể đổi sau khi hoàn tất draft.
-7. Export phiên để lưu actions, hover, roster, coach, timer, patch và thứ tự vị trí;
-   import có validation. Phiên draft nằm trong RAM backend, không tự lưu qua restart.
-   Theme được lưu/export riêng như trước.
-8. Đến bàn in-game, bấm nút phát widget/bảng đầy đủ để chuyển chương trình về in-game.
-   Postgame vẫn hoãn.
+2. Nhập HLV (để trống sẽ ẩn thẻ COACH) và series ban; tên người chơi lấy từ LCU, rồi bấm
+   **Lưu và đẩy lên view**. Chỉ nhập tên được phép công khai lên stream.
+3. Mở LoL Client ở phòng cấm chọn. Lượt, tướng cấm/chọn, hover, timer và vị trí
+   (theo ô người chơi) lấy từ LCU `/lol-champ-select/v1/session`, chỉ đọc; không còn nhập tay.
+   Thông tin kết nối LCU nằm trong bộ nhớ server, không gửi ra frontend hay log.
+4. Một luồng overlay: `/overlay` tự nhận diện scene. Không có dữ liệu thì trống hoàn toàn; khi LCU vào
+   phòng cấm chọn, cấm chọn tự lên (hiện từ giữa ra, từng cụm: khối giữa, series ban, các pick từ ô
+   gần giữa, ban và HLV, thanh timer); khi có dữ liệu trận mới (collector) thì tự chuyển sang
+   in-game. Cấm chọn đã đủ 20 lượt vẫn giữ cho tới khi có dữ liệu trận. URL có `?scene=draft`,
+   `?scene=ingame` hoặc `?scene=postgame` luôn ghim đúng màn đó. Các nút dưới đây ghim scene
+   thủ công; **Tự động theo dữ liệu** trả về chế độ tự động.
+   Bấm **Đưa cấm chọn lên chương trình** để tắt mock và chọn scene draft. Khi vào trận,
+   bấm **Vào in-game (ẩn cấm chọn)** hoặc dùng URL `/overlay?scene=ingame`.
+   `/overlay` không khóa scene đi theo chương trình; `scene=draft` luôn là cấm chọn.
+5. **Đổi bên xanh ↔ đỏ** (cấu hình trước trận và trang này) cùng gọi lệnh `swapSides`: đổi tên,
+   logo, tỉ số, HLV, thứ tự và series ban (tên người chơi theo phía bản đồ từ LCU).
+
+Series ban: tướng bị cấm từ các ván trước vì đối thủ đã chọn, mỗi vị trí và mỗi bên tối đa
+4 tướng (BO5). Tìm theo tên, có icon, chọn nhiều và bấm icon để xóa. Bảng chỉ hiện trên
+layout Cam tuyển thủ và chỉ khi có ít nhất một tướng.
+
+Thanh timer chạy từ hai đầu vào giữa và lấy màu đội đang thao tác. Ô đang ban/pick nhấp nháy nhẹ;
+khi khóa, ô chớp viền theo màu đội. Khối giữa không hiện patch.
+
 
 ## Bộ mẫu và ranh giới dữ liệu
 
@@ -45,10 +55,10 @@ fixture tham chiếu. Studio ghi nhãn bộ mẫu; không coi đây là payload 
 Tướng/skin/bans fixture là diễn giải của ảnh, không xác nhận chính xác skin giải.
 Không đưa sponsor/logo Riot crop hoặc phần trăm thắng/pick giả vào production.
 
-Nguồn draft hiện là `manual` hoặc `reference`. Chưa nối session LCU/LB draft,
-chưa thu mẫu live để xác minh hover/lock/bans/timer/swap/reconnect. Không lấy
-snapshot in-game để suy ra quá trình cấm chọn. Đây là mốc UI và luồng nhập tay;
-kiểm chứng draft tự động cần phiên cấm chọn thật ở bước tiếp theo.
+Nguồn draft live là `lcu` (đọc LCU, đã dò được thông tin kết nối từ tiến trình LeagueClientUx);
+`reference` là bộ mẫu UI. Chưa thu phiên cấm chọn thật để xác minh hover/lock/timer/swap/reconnect
+của ánh xạ LCU: hiện kiểm bằng payload tổng hợp trong tests/draft-lcu.test.ts. Không lấy
+snapshot in-game để suy ra quá trình cấm chọn.
 
 Catalog riêng đủ 171 tướng của Data Dragon **15.20.1**; giữ catalog demo đã duyệt.
 Icon và portrait base 2D đều local; tổng portrait khoảng 7,99 MB, chỉ ảnh được

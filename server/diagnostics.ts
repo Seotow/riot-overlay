@@ -4,7 +4,7 @@ import { execFile } from "node:child_process";
 import { promisify } from "node:util";
 import { dirname, join } from "node:path";
 import type { DiagnosticReport, Evidence, Probe } from "../shared/diagnostics";
-type Credentials = { port: number; password: string };
+export type Credentials = { port: number; password: string };
 export function parseLockfile(text: string): Credentials | null {
   const parts = text.trim().split(":");
   const port = Number(parts[2]);
@@ -16,6 +16,15 @@ export function parseLockfile(text: string): Credentials | null {
     port <= 65535 &&
     !!parts[3]
     ? { port, password: parts[3] }
+    : null;
+}
+// The client process is the reliable source: its command line carries the app port and token,
+// and its folder holds the lockfile on any drive. Values stay in memory, never logged or sent out.
+export function parseClientCommandLine(commandLine: string): Credentials | null {
+  const port = Number(/--app-port=(\d+)/.exec(commandLine)?.[1]);
+  const password = /--remoting-auth-token=([A-Za-z0-9_-]+)/.exec(commandLine)?.[1];
+  return Number.isInteger(port) && port > 0 && port <= 65535 && password
+    ? { port, password }
     : null;
 }
 export async function discover(): Promise<Credentials | null> {
@@ -30,14 +39,18 @@ export async function discover(): Promise<Credentials | null> {
           "-NoProfile",
           "-NonInteractive",
           "-Command",
-          "Get-Process LeagueClient -ErrorAction SilentlyContinue | Select-Object -ExpandProperty Path",
+          "Get-CimInstance Win32_Process -Filter \"Name='LeagueClientUx.exe'\" | ForEach-Object { $_.ExecutablePath + '|' + $_.CommandLine }",
         ],
-        { timeout: 2000, windowsHide: true, maxBuffer: 8192 },
+        { timeout: 3000, windowsHide: true, maxBuffer: 16384 },
       );
-      for (const p of stdout.trim().split(/\r?\n/).filter(Boolean))
-        paths.unshift(join(dirname(p), "lockfile"));
+      for (const line of stdout.split(/\r?\n/).filter(Boolean)) {
+        const [exe, ...rest] = line.split("|");
+        const fromCommandLine = parseClientCommandLine(rest.join("|"));
+        if (fromCommandLine) return fromCommandLine;
+        if (exe) paths.unshift(join(dirname(exe), "lockfile"));
+      }
     } catch {
-      /* No client or permission to read executable path. */
+      /* No client or permission to read the process. */
     }
   }
   for (const path of paths) {

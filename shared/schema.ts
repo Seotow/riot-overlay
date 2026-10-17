@@ -1,9 +1,10 @@
 import { z } from "zod";
 import { draftSchema, type DraftState } from "./draft";
+import type { LcuDraftStatus } from "./draft-lcu";
 import { hudSchema } from "./replay-hud";
 import { postgameSampleSchema, type PostgameState } from "./postgame";
 import { rehearsalKindSchema, rehearsalVariantSchema, type RehearsalDisplay } from "./rehearsal";
-export const sceneSchema = z.enum(["ingame", "draft", "postgame"]);
+export const sceneSchema = z.enum(["auto", "ingame", "draft", "postgame"]);
 const color = z.string().regex(/^#[0-9a-fA-F]{6}$/);
 export const themeSchema = z.object({
   killfeedStyle: z.enum(["text", "broadcast"]).optional(),
@@ -100,6 +101,7 @@ export const defaultTheme: Theme = {
 };
 export const commandSchema = z.discriminatedUnion("type", [
   z.object({ type: z.literal("draftState"), value: draftSchema }),
+  z.object({ type: z.literal("swapSides") }),
   z.object({
     type: z.literal("postgameState"),
     value: postgameSampleSchema.nullable(),
@@ -194,6 +196,7 @@ export type Player = {
 };
 export type State = {
   draft?: DraftState;
+  draftLcu?: LcuDraftStatus;
   postgame?: PostgameState | null;
   broadcast?: {
     view: "normal" | "gold" | "levels" | "runes" | "minimal";

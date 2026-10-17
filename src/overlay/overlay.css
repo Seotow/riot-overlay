@@ -2933,23 +2933,23 @@
 }
 /* Draft motion keeps final geometry and the central camera window unchanged.
    Champion/lock keys are source transitions, never the ticking draft clock. */
-.production-draft .ref-draft {
+.production-draft.is-intro .ref-draft {
   animation: draft-panel-in 0.28s ease-out both;
 }
-.production-draft .draft-team {
+.production-draft.is-intro .draft-team {
   --draft-enter-x: -24px;
   animation: draft-team-in 0.5s 0.16s var(--broadcast-ease) both;
 }
-.production-draft .draft-team-1 {
+.production-draft.is-intro .draft-team-1 {
   --draft-enter-x: 24px;
 }
-.production-draft .ref-draft-center {
+.production-draft.is-intro .ref-draft-center {
   animation: draft-panel-in 0.4s 0.08s ease-out both;
 }
-.production-draft .draft-bans {
+.production-draft.is-intro .draft-bans {
   animation: draft-panel-in 0.4s 0.2s ease-out both;
 }
-.production-draft .draft-ban {
+.production-draft.is-intro .draft-ban {
   animation: draft-panel-in 0.3s calc(0.2s + var(--draft-delay, 0ms)) ease-out both;
 }
 .production-draft .pick-portrait {
@@ -3044,7 +3044,7 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .production-draft,
-  .production-draft * {
+  .production-draft *:not(.draft-timer-fill) {
     animation: none !important;
     transition: none !important;
   }
@@ -4805,3 +4805,404 @@
   width: 956px;
 }
 /* Both powerplays on one team: elder stays on the outer side of baron (their spawn timers are hidden while buffs run). */
+
+/* Draft broadcast layout: coach tag, series bans, centre block, timer line and cell effects. */
+.production-draft .draft-bans.blue-bans,
+.production-draft .draft-team-0 {
+  --team-glow: var(--broadcast-blue, #2f9cf0);
+}
+.production-draft .draft-bans.red-bans,
+.production-draft .draft-team-1 {
+  --team-glow: var(--broadcast-red, #e0414f);
+}
+.production-draft .draft-bans.no-coach {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.series-bans {
+  position: absolute;
+  left: 520px;
+  top: 667px;
+  width: 880px;
+  height: 112px;
+  background: #050505f0;
+  color: #fff;
+  font-family: "Spiegel", sans-serif;
+}
+.series-bans h3 {
+  margin: 0;
+  height: 34px;
+  line-height: 34px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+.series-bans-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  height: 76px;
+  padding: 0 6px;
+}
+.series-bans-column {
+  position: relative;
+  padding-left: 26px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3px;
+}
+.series-bans-role {
+  position: absolute;
+  left: 2px;
+  top: 50%;
+  width: 20px;
+  height: 20px;
+  transform: translateY(-50%);
+  background: #c7c7c7;
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+}
+.series-bans-row {
+  display: flex;
+  gap: 3px;
+  height: 34px;
+}
+.series-bans-row img {
+  width: 34px;
+  height: 34px;
+  object-fit: cover;
+  border: 1px solid #2b3335;
+  filter: saturate(0.85);
+}
+.series-bans-row.blue img {
+  border-color: var(--broadcast-blue, #2f9cf0);
+}
+.series-bans-row.red img {
+  border-color: var(--broadcast-red, #e0414f);
+}
+/* Timer line shrinks from both ends toward the centre, in the colour of the acting team. */
+.production-draft .draft-progress {
+  left: 300px;
+  width: 1320px;
+  height: 8px;
+  top: -8px;
+  display: flex;
+  justify-content: center;
+  background: transparent;
+}
+.production-draft .draft-progress i {
+  background: var(--broadcast-blue, #2f9cf0);
+  box-shadow: 0 0 8px var(--broadcast-blue, #2f9cf0);
+}
+.production-draft .draft-progress.red i {
+  background: var(--broadcast-red, #e0414f);
+  box-shadow: 0 0 8px var(--broadcast-red, #e0414f);
+}
+.production-draft:not(.draft-simple) .draft-progress b,
+.production-draft:not(.draft-simple) .draft-phase {
+  display: none;
+}
+/* Centre block: pips, side labels, logos and team names as in the reference. */
+.production-draft:not(.draft-simple) .ref-draft-center .draft-series {
+  position: relative;
+  padding: 50px 17px 0;
+}
+.draft-series-arrow {
+  position: absolute;
+  left: 50%;
+  top: 82px;
+  width: 0;
+  height: 0;
+  margin-left: -4px;
+  border-left: 9px solid #e8e8e7;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+}
+.draft-side-labels {
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  top: 76px;
+  display: flex;
+  justify-content: space-between;
+  font:
+    700 15px/18px "Spiegel",
+    sans-serif;
+  color: #e8e8e7;
+}
+.draft-side-labels span {
+  width: 100px;
+  text-align: center;
+}
+.production-draft:not(.draft-simple) .ref-draft-center .draft-logos {
+  top: 106px;
+  left: 14px;
+  right: 14px;
+  height: 96px;
+}
+.production-draft:not(.draft-simple) .ref-draft-center .draft-logos img {
+  width: 92px;
+  height: 92px;
+}
+.production-draft:not(.draft-simple) .ref-draft-center .draft-logos img.draft-tournament-logo {
+  width: 40px;
+  height: 48px;
+}
+.production-draft:not(.draft-simple) .ref-draft-center .draft-logos > span:not(.draft-tournament) {
+  width: 92px;
+}
+.production-draft:not(.draft-simple) .ref-draft-center .draft-tournament {
+  width: 56px;
+  font-size: 11px;
+  line-height: 13px;
+}
+.production-draft:not(.draft-simple) .ref-draft-center .draft-team-names {
+  left: 12px;
+  right: 12px;
+  top: 214px;
+}
+.production-draft:not(.draft-simple) .ref-draft-center .draft-team-names b {
+  width: 110px;
+  max-width: 110px;
+  text-align: center;
+}
+/* No logos: the team names grow and take over the logo area. */
+.production-draft:not(.draft-simple)
+  .ref-draft-center.name-only
+  .draft-logos
+  > span:not(.draft-tournament) {
+  width: 0;
+}
+.production-draft:not(.draft-simple) .ref-draft-center.name-only .draft-team-names {
+  top: 118px;
+  height: 100px;
+}
+.production-draft:not(.draft-simple) .ref-draft-center.name-only .draft-team-names b {
+  width: 130px;
+  max-width: 130px;
+  line-height: 100px;
+}
+/* The acting cell breathes gently; a freshly locked cell blinks in its team colour. */
+.production-draft .draft-ban.active {
+  animation: draft-active-pulse 1.4s ease-in-out infinite;
+}
+.production-draft .ref-pick.is-hover {
+  animation: draft-active-pulse 1.4s ease-in-out infinite;
+}
+.production-draft .draft-ban.is-locked::after,
+.production-draft .ref-pick.is-picked::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  border: 3px solid var(--team-glow, #fff);
+  opacity: 0;
+  animation: draft-lock-blink 0.9s ease-out 1;
+}
+@keyframes draft-active-pulse {
+  0%,
+  100% {
+    box-shadow: inset 0 0 8px color-mix(in srgb, var(--team-glow, #2f9cf0) 35%, transparent);
+  }
+  50% {
+    box-shadow:
+      inset 0 0 22px color-mix(in srgb, var(--team-glow, #2f9cf0) 80%, transparent),
+      0 0 10px color-mix(in srgb, var(--team-glow, #2f9cf0) 55%, transparent);
+  }
+}
+@keyframes draft-lock-blink {
+  0% {
+    opacity: 1;
+  }
+  20% {
+    opacity: 0.15;
+  }
+  40% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 0.15;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+/* The timer line sits just above the picks, so the panel reveal must not clip upward overflow. */
+@keyframes draft-panel-in-open {
+  from {
+    opacity: 0;
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    opacity: 1;
+    clip-path: inset(-20px 0 0 0);
+  }
+}
+
+/* Simple layout: series bans sit between the bottom ban strips as one row per position. */
+.draft-simple .draft-side-labels,
+.draft-simple .draft-series-arrow {
+  display: none;
+}
+.production-draft.draft-simple .series-bans {
+  left: 785px;
+  top: 900px;
+  width: 350px;
+  height: 130px;
+}
+.draft-simple .series-bans h3 {
+  height: 22px;
+  line-height: 22px;
+  font-size: 16px;
+}
+.draft-simple .series-bans-grid {
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(5, 1fr);
+  height: 108px;
+  padding: 0 8px;
+}
+.draft-simple .series-bans-column {
+  display: grid;
+  grid-template-columns: 1fr 22px 1fr;
+  align-items: center;
+  gap: 4px;
+  padding-left: 0;
+}
+.draft-simple .series-bans-role {
+  position: static;
+  order: 2;
+  width: 16px;
+  height: 16px;
+  transform: none;
+  justify-self: center;
+}
+.draft-simple .series-bans-row {
+  height: 20px;
+  gap: 2px;
+}
+.draft-simple .series-bans-row.blue {
+  order: 1;
+  justify-content: flex-end;
+}
+.draft-simple .series-bans-row.red {
+  order: 3;
+}
+.draft-simple .series-bans-row img {
+  width: 20px;
+  height: 20px;
+}
+
+/* Timer line: one linear animation from the real deadline. */
+.production-draft .draft-progress i.draft-timer-fill {
+  width: 100%;
+  transition: none;
+  animation-name: draft-timer-run;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+@keyframes draft-timer-run {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0;
+  }
+}
+/* Locking keeps the same artwork element and eases the cell back instead of snapping. */
+.production-draft:not(.draft-simple) .draft-team .ref-pick {
+  transition: width 0.5s var(--broadcast-ease, cubic-bezier(0.22, 0.8, 0.3, 1));
+}
+.production-draft .pick-portrait {
+  transition: object-position 0.5s var(--broadcast-ease, cubic-bezier(0.22, 0.8, 0.3, 1));
+}
+
+/* Draft intro: the scene builds from the centre outward, one cluster at a time.
+   centre block -> series bans -> picks (inner cell first) -> bans and coach tags -> timer line. */
+@keyframes draft-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes draft-center-in {
+  from {
+    opacity: 0;
+    clip-path: inset(0 50% 0 50%);
+  }
+  to {
+    opacity: 1;
+    clip-path: inset(0);
+  }
+}
+@keyframes draft-cell-out {
+  from {
+    opacity: 0;
+    transform: translateX(var(--cell-from, 90px));
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes draft-bar-out {
+  from {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  to {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+.production-draft.is-intro .ref-draft {
+  animation: draft-fade 0.25s ease-out both;
+}
+.production-draft.is-intro .ref-draft-center {
+  animation: draft-center-in 0.55s var(--broadcast-ease, ease-out) both;
+}
+.production-draft.is-intro .series-bans {
+  animation: draft-panel-in 0.4s 0.45s ease-out both;
+}
+.production-draft.is-intro .draft-team {
+  animation: none;
+}
+.production-draft.is-intro .draft-team-0 {
+  --cell-from: 110px;
+}
+.production-draft.is-intro .draft-team-1 {
+  --cell-from: -110px;
+}
+.production-draft.is-intro .draft-team .ref-pick {
+  animation: draft-cell-out 0.5s calc(0.35s + var(--enter-order, 0) * 0.09s)
+    var(--broadcast-ease, ease-out) both;
+}
+.production-draft.is-intro .draft-team .ref-pick.is-hover {
+  animation:
+    draft-cell-out 0.5s calc(0.35s + var(--enter-order, 0) * 0.09s) var(--broadcast-ease, ease-out)
+      both,
+    draft-active-pulse 1.4s ease-in-out 1.4s infinite;
+}
+.production-draft.is-intro .draft-bans {
+  animation: draft-panel-in 0.4s 1s ease-out both;
+}
+.production-draft.is-intro .draft-ban {
+  animation: draft-panel-in 0.3s calc(1.05s + var(--enter-order, 0) * 0.07s) ease-out both;
+}
+.production-draft.is-intro .draft-ban.active {
+  animation:
+    draft-panel-in 0.3s calc(1.05s + var(--enter-order, 0) * 0.07s) ease-out both,
+    draft-active-pulse 1.4s ease-in-out 1.7s infinite;
+}
+.production-draft.is-intro .draft-progress {
+  transform-origin: center;
+  animation: draft-bar-out 0.5s 1.4s var(--broadcast-ease, ease-out) both;
+}

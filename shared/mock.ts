@@ -1,14 +1,16 @@
 import { type State, type Command } from "./schema";
 import { ingameFixture as fixture, referenceTheme } from "./reference";
 import { champion } from "./assets";
+import { swapDraftSides } from "./draft";
+import { swapTeamSides } from "./match-config";
 export function createState(): State {
   return {
     protocol: 1,
     revision: 0,
     source: "mock",
     mockVisible: false,
-    provider: "riot",
-    scene: "ingame",
+    provider: "collector-accountless",
+    scene: "auto",
     playing: false,
     gameTime: 1538,
     scenario: "balanced",
@@ -55,6 +57,11 @@ export function applyCommand(state: State, cmd: Command): State {
       ingameGraphics: { ...s.theme.ingameGraphics, [cmd.key]: cmd.value },
     };
   if (cmd.type === "draftState") s.draft = cmd.value;
+  // One action for both "Đổi bên" buttons: team identity, scores and the draft setup move together.
+  if (cmd.type === "swapSides") {
+    s.theme = swapTeamSides(s.theme);
+    if (s.draft) s.draft = swapDraftSides(s.draft);
+  }
   if (cmd.type === "postgameState") s.postgame = cmd.value;
   if (cmd.type === "broadcast") s.broadcast = cmd.value;
   if (cmd.type === "broadcastInhibitors")
@@ -63,7 +70,8 @@ export function applyCommand(state: State, cmd: Command): State {
       inhibitors: cmd.value,
     };
   if (cmd.type === "broadcastWidget") {
-    s.scene = "ingame";
+    // A pinned scene stays pinned; automatic mode keeps following the data.
+    if (s.scene !== "auto") s.scene = "ingame";
     s.broadcast = {
       ...(s.broadcast ?? { view: "normal", inhibitors: "auto" }),
       ...(cmd.key === "minimal"

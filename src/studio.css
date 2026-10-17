@@ -1012,3 +1012,120 @@ body.studio-body {
     flex-wrap: wrap;
   }
 }
+
+/* Series ban editor: one picker per side and position, with champion icons. */
+.studio-shell .series-ban-editor .series-side h4 {
+  margin: 12px 0 6px;
+}
+.studio-shell .series-row {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+}
+.studio-shell .series-cell {
+  position: relative;
+  display: grid;
+  gap: 6px;
+  align-content: start;
+}
+.studio-shell .series-role {
+  width: 18px;
+  height: 18px;
+  background: currentColor;
+  opacity: 0.7;
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+}
+.studio-shell .series-picker {
+  position: relative;
+  display: grid;
+  gap: 6px;
+}
+.studio-shell .series-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  min-height: 34px;
+}
+.studio-shell .series-chip {
+  position: relative;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 1px solid #4a5558;
+  background: #0b0f10;
+  cursor: pointer;
+}
+.studio-shell .series-chip img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.studio-shell .series-chip i {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 14px;
+  height: 14px;
+  display: grid;
+  place-items: center;
+  background: #000a;
+  color: #fff;
+  font: 700 12px/1 sans-serif;
+  font-style: normal;
+}
+.studio-shell .series-chip:hover i {
+  background: #b3262d;
+}
+.studio-shell .series-results {
+  list-style: none;
+  margin: 0;
+  padding: 4px;
+  display: grid;
+  gap: 2px;
+  border: 1px solid #4a5558;
+  background: #0b0f10;
+}
+.studio-shell .series-results button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 2px 4px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.studio-shell .series-results button:hover {
+  background: #1b2528;
+}
+.studio-shell .series-results img {
+  width: 28px;
+  height: 28px;
+}
+.studio-shell .draft-urls code {
+  padding: 0 4px;
+  background: #0b0f10;
+}
+
+/* Result list floats above the following rows instead of pushing them down. */
+.studio-shell .series-results {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 170px;
+  z-index: 30;
+  margin-top: 2px;
+  box-shadow: 0 8px 24px #000a;
+}
+.studio-shell .series-coach {
+  display: grid;
+  gap: 4px;
+  max-width: 360px;
+  margin-bottom: 8px;
+}

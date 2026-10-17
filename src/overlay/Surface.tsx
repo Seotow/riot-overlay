@@ -7,6 +7,7 @@ import { clock } from "../../shared/mock";
 import { champion, item, spell, rune, catalog } from "../../shared/assets";
 import { draftFixture } from "../../shared/reference";
 import { DraftOverlay } from "./DraftOverlay";
+import { detectScene } from "../../shared/scene";
 import { PostgameOverlay } from "./PostgameOverlay";
 
 // Broadcast marks are explicit crops from the user-supplied reference, never HUD/data.
@@ -338,8 +339,19 @@ export function Surface({
   }, []);
   const requested = new URLSearchParams(location.search).get("scene");
   const overlay = location.pathname === "/overlay";
-  const active =
-    overlay && ["draft", "ingame", "postgame"].includes(requested || "") ? requested : state.scene;
+  // A scene in the URL pins the overlay. Otherwise the operator's pinned scene, or, in automatic
+  // mode, whatever the data says (empty when there is none).
+  const pinned =
+    overlay && ["draft", "ingame", "postgame"].includes(requested || "") ? requested : null;
+  const detected = detectScene(state, observation, now);
+  const draftHeld = useRef(false);
+  let active: string | null = pinned ?? detected;
+  if (!pinned && state.scene === "auto") {
+    if (detected) draftHeld.current = detected === "draft";
+    // A finished draft stays up until the game data arrives; a cancelled one clears.
+    else if (draftHeld.current && (state.draft?.step ?? 0) >= 20) active = "draft";
+    else draftHeld.current = false;
+  }
   const t = state.theme;
   const style = {
     "--ingame-panel-opacity": t.ingamePanelOpacity ?? 0.84,

@@ -36,7 +36,12 @@ const server = spawn(
     "--production",
   ],
   {
-    env: { ...process.env, PORT: "4311", RIOT_OVERLAY_THEME_PATH: themePath },
+    env: {
+      ...process.env,
+      PORT: "4311",
+      RIOT_OVERLAY_THEME_PATH: themePath,
+      RIOT_OVERLAY_PROVIDER: "riot",
+    },
     stdio: ["ignore", "pipe", "pipe"],
   },
 );
@@ -177,7 +182,7 @@ try {
     assert.equal(result.state.broadcast.view, view);
     assert.equal(result.state.rehearsal, undefined);
   }
-  for (const value of ["ingame", "draft", "postgame"])
+  for (const value of ["auto", "ingame", "draft", "postgame"])
     assert.equal((await command({ type: "scene", value })).state.scene, value);
   await command({ type: "mockVisible", value: true });
   for (const value of ["kill", "level", "objective", "draft"])

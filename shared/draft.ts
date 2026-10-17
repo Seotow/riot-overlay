@@ -24,6 +24,9 @@ export const draftTurns = [
   [0, "pick", 4],
   [1, "pick", 4],
 ] as const;
+function emptySeriesBans(): string[][] {
+  return Array.from({ length: 10 }, () => []);
+}
 const championId = z
   .string()
   .max(40)
@@ -34,7 +37,7 @@ const order = z
   .refine((v) => new Set(v).size === 5, "Vị trí phải khác nhau");
 export const draftSchema = z
   .object({
-    source: z.enum(["manual", "reference"]),
+    source: z.enum(["manual", "reference", "lcu"]),
     step: z.number().int().min(0).max(20),
     actions: z.array(championId.nullable()).length(20),
     hover: championId.nullable(),
@@ -44,6 +47,9 @@ export const draftSchema = z
     duration: z.number().int().min(5).max(120),
     deadline: z.number().finite().nonnegative().nullable(),
     patch: z.string().max(20),
+    // Series bans: champions already banned by the opponent in earlier games, per side and
+    // position (index side * 5 + position, up to 4 games in a best of five).
+    seriesBans: z.array(z.array(championId).max(4)).length(10).default(emptySeriesBans),
   })
   .refine(
     (d) =>
@@ -67,12 +73,14 @@ export function emptyDraft(): DraftState {
     duration: 30,
     deadline: null,
     patch: "",
+    seriesBans: emptySeriesBans(),
   };
 }
 export function draftSlots(d: DraftState, side: number, kind: "pick" | "ban") {
   const slots: (string | null)[] = Array(5).fill(null);
   draftTurns.forEach(([s, k, slot], i) => {
-    if (s === side && k === kind && i < d.step) slots[slot] = d.actions[i];
+    // Locked actions stay visible even when the source reports a later turn first.
+    if (s === side && k === kind) slots[slot] = d.actions[i];
   });
   return kind === "pick" ? d.order[side].map((i) => slots[i]) : slots;
 }
@@ -94,4 +102,16 @@ export function undoDraft(d: DraftState): DraftState {
   const actions = [...d.actions];
   actions.fill(null, d.step - 1);
   return { ...d, step: d.step - 1, actions, hover: null, deadline: null };
+}
+
+// Swapping sides moves what belongs to a team: coaches, pick order and series bans. Picks, bans and
+// player names come from the client by map side, so they stay where they are.
+export function swapDraftSides(d: DraftState): DraftState {
+  const half = <T>(v: T[]) => [...v.slice(5), ...v.slice(0, 5)];
+  return {
+    ...d,
+    coaches: [d.coaches[1], d.coaches[0]],
+    order: [d.order[1], d.order[0]],
+    seriesBans: half(d.seriesBans),
+  };
 }
