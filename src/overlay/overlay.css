@@ -447,7 +447,9 @@
   flex-direction: row-reverse;
 }
 .red-row .row-name > div b {
-  margin-right: auto;
+  margin-right: 0;
+  margin-left: auto;
+  text-align: right;
 }
 .red-row .health-track,
 .red-row .resource-track {
@@ -713,7 +715,7 @@
   width: 1768px;
   height: 9px;
   background: var(--blue);
-  box-shadow: 0 0 5px #193aff55;
+  box-shadow: 0 0 5px color-mix(in srgb, var(--blue) 33%, transparent);
 }
 .ref-draft-picks {
   display: flex;
@@ -2580,28 +2582,8 @@
   -webkit-mask-repeat: no-repeat;
   clip-path: circle(49%);
 }
-/* Optical centering of the traced glyph body in its original 23x24 canvas.
-   Keep the progress ring and shared lane/inhibitor assets unchanged. */
-.role-quest-icon[data-role="top"] {
-  --quest-glyph-x: 13.0435%;
-  --quest-glyph-y: 10.4167%;
-}
-.role-quest-icon[data-role="jungle"] {
-  --quest-glyph-x: 4.3478%;
-  --quest-glyph-y: 0%;
-}
-.role-quest-icon[data-role="mid"] {
-  --quest-glyph-x: 6.5217%;
-  --quest-glyph-y: 4.1667%;
-}
-.role-quest-icon[data-role="bot"] {
-  --quest-glyph-x: -2.1739%;
-  --quest-glyph-y: -2.0833%;
-}
-.role-quest-icon[data-role="support"] {
-  --quest-glyph-x: 4.3478%;
-  --quest-glyph-y: 6.25%;
-}
+/* The position-*.svg glyphs are drawn centered in their square canvas (measured: the visible body
+   is within 0.1px of the box centre), so no per-role optical offset is applied. */
 .role-quest-icon > .role-quest-glyph {
   position: absolute;
   left: 50%;
@@ -2818,16 +2800,17 @@
 
 /* No-camera variant: fill the 177px camera slots without changing the gold axis. */
 .live-canvas.no-player-cameras:not(.minimal) .ref-player-table {
-  left: 287px;
-  width: 1346px;
-  grid-template-columns: 640px 65px 641px;
+  /* Between the game's left panel (ends at x=306) and the minimap frame (starts at x=1641). */
+  left: 306px;
+  width: 1335px;
+  grid-template-columns: 635px 65px 635px;
 }
 .live-canvas.no-player-cameras:not(.minimal) .live-player-row .row-name {
   width: 220px;
 }
 .live-canvas.no-player-cameras:not(.minimal) .live-player-row .health-track,
 .live-canvas.no-player-cameras:not(.minimal) .live-player-row .resource-track {
-  width: 200px;
+  width: min(200px, 100%);
 }
 
 .live-team-grubs {
@@ -5259,4 +5242,99 @@
 }
 .live-canvas .live-objective.is-available {
   padding-right: 3px;
+}
+
+/* Player table (no player cameras): only the champion + health/resource cluster of each row keeps
+   the see-through panel; every other part is nearly opaque and the item slots are the darkest.
+   Positions follow the row grid (24 154 24 20 24 48 1fr 62, gap 10, padding 6): the cluster is the
+   48px champion column plus the flexible name column, 302px from the row's start. */
+.live-canvas.no-player-cameras:not(.minimal) .ref-player-table[data-source="observed"] {
+  --ig-plate: rgb(5 7 9);
+  --ig-items: var(--ig-plate);
+  --ig-mid: rgb(8 12 14 / calc((var(--ingame-panel-opacity, 0.84) + 0.96) / 2));
+  background: transparent;
+}
+.live-canvas.no-player-cameras:not(.minimal) .ref-player-table[data-source="observed"]::before {
+  background: transparent;
+}
+.live-canvas.no-player-cameras:not(.minimal) .ref-player-table[data-source="observed"] .table-gold {
+  background: var(--ig-plate);
+}
+.live-canvas.no-player-cameras:not(.minimal)
+  .ref-player-table[data-source="observed"]
+  .live-player-row {
+  /* Solid black from the champion icon outwards-left (vision, items, quest, runes, spells); the
+     champion, name, health/resource and KDA share one translucent level between the old name
+     (0.84) and KDA (0.96) opacities. */
+  background:
+    linear-gradient(var(--ig-items), var(--ig-items)) 34px 0 / 166px 100% no-repeat,
+    linear-gradient(var(--ig-plate), var(--ig-plate)) 0 0 / 302px 100% no-repeat,
+    linear-gradient(var(--ig-mid), var(--ig-mid)) 302px 0 / calc(100% - 302px) 100% no-repeat;
+}
+.live-canvas.no-player-cameras:not(.minimal)
+  .ref-player-table[data-source="observed"]
+  .live-player-row.red-row {
+  background:
+    linear-gradient(var(--ig-items), var(--ig-items)) right 34px top 0 / 166px 100% no-repeat,
+    linear-gradient(var(--ig-plate), var(--ig-plate)) 100% 0 / 302px 100% no-repeat,
+    linear-gradient(var(--ig-mid), var(--ig-mid)) 0 0 / calc(100% - 302px) 100% no-repeat;
+}
+/* Blacks sampled from the reference broadcast (flat areas of the table measure about rgb(12 16 20)
+   and the item slots about rgb(8 8 8)). */
+.live-canvas {
+  --ig-black: rgb(12 16 20 / 0.96);
+}
+/* Top bar, as specified: the team block is solid black at the outer end and falls to 80% at its
+   inner edge; each economy block starts at 50% and turns solid black towards the centre, which
+   stays solid. Stops follow the grid (team 0-24.6%, economy to 43%, kills to 56.6% of the padding box). */
+.live-canvas .live-scoreboard .score-main {
+  background: linear-gradient(
+    90deg,
+    rgb(0 0 0 / 1) 0%,
+    rgb(0 0 0 / 0.85) 20%,
+    rgb(0 0 0 / 0.75) 20%,
+    rgb(0 0 0 / 1) 43%,
+    rgb(0 0 0 / 1) 56.6%,
+    rgb(0 0 0 / 0.75) 80%,
+    rgb(0 0 0 / 0.85) 80%,
+    rgb(0 0 0 / 1) 100%
+  );
+}
+.live-canvas .live-scoreboard .score-sub {
+  background: rgb(4 6 8 / 0.84);
+}
+
+/* Scoreboard frame: one thin, faint line on every side (the reference frame is a single hairline). */
+.live-canvas .live-scoreboard .score-main {
+  border: 1px solid rgb(119 122 113 / 0.3);
+  border-radius: 3px;
+}
+
+/* Centre column (gold difference): the same translucent level as the name cluster. */
+.live-canvas.no-player-cameras:not(.minimal) .ref-player-table[data-source="observed"] .table-gold {
+  background: var(--ig-mid);
+}
+/* Table frame: the reference lines measure about 80/255 where these were 135; keep them 1px. */
+.live-canvas .ref-player-table {
+  border-top-color: rgb(138 143 126 / 0.5);
+  border-bottom-color: rgb(138 143 126 / 0.5);
+}
+.live-canvas .ref-player-table .table-gold {
+  border-left-color: rgb(143 149 126 / 0.35);
+  border-right-color: rgb(143 149 126 / 0.35);
+}
+/* Champion icon: one thin black frame instead of the grey border plus the image border. */
+.live-canvas .live-player-row .row-champion,
+.live-canvas.minimal .live-player-row .row-champion {
+  border: 0;
+}
+.live-canvas .live-player-row .row-champion > img {
+  box-sizing: border-box;
+  border: 1px solid #000;
+}
+
+/* The game's own 18+ sign sits in the top-left corner (about 168x28px): the two pit timers start
+   below it instead of covering it. */
+.live-canvas .live-objective-stack {
+  top: 40px;
 }

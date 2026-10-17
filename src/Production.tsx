@@ -234,12 +234,11 @@ export function MatchConfig({
               <option value="simple">Simple, cam caster</option>
             </NativeSelect>
           </label>
-          {(["blue", "red", "accent", "background"] as const).map((key) => (
+          {(["red", "accent", "background"] as const).map((key) => (
             <label key={key}>
               {
                 {
-                  blue: "Xanh đậm, tên đội / nhận diện",
-                  red: "Đỏ đậm, tên đội / nhận diện",
+                  red: "Đỏ, tên đội / icon / progress / chênh vàng",
                   accent: "Màu nhấn",
                   background: "Nền panel",
                 }[key]
@@ -263,19 +262,11 @@ export function MatchConfig({
             </NativeSelect>
           </label>
           <label>
-            Xanh nhạt, icon / progress / chênh vàng
+            Xanh, tên đội / icon / progress / chênh vàng
             <Input
               type="color"
               value={broadcastColors(draft).blue}
               onChange={(e) => patch({ blueSecondary: e.target.value })}
-            />
-          </label>
-          <label>
-            Đỏ nhạt, icon / progress / chênh vàng
-            <Input
-              type="color"
-              value={broadcastColors(draft).red}
-              onChange={(e) => patch({ redSecondary: e.target.value })}
             />
           </label>
           <label>
