@@ -25,10 +25,7 @@ if (
 )
   throw Error("Invalid validation options");
 const wait = (ms: number) => new Promise((r) => setTimeout(r, ms));
-async function get(
-  game: boolean,
-  path: string,
-): Promise<{ http: number | null; data: unknown }> {
+async function get(game: boolean, path: string): Promise<{ http: number | null; data: unknown }> {
   return new Promise((yes) => {
     let finished = false;
     const finish = (http: number | null, data: unknown = null) => {
@@ -59,10 +56,7 @@ async function get(
         res.on("error", () => finish(null));
         res.on("end", () => {
           try {
-            finish(
-              res.statusCode ?? null,
-              JSON.parse(Buffer.concat(parts).toString()),
-            );
+            finish(res.statusCode ?? null, JSON.parse(Buffer.concat(parts).toString()));
           } catch {
             finish(res.statusCode ?? null);
           }
@@ -103,7 +97,7 @@ const report = await validateProject({
   dataOrigin: "local-game-api",
 });
 const startedAt = report.startedAt;
-const folder = resolve("Collector/evidence/validation");
+const folder = resolve("collector/evidence/validation");
 await mkdir(folder, { recursive: true });
 await writeFile(
   resolve(folder, `project-live-${startedAt.replaceAll(":", "-")}.json`),

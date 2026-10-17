@@ -1,24 +1,13 @@
 import { createWriteStream } from "node:fs";
-import {
-  mkdir,
-  readFile,
-  writeFile,
-  rename,
-  unlink,
-  access,
-} from "node:fs/promises";
+import { mkdir, readFile, writeFile, rename, unlink, access } from "node:fs/promises";
 import { resolve } from "node:path";
 import { createGzip } from "node:zlib";
 import { WebSocket } from "ws";
 import { observerFrameSchema, ingameSampleSchema } from "../../shared/observer";
 import { normalizeIngame } from "../../server/ingame-adapter";
 import { getLocal } from "../../server/diagnostics";
-import { collectorSafety } from "../../server/collector-safety";
 import { capturePrivacy } from "../validation/capture-privacy";
-import {
-  COLLECTOR_SAMPLE_INTERVAL_MS,
-  remainingSampleDelay,
-} from "../../shared/capture-rules";
+import { COLLECTOR_SAMPLE_INTERVAL_MS, remainingSampleDelay } from "../../shared/capture-rules";
 
 const appPort = Number(process.env.RIOT_OVERLAY_CAPTURE_PORT ?? 4310);
 if (!Number.isInteger(appPort) || appPort < 1024 || appPort > 65535)
@@ -35,22 +24,15 @@ if (args[0] === "--mark" || args[0] === "--stop") {
   const note = args.slice(1).join(" ").trim();
   if (args[0] === "--mark" && (!note || note.length > 500))
     throw Error('Use --mark "note" (1..500 characters)');
-  const pointer = JSON.parse(
-    await readFile(resolve(root, "active-collector.json"), "utf8"),
-  );
+  const pointer = JSON.parse(await readFile(resolve(root, "active-collector.json"), "utf8"));
   if (
     !/^\d{4}-\d{2}-\d{2}T\d{2}-\d{2}-\d{2}-\d{3}Z$/.test(pointer.directory) ||
     Date.now() - Date.parse(pointer.updatedAt) > 20000
   )
     throw Error("No current collector capture");
   if (args[0] === "--stop") {
-    await writeFile(
-      resolve(root, pointer.directory, "stop.request"),
-      "operator\n",
-    );
-    console.log(
-      JSON.stringify({ directory: pointer.directory, stopRequested: true }),
-    );
+    await writeFile(resolve(root, pointer.directory, "stop.request"), "operator\n");
+    console.log(JSON.stringify({ directory: pointer.directory, stopRequested: true }));
   } else {
     const frame = await json(base + "/api/observer");
     const { appendFile } = await import("node:fs/promises");
@@ -62,25 +44,18 @@ if (args[0] === "--mark" || args[0] === "--stop") {
         note,
       }) + "\n",
     );
-    console.log(
-      JSON.stringify({ directory: pointer.directory, markerSaved: true }),
-    );
+    console.log(JSON.stringify({ directory: pointer.directory, markerSaved: true }));
   }
 } else {
-  if (args.length > 1)
-    throw Error("Use npm run capture:collector -- <duration-ms>");
+  if (args.length > 1) throw Error("Use npm run capture:collector -- <duration-ms>");
   const durationMs = Number(args[0] ?? 10800000);
-  if (
-    !Number.isInteger(durationMs) ||
-    durationMs < 5000 ||
-    durationMs > 14400000
-  )
+  if (!Number.isInteger(durationMs) || durationMs < 5000 || durationMs > 14400000)
     throw Error("Duration must be 5000..14400000 ms");
   const provider = await json(base + "/api/providers");
-  if (!(await collectorSafety.check()).allowed)
-    throw Error("Collector bị chặn: cần xác nhận spectator hoặc replay trước khi ghi.");
-  if(provider.collector?.observerIntervalMs !== COLLECTOR_SAMPLE_INTERVAL_MS)
-    throw Error('Backend chưa hỗ trợ nhịp 500ms. Khởi động lại backend từ workspace đã build trước khi ghi.');
+  if (provider.collector?.observerIntervalMs !== COLLECTOR_SAMPLE_INTERVAL_MS)
+    throw Error(
+      "Backend chưa hỗ trợ nhịp 500ms. Khởi động lại backend từ workspace đã build trước khi ghi.",
+    );
   if (
     provider.selected !== "collector-accountless" ||
     provider.output !== "collector-accountless" ||
@@ -89,19 +64,15 @@ if (args[0] === "--mark" || args[0] === "--stop") {
     provider.collector.runtime.withoutAccount !== true ||
     provider.collector.runtime.credentialConfigured !== false
   )
-    throw Error(
-      "Select owned Collector không tài khoản LB and turn demo off first",
-    );
+    throw Error("Select owned Collector không tài khoản LB and turn demo off first");
   const port = provider.collector.runtime.port;
-  if (!Number.isInteger(port) || port < 1024 || port > 65535)
-    throw Error("Invalid loopback port");
+  if (!Number.isInteger(port) || port < 1024 || port > 65535) throw Error("Invalid loopback port");
   const authUrl = `http://127.0.0.1:${port}/api/status`;
   const authOk = (s: any) =>
     s.authentication?.state === "not-configured" &&
     s.authentication?.signedResponses === 0 &&
     s.authentication?.features?.length === 0;
-  if (!authOk(await json(authUrl)))
-    throw Error("Accountless authentication state not verified");
+  if (!authOk(await json(authUrl))) throw Error("Accountless authentication state not verified");
   const startedAt = new Date().toISOString(),
     id = startedAt.replaceAll(":", "-").replace(".", "-"),
     folder = resolve(root, id);
@@ -110,8 +81,7 @@ if (args[0] === "--mark" || args[0] === "--stop") {
   const pointer = resolve(root, "active-collector.json");
   try {
     const p = JSON.parse(await readFile(pointer, "utf8"));
-    if (Date.now() - Date.parse(p.updatedAt) < 20000)
-      throw Error("capture-already-active");
+    if (Date.now() - Date.parse(p.updatedAt) < 20000) throw Error("capture-already-active");
   } catch (e) {
     if ((e as Error).message === "capture-already-active") throw e;
   }
@@ -230,10 +200,7 @@ if (args[0] === "--mark" || args[0] === "--stop") {
           report.nativeFrames++;
           report.firstNativeAt ??= receivedAt;
           report.lastNativeAt = receivedAt;
-          if (
-            raw.type === "snapshot" &&
-            typeof raw.data?.gameTime === "number"
-          ) {
+          if (raw.type === "snapshot" && typeof raw.data?.gameTime === "number") {
             report.firstGameTime ??= raw.data.gameTime;
             report.lastGameTime = raw.data.gameTime;
           }
@@ -257,11 +224,7 @@ if (args[0] === "--mark" || args[0] === "--stop") {
             ...f.data.sample,
             events: [...events.values()],
           });
-          write(
-            sampleOut,
-            { receivedAt, message: { type: "collector-sample", sample } },
-            ws,
-          );
+          write(sampleOut, { receivedAt, message: { type: "collector-sample", sample } }, ws);
           report.observerFrames++;
           const receivedMs = Date.parse(receivedAt);
           if (lastObserverAt !== null) {
@@ -289,18 +252,9 @@ if (args[0] === "--mark" || args[0] === "--stop") {
   }
   async function checkpoint() {
     report.updatedAt = new Date().toISOString();
-    await writeFile(
-      resolve(folder, "manifest.json.tmp"),
-      JSON.stringify(report, null, 2),
-    );
-    await rename(
-      resolve(folder, "manifest.json.tmp"),
-      resolve(folder, "manifest.json"),
-    );
-    await writeFile(
-      pointer,
-      JSON.stringify({ directory: id, updatedAt: report.updatedAt }),
-    );
+    await writeFile(resolve(folder, "manifest.json.tmp"), JSON.stringify(report, null, 2));
+    await rename(resolve(folder, "manifest.json.tmp"), resolve(folder, "manifest.json"));
+    await writeFile(pointer, JSON.stringify({ directory: id, updatedAt: report.updatedAt }));
   }
   await checkpoint();
   console.log(
@@ -316,10 +270,6 @@ if (args[0] === "--mark" || args[0] === "--stop") {
   const poll = async () => {
     while (!stopped) {
       const pollStarted = performance.now();
-      if (!(await collectorSafety.check()).allowed) {
-        stop("safety-blocked");
-        break;
-      }
       try {
         await access(resolve(folder, "stop.request"));
         stop("operator");
@@ -331,26 +281,18 @@ if (args[0] === "--mark" || args[0] === "--stop") {
           json(authUrl),
           getLocal("capture-reference", "/liveclientdata/allgamedata"),
         ]);
-        if (
-          p.selected !== "collector-accountless" ||
-          p.output !== "collector-accountless"
-        )
+        if (p.selected !== "collector-accountless" || p.output !== "collector-accountless")
           stop("provider-changed");
         else if (!authOk(a)) stop("auth-state-changed");
         if (!stopped && ref.probe.status === "ok") {
-          const sample = normalizeIngame(
-            ref.data,
-            {},
-            new Date().toISOString(),
-          );
+          const sample = normalizeIngame(ref.data, {}, new Date().toISOString());
           write(referenceOut, {
             receivedAt: new Date().toISOString(),
             message: privacy(ref.data),
             sample,
           });
           report.referenceFrames++;
-        } else if (!stopped)
-          report.referenceUnavailable = (report.referenceUnavailable ?? 0) + 1;
+        } else if (!stopped) report.referenceUnavailable = (report.referenceUnavailable ?? 0) + 1;
         await checkpoint();
       } catch {
         report.localUnavailable = (report.localUnavailable ?? 0) + 1;

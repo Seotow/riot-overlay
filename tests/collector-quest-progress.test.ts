@@ -1,11 +1,9 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { collectorPlayerExtras } from "../Collector/adapter/player-extras";
+import { collectorPlayerExtras } from "../collector/adapter/player-extras";
 const make = (role: string, id: number, count: number): any => ({
   common: {
-    buffs: [
-      { name: `SR_2026_S1_RoleBound_${role}_Quest`, count, endTime: 25000 },
-    ],
+    buffs: [{ name: `SR_2026_S1_RoleBound_${role}_Quest`, count, endTime: 25000 }],
   },
   items: [{ slot: 8, id, stats: {} }],
 });

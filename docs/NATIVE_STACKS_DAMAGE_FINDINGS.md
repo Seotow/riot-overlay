@@ -58,7 +58,7 @@ giả số để hoàn thiện postgame. Winner/final time cần terminal eviden
 
 ## Tái lập
 
-`node scripts/audit-native-stacks-damage.mjs`
+`node scripts/inspect/audit-native-stacks-damage.mjs`
 
 Report `.npm-cache/data-audit/native-stacks-damage.json` chỉ aggregate gameplay,
 không log player identity/credentials. Original không sửa. Audit không thay

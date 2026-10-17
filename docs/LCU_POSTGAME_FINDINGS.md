@@ -44,7 +44,7 @@ Game ID người dùng chỉ định: `1607368559`. Các response thành công H
 PUUID và thông tin đăng nhập chỉ xử lý trong bộ nhớ. Credentials LCU không
 được in, lưu vào evidence, đưa frontend, theme hoặc Git. Local report chỉ có
 field gameplay đã chọn, tại `.npm-cache/lcu-postgame-player.json` và
-`.npm-cache/lcu-postgame-custom.log`. Probe: `scripts/probe-lcu-postgame.ts`.
+`.npm-cache/lcu-postgame-custom.log`. Probe: `scripts/inspect/probe-lcu-postgame.ts`.
 
 `/lol-summoner/v1/alias/summoners` trả 404 ở client này. Không dùng một endpoint
 theo tài liệu cũ như bằng chứng nó đang hoạt động. Swagger ở hai đường đã thử

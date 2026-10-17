@@ -43,7 +43,7 @@ npm test
 npx tsx tests/system.integration.ts
 ```
 
-`scripts/verify-studio-shadcn.mjs` chạy Edge headless trên backend QA riêng 4393,
+`scripts/verify/verify-studio-shadcn.mjs` chạy Edge headless trên backend QA riêng 4393,
 theme riêng. Kiểm 8 route, lưu config, toggle widget, phát/tạm dừng recording,
 responsive 900px và renderer OBS trong suốt. Ảnh/report tại
 `.npm-cache/studio-shadcn-qa/`. Không chạy script này trên backend operator.

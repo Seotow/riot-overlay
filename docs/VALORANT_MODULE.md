@@ -41,7 +41,7 @@ không cài hook Git hoặc tự chạy installer.
 `data/valorant/module.json` thành đường dẫn absolute tới **Spectra Client.exe**
 đã cài, hoặc để `null` khi chỉ kiểm chứng services. Không nhập command shell.
 Source Client không thay thế executable/Overwolf runtime. Đã có helper
-`scripts/acquire-spectra-client.ps1` tải/giải nén release 0.3.4 theo SHA256
+`scripts/assets/acquire-spectra-client.ps1` tải/giải nén release 0.3.4 theo SHA256
 pin (cần 7-Zip); không chạy installer hoặc can thiệp anti-cheat. Nếu thư mục
 runtime đã có, helper từ chối ghi đè.
 

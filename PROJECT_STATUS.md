@@ -19,18 +19,6 @@ bằng terminal. Giữ bố cục draft/in-game đã duyệt, không mở lại 
 - Bản ghi hiện hành là projection 10 từ raw ngày 16/10, có 1.525 mẫu.
   Raw và các projection trước được giữ nguyên, không theo Git.
 
-## Chốt an toàn collector
-
-Không khởi động collector khi đang là người chơi hoặc chưa xác nhận được
-spectator/replay. Có clock Replay API hoặc tên active player là Unknown chưa
-đủ để cho phép. Chốt kiểm tra trước khi mở host, trước khi kết nối/đọc nguồn
-live và kiểm tra lại trong lúc chạy. Khi bị chặn, Studio/OBS bỏ frame live,
-ngắt socket và dừng host do ứng dụng quản lý. Capture cũng có chốt riêng.
-
-Không có config bỏ qua. Bản ghi đã lưu và điều khiển draft vẫn dùng được.
-Chỉ trả về trạng thái/lý do; không xuất command line, tên active player hoặc
-credentials. Chi tiết: [COLLECTOR_SAFETY](docs/COLLECTOR_SAFETY.md).
-
 ## Đầu ra phát sóng
 
 Thanh điểm số: cụm logo/tên sát hai mép hơn, chừa đủ chỗ cho tên 5 ký tự.
@@ -85,3 +73,7 @@ yêu cầu mới.
 
 [Nhật ký các mốc trước](docs/history/PROJECT_STATUS_2026-10-17.md) giữ các
 số đo, bản ghi và quyết định cũ để tra cứu.
+
+## Cấu trúc 17/10/2026
+
+Thư mục `Collector/` đổi thành `collector/` với `hosts/` (source native), `bundles/` (bản build kèm runtime), `supervisor/`. `scripts/` chia thành assets, capture, inspect, verify, dev. Đã thêm Prettier (`npm run format`). Các tài liệu trong `docs/history/` giữ đường dẫn cũ. Chưa build lại host C# tại máy này; manifest và build script của host giữ nguyên.

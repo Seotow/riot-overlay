@@ -1,0 +1,99 @@
+import assert from "node:assert/strict";
+import { readFile, mkdir, readdir } from "node:fs/promises";
+import { createRequire } from "node:module";
+import { resolve } from "node:path";
+const base = process.env.OVERLAY_VISUAL_URL;
+assert.match(base ?? "", /^http:\/\/127\.0\.0\.1:\d+$/);
+assert.ok(!base.endsWith(":4310"));
+const { chromium } = createRequire(import.meta.url)(
+  resolve(process.env.OVERLAY_BROWSER_PACKAGES, "playwright"),
+);
+const ids = (await readdir("data/captures"))
+  .filter((s) => /^2026-10-16T/.test(s))
+  .sort()
+  .reverse();
+const id = process.env.OVERLAY_CAPTURE_ID ?? ids[0];
+const records = (await readFile(resolve("data/captures", id, "observer-samples.ndjson"), "utf8"))
+  .trim()
+  .split(/\r?\n/)
+  .map(JSON.parse);
+const origin = Date.parse(records[0].receivedAt),
+  offset = (time) =>
+    Date.parse(records.find((r) => r.message.sample.gameTime.value >= time).receivedAt) - origin;
+const until = async (check) => {
+  for (let i = 0; i < 150; i++) {
+    if (await check()) return;
+    await new Promise((r) => setTimeout(r, 100));
+  }
+  throw Error("Timeout");
+};
+const report = async () => await (await fetch(base + "/api/providers")).json();
+const browser = await chromium.launch({ channel: "msedge", headless: true });
+try {
+  const page = await browser.newPage({ viewport: { width: 1920, height: 1080 } }),
+    errors = [];
+  page.on("pageerror", (e) => errors.push(String(e)));
+  await page.goto(base + "/?page=demo");
+  await page.getByLabel("Bộ dữ liệu thật", { exact: true }).selectOption(id);
+  await page.getByRole("button", { name: "Tải bản ghi", exact: true }).click();
+  await until(async () => (await report()).recording.id === id);
+  const overlay = await browser.newPage({ viewport: { width: 1920, height: 1080 } });
+  overlay.on("pageerror", (e) => errors.push(String(e)));
+  await overlay.goto(base + "/overlay?scene=ingame");
+  const seek = async (time) => {
+    const position = offset(time);
+    const slider = page.getByRole("slider", { name: "Tiến độ bản ghi thật" });
+    await slider.evaluate((e, v) => {
+      e.value = String(v);
+    }, position);
+    await slider.dispatchEvent("pointerup");
+    await until(async () => (await report()).recording.positionMs === position);
+  };
+  await seek(740);
+  await until(
+    async () => (await overlay.locator(".blue-team-dragons .dragon-token").count()) === 4,
+  );
+  const numbers = await overlay.locator(".row-numbers > b").allTextContents();
+  assert.equal(numbers.length, 10);
+  assert.ok(numbers.every((x) => /^\d+$/.test(x)));
+  assert.ok((await overlay.locator(".blue-team-dragons .dragon-earth").count()) === 2);
+  await page.locator(".recording-source-data summary").click();
+  assert.match(await page.locator(".recording-source-data pre").textContent(), /"sourceStats"/);
+  await mkdir(".npm-cache/visual-audit", { recursive: true });
+  await overlay.screenshot({
+    path: ".npm-cache/visual-audit/recorded-all-data.png",
+    omitBackground: true,
+  });
+  await seek(403);
+  await page.getByRole("button", { name: "Phát bản ghi", exact: true }).click();
+  await overlay
+    .getByRole("img", { name: "Tác nhân hạ gục: chemtech", exact: true })
+    .waitFor({ timeout: 20000 });
+  await page.getByRole("button", { name: "Tạm dừng bản ghi", exact: true }).click();
+  const row = overlay
+    .locator(".broadcast-feed-row")
+    .filter({ has: overlay.getByRole("img", { name: "Tác nhân hạ gục: chemtech", exact: true }) });
+  await row.getByAltText("Yasuo", { exact: true }).waitFor();
+  assert.equal(
+    await row.locator(".feed-objective-icon").evaluate((e) => getComputedStyle(e).backgroundColor),
+    "rgb(255, 255, 255)",
+  );
+  await overlay.screenshot({
+    path: ".npm-cache/visual-audit/recorded-dragon-kills-yasuo.png",
+    omitBackground: true,
+  });
+  assert.deepEqual(errors, []);
+  console.log(
+    JSON.stringify({
+      pass: true,
+      id,
+      csRows: 10,
+      dragons: 4,
+      neutralKiller: "chemtech",
+      victim: "Yasuo",
+      whiteMask: true,
+    }),
+  );
+} finally {
+  await browser.close();
+}

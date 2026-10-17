@@ -2,11 +2,7 @@ import { WebSocket } from "ws";
 import { CollectorGameplay } from "./gameplay";
 import { ObserverSession } from "../../server/observer-session";
 import type { ObserverFrame, ObservedEvent } from "../../shared/observer";
-import {
-  normalizeCollector,
-  object,
-  type NormalizedCollector,
-} from "./normalize";
+import { normalizeCollector, object, type NormalizedCollector } from "./normalize";
 
 export class LeagueCollectorSource {
   readonly endpoint: string;
@@ -15,13 +11,8 @@ export class LeagueCollectorSource {
   private stopped = false;
   private nextAttempt = 0;
   private status:
-    | "offline"
-    | "connecting"
-    | "waiting"
-    | "receiving"
-    | "stale"
-    | "invalid"
-    | "stopped" = "offline";
+    "offline" | "connecting" | "waiting" | "receiving" | "stale" | "invalid" | "stopped" =
+    "offline";
   private normalized: NormalizedCollector | null = null;
   private session = new ObserverSession();
   private gameplay = new CollectorGameplay();
@@ -30,10 +21,7 @@ export class LeagueCollectorSource {
   private lastProviderTime = -1;
   private accepted = 0;
   private rejected = 0;
-  private pendingEvents = new Map<
-    string,
-    { event: ObservedEvent; receivedAt: number }
-  >();
+  private pendingEvents = new Map<string, { event: ObservedEvent; receivedAt: number }>();
   private deliveryPrimed = false;
   private pendingTruncated = false;
   constructor(options: { port?: number; clock?: () => number } = {}) {
@@ -57,10 +45,7 @@ export class LeagueCollectorSource {
     this.status = status;
   }
   private refresh() {
-    if (
-      this.normalized &&
-      this.clock() - Date.parse(this.normalized.sample.capturedAt) >= 5000
-    )
+    if (this.normalized && this.clock() - Date.parse(this.normalized.sample.capturedAt) >= 5000)
       this.invalidate("stale");
   }
   accept(raw: unknown): boolean {
@@ -73,9 +58,7 @@ export class LeagueCollectorSource {
         envelope.schemaVersion === 1 &&
         envelope.source === "lblib" &&
         envelope.synthetic === false &&
-        ["waiting", "error", "ended", "stopped"].includes(
-          String(object(envelope.data).state),
-        )
+        ["waiting", "error", "ended", "stopped"].includes(String(object(envelope.data).state))
       )
         this.invalidate("waiting");
       return false;
@@ -89,17 +72,12 @@ export class LeagueCollectorSource {
     const sequence = envelope.sequence as number;
     const stamp = Date.parse(normalized.sample.capturedAt);
     // Duplicate/late frames never extend freshness or roll back the epoch.
-    if (sequence <= this.lastSequence || stamp < this.lastProviderTime)
-      return false;
+    if (sequence <= this.lastSequence || stamp < this.lastProviderTime) return false;
     this.lastSequence = sequence;
     this.lastProviderTime = stamp;
     this.gameplay.enrich(raw, normalized);
     this.normalized = normalized;
-    this.frame = this.session.ingest(
-      normalized.sample,
-      normalized.signature,
-      this.now(),
-    );
+    this.frame = this.session.ingest(normalized.sample, normalized.signature, this.now());
     if (this.frame.transition !== "none") {
       this.pendingEvents.clear();
       this.deliveryPrimed = false;
@@ -195,9 +173,7 @@ export class LeagueCollectorSource {
       capabilities: {
         fields: Object.keys(coverage),
         events: (this.normalized?.sample.events.length ?? 0) > 0,
-        objectives: !!this.normalized?.sample.teams?.some(
-          (t) => t.dragons.value !== null,
-        ),
+        objectives: !!this.normalized?.sample.teams?.some((t) => t.dragons.value !== null),
         roleOrderVerified: false,
         productionReady: false,
       },

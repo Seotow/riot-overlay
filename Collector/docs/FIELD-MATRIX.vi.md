@@ -4,7 +4,7 @@ Nguồn: native schema được `SchemaJson` xuất qua `CollectorHub` envelope 
 Runtime evidence gồm map12 ngày14/10 và SRlive ngày15/10/2026. Xem
 [SR-LIVE-VALIDATION](SR-LIVE-VALIDATION.vi.md) cho sample counts và giới hạn;
 không coi một cửa sổ đối chiếu là fullparity.
-Bảng máy đọc được: `Collector/adapter/fields.ts`. Không cần credentials để
+Bảng máy đọc được: `collector/adapter/fields.ts`. Không cần credentials để
 import hoặc kiểm thử adapter; nó chỉ đọc feed collector đã chạy.
 
 | Field của project | Native path | Bằng chứng hiện có / xử lý |

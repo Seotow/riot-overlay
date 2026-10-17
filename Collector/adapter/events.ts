@@ -2,13 +2,9 @@ import { createHash } from "node:crypto";
 import type { ObservedEvent } from "../../shared/observer";
 
 const obj = (v: unknown): Record<string, unknown> =>
-  v !== null && typeof v === "object" && !Array.isArray(v)
-    ? (v as Record<string, unknown>)
-    : {};
+  v !== null && typeof v === "object" && !Array.isArray(v) ? (v as Record<string, unknown>) : {};
 const networkId = (v: unknown): number | null =>
-  typeof v === "number" && Number.isInteger(v) && v > 0 && v <= 0xffffffff
-    ? v
-    : null;
+  typeof v === "number" && Number.isInteger(v) && v > 0 && v <= 0xffffffff ? v : null;
 type Target = {
   team: "ORDER" | "CHAOS";
   kind: "hero" | "turret" | "inhibitor";
@@ -44,10 +40,7 @@ export function collectorEvents(
   };
   // Native identity may be missing while ordinary player telemetry is valid.
   // Suppress events rather than guessing the killer from champion/array order.
-  if (
-    heroes.length !== 10 ||
-    !heroes.every((h, slot) => register(h, "hero", slot))
-  )
+  if (heroes.length !== 10 || !heroes.every((h, slot) => register(h, "hero", slot)))
     return { events: [] as ObservedEvent[], truncated: false };
   for (const [key, kind, limit] of [
     ["turrets", "turret", 64],
@@ -94,8 +87,7 @@ export function collectorEvents(
         continue;
       const killerId = networkId(e.killerNetworkId),
         victimId = networkId(e[victimKey]);
-      if (killerId === null || victimId === null || killerId === victimId)
-        continue;
+      if (killerId === null || victimId === null || killerId === victimId) continue;
       const killer = targets.get(killerId),
         victim = targets.get(victimId);
       if (

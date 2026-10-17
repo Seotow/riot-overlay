@@ -28,7 +28,7 @@ feature parity, độ ổn định toàn trận hoặc bảo đảm cache/patch 
 
 ## Chuẩn bị phép thử không tài khoản — 16/10/2026
 
-Lệnh từ root: `npx tsx Collector/scripts/probe-basic-fields.ts --without-account`.
+Lệnh từ root: `npx tsx collector/scripts/probe-basic-fields.ts --without-account`.
 Chế độ này giữ DLL cache đã pin hash, không dùng `--update-lib`, tạo host riêng
 với email/password rỗng, loại các biến LB/AWS/Cognito kế thừa và trỏ file env
 đến đường dẫn bắt buộc không tồn tại. Không sửa file tài khoản thật hoặc DLL,
@@ -39,7 +39,7 @@ sẵn hay không và trạng thái auth/count ký/feature từ host. Nếu produ
 có, kết quả chỉ là reconnect không tài khoản, chưa chứng minh coldstart độc lập.
 Có thể thêm `--no-inject` để bắt buộc dùng producer sẵn có.
 
-Offline `npx tsx Collector/scripts/check-accountless-offline.ts` đã đạt:
+Offline `npx tsx collector/scripts/check-accountless-offline.ts` đã đạt:
 hash DLL đúng, `--auth-check` trả `not-configured`, exit2 đúng thiết kế; không
 khởi tạo native hoặc đọc game. Evidence:
 `../evidence/validation/accountless-offline-2026-10-16T02-30-07.021Z.json`.
@@ -58,7 +58,7 @@ thì dùng --no-inject. Coldstart chỉ khi chưa có producer, dùng luồng g�
 collector đã được user yêu cầu kiểm chứng. Không LCU/đổi replay/quit game.
 
 Để tuyệt đối không nạp DLL lại:
-`npx tsx Collector/scripts/probe-basic-fields.ts --no-inject`.
+`npx tsx collector/scripts/probe-basic-fields.ts --no-inject`.
 Nếu producer không còn, lệnh dừng; không fallback injection. Mỗi lượt≤30s đo
 cộng startup/cleanup; chỉ dừng host do mình tạo, không dừng host attach ngoài.
 HP/resource cần current≥0 và max>0/current≤max. MP chỉ là resource loại mana;

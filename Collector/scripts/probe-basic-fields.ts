@@ -4,7 +4,7 @@ import { mkdir, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { WebSocket } from "ws";
 import { getLocal } from "../../server/diagnostics";
-import { CollectorRuntime } from "../runtime/supervisor";
+import { CollectorRuntime } from "../supervisor/supervisor";
 import { object } from "../adapter/normalize";
 import { inspectBasicFields } from "../validation/basic-fields";
 
@@ -35,9 +35,7 @@ async function open(port: number): Promise<boolean | null> {
     );
   });
 }
-async function collectorStatus(
-  port: number,
-): Promise<Record<string, unknown> | null> {
+async function collectorStatus(port: number): Promise<Record<string, unknown> | null> {
   return new Promise((yes) => {
     let finished = false;
     const end = (v: Record<string, unknown> | null) => {
@@ -134,10 +132,7 @@ try {
     !["unknown", "spectator"].includes(active.data.toLowerCase())
   )
     report.outcome = "spectator-unverified";
-  else if (
-    !Array.isArray(end) ||
-    end.some((e) => object(e).EventName === "GameEnd")
-  )
+  else if (!Array.isArray(end) || end.some((e) => object(e).EventName === "GameEnd"))
     report.outcome = "end-state-unavailable-or-ended";
   else if (
     typeof game.gameTime !== "number" ||
@@ -145,8 +140,7 @@ try {
     game.gameTime < 0
   )
     report.outcome = "game-clock-unavailable";
-  else if ((await open(58869)) !== false)
-    report.outcome = "LB-listener-not-confirmed-closed";
+  else if ((await open(58869)) !== false) report.outcome = "LB-listener-not-confirmed-closed";
   else {
     report.mapNumber =
       typeof game.mapNumber === "number" && Number.isInteger(game.mapNumber)
@@ -161,14 +155,12 @@ try {
       object((await collectorStatus(18799))?.collector).source === "lblib"
     )
       report.attachedExisting = true;
-    else if (portExisting !== false)
-      report.outcome = "existing-collector-unverified";
+    else if (portExisting !== false) report.outcome = "existing-collector-unverified";
     else {
       const native = await open(4998);
       report.producerPresentBefore = native;
       if (native === null) report.outcome = "native-listener-unverified";
-      else if (noInject && !native)
-        report.outcome = "existing-producer-unavailable";
+      else if (noInject && !native) report.outcome = "existing-producer-unavailable";
       else {
         port = 18814;
         report.autoInject = !native && !noInject;
@@ -210,41 +202,25 @@ try {
                 const key = `${row.row}:${row.team}:${row.champion}`,
                   before = previous.get(key);
                 if (before)
-                  for (const field of [
-                    "health",
-                    "resource",
-                    "currentGold",
-                    "totalGold",
-                  ] as const)
+                  for (const field of ["health", "resource", "currentGold", "totalGold"] as const)
                     if (
                       before[field] !== null &&
                       row[field] !== null &&
-                      JSON.stringify(before[field]) !==
-                        JSON.stringify(row[field])
+                      JSON.stringify(before[field]) !== JSON.stringify(row[field])
                     ) {
                       changed[field].add(key);
                       report.changedHeroes[field] = changed[field].size;
                     }
                 previous.set(key, row);
               }
-              for (const key of [
-                "health",
-                "resource",
-                "currentGold",
-                "totalGold",
-              ] as const)
-                report.coverageMax[key] = Math.max(
-                  report.coverageMax[key],
-                  result.coverage[key],
-                );
+              for (const key of ["health", "resource", "currentGold", "totalGold"] as const)
+                report.coverageMax[key] = Math.max(report.coverageMax[key], result.coverage[key]);
             } catch {}
           });
         }
         await wait(250);
       }
-      report.outcome = latest
-        ? "native-fields-observed"
-        : "no-valid-native-fields";
+      report.outcome = latest ? "native-fields-observed" : "no-valid-native-fields";
       const auth = object((await collectorStatus(port))?.authentication);
       if (
         typeof auth.state === "string" &&
@@ -279,11 +255,9 @@ try {
 if (latest) {
   report.sanitizedRowsPrinted = true;
   const display = latest as NonNullable<ReturnType<typeof inspectBasicFields>>;
-  console.log(
-    JSON.stringify({ kind: "sanitized-basic-field-values", ...display }),
-  );
+  console.log(JSON.stringify({ kind: "sanitized-basic-field-values", ...display }));
 }
-const folder = resolve("Collector/evidence/validation");
+const folder = resolve("collector/evidence/validation");
 await mkdir(folder, { recursive: true });
 await writeFile(
   resolve(folder, `basic-fields-${startedAt.replaceAll(":", "-")}.json`),

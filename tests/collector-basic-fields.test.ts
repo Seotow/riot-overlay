@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { inspectBasicFields } from "../Collector/validation/basic-fields";
+import { inspectBasicFields } from "../collector/validation/basic-fields";
 const now = Date.parse("2026-10-15T15:00:00Z");
 function frame(count = 1): any {
   return {

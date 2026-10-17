@@ -7,7 +7,7 @@ Schema SDK công khai khai báo `tabPlayer.stacksData?: number`:
 SDK xác nhận kiểu field, không tự xác nhận semantics Q/passive theo từng champion.
 Không nhập SDK GPL hoặc DLL vào project; không dùng memory/hook/REA cho khảo sát này.
 
-Đã đọc14 file NDJSON local,2711 state frame. Script `node scripts/inspect-lb-stacks.mjs` stream chỉ đọc, in tên tướng/field/giá trị/game clock tổng hợp, không xuất identity/credentials/raw provider.
+Đã đọc14 file NDJSON local,2711 state frame. Script `node scripts/inspect/inspect-lb-stacks.mjs` stream chỉ đọc, in tên tướng/field/giá trị/game clock tổng hợp, không xuất identity/credentials/raw provider.
 
 | Tướng | Số frame có tướng | stacksData thấp–cao | Bằng chứng / giới hạn |
 | --- | ---: | --- | --- |

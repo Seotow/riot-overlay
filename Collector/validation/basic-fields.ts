@@ -1,14 +1,11 @@
 import { object } from "../adapter/normalize";
 import { resolveChampion, liveChampion } from "../../shared/live-assets";
 
-const number = (v: unknown) =>
-  typeof v === "number" && Number.isFinite(v) && v >= 0 ? v : null;
+const number = (v: unknown) => (typeof v === "number" && Number.isFinite(v) && v >= 0 ? v : null);
 const pair = (current: unknown, max: unknown) => {
   const a = number(current),
     b = number(max);
-  return a !== null && b !== null && b > 0 && a <= b
-    ? { current: a, max: b }
-    : null;
+  return a !== null && b !== null && b > 0 && a <= b ? { current: a, max: b } : null;
 };
 const kinds = [
   "mana",
@@ -62,8 +59,7 @@ export function inspectBasicFields(raw: unknown, now: number) {
       c = object(h.common),
       info = object(h.info);
     const code =
-      typeof c.identifier === "string" &&
-      /^[A-Za-z0-9]{1,64}$/.test(c.identifier)
+      typeof c.identifier === "string" && /^[A-Za-z0-9]{1,64}$/.test(c.identifier)
         ? c.identifier
         : null;
     const champion = resolveChampion({

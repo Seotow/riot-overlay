@@ -60,11 +60,11 @@ Projection8 `2026-10-16T19-49-29-104Z`:1525 samples từ7331 native frames,
 giữ original `2026-10-16T12-43-43-938Z` nguyên vẹn. Projection7 trước đó chỉ
 thêm championStacks, không có đầy đủ itemCounters. Không xóa các phiên trước.
 
-Audit `scripts/audit-native-item-counters.mjs`; JSON aggregate tại
+Audit `scripts/inspect/audit-native-item-counters.mjs`; JSON aggregate tại
 `.npm-cache/data-audit/native-item-counters.json`. Metadata giày được đối
 chiếu URL Riot `/cdn/16.20.1/data/vi_VN/item.json`.
 
-Browser QA: `scripts/verify-stack-ui.mjs`,1920×1080,4 camera/layout variants;
+Browser QA: `scripts/verify/verify-stack-ui.mjs`,1920×1080,4 camera/layout variants;
 Smolder32, Veigar77, Tear330; cột champion/rune/HP cùng X mỗi đội (<1px),
 badge26px trong ultimate40px, sát mép phải, số trắng nền transparent và assets tải được.
 Ảnh/report `.npm-cache/stack-ui-qa/`. Không có gameplay mới hoặc xác minh

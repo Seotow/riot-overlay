@@ -7,10 +7,10 @@ import urllib.parse
 
 ROOT = Path(__file__).resolve().parent.parent
 required = [
-    'src/LeagueCollector/src/LeagueCollector/LeagueCollector.csproj',
-    'src/LeagueReader/native/include/lc_reader.h',
-    'runtime/LeagueCollector/LeagueCollector.dll',
-    'runtime/LeagueReader-Windows-x64/IndependentCollector.dll',
+    'hosts/lb-host/src/LeagueCollector/LeagueCollector.csproj',
+    'hosts/independent-reader/native/include/lc_reader.h',
+    'bundles/lb-host/LeagueCollector.dll',
+    'bundles/independent-reader/IndependentCollector.dll',
     'evidence/validation/single-inject-attempt-20261014.json',
     'archive/cloud-export/RiotOverlay-local/EXPORT-MANIFEST.json',
     'scripts/NuGet.offline.config',
@@ -28,7 +28,7 @@ for document in [ROOT / 'README.vi.md', *(ROOT / 'docs').glob('*.md')]:
         links += 1
         if not (document.parent / target).is_file():
             failures.append({'reason': 'broken-link', 'document': str(document.relative_to(ROOT)), 'target': target})
-native = ROOT / 'src/LeagueCollector/native/lblib.dll'
+native = ROOT / 'hosts/lb-host/native/lblib.dll'
 native_hash = hashlib.sha256(native.read_bytes()).hexdigest()
 if native_hash != 'a1028d56ef03c84a0808ac028a0ee3a982e7962e844592157ed4b6c2663141d3':
     failures.append({'reason': 'native-hash-mismatch'})

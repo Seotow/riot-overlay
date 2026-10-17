@@ -44,7 +44,7 @@ Giữ mục tiêu toàn tuyến thật và full telemetry, không chốt parity 
 
 Đã nối provider `league-collector`, launcher owned host và selector Studio;
 `npm run start:collector` không cần mở LB gốc. Dùng DLL gốc/guard/auth gốc,
-không phải reader độc lập. Config ổn định tại `Collector/config/collector.env`.
+không phải reader độc lập. Config ổn định tại `collector/config/collector.env`.
 137 unit test/build/integration và browser fixture đạt; host thật idle start/
 stop và launcher thử thoát không cleanup đã đạt ở idle. Dữ liệu game thật toàn tuyến chưa đo.
 Người dùng hiện chưa thể bật game; tiếp tục offline và giữ CS/null, lane chưa
@@ -66,7 +66,7 @@ kiểmfieldnghĩa trướcnguồn thửnghiệmStudio;không tựrollout từpre
 
 ## Mốc mới nhất: field matrix và adapter offline đã triển khai
 
-`Collector/adapter` normalize nativeenvelopev1 sangIngameSample/ObserverFrame,
+`collector/adapter` normalize nativeenvelopev1 sangIngameSample/ObserverFrame,
 sourceleague-collector riêng, nullablefield, ổnđịnhslot theo team/heroIndex,
 teamgold/kills chỉaggregate5fieldhợp lệ. SourceWS chỉđọc loopback, freshness5s,
 duplicate/lateframe khônggia hạn, status/socketclose/invalid xóa sample,
@@ -74,7 +74,7 @@ reconnectthay session/seekđổiepoch. Khôngcredentials/raw/identity vàooutput
 Matrixtách runtimepresence/positive-change/schema-only/chưa hỗ trợ. Perks/buff/
 objectives/events/roleorder chưaverified; productionReadyfalse.
 Xem [field matrix](FIELD-MATRIX.vi.md), [adapter](ADAPTER.vi.md). CLI
-`npm run collector:inspect` chỉconsume feedđãchạy, khônglaunchcollector/game.
+`npm run collector:inspect` chỉconsume feedđãchạy, khônglaunchCollector/game.
 Chưaregister providerStudio/OBS hoặc đoadaptertrênreplay; bước tiếp map11SR/
 fieldmapping thật trước integrationproduction.
 
@@ -101,10 +101,10 @@ thật. Xem [hướng dẫn và bằng chứng](AUTH-VERIFICATION.vi.md).
 
 ## Cấu trúc hiện hành sau dọn workspace
 
-Source làm việc đã chuyển tới `Collector/src/LeagueCollector` và
-`Collector/src/LeagueReader`. Runtime cloud nằm trong `Collector/runtime`,
-scripts ở `Collector/scripts`, evidence ở `Collector/evidence`, baseline/ZIP
-trong `Collector/archive`. Xem [README](../README.vi.md) và
+Source làm việc đã chuyển tới `collector/hosts/lb-host` và
+`collector/hosts/independent-reader`. Runtime cloud nằm trong `collector/runtime`,
+scripts ở `collector/scripts`, evidence ở `collector/evidence`, baseline/ZIP
+trong `collector/archive`. Xem [README](../README.vi.md) và
 [bản đồ di chuyển](../evidence/import/layout-migration-20261014.json).
 Evidence lịch sử giữ nguyên nội dung, kể cả đường dẫn cũ trong log.
 Các wrapper root giữ lệnh validation cũ và dùng cùng one-shot marker đã di chuyển.

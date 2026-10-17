@@ -6,7 +6,6 @@
 - [Studio](STUDIO_UI.md)
 - [Vận hành trận thật](LIVE_MATCH_RUNBOOK.md)
 - [Cấm chọn](DRAFT_RUNBOOK.md)
-- [Chốt an toàn collector](COLLECTOR_SAFETY.md)
 - [Kết quả kiểm thử](TEST_REPORT.md)
 
 ## Thiết kế và nguồn dữ liệu

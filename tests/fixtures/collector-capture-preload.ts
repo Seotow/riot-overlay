@@ -3,7 +3,6 @@ import https from "node:https";
 import { EventEmitter } from "node:events";
 import { Readable } from "node:stream";
 import { syncBuiltinESMExports } from "node:module";
-import "./spectator-safety-preload";
 const original = https.request;
 (https as any).request = (options: any, callback: any) => {
   if (Number(options.port) !== 2999) return original(options, callback);
@@ -24,7 +23,7 @@ const original = https.request;
           token: "AUTH_SENTINEL",
         })),
       };
-    const response: any = Readable.from([Buffer.from(JSON.stringify(body))]);
+      const response: any = Readable.from([Buffer.from(JSON.stringify(body))]);
       response.statusCode = 200;
       callback(response);
     });

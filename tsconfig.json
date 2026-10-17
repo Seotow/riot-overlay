@@ -19,12 +19,12 @@
     "server",
     "shared",
     "tests",
-    "Collector/adapter",
-    "Collector/validation",
-    "Collector/scripts/validate-project-live.ts",
-    "Collector/scripts/probe-basic-fields.ts",
-    "Collector/scripts/check-accountless-offline.ts",
-    "Collector/scripts/capture-match.ts",
-    "Collector/runtime/supervisor.ts"
+    "collector/adapter",
+    "collector/validation",
+    "collector/scripts/validate-project-live.ts",
+    "collector/scripts/probe-basic-fields.ts",
+    "collector/scripts/check-accountless-offline.ts",
+    "collector/scripts/capture-match.ts",
+    "collector/supervisor/supervisor.ts"
   ]
 }

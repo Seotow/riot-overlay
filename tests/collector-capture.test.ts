@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { capturePrivacy } from "../Collector/validation/capture-privacy";
-import { normalizeCollector } from "../Collector/adapter/normalize";
+import { capturePrivacy } from "../collector/validation/capture-privacy";
+import { normalizeCollector } from "../collector/adapter/normalize";
 import { parseCapture, CaptureReplay } from "../server/capture-replay";
 
 test("collector archive retains gameplay identifiers and names, filters nested authentication only", () => {
@@ -60,9 +60,7 @@ test("collector capture replays normalized telemetry/events without LB and rejec
     )!.sample;
   const a = make(100),
     b = make(100.5);
-  b.events = [
-    { id: 1, at: 100.5, kind: "ChampionKill", team: "ORDER", playerSlot: 0 },
-  ];
+  b.events = [{ id: 1, at: 100.5, kind: "ChampionKill", team: "ORDER", playerSlot: 0 }];
   const line = (offset: number, sample: unknown) =>
     JSON.stringify({
       receivedAt: new Date(now + offset).toISOString(),
@@ -79,8 +77,6 @@ test("collector capture replays normalized telemetry/events without LB and rejec
   assert.equal(replay.observe().sample?.gameTime.value, 100.5);
   assert.equal(replay.observe().sample?.events[0].kind, "ChampionKill");
   assert.throws(() =>
-    parseCapture(
-      line(0, { ...a, gameTime: { ...a.gameTime, source: "live-client" } }),
-    ),
+    parseCapture(line(0, { ...a, gameTime: { ...a.gameTime, source: "live-client" } })),
   );
 });

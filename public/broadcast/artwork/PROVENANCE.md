@@ -7,7 +7,7 @@ from official Riot LoR Data Dragon pinned to `7_10_0`; Hextech is the official
 Preseason 2022 key art hosted on Riot CDN. Infernal is a pre-rendered raster
 image hosted by Dignitas (not a painting and not a runtime 3D model).
 Original bytes, URLs, page links and both source/output SHA-256 hashes are recorded
-in `riot-dragons/provenance.json`. Reproduce with `node scripts/sync-dragon-art.mjs`
+in `riot-dragons/provenance.json`. Reproduce with `node scripts/assets/sync-dragon-art.mjs`
 (network and sharp required; `OVERLAY_BROWSER_PACKAGES` may point to the installed
 runtime package directory). Infernal's edge-connected white matte is removed
 offline with a deterministic flood fill; original bytes remain unchanged.

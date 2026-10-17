@@ -5,8 +5,8 @@ import { randomUUID } from "node:crypto";
 import { mkdir, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { WebSocketServer, WebSocket } from "ws";
-import { normalizeCollector } from "../Collector/adapter";
-import { validateProject } from "../Collector/validation/project";
+import { normalizeCollector } from "../collector/adapter";
+import { validateProject } from "../collector/validation/project";
 
 type Scenario =
   | "pass"
@@ -99,8 +99,7 @@ async function scenario(kind: Scenario) {
       return;
     }
     let data: unknown;
-    if (req.url === "/game/liveclientdata/activeplayername/")
-      data = "Spectator";
+    if (req.url === "/game/liveclientdata/activeplayername/") data = "Spectator";
     else if (req.url === "/game/liveclientdata/allgamedata") {
       referenceReads++;
       if (kind === "no-game") {
@@ -111,10 +110,7 @@ async function scenario(kind: Scenario) {
       data = {
         gameData: { mapNumber: 11, gameTime: clock() },
         events: {
-          Events:
-            kind === "game-end" && referenceReads > 2
-              ? [{ EventName: "GameEnd" }]
-              : [],
+          Events: kind === "game-end" && referenceReads > 2 ? [{ EventName: "GameEnd" }] : [],
         },
         allPlayers: Array.from({ length: 10 }, (_, i) => ({
           rawChampionName: `game_character_displayname_${codes[i % 5]}`,
@@ -192,10 +188,7 @@ async function scenario(kind: Scenario) {
     socket.send(JSON.stringify({ type: "observer", frame }));
   };
   sockets.on("connection", (socket, req) => {
-    roles.set(
-      socket,
-      new URL(req.url!, "http://127.0.0.1").searchParams.get("role") ?? "",
-    );
+    roles.set(socket, new URL(req.url!, "http://127.0.0.1").searchParams.get("role") ?? "");
     socket.on("message", () => wsCommands++);
     send(socket);
   });
@@ -252,18 +245,14 @@ async function scenario(kind: Scenario) {
         assert.deepEqual(report.errors, []);
         assert.ok(report.samples.length > 0);
         assert.ok(
-          report.samples.every(
-            (s) => s.rosterMatches === 10 && s.fields.level.matched === 10,
-          ),
+          report.samples.every((s) => s.rosterMatches === 10 && s.fields.level.matched === 10),
         );
         assert.ok(report.shared.pairedFrames > 0);
         assert.equal(report.shared.equalFrames, report.shared.pairedFrames);
         assert.equal(report.shared.differingFrames, 0);
         assert.ok(
           report.samples.every(
-            (s) =>
-              s.fields.health.referencePresent === 0 &&
-              s.fields.health.compared === 0,
+            (s) => s.fields.health.referencePresent === 0 && s.fields.health.compared === 0,
           ),
         );
       } else if (kind === "different-obs") {
@@ -274,9 +263,7 @@ async function scenario(kind: Scenario) {
       else if (kind === "clock-skew")
         assert.ok(report.errors.includes("no-aligned-roster-comparisons"));
       else if (kind === "provider-change")
-        assert.ok(
-          report.errors.includes("project-provider-changed-or-stopped"),
-        );
+        assert.ok(report.errors.includes("project-provider-changed-or-stopped"));
       else if (kind === "game-end")
         assert.ok(report.errors.includes("game-session-ended-or-changed"));
       else if (kind === "missing-core") {
@@ -332,13 +319,10 @@ const report = {
   rawRecorded: false,
   outcomes,
 };
-const folder = resolve("Collector/evidence/validation");
+const folder = resolve("collector/evidence/validation");
 await mkdir(folder, { recursive: true });
 await writeFile(
-  resolve(
-    folder,
-    `project-validator-lab-${startedAt.replaceAll(":", "-")}.json`,
-  ),
+  resolve(folder, `project-validator-lab-${startedAt.replaceAll(":", "-")}.json`),
   JSON.stringify(report, null, 2),
   { flag: "wx" },
 );

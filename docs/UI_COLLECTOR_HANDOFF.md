@@ -27,7 +27,7 @@ Không biến quyết định nghiệm thu baseline thành tuyên bố full tele
   HP1495.4379/1583.4,wind341.2647/341.2647, currentGold2066.4946,totalGold6566.506.
   User sửa báo nhầm HP và xác nhận số đúng; resource HUD341/341. Gold chưa HUDcheck.
 - Event ChampionKill thật đi qua native→adapter→Studio/OBS, timestamp gần Riot.
-  Các audit chi tiết ở `Collector/evidence/validation/accountless-full-*.json`.
+  Các audit chi tiết ở `collector/evidence/validation/accountless-full-*.json`.
 - Rồng Hóa Kỹ bị Yasuo/teamORDER hạ950.9522s qua native DeathEvent nối chính
   unit đã quan sát trước đó. HP5790.625→0. User xác nhận HUD xanh1/đỏ0.
   Riot2999 bỏ sót DragonKill; không dùng Riot làm nguồn chuẩn đầy đủ cho objectives.
@@ -136,5 +136,5 @@ Các lệnh regression: `npm test`, `npm run test:collector-capture`,
 `npm run test:collector` (kèm transport), `npm run build`.
 
 Tài liệu nguồn: PROJECT_STATUS.md, TEST_REPORT.md,
-Collector/docs/ACCOUNTLESS-VERIFICATION.vi.md, BASIC-FIELDS.vi.md,
+collector/docs/ACCOUNTLESS-VERIFICATION.vi.md, BASIC-FIELDS.vi.md,
 PROJECT-RUNBOOK.vi.md, FIELD-MATRIX.vi.md, NATIVE-EVENTS.vi.md.

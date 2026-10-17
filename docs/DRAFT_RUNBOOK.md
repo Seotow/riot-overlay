@@ -54,13 +54,13 @@ Catalog riêng đủ 171 tướng của Data Dragon **15.20.1**; giữ catalog d
 Icon và portrait base 2D đều local; tổng portrait khoảng 7,99 MB, chỉ ảnh được
 hiển thị mới tải. Metadata/icon có version; endpoint loading art của Riot không
 có version nên không khẳng định texture/skin trùng patch. Tái tạo bằng
-`node scripts/sync-draft-assets.mjs` từ CDN Riot. Patch nhãn do operator nhập,
+`node scripts/assets/sync-draft-assets.mjs` từ CDN Riot. Patch nhãn do operator nhập,
 không tự nâng asset baseline theo nhãn.
 
 ## Kiểm tra
 
 - `npm run build`, `npm test`, `npm run test:integration`.
-- `scripts/draft-smoke.mjs`: backend/theme riêng khác 4310,
+- `scripts/verify/draft-smoke.mjs`: backend/theme riêng khác 4310,
   `OVERLAY_VISUAL_URL` và `OVERLAY_BROWSER_PACKAGES` (Playwright).
   Tương tác 20 lượt, undo/skip/swap, timer, export/import, preview/OBS,
   1920×1080, asset/font, transparency và Studio 1280px.

@@ -3,18 +3,11 @@ import { Input } from "./components/ui/input";
 import { Card } from "./components/ui/card";
 import { Button } from "./components/ui/button";
 import React, { useEffect, useState } from "react";
-import {
-  providerReportSchema,
-  sourceNames,
-  type ProviderReport,
-} from "../shared/providers";
+import { providerReportSchema, sourceNames, type ProviderReport } from "../shared/providers";
 import { liveCatalog } from "../shared/live-assets";
 import type { ObserverFrame } from "../shared/observer";
 import { sourceCoverage } from "../shared/coverage";
-import {
-  researchBoundary,
-  sourceCandidates,
-} from "../shared/source-capabilities";
+import { researchBoundary, sourceCandidates } from "../shared/source-capabilities";
 import type { Command, State } from "../shared/schema";
 
 export const studioModules = [
@@ -58,8 +51,7 @@ export const studioModules = [
     id: "demo",
     title: "Phòng thử",
     icon: "04",
-    description:
-      "Phát lại dữ liệu thật, tua timeline và điều khiển như phát sóng.",
+    description: "Phát lại dữ liệu thật, tua timeline và điều khiển như phát sóng.",
   },
   {
     id: "theme",
@@ -141,13 +133,7 @@ function useFresh(frame: ObserverFrame | null) {
     ? frame.sample
     : null;
 }
-export function SourcePanel({
-  state,
-  observation,
-  report,
-  connected,
-  send,
-}: Props) {
+export function SourcePanel({ state, observation, report, connected, send }: Props) {
   const sample = useFresh(connected ? observation : null);
   const coverage = sourceCoverage(sample);
   const choices = [
@@ -194,9 +180,7 @@ export function SourcePanel({
             type="checkbox"
             checked={state.mockVisible}
             disabled={!connected}
-            onChange={(e) =>
-              send({ type: "mockVisible", value: e.target.checked })
-            }
+            onChange={(e) => send({ type: "mockVisible", value: e.target.checked })}
           />
           Dùng dữ liệu mẫu
         </label>
@@ -206,16 +190,6 @@ export function SourcePanel({
           Dữ liệu mẫu đang được dùng cho cả Studio và OBS.
         </p>
       )}
-      {!state.mockVisible &&
-        state.provider !== "recording" &&
-        report?.safety &&
-        !report.safety.allowed && (
-          <p className="note" role="alert">
-            {report.safety.reason === "player"
-              ? "Collector đã bị chặn vì bạn đang là người chơi trong trận. Chỉ dùng khi xem spectator hoặc replay."
-              : "Collector đang chờ xác nhận spectator hoặc replay. Chưa thu dữ liệu trận."}
-          </p>
-        )}
       {state.provider === "recording" && (
         <a className="button secondary" href="/?page=demo">
           Mở phòng thử
@@ -233,9 +207,7 @@ export function SourcePanel({
         <Card>
           <small>Cập nhật cuối</small>
           <strong>
-            {sample
-              ? new Date(sample.capturedAt).toLocaleTimeString("vi-VN")
-              : "Chưa có"}
+            {sample ? new Date(sample.capturedAt).toLocaleTimeString("vi-VN") : "Chưa có"}
           </strong>
         </Card>
       </div>
@@ -279,9 +251,7 @@ export function SourcePanel({
     </section>
   );
 }
-export function Dashboard(
-  props: Props & { navigate: (page: StudioPage) => void },
-) {
+export function Dashboard(props: Props & { navigate: (page: StudioPage) => void }) {
   const sample = useFresh(props.connected ? props.observation : null);
   return (
     <div className="dashboard">
@@ -292,17 +262,13 @@ export function Dashboard(
             {props.state.theme.blueName} gặp {props.state.theme.redName}
           </p>
         </div>
-        <Button onClick={() => props.navigate("studio")}>
-          Mở bàn phát sóng
-        </Button>
+        <Button onClick={() => props.navigate("studio")}>Mở bàn phát sóng</Button>
       </div>
       <div className="session-cards">
         <Card>
           <small>Nguồn đang dùng</small>
           <strong>
-            {props.state.mockVisible
-              ? "Dữ liệu mẫu"
-              : sourceNames[props.state.provider]}
+            {props.state.mockVisible ? "Dữ liệu mẫu" : sourceNames[props.state.provider]}
           </strong>
           <span>{props.connected ? "Đã kết nối" : "Mất kết nối"}</span>
         </Card>
@@ -326,20 +292,12 @@ export function Dashboard(
       <div className="module-grid">
         {(
           [
-            [
-              "theme",
-              "Cấu hình trận đấu",
-              "Tên đội, tỉ số, logo và giao diện.",
-            ],
+            ["theme", "Cấu hình trận đấu", "Tên đội, tỉ số, logo và giao diện."],
             ["sources", "Nguồn dữ liệu", "Kết nối và kiểm tra dữ liệu trận."],
             ["demo", "Phòng thử", "Phát lại trận đã lưu."],
           ] as const
         ).map(([id, title, description]) => (
-          <Button
-            className="module-card"
-            key={id}
-            onClick={() => props.navigate(id)}
-          >
+          <Button className="module-card" key={id} onClick={() => props.navigate(id)}>
             <b>{title}</b>
             <p>{description}</p>
           </Button>
@@ -351,9 +309,7 @@ export function Dashboard(
 export function Roadmap({ valorant = false }: { valorant?: boolean }) {
   return (
     <section className="dashboard roadmap">
-      <small>
-        {valorant ? "GAME MODULE, CHƯA TRIỂN KHAI" : "DEVELOPMENT ROADMAP"}
-      </small>
+      <small>{valorant ? "GAME MODULE, CHƯA TRIỂN KHAI" : "DEVELOPMENT ROADMAP"}</small>
       <h2>{valorant ? "VALORANT" : "Lộ trình mở rộng"}</h2>
       <p>
         {valorant
@@ -365,33 +321,32 @@ export function Roadmap({ valorant = false }: { valorant?: boolean }) {
           <small>HIỆN TẠI</small>
           <h3>LoL production với LeagueBroadcast</h3>
           <p>
-            LeagueBroadcast là nguồn bắt buộc cho telemetry giải đấu đầy đủ.
-            Riot local giữ vai trò replay, kiểm thử và chế độ giới hạn.
+            LeagueBroadcast là nguồn bắt buộc cho telemetry giải đấu đầy đủ. Riot local giữ vai trò
+            replay, kiểm thử và chế độ giới hạn.
           </p>
         </Card>
         <Card>
           <small>PHASE TIẾP THEO</small>
           <h3>Sự kiện và scene giải đấu</h3>
           <p>
-            Hoàn thiện event contract, trigger, animation và scene theo video
-            tham chiếu; giữ provenance và chống phát trùng.
+            Hoàn thiện event contract, trigger, animation và scene theo video tham chiếu; giữ
+            provenance và chống phát trùng.
           </p>
         </Card>
         <Card>
           <small>PHASE SAU</small>
           <h3>Giao diện và vận hành</h3>
           <p>
-            Đối chiếu HUD, scoreboard, objective, replay, transition và công cụ
-            điều khiển production theo audit đã duyệt.
+            Đối chiếu HUD, scoreboard, objective, replay, transition và công cụ điều khiển
+            production theo audit đã duyệt.
           </p>
         </Card>
         <Card>
           <small>PHASE MỞ RỘNG</small>
           <h3>VALORANT</h3>
           <p>
-            Adapter và contract riêng; kiểm tra chính sách Riot, nguồn spectator
-            được phép và yêu cầu phê duyệt. Chưa có nguồn hay overlay Valorant
-            hoạt động.
+            Adapter và contract riêng; kiểm tra chính sách Riot, nguồn spectator được phép và yêu
+            cầu phê duyệt. Chưa có nguồn hay overlay Valorant hoạt động.
           </p>
         </Card>
       </div>

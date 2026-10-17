@@ -2,71 +2,100 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { once } from "node:events";
 import { WebSocketServer } from "ws";
-import {
-  normalizeCollector,
-  LeagueCollectorSource,
-} from "../Collector/adapter";
+import { normalizeCollector, LeagueCollectorSource } from "../collector/adapter";
 import { observerFrameSchema } from "../shared/observer";
-import { CollectorGameplay } from "../Collector/adapter/gameplay";
+import { CollectorGameplay } from "../collector/adapter/gameplay";
 import { presentationPitTimers } from "../shared/pit-timers";
 
 test("dragon timer uses current living native monster, not future kills or cached bodies", () => {
- const raw=fixture(), project=new CollectorGameplay();
- const apply=()=>project.enrich(raw,normalizeCollector(raw,base)!).sample;
- assert.equal(apply().pitTimers,undefined);
- const monster={info:{networkId:9000,team:0},common:{identifier:"sru_dragon_chemtech",health:3625,status:1}};
- raw.data.minions=[monster];
- let s=apply();
- assert.equal(s.pitTimers?.[0].type.value,"chemtech");
- assert.equal(s.pitTimers?.[0].isAlive?.value,true);
- assert.equal(s.pitTimers?.[0].timeAlive.value,null);
- assert.equal(presentationPitTimers(s)[1].type.value,"chemtech");
- raw.data.minions=[];raw.data.gameTime++;
- assert.equal(apply().pitTimers,undefined);
- monster.common.health=0;raw.data.minions=[monster];
- assert.equal(apply().pitTimers,undefined);
- monster.common.health=3625;monster.common.identifier="sru_dragon_hextech";
- assert.equal(apply().pitTimers?.[0].type.value,"hextech");
- raw.data.gameTime=50;raw.data.minions=[];
- assert.equal(apply().pitTimers,undefined);
+  const raw = fixture(),
+    project = new CollectorGameplay();
+  const apply = () => project.enrich(raw, normalizeCollector(raw, base)!).sample;
+  assert.equal(apply().pitTimers, undefined);
+  const monster = {
+    info: { networkId: 9000, team: 0 },
+    common: { identifier: "sru_dragon_chemtech", health: 3625, status: 1 },
+  };
+  raw.data.minions = [monster];
+  let s = apply();
+  assert.equal(s.pitTimers?.[0].type.value, "chemtech");
+  assert.equal(s.pitTimers?.[0].isAlive?.value, true);
+  assert.equal(s.pitTimers?.[0].timeAlive.value, null);
+  assert.equal(presentationPitTimers(s)[1].type.value, "chemtech");
+  raw.data.minions = [];
+  raw.data.gameTime++;
+  assert.equal(apply().pitTimers, undefined);
+  monster.common.health = 0;
+  raw.data.minions = [monster];
+  assert.equal(apply().pitTimers, undefined);
+  monster.common.health = 3625;
+  monster.common.identifier = "sru_dragon_hextech";
+  assert.equal(apply().pitTimers?.[0].type.value, "hextech");
+  raw.data.gameTime = 50;
+  raw.data.minions = [];
+  assert.equal(apply().pitTimers, undefined);
 });
 
 const base = Date.parse("2026-10-14T15:00:00Z");
-test("next dragon comes from exact current indicator, with live priority and no marker cache",()=>{
- const raw=fixture() as ReturnType<typeof fixture>&{data:{particleEmitters:any[]}};
- const project=new CollectorGameplay();
- const apply=()=>project.enrich(raw,normalizeCollector(raw,base)!).sample;
- for(const type of ["Fire","Earth","Water","Air","Hextech","Chemtech","Elder"]){
-  for(const name of [`Dragon_Indicator_${type}`,`DATA/Particles/Dragon_Indicator_${type}.troy`]){
-   raw.data.particleEmitters=[{info:{name}}];
-   const s=apply(),t=presentationPitTimers(s)[1];
-   assert.equal(t.type.value,type.toLowerCase());
-   assert.equal(s.pitTimers?.[0].type.availability,"observed");
-   assert.equal(s.pitTimers?.[0].isAlive?.value,null);
-   assert.equal(s.pitTimers?.[0].timeAlive.value,null);
-   assert.equal(t.basis,"rule-estimate");
+test("next dragon comes from exact current indicator, with live priority and no marker cache", () => {
+  const raw = fixture() as ReturnType<typeof fixture> & { data: { particleEmitters: any[] } };
+  const project = new CollectorGameplay();
+  const apply = () => project.enrich(raw, normalizeCollector(raw, base)!).sample;
+  for (const type of ["Fire", "Earth", "Water", "Air", "Hextech", "Chemtech", "Elder"]) {
+    for (const name of [
+      `Dragon_Indicator_${type}`,
+      `DATA/Particles/Dragon_Indicator_${type}.troy`,
+    ]) {
+      raw.data.particleEmitters = [{ info: { name } }];
+      const s = apply(),
+        t = presentationPitTimers(s)[1];
+      assert.equal(t.type.value, type.toLowerCase());
+      assert.equal(s.pitTimers?.[0].type.availability, "observed");
+      assert.equal(s.pitTimers?.[0].isAlive?.value, null);
+      assert.equal(s.pitTimers?.[0].timeAlive.value, null);
+      assert.equal(t.basis, "rule-estimate");
+    }
   }
- }
- raw.data.minions=[{info:{networkId:9001,team:0},common:{identifier:"sru_dragon_water",health:100,status:1}}];
- assert.equal(apply().pitTimers?.[0].type.value,"water"); // Live Water outranks Elder marker.
- raw.data.minions=[];
- raw.data.particleEmitters=[{info:{name:"Dragon_Indicator_Water"}},{info:{name:"Dragon_Indicator_Fire"}}];
- assert.equal(apply().pitTimers,undefined);
- for(const name of ["Dragon_Indicator_Water_Preview","Other_Dragon_Indicator_Water","Dragon_Indicator_Unknown"]){
-  raw.data.particleEmitters=[{info:{name}}];assert.equal(apply().pitTimers,undefined);
- }
- raw.data.gameTime=10;raw.data.particleEmitters=[];
- assert.equal(apply().pitTimers,undefined);
- assert.equal(presentationPitTimers(apply())[1].type.value,"dragon");
+  raw.data.minions = [
+    {
+      info: { networkId: 9001, team: 0 },
+      common: { identifier: "sru_dragon_water", health: 100, status: 1 },
+    },
+  ];
+  assert.equal(apply().pitTimers?.[0].type.value, "water"); // Live Water outranks Elder marker.
+  raw.data.minions = [];
+  raw.data.particleEmitters = [
+    { info: { name: "Dragon_Indicator_Water" } },
+    { info: { name: "Dragon_Indicator_Fire" } },
+  ];
+  assert.equal(apply().pitTimers, undefined);
+  for (const name of [
+    "Dragon_Indicator_Water_Preview",
+    "Other_Dragon_Indicator_Water",
+    "Dragon_Indicator_Unknown",
+  ]) {
+    raw.data.particleEmitters = [{ info: { name } }];
+    assert.equal(apply().pitTimers, undefined);
+  }
+  raw.data.gameTime = 10;
+  raw.data.particleEmitters = [];
+  assert.equal(apply().pitTimers, undefined);
+  assert.equal(presentationPitTimers(apply())[1].type.value, "dragon");
 });
-test("native champion stack contract exposes real Smolder/Veigar counters and clears on missing buff",()=>{
- const raw=fixture();const h=raw.data.heroes[0];
- h.common.identifier="Smolder";h.common.buffs=[{name:"SmolderQPassive",count:32}];
- assert.equal(normalizeCollector(raw,base)!.sample.players[0].championStacks?.value,32);
- h.common.identifier="Veigar";h.common.buffs=[{name:"VeigarPhenomenalEvilPower",count:77}];
- assert.equal(normalizeCollector(raw,base)!.sample.players[0].championStacks?.value,77);
- h.common.buffs=[];
- assert.equal(normalizeCollector(raw,base)!.sample.players[0].championStacks?.availability,"missing");
+test("native champion stack contract exposes real Smolder/Veigar counters and clears on missing buff", () => {
+  const raw = fixture();
+  const h = raw.data.heroes[0];
+  h.common.identifier = "Smolder";
+  h.common.buffs = [{ name: "SmolderQPassive", count: 32 }];
+  assert.equal(normalizeCollector(raw, base)!.sample.players[0].championStacks?.value, 32);
+  h.common.identifier = "Veigar";
+  h.common.buffs = [{ name: "VeigarPhenomenalEvilPower", count: 77 }];
+  assert.equal(normalizeCollector(raw, base)!.sample.players[0].championStacks?.value, 77);
+  h.common.buffs = [];
+  assert.equal(
+    normalizeCollector(raw, base)!.sample.players[0].championStacks?.availability,
+    "missing",
+  );
 });
 test("native values are not gated by external comparisons: CS, death bit, buffs, quest and raw stats", () => {
   const raw = fixture(),
@@ -115,15 +144,12 @@ test("cached objective identities survive disappearance, deduplicate and reset o
       common: { identifier: "SRU_Dragon_Earth" },
     },
   ];
-  const apply = () =>
-    project.enrich(raw, normalizeCollector(raw, base)!).sample;
+  const apply = () => project.enrich(raw, normalizeCollector(raw, base)!).sample;
   apply();
   raw.data.minions = [];
   raw.data.gameTime = 101;
   raw.data.gameEvents = {
-    deathEvents: [
-      { gameTime: 101, killerNetworkId: 1000, victimNetworkId: 9000 },
-    ],
+    deathEvents: [{ gameTime: 101, killerNetworkId: 1000, victimNetworkId: 9000 }],
   };
   let s = apply();
   assert.deepEqual(s.teams?.[0].dragons.value, ["earth"]);
@@ -149,14 +175,9 @@ test("cached objective identities survive disappearance, deduplicate and reset o
 test("source hero death with unknown killer is retained without inventing an actor", () => {
   const raw = fixture();
   raw.data.gameEvents = {
-    heroDieEvents: [
-      { gameTime: 100, killerNetworkId: 9999, victimNetworkId: 1000 },
-    ],
+    heroDieEvents: [{ gameTime: 100, killerNetworkId: 9999, victimNetworkId: 1000 }],
   };
-  const s = new CollectorGameplay().enrich(
-    raw,
-    normalizeCollector(raw, base)!,
-  ).sample;
+  const s = new CollectorGameplay().enrich(raw, normalizeCollector(raw, base)!).sample;
   assert.equal(s.events.length, 1);
   assert.equal(s.events[0].victimSlot, 0);
   assert.equal(s.events[0].killerSlot, undefined);
@@ -167,10 +188,8 @@ test("source hero death with unknown killer is retained without inventing an act
       common: { identifier: "SRU_Dragon_Chemtech" },
     },
   ];
-  const known = new CollectorGameplay().enrich(
-    raw,
-    normalizeCollector(raw, base)!,
-  ).sample.events[0];
+  const known = new CollectorGameplay().enrich(raw, normalizeCollector(raw, base)!).sample
+    .events[0];
   assert.equal(known.killerObjectiveType, "chemtech");
   assert.equal(known.killerSlot, undefined);
   assert.equal(known.team, undefined);
@@ -192,22 +211,14 @@ test("non-player killers resolve by exact network identity: minion, jungle monst
     if (unitType === "turret") raw.data.turrets = [unit];
     else raw.data.minions = [unit];
     raw.data.gameEvents = {
-      heroDieEvents: [
-        { gameTime: 100, killerNetworkId: 9999, victimNetworkId: 1000 },
-      ],
+      heroDieEvents: [{ gameTime: 100, killerNetworkId: 9999, victimNetworkId: 1000 }],
     };
-    const e = new CollectorGameplay().enrich(
-      raw,
-      normalizeCollector(raw, base)!,
-    ).sample.events[0];
+    const e = new CollectorGameplay().enrich(raw, normalizeCollector(raw, base)!).sample.events[0];
     assert.equal(e.killerUnitType, unitType);
     assert.equal(e.killerObjectiveType, objective);
     assert.equal(e.killerSlot, undefined);
     assert.equal(e.victimSlot, 0);
-    assert.equal(
-      e.team,
-      team === 1 ? "ORDER" : team === 2 ? "CHAOS" : undefined,
-    );
+    assert.equal(e.team, team === 1 ? "ORDER" : team === 2 ? "CHAOS" : undefined);
   }
 });
 function fixture(sequence = 1, time = 100, now = base): any {
@@ -228,7 +239,7 @@ function fixture(sequence = 1, time = 100, now = base): any {
         heroIndex: i,
         info: {
           team: i < 5 ? 1 : 2,
-            name: "TestPlayer#VN2",
+          name: "TestPlayer#VN2",
           networkId: 1000 + i,
         },
         common: {
@@ -299,31 +310,17 @@ test("malformed/unsupported fields remain missing; zero is not a substitute", ()
   h.spells.push({ index: 3, readyAt: 50, maxCooldown: 20 });
   h.kills = -1;
   const p = normalizeCollector(raw, base)!.sample.players[0];
-  for (const value of [
-    p.championId,
-    p.health,
-    p.resource,
-    p.cs,
-    p.items,
-    p.cooldowns,
-    p.kills,
-  ]) {
+  for (const value of [p.championId, p.health, p.resource, p.cs, p.items, p.cooldowns, p.kills]) {
     assert.equal(value?.value, null);
     assert.equal(value?.availability, "missing");
   }
   assert.equal(p.perks?.value, null);
-  assert.equal(
-    normalizeCollector(raw, base)!.sample.teams?.[0].kills.value,
-    null,
-  );
+  assert.equal(normalizeCollector(raw, base)!.sample.teams?.[0].kills.value, null);
 });
 
 test("SR auxiliary native slots 7/8 do not suppress standard inventory or masquerade as items", () => {
   const raw = fixture();
-  raw.data.heroes[0].items.push(
-    { slot: 7, id: 12345, count: 1 },
-    { slot: 8, id: 34567, count: 1 },
-  );
+  raw.data.heroes[0].items.push({ slot: 7, id: 12345, count: 1 }, { slot: 8, id: 34567, count: 1 });
   const p = normalizeCollector(raw, base)!.sample.players[0];
   assert.deepEqual(p.items.value, [0, 3340]);
   assert.equal(p.inventory?.value?.length, 2);
@@ -411,10 +408,7 @@ test("native item cooldown joins inventory slot to spell index and respects empt
   p = normalizeCollector(raw, base)!.sample.players[0];
   assert.equal(p.cooldowns?.value?.filter((c) => c.kind === "item").length, 0);
   h.spells.push({ index: 6, readyAt: 0, maxCooldown: 120 });
-  assert.equal(
-    normalizeCollector(raw, base)!.sample.players[0].cooldowns?.value,
-    null,
-  );
+  assert.equal(normalizeCollector(raw, base)!.sample.players[0].cooldowns?.value, null);
 });
 
 test("rejects synthetic/replayed/wrong-source, stale/future envelopes and incomplete/ambiguous rosters", () => {
@@ -438,27 +432,15 @@ test("rejects synthetic/replayed/wrong-source, stale/future envelopes and incomp
 
 function nativeEventsFixture(sequence = 1, time = 100, now = base): any {
   const raw = fixture(sequence, time, now);
-  raw.data.turrets = [
-    { info: { networkId: 2000, team: 2, name: "PRIVATE_TURRET_SENTINEL" } },
-  ];
+  raw.data.turrets = [{ info: { networkId: 2000, team: 2, name: "PRIVATE_TURRET_SENTINEL" } }];
   raw.data.barracksDampeners = [{ info: { networkId: 3000, team: 2 } }];
   raw.data.gameEvents = {
-    heroDieEvents: [
-      { gameTime: 99, killerNetworkId: 1000, victimNetworkId: 1005 },
-    ],
-    turretKillEvents: [
-      { gameTime: 99.2, killerNetworkId: 1000, victimNetworkId: 2000 },
-    ],
-    inhibitorKillEvents: [
-      { gameTime: 99.3, killerNetworkId: 1000, inhibitorNetworkId: 3000 },
-    ],
-    aceEvents: [
-      { gameTime: 99.4, killerNetworkId: 1000, victimNetworkId: 1005 },
-    ],
+    heroDieEvents: [{ gameTime: 99, killerNetworkId: 1000, victimNetworkId: 1005 }],
+    turretKillEvents: [{ gameTime: 99.2, killerNetworkId: 1000, victimNetworkId: 2000 }],
+    inhibitorKillEvents: [{ gameTime: 99.3, killerNetworkId: 1000, inhibitorNetworkId: 3000 }],
+    aceEvents: [{ gameTime: 99.4, killerNetworkId: 1000, victimNetworkId: 1005 }],
     // Generic deaths are not ChampionKill records and must not double count.
-    deathEvents: [
-      { gameTime: 99, killerNetworkId: 1000, victimNetworkId: 1005 },
-    ],
+    deathEvents: [{ gameTime: 99, killerNetworkId: 1000, victimNetworkId: 1005 }],
     notificationEvents: [{ type: "GameEnd", token: "PRIVATE_SENTINEL" }],
   };
   return raw;
@@ -473,10 +455,7 @@ test("typed native events resolve exact object teams/slots, sanitize identity an
     ["ChampionKill", "TurretKilled", "InhibKilled", "Ace"],
   );
   assert.ok(
-    events.every(
-      (e) =>
-        e.team === "ORDER" && e.playerSlot === 0 && Number.isSafeInteger(e.id),
-    ),
+    events.every((e) => e.team === "ORDER" && e.playerSlot === 0 && Number.isSafeInteger(e.id)),
   );
   assert.equal(events[1].firstTurret, undefined);
   assert.deepEqual(result.sample.eventCoverage, {
@@ -509,11 +488,7 @@ test("ambiguous, unknown, friendly, future and historical native events cannot c
   ]) {
     const raw = nativeEventsFixture();
     change(raw);
-    assert.ok(
-      !normalizeCollector(raw, base)!.sample.events.some(
-        (e) => e.kind === "ChampionKill",
-      ),
-    );
+    assert.ok(!normalizeCollector(raw, base)!.sample.events.some((e) => e.kind === "ChampionKill"));
   }
   const unknown = nativeEventsFixture();
   delete unknown.data.turrets;

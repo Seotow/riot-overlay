@@ -58,7 +58,7 @@ bộ live dùng catalog riêng. Không tự đổi version baseline khi cập nh
 
 Collector tích hợp không được đóng gói trong Git: DLL, runtime, cache và
 source vendor được quản lý riêng. Người quản trị cần chuẩn bị các thành phần
-đã được phép sử dụng theo [runbook collector](../Collector/docs/PROJECT-RUNBOOK.vi.md).
+đã được phép sử dụng theo [runbook collector](../collector/docs/PROJECT-RUNBOOK.vi.md).
 Không tải DLL từ nguồn không rõ hoặc chép credentials vào repository.
 
 Sau khi chuẩn bị:
@@ -68,14 +68,9 @@ npm run start:collector:no-auth
 ```
 
 Hoặc `npm run start:collector` nếu dùng chế độ có tài khoản.
-Cấu hình tài khoản ở `Collector/config/collector.env`, file bị Git bỏ qua.
+Cấu hình tài khoản ở `collector/config/collector.env`, file bị Git bỏ qua.
 Chế độ không tài khoản vẫn cần runtime và cache thích hợp, không phải clone
 xong là có thể thu dữ liệu.
-
-Tại **Nguồn dữ liệu**, ứng dụng phải xác nhận spectator hoặc replay trước
-khi mở collector. Đang chơi trận hoặc không xác nhận được chế độ thì bị chặn.
-Không sửa chốt để dùng trên máy người đang thi đấu.
-Xem [chốt an toàn](COLLECTOR_SAFETY.md).
 
 Nếu dùng LB gốc, chạy LB riêng rồi chọn **LeagueBroadcast**.
 Ứng dụng có thể ngắt kết nối feed nhưng không quản lý tiến trình LB bên ngoài.
@@ -88,7 +83,6 @@ Nếu dùng LB gốc, chạy LB riêng rồi chọn **LeagueBroadcast**.
 4. Mở **Phòng thử**, tải bản ghi rồi kiểm play/pause, timeline và các widget.
 
 Nhịp mục tiêu là 500 ms, không phải bảo đảm tuyệt đối dưới mọi tải máy.
-Capture tự dừng nếu chốt không còn xác nhận spectator/replay.
 Cách đối chiếu raw và bản dựng: [bàn giao dữ liệu](UI_COLLECTOR_HANDOFF.md).
 
 ## Sau trận và bảo mật

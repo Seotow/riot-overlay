@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { accountlessEnvironment } from "../Collector/runtime/accountless-environment";
+import { accountlessEnvironment } from "../collector/supervisor/accountless-environment";
 test("accountless child cannot inherit LB/AWS/Cognito credentials or the user's env file", () => {
   const parent = {
     SystemRoot: "C:/Windows",

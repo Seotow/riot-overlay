@@ -1,5 +1,5 @@
 $ErrorActionPreference = 'Stop'
-$taskDll = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../src/LeagueCollector/src/LeagueCollector/bin/Release/net10.0/LeagueCollector.dll'))
+$taskDll = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../hosts/lb-host/src/LeagueCollector/bin/Release/net10.0/LeagueCollector.dll'))
 # Read-only. Match only the exact validation DLL/flags; never print command lines.
 $taskMatches = @(Get-CimInstance Win32_Process -Filter "Name='dotnet.exe'" | Where-Object {
     $null -ne $_.CommandLine -and $_.CommandLine.IndexOf($taskDll, [StringComparison]::OrdinalIgnoreCase) -ge 0 -and

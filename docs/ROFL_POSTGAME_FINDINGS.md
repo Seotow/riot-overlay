@@ -21,7 +21,7 @@ phải bằng chứng spectator tải được replay custom mới sau mỗi tr�
 - Damage Yasuo 40241, Smolder 4366, Veigar 5889. Có cả physical/magic/true
   damage lên tướng cho 10 người, không phải suy từ HP hoặc replay timeline.
 
-Script chẩn đoán `scripts/probe-rofl-postgame.mjs` kiểm magic/version, bounds
+Script chẩn đoán `scripts/inspect/probe-rofl-postgame.mjs` kiểm magic/version, bounds
 metadata tối đa 2MB, UTF-8/JSON, roster10 và đối chiếu LCU. Report chọn field,
 không copy Riot ID/PUUID/summoner ID từ statsJson vào log:
 `.npm-cache/rofl-postgame-probe.json`. Có SHA-256 riêng của metadata.

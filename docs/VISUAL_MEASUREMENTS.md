@@ -17,7 +17,7 @@
 | Soul takeover | 0 / 145 / 286 / 600 | Khớp |
 | Soul description strip | 715 / 113 / 503 / 35 | Khớp |
 
-Biên tham chiếu được kiểm tra thủ công từ ảnh 1920×1080, sai số dự kiến ±2 px do video nén. Manifest `scripts/visual-regions.json` phân vùng cả 11 ảnh. Minimap, bảng champion đang chọn/ability phía trái, HP/nameplate trong map và thông báo game không thuộc UI renderer. Camera và sponsor là input broadcast riêng; Soul artwork/takeover vẫn là đồ họa cần dựng, không được loại khỏi phạm vi chỉ để tăng điểm.
+Biên tham chiếu được kiểm tra thủ công từ ảnh 1920×1080, sai số dự kiến ±2 px do video nén. Manifest `scripts/verify/visual-regions.json` phân vùng cả 11 ảnh. Minimap, bảng champion đang chọn/ability phía trái, HP/nameplate trong map và thông báo game không thuộc UI renderer. Camera và sponsor là input broadcast riêng; Soul artwork/takeover vẫn là đồ họa cần dựng, không được loại khỏi phạm vi chỉ để tăng điểm.
 
 Font Beaufort vẫn được giữ cho Studio/theme đã có. Nhánh live dùng **Anton** (alias Broadcast Condensed, kèm OFL); đây là font thay thế được đo, **chưa xác nhận font gốc Riot**. Thử 15 tổ hợp size/padding nhãn TOTAL GOLD, chọn 27px/padding-top 9px. Mask chữ sáng, crop cố định x12 y154 rộng145 cao40, dung sai lân cận 1px: precision 99,467%, recall 99,574%, F1 **99,521%**. Không căn tự động mỗi ảnh để giấu sai lệch vị trí. Không suy ra điểm cho scoreboard, số liệu hoặc tất cả font từ nhãn này.
 
@@ -57,9 +57,9 @@ Build/backend local trước. Browser QA bấm các nút thật và thay rehears
 
 ```powershell
 $env:OVERLAY_BROWSER_PACKAGES='C:/Users/Seotow/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules'
-node scripts/visual-capture.mjs
-node scripts/visual-score.mjs
-node scripts/visual-font-calibrate.mjs
+node scripts/verify/visual-capture.mjs
+node scripts/verify/visual-score.mjs
+node scripts/verify/visual-font-calibrate.mjs
 ```
 
 Máy khác đặt biến thành thư mục package Playwright/sharp thực tế, không mặc định có runtime Codex. Script capture dùng Edge đã cài, URL mặc định 4310; hỗ trợ `OVERLAY_VISUAL_URL` cho backend loopback cô lập. Font calibration hiện dành port4310.

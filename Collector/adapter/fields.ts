@@ -1,7 +1,19 @@
 // Runtime evidence is aggregate presence/positive/change, never parity proof.
 export const collectorFieldMatrix = [
-  {field:"championStacks",path:"heroes[].common.buffs[].count",evidence:"capture-7331-Smolder-Veigar-changing-count",mapping:"exact SmolderQPassive / VeigarPhenomenalEvilPower; other champions missing",enabled:true},
-  {field:"itemCounters",path:"heroes[].items[] + spells[].ammoCount",evidence:"capture-Tear330-potions-wards-support",mapping:"item-specific charges/stock/count; slot8 retained; boots3008 runtime pending",enabled:true},
+  {
+    field: "championStacks",
+    path: "heroes[].common.buffs[].count",
+    evidence: "capture-7331-Smolder-Veigar-changing-count",
+    mapping: "exact SmolderQPassive / VeigarPhenomenalEvilPower; other champions missing",
+    enabled: true,
+  },
+  {
+    field: "itemCounters",
+    path: "heroes[].items[] + spells[].ammoCount",
+    evidence: "capture-Tear330-potions-wards-support",
+    mapping: "item-specific charges/stock/count; slot8 retained; boots3008 runtime pending",
+    enabled: true,
+  },
   {
     field: "gameTime",
     path: "data.gameTime",
@@ -47,10 +59,8 @@ export const collectorFieldMatrix = [
   {
     field: "cs",
     path: "heroes[].laneMinionKills + neutralMinionKills",
-    evidence:
-      "native-capture-2026-10-16; user-confirmed-pause-caused-crosscheck-offsets",
-    mapping:
-      "laneMinionKills + neutralMinionKills, zero preserved; no external-comparison gate",
+    evidence: "native-capture-2026-10-16; user-confirmed-pause-caused-crosscheck-offsets",
+    mapping: "laneMinionKills + neutralMinionKills, zero preserved; no external-comparison gate",
     enabled: true,
   },
   {
@@ -122,24 +132,21 @@ export const collectorFieldMatrix = [
     field: "perks/keystone",
     path: "heroes[].perks",
     evidence: "source-schema-and-pinned-catalog; runtime-unverified",
-    mapping:
-      "unique catalog keystone; full nine only with valid primary4/secondary2/shards3 order",
+    mapping: "unique catalog keystone; full nine only with valid primary4/secondary2/shards3 order",
     enabled: true,
   },
   {
     field: "experience",
     path: "heroes[].experience",
     evidence: "schema-only",
-    mapping:
-      "sourceStats.experience exposes total scalar; no invented previous/next boundaries",
+    mapping: "sourceStats.experience exposes total scalar; no invented previous/next boundaries",
     enabled: true,
   },
   {
     field: "isDead/respawnSeconds",
     path: "common.status/respawnTime",
     evidence: "native-capture-status-bit0-and-respawnTime",
-    mapping:
-      "dead when common.status bit0 clear; direct respawnTime; no HP inference",
+    mapping: "dead when common.status bit0 clear; direct respawnTime; no HP inference",
     enabled: true,
   },
   {

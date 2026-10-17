@@ -84,7 +84,7 @@ cờ bảo vệ nào thì backend từ chối ghi, không áp preset một phầ
 
 Unit161/161, build, integration backend riêng; origin/method/invalid-HUD guards.
 HUD service positive/unsupported/mismatch/safeguard được kiểm bằng transport giả.
-`scripts/hud-killfeed-smoke.ts` chạy Edge1920×1080, intercept toàn bộ request
+`scripts/verify/hud-killfeed-smoke.ts` chạy Edge1920×1080, intercept toàn bộ request
 HUD trong bài test; kiểm save không apply, reload không apply, explicit apply,
 config killfeed persist, hình/layout/icon trắng. Ảnh `*-lab.png` là fixture UI,
 không phải event/bằng chứng HUD game thật. Không đánh đồng với kiểm live.

@@ -13,10 +13,7 @@ type Unit = {
   kind?: "TurretKilled" | "InhibKilled";
   lane?: "top" | "mid" | "bot";
 };
-const objectiveCodes: Record<
-  string,
-  NonNullable<ObservedEvent["objectiveType"]>
-> = {
+const objectiveCodes: Record<string, NonNullable<ObservedEvent["objectiveType"]>> = {
   sru_dragon_fire: "fire",
   sru_dragon_earth: "earth",
   sru_dragon_water: "water",
@@ -29,8 +26,7 @@ const objectiveCodes: Record<
 };
 const id = (v: unknown): v is number =>
   typeof v === "number" && Number.isInteger(v) && v > 0 && v <= 0xffffffff;
-const hash = (s: string) =>
-  parseInt(createHash("sha256").update(s).digest("hex").slice(0, 13), 16);
+const hash = (s: string) => parseInt(createHash("sha256").update(s).digest("hex").slice(0, 13), 16);
 // Stateful source projection: identity survives a monster disappearing on its death
 // frame. Counters describe observed history, never an assertion of full coverage.
 export class CollectorGameplay {
@@ -59,8 +55,7 @@ export class CollectorGameplay {
     const s = normalized.sample,
       d = object(object(raw).data),
       time = s.gameTime.value!;
-    if (this.signature !== normalized.signature || time < this.time - 0.05)
-      this.reset();
+    if (this.signature !== normalized.signature || time < this.time - 0.05) this.reset();
     this.signature = normalized.signature;
     this.time = time;
     const heroes = (Array.isArray(d.heroes) ? d.heroes : [])
@@ -91,8 +86,7 @@ export class CollectorGameplay {
           : slot === undefined && !kind
             ? {
                 unitType:
-                  String(object(u.common).identifier ?? "").toLowerCase() ===
-                  "sru_horde"
+                  String(object(u.common).identifier ?? "").toLowerCase() === "sru_horde"
                     ? ("grubs" as const)
                     : info.team === 1 || info.team === 2
                       ? ("minion" as const)
@@ -102,9 +96,7 @@ export class CollectorGameplay {
         ...(kind ? { kind } : {}),
         ...(kind === "InhibKilled" && laneCode
           ? {
-              lane: ({ "0": "bot", "1": "mid", "2": "top" } as const)[
-                laneCode as "0" | "1" | "2"
-              ],
+              lane: ({ "0": "bot", "1": "mid", "2": "top" } as const)[laneCode as "0" | "1" | "2"],
             }
           : {}),
       });
@@ -117,61 +109,76 @@ export class CollectorGameplay {
     }
     // Current snapshot only: cached identities are for deaths, not proof of life.
     // Do not expose a dead body or a future dragon from event history as alive.
-    const livingDragons = (Array.isArray(d.minions) ? d.minions : [])
-      .map(object)
-      .filter((u) => {
-        const c = object(u.common), code = String(c.identifier ?? "").toLowerCase();
-        return code.startsWith("sru_dragon_") && objectiveCodes[code] &&
-          typeof c.health === "number" && Number.isFinite(c.health) && c.health > 0 &&
-          !(typeof c.status === "number" && (c.status & 1) === 0);
-      });
-    const dragonTypes = [...new Set(livingDragons.map(u =>
-      objectiveCodes[String(object(u.common).identifier).toLowerCase()]))];
-    const indicatorTypes = [...new Set((Array.isArray(d.particleEmitters) ? d.particleEmitters : [])
-      .map(object)
-      .map(p => String(object(p.info).name ?? "").match(/^(?:.*[\\/])?Dragon_Indicator_(Fire|Earth|Water|Air|Hextech|Chemtech|Elder)(?:\.troy)?$/i)?.[1].toLowerCase())
-      .filter((type): type is string => !!type))];
+    const livingDragons = (Array.isArray(d.minions) ? d.minions : []).map(object).filter((u) => {
+      const c = object(u.common),
+        code = String(c.identifier ?? "").toLowerCase();
+      return (
+        code.startsWith("sru_dragon_") &&
+        objectiveCodes[code] &&
+        typeof c.health === "number" &&
+        Number.isFinite(c.health) &&
+        c.health > 0 &&
+        !(typeof c.status === "number" && (c.status & 1) === 0)
+      );
+    });
+    const dragonTypes = [
+      ...new Set(
+        livingDragons.map((u) => objectiveCodes[String(object(u.common).identifier).toLowerCase()]),
+      ),
+    ];
+    const indicatorTypes = [
+      ...new Set(
+        (Array.isArray(d.particleEmitters) ? d.particleEmitters : [])
+          .map(object)
+          .map((p) =>
+            String(object(p.info).name ?? "")
+              .match(
+                /^(?:.*[\\/])?Dragon_Indicator_(Fire|Earth|Water|Air|Hextech|Chemtech|Elder)(?:\.troy)?$/i,
+              )?.[1]
+              .toLowerCase(),
+          )
+          .filter((type): type is string => !!type),
+      ),
+    ];
     // A live monster outranks the spawn marker. Conflicting live identities or
     // multiple marker types are missing, never resolved by order or cached history.
-    const dragonType = dragonTypes.length === 1 ? dragonTypes[0]
-      : dragonTypes.length === 0 && indicatorTypes.length === 1 ? indicatorTypes[0] : null;
+    const dragonType =
+      dragonTypes.length === 1
+        ? dragonTypes[0]
+        : dragonTypes.length === 0 && indicatorTypes.length === 1
+          ? indicatorTypes[0]
+          : null;
     if (dragonType) {
-      const observed = <T,>(value: T | null) => ({ value,
-        availability: value === null ? "missing" as const : "observed" as const,
-        source: "league-collector" as const, observedAt: s.capturedAt });
-      s.pitTimers = [{ pit: "dragon", type: observed(dragonType),
-        isAlive: observed<boolean>(dragonTypes.length === 1 ? true : null),
-        timeAlive: observed<number>(null), timeDestroy: observed<number>(null) }];
+      const observed = <T>(value: T | null) => ({
+        value,
+        availability: value === null ? ("missing" as const) : ("observed" as const),
+        source: "league-collector" as const,
+        observedAt: s.capturedAt,
+      });
+      s.pitTimers = [
+        {
+          pit: "dragon",
+          type: observed(dragonType),
+          isAlive: observed<boolean>(dragonTypes.length === 1 ? true : null),
+          timeAlive: observed<number>(null),
+          timeDestroy: observed<number>(null),
+        },
+      ];
     }
     heroes.forEach((h, slot) => register(h, slot));
     for (const v of Array.isArray(d.turrets) ? d.turrets : [])
       register(v, undefined, "TurretKilled");
-    for (const v of Array.isArray(d.barracksDampeners)
-      ? d.barracksDampeners
-      : [])
+    for (const v of Array.isArray(d.barracksDampeners) ? d.barracksDampeners : [])
       register(v, undefined, "InhibKilled");
-    for (const v of Array.isArray(d.barracksDampeners)
-      ? d.barracksDampeners
-      : []) {
+    for (const v of Array.isArray(d.barracksDampeners) ? d.barracksDampeners : []) {
       const u = object(v),
         network = object(u.info).networkId,
         health = u.health;
-      if (
-        !id(network) ||
-        typeof health !== "number" ||
-        !Number.isFinite(health) ||
-        health < 0
-      )
+      if (!id(network) || typeof health !== "number" || !Number.isFinite(health) || health < 0)
         continue;
       const target = this.units.get(network),
         before = this.inhibHealth.get(network);
-      if (
-        health === 0 &&
-        before !== undefined &&
-        before > 0 &&
-        target?.team &&
-        target.lane
-      )
+      if (health === 0 && before !== undefined && before > 0 && target?.team && target.lane)
         this.inhibTimers.set(network, {
           team: target.team,
           lane: target.lane,
@@ -196,9 +203,7 @@ export class CollectorGameplay {
           kind: "LevelUp" | "RoleQuestCompleted" | "ItemCompleted",
           extra: Partial<ObservedEvent>,
         ) => {
-          const key = hash(
-            `${kind}:${p.slot}:${time}:${extra.itemId ?? extra.level ?? ""}`,
-          );
+          const key = hash(`${kind}:${p.slot}:${time}:${extra.itemId ?? extra.level ?? ""}`);
           this.history.set(key, {
             id: key,
             at: time,
@@ -214,10 +219,7 @@ export class CollectorGameplay {
           p.level.value > before.level.value
         )
           emit("LevelUp", { level: p.level.value });
-        if (
-          before.roleQuest?.value?.completed === false &&
-          p.roleQuest?.value?.completed === true
-        )
+        if (before.roleQuest?.value?.completed === false && p.roleQuest?.value?.completed === true)
           emit("RoleQuestCompleted", {});
         if (before.items.value && p.items.value)
           for (const itemId of new Set(p.items.value))
@@ -234,12 +236,8 @@ export class CollectorGameplay {
       : []) {
       const e = object(rawDeath),
         at = e.gameTime,
-        victim = id(e.victimNetworkId)
-          ? this.units.get(e.victimNetworkId)
-          : undefined,
-        killer = id(e.killerNetworkId)
-          ? this.units.get(e.killerNetworkId)
-          : undefined;
+        victim = id(e.victimNetworkId) ? this.units.get(e.victimNetworkId) : undefined,
+        killer = id(e.killerNetworkId) ? this.units.get(e.killerNetworkId) : undefined;
       if (
         typeof at !== "number" ||
         !Number.isFinite(at) ||
@@ -250,10 +248,7 @@ export class CollectorGameplay {
         continue;
       if (
         [...this.history.values()].some(
-          (x) =>
-            x.kind === "ChampionKill" &&
-            x.at === at &&
-            x.victimSlot === victim.slot,
+          (x) => x.kind === "ChampionKill" && x.at === at && x.victimSlot === victim.slot,
         )
       )
         continue;
@@ -268,9 +263,7 @@ export class CollectorGameplay {
         ...(killer && objectiveCodes[killer.code]
           ? { killerObjectiveType: objectiveCodes[killer.code] }
           : {}),
-        ...(killer?.slot !== undefined
-          ? { killerSlot: killer.slot, playerSlot: killer.slot }
-          : {}),
+        ...(killer?.slot !== undefined ? { killerSlot: killer.slot, playerSlot: killer.slot } : {}),
       });
     }
     const deaths = object(d.gameEvents).deathEvents;
@@ -328,29 +321,22 @@ export class CollectorGameplay {
         playerSlot: killer.slot,
         killerSlot: killer.slot,
         ...(type ? { objectiveType: type } : {}),
-        ...(kind === "BaronKill" &&
-        s.teams?.every((t) => t.totalGold.value !== null)
+        ...(kind === "BaronKill" && s.teams?.every((t) => t.totalGold.value !== null)
           ? {
               goldBaseline: {
-                own: s.teams.find((t) => t.team === killer.team)!.totalGold
-                  .value!,
-                enemy: s.teams.find((t) => t.team !== killer.team)!.totalGold
-                  .value!,
+                own: s.teams.find((t) => t.team === killer.team)!.totalGold.value!,
+                enemy: s.teams.find((t) => t.team !== killer.team)!.totalGold.value!,
               },
             }
           : {}),
         ...(kind === "TurretKilled"
           ? {
-              firstTurret: ![...this.history.values()].some(
-                (x) => x.kind === "TurretKilled",
-              ),
+              firstTurret: ![...this.history.values()].some((x) => x.kind === "TurretKilled"),
             }
           : {}),
       });
     }
-    const events = [...this.history.values()].sort(
-      (a, b) => a.at - b.at || a.id - b.id,
-    );
+    const events = [...this.history.values()].sort((a, b) => a.at - b.at || a.id - b.id);
     // Soul is confirmed by an explicit soul buff, not guessed from elapsed time.
     for (const h of heroes) {
       const team = object(h.info).team === 1 ? "ORDER" : "CHAOS";
@@ -384,21 +370,14 @@ export class CollectorGameplay {
         });
       }
     }
-    s.events = [...this.history.values()]
-      .sort((a, b) => a.at - b.at || a.id - b.id)
-      .slice(-4096);
+    s.events = [...this.history.values()].sort((a, b) => a.at - b.at || a.id - b.id).slice(-4096);
     if (this.history.size > 4096) {
       this.history = new Map(s.events.map((e) => [e.id, e]));
       s.limits.eventsTruncated = true;
     }
     for (const t of s.teams ?? []) {
       const dragons = events
-        .filter(
-          (e) =>
-            e.team === t.team &&
-            e.kind === "DragonKill" &&
-            e.objectiveType !== "elder",
-        )
+        .filter((e) => e.team === t.team && e.kind === "DragonKill" && e.objectiveType !== "elder")
         .map((e) => e.objectiveType!);
       t.dragons = {
         value: dragons.slice(-8),

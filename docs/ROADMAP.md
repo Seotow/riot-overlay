@@ -2,9 +2,8 @@
 
 ## Bản nội bộ, 17/10/2026
 
-Chốt UI hiện có, hướng dẫn chạy local và gate chỉ cho collector chạy ở
-spectator/replay. Bước tiếp theo là kiểm toàn trận trên máy vận hành và xác
-nhận gate với game thật. ROFL tạm hoãn: file thử do người chơi tải, không phải
+Chốt UI hiện có, hướng dẫn chạy local. Chốt an toàn collector đã gỡ theo yêu cầu 17/10/2026.
+Bước tiếp theo là kiểm toàn trận trên máy vận hành. ROFL tạm hoãn: file thử do người chơi tải, không phải
 nguồn spectator tự lấy được. LCU/Standard API cho custom chưa thành luồng
 postgame tự động. Không mở lại audit layout đã duyệt.
 
@@ -22,7 +21,7 @@ Launcher/provider/Studio/OBS đã nối và test offline, kể cả launcher th�
 không cleanup ở host idle. Khi game sẵn sàng, kiểm tuyến thật không mở LB gốc rồi đối chiếu
 CS, lane, HP/gold/cooldown và stability qua session. Ngọc/buff/objective/event
 vẫn là phần thiếu của mục tiêu đầy đủ. Xem
-[runbook](../Collector/docs/PROJECT-RUNBOOK.vi.md); không quay lại khảo sát UI baseline.
+[runbook](../collector/docs/PROJECT-RUNBOOK.vi.md); không quay lại khảo sát UI baseline.
 
 ## Postgame UI đang chờ duyệt — 13/10/2026
 

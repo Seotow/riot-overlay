@@ -9,7 +9,7 @@ from uuid import uuid4
 
 ROOT = Path(__file__).resolve().parent.parent
 SDK = ROOT.parent / '.npm-cache/lb-headless/dotnet-10.0.401/dotnet.exe'
-HOST = ROOT / 'src/LeagueCollector/src/LeagueCollector/bin/Release/net10.0/LeagueCollector.dll'
+HOST = ROOT / 'hosts/lb-host/src/LeagueCollector/bin/Release/net10.0/LeagueCollector.dll'
 CONFIG = ROOT / 'config/collector.env'
 CONFIG = CONFIG if CONFIG.is_file() else HOST.with_name('collector.env')
 allowed = {'not-configured', 'authenticated', 'authenticated-subscription-unavailable', 'authentication-failed', 'challenge-signing-failed'}

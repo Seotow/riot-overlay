@@ -1,19 +1,10 @@
-import {
-  bootIds,
-  completedQuestIds,
-  questRoles,
-} from "../../shared/role-quest";
+import { bootIds, completedQuestIds, questRoles } from "../../shared/role-quest";
 import type { ObservedPlayer } from "../../shared/observer";
 const obj = (v: unknown): Record<string, unknown> =>
-  v !== null && typeof v === "object" && !Array.isArray(v)
-    ? (v as Record<string, unknown>)
-    : {};
+  v !== null && typeof v === "object" && !Array.isArray(v) ? (v as Record<string, unknown>) : {};
 export const nonnegative = (v: unknown): number | null =>
   typeof v === "number" && Number.isFinite(v) && v >= 0 ? v : null;
-export function collectorPlayerExtras(
-  h: Record<string, unknown>,
-  gameTime: number,
-) {
+export function collectorPlayerExtras(h: Record<string, unknown>, gameTime: number) {
   const common = obj(h.common),
     respawn = nonnegative(h.respawnTime);
   const buffs = Array.isArray(common.buffs) ? common.buffs.map(obj) : null;
@@ -49,20 +40,14 @@ export function collectorPlayerExtras(
         b.name.toLowerCase() === name.toLowerCase() &&
         (nonnegative(b.endTime) === null || Number(b.endTime) > gameTime),
     );
-  const buffRole = (
-    Object.keys(roleNames) as Array<keyof typeof roleNames>
-  ).find(
+  const buffRole = (Object.keys(roleNames) as Array<keyof typeof roleNames>).find(
     (r) =>
       activeBuff(`SR_2026_S1_RoleBound_${roleNames[r]}_Quest`) ||
       activeBuff(`SR_2026_S1_RoleBound_${roleNames[r]}_QuestCompleted`),
   );
   const id = quest?.id as number | undefined,
-    role =
-      buffRole ??
-      (id ? (questRoles[id] ?? (bootIds.has(id) ? "bot" : "support")) : null);
-  const questBuff = role
-    ? activeBuff(`SR_2026_S1_RoleBound_${roleNames[role]}_Quest`)
-    : undefined;
+    role = buffRole ?? (id ? (questRoles[id] ?? (bootIds.has(id) ? "bot" : "support")) : null);
+  const questBuff = role ? activeBuff(`SR_2026_S1_RoleBound_${roleNames[role]}_Quest`) : undefined;
   const doneBuff = role
     ? activeBuff(`SR_2026_S1_RoleBound_${roleNames[role]}_QuestCompleted`)
     : undefined;
@@ -74,9 +59,7 @@ export function collectorPlayerExtras(
     (questBuff
       ? false
       : !!id &&
-        (completedQuestIds.has(id) ||
-          bootIds.has(id) ||
-          (role === "support" && supportDone)));
+        (completedQuestIds.has(id) || bootIds.has(id) || (role === "support" && supportDone)));
   const spells = Array.isArray(h.spells) ? h.spells.map(obj) : [];
   const stats = quest?.stats;
   const itemProgress =
@@ -99,9 +82,7 @@ export function collectorPlayerExtras(
           : null;
   const points = nonnegative(questBuff?.count);
   const pet = items.find((i) => [1101, 1102, 1103].includes(Number(i.id)));
-  const remaining =
-    nonnegative(activeBuff("itemsmitecounter")?.count) ??
-    nonnegative(pet?.charges);
+  const remaining = nonnegative(activeBuff("itemsmitecounter")?.count) ?? nonnegative(pet?.charges);
   const progress =
     role === "jungle"
       ? remaining !== null && remaining <= 35
@@ -123,16 +104,13 @@ export function collectorPlayerExtras(
               : role === "support" && completed
                 ? 2055
                 : role === "mid" && completed
-                  ? ((items.find(
-                      (i) => Number(i.slot) < 6 && bootIds.has(Number(i.id)),
-                    )?.id as number) ?? null)
+                  ? ((items.find((i) => Number(i.slot) < 6 && bootIds.has(Number(i.id)))
+                      ?.id as number) ?? null)
                   : null,
           rewardSpellId:
             role === "jungle"
               ? ((spells.find(
-                  (s) =>
-                    typeof s.name === "string" &&
-                    /^SummonerSmiteAvatar/.test(s.name),
+                  (s) => typeof s.name === "string" && /^SummonerSmiteAvatar/.test(s.name),
                 )?.name as string) ?? null)
               : role === "top" && completed
                 ? "S12_SummonerTeleportUpgrade"

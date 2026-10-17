@@ -9,14 +9,8 @@ import { nativeChampionStacks } from "../../shared/champion-stacks";
 import { projectItemCounters } from "../../shared/item-counters";
 
 export const object = (v: unknown): Record<string, unknown> =>
-  v !== null && typeof v === "object" && !Array.isArray(v)
-    ? (v as Record<string, unknown>)
-    : {};
-const num = (
-  v: unknown,
-  integer = false,
-  max = Number.MAX_SAFE_INTEGER,
-): number | null =>
+  v !== null && typeof v === "object" && !Array.isArray(v) ? (v as Record<string, unknown>) : {};
+const num = (v: unknown, integer = false, max = Number.MAX_SAFE_INTEGER): number | null =>
   typeof v === "number" &&
   Number.isFinite(v) &&
   v >= 0 &&
@@ -41,10 +35,7 @@ export interface NormalizedCollector {
 }
 
 // Accept only current native envelopes. Unknown provider fields are never copied.
-export function normalizeCollector(
-  raw: unknown,
-  nowMs: number,
-): NormalizedCollector | null {
+export function normalizeCollector(raw: unknown, nowMs: number): NormalizedCollector | null {
   const envelope = object(raw),
     data = object(envelope.data);
   if (
@@ -61,16 +52,10 @@ export function normalizeCollector(
   )
     return null;
   const stamp = Date.parse(envelope.timestamp);
-  if (!Number.isFinite(stamp) || stamp > nowMs + 1000 || nowMs - stamp >= 5000)
-    return null;
+  if (!Number.isFinite(stamp) || stamp > nowMs + 1000 || nowMs - stamp >= 5000) return null;
   const observedAt = new Date(stamp).toISOString();
   const gameTime = num(data.gameTime);
-  if (
-    gameTime === null ||
-    !Array.isArray(data.heroes) ||
-    data.heroes.length !== 10
-  )
-    return null;
+  if (gameTime === null || !Array.isArray(data.heroes) || data.heroes.length !== 10) return null;
   const heroes = data.heroes.map(object);
   const keys = heroes.map((h) => num(h.heroIndex, true, 0xffffffff));
   if (
@@ -78,8 +63,7 @@ export function normalizeCollector(
     new Set(keys).size !== 10 ||
     heroes.some(
       (h) =>
-        ![1, 2].includes(Number(object(h.info).team)) ||
-        typeof object(h.info).team !== "number",
+        ![1, 2].includes(Number(object(h.info).team)) || typeof object(h.info).team !== "number",
     ) ||
     heroes.filter((h) => object(h.info).team === 1).length !== 5
   )
@@ -92,8 +76,7 @@ export function normalizeCollector(
   const players = heroes.map((h, slot) => {
     const common = object(h.common);
     const code =
-      typeof common.identifier === "string" &&
-      /^[A-Za-z0-9]{1,64}$/.test(common.identifier)
+      typeof common.identifier === "string" && /^[A-Za-z0-9]{1,64}$/.test(common.identifier)
         ? common.identifier
         : null;
     const champion = resolveChampion({
@@ -141,14 +124,9 @@ export function normalizeCollector(
         : null;
     const summoner = (index: number) => {
       const name = spells?.find((s) => s.index === index)?.name;
-      return typeof name === "string" && /^[A-Za-z0-9_]{1,100}$/.test(name)
-        ? name
-        : null;
+      return typeof name === "string" && /^[A-Za-z0-9_]{1,100}$/.test(name) ? name : null;
     };
-    const summoners: [string | null, string | null] = [
-      summoner(4),
-      summoner(5),
-    ];
+    const summoners: [string | null, string | null] = [summoner(4), summoner(5)];
     // Slot correspondence comes from Farsight SpellBookUtils and SpellSlotIndex.
     // It is source evidence; actual game timer/activation semantics still need checking.
     const cooldowns = spells
@@ -178,12 +156,9 @@ export function normalizeCollector(
             const spell = spells.find((s) => s.index === 6 + Number(item.slot));
             if (!spell) return [];
             // Farsight Spell.GetMaxCooldown chooses recharge for empty ammo.
-            const recharge =
-              positive(spell.ammoReadyAt) !== null && spell.ammoCount === 0;
+            const recharge = positive(spell.ammoReadyAt) !== null && spell.ammoCount === 0;
             const readyAt = num(recharge ? spell.ammoReadyAt : spell.readyAt);
-            const total = positive(
-              recharge ? spell.ammoCooldown : spell.maxCooldown,
-            );
+            const total = positive(recharge ? spell.ammoCooldown : spell.maxCooldown);
             return readyAt !== null && total !== null
               ? [
                   {
@@ -223,37 +198,27 @@ export function normalizeCollector(
         "attackSpeedBonus",
       ].map((key) => [
         key,
-        typeof common[key] === "number" && Number.isFinite(common[key])
-          ? common[key]
-          : null,
+        typeof common[key] === "number" && Number.isFinite(common[key]) ? common[key] : null,
       ]),
     ]);
     return {
       slot,
       playerName: field(cleanPlayerName(object(h.info).name), observedAt),
       championStacks: field(nativeChampionStacks(champion.id, common.buffs), observedAt),
-      itemCounters: field(projectItemCounters(rawItems,spells),observedAt),
-      team: field(
-        object(h.info).team === 1 ? ("ORDER" as const) : ("CHAOS" as const),
-        observedAt,
-      ),
+      itemCounters: field(projectItemCounters(rawItems, spells), observedAt),
+      team: field(object(h.info).team === 1 ? ("ORDER" as const) : ("CHAOS" as const), observedAt),
       championId: field(champion.id, observedAt),
       championMapping: champion.via,
       level: field(positive(num(common.level, true, 30), true), observedAt),
       kills: field(num(h.kills, true), observedAt),
       deaths: field(num(h.deaths, true), observedAt),
       assists: field(num(h.assists, true), observedAt),
-      cs: field(
-        laneCs !== null && neutralCs !== null ? laneCs + neutralCs : null,
-        observedAt,
-      ),
+      cs: field(laneCs !== null && neutralCs !== null ? laneCs + neutralCs : null, observedAt),
       totalGold: field(num(h.totalGold), observedAt),
       currentGold: field(num(h.gold), observedAt),
       wardScore: field(num(h.visionScore), observedAt),
       health: field(
-        hp !== null && maxHp !== null && hp <= maxHp
-          ? { current: hp, max: maxHp }
-          : null,
+        hp !== null && maxHp !== null && hp <= maxHp ? { current: hp, max: maxHp } : null,
         observedAt,
       ),
       resource: field(
@@ -264,10 +229,7 @@ export function normalizeCollector(
       ),
       inventory: field(validInventory, observedAt),
       items: field(validInventory?.map((i) => i.id) ?? null, observedAt),
-      spells: field(
-        summoners.some((s) => s !== null) ? summoners : null,
-        observedAt,
-      ),
+      spells: field(summoners.some((s) => s !== null) ? summoners : null, observedAt),
       cooldowns: field(validCooldowns, observedAt),
       keystone: field<number>(perks.keystone, observedAt),
       perks: field<number[]>(perks.perks, observedAt),
@@ -354,9 +316,7 @@ export function normalizeCollector(
   if (!sample.success) return null;
   // IDs are session keys only, never exposed in sample/report/recording.
   const gameId =
-    typeof data.gameId === "string" && data.gameId.length <= 128
-      ? data.gameId
-      : "unknown-game";
+    typeof data.gameId === "string" && data.gameId.length <= 128 ? data.gameId : "unknown-game";
   const signature = createHash("sha256")
     .update(
       JSON.stringify([

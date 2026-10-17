@@ -1,11 +1,8 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { normalizeCollector } from "../Collector/adapter";
+import { normalizeCollector } from "../collector/adapter";
 import { normalizeIngame } from "../server/ingame-adapter";
-import {
-  compareCollectorReference,
-  gamePreflight,
-} from "../Collector/validation/compare";
+import { compareCollectorReference, gamePreflight } from "../collector/validation/compare";
 
 const now = Date.parse("2026-10-15T00:00:00Z");
 const codes = ["Ahri", "Garen", "Annie", "Ashe", "Lux"];
@@ -58,40 +55,24 @@ function native(): any {
 }
 
 test("live preflight requires advancing SR10 spectator, known roster and no GameEnd", () => {
-  assert.equal(
-    gamePreflight(reference(), reference(100.6), "Spectator"),
-    "ready",
-  );
+  assert.equal(gamePreflight(reference(), reference(100.6), "Spectator"), "ready");
   assert.equal(
     gamePreflight(reference(), reference(100.6), "PRIVATE_PLAYER"),
     "spectator-unverified",
   );
-  assert.equal(
-    gamePreflight(reference(), reference(), "Unknown"),
-    "clock-not-advancing",
-  );
+  assert.equal(gamePreflight(reference(), reference(), "Unknown"), "clock-not-advancing");
   const end = reference(101);
   end.events.Events.push({ EventName: "GameEnd" });
   assert.equal(gamePreflight(reference(), end, "Unknown"), "game-ended");
   const partial = reference(101);
   partial.allPlayers.pop();
-  assert.equal(
-    gamePreflight(reference(), partial, "Unknown"),
-    "SR10-unverified",
-  );
+  assert.equal(gamePreflight(reference(), partial, "Unknown"), "SR10-unverified");
   const duplicate = reference(101);
-  duplicate.allPlayers[1].rawChampionName =
-    duplicate.allPlayers[0].rawChampionName;
-  assert.equal(
-    gamePreflight(reference(), duplicate, "Unknown"),
-    "roster-ambiguous",
-  );
+  duplicate.allPlayers[1].rawChampionName = duplicate.allPlayers[0].rawChampionName;
+  assert.equal(gamePreflight(reference(), duplicate, "Unknown"), "roster-ambiguous");
   const noEvents = reference(101);
   delete noEvents.events;
-  assert.equal(
-    gamePreflight(reference(), noEvents, "Unknown"),
-    "end-state-unavailable",
-  );
+  assert.equal(gamePreflight(reference(), noEvents, "Unknown"), "end-state-unavailable");
 });
 
 test("live comparison separates presence from equality and never exports identities or stats", () => {
@@ -117,11 +98,8 @@ test("live comparison separates presence from equality and never exports identit
   const changed = reference(100.2);
   changed.allPlayers[0].level = 11;
   assert.equal(
-    compareCollectorReference(
-      c,
-      normalizeIngame(changed, {}, new Date(now).toISOString()),
-      now,
-    ).fields.level.disagreed,
+    compareCollectorReference(c, normalizeIngame(changed, {}, new Date(now).toISOString()), now)
+      .fields.level.disagreed,
     1,
   );
 });
@@ -137,16 +115,9 @@ test("stale/skewed or ambiguous roster samples cannot produce parity comparisons
   assert.equal(ambiguous.rosterComplete, false);
   assert.equal(ambiguous.rosterMatches, 0);
   assert.equal(ambiguous.fields.level.compared, 0);
-  const validReference = normalizeIngame(
-    reference(),
-    {},
-    new Date(now).toISOString(),
-  );
+  const validReference = normalizeIngame(reference(), {}, new Date(now).toISOString());
   c.players[0].championId.source = "leaguebroadcast";
-  assert.equal(
-    compareCollectorReference(c, validReference, now).rosterComplete,
-    false,
-  );
+  assert.equal(compareCollectorReference(c, validReference, now).rosterComplete, false);
   c.gameTime.source = "leaguebroadcast";
   assert.equal(compareCollectorReference(c, r, now).aligned, false);
 });

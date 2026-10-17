@@ -53,7 +53,7 @@ có thể xuất JSON để giữ. Khi chưa nạp chỉ hiện trạng thái ch
 ## Kiểm chứng / giới hạn
 
 - `npm run build`, `npm test`, `npm run test:integration`.
-- `scripts/postgame-smoke.mjs`: backend QA riêng, Edge 1920×1080 và 1280×720;
+- `scripts/verify/postgame-smoke.mjs`: backend QA riêng, Edge 1920×1080 và 1280×720;
   Studio 1280×800. Kiểm tra icon/font, 10 damage players, 10 bans, hai đội thắng,
   khoảng thiếu, validation import/export, frame OBS thật, body trong suốt,
   căn đều hai cột damage và graph nằm trong panel.

@@ -1,14 +1,5 @@
 # Kiến trúc LoL
 
-## Chốt nguồn live, 17/10/2026
-
-`server/collector-safety.ts` xác nhận spectator/replay theo active player và
-chế độ tiến trình hoặc LCU. Mặc định từ chối khi thiếu bằng chứng. Backend
-kiểm trước khi mở/đọc nguồn live; supervisor kiểm trước spawn và khi đang chạy.
-Capture có kiểm tra riêng. Recording không qua chốt vì chỉ đọc file đã lưu.
-Frontend chỉ nhận allowed/reason, không nhận identity/command line/credentials.
-Xem [COLLECTOR_SAFETY](COLLECTOR_SAFETY.md).
-
 ## Studio shadcn — 17/10/2026
 
 `src/main.tsx` là shell LoL với 8 route; các trang dùng chung component shadcn
@@ -28,7 +19,7 @@ hoặc counter derive. Mapping vẫn source-derived, game semantics chưa xác m
 
 ### Provider và launcher LeagueCollector — 15/10/2026
 
-`server/index.ts` chọn `league-collector` → `Collector/runtime/supervisor.ts`
+`server/index.ts` chọn `league-collector` → `collector/supervisor/supervisor.ts`
 khởi động host .NET dùng DLL LB gốc → WS loopback `/ws` → adapter →
 ObserverFrame chung cho Studio/OBS. Supervisor sở hữu process, không xác nhận
 telemetry; adapter xác minh envelope/roster/freshness riêng. Không đưa env/token
@@ -38,13 +29,13 @@ thử thoát không cleanup. Fixture đã chứng minh routing; game toàn tuy�
 
 ### LeagueCollector adapter riêng — 14/10/2026
 
-`Collector/adapter` đọc envelope native từ host .NET qua `/ws` loopback và
+`collector/adapter` đọc envelope native từ host .NET qua `/ws` loopback và
 allowlistnormalize sang shared ObserverFrame. Không nhập vendorFarsight/DLL
 vào backendTS, khônglaunch/auth/gamecontrol. `ObserverSession` quảnlý epoch/
 session, adapter loại duplicate/stale/invalid và xóa output khi mấtnguồn.
 Source mới chưaregister providerselectorStudio; LBproduction giữ baseline.
 Fieldmatrix/capabilities tách supportedprojection khỏi runtimeverification và
-productionreadiness. Xem Collector/docs/ADAPTER.vi.md và FIELD-MATRIX.vi.md.
+productionreadiness. Xem collector/docs/ADAPTER.vi.md và FIELD-MATRIX.vi.md.
 
 ### Riot postgame staged / secrets RAM — 13/10/2026
 
@@ -161,7 +152,7 @@ Ranh giới Vanguard: chỉ dùng API, game client, spectator/replay service và
 
 ## Engine LoL riêng — nền độc lập 14/10/2026
 
-`scripts/start-independent-engine.ts` → `IndependentEngine` (instance
+`scripts/dev/start-independent-engine.ts` → `IndependentEngine` (instance
 `IngameCollector` riêng, API2999) → `startIndependentEngineServer` → loopback4313.
 GET health/snapshot/capabilities và WS nhận-only, không nối provider production.
 Tái sử dụng adapter/session/event enrichment nội bộ; không import DLL, login,

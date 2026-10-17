@@ -42,6 +42,13 @@ Các tài liệu này giúp tiếp tục công việc mà không cần lịch s�
 
 - `npm run build`: kiểm tra TypeScript và build frontend.
 - `npm test`: kiểm tra reducer, validation và asset fixture.
+- `npm run format:check` / `npm run format`: Prettier cho mã nguồn app và collector (cấu hình `.prettierrc.json`, loại trừ ở `.prettierignore`; không format hosts, bundles, vendor, Valorant, docs).
+
+## Cấu trúc thư mục
+
+- `server/`, `shared/`, `src/`, `tests/`: ứng dụng Studio/OBS.
+- `scripts/{assets,capture,inspect,verify,dev}/`: công cụ phát triển, nhóm theo chức năng.
+- `collector/`: `adapter`, `supervisor`, `validation`, `scripts`, `config`, `docs`; `hosts/` là source native (`lb-host`, `independent-reader`); `bundles/` là bản đã build kèm runtime. Xem collector/README.vi.md.
 - Khi đổi transport: chạy backend và `npx tsx tests/transport.integration.ts`. Test này thay đổi mock trận và reset về cuối; chạy trong phiên test.
 - Khi đổi UI: kiểm tra draft/in-game ở 1920×1080, ảnh/font đã tải, chế độ không có nền tham chiếu và renderer OBS. Không suy ra độ giống từ ảnh nền có sẵn HUD.
 - Không cần chạy test ứng dụng cho thay đổi tài liệu thuần túy; kiểm tra liên kết, lệnh và tính nhất quán.
@@ -50,4 +57,4 @@ Cập nhật `PROJECT_STATUS.md` khi hoàn thành một mốc, ghi rõ đã làm
 
 ## Cập nhật hướng ưu tiên 19/09/2026
 
-Người dùng chọn in-game trước và sẽ mở replay để cung cấp mẫu. Collector/adapter/session phục vụ Studio đã được chuẩn bị, xem phần cuối PROJECT_STATUS.md. Tiếp tục kiểm chứng replay khi client sẵn sàng; tạm hoãn champ-select. Không coi Replay API có clock là bằng chứng có dữ liệu 10 người chơi.
+Người dùng chọn in-game trước và sẽ mở replay để cung cấp mẫu. collector/adapter/session phục vụ Studio đã được chuẩn bị, xem phần cuối PROJECT_STATUS.md. Tiếp tục kiểm chứng replay khi client sẵn sàng; tạm hoãn champ-select. Không coi Replay API có clock là bằng chứng có dữ liệu 10 người chơi.

@@ -10,11 +10,11 @@ LCU, đổi source/demo/theme, gửi command WS hoặc sửa playback. Không c�
    Giữ LB gốc đóng. Runtime collector vẫn giữ auth/native/version/spectator guard.
 2. Từ root, `npm run start:collector` để project sở hữu host. Studio chọn
    LeagueCollector, demo tắt; đây là luồng vận hành đã tích hợp, không phải
-   command của validator. Credentials tại `Collector/config/collector.env`.
+   command của validator. Credentials tại `collector/config/collector.env`.
 3. Chạy ở terminal khác: `npm run collector:validate`. Mặc định attach loopback
    4310, tối đa30 giây đo sau preflight. Không dừng hoặc đổi host/backend khi xong.
 4. Cần đổi cổng/thời lượng thì gọi trực tiếp:
-   `npx tsx Collector/scripts/validate-project-live.ts --port 4310 --seconds 30`.
+   `npx tsx collector/scripts/validate-project-live.ts --port 4310 --seconds 30`.
    Thời lượng hợp lệ5..120s. Wrapper npm.ps1 trên máy đã bỏ tên flag khi dùng
    `npm run ... -- --seconds 5`; lệnh npx trực tiếp và npm không flag đã chạy được.
 
@@ -42,7 +42,7 @@ LCU, đổi source/demo/theme, gửi command WS hoặc sửa playback. Không c�
   đổi provider/ownership. LB listener kiểm tra ở đầu/cuối; đây là hai boundary
   checks, không là bằng chứng process LB vắng mặt liên tục toàn cửa sổ.
 
-Report tại `Collector/evidence/validation/project-live-<UTC>.json`, bị ignore.
+Report tại `collector/evidence/validation/project-live-<UTC>.json`, bị ignore.
 Chỉ có counts/clock skew/status và cờ phạm vi, không snapshot/player identity/
 credential/raw stats. `null` là bước chưa kiểm hoặc chưa thể xác minh; không
 coi defaultfalse là kết quả negative. Không xuất signature roster nội bộ.

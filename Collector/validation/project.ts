@@ -5,10 +5,7 @@ import { normalizeIngame, rosterSignature } from "../../server/ingame-adapter";
 import { compareCollectorReference, gamePreflight } from "./compare";
 
 export interface ValidationIO {
-  get(
-    game: boolean,
-    path: string,
-  ): Promise<{ http: number | null; data: unknown }>;
+  get(game: boolean, path: string): Promise<{ http: number | null; data: unknown }>;
   lbListener(): Promise<boolean | null>;
   projectBaseUrl: string;
   dataOrigin: "fixture" | "local-game-api";
@@ -21,8 +18,7 @@ export interface ValidationIO {
 export async function validateProject(io: ValidationIO) {
   const { get, lbListener, projectBaseUrl, seconds, dataOrigin } = io;
   const now = io.now ?? Date.now;
-  const wait =
-    io.wait ?? ((ms: number) => new Promise<void>((r) => setTimeout(r, ms)));
+  const wait = io.wait ?? ((ms: number) => new Promise<void>((r) => setTimeout(r, ms)));
   const url = new URL(projectBaseUrl);
   if (
     url.protocol !== "http:" ||
@@ -70,9 +66,7 @@ export async function validateProject(io: ValidationIO) {
   let previousReferenceClock = -1;
   let lastComparedFrame = "";
   const object = (v: unknown): Record<string, unknown> =>
-    v !== null && typeof v === "object" && !Array.isArray(v)
-      ? (v as Record<string, unknown>)
-      : {};
+    v !== null && typeof v === "object" && !Array.isArray(v) ? (v as Record<string, unknown>) : {};
   try {
     const first = await get(true, "/liveclientdata/allgamedata");
     if (first.http !== 200) report.preflight = "game-api-unavailable";
@@ -84,8 +78,7 @@ export async function validateProject(io: ValidationIO) {
         second.http === 200 && active.http === 200
           ? gamePreflight(first.data, second.data, active.data)
           : "game-preflight-unavailable";
-      if (report.preflight === "ready")
-        baselineReferenceSignature = rosterSignature(second.data);
+      if (report.preflight === "ready") baselineReferenceSignature = rosterSignature(second.data);
     }
     if (report.preflight === "ready") {
       const lbOpen = await lbListener();
@@ -99,25 +92,17 @@ export async function validateProject(io: ValidationIO) {
             parsed.data.collector?.runtime.owned === true &&
             parsed.data.collector.runtime.status === "running"
           : null;
-      if (!report.lbListenerClosed)
-        report.errors.push("LB-listener-not-confirmed-closed");
-      if (!report.projectOwned)
-        report.errors.push("project-owned-collector-unavailable");
+      if (!report.lbListenerClosed) report.errors.push("LB-listener-not-confirmed-closed");
+      if (!report.projectOwned) report.errors.push("project-owned-collector-unavailable");
       if (report.lbListenerClosed && report.projectOwned) {
         report.measurementScope =
-          dataOrigin === "fixture"
-            ? "fixture-project-comparison"
-            : "live-project-comparison";
+          dataOrigin === "fixture" ? "fixture-project-comparison" : "live-project-comparison";
         const url = projectBaseUrl;
-        const frames = new Map<
-          string,
-          { studio?: ObserverFrame; obs?: ObserverFrame }
-        >();
+        const frames = new Map<string, { studio?: ObserverFrame; obs?: ObserverFrame }>();
         const paired = new Set<string>();
         const connect = (role: "studio" | "obs") => {
           const socket = new WebSocket(
-            url.replace("http", "ws") +
-              `/ws?role=${role === "obs" ? "overlay" : "studio"}`,
+            url.replace("http", "ws") + `/ws?role=${role === "obs" ? "overlay" : "studio"}`,
             {
               origin: url,
               handshakeTimeout: 2500,
@@ -158,8 +143,7 @@ export async function validateProject(io: ValidationIO) {
                 else report.shared.differingFrames++;
               }
               if (frames.size > 64) frames.delete(frames.keys().next().value!);
-              if (paired.size > 128)
-                paired.delete(paired.values().next().value!);
+              if (paired.size > 128) paired.delete(paired.values().next().value!);
             } catch {
               if (!report.errors.includes("consumer-invalid-json"))
                 report.errors.push("consumer-invalid-json");
@@ -224,11 +208,7 @@ export async function validateProject(io: ValidationIO) {
           ) {
             lastComparedFrame = `${frame.data.sessionId}:${frame.data.epoch}:${frame.data.sequence}`;
             report.samples.push(
-              compareCollectorReference(
-                frame.data.sample,
-                referenceSample,
-                now(),
-              ),
+              compareCollectorReference(frame.data.sample, referenceSample, now()),
             );
           }
           await wait(750);
@@ -247,16 +227,10 @@ export async function validateProject(io: ValidationIO) {
           )
         )
           report.errors.push("no-complete-core-comparison");
-        if (
-          report.samples.some((s) =>
-            Object.values(s.fields).some((f) => f.disagreed > 0),
-          )
-        )
+        if (report.samples.some((s) => Object.values(s.fields).some((f) => f.disagreed > 0)))
           report.errors.push("field-disagreements-observed");
-        if (!report.shared.pairedFrames)
-          report.errors.push("no-shared-consumer-frames");
-        if (report.shared.differingFrames)
-          report.errors.push("consumer-frame-disagreement");
+        if (!report.shared.pairedFrames) report.errors.push("no-shared-consumer-frames");
+        if (report.shared.differingFrames) report.errors.push("consumer-frame-disagreement");
         const lbAtEnd = await lbListener();
         report.lbListenerClosedAtEnd = lbAtEnd === null ? null : !lbAtEnd;
         if (!report.lbListenerClosedAtEnd)

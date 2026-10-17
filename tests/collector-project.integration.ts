@@ -64,17 +64,17 @@ const fixture = () => ({
         { index: 3, readyAt: 150, maxCooldown: 60 },
         { index: 6, readyAt: 200, maxCooldown: 120 },
       ],
-      perks: [8005, 8009, 9104, 8014, 8226, 8237, 5008, 5008, 5001].map(
-        (id) => ({ id, value: "PRIVATE_PERK_SENTINEL" }),
-      ),
+      perks: [8005, 8009, 9104, 8014, 8226, 8237, 5008, 5008, 5001].map((id) => ({
+        id,
+        value: "PRIVATE_PERK_SENTINEL",
+      })),
     })),
   },
 });
 feed.on("connection", (socket) => socket.send(JSON.stringify(fixture())));
 const ticker = setInterval(() => {
   const json = JSON.stringify(fixture());
-  for (const client of feed.clients)
-    if (client.readyState === WebSocket.OPEN) client.send(json);
+  for (const client of feed.clients) if (client.readyState === WebSocket.OPEN) client.send(json);
 }, 100);
 const probe = createServer();
 probe.listen(0, "127.0.0.1");
@@ -86,15 +86,7 @@ await new Promise<void>((yes) => probe.close(() => yes()));
 const directory = await mkdtemp(join(tmpdir(), "collector-project-"));
 const backend = spawn(
   process.execPath,
-  [
-    "--import",
-    "tsx",
-    "--import",
-    "./tests/fixtures/spectator-safety-preload.ts",
-    "server/index.ts",
-    "--production",
-    "--collector",
-  ],
+  ["--import", "tsx", "server/index.ts", "--production", "--collector"],
   {
     cwd: process.cwd(),
     windowsHide: true,
@@ -132,10 +124,7 @@ try {
     }
   });
   const connect = async (role: string) => {
-    const socket = new WebSocket(
-      url.replace("http", "ws") + `/ws?role=${role}`,
-      { origin: url },
-    );
+    const socket = new WebSocket(url.replace("http", "ws") + `/ws?role=${role}`, { origin: url });
     await once(socket, "open");
     return socket;
   };
@@ -186,36 +175,24 @@ try {
   }
   await until(
     async () =>
-      studioFrames.some((f) =>
-        f.newEvents?.some((e: any) => e.kind === "ChampionKill"),
-      ) &&
-      obsFrames.some((f) =>
-        f.newEvents?.some((e: any) => e.kind === "ChampionKill"),
-      ),
+      studioFrames.some((f) => f.newEvents?.some((e: any) => e.kind === "ChampionKill")) &&
+      obsFrames.some((f) => f.newEvents?.some((e: any) => e.kind === "ChampionKill")),
   );
   const studioEvent = studioFrames.find((f) =>
     f.newEvents?.some((e: any) => e.kind === "ChampionKill"),
   );
-  const obsEvent = obsFrames.find((f) =>
-    f.newEvents?.some((e: any) => e.kind === "ChampionKill"),
-  );
+  const obsEvent = obsFrames.find((f) => f.newEvents?.some((e: any) => e.kind === "ChampionKill"));
   assert.deepEqual(studioEvent.newEvents, obsEvent.newEvents);
   await wait(1000);
   assert.equal(
-    studioFrames.filter((f) =>
-      f.newEvents?.some((e: any) => e.kind === "ChampionKill"),
-    ).length,
+    studioFrames.filter((f) => f.newEvents?.some((e: any) => e.kind === "ChampionKill")).length,
     1,
   );
   assert.equal(
-    obsFrames.filter((f) =>
-      f.newEvents?.some((e: any) => e.kind === "ChampionKill"),
-    ).length,
+    obsFrames.filter((f) => f.newEvents?.some((e: any) => e.kind === "ChampionKill")).length,
     1,
   );
-  const report = providerReportSchema.parse(
-    await (await fetch(url + "/api/providers")).json(),
-  );
+  const report = providerReportSchema.parse(await (await fetch(url + "/api/providers")).json());
   assert.equal(report.selected, "league-collector");
   assert.equal(report.collector?.runtime.status, "external");
   assert.equal(report.collector?.runtime.owned, false);
@@ -229,9 +206,7 @@ try {
   await until(async () => {
     const r = await (await fetch(url + "/api/providers")).json();
     return (
-      r.selected === "riot" &&
-      r.collector.runtime.status === "stopped" &&
-      r.collector.players === 0
+      r.selected === "riot" && r.collector.runtime.status === "stopped" && r.collector.players === 0
     );
   });
   studio.send(JSON.stringify({ type: "provider", value: "league-collector" }));
@@ -240,35 +215,9 @@ try {
     return r.collector.players === 10;
   });
   assert.ok(feed.clients.size > 0); // selecting source again reconnects, no permanent stop
-  for (const reason of ["player", "unverified"]) {
-    backend.send(reason === "player" ? "test-player" : "test-unknown");
-    await until(async () => {
-      const r = await (await fetch(url + "/api/providers")).json();
-      return (
-        r.safety.reason === reason &&
-        r.collector.players === 0 &&
-        r.collector.runtime.status === "stopped" &&
-        feed.clients.size === 0
-      );
-    });
-    assert.equal(await (await fetch(url + "/api/observer")).json(), null);
-    await until(
-      async () => studioFrames.at(-1) === null && obsFrames.at(-1) === null,
-    );
-    backend.send("test-spectator");
-    await until(
-      async () =>
-        (await (await fetch(url + "/api/providers")).json()).collector
-          .players === 10,
-    );
-  }
-  studio.send(
-    JSON.stringify({ type: "provider", value: "collector-accountless" }),
-  );
+  studio.send(JSON.stringify({ type: "provider", value: "collector-accountless" }));
   await until(async () => {
-    const r = providerReportSchema.parse(
-      await (await fetch(url + "/api/providers")).json(),
-    );
+    const r = providerReportSchema.parse(await (await fetch(url + "/api/providers")).json());
     return (
       r.selected === "collector-accountless" &&
       r.output === "collector-accountless" &&
@@ -278,19 +227,11 @@ try {
     );
   });
   await wait(1000);
-  const accountlessObservation = await (
-    await fetch(url + "/api/observer")
-  ).json();
-  assert.equal(
-    accountlessObservation.sample,
-    null,
-    "must not reuse authenticated/external frames",
-  );
+  const accountlessObservation = await (await fetch(url + "/api/observer")).json();
+  assert.equal(accountlessObservation.sample, null, "must not reuse authenticated/external frames");
   studio.send(JSON.stringify({ type: "provider", value: "league-collector" }));
   await until(
-    async () =>
-      (await (await fetch(url + "/api/providers")).json()).collector.players ===
-      10,
+    async () => (await (await fetch(url + "/api/providers")).json()).collector.players === 10,
   );
   if (process.env.COLLECTOR_BROWSER_QA === "1") {
     const packages = process.env.OVERLAY_BROWSER_PACKAGES;
@@ -312,25 +253,16 @@ try {
       page.on("pageerror", (e: Error) => errors.push(e.message));
       await page.goto(url + "/?page=sources");
       await page.getByLabel("Nguồn trận đấu").waitFor();
-      assert.equal(
-        await page.getByLabel("Nguồn trận đấu").inputValue(),
-        "league-collector",
-      );
-      await page.waitForFunction(() =>
-        document.body.innerText.includes("10/10 người"),
-      );
+      assert.equal(await page.getByLabel("Nguồn trận đấu").inputValue(), "league-collector");
+      await page.waitForFunction(() => document.body.innerText.includes("10/10 người"));
       await page.evaluate(() => document.fonts.ready);
       await page.screenshot({
         path: join(out, "sources-1920.png"),
         fullPage: true,
       });
       await page.getByLabel("Nguồn trận đấu").selectOption("riot");
-      await page
-        .getByLabel("Nguồn trận đấu")
-        .selectOption("collector-accountless");
-      await page
-        .getByText("DLL cache · Không dùng tài khoản LB", { exact: true })
-        .waitFor();
+      await page.getByLabel("Nguồn trận đấu").selectOption("collector-accountless");
+      await page.getByText("DLL cache · Không dùng tài khoản LB", { exact: true }).waitFor();
       await page
         .getByText("Chế độ không tài khoản cần host do app quản lý.", {
           exact: false,
@@ -341,9 +273,7 @@ try {
         fullPage: true,
       });
       await page.getByLabel("Nguồn trận đấu").selectOption("league-collector");
-      await page.waitForFunction(() =>
-        document.body.innerText.includes("10/10 người"),
-      );
+      await page.waitForFunction(() => document.body.innerText.includes("10/10 người"));
       const overlay = await browser.newPage({
         viewport: { width: 1920, height: 1080 },
       });
@@ -361,10 +291,7 @@ try {
         .toBuffer({ resolveWithObject: true });
       let transparent = 0;
       for (let i = 3; i < data.length; i += 4) if (data[i] === 0) transparent++;
-      assert.ok(
-        transparent / (info.width * info.height) > 0.2,
-        "OBS alpha missing",
-      );
+      assert.ok(transparent / (info.width * info.height) > 0.2, "OBS alpha missing");
       assert.deepEqual(errors, []);
       console.log(
         "PASS: browser source selection/reselection, shared collector frames and OBS transparency1920",
@@ -373,15 +300,11 @@ try {
       await browser.close();
     }
   }
-  const transport = spawn(
-    process.execPath,
-    ["--import", "tsx", "tests/transport.integration.ts"],
-    {
-      windowsHide: true,
-      env: { ...process.env, OVERLAY_TEST_URL: url },
-      stdio: ["ignore", "pipe", "pipe"],
-    },
-  );
+  const transport = spawn(process.execPath, ["--import", "tsx", "tests/transport.integration.ts"], {
+    windowsHide: true,
+    env: { ...process.env, OVERLAY_TEST_URL: url },
+    stdio: ["ignore", "pipe", "pipe"],
+  });
   let transportOutput = "";
   transport.stdout.on("data", (b) => (transportOutput += b));
   transport.stderr.on("data", (b) => (transportOutput += b));

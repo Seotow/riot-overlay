@@ -1,10 +1,10 @@
 # Adapter riêng sang ObserverFrame
 
-Entry: `Collector/adapter/index.ts`. Projectionnative trực tiếp; không bọc feed
+Entry: `collector/adapter/index.ts`. Projectionnative trực tiếp; không bọc feed
 `LeagueBroadcastSource` hoặc giả thành Riotallgamedata.
 
 ```ts
-import { LeagueCollectorSource } from "./Collector/adapter";
+import { LeagueCollectorSource } from "./collector/adapter";
 const source = new LeagueCollectorSource({ port: 18799 });
 source.ensureConnected(); // explicit, chỉ WS loopback /ws
 const frame = source.observe(); // shared observerFrameSchema
@@ -13,7 +13,7 @@ source.stop();
 ```
 
 Ví dụ chỉ minh họa lifecycle; consumer thực gọi ensureConnected/observe theo
-tick riêng. Constructor không mở socket, đọc env, launchcollector/game hoặc
+tick riêng. Constructor không mở socket, đọc env, launchCollector/game hoặc
 switchprovider. Từ mốc 15/10/2026, backend dùng adapter này qua provider
 `league-collector`; launcher riêng quản lý host. Xem [runbook](PROJECT-RUNBOOK.vi.md).
 

@@ -5,7 +5,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 CLOUD = ROOT / 'archive/cloud-export/RiotOverlay-local'
-LOCAL = ROOT / 'src/LeagueCollector'
+LOCAL = ROOT / 'hosts/lb-host'
 
 def digest(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()

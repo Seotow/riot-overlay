@@ -36,18 +36,6 @@ Các scene OBS cố định: `/overlay?scene=ingame`, `/overlay?scene=draft`,
 `/overlay?scene=postgame`. Renderer không chứa ảnh đối chiếu, nút điều khiển
 hoặc nhãn kiểm thử. Trạng thái nguồn và cảnh báo nằm trong Studio.
 
-## An toàn khi lấy dữ liệu
-
-Collector chỉ được mở khi ứng dụng xác nhận đang xem spectator hoặc replay.
-Nếu phát hiện tên người chơi đang điều khiển, hoặc không xác nhận được chế độ,
-ứng dụng không mở collector. Khi mất xác nhận trong lúc chạy, ứng dụng ngắt
-nguồn live và dừng host do nó quản lý.
-
-Không có nút bỏ qua chốt này. Có clock từ Replay API chưa đủ để cho phép thu.
-Chốt áp dụng cả collector có tài khoản và không tài khoản; bản ghi đã lưu,
-cấm chọn thủ công và dữ liệu mẫu vẫn dùng được. Xem
-[quy tắc và cách xử lý bị chặn](docs/COLLECTOR_SAFETY.md).
-
 ## Nguồn dữ liệu
 
 | Nguồn | Điều kiện |
@@ -60,7 +48,7 @@ cấm chọn thủ công và dữ liệu mẫu vẫn dùng được. Xem
 Chạy collector tích hợp bằng `npm run start:collector` hoặc
 `npm run start:collector:no-auth` sau khi chuẩn bị runtime.
 Clone repository không tự có DLL, runtime hoặc tài khoản collector.
-Xem [hướng dẫn collector](Collector/docs/PROJECT-RUNBOOK.vi.md).
+Xem [hướng dẫn collector](collector/docs/PROJECT-RUNBOOK.vi.md).
 
 Ghi trận với collector không tài khoản bằng terminal thứ hai:
 

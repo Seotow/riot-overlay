@@ -7,16 +7,21 @@ Kiểm chứng account/native: [AUTH-VERIFICATION.vi.md](docs/AUTH-VERIFICATION.
 
 Provider tích hợp thử nghiệm: [runbook](docs/PROJECT-RUNBOOK.vi.md),
 [field matrix](docs/FIELD-MATRIX.vi.md) và
-[hướng dẫn adapter](docs/ADAPTER.vi.md). Entry TypeScript `Collector/adapter/index.ts`;
+[hướng dẫn adapter](docs/ADAPTER.vi.md). Entry TypeScript `collector/adapter/index.ts`;
 đã đăng ký trong Studio và có launcher owned host; chưa full LB parity.
 
 ```text
-Collector/
-  src/
-    LeagueCollector/    Source local mới nhất, dùng DLL LB; có lifecycle fix
-    LeagueReader/       Source C++/host độc lập, chưa game-validated
-  runtime/              Hai gói Windows cloud, tách khỏi source đang sửa
-    supervisor.ts       Launcher host dùng bản managed local đã build
+collector/
+  adapter/              Adapter TypeScript: native frame -> frame chuẩn của Studio
+  supervisor/           Launcher host (supervisor.ts) và môi trường không tài khoản
+  validation/           Bộ so khớp/kiểm tra dữ liệu thu được
+  hosts/                Source của các host native
+    lb-host/            Host dùng DLL LB (trước là src/LeagueCollector); có lifecycle fix.
+                        Project C# nằm ở src/LeagueCollector
+    independent-reader/ Source C++/host độc lập (trước là src/LeagueReader), chưa game-validated
+  bundles/              Gói Windows đã build kèm runtime .NET, tách khỏi source đang sửa
+    lb-host/            Bản chạy của lb-host (trước là runtime/LeagueCollector)
+    independent-reader/ Bản chạy của independent-reader (trước là runtime/LeagueReader-Windows-x64)
   config/               collector.env local bị ignore; example không chứa secret
   scripts/              Build, audit và validation/probe
   docs/                 Status, plan, validation và lifecycle review
@@ -28,21 +33,21 @@ Collector/
     packages/           ZIP gốc và hướng dẫn download
 ```
 
-`src/LeagueReader` là source làm việc từ baseline cloud. Archive giữ nguyên
-để truy nguyên; không sửa archive để phát triển. `src/LeagueCollector` lấy
-từ validation local mới nhất, khác standalone cloud. `runtime/LeagueCollector`
-là binary cloud cũ, chưa chứa lifecycle fix local; build source local nếu cần
-chạy bản sửa. Collector chưa thay LB production.
+`hosts/independent-reader` là source làm việc từ baseline cloud. Archive giữ
+nguyên để truy nguyên; không sửa archive để phát triển. `hosts/lb-host` lấy từ
+validation local mới nhất, khác standalone cloud. `bundles/lb-host` là binary
+đã build; supervisor dùng `hosts/lb-host/src/LeagueCollector/bin/Release/net10.0`
+nếu có, nếu không thì dùng bundle này. Collector chưa thay LB production.
 
 ## Lệnh từ root Riot Overlay
 
 ```powershell
 # Kiểm export cloud, không chạy game
-python Collector/archive/cloud-export/RiotOverlay-local/tools/verify_export.py
+python collector/archive/cloud-export/RiotOverlay-local/tools/verify_export.py
 # So sánh source local/cloud, đọc evidence lab đã có
-python Collector/scripts/audit-import.py
+python collector/scripts/audit-import.py
 # Build và managed lab offline, không injection hoặc game access
-powershell -NoProfile -File Collector/scripts/build-validate.ps1
+powershell -NoProfile -File collector/scripts/build-validate.ps1
 ```
 
 `inspect-replay`, `validate-no-inject`, `validate-single-inject` và

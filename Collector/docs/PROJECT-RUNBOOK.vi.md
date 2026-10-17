@@ -38,10 +38,10 @@ trên trận thật. Bằng chứng SR live riêng tại [SR live](SR-LIVE-VALID
 
 ## Chuẩn bị và chạy
 
-1. Giữ runtime/DLL đã restore tại `Collector/runtime` và `Collector/src`.
-   Từ thư mục gốc, chạy `powershell -NoProfile -File Collector/scripts/build-validate.ps1`
+1. Giữ runtime/DLL đã restore tại `collector/runtime` và `collector/src`.
+   Từ thư mục gốc, chạy `powershell -NoProfile -File collector/scripts/build-validate.ps1`
    nếu sửa source managed hoặc chưa có build. Không tự thay DLL/patch guard.
-2. Credentials dùng `Collector/config/collector.env`, dựa trên file example
+2. Credentials dùng `collector/config/collector.env`, dựa trên file example
    cùng thư mục. File thật đã có trên máy này; không chép vào Git, theme hoặc
    gửi qua Studio. Có file chỉ chứng minh cấu hình hiện diện, không quyền LB.
 3. Chạy `npm run build`, rồi `npm run start:collector` từ thư mục gốc.

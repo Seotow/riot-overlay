@@ -2,45 +2,22 @@ import type { IngameSample, ObservedPlayer } from "../../shared/observer";
 import { normalizeIngame } from "../../server/ingame-adapter";
 
 const obj = (v: unknown): Record<string, unknown> =>
-  v !== null && typeof v === "object" && !Array.isArray(v)
-    ? (v as Record<string, unknown>)
-    : {};
-export function gamePreflight(
-  first: unknown,
-  second: unknown,
-  active: unknown,
-) {
-  if (
-    typeof active !== "string" ||
-    !["unknown", "spectator"].includes(active.toLowerCase())
-  )
+  v !== null && typeof v === "object" && !Array.isArray(v) ? (v as Record<string, unknown>) : {};
+export function gamePreflight(first: unknown, second: unknown, active: unknown) {
+  if (typeof active !== "string" || !["unknown", "spectator"].includes(active.toLowerCase()))
     return "spectator-unverified" as const;
   for (const raw of [first, second]) {
     const root = obj(raw),
       game = obj(root.gameData),
       events = obj(root.events).Events;
-    if (
-      game.mapNumber !== 11 ||
-      !Array.isArray(root.allPlayers) ||
-      root.allPlayers.length !== 10
-    )
+    if (game.mapNumber !== 11 || !Array.isArray(root.allPlayers) || root.allPlayers.length !== 10)
       return "SR10-unverified" as const;
     if (!Array.isArray(events)) return "end-state-unavailable" as const;
-    if (events.some((e) => obj(e).EventName === "GameEnd"))
-      return "game-ended" as const;
-    if (
-      typeof game.gameTime !== "number" ||
-      !Number.isFinite(game.gameTime) ||
-      game.gameTime < 0
-    )
+    if (events.some((e) => obj(e).EventName === "GameEnd")) return "game-ended" as const;
+    if (typeof game.gameTime !== "number" || !Number.isFinite(game.gameTime) || game.gameTime < 0)
       return "clock-unavailable" as const;
   }
-  if (
-    !(
-      Number(obj(obj(second).gameData).gameTime) >
-      Number(obj(obj(first).gameData).gameTime)
-    )
-  )
+  if (!(Number(obj(obj(second).gameData).gameTime) > Number(obj(obj(first).gameData).gameTime)))
     return "clock-not-advancing" as const;
   let a: IngameSample, b: IngameSample;
   try {
@@ -53,16 +30,13 @@ export function gamePreflight(
     sample.players.map((p) => `${p.team.value}:${p.championId.value}`).sort();
   for (const sample of [a, b])
     if (
-      sample.players.some(
-        (p) => p.team.value === null || p.championId.value === null,
-      ) ||
+      sample.players.some((p) => p.team.value === null || p.championId.value === null) ||
       sample.players.filter((p) => p.team.value === "ORDER").length !== 5 ||
       sample.players.filter((p) => p.team.value === "CHAOS").length !== 5 ||
       new Set(keys(sample)).size !== 10
     )
       return "roster-ambiguous" as const;
-  if (JSON.stringify(keys(a)) !== JSON.stringify(keys(b)))
-    return "roster-changed" as const;
+  if (JSON.stringify(keys(a)) !== JSON.stringify(keys(b))) return "roster-changed" as const;
   return "ready" as const;
 }
 
@@ -103,8 +77,7 @@ const value = (
     field.value === null
   )
     return null;
-  if (key === "spells" && (field.value as unknown[]).some((v) => v === null))
-    return null;
+  if (key === "spells" && (field.value as unknown[]).some((v) => v === null)) return null;
   return field.value;
 };
 const canonical = (key: (typeof fields)[number], v: unknown) =>
@@ -128,12 +101,10 @@ export function compareCollectorReference(
     fields.map((key) => [
       key,
       {
-        nativePresent: candidate.players.filter(
-          (p) => value(p, key, "league-collector") !== null,
-        ).length,
-        referencePresent: reference.players.filter(
-          (p) => value(p, key, "live-client") !== null,
-        ).length,
+        nativePresent: candidate.players.filter((p) => value(p, key, "league-collector") !== null)
+          .length,
+        referencePresent: reference.players.filter((p) => value(p, key, "live-client") !== null)
+          .length,
         compared: 0,
         matched: 0,
         disagreed: 0,
@@ -156,24 +127,15 @@ export function compareCollectorReference(
     reference.gameTime.availability === "observed" &&
     candidate.gameTime.value !== null &&
     reference.gameTime.value !== null;
-  const skew = clocksValid
-    ? Math.abs(candidate.gameTime.value! - reference.gameTime.value!)
-    : null;
-  const aligned =
-    fresh(candidate, now) &&
-    fresh(reference, now) &&
-    skew !== null &&
-    skew <= 0.5;
+  const skew = clocksValid ? Math.abs(candidate.gameTime.value! - reference.gameTime.value!) : null;
+  const aligned = fresh(candidate, now) && fresh(reference, now) && skew !== null && skew <= 0.5;
   const signature = (p: ObservedPlayer) =>
     p.team.value !== null && p.championId.value !== null
       ? `${p.team.value}:${p.championId.value}`
       : null;
   const keys = candidate.players.map(signature);
   const refKeys = reference.players.map(signature);
-  const knownRoster = (
-    p: ObservedPlayer,
-    source: "league-collector" | "live-client",
-  ) =>
+  const knownRoster = (p: ObservedPlayer, source: "league-collector" | "live-client") =>
     p.team.source === source &&
     p.championId.source === source &&
     p.team.availability === "observed" &&

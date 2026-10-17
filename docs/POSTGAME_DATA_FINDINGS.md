@@ -21,7 +21,7 @@ Không gọi LB/LCU hiện tại, không đăng nhập, bật widget, sửa conf
 khởi động REA/collector hoặc can thiệp quyền premium.
 
 ```powershell
-node scripts/inspect-postgame-evidence.mjs --save
+node scripts/inspect/inspect-postgame-evidence.mjs --save
 ```
 
 Script stream-read 15 file `leaguebroadcast-ws.ndjson` (14 có message):

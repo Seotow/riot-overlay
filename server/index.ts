@@ -1,9 +1,8 @@
 import { observeIngame, observerRecording } from "./observer";
 import { diagnose } from "./diagnostics";
 import { leagueBroadcast } from "./leaguebroadcast";
-import { LeagueCollectorSource } from "../Collector/adapter";
-import { CollectorRuntime } from "../Collector/runtime/supervisor";
-import { collectorSafety } from "./collector-safety";
+import { LeagueCollectorSource } from "../collector/adapter";
+import { CollectorRuntime } from "../collector/supervisor/supervisor";
 import { CaptureReplay, listCaptures } from "./capture-replay";
 import { createServer } from "node:http";
 import { readFile, writeFile, mkdir, rename } from "node:fs/promises";
@@ -13,10 +12,7 @@ import { commandSchema, themeSchema } from "../shared/schema";
 import { createState, applyCommand, tick } from "../shared/mock";
 import { RiotPostgameService, riotError } from "./riot-postgame";
 import { ReplayHudService } from "./replay-hud";
-import {
-  COLLECTOR_SAMPLE_INTERVAL_MS,
-  remainingSampleDelay,
-} from "../shared/capture-rules";
+import { COLLECTOR_SAMPLE_INTERVAL_MS, remainingSampleDelay } from "../shared/capture-rules";
 const host = "127.0.0.1",
   port = Number(process.env.PORT || 4310);
 let state = createState();
@@ -33,38 +29,21 @@ const accountlessRuntime = new CollectorRuntime({
   external: process.env.RIOT_OVERLAY_COLLECTOR_EXTERNAL === "1",
 });
 const usesCollector = () =>
-  state.provider === "league-collector" ||
-  state.provider === "collector-accountless";
+  state.provider === "league-collector" || state.provider === "collector-accountless";
 const selectedCollectorRuntime = () =>
-  state.provider === "collector-accountless"
-    ? accountlessRuntime
-    : collectorRuntime;
+  state.provider === "collector-accountless" ? accountlessRuntime : collectorRuntime;
 const selectedCollectorSource = () =>
-  state.provider === "collector-accountless"
-    ? accountlessCollector
-    : localCollector;
+  state.provider === "collector-accountless" ? accountlessCollector : localCollector;
 if (process.argv.includes("--collector")) state.provider = "league-collector";
-if (process.argv.includes("--collector-accountless"))
-  state.provider = "collector-accountless";
+if (process.argv.includes("--collector-accountless")) state.provider = "collector-accountless";
 const riotPostgame = new RiotPostgameService();
 const replayHud = new ReplayHudService();
 // Isolated verification can persist a temporary theme without touching user branding.
-const themePath = resolve(
-  process.env.RIOT_OVERLAY_THEME_PATH || "data/theme.json",
-);
+const themePath = resolve(process.env.RIOT_OVERLAY_THEME_PATH || "data/theme.json");
 const captureReplay = new CaptureReplay();
 let shuttingDown = false;
 let captureLoadVersion = 0;
 async function selectedObservation(broadcast = false) {
-  if (state.provider !== "recording") {
-    const provider = state.provider;
-    const decision = await collectorSafety.check();
-    if (provider !== state.provider) return selectedObservation(broadcast);
-    if (!decision.allowed) {
-      await stopLiveCollection();
-      return null;
-    }
-  }
   return state.provider === "recording"
     ? Promise.resolve(captureReplay.observe())
     : state.provider === "leaguebroadcast"
@@ -77,13 +56,6 @@ async function selectedObservation(broadcast = false) {
           )
         : observeIngame();
 }
-async function stopLiveCollection() {
-  localCollector.disconnect();
-  accountlessCollector.disconnect();
-  leagueBroadcast.disconnect();
-  lastObservation = null;
-  await Promise.all([collectorRuntime.stop(), accountlessRuntime.stop()]);
-}
 const selectedRecording = () =>
   state.provider === "recording"
     ? captureReplay.recording()
@@ -93,9 +65,7 @@ const selectedRecording = () =>
         ? selectedCollectorSource().recording()
         : observerRecording();
 try {
-  state.theme = themeSchema.parse(
-    JSON.parse(await readFile(themePath, "utf8")),
-  );
+  state.theme = themeSchema.parse(JSON.parse(await readFile(themePath, "utf8")));
 } catch {}
 let saves = Promise.resolve();
 const production = process.argv.includes("--production");
@@ -110,9 +80,7 @@ const server = createServer(async (req, res) => {
     res.setHeader("Cache-Control", "no-store");
     const allowed = [`http://${host}:${port}`, `http://localhost:${port}`];
     if (
-      ![`127.0.0.1:${port}`, `localhost:${port}`].includes(
-        req.headers.host || "",
-      ) ||
+      ![`127.0.0.1:${port}`, `localhost:${port}`].includes(req.headers.host || "") ||
       (req.headers.origin && !allowed.includes(req.headers.origin)) ||
       req.headers["sec-fetch-site"] === "cross-site" ||
       (req.method !== "GET" && !allowed.includes(req.headers.origin || ""))
@@ -151,9 +119,7 @@ const server = createServer(async (req, res) => {
     res.setHeader("X-Content-Type-Options", "nosniff");
     const allowed = [`http://${host}:${port}`, `http://localhost:${port}`];
     if (
-      ![`127.0.0.1:${port}`, `localhost:${port}`].includes(
-        req.headers.host || "",
-      ) ||
+      ![`127.0.0.1:${port}`, `localhost:${port}`].includes(req.headers.host || "") ||
       (req.headers.origin && !allowed.includes(req.headers.origin)) ||
       req.headers["sec-fetch-site"] === "cross-site" ||
       (req.method !== "GET" && !allowed.includes(req.headers.origin || ""))
@@ -210,14 +176,9 @@ const server = createServer(async (req, res) => {
           riotPostgame.clear();
           res.end(JSON.stringify(riotPostgame.status()));
         } else res.end(JSON.stringify(riotPostgame.configure(input)));
-      } else if (req.url === routes[2])
-        res.end(JSON.stringify(await riotPostgame.load(input)));
+      } else if (req.url === routes[2]) res.end(JSON.stringify(await riotPostgame.load(input)));
       else {
-        if (
-          !input ||
-          typeof input.matchId !== "string" ||
-          Object.keys(input).length !== 1
-        )
+        if (!input || typeof input.matchId !== "string" || Object.keys(input).length !== 1)
           throw Error();
         const candidate = riotPostgame.publishedCandidate(input.matchId);
         state = {
@@ -239,12 +200,8 @@ const server = createServer(async (req, res) => {
       }
     } catch (e) {
       const safe = riotError(e);
-      res.writeHead(
-        safe.status >= 400 && safe.status <= 599 ? safe.status : 502,
-      );
-      res.end(
-        JSON.stringify({ error: safe.code, retryAfter: safe.retryAfter }),
-      );
+      res.writeHead(safe.status >= 400 && safe.status <= 599 ? safe.status : 502);
+      res.end(JSON.stringify({ error: safe.code, retryAfter: safe.retryAfter }));
     }
     return;
   }
@@ -262,9 +219,7 @@ const server = createServer(async (req, res) => {
     res.setHeader("Cache-Control", "no-store");
     const allowed = [`http://${host}:${port}`, `http://localhost:${port}`];
     if (
-      ![`127.0.0.1:${port}`, `localhost:${port}`].includes(
-        req.headers.host || "",
-      ) ||
+      ![`127.0.0.1:${port}`, `localhost:${port}`].includes(req.headers.host || "") ||
       (req.headers.origin && !allowed.includes(req.headers.origin)) ||
       req.headers["sec-fetch-site"] === "cross-site"
     ) {
@@ -289,7 +244,6 @@ const server = createServer(async (req, res) => {
                     capturedAt: new Date().toISOString(),
                     selected: state.provider,
                     output: state.mockVisible ? "demo" : state.provider,
-                    safety: collectorSafety.snapshot(),
                     leaguebroadcast: leagueBroadcast.snapshot(),
                     collector: {
                       observerIntervalMs: COLLECTOR_SAMPLE_INTERVAL_MS,
@@ -332,10 +286,7 @@ const server = createServer(async (req, res) => {
       path === "/" || path === "/overlay"
         ? resolve("dist/index.html")
         : resolve("dist", "." + path);
-    if (
-      !file.startsWith(resolve("dist") + "/") &&
-      !file.startsWith(resolve("dist") + "\\")
-    )
+    if (!file.startsWith(resolve("dist") + "/") && !file.startsWith(resolve("dist") + "\\"))
       throw Error();
     const body = await readFile(file);
     res.setHeader(
@@ -374,11 +325,8 @@ server.on("upgrade", (req, socket, head) => {
   }
   const origin = req.headers.origin;
   if (
-    ![`127.0.0.1:${port}`, `localhost:${port}`].includes(
-      req.headers.host || "",
-    ) ||
-    (origin !== `http://${host}:${port}` &&
-      origin !== `http://localhost:${port}`)
+    ![`127.0.0.1:${port}`, `localhost:${port}`].includes(req.headers.host || "") ||
+    (origin !== `http://${host}:${port}` && origin !== `http://localhost:${port}`)
   ) {
     socket.destroy();
     return;
@@ -393,11 +341,8 @@ function broadcast() {
 }
 wss.on("connection", (ws, req) => {
   ws.send(JSON.stringify({ type: "snapshot", state }));
-  if (lastObservation)
-    ws.send(JSON.stringify({ type: "observer", frame: lastObservation }));
-  const readonly =
-    new URL(req.url || "/", `http://${host}`).searchParams.get("role") ===
-    "overlay";
+  if (lastObservation) ws.send(JSON.stringify({ type: "observer", frame: lastObservation }));
+  const readonly = new URL(req.url || "/", `http://${host}`).searchParams.get("role") === "overlay";
   ws.on("message", async (raw) => {
     try {
       if (readonly) throw Error();
@@ -415,16 +360,13 @@ wss.on("connection", (ws, req) => {
         broadcast();
         for (const c of wss.clients)
           if (c.readyState === WebSocket.OPEN)
-            c.send(
-              JSON.stringify({ type: "observer", frame: lastObservation }),
-            );
+            c.send(JSON.stringify({ type: "observer", frame: lastObservation }));
         return;
       }
       if (cmd.type === "captureLoad") {
         const version = ++captureLoadVersion;
         const entries = await captureReplay.prepare(cmd.id);
-        if (version !== captureLoadVersion || ws.readyState !== WebSocket.OPEN)
-          return;
+        if (version !== captureLoadVersion || ws.readyState !== WebSocket.OPEN) return;
         captureReplay.loadEntries(cmd.id, entries);
         state = {
           ...state,
@@ -439,13 +381,10 @@ wss.on("connection", (ws, req) => {
         broadcast();
         for (const c of wss.clients)
           if (c.readyState === WebSocket.OPEN)
-            c.send(
-              JSON.stringify({ type: "observer", frame: lastObservation }),
-            );
+            c.send(JSON.stringify({ type: "observer", frame: lastObservation }));
         return;
       }
-      if (cmd.type === "provider" || cmd.type === "mockVisible")
-        captureLoadVersion++;
+      if (cmd.type === "provider" || cmd.type === "mockVisible") captureLoadVersion++;
       if (cmd.type === "captureControl") {
         if (state.provider !== "recording") throw Error();
         captureReplay.control(cmd);
@@ -457,14 +396,9 @@ wss.on("connection", (ws, req) => {
           state = { ...state, rehearsal: undefined };
       }
       state = applyCommand(state, cmd);
-      if (
-        cmd.type === "provider" ||
-        cmd.type === "mockVisible" ||
-        cmd.type === "reset"
-      )
+      if (cmd.type === "provider" || cmd.type === "mockVisible" || cmd.type === "reset")
         state.rehearsal = undefined;
-      if (state.provider !== "leaguebroadcast" || state.mockVisible)
-        leagueBroadcast.disconnect();
+      if (state.provider !== "leaguebroadcast" || state.mockVisible) leagueBroadcast.disconnect();
       if (!usesCollector() || state.mockVisible || cmd.type === "provider") {
         localCollector.disconnect();
         accountlessCollector.disconnect();
@@ -515,38 +449,17 @@ async function pollObservation() {
   if (shuttingDown) return;
   const pollStarted = performance.now();
   try {
-    if (!state.mockVisible && state.provider !== "recording") {
-      const provider = state.provider;
-      const decision = await collectorSafety.check();
-      if (state.mockVisible || provider !== state.provider) return;
-      if (!decision.allowed) {
-        await stopLiveCollection();
-        if (state.mockVisible || provider !== state.provider) return;
-        for (const client of wss.clients)
-          if (client.readyState === WebSocket.OPEN)
-            client.send(JSON.stringify({ type: "observer", frame: null }));
-        return;
-      }
-    }
     if (usesCollector() && !state.mockVisible) {
       const provider = state.provider;
       const runtime = selectedCollectorRuntime();
-      await (
-        runtime === collectorRuntime ? accountlessRuntime : collectorRuntime
-      ).stop();
-      if (provider !== state.provider || state.mockVisible || shuttingDown)
-        return;
+      await (runtime === collectorRuntime ? accountlessRuntime : collectorRuntime).stop();
+      if (provider !== state.provider || state.mockVisible || shuttingDown) return;
       await runtime.setEnabled(true);
-      if (provider !== state.provider || state.mockVisible || shuttingDown)
-        return;
+      if (provider !== state.provider || state.mockVisible || shuttingDown) return;
       if (["running", "external"].includes(runtime.snapshot().status))
         selectedCollectorSource().ensureConnected();
     }
-    if (
-      wss.clients.size > 0 &&
-      state.provider === "leaguebroadcast" &&
-      !state.mockVisible
-    )
+    if (wss.clients.size > 0 && state.provider === "leaguebroadcast" && !state.mockVisible)
       leagueBroadcast.ensureConnected();
     if (!state.mockVisible && wss.clients.size > 0) {
       const providerAtStart = state.provider;
@@ -568,18 +481,13 @@ async function pollObservation() {
   } finally {
     if (!shuttingDown) {
       const interval = usesCollector() ? COLLECTOR_SAMPLE_INTERVAL_MS : 750;
-      setTimeout(
-        pollObservation,
-        remainingSampleDelay(performance.now() - pollStarted, interval),
-      );
+      setTimeout(pollObservation, remainingSampleDelay(performance.now() - pollStarted, interval));
     }
   }
 }
 void pollObservation();
 server.listen(port, host, () =>
-  console.log(
-    `Rift Studio: http://${host}:${port}\nOBS overlay: http://${host}:${port}/overlay`,
-  ),
+  console.log(`Rift Studio: http://${host}:${port}\nOBS overlay: http://${host}:${port}/overlay`),
 );
 async function shutdown() {
   if (shuttingDown) return;

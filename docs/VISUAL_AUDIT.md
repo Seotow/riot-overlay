@@ -30,7 +30,7 @@ Leaderboard286px không đổi; thanh XP từ152→190px bằng thanh gold, số
 ## Motion và màu phụ — 16/10/2026
 
 Đo ảnh `codex-clipboard-2dfc8320-7763-4bac-bd4e-ceb706315268.png`
-1920×1080 bằng `scripts/measure-motion-layout.mjs`: line góc xanh 5px,
+1920×1080 bằng `scripts/inspect/measure-motion-layout.mjs`: line góc xanh 5px,
 đỏ 5–6px; median màu xanh đã compositing RGB(76,143,179), logo xanh
 RGB(19,105,189). Không coi màu pixel ghép nền là màu asset nguyên bản.
 Minimal dùng line 5px và màu phụ configurable (#69afd4/#df7d86 mặc định).

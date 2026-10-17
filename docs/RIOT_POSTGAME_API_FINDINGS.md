@@ -45,7 +45,7 @@ kiểm chứng; thiếu trong bảng tài liệu không có nghĩa payload khôn
 ## Kiểm chứng tài liệu có thể tái lập
 
 ```powershell
-node scripts/inspect-riot-postgame-schema.mjs
+node scripts/inspect/inspect-riot-postgame-schema.mjs
 ```
 
 Hai GET chỉ vào public reference của Riot, không dùng key, không query game.

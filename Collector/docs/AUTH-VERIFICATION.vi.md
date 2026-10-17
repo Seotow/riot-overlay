@@ -31,8 +31,8 @@ mode unsupported hoặc lỗi auth từ các trạng thái này.
 ## Phần cần người dùng trước runtime
 
 1. Cấu hình local: copy
-   `Collector/config/collector.env.example` thành
-   `Collector/config/collector.env`,
+   `collector/config/collector.env.example` thành
+   `collector/config/collector.env`,
    điền email/password bằng editor trên máy. Không gửi mật khẩu/token vào chat.
    File env đã bị Git ignore. Đây là tài khoản email/password; OAuth Google
    tương tác hoặc MFA chưa được host hỗ trợ.
@@ -52,7 +52,7 @@ native authorization proof. Chỉ có frame thật mới đánh giá roster/fiel
 Lệnh account-only (chỉ sau cấu hình):
 
 ```powershell
-python Collector/scripts/check-auth.py
+python collector/scripts/check-auth.py
 ```
 
 Lệnh này không cần replay. Nếu network bị sandbox chặn thì dùng approval

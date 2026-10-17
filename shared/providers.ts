@@ -1,12 +1,6 @@
 import { z } from "zod";
 export const providerReportSchema = z.object({
   capturedAt: z.string().datetime(),
-  safety: z
-    .object({
-      allowed: z.boolean(),
-      reason: z.enum(["spectator", "replay", "player", "unverified"]),
-    })
-    .optional(),
   selected: z.enum([
     "riot",
     "leaguebroadcast",
@@ -49,14 +43,7 @@ export const providerReportSchema = z.object({
       slotOrder: z.literal("team-hero-index"),
       eventSemantics: z.literal("unverified"),
       runtime: z.object({
-        status: z.enum([
-          "stopped",
-          "starting",
-          "running",
-          "external",
-          "failed",
-          "conflict",
-        ]),
+        status: z.enum(["stopped", "starting", "running", "external", "failed", "conflict"]),
         error: z.string().nullable(),
         owned: z.boolean(),
         credentialConfigured: z.boolean(),

@@ -19,11 +19,10 @@ globalThis.fetch = async (input, options) => {
   const url = String(input);
   const prefix = `https://sea.api.riotgames.com/lol/match/v5/matches/${id}`;
   if (url !== prefix && url !== `${prefix}/timeline`)
-    return url.startsWith("https://") && new URL(url).hostname.endsWith(".api.riotgames.com") ? new Response("", { status: 404 }) : nativeFetch(input, options);
-  if (
-    new Headers(options?.headers).get("X-Riot-Token") !==
-    "SYNTHETIC-NOT-A-REAL-KEY"
-  )
+    return url.startsWith("https://") && new URL(url).hostname.endsWith(".api.riotgames.com")
+      ? new Response("", { status: 404 })
+      : nativeFetch(input, options);
+  if (new Headers(options?.headers).get("X-Riot-Token") !== "SYNTHETIC-NOT-A-REAL-KEY")
     return new Response("", { status: 403 });
   if (url.endsWith("/timeline"))
     return Response.json({

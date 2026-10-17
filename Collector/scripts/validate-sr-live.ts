@@ -12,27 +12,17 @@ import { normalizeIngame } from "../../server/ingame-adapter";
 
 if (process.argv.length !== 2) throw Error("No options accepted");
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
-const output = resolve(
-  root,
-  "src/LeagueCollector/src/LeagueCollector/bin/Release/net10.0",
-);
+const output = resolve(root, "hosts/lb-host/src/LeagueCollector/bin/Release/net10.0");
 const dll = resolve(output, "LeagueCollector.dll");
-const sdk = resolve(
-  root,
-  "../.npm-cache/lb-headless/dotnet-10.0.401/dotnet.exe",
-);
+const sdk = resolve(root, "../.npm-cache/lb-headless/dotnet-10.0.401/dotnet.exe");
 const port = 18807;
 const hash = async (path: string) =>
   createHash("sha256")
     .update(await readFile(path))
     .digest("hex");
 const delay = (ms: number) => new Promise((r) => setTimeout(r, ms));
-const numeric = (v: unknown) =>
-  typeof v === "number" && Number.isFinite(v) ? v : null;
-async function get(
-  path: string,
-  game = false,
-): Promise<{ http: number | null; data: any }> {
+const numeric = (v: unknown) => (typeof v === "number" && Number.isFinite(v) ? v : null);
+async function get(path: string, game = false): Promise<{ http: number | null; data: any }> {
   return new Promise((resolveResult) => {
     const request = (game ? https : http).get(
       {
@@ -90,8 +80,7 @@ await access(resolve(output, "collector.env"));
 if ((await open(port)) !== false || (await open(58869)) !== false)
   throw Error("Validation or LB listener occupied; no host started");
 const nativeBefore = await open(4998);
-if (nativeBefore !== false)
-  throw Error("Existing native producer; this cold-start trial not run");
+if (nativeBefore !== false) throw Error("Existing native producer; this cold-start trial not run");
 const before = await get("/liveclientdata/allgamedata", true);
 const active = await get("/liveclientdata/activeplayername/", true);
 if (
@@ -106,10 +95,7 @@ if (before.data?.events?.Events?.some((e: any) => e.EventName === "GameEnd"))
   throw Error("GameEnd observed; no trial");
 await delay(600);
 const second = await get("/liveclientdata/gamestats", true);
-if (
-  second.http !== 200 ||
-  !(second.data?.gameTime > before.data.gameData.gameTime)
-)
+if (second.http !== 200 || !(second.data?.gameTime > before.data.gameData.gameTime))
   throw Error("Clock not advancing; no trial");
 const folder = resolve(root, "evidence/validation");
 await mkdir(folder, { recursive: true });
@@ -168,8 +154,7 @@ let exited = false,
   exitCode: number | null = null,
   text = "";
 const collect = (chunk: Buffer) => {
-  if (text.length < 65536)
-    text += chunk.toString().slice(0, 65536 - text.length);
+  if (text.length < 65536) text += chunk.toString().slice(0, 65536 - text.length);
 };
 child.stdout.on("data", collect);
 child.stderr.on("data", collect);
@@ -197,18 +182,11 @@ try {
     const native = await get("/api/snapshot");
     const live = await get("/liveclientdata/allgamedata", true);
     const normalized = normalizeCollector(native.data, Date.now());
-    const rows = Array.isArray(native.data?.data?.heroes)
-      ? native.data.data.heroes
-      : [];
-    const indices = rows
-      .map((h: any) => h.heroIndex)
-      .filter((v: any) => Number.isInteger(v));
+    const rows = Array.isArray(native.data?.data?.heroes) ? native.data.data.heroes : [];
+    const indices = rows.map((h: any) => h.heroIndex).filter((v: any) => Number.isInteger(v));
     const histogram = (values: unknown[], allowed: number[]) =>
       Object.fromEntries(
-        allowed.map((key) => [
-          String(key),
-          values.filter((v) => v === key).length,
-        ]),
+        allowed.map((key) => [String(key), values.filter((v) => v === key).length]),
       );
     const comparison: any = {
       clockSkew: null,
@@ -217,17 +195,11 @@ try {
       fields: {},
     };
     if (normalized && live.http === 200) {
-      const reference = normalizeIngame(
-        live.data,
-        {},
-        new Date().toISOString(),
-      );
+      const reference = normalizeIngame(live.data, {}, new Date().toISOString());
       const skew =
         reference.gameTime.value === null
           ? null
-          : Math.abs(
-              reference.gameTime.value - normalized.sample.gameTime.value!,
-            );
+          : Math.abs(reference.gameTime.value - normalized.sample.gameTime.value!);
       comparison.clockSkew = skew;
       comparison.aligned = skew !== null && skew <= 1;
       if (comparison.aligned)
@@ -241,14 +213,7 @@ try {
           if (candidates.length !== 1) continue;
           comparison.rosterMatches++;
           const q = candidates[0];
-          for (const key of [
-            "level",
-            "kills",
-            "deaths",
-            "assists",
-            "cs",
-            "items",
-          ] as const) {
+          for (const key of ["level", "kills", "deaths", "assists", "cs", "items"] as const) {
             if (p[key].value === null || q[key].value === null) continue;
             const entry = (comparison.fields[key] ??= {
               compared: 0,
@@ -257,15 +222,11 @@ try {
             entry.compared++;
             const a =
               key === "items"
-                ? [...(p[key].value as number[])]
-                    .filter(Boolean)
-                    .sort((a, b) => a - b)
+                ? [...(p[key].value as number[])].filter(Boolean).sort((a, b) => a - b)
                 : p[key].value;
             const b =
               key === "items"
-                ? [...(q[key].value as number[])]
-                    .filter(Boolean)
-                    .sort((a, b) => a - b)
+                ? [...(q[key].value as number[])].filter(Boolean).sort((a, b) => a - b)
                 : q[key].value;
             if (JSON.stringify(a) === JSON.stringify(b)) entry.matched++;
           }
@@ -319,9 +280,8 @@ try {
       normalized: normalized !== null,
       adapter: adapter.snapshot(),
       comparison,
-      resourcePairs: rows.filter(
-        (h: any) => Number.isFinite(h.resource) && h.maxResource > 0,
-      ).length,
+      resourcePairs: rows.filter((h: any) => Number.isFinite(h.resource) && h.maxResource > 0)
+        .length,
       fieldCoverage: normalized
         ? Object.fromEntries(
             [
@@ -340,9 +300,8 @@ try {
               "cooldowns",
             ].map((key) => [
               key,
-              normalized.sample.players.filter(
-                (p) => (p as any)[key]?.availability === "observed",
-              ).length,
+              normalized.sample.players.filter((p) => (p as any)[key]?.availability === "observed")
+                .length,
             ]),
           )
         : {},
@@ -364,21 +323,16 @@ for (const line of text.split(/\r?\n/))
     try {
       const event = JSON.parse(line);
       if (
-        ![
-          "game-window",
-          "inject-reported",
-          "game-started",
-          "native-failed",
-          "game-ended",
-        ].includes(event.validationEvent)
+        !["game-window", "inject-reported", "game-started", "native-failed", "game-ended"].includes(
+          event.validationEvent,
+        )
       )
         continue;
       report.events.push({
         stage: event.validationEvent,
         count: numeric(event.count),
         version:
-          typeof event.gameVersion === "string" &&
-          /^\d+(?:\.\d+){1,3}$/.test(event.gameVersion)
+          typeof event.gameVersion === "string" && /^\d+(?:\.\d+){1,3}$/.test(event.gameVersion)
             ? event.gameVersion
             : null,
         errorType: [
@@ -412,13 +366,9 @@ console.log(
   JSON.stringify({
     evidence: name,
     samples: report.samples.length,
-    nativeSamples: report.samples.filter((s: any) => s.nativeHeroes === 10)
-      .length,
+    nativeSamples: report.samples.filter((s: any) => s.nativeHeroes === 10).length,
     normalizedSamples: report.samples.filter((s: any) => s.normalized).length,
-    maxSnapshots: Math.max(
-      0,
-      ...report.samples.map((s: any) => s.snapshots ?? 0),
-    ),
+    maxSnapshots: Math.max(0, ...report.samples.map((s: any) => s.snapshots ?? 0)),
     events: report.events,
     gracefulExit: report.gracefulExit,
     after: report.after,

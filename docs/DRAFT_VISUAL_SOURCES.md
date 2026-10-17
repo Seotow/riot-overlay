@@ -19,7 +19,7 @@ resize tối đa800×480/quality82; không AI, WebGL hoặc xử lý ảnh trong
 Nguồn/version/input/output SHA256 từng ảnh tại
 `public/ddragon/15.20.1/splash-centered/provenance.json`.
 
-`scripts/sync-draft-centered-art.mjs` đọc metadata15.20 và tải centered base skin,
+`scripts/assets/sync-draft-centered-art.mjs` đọc metadata15.20 và tải centered base skin,
 tạo WebP offline bằng sharp; `OVERLAY_BROWSER_PACKAGES` trỏ thư mục chứa sharp.
 Raw nguồn/metadata chỉ cache ignored. `sync-draft-assets.mjs` giữ field splash
 để tái tạo icons/portrait không làm mất liên kết ảnh ngang.

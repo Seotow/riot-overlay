@@ -26,7 +26,7 @@ Giữ một surface chính, font/ảnh/gauge không giảm opacity. Config riên
 giá trị khác vẫn được giữ; theme cá nhân hiện chưa lưu field, nên reload nhận
 mặc định mới mà không sửa file của người dùng. Bans/draft không thay đổi.
 
-Tái đo: `scripts/measure-panel-tones.mjs`, cần `OVERLAY_BROWSER_PACKAGES` có
+Tái đo: `scripts/inspect/measure-panel-tones.mjs`, cần `OVERLAY_BROWSER_PACKAGES` có
 sharp; JSON trong cache ignored. Renderer PNG alpha kiểm tra qua production-smoke,
 build/104 test đạt, hai layout và slider/save/OBS vẫn đạt. Preview mới
 `.npm-cache/visual-audit/ingame-opacity-calibrated.png` chỉ minh họa tone trên

@@ -18,7 +18,7 @@ có trong snapshot chưa được map; vector thiếu/mơ hồ giữ output tr�
 
 Đây là source-derived/fixture-tested, **chưa kiểm chứng event thật trong game**.
 Không có native execution, auth request hoặc REA Evidence ID mới trong lượt
-này. Source/hash đọc ở workspace dưới `Collector/src/LeagueCollector/vendor/
+này. Source/hash đọc ở workspace dưới `collector/hosts/lb-host/vendor/
 Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot`:
 
 | Tệp | SHA-256 |

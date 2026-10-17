@@ -11,19 +11,19 @@ modules/valorant/**/logs/
 modules/valorant/**/replays/
 
 # Collector vendor/source exports, runtimes and retained local validation evidence
-Collector/archive/
-Collector/config/collector.env
-Collector/evidence/
-Collector/**/bin/
-Collector/**/obj/
-Collector/**/__pycache__/
-Collector/**/collector.env
-Collector/**/bluebottle.env
-Collector/**/dist/
-Collector/**/build/
-Collector/**/build-logs/
-Collector/**/recordings/
-Collector/**/captures/
+collector/archive/
+collector/config/collector.env
+collector/evidence/
+collector/**/bin/
+collector/**/obj/
+collector/**/__pycache__/
+collector/**/collector.env
+collector/**/bluebottle.env
+collector/**/dist/
+collector/**/build/
+collector/**/build-logs/
+collector/**/recordings/
+collector/**/captures/
 
 # Generated development/test outputs
 .dev-build/

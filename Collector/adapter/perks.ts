@@ -1,8 +1,7 @@
 import pathsData from "../../shared/generated/rune-paths.json";
 import { liveCatalog, liveRune } from "../../shared/live-assets";
 
-const paths: Record<string, { treeId: number; keystone: boolean }> =
-  pathsData.paths;
+const paths: Record<string, { treeId: number; keystone: boolean }> = pathsData.paths;
 const shards = new Set([5001, 5005, 5007, 5008, 5011]);
 
 // Source-derived projection only. Never assume that native vector order matches
@@ -18,8 +17,7 @@ export function collectorPerks(raw: unknown) {
     return missing;
   const ids: number[] = [];
   for (const entry of raw) {
-    if (!entry || typeof entry !== "object" || Array.isArray(entry))
-      return missing;
+    if (!entry || typeof entry !== "object" || Array.isArray(entry)) return missing;
     const id = (entry as Record<string, unknown>).id;
     if (
       typeof id !== "number" ||
@@ -44,9 +42,7 @@ export function collectorPerks(raw: unknown) {
     first.includes(keystone) &&
     secondary !== undefined &&
     secondary !== primary &&
-    second.every(
-      (id) => paths[id]?.treeId === secondary && !paths[id].keystone,
-    ) &&
+    second.every((id) => paths[id]?.treeId === secondary && !paths[id].keystone) &&
     ids.slice(6).every((id) => shards.has(id));
   return { perks: ordered ? ids : null, keystone };
 }

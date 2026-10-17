@@ -1,7 +1,7 @@
 $ErrorActionPreference = 'Stop'
 $taskRoot = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'))
 $taskSdk = Join-Path $taskRoot '.npm-cache/lb-headless/dotnet-10.0.401/dotnet.exe'
-$taskDll = Join-Path $PSScriptRoot '../src/LeagueCollector/src/LeagueCollector/bin/Release/net10.0/LeagueCollector.dll'
+$taskDll = Join-Path $PSScriptRoot '../hosts/lb-host/src/LeagueCollector/bin/Release/net10.0/LeagueCollector.dll'
 $taskOutput = @(& $taskSdk $taskDll --ipc-status 2>&1)
 $taskCode = $LASTEXITCODE
 $taskResult = $null

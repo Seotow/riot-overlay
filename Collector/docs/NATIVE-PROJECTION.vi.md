@@ -7,7 +7,7 @@ REA mới và không thực hiện native decompilation, auth, inject hoặc đ�
 
 ## Nguồn và giới hạn
 
-Source đã restore dưới `Collector/src/LeagueCollector/vendor/Farsight/`:
+Source đã restore dưới `collector/hosts/lb-host/vendor/Farsight/`:
 
 - `BlueBottleIPC.LeagueBroadcast.Snapshot/Perk.cs`: FlatBuffer struct có Id,
   Value và StatModValue. `SchemaJson.cs` xuất trường schema; adapter chỉ lấy Id.

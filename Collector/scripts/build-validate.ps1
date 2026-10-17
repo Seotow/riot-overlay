@@ -1,7 +1,7 @@
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
 $taskRoot = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'))
-$taskSource = Join-Path $PSScriptRoot '../src/LeagueCollector'
+$taskSource = Join-Path $PSScriptRoot '../hosts/lb-host'
 $taskSdk = Join-Path $taskRoot '.npm-cache/lb-headless/dotnet-10.0.401/dotnet.exe'
 $taskProject = Join-Path $taskSource 'src/LeagueCollector/LeagueCollector.csproj'
 $taskDll = Join-Path $taskSource 'src/LeagueCollector/bin/Release/net10.0/LeagueCollector.dll'

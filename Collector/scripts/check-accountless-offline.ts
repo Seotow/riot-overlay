@@ -3,12 +3,10 @@ import { access, readFile, mkdir, writeFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
 import { resolve } from "node:path";
 import assert from "node:assert/strict";
-import { accountlessEnvironment } from "../runtime/accountless-environment";
+import { accountlessEnvironment } from "../supervisor/accountless-environment";
 
-const output = resolve(
-  "Collector/src/LeagueCollector/src/LeagueCollector/bin/Release/net10.0",
-);
-const absent = resolve("Collector/config/.accountless-env-must-not-exist");
+const output = resolve("collector/hosts/lb-host/src/LeagueCollector/bin/Release/net10.0");
+const absent = resolve("collector/config/.accountless-env-must-not-exist");
 let missing = false;
 try {
   await access(absent);
@@ -24,7 +22,7 @@ assert.equal(
 );
 const startedAt = new Date().toISOString();
 const child = spawn(
-  resolve("Collector/runtime/LeagueCollector/runtime/dotnet.exe"),
+  resolve("collector/bundles/lb-host/runtime/dotnet.exe"),
   [
     resolve(output, "LeagueCollector.dll"),
     "--auth-check",
@@ -78,7 +76,7 @@ const report = {
   dllCacheHashVerified: true,
   dataWithoutAccountVerified: false,
 };
-const folder = resolve("Collector/evidence/validation");
+const folder = resolve("collector/evidence/validation");
 await mkdir(folder, { recursive: true });
 await writeFile(
   resolve(folder, `accountless-offline-${startedAt.replaceAll(":", "-")}.json`),

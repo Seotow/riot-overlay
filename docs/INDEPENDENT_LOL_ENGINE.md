@@ -51,7 +51,7 @@ chưa tự giải đồng bộ nguồn hoặc freshness của từng giá trị.
 Một lần kiểm tra schema công khai của game patch đang chạy:
 
 ```powershell
-node scripts/inspect-game-client-schema.mjs
+node scripts/inspect/inspect-game-client-schema.mjs
 ```
 
 Công cụ chỉGET Swagger2999, không gọi gameplay command; report chỉ tên route/
