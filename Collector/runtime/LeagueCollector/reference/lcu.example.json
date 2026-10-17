@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "sequence": 43,
+  "timestamp": "2026-10-14T00:00:00Z",
+  "type": "lcu",
+  "source": "lcu",
+  "synthetic": false,
+  "recordedAt": null,
+  "data": {
+    "state": "connected",
+    "phase": "ChampSelect",
+    "champSelect": {
+      "myTeam": [
+        {
+          "cellId": 0,
+          "championId": 103,
+          "assignedPosition": "middle",
+          "spell1Id": 4,
+          "spell2Id": 14
+        }
+      ],
+      "enemyTeam": [
+        {
+          "cellId": 5,
+          "championId": 86
+        }
+      ],
+      "bans": {
+        "myTeamBans": [
+          238
+        ],
+        "theirTeamBans": [
+          157
+        ],
+        "numBans": 2
+      },
+      "actions": [],
+      "timer": {
+        "phase": "FINALIZATION",
+        "adjustedTimeLeftInPhase": 15000
+      }
+    }
+  }
+}

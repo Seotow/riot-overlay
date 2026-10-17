@@ -1,0 +1,131 @@
+{
+  "schemaVersion": 1,
+  "sequence": 42,
+  "timestamp": "2026-10-14T00:00:00Z",
+  "type": "snapshot",
+  "source": "lblib",
+  "synthetic": false,
+  "recordedAt": null,
+  "data": {
+    "gameTime": 900.5,
+    "playbackSpeed": 1.0,
+    "utcTime": 1791936000000,
+    "camera": null,
+    "teamStats": [
+      {
+        "towersLost": 1
+      },
+      {
+        "towersLost": 2
+      }
+    ],
+    "gameEvents": {
+      "deathEvents": [],
+      "damageDealtEvents": [],
+      "notificationEvents": [],
+      "inhibitorKillEvents": [],
+      "firstBloodEvents": [],
+      "turretKillEvents": [],
+      "turretPlateDestroyEvents": [],
+      "xKillEvents": [],
+      "aceEvents": [],
+      "objectiveStealEvents": [],
+      "heroDieEvents": []
+    },
+    "heroes": [
+      {
+        "info": {
+          "name": "ExamplePlayer#VN2",
+          "networkId": 12345,
+          "index": 10,
+          "position": {
+            "x": 5400.0,
+            "y": 52.0,
+            "z": 6800.0
+          },
+          "rotation": null,
+          "team": 1
+        },
+        "common": {
+          "identifier": "Ahri",
+          "currentAttack": "",
+          "status": 9,
+          "health": 1250.0,
+          "maxHealth": 1600.0,
+          "armor": null,
+          "magicResist": null,
+          "level": 11,
+          "attackSpeedMultiplier": null,
+          "movementSpeed": null,
+          "dataStack": null,
+          "buffs": [],
+          "animations": null,
+          "submeshVisiblityMask": 0,
+          "attackSpeedBonus": null,
+          "animationState": null
+        },
+        "heroIndex": 0,
+        "respawnTime": 0.0,
+        "gold": 1350.0,
+        "totalGold": 7800.0,
+        "goldGivenOnDeath": 0.0,
+        "experience": 7200.0,
+        "resource": 600.0,
+        "maxResource": 900.0,
+        "resourceType": 0,
+        "visionScore": 12.0,
+        "spells": [
+          {
+            "name": "AhriOrbofDeception",
+            "icon": null,
+            "readyAt": 905.0,
+            "maxCooldown": 7.0,
+            "ammoReadyAt": 0.0,
+            "ammoCooldown": 0.0,
+            "initAtTime": 898.0,
+            "index": 0,
+            "level": 5,
+            "ammoCount": 0,
+            "cooldown": 7.0,
+            "isToggled": false
+          }
+        ],
+        "items": [
+          {
+            "itemAssets": [],
+            "stats": null,
+            "combineCost": 0,
+            "id": 1001,
+            "count": 1,
+            "stacks": 0,
+            "charges": 0,
+            "slot": 0,
+            "itemAssetHashes": []
+          }
+        ],
+        "perks": [
+          {
+            "id": 8112,
+            "value": 0.0,
+            "statModValue": 0.0
+          }
+        ],
+        "bones": null,
+        "characterStats": null,
+        "laneMinionKills": 120,
+        "neutralMinionKills": 8,
+        "kills": 3,
+        "deaths": 1,
+        "assists": 5
+      }
+    ],
+    "minions": [],
+    "turrets": [],
+    "barracksDampeners": [],
+    "hqs": [],
+    "missiles": [],
+    "particleEmitters": [],
+    "misc": [],
+    "gameId": "EXAMPLE-GAME-ID"
+  }
+}

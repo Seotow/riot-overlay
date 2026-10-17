@@ -1,0 +1,2786 @@
+{
+  "description": "Danh mục schema native đọc từ C# đã khôi phục; không xác nhận mọi field thuộc Free. Không phải payload trận thật. Value structs xuất public fields; IEnumerable xuất thành mảng. Inline vectors lưu bằng private fields không được SchemaJson xuất riêng.",
+  "rootType": "GameInfo",
+  "models": {
+    "AIClient": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/AIClient.cs",
+      "fields": [
+        {
+          "index": 0,
+          "jsonName": "identifier",
+          "csharpType": "string?",
+          "required": false
+        },
+        {
+          "index": 1,
+          "jsonName": "currentAttack",
+          "csharpType": "string?",
+          "required": false
+        },
+        {
+          "index": 2,
+          "jsonName": "status",
+          "csharpType": "AIClientStatus",
+          "required": false
+        },
+        {
+          "index": 3,
+          "jsonName": "health",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 4,
+          "jsonName": "maxHealth",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 5,
+          "jsonName": "armor",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 6,
+          "jsonName": "magicResist",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 7,
+          "jsonName": "level",
+          "csharpType": "uint",
+          "required": false
+        },
+        {
+          "index": 8,
+          "jsonName": "attackSpeedMultiplier",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 9,
+          "jsonName": "movementSpeed",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 10,
+          "jsonName": "dataStack",
+          "csharpType": "DataStack?",
+          "required": false
+        },
+        {
+          "index": 11,
+          "jsonName": "buffs",
+          "csharpType": "IList<Buff>?",
+          "required": false
+        },
+        {
+          "index": 12,
+          "jsonName": "animations",
+          "csharpType": "IList<Animation>?",
+          "required": false
+        },
+        {
+          "index": 13,
+          "jsonName": "submeshVisiblityMask",
+          "csharpType": "uint",
+          "required": false
+        },
+        {
+          "index": 14,
+          "jsonName": "attackSpeedBonus",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 15,
+          "jsonName": "animationState",
+          "csharpType": "AnimationState?",
+          "required": false
+        }
+      ]
+    },
+    "AIHeroClient": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/AIHeroClient.cs",
+      "fields": [
+        {
+          "index": 0,
+          "jsonName": "info",
+          "csharpType": "ObjectInfo",
+          "required": true
+        },
+        {
+          "index": 1,
+          "jsonName": "common",
+          "csharpType": "AIClient",
+          "required": true
+        },
+        {
+          "index": 2,
+          "jsonName": "heroIndex",
+          "csharpType": "uint",
+          "required": false
+        },
+        {
+          "index": 3,
+          "jsonName": "respawnTime",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 4,
+          "jsonName": "gold",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 5,
+          "jsonName": "totalGold",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 6,
+          "jsonName": "goldGivenOnDeath",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 7,
+          "jsonName": "experience",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 8,
+          "jsonName": "resource",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 9,
+          "jsonName": "maxResource",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 10,
+          "jsonName": "resourceType",
+          "csharpType": "byte",
+          "required": false
+        },
+        {
+          "index": 11,
+          "jsonName": "visionScore",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 12,
+          "jsonName": "spells",
+          "csharpType": "IList<Spell>?",
+          "required": false
+        },
+        {
+          "index": 13,
+          "jsonName": "items",
+          "csharpType": "IList<Item>?",
+          "required": false
+        },
+        {
+          "index": 14,
+          "jsonName": "perks",
+          "csharpType": "IList<Perk>?",
+          "required": false
+        },
+        {
+          "index": 15,
+          "jsonName": "bones",
+          "csharpType": "IList<Bone>?",
+          "required": false
+        },
+        {
+          "index": 16,
+          "jsonName": "characterStats",
+          "csharpType": "CharacterStats?",
+          "required": false
+        },
+        {
+          "index": 17,
+          "jsonName": "laneMinionKills",
+          "csharpType": "int",
+          "required": false
+        },
+        {
+          "index": 18,
+          "jsonName": "neutralMinionKills",
+          "csharpType": "int",
+          "required": false
+        },
+        {
+          "index": 19,
+          "jsonName": "kills",
+          "csharpType": "int",
+          "required": false
+        },
+        {
+          "index": 20,
+          "jsonName": "deaths",
+          "csharpType": "int",
+          "required": false
+        },
+        {
+          "index": 21,
+          "jsonName": "assists",
+          "csharpType": "int",
+          "required": false
+        }
+      ]
+    },
+    "AIMinionClient": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/AIMinionClient.cs",
+      "fields": [
+        {
+          "index": 0,
+          "jsonName": "info",
+          "csharpType": "ObjectInfo",
+          "required": true
+        },
+        {
+          "index": 1,
+          "jsonName": "common",
+          "csharpType": "AIClient",
+          "required": true
+        },
+        {
+          "index": 2,
+          "jsonName": "typeInfo",
+          "csharpType": "AIMinionClientTypeInfo",
+          "required": false
+        },
+        {
+          "index": 3,
+          "jsonName": "bones",
+          "csharpType": "IList<Bone>?",
+          "required": false
+        }
+      ]
+    },
+    "AITurretClient": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/AITurretClient.cs",
+      "fields": [
+        {
+          "index": 0,
+          "jsonName": "info",
+          "csharpType": "ObjectInfo",
+          "required": true
+        },
+        {
+          "index": 1,
+          "jsonName": "common",
+          "csharpType": "AIClient",
+          "required": true
+        },
+        {
+          "index": 2,
+          "jsonName": "plateCount",
+          "csharpType": "sbyte",
+          "required": false
+        },
+        {
+          "index": 3,
+          "jsonName": "maxPlateCount",
+          "csharpType": "sbyte",
+          "required": false
+        }
+      ]
+    },
+    "Animation": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/Animation.cs",
+      "fields": [
+        {
+          "index": 0,
+          "jsonName": "nameHash",
+          "csharpType": "uint",
+          "required": false
+        },
+        {
+          "index": 1,
+          "jsonName": "animationProgress",
+          "csharpType": "float",
+          "required": false
+        }
+      ]
+    },
+    "AnimationContribution": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/AnimationContribution.cs",
+      "fields": [
+        {
+          "index": 0,
+          "jsonName": "instanceId",
+          "csharpType": "ulong",
+          "required": false
+        },
+        {
+          "index": 1,
+          "jsonName": "nameHash",
+          "csharpType": "uint",
+          "required": false
+        },
+        {
+          "index": 2,
+          "jsonName": "time",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 3,
+          "jsonName": "duration",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 4,
+          "jsonName": "weight",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 5,
+          "jsonName": "track",
+          "csharpType": "uint",
+          "required": false
+        },
+        {
+          "index": 6,
+          "jsonName": "blendMode",
+          "csharpType": "AnimationBlendMode",
+          "required": false
+        },
+        {
+          "index": 7,
+          "jsonName": "jointWeights",
+          "csharpType": "IList<AnimationJointWeight>?",
+          "required": false
+        }
+      ]
+    },
+    "AnimationJointWeight": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/AnimationJointWeight.cs",
+      "fields": [
+        {
+          "index": 0,
+          "jsonName": "nameHash",
+          "csharpType": "uint",
+          "required": false
+        },
+        {
+          "index": 1,
+          "jsonName": "weight",
+          "csharpType": "float",
+          "required": false
+        }
+      ]
+    },
+    "AnimationPoseNode": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/AnimationPoseNode.cs",
+      "fields": [
+        {
+          "index": 0,
+          "jsonName": "contribution",
+          "csharpType": "int",
+          "required": false
+        },
+        {
+          "index": 1,
+          "jsonName": "from",
+          "csharpType": "int",
+          "required": false
+        },
+        {
+          "index": 2,
+          "jsonName": "to",
+          "csharpType": "int",
+          "required": false
+        },
+        {
+          "index": 3,
+          "jsonName": "alpha",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 4,
+          "jsonName": "jointAlphas",
+          "csharpType": "IList<AnimationJointWeight>?",
+          "required": false
+        },
+        {
+          "index": 5,
+          "jsonName": "sampleWeights",
+          "csharpType": "IList<AnimationJointWeight>?",
+          "required": false
+        },
+        {
+          "index": 6,
+          "jsonName": "spherical",
+          "csharpType": "bool",
+          "required": false
+        }
+      ]
+    },
+    "AnimationState": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/AnimationState.cs",
+      "fields": [
+        {
+          "index": 0,
+          "jsonName": "version",
+          "csharpType": "ushort",
+          "required": false
+        },
+        {
+          "index": 1,
+          "jsonName": "status",
+          "csharpType": "AnimationStateStatus",
+          "required": false
+        },
+        {
+          "index": 2,
+          "jsonName": "contributions",
+          "csharpType": "IList<AnimationContribution>?",
+          "required": false
+        },
+        {
+          "index": 3,
+          "jsonName": "poses",
+          "csharpType": "IList<AnimationPoseNode>?",
+          "required": false
+        },
+        {
+          "index": 4,
+          "jsonName": "tracks",
+          "csharpType": "IList<AnimationTrackState>?",
+          "required": false
+        }
+      ]
+    },
+    "AnimationTrackState": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/AnimationTrackState.cs",
+      "fields": [
+        {
+          "index": 0,
+          "jsonName": "track",
+          "csharpType": "uint",
+          "required": false
+        },
+        {
+          "index": 1,
+          "jsonName": "root",
+          "csharpType": "int",
+          "required": false
+        },
+        {
+          "index": 2,
+          "jsonName": "weight",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 3,
+          "jsonName": "blendMode",
+          "csharpType": "AnimationBlendMode",
+          "required": false
+        },
+        {
+          "index": 4,
+          "jsonName": "jointWeights",
+          "csharpType": "IList<AnimationJointWeight>?",
+          "required": false
+        }
+      ]
+    },
+    "AuthenticationChallenge": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/AuthenticationChallenge.cs",
+      "fields": [
+        {
+          "index": 0,
+          "jsonName": "challenge",
+          "csharpType": "Challenge",
+          "required": true
+        }
+      ]
+    },
+    "AutoDirectorPresentation": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/AutoDirectorPresentation.cs",
+      "fields": [
+        {
+          "index": 0,
+          "jsonName": "enabled",
+          "csharpType": "bool",
+          "required": false
+        },
+        {
+          "index": 1,
+          "jsonName": "requestedRevision",
+          "csharpType": "ulong",
+          "required": false
+        },
+        {
+          "index": 2,
+          "jsonName": "appliedRevision",
+          "csharpType": "ulong",
+          "required": false
+        },
+        {
+          "index": 3,
+          "jsonName": "appliedGameTime",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 4,
+          "jsonName": "gameTime",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 5,
+          "jsonName": "framedHeroMask",
+          "csharpType": "uint",
+          "required": false
+        },
+        {
+          "index": 6,
+          "jsonName": "deferred",
+          "csharpType": "bool",
+          "required": false
+        }
+      ]
+    },
+    "Bone": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/Bone.cs",
+      "fields": [
+        {
+          "index": 0,
+          "jsonName": "name",
+          "csharpType": "string?",
+          "required": false
+        },
+        {
+          "index": 1,
+          "jsonName": "xform",
+          "csharpType": "Xform?",
+          "required": false
+        }
+      ]
+    },
+    "Buff": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/Buff.cs",
+      "fields": [
+        {
+          "index": 0,
+          "jsonName": "name",
+          "csharpType": "string?",
+          "required": false
+        },
+        {
+          "index": 1,
+          "jsonName": "startTime",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 2,
+          "jsonName": "endTime",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 3,
+          "jsonName": "count",
+          "csharpType": "uint",
+          "required": false
+        },
+        {
+          "index": 4,
+          "jsonName": "type",
+          "csharpType": "sbyte",
+          "required": false
+        }
+      ]
+    },
+    "Building": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/Building.cs",
+      "fields": [
+        {
+          "index": 0,
+          "jsonName": "info",
+          "csharpType": "ObjectInfo",
+          "required": true
+        },
+        {
+          "index": 1,
+          "jsonName": "health",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 2,
+          "jsonName": "maxHealth",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 3,
+          "jsonName": "status",
+          "csharpType": "sbyte",
+          "required": false
+        }
+      ]
+    },
+    "Camera": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/Camera.cs",
+      "fields": [
+        {
+          "index": 0,
+          "jsonName": "screenX",
+          "csharpType": "uint",
+          "required": false
+        },
+        {
+          "index": 1,
+          "jsonName": "screenY",
+          "csharpType": "uint",
+          "required": false
+        },
+        {
+          "index": 2,
+          "jsonName": "view",
+          "csharpType": "BlueBottleIPC.LeagueBroadcast.Common.Matrix4x4?",
+          "required": false
+        },
+        {
+          "index": 3,
+          "jsonName": "proj",
+          "csharpType": "BlueBottleIPC.LeagueBroadcast.Common.Matrix4x4?",
+          "required": false
+        },
+        {
+          "index": 4,
+          "jsonName": "focusPosition",
+          "csharpType": "BlueBottleIPC.LeagueBroadcast.Common.Vector3?",
+          "required": false
+        },
+        {
+          "index": 5,
+          "jsonName": "autoDirector",
+          "csharpType": "AutoDirectorPresentation?",
+          "required": false
+        }
+      ]
+    },
+    "CameraProperties": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/CameraProperties.cs",
+      "fields": [
+        {
+          "index": 0,
+          "jsonName": "isUnlocked",
+          "csharpType": "bool",
+          "required": false
+        },
+        {
+          "index": 1,
+          "jsonName": "zoomCurrent",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 2,
+          "jsonName": "zoomTarget",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 3,
+          "jsonName": "isFpsCamera",
+          "csharpType": "bool",
+          "required": false
+        }
+      ]
+    },
+    "CameraState": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/CameraState.cs",
+      "fields": [
+        {
+          "index": 0,
+          "jsonName": "pos",
+          "csharpType": "Vector3?",
+          "required": false
+        },
+        {
+          "index": 1,
+          "jsonName": "rotYaw",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 2,
+          "jsonName": "rotPitch",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 3,
+          "jsonName": "rotRoll",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 4,
+          "jsonName": "vel",
+          "csharpType": "Vector3?",
+          "required": false
+        },
+        {
+          "index": 5,
+          "jsonName": "isTeleport",
+          "csharpType": "bool",
+          "required": false
+        },
+        {
+          "index": 6,
+          "jsonName": "utcTime",
+          "csharpType": "ulong",
+          "required": false
+        },
+        {
+          "index": 7,
+          "jsonName": "sequence",
+          "csharpType": "uint",
+          "required": false
+        }
+      ]
+    },
+    "CharacterStats": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/CharacterStats.cs",
+      "fields": [
+        {
+          "index": 0,
+          "jsonName": "attackSpeedMod",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 1,
+          "jsonName": "percentAttackSpeedMod",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 2,
+          "jsonName": "percentMultiplicativeAttackSpeedMod",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 3,
+          "jsonName": "baseAttackDamage",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 4,
+          "jsonName": "flatPhysicalDamageMod",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 5,
+          "jsonName": "percentPhysicalDamageMod",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 6,
+          "jsonName": "crit",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 7,
+          "jsonName": "critDamageMultiplier",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 8,
+          "jsonName": "attackRange",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 9,
+          "jsonName": "flatMagicDamageMod",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 10,
+          "jsonName": "percentMagicDamageMod",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 11,
+          "jsonName": "abilityHasteMod",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 12,
+          "jsonName": "physicalLethality",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 13,
+          "jsonName": "flatArmorPenetration",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 14,
+          "jsonName": "percentArmorPenetration",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 15,
+          "jsonName": "percentBonusArmorPenetration",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 16,
+          "jsonName": "magicLethality",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 17,
+          "jsonName": "flatMagicPenetration",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 18,
+          "jsonName": "percentMagicPenetration",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 19,
+          "jsonName": "percentBonusMagicPenetration",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 20,
+          "jsonName": "percentLifeStealMod",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 21,
+          "jsonName": "percentSpellVampMod",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 22,
+          "jsonName": "percentPhysicalVamp",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 23,
+          "jsonName": "percentOmnivampMod",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 24,
+          "jsonName": "armor",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 25,
+          "jsonName": "bonusArmor",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 26,
+          "jsonName": "spellBlock",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 27,
+          "jsonName": "bonusSpellBlock",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 28,
+          "jsonName": "flatMagicReduction",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 29,
+          "jsonName": "percentMagicReduction",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 30,
+          "jsonName": "hpRegenRate",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 31,
+          "jsonName": "parRegenRate",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 32,
+          "jsonName": "percentCcReduction",
+          "csharpType": "float",
+          "required": false
+        }
+      ]
+    },
+    "CinematicAuthoringActionEvent": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/CinematicAuthoringActionEvent.cs",
+      "fields": [
+        {
+          "index": 0,
+          "jsonName": "generation",
+          "csharpType": "ulong",
+          "required": false
+        },
+        {
+          "index": 1,
+          "jsonName": "action",
+          "csharpType": "CinematicControllerAction",
+          "required": false
+        }
+      ]
+    },
+    "CinematicCameraEditEvent": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/CinematicCameraEditEvent.cs",
+      "fields": [
+        {
+          "index": 0,
+          "jsonName": "generation",
+          "csharpType": "ulong",
+          "required": false
+        },
+        {
+          "index": 1,
+          "jsonName": "clipIndex",
+          "csharpType": "uint",
+          "required": false
+        },
+        {
+          "index": 2,
+          "jsonName": "trackIndex",
+          "csharpType": "uint",
+          "required": false
+        },
+        {
+          "index": 3,
+          "jsonName": "sectionIndex",
+          "csharpType": "uint",
+          "required": false
+        },
+        {
+          "index": 4,
+          "jsonName": "channelIndex",
+          "csharpType": "uint",
+          "required": false
+        },
+        {
+          "index": 5,
+          "jsonName": "keyIndex",
+          "csharpType": "uint",
+          "required": false
+        },
+        {
+          "index": 6,
+          "jsonName": "phase",
+          "csharpType": "CinematicCameraEditPhase",
+          "required": false
+        },
+        {
+          "index": 7,
+          "jsonName": "position",
+          "csharpType": "Vector3?",
+          "required": false
+        },
+        {
+          "index": 8,
+          "jsonName": "handle",
+          "csharpType": "CinematicCameraEditorHandle",
+          "required": false
+        }
+      ]
+    },
+    "CinematicCameraPose": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/CinematicCameraPose.cs",
+      "fields": [
+        {
+          "index": 0,
+          "jsonName": "available",
+          "csharpType": "bool",
+          "required": false
+        },
+        {
+          "index": 1,
+          "jsonName": "isFreeCamera",
+          "csharpType": "bool",
+          "required": false
+        },
+        {
+          "index": 2,
+          "jsonName": "position",
+          "csharpType": "Vector3?",
+          "required": false
+        },
+        {
+          "index": 3,
+          "jsonName": "rotation",
+          "csharpType": "Vector3?",
+          "required": false
+        },
+        {
+          "index": 4,
+          "jsonName": "zoom",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 5,
+          "jsonName": "fov",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 6,
+          "jsonName": "channels",
+          "csharpType": "byte",
+          "required": false
+        }
+      ]
+    },
+    "CinematicPropEditEvent": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/CinematicPropEditEvent.cs",
+      "fields": [
+        {
+          "index": 0,
+          "jsonName": "generation",
+          "csharpType": "ulong",
+          "required": false
+        },
+        {
+          "index": 1,
+          "jsonName": "propId",
+          "csharpType": "string?",
+          "required": false
+        },
+        {
+          "index": 2,
+          "jsonName": "keyIndex",
+          "csharpType": "uint",
+          "required": false
+        },
+        {
+          "index": 3,
+          "jsonName": "phase",
+          "csharpType": "CinematicPropEditPhase",
+          "required": false
+        },
+        {
+          "index": 4,
+          "jsonName": "position",
+          "csharpType": "Vector3?",
+          "required": false
+        }
+      ]
+    },
+    "CrashReportChannel": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/CrashReportChannel.cs",
+      "fields": [
+        {
+          "index": 0,
+          "jsonName": "name",
+          "csharpType": "string",
+          "required": true
+        }
+      ]
+    },
+    "DamageDealtEvent": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/DamageDealtEvent.cs",
+      "fields": [
+        {
+          "index": 0,
+          "jsonName": "gameTime",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 1,
+          "jsonName": "sourceNetworkId",
+          "csharpType": "uint",
+          "required": false
+        },
+        {
+          "index": 2,
+          "jsonName": "targetNetworkId",
+          "csharpType": "uint",
+          "required": false
+        },
+        {
+          "index": 3,
+          "jsonName": "damageDealt",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 4,
+          "jsonName": "damageType",
+          "csharpType": "DamageType",
+          "required": false
+        },
+        {
+          "index": 5,
+          "jsonName": "attackSuccessFlag",
+          "csharpType": "AttackSuccessFlag",
+          "required": false
+        },
+        {
+          "index": 6,
+          "jsonName": "param4",
+          "csharpType": "sbyte",
+          "required": false
+        },
+        {
+          "index": 7,
+          "jsonName": "spellIdentifierELFHash",
+          "csharpType": "uint",
+          "required": false
+        },
+        {
+          "index": 8,
+          "jsonName": "targetHealthBefore",
+          "csharpType": "float",
+          "required": false
+        }
+      ]
+    },
+    "DataStack": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/DataStack.cs",
+      "fields": [
+        {
+          "index": 0,
+          "jsonName": "skinName",
+          "csharpType": "string?",
+          "required": false
+        },
+        {
+          "index": 1,
+          "jsonName": "charHash",
+          "csharpType": "uint",
+          "required": false
+        },
+        {
+          "index": 2,
+          "jsonName": "skinId",
+          "csharpType": "uint",
+          "required": false
+        }
+      ]
+    },
+    "DeathEvent": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/DeathEvent.cs",
+      "fields": [
+        {
+          "index": 0,
+          "jsonName": "gameTime",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 1,
+          "jsonName": "killerNetworkId",
+          "csharpType": "uint",
+          "required": false
+        },
+        {
+          "index": 2,
+          "jsonName": "victimNetworkId",
+          "csharpType": "uint",
+          "required": false
+        }
+      ]
+    },
+    "GameEvents": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/GameEvents.cs",
+      "fields": [
+        {
+          "index": 0,
+          "jsonName": "deathEvents",
+          "csharpType": "IList<DeathEvent>?",
+          "required": false
+        },
+        {
+          "index": 1,
+          "jsonName": "damageDealtEvents",
+          "csharpType": "IList<DamageDealtEvent>?",
+          "required": false
+        },
+        {
+          "index": 2,
+          "jsonName": "notificationEvents",
+          "csharpType": "IList<NotificationEvent>?",
+          "required": false
+        },
+        {
+          "index": 3,
+          "jsonName": "inhibitorKillEvents",
+          "csharpType": "IList<InhibitorKillEvent>?",
+          "required": false
+        },
+        {
+          "index": 4,
+          "jsonName": "firstBloodEvents",
+          "csharpType": "IList<FirstBloodEvent>?",
+          "required": false
+        },
+        {
+          "index": 5,
+          "jsonName": "turretKillEvents",
+          "csharpType": "IList<TurretKillEvent>?",
+          "required": false
+        },
+        {
+          "index": 6,
+          "jsonName": "turretPlateDestroyEvents",
+          "csharpType": "IList<TurretPlateDestroyEvent>?",
+          "required": false
+        },
+        {
+          "index": 7,
+          "jsonName": "xKillEvents",
+          "csharpType": "IList<XKillEvent>?",
+          "required": false
+        },
+        {
+          "index": 8,
+          "jsonName": "aceEvents",
+          "csharpType": "IList<AceEvent>?",
+          "required": false
+        },
+        {
+          "index": 9,
+          "jsonName": "objectiveStealEvents",
+          "csharpType": "IList<ObjectiveStealEvent>?",
+          "required": false
+        },
+        {
+          "index": 10,
+          "jsonName": "heroDieEvents",
+          "csharpType": "IList<HeroDieEvent>?",
+          "required": false
+        }
+      ]
+    },
+    "GameInfo": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/GameInfo.cs",
+      "fields": [
+        {
+          "index": 0,
+          "jsonName": "gameTime",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 1,
+          "jsonName": "playbackSpeed",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 2,
+          "jsonName": "utcTime",
+          "csharpType": "ulong",
+          "required": false
+        },
+        {
+          "index": 3,
+          "jsonName": "camera",
+          "csharpType": "Camera?",
+          "required": false
+        },
+        {
+          "index": 4,
+          "jsonName": "teamStats",
+          "csharpType": "IList<TeamStats>?",
+          "required": false
+        },
+        {
+          "index": 5,
+          "jsonName": "gameEvents",
+          "csharpType": "GameEvents?",
+          "required": false
+        },
+        {
+          "index": 6,
+          "jsonName": "heroes",
+          "csharpType": "IList<AIHeroClient>?",
+          "required": false
+        },
+        {
+          "index": 7,
+          "jsonName": "minions",
+          "csharpType": "IList<AIMinionClient>?",
+          "required": false
+        },
+        {
+          "index": 8,
+          "jsonName": "turrets",
+          "csharpType": "IList<AITurretClient>?",
+          "required": false
+        },
+        {
+          "index": 9,
+          "jsonName": "barracksDampeners",
+          "csharpType": "IList<Building>?",
+          "required": false
+        },
+        {
+          "index": 10,
+          "jsonName": "hqs",
+          "csharpType": "IList<Building>?",
+          "required": false
+        },
+        {
+          "index": 11,
+          "jsonName": "missiles",
+          "csharpType": "IList<Missile>?",
+          "required": false
+        },
+        {
+          "index": 12,
+          "jsonName": "particleEmitters",
+          "csharpType": "IList<GeneralParticleEmitter>?",
+          "required": false
+        },
+        {
+          "index": 13,
+          "jsonName": "misc",
+          "csharpType": "IList<MiscObjects>?",
+          "required": false
+        },
+        {
+          "index": 14,
+          "jsonName": "gameId",
+          "csharpType": "string?",
+          "required": false
+        }
+      ]
+    },
+    "GameStateMetaData": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/GameStateMetaData.cs",
+      "fields": [
+        {
+          "index": 0,
+          "jsonName": "gameVersion",
+          "csharpType": "string?",
+          "required": false
+        },
+        {
+          "index": 1,
+          "jsonName": "gameState",
+          "csharpType": "byte",
+          "required": false
+        },
+        {
+          "index": 2,
+          "jsonName": "gameId",
+          "csharpType": "string?",
+          "required": false
+        }
+      ]
+    },
+    "GeneralParticleEmitter": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/GeneralParticleEmitter.cs",
+      "fields": [
+        {
+          "index": 0,
+          "jsonName": "info",
+          "csharpType": "ObjectInfo",
+          "required": true
+        },
+        {
+          "index": 1,
+          "jsonName": "attachmentIndex",
+          "csharpType": "uint",
+          "required": false
+        },
+        {
+          "index": 2,
+          "jsonName": "targetIndex",
+          "csharpType": "uint",
+          "required": false
+        },
+        {
+          "index": 3,
+          "jsonName": "worldRotation",
+          "csharpType": "Matrix3x3",
+          "required": true
+        }
+      ]
+    },
+    "HudPanelRowClicked": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/HudPanelRowClicked.cs",
+      "fields": [
+        {
+          "index": 0,
+          "jsonName": "rowId",
+          "csharpType": "string",
+          "required": true
+        },
+        {
+          "index": 1,
+          "jsonName": "generation",
+          "csharpType": "uint",
+          "required": false
+        }
+      ]
+    },
+    "HudPanelRowsReordered": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/HudPanelRowsReordered.cs",
+      "fields": [
+        {
+          "index": 0,
+          "jsonName": "rowIds",
+          "csharpType": "IList<string>?",
+          "required": false
+        },
+        {
+          "index": 1,
+          "jsonName": "generation",
+          "csharpType": "uint",
+          "required": false
+        }
+      ]
+    },
+    "Item": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/Item.cs",
+      "fields": [
+        {
+          "index": 0,
+          "jsonName": "itemAssets",
+          "csharpType": "IList<string>?",
+          "required": false
+        },
+        {
+          "index": 1,
+          "jsonName": "stats",
+          "csharpType": "ItemStats?",
+          "required": false
+        },
+        {
+          "index": 2,
+          "jsonName": "combineCost",
+          "csharpType": "int",
+          "required": false
+        },
+        {
+          "index": 3,
+          "jsonName": "id",
+          "csharpType": "uint",
+          "required": false
+        },
+        {
+          "index": 4,
+          "jsonName": "count",
+          "csharpType": "sbyte",
+          "required": false
+        },
+        {
+          "index": 5,
+          "jsonName": "stacks",
+          "csharpType": "ushort",
+          "required": false
+        },
+        {
+          "index": 6,
+          "jsonName": "charges",
+          "csharpType": "ushort",
+          "required": false
+        },
+        {
+          "index": 7,
+          "jsonName": "slot",
+          "csharpType": "byte",
+          "required": false
+        },
+        {
+          "index": 8,
+          "jsonName": "itemAssetHashes",
+          "csharpType": "IList<ulong>?",
+          "required": false
+        }
+      ]
+    },
+    "MirrorState": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/MirrorState.cs",
+      "fields": [
+        {
+          "index": 0,
+          "jsonName": "gameTime",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 1,
+          "jsonName": "playbackSpeed",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 2,
+          "jsonName": "gameState",
+          "csharpType": "byte",
+          "required": false
+        },
+        {
+          "index": 3,
+          "jsonName": "utcTime",
+          "csharpType": "ulong",
+          "required": false
+        }
+      ]
+    },
+    "MiscObjects": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/MiscObjects.cs",
+      "fields": [
+        {
+          "index": 0,
+          "jsonName": "type",
+          "csharpType": "ulong",
+          "required": false
+        },
+        {
+          "index": 1,
+          "jsonName": "info",
+          "csharpType": "IList<ObjectInfo>?",
+          "required": false
+        }
+      ]
+    },
+    "Missile": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/Missile.cs",
+      "fields": [
+        {
+          "index": 0,
+          "jsonName": "info",
+          "csharpType": "ObjectInfo",
+          "required": true
+        },
+        {
+          "index": 1,
+          "jsonName": "sourceIdx",
+          "csharpType": "uint",
+          "required": false
+        },
+        {
+          "index": 2,
+          "jsonName": "targetIdx",
+          "csharpType": "uint",
+          "required": false
+        },
+        {
+          "index": 3,
+          "jsonName": "startPos",
+          "csharpType": "Vector3?",
+          "required": false
+        },
+        {
+          "index": 4,
+          "jsonName": "endPos",
+          "csharpType": "Vector3?",
+          "required": false
+        }
+      ]
+    },
+    "NotificationEvent": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/NotificationEvent.cs",
+      "fields": [
+        {
+          "index": 0,
+          "jsonName": "gameTime",
+          "csharpType": "float",
+          "required": false
+        }
+      ]
+    },
+    "ObjectAddressDump": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/ObjectAddressDump.cs",
+      "fields": [
+        {
+          "index": 0,
+          "jsonName": "entries",
+          "csharpType": "IList<ObjectAddressEntry>?",
+          "required": false
+        }
+      ]
+    },
+    "ObjectAddressEntry": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/ObjectAddressEntry.cs",
+      "fields": [
+        {
+          "index": 0,
+          "jsonName": "networkId",
+          "csharpType": "uint",
+          "required": false
+        },
+        {
+          "index": 1,
+          "jsonName": "index",
+          "csharpType": "uint",
+          "required": false
+        },
+        {
+          "index": 2,
+          "jsonName": "type",
+          "csharpType": "ulong",
+          "required": false
+        },
+        {
+          "index": 3,
+          "jsonName": "address",
+          "csharpType": "ulong",
+          "required": false
+        }
+      ]
+    },
+    "ObjectInfo": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/ObjectInfo.cs",
+      "fields": [
+        {
+          "index": 0,
+          "jsonName": "name",
+          "csharpType": "string",
+          "required": true
+        },
+        {
+          "index": 1,
+          "jsonName": "networkId",
+          "csharpType": "uint",
+          "required": false
+        },
+        {
+          "index": 2,
+          "jsonName": "index",
+          "csharpType": "uint",
+          "required": false
+        },
+        {
+          "index": 3,
+          "jsonName": "position",
+          "csharpType": "Vector3",
+          "required": true
+        },
+        {
+          "index": 4,
+          "jsonName": "rotation",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 5,
+          "jsonName": "team",
+          "csharpType": "byte",
+          "required": false
+        }
+      ]
+    },
+    "OffsetDump": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/OffsetDump.cs",
+      "fields": [
+        {
+          "index": 0,
+          "jsonName": "entries",
+          "csharpType": "IList<OffsetEntry>?",
+          "required": false
+        }
+      ]
+    },
+    "OffsetEntry": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/OffsetEntry.cs",
+      "fields": [
+        {
+          "index": 0,
+          "jsonName": "id",
+          "csharpType": "uint",
+          "required": false
+        },
+        {
+          "index": 1,
+          "jsonName": "value",
+          "csharpType": "ulong",
+          "required": false
+        }
+      ]
+    },
+    "PausedGameInfo": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/PausedGameInfo.cs",
+      "fields": [
+        {
+          "index": 0,
+          "jsonName": "utcTime",
+          "csharpType": "ulong",
+          "required": false
+        },
+        {
+          "index": 1,
+          "jsonName": "camera",
+          "csharpType": "Camera?",
+          "required": false
+        }
+      ]
+    },
+    "PenEraserStateChanged": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/PenEraserStateChanged.cs",
+      "fields": [
+        {
+          "index": 0,
+          "jsonName": "hovering",
+          "csharpType": "bool",
+          "required": false
+        },
+        {
+          "index": 1,
+          "jsonName": "inContact",
+          "csharpType": "bool",
+          "required": false
+        }
+      ]
+    },
+    "Perk": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/Perk.cs",
+      "fields": [
+        {
+          "index": 0,
+          "jsonName": "id",
+          "csharpType": "uint",
+          "required": false
+        },
+        {
+          "index": 1,
+          "jsonName": "value",
+          "csharpType": "double",
+          "required": false
+        },
+        {
+          "index": 2,
+          "jsonName": "statModValue",
+          "csharpType": "double",
+          "required": false
+        }
+      ]
+    },
+    "RenderSettings": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/RenderSettings.cs",
+      "fields": [
+        {
+          "index": 0,
+          "jsonName": "fogOfWar",
+          "csharpType": "bool?",
+          "required": false
+        }
+      ]
+    },
+    "ReplayFile": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/ReplayFile.cs",
+      "fields": [
+        {
+          "index": 0,
+          "jsonName": "snapshots",
+          "csharpType": "IList<GameInfo>?",
+          "required": false
+        }
+      ]
+    },
+    "Response": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/Response.cs",
+      "fields": [
+        {
+          "index": 0,
+          "jsonName": "data",
+          "csharpType": "ResponseKind",
+          "required": true
+        },
+        {
+          "index": 2,
+          "jsonName": "requestId",
+          "csharpType": "ulong",
+          "required": false
+        }
+      ]
+    },
+    "SceneEditorHudLayout": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/SceneEditorHudLayout.cs",
+      "fields": [
+        {
+          "index": 0,
+          "jsonName": "available",
+          "csharpType": "bool",
+          "required": false
+        },
+        {
+          "index": 1,
+          "jsonName": "minimapX",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 2,
+          "jsonName": "minimapY",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 3,
+          "jsonName": "minimapWidth",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 4,
+          "jsonName": "minimapHeight",
+          "csharpType": "float",
+          "required": false
+        }
+      ]
+    },
+    "SequenceStateResponse": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/SequenceStateResponse.cs",
+      "fields": [
+        {
+          "index": 0,
+          "jsonName": "state",
+          "csharpType": "Memory<byte>?",
+          "required": false
+        }
+      ]
+    },
+    "SimpleResponse": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/SimpleResponse.cs",
+      "fields": [
+        {
+          "index": 0,
+          "jsonName": "kind",
+          "csharpType": "SimpleResponseKind",
+          "required": false
+        }
+      ]
+    },
+    "Spell": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/Spell.cs",
+      "fields": [
+        {
+          "index": 0,
+          "jsonName": "name",
+          "csharpType": "string?",
+          "required": false
+        },
+        {
+          "index": 1,
+          "jsonName": "icon",
+          "csharpType": "string?",
+          "required": false
+        },
+        {
+          "index": 2,
+          "jsonName": "readyAt",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 3,
+          "jsonName": "maxCooldown",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 4,
+          "jsonName": "ammoReadyAt",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 5,
+          "jsonName": "ammoCooldown",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 6,
+          "jsonName": "initAtTime",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 7,
+          "jsonName": "index",
+          "csharpType": "ushort",
+          "required": false
+        },
+        {
+          "index": 8,
+          "jsonName": "level",
+          "csharpType": "byte",
+          "required": false
+        },
+        {
+          "index": 9,
+          "jsonName": "ammoCount",
+          "csharpType": "byte",
+          "required": false
+        },
+        {
+          "index": 10,
+          "jsonName": "cooldown",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 11,
+          "jsonName": "isToggled",
+          "csharpType": "bool",
+          "required": false
+        }
+      ]
+    },
+    "SpellObjectEntry": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/SpellObjectEntry.cs",
+      "fields": [
+        {
+          "index": 0,
+          "jsonName": "elfHash",
+          "csharpType": "uint",
+          "required": false
+        },
+        {
+          "index": 1,
+          "jsonName": "spellName",
+          "csharpType": "string?",
+          "required": false
+        }
+      ]
+    },
+    "SpellObjectList": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/SpellObjectList.cs",
+      "fields": [
+        {
+          "index": 0,
+          "jsonName": "spellObjects",
+          "csharpType": "IList<SpellObjectEntry>?",
+          "required": false
+        }
+      ]
+    },
+    "StrokeAnchorTargetChanged": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/StrokeAnchorTargetChanged.cs",
+      "fields": [
+        {
+          "index": 0,
+          "jsonName": "networkId",
+          "csharpType": "uint",
+          "required": false
+        }
+      ]
+    },
+    "StrokeCameraLockChanged": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/StrokeCameraLockChanged.cs",
+      "fields": [
+        {
+          "index": 0,
+          "jsonName": "networkId",
+          "csharpType": "uint",
+          "required": false
+        }
+      ]
+    },
+    "StrokeProperties": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/StrokeProperties.cs",
+      "fields": [
+        {
+          "index": 0,
+          "jsonName": "enabled",
+          "csharpType": "bool",
+          "required": false
+        },
+        {
+          "index": 1,
+          "jsonName": "layer",
+          "csharpType": "StrokeLayer",
+          "required": false
+        },
+        {
+          "index": 2,
+          "jsonName": "startStyle",
+          "csharpType": "StrokeTipStyle",
+          "required": false
+        },
+        {
+          "index": 3,
+          "jsonName": "endStyle",
+          "csharpType": "StrokeTipStyle",
+          "required": false
+        },
+        {
+          "index": 4,
+          "jsonName": "color",
+          "csharpType": "ColorRGBA?",
+          "required": false
+        },
+        {
+          "index": 5,
+          "jsonName": "lineStyle",
+          "csharpType": "StrokeLineStyle",
+          "required": false
+        },
+        {
+          "index": 6,
+          "jsonName": "width",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 7,
+          "jsonName": "vanishTime",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 8,
+          "jsonName": "timeMode",
+          "csharpType": "StrokeTimeMode",
+          "required": false
+        },
+        {
+          "index": 9,
+          "jsonName": "anchorMode",
+          "csharpType": "bool",
+          "required": false
+        },
+        {
+          "index": 10,
+          "jsonName": "selectedAnchorNetworkId",
+          "csharpType": "uint",
+          "required": false
+        },
+        {
+          "index": 11,
+          "jsonName": "anchorTargets",
+          "csharpType": "IList<uint>?",
+          "required": false
+        },
+        {
+          "index": 12,
+          "jsonName": "cameraLockNetworkId",
+          "csharpType": "uint",
+          "required": false
+        }
+      ]
+    },
+    "StrokeSyncEvent": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/StrokeSyncEvent.cs",
+      "fields": [
+        {
+          "index": 0,
+          "jsonName": "eventType",
+          "csharpType": "StrokeSyncEventType",
+          "required": false
+        },
+        {
+          "index": 1,
+          "jsonName": "strokeId",
+          "csharpType": "string",
+          "required": true
+        },
+        {
+          "index": 2,
+          "jsonName": "color",
+          "csharpType": "ColorRGBA?",
+          "required": false
+        },
+        {
+          "index": 3,
+          "jsonName": "width",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 4,
+          "jsonName": "layer",
+          "csharpType": "StrokeLayer",
+          "required": false
+        },
+        {
+          "index": 5,
+          "jsonName": "startTip",
+          "csharpType": "StrokeTipStyle",
+          "required": false
+        },
+        {
+          "index": 6,
+          "jsonName": "endTip",
+          "csharpType": "StrokeTipStyle",
+          "required": false
+        },
+        {
+          "index": 7,
+          "jsonName": "lineStyle",
+          "csharpType": "StrokeLineStyle",
+          "required": false
+        },
+        {
+          "index": 8,
+          "jsonName": "vanishTime",
+          "csharpType": "float",
+          "required": false
+        },
+        {
+          "index": 9,
+          "jsonName": "timeMode",
+          "csharpType": "StrokeTimeMode",
+          "required": false
+        },
+        {
+          "index": 10,
+          "jsonName": "points",
+          "csharpType": "IList<Vector3>?",
+          "required": false
+        },
+        {
+          "index": 11,
+          "jsonName": "pointGameTimes",
+          "csharpType": "IList<float>?",
+          "required": false
+        },
+        {
+          "index": 12,
+          "jsonName": "isArea",
+          "csharpType": "bool",
+          "required": false
+        },
+        {
+          "index": 13,
+          "jsonName": "hasOutline",
+          "csharpType": "bool",
+          "required": false
+        },
+        {
+          "index": 14,
+          "jsonName": "fillColor",
+          "csharpType": "ColorRGBA?",
+          "required": false
+        },
+        {
+          "index": 15,
+          "jsonName": "anchorNetworkId",
+          "csharpType": "uint",
+          "required": false
+        },
+        {
+          "index": 16,
+          "jsonName": "pressures",
+          "csharpType": "IList<float>?",
+          "required": false
+        }
+      ]
+    },
+    "StrokeSyncEvents": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/StrokeSyncEvents.cs",
+      "fields": [
+        {
+          "index": 0,
+          "jsonName": "events",
+          "csharpType": "IList<StrokeSyncEvent>?",
+          "required": false
+        }
+      ]
+    },
+    "TeamStats": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/TeamStats.cs",
+      "fields": [
+        {
+          "index": 0,
+          "jsonName": "towersLost",
+          "csharpType": "byte",
+          "required": false
+        }
+      ]
+    },
+    "Xform": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/Xform.cs",
+      "fields": [
+        {
+          "index": 0,
+          "jsonName": "position",
+          "csharpType": "Vector3",
+          "required": false
+        },
+        {
+          "index": 1,
+          "jsonName": "scale",
+          "csharpType": "Vector3",
+          "required": false
+        },
+        {
+          "index": 2,
+          "jsonName": "rotation",
+          "csharpType": "Vector4",
+          "required": false
+        }
+      ]
+    }
+  },
+  "enums": {
+    "AIClientStatus": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/AIClientStatus.cs",
+      "membersAsDeclared": [
+        "IsAlive = 1",
+        "IsZombie = 2",
+        "IsRecalling = 4",
+        "IsTargetable = 8"
+      ]
+    },
+    "AIMinionClientTypeInfo": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/AIMinionClientTypeInfo.cs",
+      "membersAsDeclared": [
+        "IsClone = 1",
+        "IsLaneMinion = 2",
+        "IsEliteMinion = 4",
+        "IsEpicMinion = 8",
+        "IsJungleMinion = 0x10",
+        "IsWardOrPlant = 0x20"
+      ]
+    },
+    "AnimationBlendMode": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/AnimationBlendMode.cs",
+      "membersAsDeclared": [
+        "Normal",
+        "Additive"
+      ]
+    },
+    "AnimationStateStatus": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/AnimationStateStatus.cs",
+      "membersAsDeclared": [
+        "Unavailable",
+        "Available",
+        "Unsupported",
+        "Invalid"
+      ]
+    },
+    "AttackSuccessFlag": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/AttackSuccessFlag.cs",
+      "membersAsDeclared": [
+        "Invulnerable",
+        "None",
+        "Dodge",
+        "Critical",
+        "Enhanced",
+        "Normal",
+        "Miss",
+        "Invalid"
+      ]
+    },
+    "CinematicCameraEditPhase": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/CinematicCameraEditPhase.cs",
+      "membersAsDeclared": [
+        "Selected",
+        "Begin",
+        "Update",
+        "Commit",
+        "Cancel"
+      ]
+    },
+    "CinematicControllerAction": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/CinematicControllerAction.cs",
+      "membersAsDeclared": [
+        "Capture",
+        "PlayheadBack",
+        "PlayheadForward",
+        "PreviewToggle",
+        "PreviewStop"
+      ]
+    },
+    "CinematicPropEditPhase": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/CinematicPropEditPhase.cs",
+      "membersAsDeclared": [
+        "Selected",
+        "Begin",
+        "Update",
+        "Commit",
+        "Cancel"
+      ]
+    },
+    "DamageType": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/DamageType.cs",
+      "membersAsDeclared": [
+        "Physical",
+        "Magic",
+        "True",
+        "Invalid"
+      ]
+    },
+    "ObjectType": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/ObjectType.cs",
+      "membersAsDeclared": [
+        "Unknown = 0uL",
+        "AIMarker = 301422653uL",
+        "LevelPropAIClient = 316820429uL",
+        "GameObject = 531401572uL",
+        "BuildingClient = 1019919150uL",
+        "Turret = 1031232777uL",
+        "DrawFX = 1121010933uL",
+        "LevelPropSpawnerPoint = 1300984122uL",
+        "HQ = 1346031826uL",
+        "LevelPropGameObject = 1517489337uL",
+        "BarracksDampener = 1622886848uL",
+        "obj_Levelsizer = 1865313452uL",
+        "AITurretCommon = 1885834192uL",
+        "AnimatedBuilding = 2407791516uL",
+        "Emote = 2484619884uL",
+        "obj_NavPoint = 2528159206uL",
+        "MissileClient = 2626346644uL",
+        "ObjectAttacher = 2654040416uL",
+        "Shop = 2823282857uL",
+        "GrassObject = 2854976178uL",
+        "UnrevealedTarget = 3113175471uL",
+        "AITurretClient = 3199897858uL",
+        "AIMinionClient = 3399847090uL",
+        "Barracks = 3521999102uL",
+        "obj_GeneralParticleEmitter = 3712870255uL",
+        "AIHeroClient = 3797954604uL",
+        "obj_SpawnPoint = 3823743852uL",
+        "obj_InfoPoint = 4101323475uL",
+        "TurretShrine = 4213875895uL",
+        "NeutralMinionCamp = 4269033891uL"
+      ]
+    },
+    "ObjectiveType": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/ObjectiveType.cs",
+      "membersAsDeclared": [
+        "Dragon",
+        "Baron",
+        "Horde",
+        "Atakhan",
+        "RiftHerald"
+      ]
+    },
+    "ItemKind": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/ResponseKind.cs",
+      "membersAsDeclared": [
+        "GameInfo = 1",
+        "GameStateMetaData = 2",
+        "SimpleResponse = 3",
+        "StrokeProperties = 4",
+        "AuthenticationChallenge = 5",
+        "CameraProperties = 6",
+        "StrokeSyncEvent = 7",
+        "StrokeSyncEvents = 8",
+        "BlueBottleIPC_LeagueBroadcast_Commands_StrokeSyncCurrent = 9",
+        "SpellObjectList = 10",
+        "BlueBottleIPC_LeagueBroadcast_Scene_SceneEventWrapper = 11",
+        "BlueBottleIPC_LeagueBroadcast_Commands_AssetCreateBatchResult = 12",
+        "BlueBottleIPC_LeagueBroadcast_Commands_StreamTextureSDPAnswer = 13",
+        "MirrorState = 14",
+        "OffsetDump = 15",
+        "ObjectAddressDump = 16",
+        "CameraState = 17",
+        "HudPanelRowClicked = 18",
+        "HudPanelRowsReordered = 19",
+        "StrokeAnchorTargetChanged = 20",
+        "StrokeCameraLockChanged = 21",
+        "PenEraserStateChanged = 22",
+        "BlueBottleIPC_LeagueBroadcast_Commands_StreamTextureSDPResult = 23",
+        "BlueBottleIPC_LeagueBroadcast_Commands_StreamTextureStatus = 24",
+        "SceneEditorHudLayout = 25",
+        "RenderSettings = 26",
+        "SequenceStateResponse = 27",
+        "CinematicCameraPose = 28",
+        "CinematicCameraEditEvent = 29",
+        "CinematicPropEditEvent = 30",
+        "CinematicAuthoringActionEvent = 31",
+        "BlueBottleIPC_LeagueBroadcast_Commands_CameraPreviewStatus = 32",
+        "CrashReportChannel = 33",
+        "NONE = 0"
+      ]
+    },
+    "SimpleResponseKind": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/SimpleResponseKind.cs",
+      "membersAsDeclared": [
+        "RegisterSuccess",
+        "RegisterError",
+        "UnregisterSuccess",
+        "UnregisterError",
+        "ProveSubTierSuccess",
+        "ProveSubTierError",
+        "PlaybackSpeedChangeSuccess",
+        "PlaybackSpeedChangeError",
+        "GenericSuccess",
+        "GenericError",
+        "Quit"
+      ]
+    },
+    "SpellSlotIndex": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/SpellSlotIndex.cs",
+      "membersAsDeclared": [
+        "Q = 0",
+        "W = 1",
+        "E = 2",
+        "R = 3",
+        "D = 4",
+        "F = 5",
+        "Item1 = 6",
+        "Item2 = 7",
+        "Item3 = 8",
+        "Item4 = 9",
+        "Item5 = 10",
+        "Item6 = 11",
+        "ItemTrinket = 12",
+        "Recall = 13",
+        "Quest = 14",
+        "Passive = 63"
+      ]
+    },
+    "StrokeSyncEventType": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/StrokeSyncEventType.cs",
+      "membersAsDeclared": [
+        "Begin",
+        "Points",
+        "End",
+        "Cancel",
+        "Erase"
+      ]
+    },
+    "Team": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/Team.cs",
+      "membersAsDeclared": [
+        "None = 0",
+        "Order = 1",
+        "Blue = Order",
+        "Chaos = 2",
+        "Red = Chaos",
+        "Neutral = 3"
+      ]
+    }
+  },
+  "valueStructs": {
+    "AceEvent": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/AceEvent.cs",
+      "serialization": "object with public instance fields",
+      "publicFields": [
+        {
+          "jsonName": "gameTime",
+          "csharpType": "float"
+        },
+        {
+          "jsonName": "killerNetworkId",
+          "csharpType": "uint"
+        },
+        {
+          "jsonName": "victimNetworkId",
+          "csharpType": "uint"
+        }
+      ],
+      "inlineVectorsNotExportedAsObjectFields": []
+    },
+    "Challenge": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/Challenge.cs",
+      "serialization": "object with public instance fields",
+      "publicFields": [],
+      "inlineVectorsNotExportedAsObjectFields": [
+        "Data"
+      ]
+    },
+    "FirstBloodEvent": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/FirstBloodEvent.cs",
+      "serialization": "object with public instance fields",
+      "publicFields": [
+        {
+          "jsonName": "gameTime",
+          "csharpType": "float"
+        },
+        {
+          "jsonName": "killerNetworkId",
+          "csharpType": "uint"
+        },
+        {
+          "jsonName": "victimNetworkId",
+          "csharpType": "uint"
+        }
+      ],
+      "inlineVectorsNotExportedAsObjectFields": []
+    },
+    "HeroDieEvent": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/HeroDieEvent.cs",
+      "serialization": "object with public instance fields",
+      "publicFields": [
+        {
+          "jsonName": "gameTime",
+          "csharpType": "float"
+        },
+        {
+          "jsonName": "killerNetworkId",
+          "csharpType": "uint"
+        },
+        {
+          "jsonName": "victimNetworkId",
+          "csharpType": "uint"
+        },
+        {
+          "jsonName": "goldReward",
+          "csharpType": "float"
+        }
+      ],
+      "inlineVectorsNotExportedAsObjectFields": [
+        "AssisterNetworkIds"
+      ]
+    },
+    "InhibitorKillEvent": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/InhibitorKillEvent.cs",
+      "serialization": "object with public instance fields",
+      "publicFields": [
+        {
+          "jsonName": "gameTime",
+          "csharpType": "float"
+        },
+        {
+          "jsonName": "killerNetworkId",
+          "csharpType": "uint"
+        },
+        {
+          "jsonName": "inhibitorNetworkId",
+          "csharpType": "uint"
+        }
+      ],
+      "inlineVectorsNotExportedAsObjectFields": [
+        "AssisterNetworkIds"
+      ]
+    },
+    "ObjectiveStealEvent": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/ObjectiveStealEvent.cs",
+      "serialization": "object with public instance fields",
+      "publicFields": [
+        {
+          "jsonName": "gameTime",
+          "csharpType": "float"
+        },
+        {
+          "jsonName": "killerNetworkId",
+          "csharpType": "uint"
+        },
+        {
+          "jsonName": "objectiveNetworkId",
+          "csharpType": "uint"
+        },
+        {
+          "jsonName": "objectiveType",
+          "csharpType": "ObjectiveType"
+        }
+      ],
+      "inlineVectorsNotExportedAsObjectFields": [
+        "StolenFromNetworkIds"
+      ]
+    },
+    "ResponseKind": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/ResponseKind.cs",
+      "serialization": "object with public instance fields",
+      "publicFields": [],
+      "inlineVectorsNotExportedAsObjectFields": []
+    },
+    "TurretKillEvent": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/TurretKillEvent.cs",
+      "serialization": "object with public instance fields",
+      "publicFields": [
+        {
+          "jsonName": "gameTime",
+          "csharpType": "float"
+        },
+        {
+          "jsonName": "killerNetworkId",
+          "csharpType": "uint"
+        },
+        {
+          "jsonName": "victimNetworkId",
+          "csharpType": "uint"
+        }
+      ],
+      "inlineVectorsNotExportedAsObjectFields": [
+        "AssisterNetworkIds"
+      ]
+    },
+    "TurretPlateDestroyEvent": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/TurretPlateDestroyEvent.cs",
+      "serialization": "object with public instance fields",
+      "publicFields": [
+        {
+          "jsonName": "gameTime",
+          "csharpType": "float"
+        },
+        {
+          "jsonName": "turretNetworkId",
+          "csharpType": "uint"
+        }
+      ],
+      "inlineVectorsNotExportedAsObjectFields": []
+    },
+    "XKillEvent": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Snapshot/XKillEvent.cs",
+      "serialization": "object with public instance fields",
+      "publicFields": [
+        {
+          "jsonName": "gameTime",
+          "csharpType": "float"
+        },
+        {
+          "jsonName": "count",
+          "csharpType": "uint"
+        },
+        {
+          "jsonName": "killerNetworkId",
+          "csharpType": "uint"
+        },
+        {
+          "jsonName": "victimNetworkId",
+          "csharpType": "uint"
+        }
+      ],
+      "inlineVectorsNotExportedAsObjectFields": [
+        "AssisterNetworkIds"
+      ]
+    },
+    "Matrix3x3": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Common/Matrix3x3.cs",
+      "serialization": "array from IEnumerable",
+      "publicFields": [],
+      "inlineVectorsNotExportedAsObjectFields": [
+        "M"
+      ]
+    },
+    "Matrix4x4": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Common/Matrix4x4.cs",
+      "serialization": "array from IEnumerable",
+      "publicFields": [],
+      "inlineVectorsNotExportedAsObjectFields": [
+        "M"
+      ]
+    },
+    "Quaternion": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Common/Quaternion.cs",
+      "serialization": "array from IEnumerable",
+      "publicFields": [
+        {
+          "jsonName": "x",
+          "csharpType": "float"
+        },
+        {
+          "jsonName": "y",
+          "csharpType": "float"
+        },
+        {
+          "jsonName": "z",
+          "csharpType": "float"
+        },
+        {
+          "jsonName": "w",
+          "csharpType": "float"
+        }
+      ],
+      "inlineVectorsNotExportedAsObjectFields": []
+    },
+    "Vector2": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Common/Vector2.cs",
+      "serialization": "object with public instance fields",
+      "publicFields": [
+        {
+          "jsonName": "x",
+          "csharpType": "float"
+        },
+        {
+          "jsonName": "y",
+          "csharpType": "float"
+        }
+      ],
+      "inlineVectorsNotExportedAsObjectFields": []
+    },
+    "Vector3": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Common/Vector3.cs",
+      "serialization": "object with public instance fields",
+      "publicFields": [
+        {
+          "jsonName": "x",
+          "csharpType": "float"
+        },
+        {
+          "jsonName": "y",
+          "csharpType": "float"
+        },
+        {
+          "jsonName": "z",
+          "csharpType": "float"
+        }
+      ],
+      "inlineVectorsNotExportedAsObjectFields": []
+    },
+    "Vector4": {
+      "source": "vendor/Farsight/BlueBottleIPC.LeagueBroadcast.Common/Vector4.cs",
+      "serialization": "object with public instance fields",
+      "publicFields": [
+        {
+          "jsonName": "x",
+          "csharpType": "float"
+        },
+        {
+          "jsonName": "y",
+          "csharpType": "float"
+        },
+        {
+          "jsonName": "z",
+          "csharpType": "float"
+        },
+        {
+          "jsonName": "w",
+          "csharpType": "float"
+        }
+      ],
+      "inlineVectorsNotExportedAsObjectFields": []
+    }
+  }
+}

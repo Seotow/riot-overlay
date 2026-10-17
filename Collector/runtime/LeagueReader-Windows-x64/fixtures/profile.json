@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "profileId": "sparse-fixture-v1",
+  "target": {
+    "module": "sparse-fixture.bin",
+    "version": "fixture-v1",
+    "sha256": "0bc4f58d807856d4a0a590e3df4fa3a8efce73d819f3cff41f16cbe0786b1de8"
+  },
+  "validation": {
+    "status": "fixture-only",
+    "note": "Synthetic sparse memory for API tests only. All offsets here are invented fixture layout; none are LoL offsets."
+  },
+  "evidence": [
+    {
+      "id": "sparse-memory",
+      "source": "tests/fixtures/memory.json",
+      "sha256": "0bc4f58d807856d4a0a590e3df4fa3a8efce73d819f3cff41f16cbe0786b1de8",
+      "note": "Test fixture, not a game capture or recovered memory layout."
+    }
+  ],
+  "fields": [
+    {
+      "root": "module",
+      "path": "gameTime",
+      "offset": 256,
+      "type": "f32",
+      "evidenceId": "sparse-memory"
+    },
+    {
+      "root": "hero",
+      "path": "info.position",
+      "offset": 16,
+      "type": "vec3",
+      "evidenceId": "sparse-memory"
+    },
+    {
+      "root": "hero",
+      "path": "common.health",
+      "offset": 32,
+      "type": "f32",
+      "evidenceId": "sparse-memory"
+    },
+    {
+      "root": "hero",
+      "path": "common.maxHealth",
+      "offset": 36,
+      "type": "f32",
+      "evidenceId": "sparse-memory"
+    },
+    {
+      "root": "hero",
+      "path": "common.level",
+      "offset": 40,
+      "type": "u32",
+      "evidenceId": "sparse-memory"
+    },
+    {
+      "root": "hero",
+      "path": "gold",
+      "offset": 44,
+      "type": "f32",
+      "evidenceId": "sparse-memory"
+    },
+    {
+      "root": "hero",
+      "path": "totalGold",
+      "offset": 48,
+      "type": "f32",
+      "evidenceId": "sparse-memory"
+    },
+    {
+      "root": "hero",
+      "path": "kills",
+      "offset": 52,
+      "type": "i32",
+      "evidenceId": "sparse-memory"
+    },
+    {
+      "root": "hero",
+      "path": "deaths",
+      "offset": 56,
+      "type": "i32",
+      "evidenceId": "sparse-memory"
+    },
+    {
+      "root": "hero",
+      "path": "assists",
+      "offset": 60,
+      "type": "i32",
+      "evidenceId": "sparse-memory"
+    },
+    {
+      "root": "hero",
+      "path": "info.name",
+      "offset": 0,
+      "derefOffsets": [
+        64
+      ],
+      "type": "utf8",
+      "maxBytes": 64,
+      "evidenceId": "sparse-memory"
+    }
+  ]
+}

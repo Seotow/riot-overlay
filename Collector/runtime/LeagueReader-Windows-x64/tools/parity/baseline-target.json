@@ -1,0 +1,151 @@
+{
+  "manifestVersion": 1,
+  "objective": "Equivalent observable data to LB logged in using the current user account; scope requested by user: Free.",
+  "referenceAvailability": "absent_no_real_windows_authenticated_snapshot_recording",
+  "candidateRuntimeCaptureAvailability": "absent",
+  "account": {
+    "tierUserDeclared": "Free",
+    "tierVerified": false,
+    "lastKnownServerLogin": "succeeded",
+    "lastKnownSubscriptionLookup": "HTTP_404",
+    "lastKnownHostFeatures": [],
+    "inference": "Subscription404 and empty feature set establish neither verified Free entitlement nor accepted unauthenticated native session."
+  },
+  "baselineContract": {
+    "source": "lblib",
+    "synthetic": false,
+    "recordedAt": null,
+    "requiresKnownSameGameId": true,
+    "requiresServerLoginAndNativeSessionEvidence": true,
+    "noCredentialsInEvidence": true
+  },
+  "rawSchema": {
+    "file": "native-schema.target.json",
+    "semantics": "schema_only_not_a_verified_Free_allowlist",
+    "allPerFieldRuntimeAvailability": "unknown_without_authenticated_recording"
+  },
+  "derivedLbFreeTargetGroups": [
+    {
+      "group": "scoreboard",
+      "target": [
+        "game time",
+        "team gold/KDA",
+        "towers/plates",
+        "grubs",
+        "dragons",
+        "power play state"
+      ],
+      "runtimeParity": "unknown",
+      "note": "Some display fields depend on LB assets/config/team database."
+    },
+    {
+      "group": "player tabs",
+      "target": [
+        "player/champion identity",
+        "HP/resource",
+        "level/XP",
+        "skills",
+        "perks",
+        "respawn state"
+      ],
+      "runtimeParity": "unknown"
+    },
+    {
+      "group": "bottom scoreboard",
+      "target": [
+        "KDA",
+        "gold",
+        "CS",
+        "vision score",
+        "shutdown",
+        "items"
+      ],
+      "runtimeParity": "unknown"
+    },
+    {
+      "group": "objectives",
+      "target": [
+        "dragon and Baron timers",
+        "inhibitor state/timers",
+        "objective kill recognition"
+      ],
+      "runtimeParity": "unknown",
+      "note": "Requires state tracking in addition to native snapshot fields."
+    },
+    {
+      "group": "LCU champion select",
+      "target": [
+        "phase",
+        "myTeam/enemyTeam",
+        "picks/bans",
+        "actions",
+        "timer"
+      ],
+      "runtimeParity": "unknown",
+      "comparisonToolCoverage": "not_implemented_snapshot_only"
+    }
+  ],
+  "staticTierEvidenceNotRuntimeProof": [
+    {
+      "field": "camera",
+      "feature": "Enterprise",
+      "address": "0x18043e580"
+    },
+    {
+      "field": "missiles",
+      "feature": "Pro",
+      "address": "0x18043da00"
+    },
+    {
+      "field": "ObjectInfo.rotation",
+      "feature": "Enterprise; otherwise NaN",
+      "address": "0x1804395d0"
+    },
+    {
+      "field": "AIClient.dataStack",
+      "feature": "Basic check exists",
+      "address": "0x180439a70"
+    },
+    {
+      "field": "gameEvents",
+      "feature": "Basic/Pro/Enterprise filtering; exact field matrix incomplete",
+      "address": "0x18043e9e0"
+    },
+    {
+      "field": "LB snapshot registration gate",
+      "feature": "returns true at this gate; does not prove session acceptance",
+      "address": "0x180183380"
+    }
+  ],
+  "knownCaptureGaps": [
+    "No real Windows match/replay recording in this workspace.",
+    "No proof of complete current-account native fields/events.",
+    "Existing JSON examples are fabricated schema illustrations, not captures.",
+    "Prior serializer omitted some inline vectors; a baseline captured through it may not preserve every native field.",
+    "Native session/authentication policy varies by transport/client trust; FeatureSet.Empty is not proof of accepted Free session.",
+    "Event stable IDs and exact-once/retention semantics are unknown.",
+    "Successful field equality on sampled snapshots is not complete parity."
+  ],
+  "sourceEvidence": [
+    {
+      "path": "standalone/reference/native-fields.json",
+      "sha256": "f1b4e378e21b97aef26ec7565cf1c5de32682ed13f7bf60e8b16d5aa74ab3935"
+    },
+    {
+      "path": "standalone/reference/AUTH-STATUS.vi.md",
+      "sha256": "8f651cc92008f34e5f22feb42f08205fb55e0976fe77dc0bac37e5e31329162b"
+    },
+    {
+      "path": "standalone/reference/API-DATA.vi.md",
+      "sha256": "11f3dc888675b1b7107eeb3892edef7900bed00d9c302be097ac381f4995d455"
+    },
+    {
+      "path": "native/ANALYSIS.vi.md",
+      "sha256": "72ccca7bfd35d8155d6fe4d61b3ed204c225b41b25a0e8542d0f8eafecbb4975"
+    },
+    {
+      "path": "recovery/decompiled/BlueBottleClient.GameLib/BlueBottleClient.GameLib.Ingame.State/IngameState.cs",
+      "sha256": "89a44cc14d762360c19c6fbbbf3c4ce11f9eeb553a266c7d8ed6da4d969f1bca"
+    }
+  ]
+}

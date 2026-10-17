@@ -12,9 +12,6 @@ modules/valorant/**/replays/
 
 # Collector vendor/source exports, runtimes and retained local validation evidence
 Collector/archive/
-Collector/runtime/*
-!Collector/runtime/supervisor.ts
-!Collector/runtime/accountless-environment.ts
 Collector/config/collector.env
 Collector/evidence/
 Collector/**/bin/

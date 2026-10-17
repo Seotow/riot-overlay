@@ -1,0 +1,19 @@
+{
+  "release": "10.0.13",
+  "files": [
+    {
+      "component": "runtime",
+      "name": "dotnet-runtime-win-x64.zip",
+      "rid": "win-x64",
+      "url": "https://builds.dotnet.microsoft.com/dotnet/Runtime/10.0.13/dotnet-runtime-10.0.13-win-x64.zip",
+      "hash": "2b98792ce86adc50899764ad2e4d21bd25cfda5432eeb0b4dfe7944f3ea049f9e0570a8f4aee92314d97cdb5f8b7be1363d501fc5012e680371e607af648ef40"
+    },
+    {
+      "component": "aspnetcore-runtime",
+      "name": "aspnetcore-runtime-win-x64.zip",
+      "rid": "win-x64",
+      "url": "https://builds.dotnet.microsoft.com/dotnet/aspnetcore/Runtime/10.0.13/aspnetcore-runtime-10.0.13-win-x64.zip",
+      "hash": "cf71f882366ea544beda44c812a7b26bc571fb3f0c5102249e615b9ee953fe5c2c5ee9198cda55f499ad55284bac7748abe35dd4478e528b94b71bc09d9403af"
+    }
+  ]
+}

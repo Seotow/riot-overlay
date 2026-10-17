@@ -1,0 +1,21 @@
+{
+  "release": "2026-10-14-status-update",
+  "native_game_tested": false,
+  "windows_runtime_executed": false,
+  "native_cpp_source_complete": false,
+  "free_tier_parity_verified": false,
+  "unauthenticated_native_verified": false,
+  "managed_build_errors": 0,
+  "native_dependency": "original lblib.dll",
+  "native_sha256": "a1028d56ef03c84a0808ac028a0ee3a982e7962e844592157ed4b6c2663141d3",
+  "authentication_status": "previous login succeeded; subscription lookup returned 404; entitlements unresolved",
+  "native_events": "raw events; objective classification and timers not integrated",
+  "serializer_limitations": [
+    "some native struct inline vectors not exported"
+  ],
+  "remaining_blockers": [
+    "Windows/LoL runtime validation",
+    "same-match comparison with LB Free",
+    "native acceptance without authentication unverified"
+  ]
+}

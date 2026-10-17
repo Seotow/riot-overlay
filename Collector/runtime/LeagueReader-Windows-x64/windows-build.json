@@ -1,0 +1,145 @@
+{
+  "apiVersion": 1,
+  "target": "Windows x64 PE32+",
+  "compiler": {
+    "executable": "/workspace/.tools/cc/debian-mingw/sysroot/usr/bin/x86_64-w64-mingw32-g++-posix",
+    "sha256": "72c69fa723ccefb89267b4941ad9b5b837d0f490cc26624fef3a9eb4237017c9",
+    "version": "x86_64-w64-mingw32-g++-posix (GCC) 14-posix"
+  },
+  "command": [
+    "/workspace/.tools/cc/debian-mingw/sysroot/usr/bin/x86_64-w64-mingw32-g++-posix",
+    "-std=c++17",
+    "-Wall",
+    "-Wextra",
+    "-Wpedantic",
+    "-Werror",
+    "-DLC_READER_BUILD",
+    "-shared",
+    "-O2",
+    "-static",
+    "-static-libgcc",
+    "-static-libstdc++",
+    "-frandom-seed=lc_reader_v1",
+    "-I",
+    "include",
+    "src/lc_reader.cpp",
+    "src/win32_reader.cpp",
+    "-Wl,--no-insert-timestamp",
+    "-Wl,--out-implib,build/liblc_reader.dll.a",
+    "-o",
+    "build/lc_reader.dll"
+  ],
+  "sourceSha256": {
+    "include/lc_reader.h": "586562685816dabee99a4b616e3e8b3f58c07eea0b8b41f5d9e17fab0317a0da",
+    "src/lc_reader.cpp": "0ad098046ef5da9698e45cdca3e86a0f8190085611c907140fd514bafff8968c",
+    "src/win32_reader.cpp": "b41a9c213c66ec938b43cb9688e78608540dbff03201a4e9c2b195510ecba389",
+    "build_windows.py": "5778e136447c4c59fb7c0326360e9a7df1f84f8d28665bf596e0d823ab588813"
+  },
+  "output": {
+    "file": "build/lc_reader.dll",
+    "bytes": 2533959,
+    "sha256": "848a5c4ca11389844a89122caf7ddab5eded00490a0d1125a90cec81aac63130"
+  },
+  "importLibrary": {
+    "file": "build/liblc_reader.dll.a",
+    "sha256": "a2c031474a5962f5e08f6d76a1c1d05857de59532e221f830d7d159088ed83d7"
+  },
+  "peImports": [
+    "KERNEL32.dll",
+    "msvcrt.dll"
+  ],
+  "cAbiExports": [
+    "lc_reader_api_version",
+    "lc_reader_create",
+    "lc_reader_destroy",
+    "lc_reader_free_buffer",
+    "lc_reader_profile_info",
+    "lc_reader_snapshot",
+    "lc_reader_win32_close",
+    "lc_reader_win32_open",
+    "lc_reader_win32_read"
+  ],
+  "crossBuildPassed": true,
+  "peInspectionPassed": true,
+  "windowsExecutionTested": false,
+  "gameRuntimeTested": false,
+  "lbParityVerified": false,
+  "toolchainPackages": [
+    {
+      "Package": "gcc-mingw-w64-x86-64-posix",
+      "Version": "14.2.0-19+27+b1",
+      "Filename": "pool/main/g/gcc-mingw-w64/gcc-mingw-w64-x86-64-posix_14.2.0-19+27+b1_amd64.deb",
+      "SHA256": "e32d24cfd1482394f16d9a84c1d0a9f5aa08ee826a79acc383c70cc8c23c4fe5",
+      "Size": "37567656",
+      "Depends": "binutils-mingw-w64-x86-64 (>= 2.30~), mingw-w64-x86-64-dev, gcc-mingw-w64-x86-64-posix-runtime (= 14.2.0-19+27+b1), gcc-mingw-w64-base (= 14.2.0-19+27+b1), libc6 (>= 2.38), libgcc-s1 (>= 3.0), libgmp10 (>= 2:6.3.0+dfsg), libisl23 (>= 0.15), libmpc3 (>= 1.1.0), libmpfr6 (>= 3.1.3), libstdc++6 (>= 5), libzstd1 (>= 1.5.5), zlib1g (>= 1:1.1.4)"
+    },
+    {
+      "Package": "g++-mingw-w64-x86-64-posix",
+      "Version": "14.2.0-19+27+b1",
+      "Filename": "pool/main/g/gcc-mingw-w64/g++-mingw-w64-x86-64-posix_14.2.0-19+27+b1_amd64.deb",
+      "SHA256": "cfa1773c2d0184819050138e587a81606d04a5f92e278b521b72b776d2c256c1",
+      "Size": "15261820",
+      "Depends": "gcc-mingw-w64-x86-64-posix (= 14.2.0-19+27+b1), gcc-mingw-w64-x86-64-posix-runtime (= 14.2.0-19+27+b1), gcc-mingw-w64-base (= 14.2.0-19+27+b1), libc6 (>= 2.38), libgmp10 (>= 2:6.3.0+dfsg), libisl23 (>= 0.15), libmpc3 (>= 1.1.0), libmpfr6 (>= 3.1.3), libzstd1 (>= 1.5.5), zlib1g (>= 1:1.2.2)"
+    },
+    {
+      "Package": "gcc-mingw-w64-base",
+      "Version": "14.2.0-19+27+b1",
+      "Filename": "pool/main/g/gcc-mingw-w64/gcc-mingw-w64-base_14.2.0-19+27+b1_amd64.deb",
+      "SHA256": "8d2c64b886ab4a435a78ddc4cd3b510f149b65fbd6be8472e8f460627562718a",
+      "Size": "194268",
+      "Depends": null
+    },
+    {
+      "Package": "gcc-mingw-w64-x86-64-posix-runtime",
+      "Version": "14.2.0-19+27+b1",
+      "Filename": "pool/main/g/gcc-mingw-w64/gcc-mingw-w64-x86-64-posix-runtime_14.2.0-19+27+b1_amd64.deb",
+      "SHA256": "c898d96177574a8a7238564a1e799d8ddfed5a3d2ea005510305f9ad466a6f59",
+      "Size": "13037152",
+      "Depends": "gcc-mingw-w64-base (= 14.2.0-19+27+b1)"
+    },
+    {
+      "Package": "binutils-mingw-w64-x86-64",
+      "Version": "2.44-3+12+b1",
+      "Filename": "pool/main/b/binutils-mingw-w64/binutils-mingw-w64-x86-64_2.44-3+12+b1_amd64.deb",
+      "SHA256": "b53f4a091b16a0d0952b8e3bd6027931641386258f96b37db1f0c62c787221d3",
+      "Size": "3473344",
+      "Depends": "libc6 (>= 2.38), libzstd1 (>= 1.5.5), zlib1g (>= 1:1.2.0), binutils-common (>= 2.44)"
+    },
+    {
+      "Package": "mingw-w64-common",
+      "Version": "12.0.0-5",
+      "Filename": "pool/main/m/mingw-w64/mingw-w64-common_12.0.0-5_all.deb",
+      "SHA256": "97dce5d0d8aff1cade4786ad4ef5078345477a598829afcac2e7f2fbc5399990",
+      "Size": "5792084",
+      "Depends": null
+    },
+    {
+      "Package": "mingw-w64-x86-64-dev",
+      "Version": "12.0.0-5",
+      "Filename": "pool/main/m/mingw-w64/mingw-w64-x86-64-dev_12.0.0-5_all.deb",
+      "SHA256": "0bf89cf7454cccb49cd2a46a6f7b33896f6ae3a1a2fe33e02c40be6155bbb385",
+      "Size": "4871860",
+      "Depends": "mingw-w64-common"
+    }
+  ],
+  "toolchainSource": "https://deb.debian.org/debian/",
+  "metadataSha256": {
+    "InRelease": "0584fba32e13e0ab8285fb16c27adea1ec03a73669c18702821094fd6ca86675",
+    "Packages.xz": "7778d3e3f303b7ddb8ce0fe7c8d57473a076c6bf2e8f241f75421d2396352498"
+  },
+  "repositorySignatureVerification": {
+    "verified": true,
+    "keyring": "/usr/share/keyrings/debian-archive-keyring.pgp",
+    "keyringSha256": "506b815cbb32d9b6066b4a2aa524071e071761e7e7f68c3ac74f3061ba852017",
+    "verifierSha256": "3f29dddc10e4089aeac5b2675313f4e5fe822abe5ab3bf7898d238c32d758304",
+    "verifierPackage": {
+      "Package": "gpgv",
+      "Version": "2.4.7-21+deb13u1+b5",
+      "Filename": "pool/main/g/gnupg2/gpgv_2.4.7-21+deb13u1+b5_amd64.deb",
+      "SHA256": "104e4c57b98f0b883aa94c68fbe7ec7b48bcdec7c0f9dedf2a51a5054aaeb5ae",
+      "Size": "241100",
+      "Depends": "libbz2-1.0, libc6 (>= 2.38), libgcrypt20 (>= 1.11.0), libgpg-error0 (>= 1.49), zlib1g (>= 1:1.1.4)"
+    },
+    "output": "gpgv: Signature made Sat Sep 12 07:56:18 2026 UTC\ngpgv:                using RSA key 4CB50190207B4758A3F73A796ED0E7B82643E131\ngpgv: Good signature from \"Debian Archive Automatic Signing Key (12/bookworm) <ftpmaster@debian.org>\"\ngpgv: Signature made Sat Sep 12 07:56:19 2026 UTC\ngpgv:                using RSA key B8E5F13176D2A7A75220028078DBA3BC47EF2265\ngpgv: Good signature from \"Debian Archive Automatic Signing Key (13/trixie) <ftpmaster@debian.org>\"\ngpgv: Signature made Sat Sep 12 07:57:47 2026 UTC\ngpgv:                using EDDSA key 41587F7DB8C774BCCF131416762F67A0B2C39DE4\ngpgv: Good signature from \"Debian Stable Release Key (13/trixie) <debian-release@lists.debian.org>\""
+  }
+}

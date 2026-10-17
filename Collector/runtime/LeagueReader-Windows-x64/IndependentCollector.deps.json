@@ -1,0 +1,21 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v10.0"
+  },
+  "targets": {
+    ".NETCoreApp,Version=v10.0": {
+      "IndependentCollector/0.1.0": {
+        "runtime": {
+          "IndependentCollector.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "IndependentCollector/0.1.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

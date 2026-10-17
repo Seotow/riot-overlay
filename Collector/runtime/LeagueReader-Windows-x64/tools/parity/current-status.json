@@ -1,0 +1,35 @@
+{
+  "reportVersion": 1,
+  "verdict": "blocked",
+  "fullParityEstablished": false,
+  "scope": "observed snapshot fields only; no claim of complete Free-tier parity",
+  "blockingReasons": [
+    "baseline:recording_not_supplied",
+    "candidate:recording_not_supplied"
+  ],
+  "unknowns": [
+    "No authenticated recording proves every possible account-authorized field or event.",
+    "Default/null values do not identify whether a field is gated, absent in game, or unsupported.",
+    "Event stable IDs, delivery/exactly-once semantics and event retention are unverified.",
+    "A candidate source label does not prove it was built or run independently of lblib.",
+    "Overlay state, asset/config metadata and LCU are outside this snapshot-only comparison."
+  ],
+  "tolerances": {
+    "gameTimeSeconds": 0.15,
+    "numericAbsolute": 0.001,
+    "numericRelative": 1e-05
+  },
+  "authenticationEvidence": {
+    "state": "unknown",
+    "entitlementTier": "unknown"
+  },
+  "alignment": {
+    "method": "ordered one-to-one nearest gameTime; no interpolation"
+  },
+  "coverage": {},
+  "fields": [],
+  "events": {
+    "idSemantics": "unknown",
+    "comparison": "raw arrays in snapshot order only; not event delivery parity"
+  }
+}

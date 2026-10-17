@@ -1,0 +1,1 @@
+{"selfTest":"passed","checks":["native_flatbuffer_to_json","vector_fields","nan_to_null","schema_fields_only","lcu_lockfile","loopback_url_only","srp_invalid_challenge","literal_credential_quotes"]}
