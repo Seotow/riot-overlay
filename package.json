@@ -35,7 +35,8 @@
     "capture:analyze": "node scripts/capture/analyze-capture-events.mjs",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "probe:tracking": "tsx scripts/inspect/probe-tracking.ts"
+    "probe:tracking": "tsx scripts/inspect/probe-tracking.ts",
+    "probe:bounty": "tsx scripts/inspect/probe-bounty.ts"
   },
   "keywords": [],
   "author": "",
