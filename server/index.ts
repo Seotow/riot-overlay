@@ -3,6 +3,7 @@ import { diagnose } from "./diagnostics";
 import { leagueBroadcast } from "./leaguebroadcast";
 import { DraftLcu } from "./draft-lcu";
 import { EogLcu } from "./eog-lcu";
+import { ReplayWatcher } from "./replays";
 import { emptyDraft } from "../shared/draft";
 import { LeagueCollectorSource } from "../collector/adapter";
 import { CollectorRuntime } from "../collector/supervisor/supervisor";
@@ -20,7 +21,7 @@ import { COLLECTOR_SAMPLE_INTERVAL_MS, remainingSampleDelay } from "../shared/ca
 const host = "127.0.0.1",
   port = Number(process.env.PORT || 4310);
 // Postgame is locked while its data source is undecided; the code stays for development.
-const postgameLocked = process.env.RIOT_OVERLAY_POSTGAME !== "1";
+const postgameLocked = process.env.RIOT_OVERLAY_POSTGAME === "0";
 let state: State = { ...createState(), postgameLocked };
 const collectorPort = Number(process.env.RIOT_OVERLAY_COLLECTOR_PORT ?? 18799);
 const localCollector = new LeagueCollectorSource({ port: collectorPort });
@@ -144,6 +145,8 @@ const server = createServer(async (req, res) => {
       "/api/riot-postgame/publish",
       "/api/riot-postgame/import-eog",
       "/api/riot-postgame/eog-files",
+      "/api/riot-postgame/rofl-files",
+      "/api/riot-postgame/import-rofl",
     ];
     if (!routes.includes(req.url)) {
       res.writeHead(404);
@@ -154,6 +157,15 @@ const server = createServer(async (req, res) => {
     if (postgameLocked && req.url !== routes[0]) {
       res.writeHead(423);
       res.end('{"error":"postgame-locked"}');
+      return;
+    }
+    if (req.url === routes[6]) {
+      if (req.method !== "GET") {
+        res.writeHead(405, { Allow: "GET" });
+        res.end("{}");
+        return;
+      }
+      res.end(JSON.stringify({ files: await replays.files(), replay: replays.snapshot() }));
       return;
     }
     if (req.url === routes[5]) {
@@ -203,8 +215,16 @@ const server = createServer(async (req, res) => {
           riotPostgame.clear();
           res.end(JSON.stringify(riotPostgame.status()));
         } else res.end(JSON.stringify(riotPostgame.configure(input)));
-      } else if (req.url === routes[4])
-        res.end(JSON.stringify(await riotPostgame.importEog(input)));
+      } else if (req.url === routes[7])
+        res.end(
+          JSON.stringify(
+            await riotPostgame.importRofl(input, async (name) => {
+              const file = (await replays.files()).find((f) => f.name === name);
+              return file ? resolve(file.dir, file.name) : null;
+            }),
+          ),
+        );
+      else if (req.url === routes[4]) res.end(JSON.stringify(await riotPostgame.importEog(input)));
       else if (req.url === routes[2]) res.end(JSON.stringify(await riotPostgame.load(input)));
       else {
         if (!input || typeof input.matchId !== "string" || Object.keys(input).length !== 1)
@@ -498,6 +518,19 @@ setInterval(async () => {
   }
 }, 600);
 // A participant's client has the end-of-game block as soon as the match ends: stage it for review.
+const replays = new ReplayWatcher();
+let replayBusy = false;
+setInterval(async () => {
+  if (postgameLocked || replayBusy || shuttingDown || wss.clients.size === 0) return;
+  replayBusy = true;
+  try {
+    await replays.afterMatch();
+    for (const file of await replays.fresh())
+      await riotPostgame.stageReplayFile(resolve(file.dir, file.name));
+  } finally {
+    replayBusy = false;
+  }
+}, 5000);
 const eogLcu = new EogLcu();
 let eogBusy = false;
 setInterval(async () => {

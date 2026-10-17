@@ -125,7 +125,7 @@ export const riotPostgameSchema = z
     evidence: z
       .object({
         matchId: z.string().regex(/^(VN2|LCU)_\d{1,20}$/),
-        mode: z.enum(["standard", "rso", "lcu-eog"]),
+        mode: z.enum(["standard", "rso", "lcu-eog", "rofl"]),
         fetchedAt: z.string().datetime(),
         patch: z.string().max(40),
         roleOrderResolved: z.tuple([z.boolean(), z.boolean()]),

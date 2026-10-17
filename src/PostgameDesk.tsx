@@ -28,7 +28,7 @@ export function PostgameDesk({
         <div className="section-heading">
           <div>
             <h2>Kết quả sau trận</h2>
-            <p>ĐANG PHÁT TRIỂN , tạm khóa.</p>
+            <p>ĐANG KHÓA (RIOT_OVERLAY_POSTGAME=0).</p>
           </div>
         </div>
         <p role="status">
@@ -38,8 +38,8 @@ export function PostgameDesk({
           cân nhắc: docs/POSTGAME_DATA_FINDINGS.md.
         </p>
         <p>
-          Mở khóa để phát triển: khởi động backend với biến môi trường{" "}
-          <code>RIOT_OVERLAY_POSTGAME=1</code>.
+          Khóa do backend được khởi động với <code>RIOT_OVERLAY_POSTGAME=0</code>; bỏ biến này để
+          mở.
         </p>
       </section>
     );

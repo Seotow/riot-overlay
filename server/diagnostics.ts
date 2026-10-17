@@ -370,3 +370,37 @@ export async function diagnose(): Promise<DiagnosticReport> {
     pending = undefined;
   }
 }
+
+// One fixed LCU POST (for example the replay download). Returns only the HTTP status: the response
+// body is never read or kept. Same loopback-only TLS exception as getLocal.
+export function postLocal(
+  endpoint: string,
+  body: unknown,
+  credentials: Credentials,
+): Promise<number | null> {
+  return new Promise((resolve) => {
+    const payload = Buffer.from(JSON.stringify(body));
+    const req = request(
+      {
+        hostname: "127.0.0.1",
+        port: credentials.port,
+        path: endpoint,
+        method: "POST",
+        rejectUnauthorized: false,
+        headers: {
+          Authorization: `Basic ${Buffer.from(`riot:${credentials.password}`).toString("base64")}`,
+          "Content-Type": "application/json",
+          "Content-Length": payload.length,
+        },
+      },
+      (res) => {
+        res.resume();
+        res.on("end", () => resolve(res.statusCode ?? null));
+        res.on("error", () => resolve(null));
+      },
+    );
+    req.setTimeout(8000, () => req.destroy());
+    req.on("error", () => resolve(null));
+    req.end(payload);
+  });
+}

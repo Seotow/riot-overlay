@@ -48,7 +48,7 @@ const navigation = [
   { id: "studio", label: "Phát sóng", icon: Clapperboard },
   { id: "demo", label: "Phòng thử", icon: Film },
   { id: "draft", label: "Cấm chọn", icon: Swords },
-  { id: "postgame", label: "Sau trận (khóa)", icon: ChartColumn },
+  { id: "postgame", label: "Sau trận", icon: ChartColumn },
   { id: "hud", label: "HUD trong game", icon: PanelTop },
 ] as const;
 

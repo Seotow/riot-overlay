@@ -4,6 +4,7 @@ import { Button } from "./components/ui/button";
 import { useEffect, useState } from "react";
 import type { State } from "../shared/schema";
 import { riotPostgameSchema, type RiotPostgameState } from "../shared/postgame";
+import { reduceRofl } from "../shared/rofl-postgame";
 import { Surface } from "./overlay/Surface";
 type Status = {
   configured: boolean;
@@ -37,6 +38,12 @@ export function RiotPostgamePanel({ state, connected }: { state: State; connecte
   const [busy, setBusy] = useState(false);
   const [notice, setNotice] = useState("");
   const [showCandidate, setShowCandidate] = useState(false);
+  const [replays, setReplays] = useState<{ name: string; size: number; modified: string }[]>([]);
+  const [replayName, setReplayName] = useState("");
+  const [replayState, setReplayState] = useState<{
+    download: string;
+    detail: string | null;
+  } | null>(null);
   const [files, setFiles] = useState<{ name: string; size: number; modified: string }[]>([]);
   const [fileName, setFileName] = useState("");
   const [reviewed, setReviewed] = useState(false);
@@ -82,6 +89,14 @@ export function RiotPostgamePanel({ state, connected }: { state: State; connecte
           });
         })
         .catch(() => {});
+      fetch("/api/riot-postgame/rofl-files", { cache: "no-store" })
+        .then((r) => (r.ok ? r.json() : null))
+        .then((r) => {
+          if (!r) return;
+          setReplays(r.files ?? []);
+          setReplayState(r.replay ?? null);
+        })
+        .catch(() => {});
       fetch("/api/riot-postgame/eog-files", { cache: "no-store" })
         .then((r) => (r.ok ? r.json() : null))
         .then((r) => r && setFiles(r.files ?? []))
@@ -124,8 +139,8 @@ export function RiotPostgamePanel({ state, connected }: { state: State; connecte
         } else {
           setShowCandidate(true);
           setNotice(
-            route === "import-eog"
-              ? "Đã nhập file EOG vào vùng duyệt. Chưa thay overlay đang phát."
+            route === "import-eog" || route === "import-rofl"
+              ? "Đã nhập dữ liệu vào vùng duyệt. Chưa thay overlay đang phát."
               : "Đã tải dữ liệu Riot vào vùng duyệt. Chưa thay overlay đang phát.",
           );
         }
@@ -136,6 +151,25 @@ export function RiotPostgamePanel({ state, connected }: { state: State; connecte
       );
     } finally {
       setBusy(false);
+    }
+  };
+  // Only the metadata at the end of the replay is read in the browser (a few tens of KB): the
+  // multi-megabyte file is never uploaded, and names/PUUIDs are dropped before anything is sent.
+  const importRofl = async (file: File | undefined) => {
+    if (!file) return;
+    const id = /^[A-Za-z0-9]{2,6}-(\d{1,15})\.rofl$/.exec(file.name)?.[1];
+    if (!id) {
+      setNotice("Tên file phải dạng VN2-<gameId>.rofl.");
+      return;
+    }
+    try {
+      const length = new DataView(await file.slice(file.size - 4).arrayBuffer()).getUint32(0, true);
+      if (length <= 0 || length > 2_000_000 || length > file.size - 12) throw Error();
+      const text = await file.slice(file.size - 4 - length, file.size - 4).text();
+      const rofl = reduceRofl(JSON.parse(text), Number(id));
+      await action("import-rofl", { gameNumber, rofl });
+    } catch {
+      setNotice("Không đọc được metadata replay. Chưa thay dữ liệu đang phát.");
     }
   };
   const importEog = async (file: File | undefined) => {
@@ -167,6 +201,55 @@ export function RiotPostgamePanel({ state, connected }: { state: State; connecte
         </span>
       </div>
       <fieldset disabled={!connected || busy}>
+        <h4>Replay (.rofl)</h4>
+        <p>
+          Hướng chính: client tải replay của trận (backend tự gửi yêu cầu tải sau trận và theo dõi
+          thư mục Replays cùng thư mục thả file <code>.npm-cache/rofl-inbox</code>). Mỗi file mới tự
+          vào vùng duyệt. Chỉ đọc số liệu cuối trận và tướng; bỏ tên, PUUID, Riot ID.
+          {replayState
+            ? ` Tải replay: ${replayState.download === "idle" ? "chưa có yêu cầu" : replayState.download === "requested" ? "đã yêu cầu" : "client từ chối"}${replayState.detail ? ` (${replayState.detail})` : ""}.`
+            : ""}
+        </p>
+        <div className="riot-config-grid">
+          <label>
+            Replay trên máy này
+            <NativeSelect
+              aria-label="Replay trên máy"
+              value={replayName}
+              onChange={(e) => setReplayName(e.target.value)}
+            >
+              <option value="">
+                {replays.length ? "Chọn một replay" : "Chưa thấy replay nào"}
+              </option>
+              {replays.map((f) => (
+                <option value={f.name} key={f.name}>
+                  {new Date(f.modified).toLocaleString("vi-VN")} , {f.name}
+                </option>
+              ))}
+            </NativeSelect>
+          </label>
+          <Button
+            type="button"
+            disabled={!replayName}
+            onClick={() => action("import-rofl", { gameNumber, replay: replayName })}
+          >
+            Nạp replay đã chọn
+          </Button>
+        </div>
+        <div className="riot-config-grid">
+          <label>
+            Hoặc chọn file .rofl
+            <Input
+              aria-label="File replay"
+              type="file"
+              accept=".rofl"
+              onChange={(e) => {
+                void importRofl(e.target.files?.[0]);
+                e.target.value = "";
+              }}
+            />
+          </label>
+        </div>
         <h4>Nhập từ file EOG (LCU)</h4>
         <p>
           Chọn file <code>eog-stats-block</code> đã lọc từ probe (<code>npm run probe:eog</code>{" "}

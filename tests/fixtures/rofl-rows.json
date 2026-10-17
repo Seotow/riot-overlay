@@ -1,0 +1,216 @@
+{
+  "gameId": 1607368559,
+  "gameLengthMs": 786412,
+  "rows": [
+    {
+      "champion": "Yasuo",
+      "team": 100,
+      "win": true,
+      "position": "Invalid",
+      "bot": false,
+      "stats": {
+        "CHAMPIONS_KILLED": 35,
+        "NUM_DEATHS": 3,
+        "ASSISTS": 0,
+        "GOLD_EARNED": 44307,
+        "TOTAL_DAMAGE_DEALT_TO_CHAMPIONS": 40241,
+        "TURRETS_KILLED": 4,
+        "BARRACKS_KILLED": 1,
+        "BARON_KILLS": 1,
+        "RIFT_HERALD_KILLS": 1,
+        "HORDE_KILLS": 2,
+        "DRAGON_KILLS": 3,
+        "ELDER_DRAGON_KILLS": 0
+      }
+    },
+    {
+      "champion": "Smolder",
+      "team": 100,
+      "win": true,
+      "position": "Invalid",
+      "bot": true,
+      "stats": {
+        "CHAMPIONS_KILLED": 0,
+        "NUM_DEATHS": 1,
+        "ASSISTS": 7,
+        "GOLD_EARNED": 5267,
+        "TOTAL_DAMAGE_DEALT_TO_CHAMPIONS": 4366,
+        "TURRETS_KILLED": 1,
+        "BARRACKS_KILLED": 0,
+        "BARON_KILLS": 0,
+        "RIFT_HERALD_KILLS": 0,
+        "HORDE_KILLS": 0,
+        "DRAGON_KILLS": 1,
+        "ELDER_DRAGON_KILLS": 0
+      }
+    },
+    {
+      "champion": "Tryndamere",
+      "team": 100,
+      "win": true,
+      "position": "Invalid",
+      "bot": true,
+      "stats": {
+        "CHAMPIONS_KILLED": 2,
+        "NUM_DEATHS": 0,
+        "ASSISTS": 1,
+        "GOLD_EARNED": 5094,
+        "TOTAL_DAMAGE_DEALT_TO_CHAMPIONS": 1798,
+        "TURRETS_KILLED": 0,
+        "BARRACKS_KILLED": 0,
+        "BARON_KILLS": 0,
+        "RIFT_HERALD_KILLS": 0,
+        "HORDE_KILLS": 1,
+        "DRAGON_KILLS": 1,
+        "ELDER_DRAGON_KILLS": 0
+      }
+    },
+    {
+      "champion": "Taric",
+      "team": 100,
+      "win": true,
+      "position": "Invalid",
+      "bot": true,
+      "stats": {
+        "CHAMPIONS_KILLED": 1,
+        "NUM_DEATHS": 0,
+        "ASSISTS": 3,
+        "GOLD_EARNED": 4214,
+        "TOTAL_DAMAGE_DEALT_TO_CHAMPIONS": 3669,
+        "TURRETS_KILLED": 1,
+        "BARRACKS_KILLED": 0,
+        "BARON_KILLS": 0,
+        "RIFT_HERALD_KILLS": 0,
+        "HORDE_KILLS": 0,
+        "DRAGON_KILLS": 0,
+        "ELDER_DRAGON_KILLS": 0
+      }
+    },
+    {
+      "champion": "Corki",
+      "team": 100,
+      "win": true,
+      "position": "Invalid",
+      "bot": true,
+      "stats": {
+        "CHAMPIONS_KILLED": 2,
+        "NUM_DEATHS": 2,
+        "ASSISTS": 3,
+        "GOLD_EARNED": 4729,
+        "TOTAL_DAMAGE_DEALT_TO_CHAMPIONS": 7025,
+        "TURRETS_KILLED": 2,
+        "BARRACKS_KILLED": 0,
+        "BARON_KILLS": 0,
+        "RIFT_HERALD_KILLS": 0,
+        "HORDE_KILLS": 0,
+        "DRAGON_KILLS": 0,
+        "ELDER_DRAGON_KILLS": 0
+      }
+    },
+    {
+      "champion": "Veigar",
+      "team": 200,
+      "win": false,
+      "position": "Invalid",
+      "bot": true,
+      "stats": {
+        "CHAMPIONS_KILLED": 2,
+        "NUM_DEATHS": 8,
+        "ASSISTS": 0,
+        "GOLD_EARNED": 3318,
+        "TOTAL_DAMAGE_DEALT_TO_CHAMPIONS": 5889,
+        "TURRETS_KILLED": 0,
+        "BARRACKS_KILLED": 0,
+        "BARON_KILLS": 0,
+        "RIFT_HERALD_KILLS": 0,
+        "HORDE_KILLS": 0,
+        "DRAGON_KILLS": 0,
+        "ELDER_DRAGON_KILLS": 0
+      }
+    },
+    {
+      "champion": "LeeSin",
+      "team": 200,
+      "win": false,
+      "position": "Invalid",
+      "bot": true,
+      "stats": {
+        "CHAMPIONS_KILLED": 3,
+        "NUM_DEATHS": 6,
+        "ASSISTS": 1,
+        "GOLD_EARNED": 4792,
+        "TOTAL_DAMAGE_DEALT_TO_CHAMPIONS": 4131,
+        "TURRETS_KILLED": 0,
+        "BARRACKS_KILLED": 0,
+        "BARON_KILLS": 0,
+        "RIFT_HERALD_KILLS": 0,
+        "HORDE_KILLS": 0,
+        "DRAGON_KILLS": 0,
+        "ELDER_DRAGON_KILLS": 0
+      }
+    },
+    {
+      "champion": "Kayle",
+      "team": 200,
+      "win": false,
+      "position": "Invalid",
+      "bot": true,
+      "stats": {
+        "CHAMPIONS_KILLED": 0,
+        "NUM_DEATHS": 9,
+        "ASSISTS": 2,
+        "GOLD_EARNED": 2917,
+        "TOTAL_DAMAGE_DEALT_TO_CHAMPIONS": 2733,
+        "TURRETS_KILLED": 0,
+        "BARRACKS_KILLED": 0,
+        "BARON_KILLS": 0,
+        "RIFT_HERALD_KILLS": 0,
+        "HORDE_KILLS": 0,
+        "DRAGON_KILLS": 0,
+        "ELDER_DRAGON_KILLS": 0
+      }
+    },
+    {
+      "champion": "Morgana",
+      "team": 200,
+      "win": false,
+      "position": "Invalid",
+      "bot": true,
+      "stats": {
+        "CHAMPIONS_KILLED": 0,
+        "NUM_DEATHS": 6,
+        "ASSISTS": 0,
+        "GOLD_EARNED": 2837,
+        "TOTAL_DAMAGE_DEALT_TO_CHAMPIONS": 2840,
+        "TURRETS_KILLED": 0,
+        "BARRACKS_KILLED": 0,
+        "BARON_KILLS": 0,
+        "RIFT_HERALD_KILLS": 0,
+        "HORDE_KILLS": 0,
+        "DRAGON_KILLS": 0,
+        "ELDER_DRAGON_KILLS": 0
+      }
+    },
+    {
+      "champion": "MasterYi",
+      "team": 200,
+      "win": false,
+      "position": "Invalid",
+      "bot": true,
+      "stats": {
+        "CHAMPIONS_KILLED": 0,
+        "NUM_DEATHS": 11,
+        "ASSISTS": 0,
+        "GOLD_EARNED": 2784,
+        "TOTAL_DAMAGE_DEALT_TO_CHAMPIONS": 1011,
+        "TURRETS_KILLED": 0,
+        "BARRACKS_KILLED": 0,
+        "BARON_KILLS": 0,
+        "RIFT_HERALD_KILLS": 0,
+        "HORDE_KILLS": 0,
+        "DRAGON_KILLS": 0,
+        "ELDER_DRAGON_KILLS": 0
+      }
+    }
+  ]
+}

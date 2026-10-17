@@ -6,6 +6,8 @@ import { riotPostgameSchema, type RiotPostgameState } from "../shared/postgame";
 import { normalizeEog } from "../shared/eog-postgame";
 import { eogHistorySchema, type EogHistory } from "../shared/eog-history";
 import { redactEog } from "./eog-redact";
+import { normalizeRofl, roflInputSchema } from "../shared/rofl-postgame";
+import { readRofl } from "./rofl";
 
 export const riotCredentialSchema = z
   .object({
@@ -27,6 +29,17 @@ export const riotLoadSchema = z
     gameNumber: z.number().int().min(1).max(99),
   })
   .strict();
+export const roflImportSchema = z.union([
+  // Rows reduced in the browser from the tail of a .rofl chosen by the operator.
+  z.object({ gameNumber: z.number().int().min(1).max(99), rofl: roflInputSchema }).strict(),
+  // A replay already on this machine (client replay folder or the drop folder).
+  z
+    .object({
+      gameNumber: z.number().int().min(1).max(99),
+      replay: z.string().regex(/^[A-Za-z0-9]{2,6}-\d{1,15}\.rofl$/),
+    })
+    .strict(),
+]);
 const EOG_DIR = resolve(".npm-cache/lcu-eog");
 const EOG_FILE = /^[\w.-]{1,120}-(?:eog-stats-block|postgame-bundle)\.json$/;
 // A saved bundle is { eog, history } from the probe; a plain block has no history.
@@ -338,6 +351,31 @@ export class RiotPostgameService {
     const { eog, history } = split(payload);
     this.candidate = normalizeEog(redactEog(eog).value, value.gameNumber, new Date(), history);
     return this.status();
+  }
+  // `locate` maps a replay file name to a real path inside one of the allowed folders.
+  async importRofl(input: unknown, locate: (name: string) => Promise<string | null>) {
+    const value = roflImportSchema.parse(input);
+    if (this.controller) throw new RiotError(409, "busy");
+    let rows;
+    if ("replay" in value) {
+      const path = await locate(value.replay);
+      if (!path) throw new RiotError(404, "no-file");
+      rows = await readRofl(path);
+    } else rows = value.rofl;
+    this.candidate = normalizeRofl(rows, value.gameNumber);
+    return this.status();
+  }
+  // Automatic path: a new replay file appears (downloaded by the client). Stage it once for review.
+  async stageReplayFile(path: string) {
+    if (this.controller) return false;
+    try {
+      const rows = await readRofl(path);
+      if (this.candidate?.evidence.matchId === `VN2_${rows.gameId}`) return false;
+      this.candidate = normalizeRofl(rows, this.candidate?.gameNumber ?? 1);
+      return true;
+    } catch {
+      return false;
+    }
   }
   async listEogFiles() {
     try {

@@ -1,12 +1,26 @@
 # Điều tra nguồn postgame từ dữ liệu hiện có — 13/10/2026
 
-## Trạng thái hiện tại, 17/10/2026: postgame **tạm khóa**
+## Trạng thái hiện tại, 17/10/2026: hướng **replay `.rofl`** (đã mở khóa)
 
-Người dùng chọn khóa postgame cho tới khi quyết định hướng dữ liệu. Khi khóa: overlay `scene=postgame` và chế độ
-tự nhận diện không hiện postgame; Studio, trang Sau trận chỉ báo "đang phát triển"; backend trả 423 cho mọi
-`/api/riot-postgame/*` trừ `status`, từ chối lệnh WebSocket `scene=postgame` và `postgameState` có dữ liệu, và
-không đọc EOG của client. Mở khóa để phát triển: chạy backend với `RIOT_OVERLAY_POSTGAME=1` (bài test tích hợp
-đặt biến này). Mã nhập EOG, chuẩn hóa, probe và Match-V5 giữ nguyên, chỉ bị khóa.
+Người dùng chốt hướng tải replay. Postgame đã mở khóa (chỉ khóa khi backend chạy với `RIOT_OVERLAY_POSTGAME=0`).
+Luồng, không nhập tay:
+
+1. Sau trận, backend gửi yêu cầu tải replay theo gameId (`POST /lol-replays/v1/rofls/{gameId}/download`, cùng
+   yêu cầu với nút tải replay của client) một lần cho mỗi game. **Chưa kiểm chứng spectator tải được replay trận
+   tùy chọn**; nếu client từ chối, trạng thái hiện mã HTTP và không làm gì thêm.
+2. Backend theo dõi thư mục Replays của client (hỏi LCU `/lol-replays/v1/rofls/path`, `LOL_REPLAYS_DIR`, thư mục
+   Documents mặc định) và thư mục thả file `.npm-cache/rofl-inbox`. File `.rofl` mới tự vào vùng duyệt; file có
+   sẵn lúc khởi động bị bỏ qua. Chọn file bằng tay vẫn có (trình duyệt chỉ đọc phần metadata ở cuối file).
+3. Chỉ đọc metadata JSON ở đuôi ROFL2 (giới hạn 2 MB, không giải mã packet, không chạy replay). Giữ số liệu cuối
+   trận và tướng; bỏ tên, PUUID, Riot ID. `shared/rofl-postgame.ts`, `server/rofl.ts`, `server/replays.ts`.
+
+Phân tích `VN2-1607368559.rofl` (7.813.521 byte, 786,4 giây): 10 người, 200 khóa stats mỗi người. Bot là người không
+có PUUID (9/10). Winner đội 100 (xanh). Tổng đội xanh: 40/6/14, vàng 63.611, 8 trụ, 1 Baron, 1 Sứ giả, 3 Sâu;
+damage lên tướng 40.241/4.366/1.798/3.669/7.025 (khớp LCU). Không có: vị trí (TEAM_POSITION rỗng, nên hàng damage
+theo thứ tự trong file), cấm chọn, lịch sử vàng, và rồng: `DRAGON_KILLS` = 5 nhưng `ELDER_DRAGON_KILLS` = 0 trái với
+sổ native nên hai mục rồng giữ —. Overlay đã hiển thị đúng bản này (fixture ẩn danh `tests/fixtures/rofl-rows.json`).
+
+Các hướng khác (collector, đại lý máy tham gia, Match-V5 kiểu RCV) giữ trong ghi chú bên dưới để tham khảo.
 
 Đã xác nhận bằng đo thật (game 1608102102, hai máy): máy spectator không có phase kết thúc, không có EOG,
 không thấy lịch sử trận tùy chọn; máy người tham gia có `eog-stats-block` đủ 10 người (damage, KDA, vàng,

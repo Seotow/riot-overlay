@@ -24,7 +24,7 @@ Các tài liệu này giúp tiếp tục công việc mà không cần lịch s�
 - Giao tiếp với người dùng bằng tiếng Việt, giải thích ngắn và dễ hiểu.
 - Ưu tiên LoL. Valorant và TFT là hướng mở rộng, chưa triển khai.
 - Người dùng đã xác nhận draft và in-game hiện tại đạt yêu cầu ban đầu. Giữ chúng làm baseline; không tự thiết kế lại hoặc mở thêm vòng audit UI nếu không cần cho yêu cầu mới.
-- Postgame đang khóa (`RIOT_OVERLAY_POSTGAME=1` để mở khi phát triển) cho tới khi người dùng chọn hướng dữ liệu; mọi nguồn phải tự động, không nhập tay.
+- Postgame đi theo hướng replay `.rofl` (người dùng chốt 17/10/2026); mọi nguồn phải tự động, không nhập tay. Khóa bằng `RIOT_OVERLAY_POSTGAME=0`.
 - Người dùng sẽ hỗ trợ thao tác LoL Client, chọn tướng và spectator khi được hướng dẫn từng bước. Không giả định client đang mở hoặc đã có trận test.
 - Bước phát triển tiếp theo là chẩn đoán nguồn dữ liệu chỉ đọc, không phải hoàn thiện lại mock.
 
