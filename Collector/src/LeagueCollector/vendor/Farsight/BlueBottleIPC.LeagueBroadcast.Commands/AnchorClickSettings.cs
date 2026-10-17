@@ -1,0 +1,74 @@
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
+using FlatSharp;
+using FlatSharp.Attributes;
+using FlatSharp.Compiler.Generated;
+using FlatSharp.Compiler.Generated.NC2FA737BA5A7BD8D4DF7945CA65733BDFA74D062FFC2B97BB9940B75520E7389;
+
+namespace BlueBottleIPC.LeagueBroadcast.Commands;
+
+[FlatBufferTable(BuildSerializer = true)]
+[FlatBufferMetadata(FlatBufferMetadataKind.FbsAttribute, "fs_serializer", "0")]
+[CompilerGenerated]
+[DebuggerTypeProxy("BlueBottleIPC.LeagueBroadcast.Commands.AnchorClickSettings")]
+public class AnchorClickSettings : IFlatBufferSerializable<AnchorClickSettings>, IFlatBufferSerializable
+{
+	[FlatBufferItem(0)]
+	public virtual bool ClickSelectEnabled { get; set; }
+
+	[FlatBufferItem(1)]
+	public virtual bool DoubleClickCameraLockEnabled { get; set; }
+
+	public static ISerializer<AnchorClickSettings> Serializer { get; }
+
+	ISerializer IFlatBufferSerializable.Serializer => (ISerializer)((IFlatBufferSerializable<AnchorClickSettings>)this).Serializer;
+
+	ISerializer<AnchorClickSettings> IFlatBufferSerializable<AnchorClickSettings>.Serializer => Serializer;
+
+	private static readonly ISerializer<AnchorClickSettings> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EAnchorClickSettings_003E_002ELazySerializer;
+
+	static ISerializer<AnchorClickSettings> IFlatBufferSerializable<AnchorClickSettings>.LazySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EAnchorClickSettings_003E_002ELazySerializer;
+
+	private static readonly ISerializer<AnchorClickSettings> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EAnchorClickSettings_003E_002EGreedySerializer;
+
+	static ISerializer<AnchorClickSettings> IFlatBufferSerializable<AnchorClickSettings>.GreedySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EAnchorClickSettings_003E_002EGreedySerializer;
+
+	private static readonly ISerializer<AnchorClickSettings> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EAnchorClickSettings_003E_002EGreedyMutableSerializer;
+
+	static ISerializer<AnchorClickSettings> IFlatBufferSerializable<AnchorClickSettings>.GreedyMutableSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EAnchorClickSettings_003E_002EGreedyMutableSerializer;
+
+	private static readonly ISerializer<AnchorClickSettings> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EAnchorClickSettings_003E_002EProgressiveSerializer;
+
+	static ISerializer<AnchorClickSettings> IFlatBufferSerializable<AnchorClickSettings>.ProgressiveSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EAnchorClickSettings_003E_002EProgressiveSerializer;
+
+	static AnchorClickSettings()
+	{
+		Serializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EAnchorClickSettings_003E_002ELazySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Lazy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EAnchorClickSettings_003E_002EGreedySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Greedy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EAnchorClickSettings_003E_002EGreedyMutableSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EAnchorClickSettings_003E_002EProgressiveSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Progressive);
+	}
+
+	public AnchorClickSettings()
+	{
+		ClickSelectEnabled = false;
+		DoubleClickCameraLockEnabled = false;
+	}
+
+	protected AnchorClickSettings(FlatBufferDeserializationContext context)
+	{
+	}
+
+	[SetsRequiredMembers]
+	public AnchorClickSettings(AnchorClickSettings source)
+	{
+		ClickSelectEnabled = CloneHelpers_7c83be20ee504926b8fb188858421982.Clone(source.ClickSelectEnabled);
+		DoubleClickCameraLockEnabled = CloneHelpers_7c83be20ee504926b8fb188858421982.Clone(source.DoubleClickCameraLockEnabled);
+	}
+
+	protected void OnFlatSharpDeserialized(FlatBufferDeserializationContext context)
+	{
+	}
+}

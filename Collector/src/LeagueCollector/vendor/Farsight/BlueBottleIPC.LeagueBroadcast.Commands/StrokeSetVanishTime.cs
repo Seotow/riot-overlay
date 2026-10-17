@@ -1,0 +1,69 @@
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
+using FlatSharp;
+using FlatSharp.Attributes;
+using FlatSharp.Compiler.Generated;
+using FlatSharp.Compiler.Generated.N69A49CFCBB5CFD213E768753BFC4DF9F21929ADF0256D20CB90C5C49B921DF29;
+
+namespace BlueBottleIPC.LeagueBroadcast.Commands;
+
+[FlatBufferTable(BuildSerializer = true)]
+[FlatBufferMetadata(FlatBufferMetadataKind.FbsAttribute, "fs_serializer", "0")]
+[CompilerGenerated]
+[DebuggerTypeProxy("BlueBottleIPC.LeagueBroadcast.Commands.StrokeSetVanishTime")]
+public class StrokeSetVanishTime : IFlatBufferSerializable<StrokeSetVanishTime>, IFlatBufferSerializable
+{
+	[FlatBufferItem(0)]
+	public virtual float VanishTime { get; set; }
+
+	public static ISerializer<StrokeSetVanishTime> Serializer { get; }
+
+	ISerializer IFlatBufferSerializable.Serializer => (ISerializer)((IFlatBufferSerializable<StrokeSetVanishTime>)this).Serializer;
+
+	ISerializer<StrokeSetVanishTime> IFlatBufferSerializable<StrokeSetVanishTime>.Serializer => Serializer;
+
+	private static readonly ISerializer<StrokeSetVanishTime> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSetVanishTime_003E_002ELazySerializer;
+
+	static ISerializer<StrokeSetVanishTime> IFlatBufferSerializable<StrokeSetVanishTime>.LazySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSetVanishTime_003E_002ELazySerializer;
+
+	private static readonly ISerializer<StrokeSetVanishTime> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSetVanishTime_003E_002EGreedySerializer;
+
+	static ISerializer<StrokeSetVanishTime> IFlatBufferSerializable<StrokeSetVanishTime>.GreedySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSetVanishTime_003E_002EGreedySerializer;
+
+	private static readonly ISerializer<StrokeSetVanishTime> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSetVanishTime_003E_002EGreedyMutableSerializer;
+
+	static ISerializer<StrokeSetVanishTime> IFlatBufferSerializable<StrokeSetVanishTime>.GreedyMutableSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSetVanishTime_003E_002EGreedyMutableSerializer;
+
+	private static readonly ISerializer<StrokeSetVanishTime> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSetVanishTime_003E_002EProgressiveSerializer;
+
+	static ISerializer<StrokeSetVanishTime> IFlatBufferSerializable<StrokeSetVanishTime>.ProgressiveSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSetVanishTime_003E_002EProgressiveSerializer;
+
+	static StrokeSetVanishTime()
+	{
+		Serializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSetVanishTime_003E_002ELazySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Lazy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSetVanishTime_003E_002EGreedySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Greedy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSetVanishTime_003E_002EGreedyMutableSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSetVanishTime_003E_002EProgressiveSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Progressive);
+	}
+
+	public StrokeSetVanishTime()
+	{
+		VanishTime = 0f;
+	}
+
+	protected StrokeSetVanishTime(FlatBufferDeserializationContext context)
+	{
+	}
+
+	[SetsRequiredMembers]
+	public StrokeSetVanishTime(StrokeSetVanishTime source)
+	{
+		VanishTime = CloneHelpers_7c83be20ee504926b8fb188858421982.Clone(source.VanishTime);
+	}
+
+	protected void OnFlatSharpDeserialized(FlatBufferDeserializationContext context)
+	{
+	}
+}

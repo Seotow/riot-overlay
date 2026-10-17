@@ -1,0 +1,22 @@
+{
+  "packages": [
+    {
+      "name": "LeagueReader-independent-source.zip",
+      "bytes": 3982653,
+      "sha256": "c34f4414d66a04d8e968de1e35745190a8c43477838e25b36659974b0cd75a65",
+      "files": 585,
+      "crcAndPerFileSha256Verified": true
+    },
+    {
+      "name": "LeagueReader-independent-Windows-x64.zip",
+      "bytes": 49225359,
+      "sha256": "bcaea4270fe07e8d95b32c2ef062fe2125244d133c407650fe1c047d642832c7",
+      "files": 375,
+      "crcAndPerFileSha256Verified": true
+    }
+  ],
+  "originalLibraryIncluded": false,
+  "credentialsIncluded": false,
+  "gameRuntimeTested": false,
+  "fullParityEstablished": false
+}

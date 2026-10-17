@@ -1375,7 +1375,13 @@
 .live-canvas .live-scoreboard { background:transparent; }
 .live-canvas .live-scoreboard .score-main { background:var(--ig-panel-strong); }
 .live-canvas .live-scoreboard .score-sub { background:var(--ig-panel-soft); }
-.live-canvas .live-scoreboard .team-caption { min-width:0; flex:1; }
+.live-canvas .live-scoreboard .team-caption { min-width:0; flex:1; height:52px; display:flex; flex-direction:column; justify-content:center; }
+.live-canvas .live-scoreboard .score-team { min-width:0; gap:6px; }
+.live-canvas .live-scoreboard .score-team.side-blue { padding:3px 4px 3px 18px; }
+.live-canvas .live-scoreboard .score-team.side-red { padding:3px 18px 3px 4px; }
+.live-canvas .live-scoreboard .score-team .team-logo { width:40px; height:40px; flex:0 0 40px; }
+.live-canvas .live-scoreboard .team-caption span { width:100%; font-size:14px; line-height:17px; }
+.live-canvas .live-scoreboard .team-caption.name-only b { font-size:var(--team-name-size,40px); line-height:52px; }
 .live-canvas .live-scoreboard .team-caption b,
 .live-canvas .live-scoreboard .team-caption span { max-width:100%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
 .live-canvas .live-scoreboard .team-logo { flex-shrink:0; }

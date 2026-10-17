@@ -1,0 +1,69 @@
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
+using FlatSharp;
+using FlatSharp.Attributes;
+using FlatSharp.Compiler.Generated;
+using FlatSharp.Compiler.Generated.N576C1C1B358553BA4B13C0A6F201E0A77CC1F1D515332E3BDDEDDAE870397E72;
+
+namespace BlueBottleIPC.LeagueBroadcast.Snapshot;
+
+[FlatBufferTable(BuildSerializer = true)]
+[FlatBufferMetadata(FlatBufferMetadataKind.FbsAttribute, "fs_serializer", "0")]
+[CompilerGenerated]
+[DebuggerTypeProxy("BlueBottleIPC.LeagueBroadcast.Snapshot.StrokeCameraLockChanged")]
+public class StrokeCameraLockChanged : IFlatBufferSerializable<StrokeCameraLockChanged>, IFlatBufferSerializable
+{
+	[FlatBufferItem(0)]
+	public virtual uint NetworkId { get; set; }
+
+	public static ISerializer<StrokeCameraLockChanged> Serializer { get; }
+
+	ISerializer IFlatBufferSerializable.Serializer => (ISerializer)((IFlatBufferSerializable<StrokeCameraLockChanged>)this).Serializer;
+
+	ISerializer<StrokeCameraLockChanged> IFlatBufferSerializable<StrokeCameraLockChanged>.Serializer => Serializer;
+
+	private static readonly ISerializer<StrokeCameraLockChanged> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ESnapshot_002EStrokeCameraLockChanged_003E_002ELazySerializer;
+
+	static ISerializer<StrokeCameraLockChanged> IFlatBufferSerializable<StrokeCameraLockChanged>.LazySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ESnapshot_002EStrokeCameraLockChanged_003E_002ELazySerializer;
+
+	private static readonly ISerializer<StrokeCameraLockChanged> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ESnapshot_002EStrokeCameraLockChanged_003E_002EGreedySerializer;
+
+	static ISerializer<StrokeCameraLockChanged> IFlatBufferSerializable<StrokeCameraLockChanged>.GreedySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ESnapshot_002EStrokeCameraLockChanged_003E_002EGreedySerializer;
+
+	private static readonly ISerializer<StrokeCameraLockChanged> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ESnapshot_002EStrokeCameraLockChanged_003E_002EGreedyMutableSerializer;
+
+	static ISerializer<StrokeCameraLockChanged> IFlatBufferSerializable<StrokeCameraLockChanged>.GreedyMutableSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ESnapshot_002EStrokeCameraLockChanged_003E_002EGreedyMutableSerializer;
+
+	private static readonly ISerializer<StrokeCameraLockChanged> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ESnapshot_002EStrokeCameraLockChanged_003E_002EProgressiveSerializer;
+
+	static ISerializer<StrokeCameraLockChanged> IFlatBufferSerializable<StrokeCameraLockChanged>.ProgressiveSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ESnapshot_002EStrokeCameraLockChanged_003E_002EProgressiveSerializer;
+
+	static StrokeCameraLockChanged()
+	{
+		Serializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ESnapshot_002EStrokeCameraLockChanged_003E_002ELazySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Lazy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ESnapshot_002EStrokeCameraLockChanged_003E_002EGreedySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Greedy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ESnapshot_002EStrokeCameraLockChanged_003E_002EGreedyMutableSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ESnapshot_002EStrokeCameraLockChanged_003E_002EProgressiveSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Progressive);
+	}
+
+	public StrokeCameraLockChanged()
+	{
+		NetworkId = 0u;
+	}
+
+	protected StrokeCameraLockChanged(FlatBufferDeserializationContext context)
+	{
+	}
+
+	[SetsRequiredMembers]
+	public StrokeCameraLockChanged(StrokeCameraLockChanged source)
+	{
+		NetworkId = CloneHelpers_7c83be20ee504926b8fb188858421982.Clone(source.NetworkId);
+	}
+
+	protected void OnFlatSharpDeserialized(FlatBufferDeserializationContext context)
+	{
+	}
+}

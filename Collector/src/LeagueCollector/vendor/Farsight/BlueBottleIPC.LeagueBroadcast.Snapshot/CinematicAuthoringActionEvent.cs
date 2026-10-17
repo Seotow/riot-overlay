@@ -1,0 +1,74 @@
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
+using FlatSharp;
+using FlatSharp.Attributes;
+using FlatSharp.Compiler.Generated;
+using FlatSharp.Compiler.Generated.NAC401F771CF4A3EEFDC685D2E845064E01B32DF9315CFD37818F3B2F8A9F64DC;
+
+namespace BlueBottleIPC.LeagueBroadcast.Snapshot;
+
+[FlatBufferTable(BuildSerializer = true)]
+[FlatBufferMetadata(FlatBufferMetadataKind.FbsAttribute, "fs_serializer", "0")]
+[CompilerGenerated]
+[DebuggerTypeProxy("BlueBottleIPC.LeagueBroadcast.Snapshot.CinematicAuthoringActionEvent")]
+public class CinematicAuthoringActionEvent : IFlatBufferSerializable<CinematicAuthoringActionEvent>, IFlatBufferSerializable
+{
+	[FlatBufferItem(0)]
+	public virtual ulong Generation { get; set; }
+
+	[FlatBufferItem(1)]
+	public virtual CinematicControllerAction Action { get; set; }
+
+	public static ISerializer<CinematicAuthoringActionEvent> Serializer { get; }
+
+	ISerializer IFlatBufferSerializable.Serializer => (ISerializer)((IFlatBufferSerializable<CinematicAuthoringActionEvent>)this).Serializer;
+
+	ISerializer<CinematicAuthoringActionEvent> IFlatBufferSerializable<CinematicAuthoringActionEvent>.Serializer => Serializer;
+
+	private static readonly ISerializer<CinematicAuthoringActionEvent> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ESnapshot_002ECinematicAuthoringActionEvent_003E_002ELazySerializer;
+
+	static ISerializer<CinematicAuthoringActionEvent> IFlatBufferSerializable<CinematicAuthoringActionEvent>.LazySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ESnapshot_002ECinematicAuthoringActionEvent_003E_002ELazySerializer;
+
+	private static readonly ISerializer<CinematicAuthoringActionEvent> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ESnapshot_002ECinematicAuthoringActionEvent_003E_002EGreedySerializer;
+
+	static ISerializer<CinematicAuthoringActionEvent> IFlatBufferSerializable<CinematicAuthoringActionEvent>.GreedySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ESnapshot_002ECinematicAuthoringActionEvent_003E_002EGreedySerializer;
+
+	private static readonly ISerializer<CinematicAuthoringActionEvent> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ESnapshot_002ECinematicAuthoringActionEvent_003E_002EGreedyMutableSerializer;
+
+	static ISerializer<CinematicAuthoringActionEvent> IFlatBufferSerializable<CinematicAuthoringActionEvent>.GreedyMutableSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ESnapshot_002ECinematicAuthoringActionEvent_003E_002EGreedyMutableSerializer;
+
+	private static readonly ISerializer<CinematicAuthoringActionEvent> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ESnapshot_002ECinematicAuthoringActionEvent_003E_002EProgressiveSerializer;
+
+	static ISerializer<CinematicAuthoringActionEvent> IFlatBufferSerializable<CinematicAuthoringActionEvent>.ProgressiveSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ESnapshot_002ECinematicAuthoringActionEvent_003E_002EProgressiveSerializer;
+
+	static CinematicAuthoringActionEvent()
+	{
+		Serializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ESnapshot_002ECinematicAuthoringActionEvent_003E_002ELazySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Lazy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ESnapshot_002ECinematicAuthoringActionEvent_003E_002EGreedySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Greedy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ESnapshot_002ECinematicAuthoringActionEvent_003E_002EGreedyMutableSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ESnapshot_002ECinematicAuthoringActionEvent_003E_002EProgressiveSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Progressive);
+	}
+
+	public CinematicAuthoringActionEvent()
+	{
+		Generation = 0uL;
+		Action = CinematicControllerAction.Capture;
+	}
+
+	protected CinematicAuthoringActionEvent(FlatBufferDeserializationContext context)
+	{
+	}
+
+	[SetsRequiredMembers]
+	public CinematicAuthoringActionEvent(CinematicAuthoringActionEvent source)
+	{
+		Generation = CloneHelpers_7c83be20ee504926b8fb188858421982.Clone(source.Generation);
+		Action = CloneHelpers_7c83be20ee504926b8fb188858421982.Clone(source.Action);
+	}
+
+	protected void OnFlatSharpDeserialized(FlatBufferDeserializationContext context)
+	{
+	}
+}

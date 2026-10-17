@@ -1,0 +1,3061 @@
+{
+  "schemaVersion": 1,
+  "catalogId": "lblib-a1028d56-static-readers-v1",
+  "source": {
+    "binarySha256": "a1028d56ef03c84a0808ac028a0ee3a982e7962e844592157ed4b6c2663141d3",
+    "initializerEvidenceSha256": "fa6e6742292448cca9fe39766b76d5967b8c789a763365a54d1c4e5124553310"
+  },
+  "validation": {
+    "status": "static-derived",
+    "gameTested": false,
+    "accountParityVerified": false
+  },
+  "descriptors": {
+    "0x180d21540": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "C7 05 ? ? ? ? 02 00 00 00 EB ? 40 B6 01",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d219b0": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "E8 ? ? ? ? 4C 8B 87 ? ? ? ? 48 8D 15 ? ? ? ? 4C 8B C8 48 8D 4D ? E8 ? ? ? ? 48 8D 4C 24",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        },
+        {
+          "pattern": "E8 ? ? ? ? 4C 8B 83 ? ? ? ? 48 8D 15",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d21e20": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "F3 0F 5C 35 ? ? ? ? 0F 28 F8",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d22290": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 8B 0D ? ? ? ? F2 0F 10 83",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d22700": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 8B 49 ? E8 ? ? ? ? F2 0F 10 0D ? ? ? ? 66 0F 2F C1 76 ? 48 8B 0D ? ? ? ? 48 8B 49 ? E8",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d22b70": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "0F B6 51 ? 0F 57 C0 48 8B 01 48 C1 E2 ? 48 8B 48 ? F2 48 0F 2A 44 0A 08 F2 0F 59 05 ? ? ? ? 66 0F 5A C0 C3",
+          "resolveKind": 2,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d22fe0": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 83 EC ? 0F B6 51 ? 48 8B 09 E8 ? ? ? ? 0F 57 C0 F2 48 0F 2A C0 F2 0F 59 05 ? ? ? ? 66 0F 5A C0 48 83 C4 ? C3",
+          "resolveKind": 2,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d23450": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "0F B6 51 ? 48 8B 01 48 C1 E2 ? 48 8B 48 ? F2 0F 10 44 0A ? C3",
+          "resolveKind": 2,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d238c0": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "0F B6 51 ? 48 8B 09 48 C1 E2 ? 48 8B 41 ? 0F B6 44 02 ? C3",
+          "resolveKind": 2,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d23d30": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "40 53 48 83 EC ? 48 8D 99 ? ? ? ? 48 81 C1",
+          "resolveKind": 2,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d241a0": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "E8 ? ? ? ? 48 8B 0D ? ? ? ? E8 ? ? ? ? 48 8B 05 ? ? ? ? 48 8B 88",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d24610": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "40 55 53 56 57 41 54 41 56 48 8D 6C 24 ? 48 81 EC 18 01 00 00",
+          "resolveKind": 2,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d24a80": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "40 53 55 56 57 48 81 EC 68 01 00 00 48 8B 05 ? ? ? ? 48 33 C4 48 89 84 24 50 01 00 00 48 8D B1 ? ? ? ? 49 8B F9 48 8B 06 48 8B CE 49 8B D8 8B EA FF 90 38 01 00 00",
+          "resolveKind": 2,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d24ef0": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 89 05 ? ? ? ? E8 ? ? ? ? 4C 8D 2D",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d257d0": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 8B 0D ? ? ? ? 45 0F B6 C1 C6 44 24 ? ? C6 44 24 ? ? C7 44 24 ? ? ? ? ? C6 44 24 ? ? E8 ? ? ? ? 48 8B CB E8 ? ? ? ? 48 8B 05",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d25c40": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 8B 0D ? ? ? ? 48 8D 55 ? 0F 29 B4 24 ? ? ? ? 0F 57 F6",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d260b0": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 8B 0D ? ? ? ? 48 8D 55 ? E8 ? ? ? ? 80 3D",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d26520": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "80 3D ? ? ? ? 00 0F 94 05 ? ? ? ? C3 CC C6 05 ? ? ? ? 01 C3",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d26990": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "40 56 48 83 EC 50 80 79 08 00 48 8B F1 0F 29 7C 24 30 0F 28 F9 0F 84 ? ? ? ? 48 8B 09 48 8B 01 FF 50 70 84 C0 0F 84 ? ? ? ? 48 8B 0E 48 89 5C 24 68",
+          "resolveKind": 2,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d26e00": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 8B 0D ? ? ? ? 44 0F B6 CB 44 8B 05",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d27270": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "49 8B 4A ? 49 03 C8 49 89 0F 48 8B 06",
+          "resolveKind": 1,
+          "knownConstant": false,
+          "value": 0
+        },
+        {
+          "pattern": "",
+          "resolveKind": 0,
+          "knownConstant": true,
+          "value": 64
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d276e0": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "4D 03 42 ? 49 8B C0 49 F7 72 ? 4C 2B C2",
+          "resolveKind": 1,
+          "knownConstant": false,
+          "value": 0
+        },
+        {
+          "pattern": "",
+          "resolveKind": 0,
+          "knownConstant": true,
+          "value": 72
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d27b50": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 83 C2 ? 49 3B D0 72 ? 48 8B 53 58",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        },
+        {
+          "pattern": "48 83 C1 ? 49 3B C8 72 ? 48 8B 4B 58",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        },
+        {
+          "pattern": "",
+          "resolveKind": 0,
+          "knownConstant": true,
+          "value": 56
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d27fc0": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 8B 0D ? ? ? ? 48 8B 89 ? ? ? ? E8 ? ? ? ? ? 8D ? 30 03 00 00",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d28430": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 8B 89 ? ? ? ? E8 ? ? ? ? ? 8D ? 30 03 00 00",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d28d18": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 83 EC ? 80 B9 ? ? ? ? ? 75 ? 48 8B 0D",
+          "resolveKind": 2,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d29188": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 8D 4E ? 4D 8B 86 ? ? ? ? 48 8D 15 ? ? ? ? E8 ? ? ? ?",
+          "resolveKind": 1,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d295f8": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 8B 05 ? ? ? ? 48 8B E9 83 78",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d29a68": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "83 78 ? ? 0F 85 ? ? ? ? 80 B9",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d29ed8": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "E8 ? ? ? ? 48 8B D8 48 85 C0 0F 84 ? ? ? ? 48 89 AC 24",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d2a348": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "E8 ? ? ? ? 48 8B D8 48 85 C0 0F 85 ? ? ? ? 44 0F 28 44 24",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d2a7b8": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "3B 15 ? ? ? ? 74 ? 48 8B 49",
+          "resolveKind": 2,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d2ac28": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 89 5C 24 ? 48 89 74 24 ? 57 48 83 EC ? 48 8B D9 48 8B FA 48 8B CA E8 ? ? ? ? 84 C0 75 ? 48 8B 93 ? ? ? ?",
+          "resolveKind": 2,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d2b098": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 89 4C 24 ? 55 53 56 57 41 54 41 55 41 56 41 57 48 8B EC 48 83 EC ? 8B 79 58 4C 8D 69 50 45 33 FF 0F 29 74 24 ? 8B DF 44 89 7D ? 48 C1 E3 03 41 8B C7 48 89 45 ? 48 8B F2 4C 8B F1 85 FF",
+          "resolveKind": 2,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d2b520": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 8B 0D ? ? ? ? 0F 28 F1 E8",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d2b990": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 8B 05 ? ? ? ? 45 33 E4 49 89 5B 08",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d2be00": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 89 0D ? ? ? ? 48 8D 05 ? ? ? ? 33 D2 48 89 01 48 8D 05 ? ? ? ?",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d2c270": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 8B 1D ? ? ? ? 48 8B 5B 28",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d2c6e0": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 8B 0D ? ? ? ? F3 0F 10 5C 24 ?",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d2cb50": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 8b 0d ? ? ? ? 0f b6 c0 8d 14 85",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d2d8a0": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "0F B6 88 ? ? ? ? EB 07 0F B6 8E",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d2dd10": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 8D 41 ? 4C 8B C1 80 BA",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d2ea60": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 8D 8F ? ? ? ? 8B 45",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d2fc20": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 8D B7 ? ? ? ? 4C 2B F7",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d30090": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "0F B6 84 08 ? ? ? ? C3 CC CC CC CC CC",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d30500": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 8D 97 ? ? ? ? 48 8B CB E8 ? ? ? ? 48 8B C3",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d316c0": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 81 C1 ? ? 00 00 E9 ? ? ? ? CC CC CC CC 48 89 5C 24 ? 48 89 6C 24",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d31b30": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "F3 0F 10 97 ? ? ? ? 48 8D 54 24",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d31fa0": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "8B 8B ? ? ? ? 48 8B F0 89 88",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d32880": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "F3 0F 11 87 ? ? ? ? E8 ? ? ? ? 4C 8B 0F",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d32cf0": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 8D 91 ? ? ? ? 48 83 7A ? ? 76 ? 48 8B 12 0F 57 C0",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d33160": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 8D 8E ? ? ? ? 4C 8B C7 48 8D 96",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d335d0": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 8D 93 ? ? ? ? 48 8B 74 24",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d33a40": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 8D 8D ? ? ? ? 8D 04 92",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d34c00": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 8D 8F ? ? ? ? 8B 05 ? ? ? ? 89 87",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d35070": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 8D 8A ? ? ? ? BA 3F 00 00 00",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d354e0": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 8D 8D ? ? ? ? E8 ? ? ? ? 48 8B 6C 24 ? 0F B6 D8",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d35950": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 8B 81 ? ? ? ? 4C 8B E1",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d35dc0": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "49 8D 96 ? 1B 00 00 49 8B CE E8",
+          "resolveKind": 1,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d36230": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 8D 8B ? ? ? ? 48 8B 01 FF 50 ? 8B 4F ? ? 8D",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d366a0": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 8D 4F ? 44 8B F0",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d36b10": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "E8 ? ? ? ? F3 0F 10 80 ? ? ? ? F3 0F 58 05 ? ? ? ? E8 ? ? ? ? 48 8B CF F3 0F 2C D8 E8 ? ? ? ? 48 8B CE 03 D8",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d36f90": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "41 FF 90 ? ? ? ? 40 0F B6 D6",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d37400": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "FF 90 ? ? ? ? 48 8D 48 ? E8 ? ? ? ? 8B D0",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d39320": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "E8 ? ? ? ? 49 8B 07 49 8D 8E 78 0E 00 00",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d39790": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "E8 ? ? ? ? 49 8B 07 49 8D 8E 68 55 00 00",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d39c88": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 89 5C 24 ? 55 56 41 ? 41 ? 41 57 48 8D 6C 24 ? 48 81 EC ? 01 00 00 0F 29 B4 24 ? ? 00 00",
+          "resolveKind": 2,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d3a0f8": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "4C 8B DC 55 53 41 56 49 8D 6B ? 48 81 EC 10 01 00 00",
+          "resolveKind": 2,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d3a568": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "40 55 56 41 56 41 57 48 8D 6C 24 98 48 81 EC 68 01 00 00 48 8B 01 48 8B F2 4C 8B F1 45 33 FF FF 50 70",
+          "resolveKind": 2,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d3ae48": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 8B B9 ? ? ? ? 48 3B DF 74 ? 66 66 66 0F 1F 84 00 ? ? ? ? 48 8B 0B",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d3b2b8": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "E8 ? ? ? ? 48 8B D8 48 85 C0 75 ? 48 8B CF E8 ? ? ? ? 48 8D 4F",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d3c020": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 81 C1 ? ? ? ? E8 ? ? ? ? F3 0F 10 80 ? ? ? ? F3 0F 58 05 ? ? ? ? E8 ? ? ? ? 48 8B CF F3 0F 2C D8 E8 ? ? ? ? 48 8B CE 03 D8",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d3c490": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "E8 ? ? ? ? 48 8B CE 03 D8 E8 ? ? ? ? 44 8B C3 48 8D 15",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d3c900": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "F3 0F 10 80 ? ? ? ? F3 0F 58 05 ? ? ? ? E8 ? ? ? ? 48 8B CF F3 0F 2C D8 E8 ? ? ? ? 48 8B CE 03 D8",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d3cd70": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "8B B0 ? ? ? ? 49 8B CE 8B B8 ? ? ? ? 8B 98 ? ? ? ? E8 ? ? ? ? 44 8B CF 89 5C 24 ? 44 8B C6",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d3d1e0": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "8B B8 ? ? ? ? 8B 98 ? ? ? ? E8 ? ? ? ? 44 8B CF 89 5C 24 ? 44 8B C6 48 8D 15 ? ? ? ?",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d3d650": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "8B 98 ? ? ? ? E8 ? ? ? ? 44 8B CF 89 5C 24 ? 44 8B C6 48 8D 15 ? ? ? ? 48 8B C8 E8 ? ? ? ?",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d3e840": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 89 5C 24 ? 48 89 74 24 ? 57 48 83 EC 40 48 8B F1 48 83 C1 40",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d3ecb0": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "8B 4B ? 40 84 FF 74 ? 0B C8",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d3f128": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 83 79 ? 00 75 0C 80 B9 88 00 00 00 00",
+          "resolveKind": 1,
+          "knownConstant": false,
+          "value": 0
+        },
+        {
+          "pattern": "",
+          "resolveKind": 0,
+          "knownConstant": true,
+          "value": 16
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d3f5a0": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "80 79 ? 19 0F 94 C0 C3",
+          "resolveKind": 1,
+          "knownConstant": false,
+          "value": 0
+        },
+        {
+          "pattern": "",
+          "resolveKind": 0,
+          "knownConstant": true,
+          "value": 12
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d3fa18": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "F3 0F 10 41 ? F3 0F 5C 41 18 C3",
+          "resolveKind": 1,
+          "knownConstant": false,
+          "value": 0
+        },
+        {
+          "pattern": "",
+          "resolveKind": 0,
+          "knownConstant": true,
+          "value": 28
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d3fe90": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "E8 ? ? ? ? 84 C0 75 59 C6 43 50 00",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d40310": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "83 FA 3F 77 ? 48 63 C2",
+          "resolveKind": 2,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d40780": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "40 53 48 83 EC 40 48 8B D9 0F 29 74 24 ? 48 8B 0D ? ? ? ? 0F 29 7C 24 ? 48 8B 49 ? E8 ? ? ? ? 83 7B ? 00 0F 28 F8 F3 0F 10 73 ?",
+          "resolveKind": 2,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d40bf0": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "80 79 2D 02 0F 94 C0 C3",
+          "resolveKind": 2,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d41060": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "0F B6 41 2E C3",
+          "resolveKind": 2,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d414d0": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "8B 4B ? 48 8B 40 ? 8B 84 88 08 08 00 00 85 C0 7E ? F3 0F 10 4B ? F3",
+          "resolveKind": 1,
+          "knownConstant": false,
+          "value": 0
+        },
+        {
+          "pattern": "",
+          "resolveKind": 0,
+          "knownConstant": true,
+          "value": 40
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d41940": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "F3 0F 10 73 ? F3 0F 5C F7 75 ? 8B 43",
+          "resolveKind": 1,
+          "knownConstant": false,
+          "value": 0
+        },
+        {
+          "pattern": "",
+          "resolveKind": 0,
+          "knownConstant": true,
+          "value": 48
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d41db8": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "83 7B ? 00 0F 28 F8 F3 0F 10 73",
+          "resolveKind": 1,
+          "knownConstant": false,
+          "value": 0
+        },
+        {
+          "pattern": "",
+          "resolveKind": 0,
+          "knownConstant": true,
+          "value": 92
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d42228": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "F3 0F 10 4B ? F3 0F 5C CF F3 0F 5F F1",
+          "resolveKind": 1,
+          "knownConstant": false,
+          "value": 0
+        },
+        {
+          "pattern": "",
+          "resolveKind": 0,
+          "knownConstant": true,
+          "value": 104
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d42698": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "F3 0F 11 73 ? 0F 28 74 24 ? F3 41 0F 58 C0 89 7B",
+          "resolveKind": 1,
+          "knownConstant": false,
+          "value": 0
+        },
+        {
+          "pattern": "",
+          "resolveKind": 0,
+          "knownConstant": true,
+          "value": 108
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d42b08": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "F3 44 0F 11 47 ? EB ? 0F 2F 7F",
+          "resolveKind": 1,
+          "knownConstant": false,
+          "value": 0
+        },
+        {
+          "pattern": "",
+          "resolveKind": 0,
+          "knownConstant": true,
+          "value": 116
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d42f78": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "8B 97 ? ? ? ? 0F 28 D7 E8",
+          "resolveKind": 1,
+          "knownConstant": false,
+          "value": 0
+        },
+        {
+          "pattern": "",
+          "resolveKind": 0,
+          "knownConstant": true,
+          "value": 244
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d45340": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "66 89 4A ? B0",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d457d8": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 81 C1 10 01 00 00 E8 ? ? ? ? 48 8D 15",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d46538": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 8B 0D ? ? ? ? 4C 8D 44 24 ? 48 8B D0",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d469a8": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 89 0D ? ? ? ? 48 8D 05 ? ? ? ? 48 89 01 48 8B F9 48 83 C1 08 E8 ? ? ? ? 45 33 FF",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d46e18": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 8D 0D ? ? ? ? 0F 10 00",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d47298": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "39 4F ? 75 ? 8B 4D ? 39 4F ? 74 ? C6 87 ? ? ? ? 01",
+          "resolveKind": 1,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d47708": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "39 4F ? 74 ? C6 87 ? ? ? ? 01 41 B7 01 E8 ? ? ? ?",
+          "resolveKind": 1,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d47b78": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 89 5C 24 ? 48 89 74 24 ? 48 89 7C 24 ? 41 56 48 83 EC ? 8B 05",
+          "resolveKind": 2,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d47fe8": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 89 6C 24 ? 48 89 74 24 ? 57 41 54 41 55 41 56 41 57 48 83 EC ? 49 8B 00 4D 8B E9 48 8B B4 24 ? ? ? ? 4D 8B F8 4C 8B F2 4C 8B E1",
+          "resolveKind": 2,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d48458": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 85 C9 0F 84 ? ? ? ? 4C 8B DC 55 48 83 EC ? F6 81 A9 00 00 00 04",
+          "resolveKind": 2,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d488c8": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "4C 8B DC 55 56 41 54 41 57 48 81 EC ? ? ? ? 48 8B 05 ? ? ? ? 48 33 C4 48 89 84 24 ? ? ? ? 80 79 58 02 48 8B F1 49 89 5B 10 49 89 7B 18 4D 89 73 D8 4C 8D B1 A4 01 00 00",
+          "resolveKind": 2,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d48d38": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "E8 ? ? ? ? 84 DB 74 ? 48 8B 0D ? ? ? ? E8 ? ? ? ? 48 8B 0D ? ? ? ? E8",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d491a8": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 83 EC 28 F3 0F 10 62 0C 0F 28 DA 0F 57 1D ? ? ? ? 33 C0 F3 0F 10 6A 08 48 83 C1 6C",
+          "resolveKind": 2,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d49618": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "E8 ? ? ? ? 48 8B 7C 24 ? 48 8B 5C 24 ? C6 86",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d49a88": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "4C 8B DC 55 56 41 54 41 56 49 8D 6B",
+          "resolveKind": 2,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d49ef8": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 8B 0D ? ? ? ? 48 8D 95 ? ? ? ? ? ? ? FF 50",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d4a368": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 8B 0D ? ? ? ? 48 8B D0 48 89 05",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d4a7e0": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 8B 05 ? ? ? ? BB ? ? ? ? 0F B6 4F",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d4ac50": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 8B 8E ? ? ? ? 89 44 24 ? C7 44 24",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d4b0c0": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 8B 88 ? ? ? ? 48 8B 01 FF 50 ? C6 43 ? ? 48 8B 4B",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d4b538": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 8B 05 ? ? ? ? 0F 10 80",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d4b9a8": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "49 8D 4E ? 48 8D 05 ? ? ? ? 49 89 46 08 E8 ? ? ? ? 49 8D 8E ? ? ? ? 49 8D 56 10 E8",
+          "resolveKind": 1,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d4be18": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "49 8D 8E ? ? ? ? 49 8D 56 10 E8 ? ? ? ?",
+          "resolveKind": 1,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d4c288": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 89 5C 24 ? 48 89 6C 24 ? 56 57 41 56 48 83 EC ? 8B 71 ? 48 8B D9 8B 49 ?",
+          "resolveKind": 2,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d4c6f8": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 89 5C 24 ? 48 8B 99 ? ? ? ? 44 0F B6 D2 8B 89 ? ? ? ?",
+          "resolveKind": 2,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d4cb68": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "41 8B 42 ? 40 0F B6 CD 0F A3 C8 0F 83",
+          "resolveKind": 1,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d4cfd8": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "88 54 24 ? 56 48 83 EC ? 48 8B F1 48 8B 0D ? ? ? ? 48 85 C9 0F 84",
+          "resolveKind": 2,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d4d448": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 89 5C 24 ? 55 56 41 56 48 83 EC ? 48 8B 05 ? ? ? ? 4C 8B F2 48 8B F1 48 8B 58 18 8B 40 20",
+          "resolveKind": 2,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d4d8b8": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "E8 ? ? ? ? 48 8B 8F 40 13 00 00 48 8B D0 48 83 C4 ? 41 5E 5F E9",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d4dd28": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "E8 ? ? ? ? 48 8B 08 48 8B 51 50 48 8B C8 FF D2 F3 41 0F 10 46 04 0F 57 C9 8B C0 F3 48 0F 2A C8 F3 0F 5E 0D ? ? ? ? F3 0F 59 CF 0F 28",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d4e198": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "8B 41 ? C3 CC CC CC CC CC CC CC CC CC CC CC CC 40 53 48 83 EC 20 48 83 B9 ? ? ? ? 00",
+          "resolveKind": 1,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d4e608": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 8B 05 ? ? ? ? 48 8B F1 48 8B 58 18 8B 40 20 48 8D 2C C3",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d4ea78": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 8B 43 ? 4C 89 3C F0 FF 02 8B 4B 24 8B 73 20",
+          "resolveKind": 1,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d4eee8": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 8B 43 ? 48 8B 5C 24 ? 48 8B 6C 24 ? 4C 89 34 F0",
+          "resolveKind": 1,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d4f358": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 8B 0D ? ? ? ? 48 85 C9 0F 84 ? ? ? ? 48 89 5C 24 ? 48 89 7C 24 ?",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d4f7c8": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "F3 0F 10 51 ? 48 8B CA F3 0F 59 0D ? ? ? ? F3 0F 11 44 24 ? E8",
+          "resolveKind": 1,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d4fc38": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "4C 8D 7E ? EB ? 4C 8D 79 ? 48 8B D6 4C 8D 49 ?",
+          "resolveKind": 1,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d500a8": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "4C 8D 49 ? 4D 8B C7 49 8B CE E8 ? ? ? ? 4C 8D 66 ?",
+          "resolveKind": 1,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d50518": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "F3 0F 10 49 ? F3 0F 10 41 ? F3 0F 10 59 ? F3 0F 10 51 ?",
+          "resolveKind": 1,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d50988": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "0F B6 41 ? 48 8B FA 48 8B D9 3C 01 74 ? 3C 02",
+          "resolveKind": 1,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d50df8": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "0F B6 46 ? 49 8B 56 ? 41 8B 8C C6 ? ? ? ? 41 8B 84 C6 ? ? ? ?",
+          "resolveKind": 1,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d51268": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "80 7E ? 00 0F 84 ? ? ? ? F3 0F 10 56 ? 48 8D 8C 24",
+          "resolveKind": 1,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d516d8": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 8D 4E ? E8 ? ? ? ? 48 8D 8C 24 20 01 00 00 E8 ? ? ? ? 48 8B 8C 24 50 02 00 00 48 33 CC E8",
+          "resolveKind": 1,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d51b48": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "41 8B 84 C6 ? ? ? ? 89 82 ? ? ? ? 89 8A ? ? ? ?",
+          "resolveKind": 1,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d51fb8": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "41 8B 8C C6 ? ? ? ? 41 8B 84 C6 ? ? ? ? 89 82 ? ? ? ? 89 8A ? ? ? ?",
+          "resolveKind": 1,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d52428": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "49 8B 8C 24 ? ? ? ? 41 8B 84 24 ? ? ? ? 48 8B 1F 48 69 D0",
+          "resolveKind": 1,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d52898": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 81 C1 ? ? ? ? 48 3B CA 72 ? 49 8D 8C 24 ? ? ? ? E8",
+          "resolveKind": 1,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d52d08": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "8B 68 ? 8B 78 ? 83 FD 01 75 ? 3B FD 75 ? 48 8B 0D",
+          "resolveKind": 1,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d53178": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "8B 78 ? 83 FD 01 75 ? 3B FD 75 ? 48 8B 0D",
+          "resolveKind": 1,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d535e8": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "0F B6 81 ? ? ? ? 49 8B CC 88 44 24 ? 41 FF D2",
+          "resolveKind": 1,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d53a58": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "4C 8B 50 ? 0F B6 81 ? ? ? ? 49 8B CC 88 44 24 ? 41 FF D2",
+          "resolveKind": 3,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d53ec8": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "80 7E ? 00 75 ? 40 32 FF 33 C9 40 88 BC 24",
+          "resolveKind": 1,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d54338": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "80 7E ? 00 75 ? 80 7E ? 00 75 ? 40 32 FF",
+          "resolveKind": 1,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d547a8": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "80 7E ? 00 74 ? 48 8B 0D ? ? ? ? 48 8B 49 20 E8",
+          "resolveKind": 1,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d54c18": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "80 7E ? 00 75 ? 80 7E ? 00 74 ? 48 8B 0D",
+          "resolveKind": 1,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d55088": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "4D 8B 45 ? 4D 85 C0 74 ? 4C 39 25 ? ? ? ? 74 ? 48 8B 0D",
+          "resolveKind": 1,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d554f8": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "40 55 56 41 57 48 8D 6C 24 ? 48 81 EC ? ? ? ? 48 8B 05",
+          "resolveKind": 2,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d55968": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 89 5C 24 ? 48 89 6C 24 ? 48 89 74 24 ? 48 89 7C 24 ? 41 56 48 83 EC ? 48 8B D9 41 0F B6 F8",
+          "resolveKind": 2,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d55dd8": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 89 05 ? ? ? ? 48 8D 54 24",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d56248": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 89 3D ? ? ? ? 48 8B 7C 24 ? 48 83 C4 ? 41 5F 41 5E 41 5C C3",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d566b8": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "80 79 ? 00 74 ? 48 8D 99 ? ? ? ? E8 ? ? ? ? 48 8B D0",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d56b28": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 83 BB ? ? ? ? 00 0F 84 ? ? ? ? 48 8B 0D ? ? ? ? 48 81 C1 ? ? ? ?",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d56f98": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "F3 0F 11 93 ? ? ? ? 0F 57 15 ? ? ? ? F3 0F 11 8B ? ? ? ? 0F 57 0D ? ? ? ? F3 0F 11 8B ? ? ? ? F3 0F 11 93 ? ? ? ?",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d57408": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 83 B9 ? ? ? ? 00 4C 8B F1 75 ? E8 ? ? ? ? 49 83 BE ? ? ? ? 00 0F 84",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d57878": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 83 C2 ? 48 8B C8 E8 ? ? ? ? 48 8B 74 24 ? 48 83 C4 ? 41 5E C3",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d57ce8": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 8B 50 ? 8B 43 FC 85 C0 75 ? 0F 28 C7",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d58158": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "66 0F 6E 72 ? EB ? 66 0F 6E 72 ? 0F 5B F6",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d58a38": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 89 5C 24 ? 57 48 83 EC 20 48 8B 02 48 8B FA 48 8B D9 48 39 81 00 01 00 00 75 ? F3 41 0F 10 00 F3 0F 5C 81 0C 01 00 00 66 0F 6F 0D ? ? ? ?",
+          "resolveKind": 2,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d58ea8": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "41 56 48 83 EC 30 48 83 B9 A0 00 00 00 00 4C 8B F1 75 05 E8 ? ? ? ? 49 83 BE A0 00 00 00 00 0F 84 ? ? ? ?",
+          "resolveKind": 2,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d59318": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 8B 0D ? ? ? ? 48 85 C9 0F 85 ? ? ? ? C3 CC CC CC CC CC CC CC CC CC CC CC CC CC CC CC",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d59788": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "8B 43 ? 39 41 ? 75 ? E8 ? ? ? ? 48 8B 4F",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d59bf8": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 8B 0D ? ? ? ? 48 85 C9 74 ? E8 ? ? ? ? 48 8B 0D ? ? ? ? BA 61 00 00 00",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d5a4e0": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 83 EC ? 0F B6 41 ? 48 8B 49 ? 24",
+          "resolveKind": 2,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d5a950": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 83 EC ? 48 89 0D ? ? ? ? 48 85 C9 75 ? 32 C0 48 83 C4 ? C3 48 8B 49 ? FF 15",
+          "resolveKind": 2,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d5bf80": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "8B 43 ? 89 83 ? ? ? ? 8B 43 ? 89 83 ? ? ? ? 8B 43 ? 89 83 ? ? ? ? 48 83 C4 50 5B C3",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d5c3f8": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "89 83 ? ? ? ? 8B 47 ? 89 83 ? ? ? ? 48 8B 5C 24 ? 48 8B 74 24",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d5c868": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "88 81 ? ? ? ? 48 8B 0D ? ? ? ? E8 ? ? ? ? B0",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d5ccd8": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "41 8B 80 ? ? ? ? 89 02 41 8B 80 ? ? ? ? 89 42 04 41 8B 80 ? ? ? ? 89 42 08 48 8B 41 38 8B 48 3C 89 4A 04 C3",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d5d148": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "F3 0F 10 91 ? ? ? ? F3 0F 10 05 ? ? ? ? F3 0F 10 48 28 F3 0F 5C 48 24 F3 0F 5C 50 24",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d5d5b8": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "F3 0F 10 93 ? ? ? ? 0F 28 CA 66 0F 6E C0 0F 5B C0 F3 0F 5C C8",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d5da28": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "C6 83 ? ? ? ? 01 E8 ? ? ? ? F3 0F 10 8B ? ? ? ?",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d5de98": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "80 B9 ? ? ? ? ? 75 ? 48 8B 81 ? ? ? ? F3 0F 10 40",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d5e308": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "F3 0F 10 ? ? ? ? ? F3 0F 11 45 ? C6 45 ? 01 48 8B 45 ? 48 89 ? 3C",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d5e778": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "F3 0F 10 91 ? ? ? ? 0F 2E D1 0F 8A ? ? ? ? 0F 85 ? ? ? ? F3 0F 10 81 ? ? ? ? 0F 2E C1 0F 8A ? ? ? ? 0F 85 ? ? ? ? F3 0F 10 81",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d5ebe8": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 83 EC ? F3 0F 10 0D ? ? ? ? 48 83 C1 ? E8 ? ? ? ? 48 8B 0D ? ? ? ? 33 D2 48 83 C4 ? E9",
+          "resolveKind": 2,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d5f058": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "0F B6 81 ? ? ? ? 3C ? 73",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d5f4c8": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 8D 15 ? ? ? ? F3 0F 10 0C 82",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d5f938": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 8D 0D ? ? ? ? 48 C1 E2 ? 48 03 D1 48 8B C8 48 8B 5C 24",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d5fda8": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 89 1D ? ? ? ? 48 8B 5C 24 ? 48 83 C4 28 E9",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d60218": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 89 0D ? ? ? ? 48 89 01 33 C0",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d60f68": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "4C 8B 05 ? ? ? ? 48 8B CE",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d613e0": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "8B 42 ? 4C 8B E9 89 45",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d61850": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "E8 ? ? ? ? 88 03 48 FF C3 48 8D 45 ? 48 3B D8 75 ? 8B 55 ? 48 8B 0D ? ? ? ? E8",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d61cc0": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "8B 4E ? 48 8D 5D ? 89 4D ? 0F B6 0B E8 ? ? ? ? 88 03 48 FF C3 48 8D 45 ? 48 3B D8 75 ? 8B 55",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d62130": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "E8 ? ? ? ? 88 03 48 FF C3 48 8D 45 ? 48 3B D8 75 ? 8B 55 ? 48 8B 0D ? ? ? ? 4C 89 B4 24",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d625a0": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "0F B6 4E ? 0F B6 F8",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d62a10": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "E8 ? ? ? ? 0F B6 4E ? 0F B6 D8 E8 ? ? ? ? 44 0F B6 C8",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d62e80": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "8B 4E ? 48 8D 5D ? 89 4D ? 0F B6 0B E8 ? ? ? ? 88 03 48 FF C3 48 8D 45 ? 48 3B D8 75 ? F3 0F 10 75",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d632f0": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "E8 ? ? ? ? 88 03 48 FF C3 48 8D 45 ? 48 3B D8 75 ? F3 0F 10 75",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d63760": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "8B 46 ? 48 8D 5D ? 89 45 ? 0F B6 0B E8 ? ? ? ? 88 03 48 FF C3 48 8D 45 ? 48 3B D8 75 ? F3 0F 10 45",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d63bd0": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "E8 ? ? ? ? 88 03 48 FF C3 48 8D 45 ? 48 3B D8 75 ? F3 0F 10 45 ? F3 0F 58 C6",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d64040": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "0F B6 4E ? 0F B6 D8 E8 ? ? ? ? 44 0F B6 C8",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d644b0": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "E8 ? ? ? ? 44 0F B6 C8 4D 8B C6",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d64920": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "0F B6 4E ? E8 ? ? ? ? 0F B6 4E ? 0F B6 F8",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d64d90": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "E8 ? ? ? ? 0F B6 4E ? 0F B6 F8",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d65200": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "8B 46 ? 48 8D 5C 24 ? 89 44 24 ? 0F B6 0B E8 ? ? ? ? 88 03 48 FF C3 48 8D 44 24 ? 48 3B D8 75 ? 8B 46",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d65670": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "E8 ? ? ? ? 88 03 48 FF C3 48 8D 44 24 ? 48 3B D8 75 ? 8B 46 ? 48 8D 5C 24 ? 89 44 24 ? 0F B6 0B E8 ? ? ? ? 88 03 48 FF C3 48 8D 44 24 ? 48 3B D8 75 ? 0F B6 4E",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d65ae0": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "8B 46 ? 48 8D 5C 24 ? 89 44 24 ? 0F B6 0B E8 ? ? ? ? 88 03 48 FF C3 48 8D 44 24 ? 48 3B D8 75 ? 0F B6 4E",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d65f50": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "E8 ? ? ? ? 88 03 48 FF C3 48 8D 44 24 ? 48 3B D8 75 ? 0F B6 4E",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d663c0": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 89 5C 24 ? 55 56 57 41 56 41 57 48 83 EC 50 80 B9 ? ? 00 00 00 48 8B F2 48 8B E9 0F 84 ? ? ? ? 48 8B 52 08 48 8B 0D ? ? ? ? 8B 52 04",
+          "resolveKind": 2,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d66830": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 8B 05 ? ? ? ? 48 89 BC 24 ? ? ? ? 44 39 B8",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d66ca0": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "44 39 B8 ? ? ? ? 0F 85 ? ? ? ? 8B 46",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d67110": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 89 0D ? ? ? ? 48 8D 05 ? ? ? ? 48 89 01 48 8B D9 48 8B 0D",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d67580": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "4C 8D 05 ? ? ? ? C7 45 ? 0B 00 00 00 48 8D 55 ? 48 8D 4E 08 E8",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d679f0": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "4C 8D 05 ? ? ? ? C7 45 ? 04 00 00 00 48 8D 55 ? 48 8D 4E 08 E8",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d67e60": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 8B 35 ? ? ? ? 4C 8D 43",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d682d0": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 89 74 24 ? 41 56 48 83 EC ? 4C 8B F1 BE",
+          "resolveKind": 2,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d68740": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 89 6C 24 ? 56 57 41 56 48 83 EC ? 48 8B E9 4D 8B F0",
+          "resolveKind": 2,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d69020": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 8B 1D ? ? ? ? 48 8B F9 48 8D 0D",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d6a650": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 89 5C 24 ? 48 89 6C 24 ? 56 48 83 EC ? 48 8B 05 ? ? ? ? 48 8B F1 48 8B 58 18 8B 40 20 48 8D 2C C3",
+          "resolveKind": 2,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d6aac0": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 89 5C 24 ? 57 48 83 EC ? 48 8B 59 10 8B 79 18 48 C1 E7 04 48 03 FB 48 3B DF 74 ? 0F 1F 00 48 8B 0B 48 8B 01 FF 50 20",
+          "resolveKind": 2,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d6af30": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 89 5C 24 ? 56 48 83 EC ? 0F B6 F2 48 8B D9 38 51 ? 0F 84 ? ? ? ? 48 89 7C 24",
+          "resolveKind": 2,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d6b3a0": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "4C 8B DC 56 41 54 41 57 48 81 EC ? ? ? ? 48 8B F1 45 33 E4",
+          "resolveKind": 2,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d6b908": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 8D 05 ? ? ? ? 48 8B D9 48 89 01 E8 ? ? ? ? 48 8D B3 A8 01 00 00 83 7E 7C 00",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d6bd78": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 8D 05 ? ? ? ? 48 89 01 8B EA 83 79 6C 00 48 8B D9",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d6c1e8": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 8D 05 ? ? ? ? C6 41 08 00 48 89 01 4C 8B F2",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d6c658": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 8D 05 ? ? ? ? 4C 89 49 30 48 8B F9 4C 89 61 40 48 8B DA",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d6cac8": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "48 8D 0D ? ? ? ? 48 89 50 08 48 89 08 48 89 50 10 48 89 50 18 48 89 50 20",
+          "resolveKind": 0,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d6cf38": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "F3 0F 10 49 2C F3 0F 59 49 28 F3 0F 2D C1 FF C0 C3",
+          "resolveKind": 2,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d6d3a8": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "8B 41 1C C3 CC CC CC CC CC CC CC CC CC CC CC CC 48 8D 81 9C 01 00 00 C3",
+          "resolveKind": 2,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d6d818": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "B0 01 C3 CC CC CC CC CC CC CC CC CC CC CC CC CC E9 ? ? ? ?",
+          "resolveKind": 2,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d6dc88": {
+      "kind": "signature",
+      "variants": [
+        {
+          "pattern": "32 C0 C3 CC CC CC CC CC CC CC CC CC CC CC CC CC 48 8B 05 ? ? ? ? C3",
+          "resolveKind": 2,
+          "knownConstant": false,
+          "value": 0
+        }
+      ],
+      "evidenceId": "recovered-initializer"
+    },
+    "0x180d25360": {
+      "kind": "fixed",
+      "value": 40,
+      "evidenceId": "recovered-initializer",
+      "note": "Initializer constant joined to a reader reference; compatibility with the target game is unverified."
+    },
+    "0x180d2cfc0": {
+      "kind": "fixed",
+      "value": 16,
+      "evidenceId": "recovered-initializer",
+      "note": "Initializer constant joined to a reader reference; compatibility with the target game is unverified."
+    },
+    "0x180d2e180": {
+      "kind": "fixed",
+      "value": 188,
+      "evidenceId": "recovered-initializer",
+      "note": "Initializer constant joined to a reader reference; compatibility with the target game is unverified."
+    },
+    "0x180d2e5f0": {
+      "kind": "fixed",
+      "value": 496,
+      "evidenceId": "recovered-initializer",
+      "note": "Initializer constant joined to a reader reference; compatibility with the target game is unverified."
+    }
+  },
+  "fields": [
+    {
+      "root": "module",
+      "path": "gameTime",
+      "type": "f32",
+      "terms": [
+        "0x180d21e20"
+      ],
+      "evidenceId": "reader-gameTime"
+    },
+    {
+      "root": "hero",
+      "path": "info.networkId",
+      "type": "u32",
+      "terms": [
+        "0x180d2e180"
+      ],
+      "evidenceId": "reader-info.networkId"
+    },
+    {
+      "root": "hero",
+      "path": "info.index",
+      "type": "u32",
+      "terms": [
+        "0x180d2cfc0"
+      ],
+      "evidenceId": "reader-info.index"
+    },
+    {
+      "root": "hero",
+      "path": "info.team",
+      "type": "u8",
+      "terms": [
+        "0x180d2d8a0"
+      ],
+      "evidenceId": "reader-info.team"
+    },
+    {
+      "root": "hero",
+      "path": "info.position",
+      "type": "vec3",
+      "terms": [
+        "0x180d2e5f0"
+      ],
+      "evidenceId": "reader-info.position"
+    },
+    {
+      "root": "hero",
+      "path": "common.health",
+      "type": "f32",
+      "terms": [
+        "0x180d316c0"
+      ],
+      "evidenceId": "reader-common.health"
+    },
+    {
+      "root": "hero",
+      "path": "common.maxHealth",
+      "type": "f32",
+      "terms": [
+        "0x180d316c0",
+        "0x180d25360"
+      ],
+      "evidenceId": "reader-common.maxHealth"
+    },
+    {
+      "root": "hero",
+      "path": "gold",
+      "type": "f32",
+      "terms": [
+        "0x180d335d0"
+      ],
+      "evidenceId": "reader-gold"
+    },
+    {
+      "root": "hero",
+      "path": "totalGold",
+      "type": "f32",
+      "terms": [
+        "0x180d335d0",
+        "0x180d25360"
+      ],
+      "evidenceId": "reader-totalGold"
+    },
+    {
+      "root": "hero",
+      "path": "experience",
+      "type": "f32",
+      "terms": [
+        "0x180d33160"
+      ],
+      "evidenceId": "reader-experience"
+    },
+    {
+      "root": "hero",
+      "path": "resource",
+      "type": "f32",
+      "terms": [
+        "0x180d2fc20"
+      ],
+      "evidenceId": "reader-resource"
+    },
+    {
+      "root": "hero",
+      "path": "maxResource",
+      "type": "f32",
+      "terms": [
+        "0x180d2fc20",
+        "0x180d25360"
+      ],
+      "evidenceId": "reader-maxResource"
+    },
+    {
+      "root": "hero",
+      "path": "resourceType",
+      "type": "u8",
+      "terms": [
+        "0x180d30090"
+      ],
+      "evidenceId": "reader-resourceType"
+    }
+  ],
+  "evidence": [
+    {
+      "id": "recovered-initializer",
+      "source": "analysis/native/reconstruction/initializer-descriptors.json",
+      "sha256": "fa6e6742292448cca9fe39766b76d5967b8c789a763365a54d1c4e5124553310",
+      "note": "Static constant evaluation, not a game memory capture or verified runtime layout."
+    },
+    {
+      "id": "reader-gameTime",
+      "source": "analysis/native/pseudocode/0x1804263a0_FUN_1804263a0.cpp",
+      "sha256": "58ebd3e5eac262a23469373f1d6c36bf8d282d50a6fb2626719e29383dbc618f",
+      "note": "REA ev_10545b65ce445ec837c44e83909d411680c8fece247a8db6b75a003ae4d0f652; field mapping follows native serializer parameters/schema; static inference, not a runtime measurement."
+    },
+    {
+      "id": "reader-info.networkId",
+      "source": "analysis/native/pseudocode/0x1804395d0_serialize_object_info_schema_match.cpp",
+      "sha256": "4aeda9203ff6143bad15654bb4a4038140a06bbd060c3b528ecf2a2d79a878ab",
+      "note": "REA ev_efde4332bf23356c0d6165b665d8c86eb3cf86d710eadbd1c5b34470e3901919; field mapping follows native serializer parameters/schema; static inference, not a runtime measurement."
+    },
+    {
+      "id": "reader-info.index",
+      "source": "analysis/native/pseudocode/0x1804395d0_serialize_object_info_schema_match.cpp",
+      "sha256": "4aeda9203ff6143bad15654bb4a4038140a06bbd060c3b528ecf2a2d79a878ab",
+      "note": "REA ev_efde4332bf23356c0d6165b665d8c86eb3cf86d710eadbd1c5b34470e3901919; field mapping follows native serializer parameters/schema; static inference, not a runtime measurement."
+    },
+    {
+      "id": "reader-info.team",
+      "source": "analysis/native/pseudocode/0x1804395d0_serialize_object_info_schema_match.cpp",
+      "sha256": "4aeda9203ff6143bad15654bb4a4038140a06bbd060c3b528ecf2a2d79a878ab",
+      "note": "REA ev_efde4332bf23356c0d6165b665d8c86eb3cf86d710eadbd1c5b34470e3901919; field mapping follows native serializer parameters/schema; static inference, not a runtime measurement."
+    },
+    {
+      "id": "reader-info.position",
+      "source": "analysis/native/pseudocode/0x1804395d0_serialize_object_info_schema_match.cpp",
+      "sha256": "4aeda9203ff6143bad15654bb4a4038140a06bbd060c3b528ecf2a2d79a878ab",
+      "note": "REA ev_efde4332bf23356c0d6165b665d8c86eb3cf86d710eadbd1c5b34470e3901919; field mapping follows native serializer parameters/schema; static inference, not a runtime measurement."
+    },
+    {
+      "id": "reader-common.health",
+      "source": "analysis/native/pseudocode/0x180431690_FUN_180431690.cpp",
+      "sha256": "b3860b61ff6648de44c0c7abe51bb21705f6ddc4d2c58ffcce002892979a7d8c",
+      "note": "REA ev_ff82f6bf6c2d2e738ba0d14ca667cbbf1d2c38de442c5dca83844b473f38fb9a; field mapping follows native serializer parameters/schema; static inference, not a runtime measurement."
+    },
+    {
+      "id": "reader-common.maxHealth",
+      "source": "analysis/native/pseudocode/0x180431740_FUN_180431740.cpp",
+      "sha256": "9ed7cb0beda7d961908e18b1f100c96733844b1e9245f059610422205a359866",
+      "note": "REA ev_3529d200e119d4619094a186b0ead6825f0a76a8d75cca2a9529adce1f330b59; field mapping follows native serializer parameters/schema; static inference, not a runtime measurement."
+    },
+    {
+      "id": "reader-gold",
+      "source": "analysis/native/pseudocode/0x1804315b0_FUN_1804315b0.cpp",
+      "sha256": "d73618da11903a8501cbd80fa0f5d7e847672f2fb36342f96f163dad0c97a3b4",
+      "note": "REA ev_b240aba3fa2f37a3ca622138c97799a621992b1aa606318a0c5d5e0fdd732c72; field mapping follows native serializer parameters/schema; static inference, not a runtime measurement."
+    },
+    {
+      "id": "reader-totalGold",
+      "source": "analysis/native/pseudocode/0x180431600_FUN_180431600.cpp",
+      "sha256": "e6f7236893b15ab4c95056dfa3ce4796581f83221d0c174bb13b97ff51c42984",
+      "note": "REA ev_11c7bd78d2178a17f4bde9ddb995dec69016f7b94e0e546ca84c66b186b9392e; field mapping follows native serializer parameters/schema; static inference, not a runtime measurement."
+    },
+    {
+      "id": "reader-experience",
+      "source": "analysis/native/pseudocode/0x1804319d0_FUN_1804319d0.cpp",
+      "sha256": "ccfe600b8174eb451abfb74373e35aa61dea5e2427b6f61fdbcdd445bbd3cab7",
+      "note": "REA ev_23882a92f69e8c981510acdd280c3d51f426c9ffb798b4ff439a63f8f26c4c66; field mapping follows native serializer parameters/schema; static inference, not a runtime measurement."
+    },
+    {
+      "id": "reader-resource",
+      "source": "analysis/native/pseudocode/0x1804317d0_FUN_1804317d0.cpp",
+      "sha256": "35f059aa739b76d887125adec0fea91b1d3220f0e71618a911ab2f1efb13db3e",
+      "note": "REA ev_35495d20ae142fc7ba99bf92ffe0e52caf8d145da425b841d91f89b8b8bb1423; field mapping follows native serializer parameters/schema; static inference, not a runtime measurement."
+    },
+    {
+      "id": "reader-maxResource",
+      "source": "analysis/native/pseudocode/0x180431820_FUN_180431820.cpp",
+      "sha256": "536423733079bae5f88d71b4aa14e1fba8840e1fe84122d2d379ec8b66ef67fd",
+      "note": "REA ev_357da0f7b2e33bae63d625400e8c890ae891653bfa800757e365662cecb72cb3; field mapping follows native serializer parameters/schema; static inference, not a runtime measurement."
+    },
+    {
+      "id": "reader-resourceType",
+      "source": "analysis/native/pseudocode/0x1804318b0_FUN_1804318b0.cpp",
+      "sha256": "0d3d53d333eacaa4ad888df9eb530a5c9709393dea8f060c005ed4da234c22d2",
+      "note": "REA ev_76c24c88103f82d660187d12963f2c7e45d6622da69c55caecd0cdb9af583ab1; field mapping follows native serializer parameters/schema; static inference, not a runtime measurement."
+    }
+  ],
+  "discoveryDescriptors": {
+    "firstObjectFunction": "0x180d29ed8",
+    "nextObjectFunction": "0x180d2a348",
+    "objectManagerGlobal": "0x180d2b520"
+  },
+  "unsupported": [
+    "Automatic object/hero discovery requires engine function reconstruction; no object roots are inferred.",
+    "Name/champion identifier MSVC/provider string representation is not implemented.",
+    "Level, KDA, CS, spells, items, perks, buffs and events are not yet implemented in this memory profile.",
+    "No account data equivalence is established; partial fields do not establish LB Free parity."
+  ],
+  "resolutionPolicy": "Only supported first-instruction decoding and unique executable-section pattern matches. Unsupported or ambiguous resolution remains unknown."
+}

@@ -1,0 +1,63 @@
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
+using FlatSharp;
+using FlatSharp.Attributes;
+using FlatSharp.Compiler.Generated.NF94C0FDDEB14BED4C490489D414CF12563EBA49E3FAB783549B36A9AF704E667;
+
+namespace BlueBottleIPC.LeagueBroadcast.Commands;
+
+[FlatBufferTable(BuildSerializer = true)]
+[FlatBufferMetadata(FlatBufferMetadataKind.FbsAttribute, "fs_serializer", "0")]
+[CompilerGenerated]
+[DebuggerTypeProxy("BlueBottleIPC.LeagueBroadcast.Commands.GetSceneEditorHudLayout")]
+public class GetSceneEditorHudLayout : IFlatBufferSerializable<GetSceneEditorHudLayout>, IFlatBufferSerializable
+{
+	public static ISerializer<GetSceneEditorHudLayout> Serializer { get; }
+
+	ISerializer IFlatBufferSerializable.Serializer => (ISerializer)((IFlatBufferSerializable<GetSceneEditorHudLayout>)this).Serializer;
+
+	ISerializer<GetSceneEditorHudLayout> IFlatBufferSerializable<GetSceneEditorHudLayout>.Serializer => Serializer;
+
+	private static readonly ISerializer<GetSceneEditorHudLayout> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EGetSceneEditorHudLayout_003E_002ELazySerializer;
+
+	static ISerializer<GetSceneEditorHudLayout> IFlatBufferSerializable<GetSceneEditorHudLayout>.LazySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EGetSceneEditorHudLayout_003E_002ELazySerializer;
+
+	private static readonly ISerializer<GetSceneEditorHudLayout> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EGetSceneEditorHudLayout_003E_002EGreedySerializer;
+
+	static ISerializer<GetSceneEditorHudLayout> IFlatBufferSerializable<GetSceneEditorHudLayout>.GreedySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EGetSceneEditorHudLayout_003E_002EGreedySerializer;
+
+	private static readonly ISerializer<GetSceneEditorHudLayout> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EGetSceneEditorHudLayout_003E_002EGreedyMutableSerializer;
+
+	static ISerializer<GetSceneEditorHudLayout> IFlatBufferSerializable<GetSceneEditorHudLayout>.GreedyMutableSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EGetSceneEditorHudLayout_003E_002EGreedyMutableSerializer;
+
+	private static readonly ISerializer<GetSceneEditorHudLayout> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EGetSceneEditorHudLayout_003E_002EProgressiveSerializer;
+
+	static ISerializer<GetSceneEditorHudLayout> IFlatBufferSerializable<GetSceneEditorHudLayout>.ProgressiveSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EGetSceneEditorHudLayout_003E_002EProgressiveSerializer;
+
+	static GetSceneEditorHudLayout()
+	{
+		Serializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EGetSceneEditorHudLayout_003E_002ELazySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Lazy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EGetSceneEditorHudLayout_003E_002EGreedySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Greedy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EGetSceneEditorHudLayout_003E_002EGreedyMutableSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EGetSceneEditorHudLayout_003E_002EProgressiveSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Progressive);
+	}
+
+	public GetSceneEditorHudLayout()
+	{
+	}
+
+	protected GetSceneEditorHudLayout(FlatBufferDeserializationContext context)
+	{
+	}
+
+	[SetsRequiredMembers]
+	public GetSceneEditorHudLayout(GetSceneEditorHudLayout source)
+	{
+	}
+
+	protected void OnFlatSharpDeserialized(FlatBufferDeserializationContext context)
+	{
+	}
+}

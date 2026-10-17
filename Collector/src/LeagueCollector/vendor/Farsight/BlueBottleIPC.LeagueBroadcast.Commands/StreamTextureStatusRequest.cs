@@ -1,0 +1,69 @@
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
+using FlatSharp;
+using FlatSharp.Attributes;
+using FlatSharp.Compiler.Generated;
+using FlatSharp.Compiler.Generated.N2B16DEC0CAB795EDF6F70B7A917CB4FF48644A70854590890782B082F6A34B1D;
+
+namespace BlueBottleIPC.LeagueBroadcast.Commands;
+
+[FlatBufferTable(BuildSerializer = true)]
+[FlatBufferMetadata(FlatBufferMetadataKind.FbsAttribute, "fs_serializer", "0")]
+[CompilerGenerated]
+[DebuggerTypeProxy("BlueBottleIPC.LeagueBroadcast.Commands.StreamTextureStatusRequest")]
+public class StreamTextureStatusRequest : IFlatBufferSerializable<StreamTextureStatusRequest>, IFlatBufferSerializable
+{
+	[FlatBufferItem(0)]
+	public virtual AssetIdentifier? Ident { get; set; }
+
+	public static ISerializer<StreamTextureStatusRequest> Serializer { get; }
+
+	ISerializer IFlatBufferSerializable.Serializer => (ISerializer)((IFlatBufferSerializable<StreamTextureStatusRequest>)this).Serializer;
+
+	ISerializer<StreamTextureStatusRequest> IFlatBufferSerializable<StreamTextureStatusRequest>.Serializer => Serializer;
+
+	private static readonly ISerializer<StreamTextureStatusRequest> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStreamTextureStatusRequest_003E_002ELazySerializer;
+
+	static ISerializer<StreamTextureStatusRequest> IFlatBufferSerializable<StreamTextureStatusRequest>.LazySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStreamTextureStatusRequest_003E_002ELazySerializer;
+
+	private static readonly ISerializer<StreamTextureStatusRequest> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStreamTextureStatusRequest_003E_002EGreedySerializer;
+
+	static ISerializer<StreamTextureStatusRequest> IFlatBufferSerializable<StreamTextureStatusRequest>.GreedySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStreamTextureStatusRequest_003E_002EGreedySerializer;
+
+	private static readonly ISerializer<StreamTextureStatusRequest> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStreamTextureStatusRequest_003E_002EGreedyMutableSerializer;
+
+	static ISerializer<StreamTextureStatusRequest> IFlatBufferSerializable<StreamTextureStatusRequest>.GreedyMutableSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStreamTextureStatusRequest_003E_002EGreedyMutableSerializer;
+
+	private static readonly ISerializer<StreamTextureStatusRequest> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStreamTextureStatusRequest_003E_002EProgressiveSerializer;
+
+	static ISerializer<StreamTextureStatusRequest> IFlatBufferSerializable<StreamTextureStatusRequest>.ProgressiveSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStreamTextureStatusRequest_003E_002EProgressiveSerializer;
+
+	static StreamTextureStatusRequest()
+	{
+		Serializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStreamTextureStatusRequest_003E_002ELazySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Lazy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStreamTextureStatusRequest_003E_002EGreedySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Greedy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStreamTextureStatusRequest_003E_002EGreedyMutableSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStreamTextureStatusRequest_003E_002EProgressiveSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Progressive);
+	}
+
+	public StreamTextureStatusRequest()
+	{
+		Ident = null;
+	}
+
+	protected StreamTextureStatusRequest(FlatBufferDeserializationContext context)
+	{
+	}
+
+	[SetsRequiredMembers]
+	public StreamTextureStatusRequest(StreamTextureStatusRequest source)
+	{
+		Ident = CloneHelpers_7c83be20ee504926b8fb188858421982.Clone(source.Ident);
+	}
+
+	protected void OnFlatSharpDeserialized(FlatBufferDeserializationContext context)
+	{
+	}
+}

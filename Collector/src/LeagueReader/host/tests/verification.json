@@ -1,0 +1,18 @@
+{
+  "allPassed": true,
+  "checks": [
+    "HTTP snapshot preserves native values, null semantics and synthetic/evidence provenance",
+    "loopback origin/Host enforcement",
+    "WebSocket native snapshot, ordered sequence and read-only close1008",
+    "NDJSON captures native snapshot/status with counters and shutdown flush; existing file never overwritten",
+    "real recording I/O failure updates error/dropped without stopping collection or server",
+    "unreadable fields remain null through native ABI and HTTP; other values retained",
+    "unknown hero discovery yields null and waiting-for-roots instead of empty or invented players",
+    "actual fixture SHA mismatch rejected with no snapshot or fallback",
+    "profile and fixture file-size bounds rejected before allocation/parsing",
+    "Linux cannot become game source or produce fake Windows process identity"
+  ],
+  "windowsExecutionTested": false,
+  "gameRuntimeTested": false,
+  "lbParityVerified": false
+}

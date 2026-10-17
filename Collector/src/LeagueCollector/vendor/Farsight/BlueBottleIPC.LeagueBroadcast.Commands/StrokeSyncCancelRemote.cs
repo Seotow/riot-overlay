@@ -1,0 +1,69 @@
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
+using FlatSharp;
+using FlatSharp.Attributes;
+using FlatSharp.Compiler.Generated;
+using FlatSharp.Compiler.Generated.N5B5CA176CFEA19EF3CE59972DE3915DD84ABDEB8372471A1C4A445A289C46FD9;
+
+namespace BlueBottleIPC.LeagueBroadcast.Commands;
+
+[FlatBufferTable(BuildSerializer = true)]
+[FlatBufferMetadata(FlatBufferMetadataKind.FbsAttribute, "fs_serializer", "0")]
+[CompilerGenerated]
+[DebuggerTypeProxy("BlueBottleIPC.LeagueBroadcast.Commands.StrokeSyncCancelRemote")]
+public class StrokeSyncCancelRemote : IFlatBufferSerializable<StrokeSyncCancelRemote>, IFlatBufferSerializable
+{
+	[FlatBufferItem(0, Required = true)]
+	[FlatBufferMetadata(FlatBufferMetadataKind.FbsAttribute, "required", "0")]
+	public virtual required string StrokeId { get; set; }
+
+	public static ISerializer<StrokeSyncCancelRemote> Serializer { get; }
+
+	ISerializer IFlatBufferSerializable.Serializer => (ISerializer)((IFlatBufferSerializable<StrokeSyncCancelRemote>)this).Serializer;
+
+	ISerializer<StrokeSyncCancelRemote> IFlatBufferSerializable<StrokeSyncCancelRemote>.Serializer => Serializer;
+
+	private static readonly ISerializer<StrokeSyncCancelRemote> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSyncCancelRemote_003E_002ELazySerializer;
+
+	static ISerializer<StrokeSyncCancelRemote> IFlatBufferSerializable<StrokeSyncCancelRemote>.LazySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSyncCancelRemote_003E_002ELazySerializer;
+
+	private static readonly ISerializer<StrokeSyncCancelRemote> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSyncCancelRemote_003E_002EGreedySerializer;
+
+	static ISerializer<StrokeSyncCancelRemote> IFlatBufferSerializable<StrokeSyncCancelRemote>.GreedySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSyncCancelRemote_003E_002EGreedySerializer;
+
+	private static readonly ISerializer<StrokeSyncCancelRemote> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSyncCancelRemote_003E_002EGreedyMutableSerializer;
+
+	static ISerializer<StrokeSyncCancelRemote> IFlatBufferSerializable<StrokeSyncCancelRemote>.GreedyMutableSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSyncCancelRemote_003E_002EGreedyMutableSerializer;
+
+	private static readonly ISerializer<StrokeSyncCancelRemote> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSyncCancelRemote_003E_002EProgressiveSerializer;
+
+	static ISerializer<StrokeSyncCancelRemote> IFlatBufferSerializable<StrokeSyncCancelRemote>.ProgressiveSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSyncCancelRemote_003E_002EProgressiveSerializer;
+
+	static StrokeSyncCancelRemote()
+	{
+		Serializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSyncCancelRemote_003E_002ELazySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Lazy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSyncCancelRemote_003E_002EGreedySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Greedy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSyncCancelRemote_003E_002EGreedyMutableSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSyncCancelRemote_003E_002EProgressiveSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Progressive);
+	}
+
+	public StrokeSyncCancelRemote()
+	{
+	}
+
+	protected StrokeSyncCancelRemote(FlatBufferDeserializationContext context)
+	{
+	}
+
+	[SetsRequiredMembers]
+	public StrokeSyncCancelRemote(StrokeSyncCancelRemote source)
+	{
+		StrokeId = CloneHelpers_7c83be20ee504926b8fb188858421982.Clone(source.StrokeId);
+	}
+
+	protected void OnFlatSharpDeserialized(FlatBufferDeserializationContext context)
+	{
+	}
+}

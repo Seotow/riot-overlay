@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+<PropertyGroup><TargetFramework>net10.0</TargetFramework><LangVersion>14</LangVersion><AllowUnsafeBlocks>true</AllowUnsafeBlocks><GenerateAssemblyInfo>false</GenerateAssemblyInfo><Nullable>disable</Nullable><AssemblyName>Farsight</AssemblyName><PlatformTarget>x64</PlatformTarget></PropertyGroup>
+<ItemGroup>
+<Reference Include="FlatSharp.Runtime"><HintPath>../../lib/FlatSharp.Runtime.dll</HintPath></Reference>
+<Reference Include="Microsoft.Extensions.Logging.Abstractions"><HintPath>../../lib/Microsoft.Extensions.Logging.Abstractions.dll</HintPath></Reference>
+<Reference Include="AWSSDK.Core"><HintPath>../../lib/AWSSDK.Core.dll</HintPath></Reference>
+<Reference Include="AwsSignatureVersion4"><HintPath>../../lib/AwsSignatureVersion4.dll</HintPath></Reference>
+<Reference Include="System.Security.Cryptography.ProtectedData"><HintPath>../../lib/System.Security.Cryptography.ProtectedData.dll</HintPath></Reference>
+</ItemGroup>
+<ItemGroup><EmbeddedResource Include="Farsight.angelscript-api.json" LogicalName="Farsight.angelscript-api.json" />
+</ItemGroup>
+<!-- Decompiled sources already contain the generated interop bodies. -->
+<Target Name="UseRecoveredInteropBodies" BeforeTargets="CoreCompile"><ItemGroup><Analyzer Remove="@(Analyzer)" /></ItemGroup></Target>
+</Project>

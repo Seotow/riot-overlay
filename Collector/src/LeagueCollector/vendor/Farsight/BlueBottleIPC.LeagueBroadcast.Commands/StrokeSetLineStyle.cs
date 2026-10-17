@@ -1,0 +1,70 @@
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
+using BlueBottleIPC.LeagueBroadcast.Common;
+using FlatSharp;
+using FlatSharp.Attributes;
+using FlatSharp.Compiler.Generated;
+using FlatSharp.Compiler.Generated.N2EEB82336954C241BE9ED013CA87E4E103C1DC7F4F48D94ED4D9A7BB8296FB8E;
+
+namespace BlueBottleIPC.LeagueBroadcast.Commands;
+
+[FlatBufferTable(BuildSerializer = true)]
+[FlatBufferMetadata(FlatBufferMetadataKind.FbsAttribute, "fs_serializer", "0")]
+[CompilerGenerated]
+[DebuggerTypeProxy("BlueBottleIPC.LeagueBroadcast.Commands.StrokeSetLineStyle")]
+public class StrokeSetLineStyle : IFlatBufferSerializable<StrokeSetLineStyle>, IFlatBufferSerializable
+{
+	[FlatBufferItem(0)]
+	public virtual StrokeLineStyle LineStyle { get; set; }
+
+	public static ISerializer<StrokeSetLineStyle> Serializer { get; }
+
+	ISerializer IFlatBufferSerializable.Serializer => (ISerializer)((IFlatBufferSerializable<StrokeSetLineStyle>)this).Serializer;
+
+	ISerializer<StrokeSetLineStyle> IFlatBufferSerializable<StrokeSetLineStyle>.Serializer => Serializer;
+
+	private static readonly ISerializer<StrokeSetLineStyle> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSetLineStyle_003E_002ELazySerializer;
+
+	static ISerializer<StrokeSetLineStyle> IFlatBufferSerializable<StrokeSetLineStyle>.LazySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSetLineStyle_003E_002ELazySerializer;
+
+	private static readonly ISerializer<StrokeSetLineStyle> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSetLineStyle_003E_002EGreedySerializer;
+
+	static ISerializer<StrokeSetLineStyle> IFlatBufferSerializable<StrokeSetLineStyle>.GreedySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSetLineStyle_003E_002EGreedySerializer;
+
+	private static readonly ISerializer<StrokeSetLineStyle> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSetLineStyle_003E_002EGreedyMutableSerializer;
+
+	static ISerializer<StrokeSetLineStyle> IFlatBufferSerializable<StrokeSetLineStyle>.GreedyMutableSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSetLineStyle_003E_002EGreedyMutableSerializer;
+
+	private static readonly ISerializer<StrokeSetLineStyle> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSetLineStyle_003E_002EProgressiveSerializer;
+
+	static ISerializer<StrokeSetLineStyle> IFlatBufferSerializable<StrokeSetLineStyle>.ProgressiveSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSetLineStyle_003E_002EProgressiveSerializer;
+
+	static StrokeSetLineStyle()
+	{
+		Serializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSetLineStyle_003E_002ELazySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Lazy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSetLineStyle_003E_002EGreedySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Greedy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSetLineStyle_003E_002EGreedyMutableSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSetLineStyle_003E_002EProgressiveSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Progressive);
+	}
+
+	public StrokeSetLineStyle()
+	{
+		LineStyle = StrokeLineStyle.solid;
+	}
+
+	protected StrokeSetLineStyle(FlatBufferDeserializationContext context)
+	{
+	}
+
+	[SetsRequiredMembers]
+	public StrokeSetLineStyle(StrokeSetLineStyle source)
+	{
+		LineStyle = CloneHelpers_7c83be20ee504926b8fb188858421982.Clone(source.LineStyle);
+	}
+
+	protected void OnFlatSharpDeserialized(FlatBufferDeserializationContext context)
+	{
+	}
+}

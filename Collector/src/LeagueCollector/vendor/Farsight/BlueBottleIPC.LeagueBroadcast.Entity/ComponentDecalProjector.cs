@@ -1,0 +1,75 @@
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
+using BlueBottleIPC.LeagueBroadcast.Commands;
+using FlatSharp;
+using FlatSharp.Attributes;
+using FlatSharp.Compiler.Generated;
+using FlatSharp.Compiler.Generated.NE37AD1DA144DBCF43F76A308F2BAD88A305C92BE9484E5D9223A7184009954C3;
+
+namespace BlueBottleIPC.LeagueBroadcast.Entity;
+
+[FlatBufferTable(BuildSerializer = true)]
+[FlatBufferMetadata(FlatBufferMetadataKind.FbsAttribute, "fs_serializer", "0")]
+[CompilerGenerated]
+[DebuggerTypeProxy("BlueBottleIPC.LeagueBroadcast.Entity.ComponentDecalProjector")]
+public class ComponentDecalProjector : IFlatBufferSerializable<ComponentDecalProjector>, IFlatBufferSerializable
+{
+	[FlatBufferItem(0)]
+	public virtual AssetIdentifier? Texture { get; set; }
+
+	[FlatBufferItem(2)]
+	public virtual float AngleThreshold { get; set; }
+
+	public static ISerializer<ComponentDecalProjector> Serializer { get; }
+
+	ISerializer IFlatBufferSerializable.Serializer => (ISerializer)((IFlatBufferSerializable<ComponentDecalProjector>)this).Serializer;
+
+	ISerializer<ComponentDecalProjector> IFlatBufferSerializable<ComponentDecalProjector>.Serializer => Serializer;
+
+	private static readonly ISerializer<ComponentDecalProjector> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002EEntity_002EComponentDecalProjector_003E_002ELazySerializer;
+
+	static ISerializer<ComponentDecalProjector> IFlatBufferSerializable<ComponentDecalProjector>.LazySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002EEntity_002EComponentDecalProjector_003E_002ELazySerializer;
+
+	private static readonly ISerializer<ComponentDecalProjector> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002EEntity_002EComponentDecalProjector_003E_002EGreedySerializer;
+
+	static ISerializer<ComponentDecalProjector> IFlatBufferSerializable<ComponentDecalProjector>.GreedySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002EEntity_002EComponentDecalProjector_003E_002EGreedySerializer;
+
+	private static readonly ISerializer<ComponentDecalProjector> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002EEntity_002EComponentDecalProjector_003E_002EGreedyMutableSerializer;
+
+	static ISerializer<ComponentDecalProjector> IFlatBufferSerializable<ComponentDecalProjector>.GreedyMutableSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002EEntity_002EComponentDecalProjector_003E_002EGreedyMutableSerializer;
+
+	private static readonly ISerializer<ComponentDecalProjector> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002EEntity_002EComponentDecalProjector_003E_002EProgressiveSerializer;
+
+	static ISerializer<ComponentDecalProjector> IFlatBufferSerializable<ComponentDecalProjector>.ProgressiveSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002EEntity_002EComponentDecalProjector_003E_002EProgressiveSerializer;
+
+	static ComponentDecalProjector()
+	{
+		Serializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002EEntity_002EComponentDecalProjector_003E_002ELazySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Lazy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002EEntity_002EComponentDecalProjector_003E_002EGreedySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Greedy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002EEntity_002EComponentDecalProjector_003E_002EGreedyMutableSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002EEntity_002EComponentDecalProjector_003E_002EProgressiveSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Progressive);
+	}
+
+	public ComponentDecalProjector()
+	{
+		Texture = null;
+		AngleThreshold = 0f;
+	}
+
+	protected ComponentDecalProjector(FlatBufferDeserializationContext context)
+	{
+	}
+
+	[SetsRequiredMembers]
+	public ComponentDecalProjector(ComponentDecalProjector source)
+	{
+		Texture = CloneHelpers_7c83be20ee504926b8fb188858421982.Clone(source.Texture);
+		AngleThreshold = CloneHelpers_7c83be20ee504926b8fb188858421982.Clone(source.AngleThreshold);
+	}
+
+	protected void OnFlatSharpDeserialized(FlatBufferDeserializationContext context)
+	{
+	}
+}

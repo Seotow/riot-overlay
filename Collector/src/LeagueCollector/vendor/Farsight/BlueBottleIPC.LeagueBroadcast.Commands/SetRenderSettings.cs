@@ -1,0 +1,69 @@
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
+using FlatSharp;
+using FlatSharp.Attributes;
+using FlatSharp.Compiler.Generated;
+using FlatSharp.Compiler.Generated.NF913478DCE8D9FBEA5488D36897FD0D46DA72FE8C672489EE44B7B78CC951D44;
+
+namespace BlueBottleIPC.LeagueBroadcast.Commands;
+
+[FlatBufferTable(BuildSerializer = true)]
+[FlatBufferMetadata(FlatBufferMetadataKind.FbsAttribute, "fs_serializer", "0")]
+[CompilerGenerated]
+[DebuggerTypeProxy("BlueBottleIPC.LeagueBroadcast.Commands.SetRenderSettings")]
+public class SetRenderSettings : IFlatBufferSerializable<SetRenderSettings>, IFlatBufferSerializable
+{
+	[FlatBufferItem(0)]
+	public virtual bool? FogOfWar { get; set; }
+
+	public static ISerializer<SetRenderSettings> Serializer { get; }
+
+	ISerializer IFlatBufferSerializable.Serializer => (ISerializer)((IFlatBufferSerializable<SetRenderSettings>)this).Serializer;
+
+	ISerializer<SetRenderSettings> IFlatBufferSerializable<SetRenderSettings>.Serializer => Serializer;
+
+	private static readonly ISerializer<SetRenderSettings> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002ESetRenderSettings_003E_002ELazySerializer;
+
+	static ISerializer<SetRenderSettings> IFlatBufferSerializable<SetRenderSettings>.LazySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002ESetRenderSettings_003E_002ELazySerializer;
+
+	private static readonly ISerializer<SetRenderSettings> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002ESetRenderSettings_003E_002EGreedySerializer;
+
+	static ISerializer<SetRenderSettings> IFlatBufferSerializable<SetRenderSettings>.GreedySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002ESetRenderSettings_003E_002EGreedySerializer;
+
+	private static readonly ISerializer<SetRenderSettings> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002ESetRenderSettings_003E_002EGreedyMutableSerializer;
+
+	static ISerializer<SetRenderSettings> IFlatBufferSerializable<SetRenderSettings>.GreedyMutableSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002ESetRenderSettings_003E_002EGreedyMutableSerializer;
+
+	private static readonly ISerializer<SetRenderSettings> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002ESetRenderSettings_003E_002EProgressiveSerializer;
+
+	static ISerializer<SetRenderSettings> IFlatBufferSerializable<SetRenderSettings>.ProgressiveSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002ESetRenderSettings_003E_002EProgressiveSerializer;
+
+	static SetRenderSettings()
+	{
+		Serializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002ESetRenderSettings_003E_002ELazySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Lazy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002ESetRenderSettings_003E_002EGreedySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Greedy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002ESetRenderSettings_003E_002EGreedyMutableSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002ESetRenderSettings_003E_002EProgressiveSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Progressive);
+	}
+
+	public SetRenderSettings()
+	{
+		FogOfWar = null;
+	}
+
+	protected SetRenderSettings(FlatBufferDeserializationContext context)
+	{
+	}
+
+	[SetsRequiredMembers]
+	public SetRenderSettings(SetRenderSettings source)
+	{
+		FogOfWar = CloneHelpers_7c83be20ee504926b8fb188858421982.Clone(source.FogOfWar);
+	}
+
+	protected void OnFlatSharpDeserialized(FlatBufferDeserializationContext context)
+	{
+	}
+}

@@ -1,0 +1,69 @@
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
+using FlatSharp;
+using FlatSharp.Attributes;
+using FlatSharp.Compiler.Generated;
+using FlatSharp.Compiler.Generated.N737C4E71164ACA2F804B938A9669AB13CE523CFB92C612BBFFCF77D2CCF07EA6;
+
+namespace BlueBottleIPC.LeagueBroadcast.Commands;
+
+[FlatBufferTable(BuildSerializer = true)]
+[FlatBufferMetadata(FlatBufferMetadataKind.FbsAttribute, "fs_serializer", "0")]
+[CompilerGenerated]
+[DebuggerTypeProxy("BlueBottleIPC.LeagueBroadcast.Commands.StrokeSyncSetEnabled")]
+public class StrokeSyncSetEnabled : IFlatBufferSerializable<StrokeSyncSetEnabled>, IFlatBufferSerializable
+{
+	[FlatBufferItem(0)]
+	public virtual bool Enabled { get; set; }
+
+	public static ISerializer<StrokeSyncSetEnabled> Serializer { get; }
+
+	ISerializer IFlatBufferSerializable.Serializer => (ISerializer)((IFlatBufferSerializable<StrokeSyncSetEnabled>)this).Serializer;
+
+	ISerializer<StrokeSyncSetEnabled> IFlatBufferSerializable<StrokeSyncSetEnabled>.Serializer => Serializer;
+
+	private static readonly ISerializer<StrokeSyncSetEnabled> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSyncSetEnabled_003E_002ELazySerializer;
+
+	static ISerializer<StrokeSyncSetEnabled> IFlatBufferSerializable<StrokeSyncSetEnabled>.LazySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSyncSetEnabled_003E_002ELazySerializer;
+
+	private static readonly ISerializer<StrokeSyncSetEnabled> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSyncSetEnabled_003E_002EGreedySerializer;
+
+	static ISerializer<StrokeSyncSetEnabled> IFlatBufferSerializable<StrokeSyncSetEnabled>.GreedySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSyncSetEnabled_003E_002EGreedySerializer;
+
+	private static readonly ISerializer<StrokeSyncSetEnabled> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSyncSetEnabled_003E_002EGreedyMutableSerializer;
+
+	static ISerializer<StrokeSyncSetEnabled> IFlatBufferSerializable<StrokeSyncSetEnabled>.GreedyMutableSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSyncSetEnabled_003E_002EGreedyMutableSerializer;
+
+	private static readonly ISerializer<StrokeSyncSetEnabled> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSyncSetEnabled_003E_002EProgressiveSerializer;
+
+	static ISerializer<StrokeSyncSetEnabled> IFlatBufferSerializable<StrokeSyncSetEnabled>.ProgressiveSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSyncSetEnabled_003E_002EProgressiveSerializer;
+
+	static StrokeSyncSetEnabled()
+	{
+		Serializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSyncSetEnabled_003E_002ELazySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Lazy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSyncSetEnabled_003E_002EGreedySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Greedy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSyncSetEnabled_003E_002EGreedyMutableSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSyncSetEnabled_003E_002EProgressiveSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Progressive);
+	}
+
+	public StrokeSyncSetEnabled()
+	{
+		Enabled = false;
+	}
+
+	protected StrokeSyncSetEnabled(FlatBufferDeserializationContext context)
+	{
+	}
+
+	[SetsRequiredMembers]
+	public StrokeSyncSetEnabled(StrokeSyncSetEnabled source)
+	{
+		Enabled = CloneHelpers_7c83be20ee504926b8fb188858421982.Clone(source.Enabled);
+	}
+
+	protected void OnFlatSharpDeserialized(FlatBufferDeserializationContext context)
+	{
+	}
+}

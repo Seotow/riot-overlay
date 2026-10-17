@@ -1,0 +1,135 @@
+// REA / Ghidra decompiler pseudocode. Not original or buildable C++.
+// Address: 0x180441560; descriptive alias: FUN_180441560
+// Evidence: ev_d52b78383ff5c0acf0266ab38e797d5a239aaf0a1961d1efa3614232528d3c9e
+// Original Evidence: rea-collector/0x180441560.json
+// SHA-256: a1028d56ef03c84a0808ac028a0ee3a982e7962e844592157ed4b6c2663141d3
+
+undefined8 * FUN_180441560(undefined8 *param_1,undefined8 param_2)
+
+{
+  undefined8 *puVar1;
+  
+  *param_1 = &PTR_FUN_180c6ff30;
+  puVar1 = param_1 + 1;
+  FUN_180446320();
+  puVar1[0x4e] = 2;
+  puVar1[0x51] = 0;
+  puVar1[0x52] = 0;
+  puVar1[0x53] = 0;
+  puVar1[0x54] = 0;
+  puVar1[0x53] = 0;
+  puVar1[0x54] = 0;
+  puVar1[0x55] = 0;
+  puVar1[0x56] = 0;
+  puVar1[0x4f] = 0;
+  puVar1[0x50] = 0;
+  *(undefined4 *)(puVar1 + 0x57) = 0xffffffff;
+  *(undefined4 *)((longlong)puVar1 + 700) = 0;
+  puVar1[0x58] = 0;
+  puVar1[0x59] = 0;
+  puVar1[0x5a] = 0;
+  puVar1[0x5b] = 2;
+  puVar1[0x5e] = 0;
+  puVar1[0x5f] = 0;
+  puVar1[0x60] = 0;
+  puVar1[0x61] = 0;
+  puVar1[0x60] = 0;
+  puVar1[0x61] = 0;
+  puVar1[0x62] = 0;
+  puVar1[99] = 0;
+  puVar1[0x5c] = 0;
+  puVar1[0x5d] = 0;
+  *(undefined4 *)(puVar1 + 100) = 0xffffffff;
+  *(undefined4 *)((longlong)puVar1 + 0x324) = 0;
+  puVar1[0x65] = 0;
+  puVar1[0x66] = 0;
+  puVar1[0x67] = 0;
+  puVar1[0x68] = 2;
+  puVar1[0x6b] = 0;
+  puVar1[0x6c] = 0;
+  puVar1[0x6d] = 0;
+  puVar1[0x6e] = 0;
+  puVar1[0x6d] = 0;
+  puVar1[0x6e] = 0;
+  puVar1[0x6f] = 0;
+  puVar1[0x70] = 0;
+  puVar1[0x69] = 0;
+  puVar1[0x6a] = 0;
+  *(undefined4 *)(puVar1 + 0x71) = 0xffffffff;
+  *(undefined4 *)((longlong)puVar1 + 0x38c) = 0;
+  puVar1[0x72] = 0;
+  puVar1[0x73] = 0;
+  puVar1[0x74] = 0;
+  puVar1[0x75] = 2;
+  puVar1[0x78] = 0;
+  puVar1[0x79] = 0;
+  puVar1[0x7a] = 0;
+  puVar1[0x7b] = 0;
+  puVar1[0x7a] = 0;
+  puVar1[0x7b] = 0;
+  puVar1[0x7c] = 0;
+  puVar1[0x7d] = 0;
+  puVar1[0x76] = 0;
+  puVar1[0x77] = 0;
+  *(undefined4 *)(puVar1 + 0x7e) = 0xffffffff;
+  *(undefined4 *)((longlong)puVar1 + 0x3f4) = 0;
+  puVar1[0x7f] = 0;
+  puVar1[0x80] = 0;
+  puVar1[0x81] = 0;
+  puVar1[0x82] = 2;
+  puVar1[0x85] = 0;
+  puVar1[0x86] = 0;
+  puVar1[0x87] = 0;
+  puVar1[0x88] = 0;
+  puVar1[0x87] = 0;
+  puVar1[0x88] = 0;
+  puVar1[0x89] = 0;
+  puVar1[0x8a] = 0;
+  puVar1[0x83] = 0;
+  puVar1[0x84] = 0;
+  *(undefined4 *)(puVar1 + 0x8b) = 0xffffffff;
+  *(undefined4 *)((longlong)puVar1 + 0x45c) = 0;
+  puVar1[0x8c] = 0;
+  puVar1[0x8d] = 0;
+  puVar1[0x8e] = 0;
+  puVar1 = (undefined8 *)FUN_180976d80(0x88);
+  *puVar1 = 0;
+  puVar1[1] = 0;
+  puVar1[2] = 0;
+  puVar1[3] = 0;
+  puVar1[4] = 0;
+  puVar1[5] = 0;
+  puVar1[6] = 0;
+  puVar1[7] = 0;
+  puVar1[8] = 0;
+  puVar1[9] = 0;
+  puVar1[10] = 0;
+  puVar1[0xb] = 0;
+  puVar1[0xc] = 0;
+  puVar1[0xd] = 0;
+  puVar1[0xe] = 0;
+  puVar1[0xf] = 0;
+  *puVar1 = 0;
+  *(undefined1 *)(puVar1 + 1) = 0;
+  puVar1[2] = param_2;
+  *(undefined4 *)(puVar1 + 3) = 0x7fffffff;
+  puVar1[4] = 8;
+  puVar1[5] = 0;
+  *(undefined4 *)(puVar1 + 6) = 0;
+  puVar1[7] = 0;
+  puVar1[8] = 0;
+  puVar1[9] = 0;
+  *(undefined4 *)(puVar1 + 10) = 0;
+  *(undefined2 *)((longlong)puVar1 + 0x54) = 0;
+  puVar1[0xb] = 0;
+  *(undefined2 *)(puVar1 + 0xc) = 0;
+  puVar1[0xd] = 1;
+  *(undefined2 *)(puVar1 + 0xe) = 0x100;
+  puVar1[0xf] = 0;
+  puVar1[0x10] = 0;
+  param_1[0x90] = puVar1;
+  *(undefined4 *)(param_1 + 0x91) = 0;
+  FUN_180428af0(param_1 + 0x92);
+  return param_1;
+}
+

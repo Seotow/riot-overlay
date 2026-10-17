@@ -1,0 +1,40 @@
+{
+  "apiVersion": 1,
+  "allPassed": true,
+  "checks": [
+    {
+      "name": "sparse-memory: position, health, gold, KDA, pointer string, legitimate zero",
+      "passed": true
+    },
+    {
+      "name": "unreadable fields and non-finite floats remain null",
+      "passed": true
+    },
+    {
+      "name": "pointer/count bounds and unknown discovery versus known empty",
+      "passed": true
+    },
+    {
+      "name": "measured version/hash/module mismatch and explicit experimental opt-in",
+      "passed": true
+    },
+    {
+      "name": "profile evidence, overlapping path, offset, chain, string and schema rejection",
+      "passed": true
+    },
+    {
+      "name": "null/invalid pointer, bounded unterminated string and malformed UTF-8",
+      "passed": true
+    },
+    {
+      "name": "per-snapshot read budget and bounded diagnostic output",
+      "passed": true
+    },
+    {
+      "name": "Win32 adapter unavailable on Linux without fake fallback",
+      "passed": true
+    }
+  ],
+  "runtimeParityTested": false,
+  "fixtureSha256": "0bc4f58d807856d4a0a590e3df4fa3a8efce73d819f3cff41f16cbe0786b1de8"
+}

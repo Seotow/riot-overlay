@@ -1,0 +1,16 @@
+
+/workspace/leaguebroadcast/native/lblib.dll:     file format pei-x86-64
+
+
+Disassembly of section .text:
+
+00000001803c2f13 <.text+0x3c1f13>:
+   1803c2f13:	48 89 44 24 40       	mov    %rax,0x40(%rsp)
+   1803c2f18:	44 0f b6 cf          	movzbl %dil,%r9d
+   1803c2f1c:	45 0f b6 c7          	movzbl %r15b,%r8d
+   1803c2f20:	4c 8b 7c 24 50       	mov    0x50(%rsp),%r15
+   1803c2f25:	49 8b d7             	mov    %r15,%rdx
+   1803c2f28:	48 8b cb             	mov    %rbx,%rcx
+   1803c2f2b:	e8 50 a8 ff ff       	call   0x1803bd780
+   1803c2f30:	48 8d 05 81 c0 8a 00 	lea    0x8ac081(%rip),%rax        # 0x180c6efb8
+   1803c2f37:	48 89 03             	mov    %rax,(%rbx)

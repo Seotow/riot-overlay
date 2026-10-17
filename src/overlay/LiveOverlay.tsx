@@ -921,9 +921,10 @@ export function LiveOverlay({
             {theme.blueLogo && (
               <img className="team-logo" src={theme.blueLogo} alt="" />
             )}
-            <div className="team-caption">
+            <div className={`team-caption ${theme.blueDescription?.trim() ? "has-description" : "name-only"}`}
+              style={{"--team-name-size":`${theme.blueName.length >= 5 ? 32 : theme.blueName.length === 4 ? 36 : 40}px`} as CSSProperties}>
               <b>{theme.blueName}</b>
-              <span>{theme.tournament}</span>
+              {theme.blueDescription?.trim() && <span>{theme.blueDescription.trim()}</span>}
             </div>
           </div>
           <div className="score-economy">
@@ -983,9 +984,10 @@ export function LiveOverlay({
                 ),
               )}
             </span>
-            <div className="team-caption">
+            <div className={`team-caption ${theme.redDescription?.trim() ? "has-description" : "name-only"}`}
+              style={{"--team-name-size":`${theme.redName.length >= 5 ? 32 : theme.redName.length === 4 ? 36 : 40}px`} as CSSProperties}>
               <b>{theme.redName}</b>
-              <span>{theme.tournament}</span>
+              {theme.redDescription?.trim() && <span>{theme.redDescription.trim()}</span>}
             </div>
             {theme.redLogo && (
               <img className="team-logo" src={theme.redLogo} alt="" />

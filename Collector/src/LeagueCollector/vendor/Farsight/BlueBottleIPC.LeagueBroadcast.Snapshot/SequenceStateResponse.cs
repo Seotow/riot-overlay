@@ -1,0 +1,70 @@
+using System;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
+using FlatSharp;
+using FlatSharp.Attributes;
+using FlatSharp.Compiler.Generated;
+using FlatSharp.Compiler.Generated.NE1D0DB9C9F1EDB8240FC15F7F3010F6028F435FEDCFD4B55EBE6B30E3A709353;
+
+namespace BlueBottleIPC.LeagueBroadcast.Snapshot;
+
+[FlatBufferTable(BuildSerializer = true)]
+[FlatBufferMetadata(FlatBufferMetadataKind.FbsAttribute, "fs_serializer", "0")]
+[CompilerGenerated]
+[DebuggerTypeProxy("BlueBottleIPC.LeagueBroadcast.Snapshot.SequenceStateResponse")]
+public class SequenceStateResponse : IFlatBufferSerializable<SequenceStateResponse>, IFlatBufferSerializable
+{
+	[FlatBufferItem(0)]
+	public virtual Memory<byte>? State { get; set; }
+
+	public static ISerializer<SequenceStateResponse> Serializer { get; }
+
+	ISerializer IFlatBufferSerializable.Serializer => (ISerializer)((IFlatBufferSerializable<SequenceStateResponse>)this).Serializer;
+
+	ISerializer<SequenceStateResponse> IFlatBufferSerializable<SequenceStateResponse>.Serializer => Serializer;
+
+	private static readonly ISerializer<SequenceStateResponse> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ESnapshot_002ESequenceStateResponse_003E_002ELazySerializer;
+
+	static ISerializer<SequenceStateResponse> IFlatBufferSerializable<SequenceStateResponse>.LazySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ESnapshot_002ESequenceStateResponse_003E_002ELazySerializer;
+
+	private static readonly ISerializer<SequenceStateResponse> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ESnapshot_002ESequenceStateResponse_003E_002EGreedySerializer;
+
+	static ISerializer<SequenceStateResponse> IFlatBufferSerializable<SequenceStateResponse>.GreedySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ESnapshot_002ESequenceStateResponse_003E_002EGreedySerializer;
+
+	private static readonly ISerializer<SequenceStateResponse> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ESnapshot_002ESequenceStateResponse_003E_002EGreedyMutableSerializer;
+
+	static ISerializer<SequenceStateResponse> IFlatBufferSerializable<SequenceStateResponse>.GreedyMutableSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ESnapshot_002ESequenceStateResponse_003E_002EGreedyMutableSerializer;
+
+	private static readonly ISerializer<SequenceStateResponse> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ESnapshot_002ESequenceStateResponse_003E_002EProgressiveSerializer;
+
+	static ISerializer<SequenceStateResponse> IFlatBufferSerializable<SequenceStateResponse>.ProgressiveSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ESnapshot_002ESequenceStateResponse_003E_002EProgressiveSerializer;
+
+	static SequenceStateResponse()
+	{
+		Serializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ESnapshot_002ESequenceStateResponse_003E_002ELazySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Lazy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ESnapshot_002ESequenceStateResponse_003E_002EGreedySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Greedy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ESnapshot_002ESequenceStateResponse_003E_002EGreedyMutableSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ESnapshot_002ESequenceStateResponse_003E_002EProgressiveSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Progressive);
+	}
+
+	public SequenceStateResponse()
+	{
+		State = null;
+	}
+
+	protected SequenceStateResponse(FlatBufferDeserializationContext context)
+	{
+	}
+
+	[SetsRequiredMembers]
+	public SequenceStateResponse(SequenceStateResponse source)
+	{
+		State = CloneHelpers_7c83be20ee504926b8fb188858421982.Clone(source.State);
+	}
+
+	protected void OnFlatSharpDeserialized(FlatBufferDeserializationContext context)
+	{
+	}
+}

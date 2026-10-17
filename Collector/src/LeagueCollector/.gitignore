@@ -1,0 +1,9 @@
+collector.env
+**/collector.env
+recordings/
+test-results/
+build-logs/
+dist/
+runtime-downloads/
+**/bin/
+**/obj/

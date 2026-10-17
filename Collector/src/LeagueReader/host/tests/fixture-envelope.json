@@ -1,0 +1,83 @@
+{
+  "schemaVersion": 1,
+  "sequence": 2,
+  "timestamp": "2026-10-14T12:23:07.0102507+00:00",
+  "type": "snapshot",
+  "source": "independent-memory-reader",
+  "synthetic": true,
+  "data": {
+    "gameTime": 900.5,
+    "heroes": [
+      {
+        "assists": 5,
+        "common": {
+          "health": 1250,
+          "level": 11,
+          "maxHealth": 1600
+        },
+        "deaths": 1,
+        "gold": 1350,
+        "info": {
+          "name": "Fixture Ahri",
+          "position": {
+            "x": 5400,
+            "y": 52,
+            "z": 6800
+          }
+        },
+        "kills": 3,
+        "totalGold": 7800
+      },
+      {
+        "assists": 5,
+        "common": {
+          "health": 0,
+          "level": 11,
+          "maxHealth": 1600
+        },
+        "deaths": 1,
+        "gold": 0,
+        "info": {
+          "name": "Fixture Dead",
+          "position": {
+            "x": 5400,
+            "y": 52,
+            "z": 6800
+          }
+        },
+        "kills": 3,
+        "totalGold": 7800
+      }
+    ]
+  },
+  "metadata": {
+    "apiVersion": 1,
+    "authenticationRequired": false,
+    "bytesRequested": 236,
+    "evidence": [
+      {
+        "id": "sparse-memory",
+        "note": "Test fixture, not a game capture or recovered memory layout.",
+        "sha256": "0bc4f58d807856d4a0a590e3df4fa3a8efce73d819f3cff41f16cbe0786b1de8",
+        "source": "tests/fixtures/memory.json"
+      }
+    ],
+    "fieldCount": 11,
+    "issueCount": 0,
+    "issues": [],
+    "issuesTruncated": false,
+    "objectDiscoveryAvailable": false,
+    "originalLibraryLoaded": false,
+    "profileId": "sparse-fixture-v1",
+    "profileValidation": "fixture-only",
+    "readCalls": 23,
+    "rootsProvidedByCaller": true,
+    "runtimeVerified": false,
+    "target": {
+      "module": "sparse-fixture.bin",
+      "sha256": "0bc4f58d807856d4a0a590e3df4fa3a8efce73d819f3cff41f16cbe0786b1de8",
+      "version": "fixture-v1"
+    },
+    "targetIdentityMatched": true
+  }
+}

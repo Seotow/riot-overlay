@@ -1,0 +1,74 @@
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
+using FlatSharp;
+using FlatSharp.Attributes;
+using FlatSharp.Compiler.Generated;
+using FlatSharp.Compiler.Generated.N6BABA36AD87BF66E2C61D8FC32119D6EB04B7AEAE659DCB8A78EA7A8BE861173;
+
+namespace BlueBottleIPC.LeagueBroadcast.Cinematics;
+
+[FlatBufferTable(BuildSerializer = true)]
+[FlatBufferMetadata(FlatBufferMetadataKind.FbsAttribute, "fs_serializer", "0")]
+[CompilerGenerated]
+[DebuggerTypeProxy("BlueBottleIPC.LeagueBroadcast.Cinematics.SetOverlayTrackRequest")]
+public class SetOverlayTrackRequest : IFlatBufferSerializable<SetOverlayTrackRequest>, IFlatBufferSerializable
+{
+	[FlatBufferItem(0)]
+	public virtual string? CinematicId { get; set; }
+
+	[FlatBufferItem(1)]
+	public virtual CinematicOverlayTrack? Track { get; set; }
+
+	public static ISerializer<SetOverlayTrackRequest> Serializer { get; }
+
+	ISerializer IFlatBufferSerializable.Serializer => (ISerializer)((IFlatBufferSerializable<SetOverlayTrackRequest>)this).Serializer;
+
+	ISerializer<SetOverlayTrackRequest> IFlatBufferSerializable<SetOverlayTrackRequest>.Serializer => Serializer;
+
+	private static readonly ISerializer<SetOverlayTrackRequest> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECinematics_002ESetOverlayTrackRequest_003E_002ELazySerializer;
+
+	static ISerializer<SetOverlayTrackRequest> IFlatBufferSerializable<SetOverlayTrackRequest>.LazySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECinematics_002ESetOverlayTrackRequest_003E_002ELazySerializer;
+
+	private static readonly ISerializer<SetOverlayTrackRequest> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECinematics_002ESetOverlayTrackRequest_003E_002EGreedySerializer;
+
+	static ISerializer<SetOverlayTrackRequest> IFlatBufferSerializable<SetOverlayTrackRequest>.GreedySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECinematics_002ESetOverlayTrackRequest_003E_002EGreedySerializer;
+
+	private static readonly ISerializer<SetOverlayTrackRequest> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECinematics_002ESetOverlayTrackRequest_003E_002EGreedyMutableSerializer;
+
+	static ISerializer<SetOverlayTrackRequest> IFlatBufferSerializable<SetOverlayTrackRequest>.GreedyMutableSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECinematics_002ESetOverlayTrackRequest_003E_002EGreedyMutableSerializer;
+
+	private static readonly ISerializer<SetOverlayTrackRequest> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECinematics_002ESetOverlayTrackRequest_003E_002EProgressiveSerializer;
+
+	static ISerializer<SetOverlayTrackRequest> IFlatBufferSerializable<SetOverlayTrackRequest>.ProgressiveSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECinematics_002ESetOverlayTrackRequest_003E_002EProgressiveSerializer;
+
+	static SetOverlayTrackRequest()
+	{
+		Serializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECinematics_002ESetOverlayTrackRequest_003E_002ELazySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Lazy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECinematics_002ESetOverlayTrackRequest_003E_002EGreedySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Greedy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECinematics_002ESetOverlayTrackRequest_003E_002EGreedyMutableSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECinematics_002ESetOverlayTrackRequest_003E_002EProgressiveSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Progressive);
+	}
+
+	public SetOverlayTrackRequest()
+	{
+		CinematicId = null;
+		Track = null;
+	}
+
+	protected SetOverlayTrackRequest(FlatBufferDeserializationContext context)
+	{
+	}
+
+	[SetsRequiredMembers]
+	public SetOverlayTrackRequest(SetOverlayTrackRequest source)
+	{
+		CinematicId = CloneHelpers_7c83be20ee504926b8fb188858421982.Clone(source.CinematicId);
+		Track = CloneHelpers_7c83be20ee504926b8fb188858421982.Clone(source.Track);
+	}
+
+	protected void OnFlatSharpDeserialized(FlatBufferDeserializationContext context)
+	{
+	}
+}

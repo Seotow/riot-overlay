@@ -1,0 +1,75 @@
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
+using FlatSharp;
+using FlatSharp.Attributes;
+using FlatSharp.Compiler.Generated;
+using FlatSharp.Compiler.Generated.N6AE3215356F13B8412766A4FE13B17227B4354F17EC1EA2F4E7AD959DA72AA0B;
+
+namespace BlueBottleIPC.LeagueBroadcast.Cinematics;
+
+[FlatBufferTable(BuildSerializer = true)]
+[FlatBufferMetadata(FlatBufferMetadataKind.FbsAttribute, "fs_serializer", "0")]
+[CompilerGenerated]
+[DebuggerTypeProxy("BlueBottleIPC.LeagueBroadcast.Cinematics.CinematicOverlayTrack")]
+public class CinematicOverlayTrack : IFlatBufferSerializable<CinematicOverlayTrack>, IFlatBufferSerializable
+{
+	[FlatBufferItem(0)]
+	public virtual string? OverlayName { get; set; }
+
+	[FlatBufferItem(1)]
+	public virtual IList<CinematicKeyframe>? Keys { get; set; }
+
+	public static ISerializer<CinematicOverlayTrack> Serializer { get; }
+
+	ISerializer IFlatBufferSerializable.Serializer => (ISerializer)((IFlatBufferSerializable<CinematicOverlayTrack>)this).Serializer;
+
+	ISerializer<CinematicOverlayTrack> IFlatBufferSerializable<CinematicOverlayTrack>.Serializer => Serializer;
+
+	private static readonly ISerializer<CinematicOverlayTrack> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECinematics_002ECinematicOverlayTrack_003E_002ELazySerializer;
+
+	static ISerializer<CinematicOverlayTrack> IFlatBufferSerializable<CinematicOverlayTrack>.LazySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECinematics_002ECinematicOverlayTrack_003E_002ELazySerializer;
+
+	private static readonly ISerializer<CinematicOverlayTrack> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECinematics_002ECinematicOverlayTrack_003E_002EGreedySerializer;
+
+	static ISerializer<CinematicOverlayTrack> IFlatBufferSerializable<CinematicOverlayTrack>.GreedySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECinematics_002ECinematicOverlayTrack_003E_002EGreedySerializer;
+
+	private static readonly ISerializer<CinematicOverlayTrack> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECinematics_002ECinematicOverlayTrack_003E_002EGreedyMutableSerializer;
+
+	static ISerializer<CinematicOverlayTrack> IFlatBufferSerializable<CinematicOverlayTrack>.GreedyMutableSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECinematics_002ECinematicOverlayTrack_003E_002EGreedyMutableSerializer;
+
+	private static readonly ISerializer<CinematicOverlayTrack> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECinematics_002ECinematicOverlayTrack_003E_002EProgressiveSerializer;
+
+	static ISerializer<CinematicOverlayTrack> IFlatBufferSerializable<CinematicOverlayTrack>.ProgressiveSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECinematics_002ECinematicOverlayTrack_003E_002EProgressiveSerializer;
+
+	static CinematicOverlayTrack()
+	{
+		Serializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECinematics_002ECinematicOverlayTrack_003E_002ELazySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Lazy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECinematics_002ECinematicOverlayTrack_003E_002EGreedySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Greedy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECinematics_002ECinematicOverlayTrack_003E_002EGreedyMutableSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECinematics_002ECinematicOverlayTrack_003E_002EProgressiveSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Progressive);
+	}
+
+	public CinematicOverlayTrack()
+	{
+		OverlayName = null;
+		Keys = null;
+	}
+
+	protected CinematicOverlayTrack(FlatBufferDeserializationContext context)
+	{
+	}
+
+	[SetsRequiredMembers]
+	public CinematicOverlayTrack(CinematicOverlayTrack source)
+	{
+		OverlayName = CloneHelpers_7c83be20ee504926b8fb188858421982.Clone(source.OverlayName);
+		Keys = CloneHelpers_7c83be20ee504926b8fb188858421982.Clone(source.Keys);
+	}
+
+	protected void OnFlatSharpDeserialized(FlatBufferDeserializationContext context)
+	{
+	}
+}

@@ -1,0 +1,63 @@
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
+using FlatSharp;
+using FlatSharp.Attributes;
+using FlatSharp.Compiler.Generated.N3C5509FB15221355E65D4EC0AA8D3F66CF04B2B065D09BCA9BECBFFA4669ABAB;
+
+namespace BlueBottleIPC.LeagueBroadcast.Commands;
+
+[FlatBufferTable(BuildSerializer = true)]
+[FlatBufferMetadata(FlatBufferMetadataKind.FbsAttribute, "fs_serializer", "0")]
+[CompilerGenerated]
+[DebuggerTypeProxy("BlueBottleIPC.LeagueBroadcast.Commands.GetCinematicCameraPose")]
+public class GetCinematicCameraPose : IFlatBufferSerializable<GetCinematicCameraPose>, IFlatBufferSerializable
+{
+	public static ISerializer<GetCinematicCameraPose> Serializer { get; }
+
+	ISerializer IFlatBufferSerializable.Serializer => (ISerializer)((IFlatBufferSerializable<GetCinematicCameraPose>)this).Serializer;
+
+	ISerializer<GetCinematicCameraPose> IFlatBufferSerializable<GetCinematicCameraPose>.Serializer => Serializer;
+
+	private static readonly ISerializer<GetCinematicCameraPose> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EGetCinematicCameraPose_003E_002ELazySerializer;
+
+	static ISerializer<GetCinematicCameraPose> IFlatBufferSerializable<GetCinematicCameraPose>.LazySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EGetCinematicCameraPose_003E_002ELazySerializer;
+
+	private static readonly ISerializer<GetCinematicCameraPose> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EGetCinematicCameraPose_003E_002EGreedySerializer;
+
+	static ISerializer<GetCinematicCameraPose> IFlatBufferSerializable<GetCinematicCameraPose>.GreedySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EGetCinematicCameraPose_003E_002EGreedySerializer;
+
+	private static readonly ISerializer<GetCinematicCameraPose> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EGetCinematicCameraPose_003E_002EGreedyMutableSerializer;
+
+	static ISerializer<GetCinematicCameraPose> IFlatBufferSerializable<GetCinematicCameraPose>.GreedyMutableSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EGetCinematicCameraPose_003E_002EGreedyMutableSerializer;
+
+	private static readonly ISerializer<GetCinematicCameraPose> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EGetCinematicCameraPose_003E_002EProgressiveSerializer;
+
+	static ISerializer<GetCinematicCameraPose> IFlatBufferSerializable<GetCinematicCameraPose>.ProgressiveSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EGetCinematicCameraPose_003E_002EProgressiveSerializer;
+
+	static GetCinematicCameraPose()
+	{
+		Serializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EGetCinematicCameraPose_003E_002ELazySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Lazy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EGetCinematicCameraPose_003E_002EGreedySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Greedy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EGetCinematicCameraPose_003E_002EGreedyMutableSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EGetCinematicCameraPose_003E_002EProgressiveSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Progressive);
+	}
+
+	public GetCinematicCameraPose()
+	{
+	}
+
+	protected GetCinematicCameraPose(FlatBufferDeserializationContext context)
+	{
+	}
+
+	[SetsRequiredMembers]
+	public GetCinematicCameraPose(GetCinematicCameraPose source)
+	{
+	}
+
+	protected void OnFlatSharpDeserialized(FlatBufferDeserializationContext context)
+	{
+	}
+}

@@ -1,0 +1,36 @@
+{
+  "passed": true,
+  "real_game_tested": false,
+  "checks": [
+    {
+      "name": "demo_http_websocket_recording_origin_shutdown",
+      "passed": true,
+      "seconds": 0.937
+    },
+    {
+      "name": "record_replay_provenance_invalid_replay",
+      "passed": true,
+      "seconds": 0.802
+    },
+    {
+      "name": "live_api_full_payload_disconnect_reconnect",
+      "passed": true,
+      "seconds": 0.93
+    },
+    {
+      "name": "lcu_tls_champselect_phase_token_rotation",
+      "passed": true,
+      "seconds": 1.692
+    },
+    {
+      "name": "native_platform_guard_no_synthetic_fallback",
+      "passed": true,
+      "seconds": 0.383
+    },
+    {
+      "name": "diagnostics_success_missing_data_offline_no_credentials",
+      "passed": true,
+      "seconds": 0.709
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
+using FlatSharp;
+using FlatSharp.Attributes;
+using FlatSharp.Compiler.Generated;
+using FlatSharp.Compiler.Generated.NFA32B21AC4F73FAAE5B9952C12C45D57D2E70F8AEA7F19B8D67A46B4B48EA317;
+
+namespace BlueBottleIPC.LeagueBroadcast.Commands;
+
+[FlatBufferTable(BuildSerializer = true)]
+[FlatBufferMetadata(FlatBufferMetadataKind.FbsAttribute, "fs_serializer", "0")]
+[CompilerGenerated]
+[DebuggerTypeProxy("BlueBottleIPC.LeagueBroadcast.Commands.SetClientCapabilities")]
+public class SetClientCapabilities : IFlatBufferSerializable<SetClientCapabilities>, IFlatBufferSerializable
+{
+	[FlatBufferItem(0)]
+	public virtual bool EditorHotkeys { get; set; }
+
+	[FlatBufferItem(1)]
+	public virtual bool KeyboardCapture { get; set; }
+
+	public static ISerializer<SetClientCapabilities> Serializer { get; }
+
+	ISerializer IFlatBufferSerializable.Serializer => (ISerializer)((IFlatBufferSerializable<SetClientCapabilities>)this).Serializer;
+
+	ISerializer<SetClientCapabilities> IFlatBufferSerializable<SetClientCapabilities>.Serializer => Serializer;
+
+	private static readonly ISerializer<SetClientCapabilities> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002ESetClientCapabilities_003E_002ELazySerializer;
+
+	static ISerializer<SetClientCapabilities> IFlatBufferSerializable<SetClientCapabilities>.LazySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002ESetClientCapabilities_003E_002ELazySerializer;
+
+	private static readonly ISerializer<SetClientCapabilities> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002ESetClientCapabilities_003E_002EGreedySerializer;
+
+	static ISerializer<SetClientCapabilities> IFlatBufferSerializable<SetClientCapabilities>.GreedySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002ESetClientCapabilities_003E_002EGreedySerializer;
+
+	private static readonly ISerializer<SetClientCapabilities> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002ESetClientCapabilities_003E_002EGreedyMutableSerializer;
+
+	static ISerializer<SetClientCapabilities> IFlatBufferSerializable<SetClientCapabilities>.GreedyMutableSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002ESetClientCapabilities_003E_002EGreedyMutableSerializer;
+
+	private static readonly ISerializer<SetClientCapabilities> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002ESetClientCapabilities_003E_002EProgressiveSerializer;
+
+	static ISerializer<SetClientCapabilities> IFlatBufferSerializable<SetClientCapabilities>.ProgressiveSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002ESetClientCapabilities_003E_002EProgressiveSerializer;
+
+	static SetClientCapabilities()
+	{
+		Serializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002ESetClientCapabilities_003E_002ELazySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Lazy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002ESetClientCapabilities_003E_002EGreedySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Greedy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002ESetClientCapabilities_003E_002EGreedyMutableSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002ESetClientCapabilities_003E_002EProgressiveSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Progressive);
+	}
+
+	public SetClientCapabilities()
+	{
+		EditorHotkeys = false;
+		KeyboardCapture = false;
+	}
+
+	protected SetClientCapabilities(FlatBufferDeserializationContext context)
+	{
+	}
+
+	[SetsRequiredMembers]
+	public SetClientCapabilities(SetClientCapabilities source)
+	{
+		EditorHotkeys = CloneHelpers_7c83be20ee504926b8fb188858421982.Clone(source.EditorHotkeys);
+		KeyboardCapture = CloneHelpers_7c83be20ee504926b8fb188858421982.Clone(source.KeyboardCapture);
+	}
+
+	protected void OnFlatSharpDeserialized(FlatBufferDeserializationContext context)
+	{
+	}
+}

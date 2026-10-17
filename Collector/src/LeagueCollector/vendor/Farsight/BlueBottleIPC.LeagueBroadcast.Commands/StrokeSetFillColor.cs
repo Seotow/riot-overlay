@@ -1,0 +1,70 @@
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
+using BlueBottleIPC.LeagueBroadcast.Common;
+using FlatSharp;
+using FlatSharp.Attributes;
+using FlatSharp.Compiler.Generated;
+using FlatSharp.Compiler.Generated.N9AFBBB23CF06BC8B948FB67E1753681F5CFD8AA3139A6E41ABA97AFB3A613F22;
+
+namespace BlueBottleIPC.LeagueBroadcast.Commands;
+
+[FlatBufferTable(BuildSerializer = true)]
+[FlatBufferMetadata(FlatBufferMetadataKind.FbsAttribute, "fs_serializer", "0")]
+[CompilerGenerated]
+[DebuggerTypeProxy("BlueBottleIPC.LeagueBroadcast.Commands.StrokeSetFillColor")]
+public class StrokeSetFillColor : IFlatBufferSerializable<StrokeSetFillColor>, IFlatBufferSerializable
+{
+	[FlatBufferItem(0, Required = true)]
+	[FlatBufferMetadata(FlatBufferMetadataKind.FbsAttribute, "required", "0")]
+	public virtual required ColorRGBA FillColor { get; set; }
+
+	public static ISerializer<StrokeSetFillColor> Serializer { get; }
+
+	ISerializer IFlatBufferSerializable.Serializer => (ISerializer)((IFlatBufferSerializable<StrokeSetFillColor>)this).Serializer;
+
+	ISerializer<StrokeSetFillColor> IFlatBufferSerializable<StrokeSetFillColor>.Serializer => Serializer;
+
+	private static readonly ISerializer<StrokeSetFillColor> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSetFillColor_003E_002ELazySerializer;
+
+	static ISerializer<StrokeSetFillColor> IFlatBufferSerializable<StrokeSetFillColor>.LazySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSetFillColor_003E_002ELazySerializer;
+
+	private static readonly ISerializer<StrokeSetFillColor> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSetFillColor_003E_002EGreedySerializer;
+
+	static ISerializer<StrokeSetFillColor> IFlatBufferSerializable<StrokeSetFillColor>.GreedySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSetFillColor_003E_002EGreedySerializer;
+
+	private static readonly ISerializer<StrokeSetFillColor> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSetFillColor_003E_002EGreedyMutableSerializer;
+
+	static ISerializer<StrokeSetFillColor> IFlatBufferSerializable<StrokeSetFillColor>.GreedyMutableSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSetFillColor_003E_002EGreedyMutableSerializer;
+
+	private static readonly ISerializer<StrokeSetFillColor> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSetFillColor_003E_002EProgressiveSerializer;
+
+	static ISerializer<StrokeSetFillColor> IFlatBufferSerializable<StrokeSetFillColor>.ProgressiveSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSetFillColor_003E_002EProgressiveSerializer;
+
+	static StrokeSetFillColor()
+	{
+		Serializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSetFillColor_003E_002ELazySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Lazy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSetFillColor_003E_002EGreedySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Greedy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSetFillColor_003E_002EGreedyMutableSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSetFillColor_003E_002EProgressiveSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Progressive);
+	}
+
+	public StrokeSetFillColor()
+	{
+	}
+
+	protected StrokeSetFillColor(FlatBufferDeserializationContext context)
+	{
+	}
+
+	[SetsRequiredMembers]
+	public StrokeSetFillColor(StrokeSetFillColor source)
+	{
+		FillColor = CloneHelpers_7c83be20ee504926b8fb188858421982.Clone(source.FillColor);
+	}
+
+	protected void OnFlatSharpDeserialized(FlatBufferDeserializationContext context)
+	{
+	}
+}

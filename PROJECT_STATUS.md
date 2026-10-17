@@ -33,6 +33,11 @@ credentials. Chi tiết: [COLLECTOR_SAFETY](docs/COLLECTOR_SAFETY.md).
 
 ## Đầu ra phát sóng
 
+Thanh điểm số: cụm logo/tên sát hai mép hơn, chừa đủ chỗ cho tên 5 ký tự.
+Mỗi đội có mô tả/thứ hạng riêng trong cấu hình; đổi bên mang theo mô tả.
+Không dùng tên giải làm nhãn phụ. Để trống mô tả thì tên dùng toàn chiều cao.
+Theme cũ vẫn đọc được, không tự ghi đè cấu hình cá nhân.
+
 Đã bỏ nhãn bản ghi/kiểm thử, nhãn kích hoạt thử và ghi chú dữ liệu mẫu khỏi
 graphic. Studio vẫn báo nguồn đang dùng và cảnh báo; không đổi provenance
 hoặc tự biến bộ mẫu thành dữ liệu thật.

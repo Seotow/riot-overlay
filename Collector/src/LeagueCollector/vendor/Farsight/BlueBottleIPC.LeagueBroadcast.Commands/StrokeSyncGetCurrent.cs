@@ -1,0 +1,63 @@
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
+using FlatSharp;
+using FlatSharp.Attributes;
+using FlatSharp.Compiler.Generated.N85DEC74C14811CF4C7B6B0B4D7AE3CC4C8C1C2952B6DC44BDD4C8DDB0551B31A;
+
+namespace BlueBottleIPC.LeagueBroadcast.Commands;
+
+[FlatBufferTable(BuildSerializer = true)]
+[FlatBufferMetadata(FlatBufferMetadataKind.FbsAttribute, "fs_serializer", "0")]
+[CompilerGenerated]
+[DebuggerTypeProxy("BlueBottleIPC.LeagueBroadcast.Commands.StrokeSyncGetCurrent")]
+public class StrokeSyncGetCurrent : IFlatBufferSerializable<StrokeSyncGetCurrent>, IFlatBufferSerializable
+{
+	public static ISerializer<StrokeSyncGetCurrent> Serializer { get; }
+
+	ISerializer IFlatBufferSerializable.Serializer => (ISerializer)((IFlatBufferSerializable<StrokeSyncGetCurrent>)this).Serializer;
+
+	ISerializer<StrokeSyncGetCurrent> IFlatBufferSerializable<StrokeSyncGetCurrent>.Serializer => Serializer;
+
+	private static readonly ISerializer<StrokeSyncGetCurrent> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSyncGetCurrent_003E_002ELazySerializer;
+
+	static ISerializer<StrokeSyncGetCurrent> IFlatBufferSerializable<StrokeSyncGetCurrent>.LazySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSyncGetCurrent_003E_002ELazySerializer;
+
+	private static readonly ISerializer<StrokeSyncGetCurrent> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSyncGetCurrent_003E_002EGreedySerializer;
+
+	static ISerializer<StrokeSyncGetCurrent> IFlatBufferSerializable<StrokeSyncGetCurrent>.GreedySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSyncGetCurrent_003E_002EGreedySerializer;
+
+	private static readonly ISerializer<StrokeSyncGetCurrent> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSyncGetCurrent_003E_002EGreedyMutableSerializer;
+
+	static ISerializer<StrokeSyncGetCurrent> IFlatBufferSerializable<StrokeSyncGetCurrent>.GreedyMutableSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSyncGetCurrent_003E_002EGreedyMutableSerializer;
+
+	private static readonly ISerializer<StrokeSyncGetCurrent> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSyncGetCurrent_003E_002EProgressiveSerializer;
+
+	static ISerializer<StrokeSyncGetCurrent> IFlatBufferSerializable<StrokeSyncGetCurrent>.ProgressiveSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSyncGetCurrent_003E_002EProgressiveSerializer;
+
+	static StrokeSyncGetCurrent()
+	{
+		Serializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSyncGetCurrent_003E_002ELazySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Lazy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSyncGetCurrent_003E_002EGreedySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Greedy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSyncGetCurrent_003E_002EGreedyMutableSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSyncGetCurrent_003E_002EProgressiveSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Progressive);
+	}
+
+	public StrokeSyncGetCurrent()
+	{
+	}
+
+	protected StrokeSyncGetCurrent(FlatBufferDeserializationContext context)
+	{
+	}
+
+	[SetsRequiredMembers]
+	public StrokeSyncGetCurrent(StrokeSyncGetCurrent source)
+	{
+	}
+
+	protected void OnFlatSharpDeserialized(FlatBufferDeserializationContext context)
+	{
+	}
+}

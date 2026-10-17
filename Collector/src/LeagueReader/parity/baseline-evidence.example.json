@@ -1,0 +1,14 @@
+{
+  "description": "Template only. Replace values after a real Windows capture; never include credentials or tokens.",
+  "baselineSha256": "REPLACE_WITH_SHA256_OF_BASELINE_RECORDING",
+  "currentAccountConfirmed": false,
+  "authentication": {
+    "serverLoginConfirmed": false,
+    "nativeSessionAccepted": false
+  },
+  "accountTierUserDeclared": "Free",
+  "entitlementTierIndependentlyVerified": false,
+  "gameVersion": null,
+  "nativeLibrarySha256": null,
+  "captureContext": null
+}

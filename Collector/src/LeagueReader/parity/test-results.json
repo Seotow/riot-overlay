@@ -1,0 +1,8 @@
+{
+  "suite": "parity observed-recording unit tests",
+  "tests": 21,
+  "failures": 0,
+  "errors": 0,
+  "success": true,
+  "scope": "Synthetic unit fixtures only; no real account/game parity established."
+}

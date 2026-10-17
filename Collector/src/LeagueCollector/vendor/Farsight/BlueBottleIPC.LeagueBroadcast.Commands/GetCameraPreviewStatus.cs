@@ -1,0 +1,63 @@
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
+using FlatSharp;
+using FlatSharp.Attributes;
+using FlatSharp.Compiler.Generated.N92D73BC12D366159407DDFD503A2ECAE5D9E8AACF9340585FAC4B22DCD917081;
+
+namespace BlueBottleIPC.LeagueBroadcast.Commands;
+
+[FlatBufferTable(BuildSerializer = true)]
+[FlatBufferMetadata(FlatBufferMetadataKind.FbsAttribute, "fs_serializer", "0")]
+[CompilerGenerated]
+[DebuggerTypeProxy("BlueBottleIPC.LeagueBroadcast.Commands.GetCameraPreviewStatus")]
+public class GetCameraPreviewStatus : IFlatBufferSerializable<GetCameraPreviewStatus>, IFlatBufferSerializable
+{
+	public static ISerializer<GetCameraPreviewStatus> Serializer { get; }
+
+	ISerializer IFlatBufferSerializable.Serializer => (ISerializer)((IFlatBufferSerializable<GetCameraPreviewStatus>)this).Serializer;
+
+	ISerializer<GetCameraPreviewStatus> IFlatBufferSerializable<GetCameraPreviewStatus>.Serializer => Serializer;
+
+	private static readonly ISerializer<GetCameraPreviewStatus> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EGetCameraPreviewStatus_003E_002ELazySerializer;
+
+	static ISerializer<GetCameraPreviewStatus> IFlatBufferSerializable<GetCameraPreviewStatus>.LazySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EGetCameraPreviewStatus_003E_002ELazySerializer;
+
+	private static readonly ISerializer<GetCameraPreviewStatus> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EGetCameraPreviewStatus_003E_002EGreedySerializer;
+
+	static ISerializer<GetCameraPreviewStatus> IFlatBufferSerializable<GetCameraPreviewStatus>.GreedySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EGetCameraPreviewStatus_003E_002EGreedySerializer;
+
+	private static readonly ISerializer<GetCameraPreviewStatus> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EGetCameraPreviewStatus_003E_002EGreedyMutableSerializer;
+
+	static ISerializer<GetCameraPreviewStatus> IFlatBufferSerializable<GetCameraPreviewStatus>.GreedyMutableSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EGetCameraPreviewStatus_003E_002EGreedyMutableSerializer;
+
+	private static readonly ISerializer<GetCameraPreviewStatus> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EGetCameraPreviewStatus_003E_002EProgressiveSerializer;
+
+	static ISerializer<GetCameraPreviewStatus> IFlatBufferSerializable<GetCameraPreviewStatus>.ProgressiveSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EGetCameraPreviewStatus_003E_002EProgressiveSerializer;
+
+	static GetCameraPreviewStatus()
+	{
+		Serializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EGetCameraPreviewStatus_003E_002ELazySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Lazy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EGetCameraPreviewStatus_003E_002EGreedySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Greedy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EGetCameraPreviewStatus_003E_002EGreedyMutableSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EGetCameraPreviewStatus_003E_002EProgressiveSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Progressive);
+	}
+
+	public GetCameraPreviewStatus()
+	{
+	}
+
+	protected GetCameraPreviewStatus(FlatBufferDeserializationContext context)
+	{
+	}
+
+	[SetsRequiredMembers]
+	public GetCameraPreviewStatus(GetCameraPreviewStatus source)
+	{
+	}
+
+	protected void OnFlatSharpDeserialized(FlatBufferDeserializationContext context)
+	{
+	}
+}

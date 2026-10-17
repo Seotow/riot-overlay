@@ -1,0 +1,69 @@
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
+using FlatSharp;
+using FlatSharp.Attributes;
+using FlatSharp.Compiler.Generated;
+using FlatSharp.Compiler.Generated.NAC27B6D1B6B13D062F1010D99BA8F81501E8F149C3236A1956B0968B98090BA1;
+
+namespace BlueBottleIPC.LeagueBroadcast.Commands;
+
+[FlatBufferTable(BuildSerializer = true)]
+[FlatBufferMetadata(FlatBufferMetadataKind.FbsAttribute, "fs_serializer", "0")]
+[CompilerGenerated]
+[DebuggerTypeProxy("BlueBottleIPC.LeagueBroadcast.Commands.DrawingStateAction")]
+public class DrawingStateAction : IFlatBufferSerializable<DrawingStateAction>, IFlatBufferSerializable
+{
+	[FlatBufferItem(0)]
+	public virtual DrawingCommand? Command { get; set; }
+
+	public static ISerializer<DrawingStateAction> Serializer { get; }
+
+	ISerializer IFlatBufferSerializable.Serializer => (ISerializer)((IFlatBufferSerializable<DrawingStateAction>)this).Serializer;
+
+	ISerializer<DrawingStateAction> IFlatBufferSerializable<DrawingStateAction>.Serializer => Serializer;
+
+	private static readonly ISerializer<DrawingStateAction> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EDrawingStateAction_003E_002ELazySerializer;
+
+	static ISerializer<DrawingStateAction> IFlatBufferSerializable<DrawingStateAction>.LazySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EDrawingStateAction_003E_002ELazySerializer;
+
+	private static readonly ISerializer<DrawingStateAction> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EDrawingStateAction_003E_002EGreedySerializer;
+
+	static ISerializer<DrawingStateAction> IFlatBufferSerializable<DrawingStateAction>.GreedySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EDrawingStateAction_003E_002EGreedySerializer;
+
+	private static readonly ISerializer<DrawingStateAction> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EDrawingStateAction_003E_002EGreedyMutableSerializer;
+
+	static ISerializer<DrawingStateAction> IFlatBufferSerializable<DrawingStateAction>.GreedyMutableSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EDrawingStateAction_003E_002EGreedyMutableSerializer;
+
+	private static readonly ISerializer<DrawingStateAction> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EDrawingStateAction_003E_002EProgressiveSerializer;
+
+	static ISerializer<DrawingStateAction> IFlatBufferSerializable<DrawingStateAction>.ProgressiveSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EDrawingStateAction_003E_002EProgressiveSerializer;
+
+	static DrawingStateAction()
+	{
+		Serializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EDrawingStateAction_003E_002ELazySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Lazy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EDrawingStateAction_003E_002EGreedySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Greedy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EDrawingStateAction_003E_002EGreedyMutableSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EDrawingStateAction_003E_002EProgressiveSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Progressive);
+	}
+
+	public DrawingStateAction()
+	{
+		Command = null;
+	}
+
+	protected DrawingStateAction(FlatBufferDeserializationContext context)
+	{
+	}
+
+	[SetsRequiredMembers]
+	public DrawingStateAction(DrawingStateAction source)
+	{
+		Command = CloneHelpers_7c83be20ee504926b8fb188858421982.Clone(source.Command);
+	}
+
+	protected void OnFlatSharpDeserialized(FlatBufferDeserializationContext context)
+	{
+	}
+}

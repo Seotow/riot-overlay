@@ -1,0 +1,63 @@
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
+using FlatSharp;
+using FlatSharp.Attributes;
+using FlatSharp.Compiler.Generated.N49DF7D67528E5F140C70F9D65A8E3CB96FF5343F525000B7F4213FA1ABCD263F;
+
+namespace BlueBottleIPC.LeagueBroadcast.Commands;
+
+[FlatBufferTable(BuildSerializer = true)]
+[FlatBufferMetadata(FlatBufferMetadataKind.FbsAttribute, "fs_serializer", "0")]
+[CompilerGenerated]
+[DebuggerTypeProxy("BlueBottleIPC.LeagueBroadcast.Commands.StrokeRedo")]
+public class StrokeRedo : IFlatBufferSerializable<StrokeRedo>, IFlatBufferSerializable
+{
+	public static ISerializer<StrokeRedo> Serializer { get; }
+
+	ISerializer IFlatBufferSerializable.Serializer => (ISerializer)((IFlatBufferSerializable<StrokeRedo>)this).Serializer;
+
+	ISerializer<StrokeRedo> IFlatBufferSerializable<StrokeRedo>.Serializer => Serializer;
+
+	private static readonly ISerializer<StrokeRedo> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeRedo_003E_002ELazySerializer;
+
+	static ISerializer<StrokeRedo> IFlatBufferSerializable<StrokeRedo>.LazySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeRedo_003E_002ELazySerializer;
+
+	private static readonly ISerializer<StrokeRedo> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeRedo_003E_002EGreedySerializer;
+
+	static ISerializer<StrokeRedo> IFlatBufferSerializable<StrokeRedo>.GreedySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeRedo_003E_002EGreedySerializer;
+
+	private static readonly ISerializer<StrokeRedo> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeRedo_003E_002EGreedyMutableSerializer;
+
+	static ISerializer<StrokeRedo> IFlatBufferSerializable<StrokeRedo>.GreedyMutableSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeRedo_003E_002EGreedyMutableSerializer;
+
+	private static readonly ISerializer<StrokeRedo> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeRedo_003E_002EProgressiveSerializer;
+
+	static ISerializer<StrokeRedo> IFlatBufferSerializable<StrokeRedo>.ProgressiveSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeRedo_003E_002EProgressiveSerializer;
+
+	static StrokeRedo()
+	{
+		Serializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeRedo_003E_002ELazySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Lazy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeRedo_003E_002EGreedySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Greedy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeRedo_003E_002EGreedyMutableSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeRedo_003E_002EProgressiveSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Progressive);
+	}
+
+	public StrokeRedo()
+	{
+	}
+
+	protected StrokeRedo(FlatBufferDeserializationContext context)
+	{
+	}
+
+	[SetsRequiredMembers]
+	public StrokeRedo(StrokeRedo source)
+	{
+	}
+
+	protected void OnFlatSharpDeserialized(FlatBufferDeserializationContext context)
+	{
+	}
+}

@@ -1,0 +1,63 @@
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
+using FlatSharp;
+using FlatSharp.Attributes;
+using FlatSharp.Compiler.Generated.N42F9C72ED78A2086DDE0E40D2EA961063BCBFBD68F4BF038D887A6351FE85AEE;
+
+namespace BlueBottleIPC.LeagueBroadcast.Scene;
+
+[FlatBufferTable(BuildSerializer = true)]
+[FlatBufferMetadata(FlatBufferMetadataKind.FbsAttribute, "fs_serializer", "0")]
+[CompilerGenerated]
+[DebuggerTypeProxy("BlueBottleIPC.LeagueBroadcast.Scene.SceneListRequest")]
+public class SceneListRequest : IFlatBufferSerializable<SceneListRequest>, IFlatBufferSerializable
+{
+	public static ISerializer<SceneListRequest> Serializer { get; }
+
+	ISerializer IFlatBufferSerializable.Serializer => (ISerializer)((IFlatBufferSerializable<SceneListRequest>)this).Serializer;
+
+	ISerializer<SceneListRequest> IFlatBufferSerializable<SceneListRequest>.Serializer => Serializer;
+
+	private static readonly ISerializer<SceneListRequest> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002EScene_002ESceneListRequest_003E_002ELazySerializer;
+
+	static ISerializer<SceneListRequest> IFlatBufferSerializable<SceneListRequest>.LazySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002EScene_002ESceneListRequest_003E_002ELazySerializer;
+
+	private static readonly ISerializer<SceneListRequest> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002EScene_002ESceneListRequest_003E_002EGreedySerializer;
+
+	static ISerializer<SceneListRequest> IFlatBufferSerializable<SceneListRequest>.GreedySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002EScene_002ESceneListRequest_003E_002EGreedySerializer;
+
+	private static readonly ISerializer<SceneListRequest> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002EScene_002ESceneListRequest_003E_002EGreedyMutableSerializer;
+
+	static ISerializer<SceneListRequest> IFlatBufferSerializable<SceneListRequest>.GreedyMutableSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002EScene_002ESceneListRequest_003E_002EGreedyMutableSerializer;
+
+	private static readonly ISerializer<SceneListRequest> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002EScene_002ESceneListRequest_003E_002EProgressiveSerializer;
+
+	static ISerializer<SceneListRequest> IFlatBufferSerializable<SceneListRequest>.ProgressiveSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002EScene_002ESceneListRequest_003E_002EProgressiveSerializer;
+
+	static SceneListRequest()
+	{
+		Serializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002EScene_002ESceneListRequest_003E_002ELazySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Lazy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002EScene_002ESceneListRequest_003E_002EGreedySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Greedy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002EScene_002ESceneListRequest_003E_002EGreedyMutableSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002EScene_002ESceneListRequest_003E_002EProgressiveSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Progressive);
+	}
+
+	public SceneListRequest()
+	{
+	}
+
+	protected SceneListRequest(FlatBufferDeserializationContext context)
+	{
+	}
+
+	[SetsRequiredMembers]
+	public SceneListRequest(SceneListRequest source)
+	{
+	}
+
+	protected void OnFlatSharpDeserialized(FlatBufferDeserializationContext context)
+	{
+	}
+}

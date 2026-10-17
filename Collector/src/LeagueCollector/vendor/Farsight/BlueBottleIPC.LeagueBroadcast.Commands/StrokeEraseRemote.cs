@@ -1,0 +1,69 @@
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
+using FlatSharp;
+using FlatSharp.Attributes;
+using FlatSharp.Compiler.Generated;
+using FlatSharp.Compiler.Generated.N04B2A1B1357643980AAC3189D37CF6540BDE25C78C88F9C0641FEC6C6EE4FBE6;
+
+namespace BlueBottleIPC.LeagueBroadcast.Commands;
+
+[FlatBufferTable(BuildSerializer = true)]
+[FlatBufferMetadata(FlatBufferMetadataKind.FbsAttribute, "fs_serializer", "0")]
+[CompilerGenerated]
+[DebuggerTypeProxy("BlueBottleIPC.LeagueBroadcast.Commands.StrokeEraseRemote")]
+public class StrokeEraseRemote : IFlatBufferSerializable<StrokeEraseRemote>, IFlatBufferSerializable
+{
+	[FlatBufferItem(0, Required = true)]
+	[FlatBufferMetadata(FlatBufferMetadataKind.FbsAttribute, "required", "0")]
+	public virtual required string StrokeId { get; set; }
+
+	public static ISerializer<StrokeEraseRemote> Serializer { get; }
+
+	ISerializer IFlatBufferSerializable.Serializer => (ISerializer)((IFlatBufferSerializable<StrokeEraseRemote>)this).Serializer;
+
+	ISerializer<StrokeEraseRemote> IFlatBufferSerializable<StrokeEraseRemote>.Serializer => Serializer;
+
+	private static readonly ISerializer<StrokeEraseRemote> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeEraseRemote_003E_002ELazySerializer;
+
+	static ISerializer<StrokeEraseRemote> IFlatBufferSerializable<StrokeEraseRemote>.LazySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeEraseRemote_003E_002ELazySerializer;
+
+	private static readonly ISerializer<StrokeEraseRemote> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeEraseRemote_003E_002EGreedySerializer;
+
+	static ISerializer<StrokeEraseRemote> IFlatBufferSerializable<StrokeEraseRemote>.GreedySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeEraseRemote_003E_002EGreedySerializer;
+
+	private static readonly ISerializer<StrokeEraseRemote> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeEraseRemote_003E_002EGreedyMutableSerializer;
+
+	static ISerializer<StrokeEraseRemote> IFlatBufferSerializable<StrokeEraseRemote>.GreedyMutableSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeEraseRemote_003E_002EGreedyMutableSerializer;
+
+	private static readonly ISerializer<StrokeEraseRemote> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeEraseRemote_003E_002EProgressiveSerializer;
+
+	static ISerializer<StrokeEraseRemote> IFlatBufferSerializable<StrokeEraseRemote>.ProgressiveSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeEraseRemote_003E_002EProgressiveSerializer;
+
+	static StrokeEraseRemote()
+	{
+		Serializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeEraseRemote_003E_002ELazySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Lazy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeEraseRemote_003E_002EGreedySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Greedy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeEraseRemote_003E_002EGreedyMutableSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeEraseRemote_003E_002EProgressiveSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Progressive);
+	}
+
+	public StrokeEraseRemote()
+	{
+	}
+
+	protected StrokeEraseRemote(FlatBufferDeserializationContext context)
+	{
+	}
+
+	[SetsRequiredMembers]
+	public StrokeEraseRemote(StrokeEraseRemote source)
+	{
+		StrokeId = CloneHelpers_7c83be20ee504926b8fb188858421982.Clone(source.StrokeId);
+	}
+
+	protected void OnFlatSharpDeserialized(FlatBufferDeserializationContext context)
+	{
+	}
+}

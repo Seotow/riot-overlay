@@ -1,0 +1,70 @@
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
+using BlueBottleIPC.LeagueBroadcast.Common;
+using FlatSharp;
+using FlatSharp.Attributes;
+using FlatSharp.Compiler.Generated;
+using FlatSharp.Compiler.Generated.N00BB20316AB89E2586702560AF0E386DA878C536D8398221A5BACA02FD558198;
+
+namespace BlueBottleIPC.LeagueBroadcast.Commands;
+
+[FlatBufferTable(BuildSerializer = true)]
+[FlatBufferMetadata(FlatBufferMetadataKind.FbsAttribute, "fs_serializer", "0")]
+[CompilerGenerated]
+[DebuggerTypeProxy("BlueBottleIPC.LeagueBroadcast.Commands.SetDirectedCameraTarget")]
+public class SetDirectedCameraTarget : IFlatBufferSerializable<SetDirectedCameraTarget>, IFlatBufferSerializable
+{
+	[FlatBufferItem(0)]
+	public virtual Vector3? Position { get; set; }
+
+	public static ISerializer<SetDirectedCameraTarget> Serializer { get; }
+
+	ISerializer IFlatBufferSerializable.Serializer => (ISerializer)((IFlatBufferSerializable<SetDirectedCameraTarget>)this).Serializer;
+
+	ISerializer<SetDirectedCameraTarget> IFlatBufferSerializable<SetDirectedCameraTarget>.Serializer => Serializer;
+
+	private static readonly ISerializer<SetDirectedCameraTarget> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002ESetDirectedCameraTarget_003E_002ELazySerializer;
+
+	static ISerializer<SetDirectedCameraTarget> IFlatBufferSerializable<SetDirectedCameraTarget>.LazySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002ESetDirectedCameraTarget_003E_002ELazySerializer;
+
+	private static readonly ISerializer<SetDirectedCameraTarget> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002ESetDirectedCameraTarget_003E_002EGreedySerializer;
+
+	static ISerializer<SetDirectedCameraTarget> IFlatBufferSerializable<SetDirectedCameraTarget>.GreedySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002ESetDirectedCameraTarget_003E_002EGreedySerializer;
+
+	private static readonly ISerializer<SetDirectedCameraTarget> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002ESetDirectedCameraTarget_003E_002EGreedyMutableSerializer;
+
+	static ISerializer<SetDirectedCameraTarget> IFlatBufferSerializable<SetDirectedCameraTarget>.GreedyMutableSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002ESetDirectedCameraTarget_003E_002EGreedyMutableSerializer;
+
+	private static readonly ISerializer<SetDirectedCameraTarget> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002ESetDirectedCameraTarget_003E_002EProgressiveSerializer;
+
+	static ISerializer<SetDirectedCameraTarget> IFlatBufferSerializable<SetDirectedCameraTarget>.ProgressiveSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002ESetDirectedCameraTarget_003E_002EProgressiveSerializer;
+
+	static SetDirectedCameraTarget()
+	{
+		Serializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002ESetDirectedCameraTarget_003E_002ELazySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Lazy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002ESetDirectedCameraTarget_003E_002EGreedySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Greedy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002ESetDirectedCameraTarget_003E_002EGreedyMutableSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002ESetDirectedCameraTarget_003E_002EProgressiveSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Progressive);
+	}
+
+	public SetDirectedCameraTarget()
+	{
+		Position = null;
+	}
+
+	protected SetDirectedCameraTarget(FlatBufferDeserializationContext context)
+	{
+	}
+
+	[SetsRequiredMembers]
+	public SetDirectedCameraTarget(SetDirectedCameraTarget source)
+	{
+		Position = CloneHelpers_7c83be20ee504926b8fb188858421982.Clone(source.Position);
+	}
+
+	protected void OnFlatSharpDeserialized(FlatBufferDeserializationContext context)
+	{
+	}
+}

@@ -1,0 +1,69 @@
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
+using FlatSharp;
+using FlatSharp.Attributes;
+using FlatSharp.Compiler.Generated;
+using FlatSharp.Compiler.Generated.NBE85524E84D0BF0341AA710FA3FE3F19CB517C8DDDBFCB2A43E89A0955AC5401;
+
+namespace BlueBottleIPC.LeagueBroadcast.Commands;
+
+[FlatBufferTable(BuildSerializer = true)]
+[FlatBufferMetadata(FlatBufferMetadataKind.FbsAttribute, "fs_serializer", "0")]
+[CompilerGenerated]
+[DebuggerTypeProxy("BlueBottleIPC.LeagueBroadcast.Commands.StreamTextureCloseSession")]
+public class StreamTextureCloseSession : IFlatBufferSerializable<StreamTextureCloseSession>, IFlatBufferSerializable
+{
+	[FlatBufferItem(0)]
+	public virtual AssetIdentifier? Ident { get; set; }
+
+	public static ISerializer<StreamTextureCloseSession> Serializer { get; }
+
+	ISerializer IFlatBufferSerializable.Serializer => (ISerializer)((IFlatBufferSerializable<StreamTextureCloseSession>)this).Serializer;
+
+	ISerializer<StreamTextureCloseSession> IFlatBufferSerializable<StreamTextureCloseSession>.Serializer => Serializer;
+
+	private static readonly ISerializer<StreamTextureCloseSession> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStreamTextureCloseSession_003E_002ELazySerializer;
+
+	static ISerializer<StreamTextureCloseSession> IFlatBufferSerializable<StreamTextureCloseSession>.LazySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStreamTextureCloseSession_003E_002ELazySerializer;
+
+	private static readonly ISerializer<StreamTextureCloseSession> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStreamTextureCloseSession_003E_002EGreedySerializer;
+
+	static ISerializer<StreamTextureCloseSession> IFlatBufferSerializable<StreamTextureCloseSession>.GreedySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStreamTextureCloseSession_003E_002EGreedySerializer;
+
+	private static readonly ISerializer<StreamTextureCloseSession> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStreamTextureCloseSession_003E_002EGreedyMutableSerializer;
+
+	static ISerializer<StreamTextureCloseSession> IFlatBufferSerializable<StreamTextureCloseSession>.GreedyMutableSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStreamTextureCloseSession_003E_002EGreedyMutableSerializer;
+
+	private static readonly ISerializer<StreamTextureCloseSession> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStreamTextureCloseSession_003E_002EProgressiveSerializer;
+
+	static ISerializer<StreamTextureCloseSession> IFlatBufferSerializable<StreamTextureCloseSession>.ProgressiveSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStreamTextureCloseSession_003E_002EProgressiveSerializer;
+
+	static StreamTextureCloseSession()
+	{
+		Serializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStreamTextureCloseSession_003E_002ELazySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Lazy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStreamTextureCloseSession_003E_002EGreedySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Greedy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStreamTextureCloseSession_003E_002EGreedyMutableSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStreamTextureCloseSession_003E_002EProgressiveSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Progressive);
+	}
+
+	public StreamTextureCloseSession()
+	{
+		Ident = null;
+	}
+
+	protected StreamTextureCloseSession(FlatBufferDeserializationContext context)
+	{
+	}
+
+	[SetsRequiredMembers]
+	public StreamTextureCloseSession(StreamTextureCloseSession source)
+	{
+		Ident = CloneHelpers_7c83be20ee504926b8fb188858421982.Clone(source.Ident);
+	}
+
+	protected void OnFlatSharpDeserialized(FlatBufferDeserializationContext context)
+	{
+	}
+}

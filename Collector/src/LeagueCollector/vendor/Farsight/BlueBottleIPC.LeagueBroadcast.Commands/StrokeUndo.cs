@@ -1,0 +1,63 @@
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
+using FlatSharp;
+using FlatSharp.Attributes;
+using FlatSharp.Compiler.Generated.NECB13F3A0DAA1E01364779FE0682C27B2FA94567618DD5B9B845D16CD16AE1A0;
+
+namespace BlueBottleIPC.LeagueBroadcast.Commands;
+
+[FlatBufferTable(BuildSerializer = true)]
+[FlatBufferMetadata(FlatBufferMetadataKind.FbsAttribute, "fs_serializer", "0")]
+[CompilerGenerated]
+[DebuggerTypeProxy("BlueBottleIPC.LeagueBroadcast.Commands.StrokeUndo")]
+public class StrokeUndo : IFlatBufferSerializable<StrokeUndo>, IFlatBufferSerializable
+{
+	public static ISerializer<StrokeUndo> Serializer { get; }
+
+	ISerializer IFlatBufferSerializable.Serializer => (ISerializer)((IFlatBufferSerializable<StrokeUndo>)this).Serializer;
+
+	ISerializer<StrokeUndo> IFlatBufferSerializable<StrokeUndo>.Serializer => Serializer;
+
+	private static readonly ISerializer<StrokeUndo> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeUndo_003E_002ELazySerializer;
+
+	static ISerializer<StrokeUndo> IFlatBufferSerializable<StrokeUndo>.LazySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeUndo_003E_002ELazySerializer;
+
+	private static readonly ISerializer<StrokeUndo> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeUndo_003E_002EGreedySerializer;
+
+	static ISerializer<StrokeUndo> IFlatBufferSerializable<StrokeUndo>.GreedySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeUndo_003E_002EGreedySerializer;
+
+	private static readonly ISerializer<StrokeUndo> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeUndo_003E_002EGreedyMutableSerializer;
+
+	static ISerializer<StrokeUndo> IFlatBufferSerializable<StrokeUndo>.GreedyMutableSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeUndo_003E_002EGreedyMutableSerializer;
+
+	private static readonly ISerializer<StrokeUndo> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeUndo_003E_002EProgressiveSerializer;
+
+	static ISerializer<StrokeUndo> IFlatBufferSerializable<StrokeUndo>.ProgressiveSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeUndo_003E_002EProgressiveSerializer;
+
+	static StrokeUndo()
+	{
+		Serializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeUndo_003E_002ELazySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Lazy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeUndo_003E_002EGreedySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Greedy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeUndo_003E_002EGreedyMutableSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeUndo_003E_002EProgressiveSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Progressive);
+	}
+
+	public StrokeUndo()
+	{
+	}
+
+	protected StrokeUndo(FlatBufferDeserializationContext context)
+	{
+	}
+
+	[SetsRequiredMembers]
+	public StrokeUndo(StrokeUndo source)
+	{
+	}
+
+	protected void OnFlatSharpDeserialized(FlatBufferDeserializationContext context)
+	{
+	}
+}

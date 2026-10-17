@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "project": "LeagueReader independent experiment",
+  "version": "0.1.0",
+  "updatedUtc": "2026-10-14",
+  "goal": "Equivalent data to LB operating with the current user account; Free scope is user-declared, not inferred from subscription404.",
+  "status": "experimental-partial-awaiting-game-evidence",
+  "fullParityEstablished": false,
+  "implementation": {
+    "ownCppCore": true,
+    "ownWindowsX64Dll": true,
+    "ownDotnetHost": true,
+    "blueBottleAuthenticationRequired": false,
+    "originalLibraryLoaded": false,
+    "originalLibraryIncludedInIndependentPackages": false,
+    "processWritesRequired": false,
+    "dllInjectionRequired": false
+  },
+  "reconstruction": {
+    "selectedRecoveredNativeFunctions": 246,
+    "initializerDescriptors": 226,
+    "signatureVariants": 241,
+    "scalarCandidates": 214,
+    "mappedFields": 13,
+    "gameValidatedFields": 0
+  },
+  "mappedFields": [
+    "gameTime",
+    "info.networkId",
+    "info.index",
+    "info.team",
+    "info.position",
+    "common.health",
+    "common.maxHealth",
+    "gold",
+    "totalGold",
+    "experience",
+    "resource",
+    "maxResource",
+    "resourceType"
+  ],
+  "limitations": {
+    "automaticObjectDiscovery": false,
+    "heroRootsFromCallerOnly": true,
+    "fullKdaItemsSpellsBuffsPerks": false,
+    "gameEvents": false,
+    "objectiveKillEventsAndTimers": false,
+    "windowsDllExecutionTested": false,
+    "gameRuntimeTested": false,
+    "authenticatedFreeTierBaselineVerified": false
+  },
+  "availableEvidence": {
+    "nativeBuild": "native/build/windows-build.json",
+    "nativeTests": "native/tests/verification.json",
+    "hostBuild": "host/dist/build.json",
+    "hostTests": "host/tests/verification.json",
+    "resolverTests": "profiles/test-results.json",
+    "parityTests": "parity/test-results.json",
+    "parityStatus": "parity/current-status.json",
+    "catalog": "profiles/profile-catalog.json"
+  },
+  "blockingInputs": [
+    "Actual matching game executable or bounded engine-function code windows for object traversal reconstruction.",
+    "Windows game-memory/runtime results; no live game process exists in this cloud.",
+    "Authenticated LB native recording for the current account and independent recording in the same game/time window."
+  ],
+  "claimBoundary": "Fixture/PE unit tests and cross-build are evidence of the implementation pipeline only; they do not establish real-game field correctness or account parity."
+}

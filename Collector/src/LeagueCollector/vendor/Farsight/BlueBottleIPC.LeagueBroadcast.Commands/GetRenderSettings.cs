@@ -1,0 +1,63 @@
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
+using FlatSharp;
+using FlatSharp.Attributes;
+using FlatSharp.Compiler.Generated.N9D4290821BBC6B0F4FE203DF905D344D2BA7F39B6193DF45BA00487C1EEE25EA;
+
+namespace BlueBottleIPC.LeagueBroadcast.Commands;
+
+[FlatBufferTable(BuildSerializer = true)]
+[FlatBufferMetadata(FlatBufferMetadataKind.FbsAttribute, "fs_serializer", "0")]
+[CompilerGenerated]
+[DebuggerTypeProxy("BlueBottleIPC.LeagueBroadcast.Commands.GetRenderSettings")]
+public class GetRenderSettings : IFlatBufferSerializable<GetRenderSettings>, IFlatBufferSerializable
+{
+	public static ISerializer<GetRenderSettings> Serializer { get; }
+
+	ISerializer IFlatBufferSerializable.Serializer => (ISerializer)((IFlatBufferSerializable<GetRenderSettings>)this).Serializer;
+
+	ISerializer<GetRenderSettings> IFlatBufferSerializable<GetRenderSettings>.Serializer => Serializer;
+
+	private static readonly ISerializer<GetRenderSettings> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EGetRenderSettings_003E_002ELazySerializer;
+
+	static ISerializer<GetRenderSettings> IFlatBufferSerializable<GetRenderSettings>.LazySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EGetRenderSettings_003E_002ELazySerializer;
+
+	private static readonly ISerializer<GetRenderSettings> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EGetRenderSettings_003E_002EGreedySerializer;
+
+	static ISerializer<GetRenderSettings> IFlatBufferSerializable<GetRenderSettings>.GreedySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EGetRenderSettings_003E_002EGreedySerializer;
+
+	private static readonly ISerializer<GetRenderSettings> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EGetRenderSettings_003E_002EGreedyMutableSerializer;
+
+	static ISerializer<GetRenderSettings> IFlatBufferSerializable<GetRenderSettings>.GreedyMutableSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EGetRenderSettings_003E_002EGreedyMutableSerializer;
+
+	private static readonly ISerializer<GetRenderSettings> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EGetRenderSettings_003E_002EProgressiveSerializer;
+
+	static ISerializer<GetRenderSettings> IFlatBufferSerializable<GetRenderSettings>.ProgressiveSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EGetRenderSettings_003E_002EProgressiveSerializer;
+
+	static GetRenderSettings()
+	{
+		Serializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EGetRenderSettings_003E_002ELazySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Lazy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EGetRenderSettings_003E_002EGreedySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Greedy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EGetRenderSettings_003E_002EGreedyMutableSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EGetRenderSettings_003E_002EProgressiveSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Progressive);
+	}
+
+	public GetRenderSettings()
+	{
+	}
+
+	protected GetRenderSettings(FlatBufferDeserializationContext context)
+	{
+	}
+
+	[SetsRequiredMembers]
+	public GetRenderSettings(GetRenderSettings source)
+	{
+	}
+
+	protected void OnFlatSharpDeserialized(FlatBufferDeserializationContext context)
+	{
+	}
+}

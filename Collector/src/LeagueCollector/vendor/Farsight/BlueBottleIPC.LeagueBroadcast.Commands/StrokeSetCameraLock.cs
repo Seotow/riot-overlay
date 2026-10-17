@@ -1,0 +1,69 @@
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
+using FlatSharp;
+using FlatSharp.Attributes;
+using FlatSharp.Compiler.Generated;
+using FlatSharp.Compiler.Generated.N26F5B7244C1C5F6E5BACECE0211C908523B81887BFC89F546FCB2A8DA09D7C44;
+
+namespace BlueBottleIPC.LeagueBroadcast.Commands;
+
+[FlatBufferTable(BuildSerializer = true)]
+[FlatBufferMetadata(FlatBufferMetadataKind.FbsAttribute, "fs_serializer", "0")]
+[CompilerGenerated]
+[DebuggerTypeProxy("BlueBottleIPC.LeagueBroadcast.Commands.StrokeSetCameraLock")]
+public class StrokeSetCameraLock : IFlatBufferSerializable<StrokeSetCameraLock>, IFlatBufferSerializable
+{
+	[FlatBufferItem(0)]
+	public virtual uint NetworkId { get; set; }
+
+	public static ISerializer<StrokeSetCameraLock> Serializer { get; }
+
+	ISerializer IFlatBufferSerializable.Serializer => (ISerializer)((IFlatBufferSerializable<StrokeSetCameraLock>)this).Serializer;
+
+	ISerializer<StrokeSetCameraLock> IFlatBufferSerializable<StrokeSetCameraLock>.Serializer => Serializer;
+
+	private static readonly ISerializer<StrokeSetCameraLock> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSetCameraLock_003E_002ELazySerializer;
+
+	static ISerializer<StrokeSetCameraLock> IFlatBufferSerializable<StrokeSetCameraLock>.LazySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSetCameraLock_003E_002ELazySerializer;
+
+	private static readonly ISerializer<StrokeSetCameraLock> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSetCameraLock_003E_002EGreedySerializer;
+
+	static ISerializer<StrokeSetCameraLock> IFlatBufferSerializable<StrokeSetCameraLock>.GreedySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSetCameraLock_003E_002EGreedySerializer;
+
+	private static readonly ISerializer<StrokeSetCameraLock> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSetCameraLock_003E_002EGreedyMutableSerializer;
+
+	static ISerializer<StrokeSetCameraLock> IFlatBufferSerializable<StrokeSetCameraLock>.GreedyMutableSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSetCameraLock_003E_002EGreedyMutableSerializer;
+
+	private static readonly ISerializer<StrokeSetCameraLock> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSetCameraLock_003E_002EProgressiveSerializer;
+
+	static ISerializer<StrokeSetCameraLock> IFlatBufferSerializable<StrokeSetCameraLock>.ProgressiveSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSetCameraLock_003E_002EProgressiveSerializer;
+
+	static StrokeSetCameraLock()
+	{
+		Serializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSetCameraLock_003E_002ELazySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Lazy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSetCameraLock_003E_002EGreedySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Greedy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSetCameraLock_003E_002EGreedyMutableSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSetCameraLock_003E_002EProgressiveSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Progressive);
+	}
+
+	public StrokeSetCameraLock()
+	{
+		NetworkId = 0u;
+	}
+
+	protected StrokeSetCameraLock(FlatBufferDeserializationContext context)
+	{
+	}
+
+	[SetsRequiredMembers]
+	public StrokeSetCameraLock(StrokeSetCameraLock source)
+	{
+		NetworkId = CloneHelpers_7c83be20ee504926b8fb188858421982.Clone(source.NetworkId);
+	}
+
+	protected void OnFlatSharpDeserialized(FlatBufferDeserializationContext context)
+	{
+	}
+}

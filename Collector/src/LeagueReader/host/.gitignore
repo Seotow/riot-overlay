@@ -1,0 +1,5 @@
+/dist/
+/build-logs/
+/tests/__pycache__/
+/src/bin/
+/src/obj/

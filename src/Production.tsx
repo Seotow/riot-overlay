@@ -119,9 +119,18 @@ export function MatchConfig({
             <label>
               Tên đội
               <Input
-                maxLength={30}
+                maxLength={5}
                 value={draft[`${side}Name`]}
                 onChange={(e) => patch({ [`${side}Name`]: e.target.value })}
+              />
+            </label>
+            <label>
+              Mô tả / thứ hạng
+              <Input
+                maxLength={40}
+                placeholder="VD: LCK #1"
+                value={draft[`${side}Description`] ?? ""}
+                onChange={(e) => patch({ [`${side}Description`]: e.target.value })}
               />
             </label>
             <label>

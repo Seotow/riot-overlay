@@ -1,0 +1,74 @@
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
+using FlatSharp;
+using FlatSharp.Attributes;
+using FlatSharp.Compiler.Generated;
+using FlatSharp.Compiler.Generated.NBF15E9E76450B9068AEDC26E1E7D702F95BF8A5FBB9030539AE4F58B00FD3CB2;
+
+namespace BlueBottleIPC.LeagueBroadcast.Common;
+
+[FlatBufferTable(BuildSerializer = true)]
+[FlatBufferMetadata(FlatBufferMetadataKind.FbsAttribute, "fs_serializer", "0")]
+[CompilerGenerated]
+[DebuggerTypeProxy("BlueBottleIPC.LeagueBroadcast.Common.ScriptVariableEnumOption")]
+public class ScriptVariableEnumOption : IFlatBufferSerializable<ScriptVariableEnumOption>, IFlatBufferSerializable
+{
+	[FlatBufferItem(0, Required = true)]
+	[FlatBufferMetadata(FlatBufferMetadataKind.FbsAttribute, "required", "0")]
+	public virtual required string Name { get; set; }
+
+	[FlatBufferItem(1)]
+	public virtual long Value { get; set; }
+
+	public static ISerializer<ScriptVariableEnumOption> Serializer { get; }
+
+	ISerializer IFlatBufferSerializable.Serializer => (ISerializer)((IFlatBufferSerializable<ScriptVariableEnumOption>)this).Serializer;
+
+	ISerializer<ScriptVariableEnumOption> IFlatBufferSerializable<ScriptVariableEnumOption>.Serializer => Serializer;
+
+	private static readonly ISerializer<ScriptVariableEnumOption> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommon_002EScriptVariableEnumOption_003E_002ELazySerializer;
+
+	static ISerializer<ScriptVariableEnumOption> IFlatBufferSerializable<ScriptVariableEnumOption>.LazySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommon_002EScriptVariableEnumOption_003E_002ELazySerializer;
+
+	private static readonly ISerializer<ScriptVariableEnumOption> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommon_002EScriptVariableEnumOption_003E_002EGreedySerializer;
+
+	static ISerializer<ScriptVariableEnumOption> IFlatBufferSerializable<ScriptVariableEnumOption>.GreedySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommon_002EScriptVariableEnumOption_003E_002EGreedySerializer;
+
+	private static readonly ISerializer<ScriptVariableEnumOption> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommon_002EScriptVariableEnumOption_003E_002EGreedyMutableSerializer;
+
+	static ISerializer<ScriptVariableEnumOption> IFlatBufferSerializable<ScriptVariableEnumOption>.GreedyMutableSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommon_002EScriptVariableEnumOption_003E_002EGreedyMutableSerializer;
+
+	private static readonly ISerializer<ScriptVariableEnumOption> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommon_002EScriptVariableEnumOption_003E_002EProgressiveSerializer;
+
+	static ISerializer<ScriptVariableEnumOption> IFlatBufferSerializable<ScriptVariableEnumOption>.ProgressiveSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommon_002EScriptVariableEnumOption_003E_002EProgressiveSerializer;
+
+	static ScriptVariableEnumOption()
+	{
+		Serializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommon_002EScriptVariableEnumOption_003E_002ELazySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Lazy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommon_002EScriptVariableEnumOption_003E_002EGreedySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Greedy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommon_002EScriptVariableEnumOption_003E_002EGreedyMutableSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommon_002EScriptVariableEnumOption_003E_002EProgressiveSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Progressive);
+	}
+
+	public ScriptVariableEnumOption()
+	{
+		Value = 0L;
+	}
+
+	protected ScriptVariableEnumOption(FlatBufferDeserializationContext context)
+	{
+	}
+
+	[SetsRequiredMembers]
+	public ScriptVariableEnumOption(ScriptVariableEnumOption source)
+	{
+		Name = CloneHelpers_7c83be20ee504926b8fb188858421982.Clone(source.Name);
+		Value = CloneHelpers_7c83be20ee504926b8fb188858421982.Clone(source.Value);
+	}
+
+	protected void OnFlatSharpDeserialized(FlatBufferDeserializationContext context)
+	{
+	}
+}

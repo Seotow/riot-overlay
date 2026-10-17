@@ -17,8 +17,6 @@ Collector/runtime/*
 !Collector/runtime/accountless-environment.ts
 Collector/config/collector.env
 Collector/evidence/
-Collector/src/LeagueCollector/
-Collector/src/LeagueReader/
 Collector/**/bin/
 Collector/**/obj/
 Collector/**/__pycache__/

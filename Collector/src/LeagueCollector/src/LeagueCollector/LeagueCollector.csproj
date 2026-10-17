@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <PlatformTarget>x64</PlatformTarget>
+    <AssemblyName>LeagueCollector</AssemblyName>
+    <UseAppHost>false</UseAppHost>
+    <EnableDefaultContentItems>false</EnableDefaultContentItems>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../vendor/Farsight/Farsight.csproj" />
+    <Reference Include="FlatSharp.Runtime"><HintPath>../../lib/FlatSharp.Runtime.dll</HintPath></Reference>
+    <Reference Include="AWSSDK.Core"><HintPath>../../lib/AWSSDK.Core.dll</HintPath></Reference>
+    <Reference Include="AWSSDK.CognitoIdentityProvider"><HintPath>../../lib/AWSSDK.CognitoIdentityProvider.dll</HintPath></Reference>
+    <Reference Include="AWSSDK.CognitoIdentity"><HintPath>../../lib/AWSSDK.CognitoIdentity.dll</HintPath></Reference>
+    <Reference Include="AWSSDK.SecurityToken"><HintPath>../../lib/AWSSDK.SecurityToken.dll</HintPath></Reference>
+    <Reference Include="AWSSDK.S3"><HintPath>../../lib/AWSSDK.S3.dll</HintPath></Reference>
+    <Reference Include="AwsSignatureVersion4"><HintPath>../../lib/AwsSignatureVersion4.dll</HintPath></Reference>
+    <Reference Include="System.Security.Cryptography.ProtectedData"><HintPath>../../lib/System.Security.Cryptography.ProtectedData.dll</HintPath></Reference>
+    <Content Include="wwwroot/**" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <Content Include="../../native/lblib.dll" Link="lblib.dll" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <Content Include="../../native/lblib.dll.version.json" Link="lblib.dll.version.json" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>

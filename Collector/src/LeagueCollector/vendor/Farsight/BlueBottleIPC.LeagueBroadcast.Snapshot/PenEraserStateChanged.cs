@@ -1,0 +1,74 @@
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
+using FlatSharp;
+using FlatSharp.Attributes;
+using FlatSharp.Compiler.Generated;
+using FlatSharp.Compiler.Generated.N61FACEEA95AF19E1C146330D0DCEBFA6C8D3DB25E3F0EFB85A8A4EA8C426D943;
+
+namespace BlueBottleIPC.LeagueBroadcast.Snapshot;
+
+[FlatBufferTable(BuildSerializer = true)]
+[FlatBufferMetadata(FlatBufferMetadataKind.FbsAttribute, "fs_serializer", "0")]
+[CompilerGenerated]
+[DebuggerTypeProxy("BlueBottleIPC.LeagueBroadcast.Snapshot.PenEraserStateChanged")]
+public class PenEraserStateChanged : IFlatBufferSerializable<PenEraserStateChanged>, IFlatBufferSerializable
+{
+	[FlatBufferItem(0)]
+	public virtual bool Hovering { get; set; }
+
+	[FlatBufferItem(1)]
+	public virtual bool InContact { get; set; }
+
+	public static ISerializer<PenEraserStateChanged> Serializer { get; }
+
+	ISerializer IFlatBufferSerializable.Serializer => (ISerializer)((IFlatBufferSerializable<PenEraserStateChanged>)this).Serializer;
+
+	ISerializer<PenEraserStateChanged> IFlatBufferSerializable<PenEraserStateChanged>.Serializer => Serializer;
+
+	private static readonly ISerializer<PenEraserStateChanged> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ESnapshot_002EPenEraserStateChanged_003E_002ELazySerializer;
+
+	static ISerializer<PenEraserStateChanged> IFlatBufferSerializable<PenEraserStateChanged>.LazySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ESnapshot_002EPenEraserStateChanged_003E_002ELazySerializer;
+
+	private static readonly ISerializer<PenEraserStateChanged> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ESnapshot_002EPenEraserStateChanged_003E_002EGreedySerializer;
+
+	static ISerializer<PenEraserStateChanged> IFlatBufferSerializable<PenEraserStateChanged>.GreedySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ESnapshot_002EPenEraserStateChanged_003E_002EGreedySerializer;
+
+	private static readonly ISerializer<PenEraserStateChanged> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ESnapshot_002EPenEraserStateChanged_003E_002EGreedyMutableSerializer;
+
+	static ISerializer<PenEraserStateChanged> IFlatBufferSerializable<PenEraserStateChanged>.GreedyMutableSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ESnapshot_002EPenEraserStateChanged_003E_002EGreedyMutableSerializer;
+
+	private static readonly ISerializer<PenEraserStateChanged> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ESnapshot_002EPenEraserStateChanged_003E_002EProgressiveSerializer;
+
+	static ISerializer<PenEraserStateChanged> IFlatBufferSerializable<PenEraserStateChanged>.ProgressiveSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ESnapshot_002EPenEraserStateChanged_003E_002EProgressiveSerializer;
+
+	static PenEraserStateChanged()
+	{
+		Serializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ESnapshot_002EPenEraserStateChanged_003E_002ELazySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Lazy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ESnapshot_002EPenEraserStateChanged_003E_002EGreedySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Greedy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ESnapshot_002EPenEraserStateChanged_003E_002EGreedyMutableSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ESnapshot_002EPenEraserStateChanged_003E_002EProgressiveSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Progressive);
+	}
+
+	public PenEraserStateChanged()
+	{
+		Hovering = false;
+		InContact = false;
+	}
+
+	protected PenEraserStateChanged(FlatBufferDeserializationContext context)
+	{
+	}
+
+	[SetsRequiredMembers]
+	public PenEraserStateChanged(PenEraserStateChanged source)
+	{
+		Hovering = CloneHelpers_7c83be20ee504926b8fb188858421982.Clone(source.Hovering);
+		InContact = CloneHelpers_7c83be20ee504926b8fb188858421982.Clone(source.InContact);
+	}
+
+	protected void OnFlatSharpDeserialized(FlatBufferDeserializationContext context)
+	{
+	}
+}

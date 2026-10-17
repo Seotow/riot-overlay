@@ -1,0 +1,69 @@
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
+using FlatSharp;
+using FlatSharp.Attributes;
+using FlatSharp.Compiler.Generated;
+using FlatSharp.Compiler.Generated.N3FAC0DE37C40A7BF0E0E1FD7E6147977E3E4D6D448C3C34734CF79F750495E0B;
+
+namespace BlueBottleIPC.LeagueBroadcast.Scene;
+
+[FlatBufferTable(BuildSerializer = true)]
+[FlatBufferMetadata(FlatBufferMetadataKind.FbsAttribute, "fs_serializer", "0")]
+[CompilerGenerated]
+[DebuggerTypeProxy("BlueBottleIPC.LeagueBroadcast.Scene.ScriptListRequest")]
+public class ScriptListRequest : IFlatBufferSerializable<ScriptListRequest>, IFlatBufferSerializable
+{
+	[FlatBufferItem(0)]
+	public virtual uint SceneId { get; set; }
+
+	public static ISerializer<ScriptListRequest> Serializer { get; }
+
+	ISerializer IFlatBufferSerializable.Serializer => (ISerializer)((IFlatBufferSerializable<ScriptListRequest>)this).Serializer;
+
+	ISerializer<ScriptListRequest> IFlatBufferSerializable<ScriptListRequest>.Serializer => Serializer;
+
+	private static readonly ISerializer<ScriptListRequest> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002EScene_002EScriptListRequest_003E_002ELazySerializer;
+
+	static ISerializer<ScriptListRequest> IFlatBufferSerializable<ScriptListRequest>.LazySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002EScene_002EScriptListRequest_003E_002ELazySerializer;
+
+	private static readonly ISerializer<ScriptListRequest> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002EScene_002EScriptListRequest_003E_002EGreedySerializer;
+
+	static ISerializer<ScriptListRequest> IFlatBufferSerializable<ScriptListRequest>.GreedySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002EScene_002EScriptListRequest_003E_002EGreedySerializer;
+
+	private static readonly ISerializer<ScriptListRequest> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002EScene_002EScriptListRequest_003E_002EGreedyMutableSerializer;
+
+	static ISerializer<ScriptListRequest> IFlatBufferSerializable<ScriptListRequest>.GreedyMutableSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002EScene_002EScriptListRequest_003E_002EGreedyMutableSerializer;
+
+	private static readonly ISerializer<ScriptListRequest> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002EScene_002EScriptListRequest_003E_002EProgressiveSerializer;
+
+	static ISerializer<ScriptListRequest> IFlatBufferSerializable<ScriptListRequest>.ProgressiveSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002EScene_002EScriptListRequest_003E_002EProgressiveSerializer;
+
+	static ScriptListRequest()
+	{
+		Serializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002EScene_002EScriptListRequest_003E_002ELazySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Lazy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002EScene_002EScriptListRequest_003E_002EGreedySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Greedy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002EScene_002EScriptListRequest_003E_002EGreedyMutableSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002EScene_002EScriptListRequest_003E_002EProgressiveSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Progressive);
+	}
+
+	public ScriptListRequest()
+	{
+		SceneId = 0u;
+	}
+
+	protected ScriptListRequest(FlatBufferDeserializationContext context)
+	{
+	}
+
+	[SetsRequiredMembers]
+	public ScriptListRequest(ScriptListRequest source)
+	{
+		SceneId = CloneHelpers_7c83be20ee504926b8fb188858421982.Clone(source.SceneId);
+	}
+
+	protected void OnFlatSharpDeserialized(FlatBufferDeserializationContext context)
+	{
+	}
+}

@@ -1,0 +1,70 @@
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
+using FlatSharp;
+using FlatSharp.Attributes;
+using FlatSharp.Compiler.Generated;
+using FlatSharp.Compiler.Generated.N0230832F4125DAE6E19C2DEDF8E65E3295549D2BC6C8D6DCA58269DD99C50734;
+
+namespace BlueBottleIPC.LeagueBroadcast.Scene;
+
+[FlatBufferTable(BuildSerializer = true)]
+[FlatBufferMetadata(FlatBufferMetadataKind.FbsAttribute, "fs_serializer", "0")]
+[CompilerGenerated]
+[DebuggerTypeProxy("BlueBottleIPC.LeagueBroadcast.Scene.SetComponentBatch")]
+public class SetComponentBatch : IFlatBufferSerializable<SetComponentBatch>, IFlatBufferSerializable
+{
+	[FlatBufferItem(0)]
+	public virtual IList<SetComponent>? Items { get; set; }
+
+	public static ISerializer<SetComponentBatch> Serializer { get; }
+
+	ISerializer IFlatBufferSerializable.Serializer => (ISerializer)((IFlatBufferSerializable<SetComponentBatch>)this).Serializer;
+
+	ISerializer<SetComponentBatch> IFlatBufferSerializable<SetComponentBatch>.Serializer => Serializer;
+
+	private static readonly ISerializer<SetComponentBatch> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002EScene_002ESetComponentBatch_003E_002ELazySerializer;
+
+	static ISerializer<SetComponentBatch> IFlatBufferSerializable<SetComponentBatch>.LazySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002EScene_002ESetComponentBatch_003E_002ELazySerializer;
+
+	private static readonly ISerializer<SetComponentBatch> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002EScene_002ESetComponentBatch_003E_002EGreedySerializer;
+
+	static ISerializer<SetComponentBatch> IFlatBufferSerializable<SetComponentBatch>.GreedySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002EScene_002ESetComponentBatch_003E_002EGreedySerializer;
+
+	private static readonly ISerializer<SetComponentBatch> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002EScene_002ESetComponentBatch_003E_002EGreedyMutableSerializer;
+
+	static ISerializer<SetComponentBatch> IFlatBufferSerializable<SetComponentBatch>.GreedyMutableSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002EScene_002ESetComponentBatch_003E_002EGreedyMutableSerializer;
+
+	private static readonly ISerializer<SetComponentBatch> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002EScene_002ESetComponentBatch_003E_002EProgressiveSerializer;
+
+	static ISerializer<SetComponentBatch> IFlatBufferSerializable<SetComponentBatch>.ProgressiveSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002EScene_002ESetComponentBatch_003E_002EProgressiveSerializer;
+
+	static SetComponentBatch()
+	{
+		Serializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002EScene_002ESetComponentBatch_003E_002ELazySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Lazy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002EScene_002ESetComponentBatch_003E_002EGreedySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Greedy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002EScene_002ESetComponentBatch_003E_002EGreedyMutableSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002EScene_002ESetComponentBatch_003E_002EProgressiveSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Progressive);
+	}
+
+	public SetComponentBatch()
+	{
+		Items = null;
+	}
+
+	protected SetComponentBatch(FlatBufferDeserializationContext context)
+	{
+	}
+
+	[SetsRequiredMembers]
+	public SetComponentBatch(SetComponentBatch source)
+	{
+		Items = CloneHelpers_7c83be20ee504926b8fb188858421982.Clone(source.Items);
+	}
+
+	protected void OnFlatSharpDeserialized(FlatBufferDeserializationContext context)
+	{
+	}
+}

@@ -14,6 +14,8 @@ export function swapTeamSides(theme: Theme): Theme {
     ...theme,
     blueName: theme.redName,
     redName: theme.blueName,
+    blueDescription: theme.redDescription,
+    redDescription: theme.blueDescription,
     blueLogo: theme.redLogo,
     redLogo: theme.blueLogo,
     blueScore: theme.redScore,

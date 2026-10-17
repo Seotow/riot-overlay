@@ -1,0 +1,18 @@
+{
+  "checks": {
+    "LeagueReader-independent-source.zip": {
+      "files": 585,
+      "manifestHashesPassed": true,
+      "originalLibraryAbsent": true,
+      "extractedCatalogRebuildIdentical": true,
+      "extractedResolverAndAbiTestsPassed": 14
+    },
+    "LeagueReader-independent-Windows-x64.zip": {
+      "files": 375,
+      "manifestHashesPassed": true,
+      "originalLibraryAbsent": true
+    }
+  },
+  "gameRuntimeTested": false,
+  "fullParityEstablished": false
+}

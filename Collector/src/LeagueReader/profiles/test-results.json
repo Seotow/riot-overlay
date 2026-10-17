@@ -1,0 +1,9 @@
+{
+  "suite": "offline profile resolver and native ABI integration",
+  "tests": 14,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "success": true,
+  "scope": "Invented PE and sparse-memory fixtures; no real game/account parity."
+}

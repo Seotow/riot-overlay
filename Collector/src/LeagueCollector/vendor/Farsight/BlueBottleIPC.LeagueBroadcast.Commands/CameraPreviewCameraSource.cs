@@ -1,0 +1,74 @@
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
+using FlatSharp;
+using FlatSharp.Attributes;
+using FlatSharp.Compiler.Generated;
+using FlatSharp.Compiler.Generated.N49BE983C75BF1E7FAEBEFFEC995036CA8AAFCF41905FC19546BC0DC8901520B1;
+
+namespace BlueBottleIPC.LeagueBroadcast.Commands;
+
+[FlatBufferTable(BuildSerializer = true)]
+[FlatBufferMetadata(FlatBufferMetadataKind.FbsAttribute, "fs_serializer", "0")]
+[CompilerGenerated]
+[DebuggerTypeProxy("BlueBottleIPC.LeagueBroadcast.Commands.CameraPreviewCameraSource")]
+public class CameraPreviewCameraSource : IFlatBufferSerializable<CameraPreviewCameraSource>, IFlatBufferSerializable
+{
+	[FlatBufferItem(0)]
+	public virtual CameraPreviewCameraSourceKind Kind { get; set; }
+
+	[FlatBufferItem(1)]
+	public virtual string? CameraId { get; set; }
+
+	public static ISerializer<CameraPreviewCameraSource> Serializer { get; }
+
+	ISerializer IFlatBufferSerializable.Serializer => (ISerializer)((IFlatBufferSerializable<CameraPreviewCameraSource>)this).Serializer;
+
+	ISerializer<CameraPreviewCameraSource> IFlatBufferSerializable<CameraPreviewCameraSource>.Serializer => Serializer;
+
+	private static readonly ISerializer<CameraPreviewCameraSource> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002ECameraPreviewCameraSource_003E_002ELazySerializer;
+
+	static ISerializer<CameraPreviewCameraSource> IFlatBufferSerializable<CameraPreviewCameraSource>.LazySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002ECameraPreviewCameraSource_003E_002ELazySerializer;
+
+	private static readonly ISerializer<CameraPreviewCameraSource> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002ECameraPreviewCameraSource_003E_002EGreedySerializer;
+
+	static ISerializer<CameraPreviewCameraSource> IFlatBufferSerializable<CameraPreviewCameraSource>.GreedySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002ECameraPreviewCameraSource_003E_002EGreedySerializer;
+
+	private static readonly ISerializer<CameraPreviewCameraSource> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002ECameraPreviewCameraSource_003E_002EGreedyMutableSerializer;
+
+	static ISerializer<CameraPreviewCameraSource> IFlatBufferSerializable<CameraPreviewCameraSource>.GreedyMutableSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002ECameraPreviewCameraSource_003E_002EGreedyMutableSerializer;
+
+	private static readonly ISerializer<CameraPreviewCameraSource> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002ECameraPreviewCameraSource_003E_002EProgressiveSerializer;
+
+	static ISerializer<CameraPreviewCameraSource> IFlatBufferSerializable<CameraPreviewCameraSource>.ProgressiveSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002ECameraPreviewCameraSource_003E_002EProgressiveSerializer;
+
+	static CameraPreviewCameraSource()
+	{
+		Serializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002ECameraPreviewCameraSource_003E_002ELazySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Lazy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002ECameraPreviewCameraSource_003E_002EGreedySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Greedy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002ECameraPreviewCameraSource_003E_002EGreedyMutableSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002ECameraPreviewCameraSource_003E_002EProgressiveSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Progressive);
+	}
+
+	public CameraPreviewCameraSource()
+	{
+		Kind = CameraPreviewCameraSourceKind.Primary;
+		CameraId = null;
+	}
+
+	protected CameraPreviewCameraSource(FlatBufferDeserializationContext context)
+	{
+	}
+
+	[SetsRequiredMembers]
+	public CameraPreviewCameraSource(CameraPreviewCameraSource source)
+	{
+		Kind = CloneHelpers_7c83be20ee504926b8fb188858421982.Clone(source.Kind);
+		CameraId = CloneHelpers_7c83be20ee504926b8fb188858421982.Clone(source.CameraId);
+	}
+
+	protected void OnFlatSharpDeserialized(FlatBufferDeserializationContext context)
+	{
+	}
+}

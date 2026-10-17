@@ -1,0 +1,70 @@
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
+using FlatSharp;
+using FlatSharp.Attributes;
+using FlatSharp.Compiler.Generated;
+using FlatSharp.Compiler.Generated.NE530B66FB68DC3051712B81F48F8086BE8AD02AC4861356F318A7F912955FB91;
+
+namespace BlueBottleIPC.LeagueBroadcast.Commands;
+
+[FlatBufferTable(BuildSerializer = true)]
+[FlatBufferMetadata(FlatBufferMetadataKind.FbsAttribute, "fs_serializer", "0")]
+[CompilerGenerated]
+[DebuggerTypeProxy("BlueBottleIPC.LeagueBroadcast.Commands.AssetCreateBatchResult")]
+public class AssetCreateBatchResult : IFlatBufferSerializable<AssetCreateBatchResult>, IFlatBufferSerializable
+{
+	[FlatBufferItem(0)]
+	public virtual IList<bool>? Success { get; set; }
+
+	public static ISerializer<AssetCreateBatchResult> Serializer { get; }
+
+	ISerializer IFlatBufferSerializable.Serializer => (ISerializer)((IFlatBufferSerializable<AssetCreateBatchResult>)this).Serializer;
+
+	ISerializer<AssetCreateBatchResult> IFlatBufferSerializable<AssetCreateBatchResult>.Serializer => Serializer;
+
+	private static readonly ISerializer<AssetCreateBatchResult> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EAssetCreateBatchResult_003E_002ELazySerializer;
+
+	static ISerializer<AssetCreateBatchResult> IFlatBufferSerializable<AssetCreateBatchResult>.LazySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EAssetCreateBatchResult_003E_002ELazySerializer;
+
+	private static readonly ISerializer<AssetCreateBatchResult> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EAssetCreateBatchResult_003E_002EGreedySerializer;
+
+	static ISerializer<AssetCreateBatchResult> IFlatBufferSerializable<AssetCreateBatchResult>.GreedySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EAssetCreateBatchResult_003E_002EGreedySerializer;
+
+	private static readonly ISerializer<AssetCreateBatchResult> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EAssetCreateBatchResult_003E_002EGreedyMutableSerializer;
+
+	static ISerializer<AssetCreateBatchResult> IFlatBufferSerializable<AssetCreateBatchResult>.GreedyMutableSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EAssetCreateBatchResult_003E_002EGreedyMutableSerializer;
+
+	private static readonly ISerializer<AssetCreateBatchResult> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EAssetCreateBatchResult_003E_002EProgressiveSerializer;
+
+	static ISerializer<AssetCreateBatchResult> IFlatBufferSerializable<AssetCreateBatchResult>.ProgressiveSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EAssetCreateBatchResult_003E_002EProgressiveSerializer;
+
+	static AssetCreateBatchResult()
+	{
+		Serializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EAssetCreateBatchResult_003E_002ELazySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Lazy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EAssetCreateBatchResult_003E_002EGreedySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Greedy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EAssetCreateBatchResult_003E_002EGreedyMutableSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EAssetCreateBatchResult_003E_002EProgressiveSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Progressive);
+	}
+
+	public AssetCreateBatchResult()
+	{
+		Success = null;
+	}
+
+	protected AssetCreateBatchResult(FlatBufferDeserializationContext context)
+	{
+	}
+
+	[SetsRequiredMembers]
+	public AssetCreateBatchResult(AssetCreateBatchResult source)
+	{
+		Success = CloneHelpers_7c83be20ee504926b8fb188858421982.Clone(source.Success);
+	}
+
+	protected void OnFlatSharpDeserialized(FlatBufferDeserializationContext context)
+	{
+	}
+}

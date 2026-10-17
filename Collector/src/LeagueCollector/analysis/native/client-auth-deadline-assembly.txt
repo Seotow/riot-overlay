@@ -1,0 +1,64 @@
+
+/workspace/leaguebroadcast/native/lblib.dll:     file format pei-x86-64
+
+
+Disassembly of section .text:
+
+00000001803bdd10 <.text+0x3bcd10>:
+   1803bdd10:	40 53                	rex push %rbx
+   1803bdd12:	48 83 ec 20          	sub    $0x20,%rsp
+   1803bdd16:	48 8b d9             	mov    %rcx,%rbx
+   1803bdd19:	c7 41 38 02 00 00 00 	movl   $0x2,0x38(%rcx)
+   1803bdd20:	33 c0                	xor    %eax,%eax
+   1803bdd22:	87 41 28             	xchg   %eax,0x28(%rcx)
+   1803bdd25:	48 83 c1 30          	add    $0x30,%rcx
+   1803bdd29:	e8 c2 80 f1 ff       	call   0x1802d5df0
+   1803bdd2e:	48 8b 03             	mov    (%rbx),%rax
+   1803bdd31:	48 8b cb             	mov    %rbx,%rcx
+   1803bdd34:	48 83 c4 20          	add    $0x20,%rsp
+   1803bdd38:	5b                   	pop    %rbx
+   1803bdd39:	48 ff 20             	rex.W jmp *(%rax)
+   1803bdd3c:	cc                   	int3
+   1803bdd3d:	cc                   	int3
+   1803bdd3e:	cc                   	int3
+   1803bdd3f:	cc                   	int3
+   1803bdd40:	40 53                	rex push %rbx
+   1803bdd42:	48 83 ec 30          	sub    $0x30,%rsp
+   1803bdd46:	48 8b 05 73 8f 94 00 	mov    0x948f73(%rip),%rax        # 0x180d06cc0
+   1803bdd4d:	48 33 c4             	xor    %rsp,%rax
+   1803bdd50:	48 89 44 24 28       	mov    %rax,0x28(%rsp)
+   1803bdd55:	48 8b d9             	mov    %rcx,%rbx
+   1803bdd58:	48 8d 4c 24 20       	lea    0x20(%rsp),%rcx
+   1803bdd5d:	e8 0e 09 e4 ff       	call   0x1801fe670
+   1803bdd62:	48 8b 4b 40          	mov    0x40(%rbx),%rcx
+   1803bdd66:	48 39 08             	cmp    %rcx,(%rax)
+   1803bdd69:	74 02                	je     0x1803bdd6d
+   1803bdd6b:	7c 0e                	jl     0x1803bdd7b
+   1803bdd6d:	b9 02 00 00 00       	mov    $0x2,%ecx
+   1803bdd72:	33 c0                	xor    %eax,%eax
+   1803bdd74:	f0 0f b1 4b 38       	lock cmpxchg %ecx,0x38(%rbx)
+   1803bdd79:	74 15                	je     0x1803bdd90
+   1803bdd7b:	32 c0                	xor    %al,%al
+   1803bdd7d:	48 8b 4c 24 28       	mov    0x28(%rsp),%rcx
+   1803bdd82:	48 33 cc             	xor    %rsp,%rcx
+   1803bdd85:	e8 e6 8b 5b 00       	call   0x180976970
+   1803bdd8a:	48 83 c4 30          	add    $0x30,%rsp
+   1803bdd8e:	5b                   	pop    %rbx
+   1803bdd8f:	c3                   	ret
+   1803bdd90:	89 4b 38             	mov    %ecx,0x38(%rbx)
+   1803bdd93:	33 c0                	xor    %eax,%eax
+   1803bdd95:	87 43 28             	xchg   %eax,0x28(%rbx)
+   1803bdd98:	48 8d 4b 30          	lea    0x30(%rbx),%rcx
+   1803bdd9c:	e8 4f 80 f1 ff       	call   0x1802d5df0
+   1803bdda1:	48 8b 03             	mov    (%rbx),%rax
+   1803bdda4:	48 8b cb             	mov    %rbx,%rcx
+   1803bdda7:	ff 10                	call   *(%rax)
+   1803bdda9:	b0 01                	mov    $0x1,%al
+   1803bddab:	48 8b 4c 24 28       	mov    0x28(%rsp),%rcx
+   1803bddb0:	48 33 cc             	xor    %rsp,%rcx
+   1803bddb3:	e8 b8 8b 5b 00       	call   0x180976970
+   1803bddb8:	48 83 c4 30          	add    $0x30,%rsp
+   1803bddbc:	5b                   	pop    %rbx
+   1803bddbd:	c3                   	ret
+   1803bddbe:	cc                   	int3
+   1803bddbf:	cc                   	int3

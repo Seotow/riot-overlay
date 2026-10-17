@@ -1,0 +1,74 @@
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
+using FlatSharp;
+using FlatSharp.Attributes;
+using FlatSharp.Compiler.Generated;
+using FlatSharp.Compiler.Generated.N38D48C29514A3C2F65DFFBCEDFBD0FFA6DB80367B4DFD03BA4B5C0791D17FC59;
+
+namespace BlueBottleIPC.LeagueBroadcast.Commands;
+
+[FlatBufferTable(BuildSerializer = true)]
+[FlatBufferMetadata(FlatBufferMetadataKind.FbsAttribute, "fs_serializer", "0")]
+[CompilerGenerated]
+[DebuggerTypeProxy("BlueBottleIPC.LeagueBroadcast.Commands.StreamTextureApplySDPAnswer")]
+public class StreamTextureApplySDPAnswer : IFlatBufferSerializable<StreamTextureApplySDPAnswer>, IFlatBufferSerializable
+{
+	[FlatBufferItem(0)]
+	public virtual AssetIdentifier? Ident { get; set; }
+
+	[FlatBufferItem(2, Required = true)]
+	[FlatBufferMetadata(FlatBufferMetadataKind.FbsAttribute, "required", "0")]
+	public virtual required string SdpAnswer { get; set; }
+
+	public static ISerializer<StreamTextureApplySDPAnswer> Serializer { get; }
+
+	ISerializer IFlatBufferSerializable.Serializer => (ISerializer)((IFlatBufferSerializable<StreamTextureApplySDPAnswer>)this).Serializer;
+
+	ISerializer<StreamTextureApplySDPAnswer> IFlatBufferSerializable<StreamTextureApplySDPAnswer>.Serializer => Serializer;
+
+	private static readonly ISerializer<StreamTextureApplySDPAnswer> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStreamTextureApplySDPAnswer_003E_002ELazySerializer;
+
+	static ISerializer<StreamTextureApplySDPAnswer> IFlatBufferSerializable<StreamTextureApplySDPAnswer>.LazySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStreamTextureApplySDPAnswer_003E_002ELazySerializer;
+
+	private static readonly ISerializer<StreamTextureApplySDPAnswer> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStreamTextureApplySDPAnswer_003E_002EGreedySerializer;
+
+	static ISerializer<StreamTextureApplySDPAnswer> IFlatBufferSerializable<StreamTextureApplySDPAnswer>.GreedySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStreamTextureApplySDPAnswer_003E_002EGreedySerializer;
+
+	private static readonly ISerializer<StreamTextureApplySDPAnswer> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStreamTextureApplySDPAnswer_003E_002EGreedyMutableSerializer;
+
+	static ISerializer<StreamTextureApplySDPAnswer> IFlatBufferSerializable<StreamTextureApplySDPAnswer>.GreedyMutableSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStreamTextureApplySDPAnswer_003E_002EGreedyMutableSerializer;
+
+	private static readonly ISerializer<StreamTextureApplySDPAnswer> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStreamTextureApplySDPAnswer_003E_002EProgressiveSerializer;
+
+	static ISerializer<StreamTextureApplySDPAnswer> IFlatBufferSerializable<StreamTextureApplySDPAnswer>.ProgressiveSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStreamTextureApplySDPAnswer_003E_002EProgressiveSerializer;
+
+	static StreamTextureApplySDPAnswer()
+	{
+		Serializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStreamTextureApplySDPAnswer_003E_002ELazySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Lazy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStreamTextureApplySDPAnswer_003E_002EGreedySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Greedy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStreamTextureApplySDPAnswer_003E_002EGreedyMutableSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStreamTextureApplySDPAnswer_003E_002EProgressiveSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Progressive);
+	}
+
+	public StreamTextureApplySDPAnswer()
+	{
+		Ident = null;
+	}
+
+	protected StreamTextureApplySDPAnswer(FlatBufferDeserializationContext context)
+	{
+	}
+
+	[SetsRequiredMembers]
+	public StreamTextureApplySDPAnswer(StreamTextureApplySDPAnswer source)
+	{
+		Ident = CloneHelpers_7c83be20ee504926b8fb188858421982.Clone(source.Ident);
+		SdpAnswer = CloneHelpers_7c83be20ee504926b8fb188858421982.Clone(source.SdpAnswer);
+	}
+
+	protected void OnFlatSharpDeserialized(FlatBufferDeserializationContext context)
+	{
+	}
+}

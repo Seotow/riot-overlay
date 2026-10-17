@@ -1,0 +1,63 @@
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
+using FlatSharp;
+using FlatSharp.Attributes;
+using FlatSharp.Compiler.Generated.N9AC8EBE7A31E1C456BA677771AB5E24F29076FDD91A054D89D1C1315B66E9997;
+
+namespace BlueBottleIPC.LeagueBroadcast.Commands;
+
+[FlatBufferTable(BuildSerializer = true)]
+[FlatBufferMetadata(FlatBufferMetadataKind.FbsAttribute, "fs_serializer", "0")]
+[CompilerGenerated]
+[DebuggerTypeProxy("BlueBottleIPC.LeagueBroadcast.Commands.GetStrokeProperties")]
+public class GetStrokeProperties : IFlatBufferSerializable<GetStrokeProperties>, IFlatBufferSerializable
+{
+	public static ISerializer<GetStrokeProperties> Serializer { get; }
+
+	ISerializer IFlatBufferSerializable.Serializer => (ISerializer)((IFlatBufferSerializable<GetStrokeProperties>)this).Serializer;
+
+	ISerializer<GetStrokeProperties> IFlatBufferSerializable<GetStrokeProperties>.Serializer => Serializer;
+
+	private static readonly ISerializer<GetStrokeProperties> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EGetStrokeProperties_003E_002ELazySerializer;
+
+	static ISerializer<GetStrokeProperties> IFlatBufferSerializable<GetStrokeProperties>.LazySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EGetStrokeProperties_003E_002ELazySerializer;
+
+	private static readonly ISerializer<GetStrokeProperties> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EGetStrokeProperties_003E_002EGreedySerializer;
+
+	static ISerializer<GetStrokeProperties> IFlatBufferSerializable<GetStrokeProperties>.GreedySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EGetStrokeProperties_003E_002EGreedySerializer;
+
+	private static readonly ISerializer<GetStrokeProperties> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EGetStrokeProperties_003E_002EGreedyMutableSerializer;
+
+	static ISerializer<GetStrokeProperties> IFlatBufferSerializable<GetStrokeProperties>.GreedyMutableSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EGetStrokeProperties_003E_002EGreedyMutableSerializer;
+
+	private static readonly ISerializer<GetStrokeProperties> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EGetStrokeProperties_003E_002EProgressiveSerializer;
+
+	static ISerializer<GetStrokeProperties> IFlatBufferSerializable<GetStrokeProperties>.ProgressiveSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EGetStrokeProperties_003E_002EProgressiveSerializer;
+
+	static GetStrokeProperties()
+	{
+		Serializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EGetStrokeProperties_003E_002ELazySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Lazy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EGetStrokeProperties_003E_002EGreedySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Greedy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EGetStrokeProperties_003E_002EGreedyMutableSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EGetStrokeProperties_003E_002EProgressiveSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Progressive);
+	}
+
+	public GetStrokeProperties()
+	{
+	}
+
+	protected GetStrokeProperties(FlatBufferDeserializationContext context)
+	{
+	}
+
+	[SetsRequiredMembers]
+	public GetStrokeProperties(GetStrokeProperties source)
+	{
+	}
+
+	protected void OnFlatSharpDeserialized(FlatBufferDeserializationContext context)
+	{
+	}
+}

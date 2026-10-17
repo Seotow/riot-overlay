@@ -58,6 +58,8 @@ export const themeSchema = z.object({
   tournament: z.string().min(1).max(80),
   blueName: z.string().min(1).max(30),
   redName: z.string().min(1).max(30),
+  blueDescription: z.string().trim().max(40).optional(),
+  redDescription: z.string().trim().max(40).optional(),
   blue: color,
   red: color,
   accent: color,

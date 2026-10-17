@@ -1,0 +1,75 @@
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
+using FlatSharp;
+using FlatSharp.Attributes;
+using FlatSharp.Compiler.Generated;
+using FlatSharp.Compiler.Generated.N234595C35D7EA56611E089D418B998B4BCD53C22A13DFA3EADEAEF63ED77601A;
+
+namespace BlueBottleIPC.LeagueBroadcast.Commands;
+
+[FlatBufferTable(BuildSerializer = true)]
+[FlatBufferMetadata(FlatBufferMetadataKind.FbsAttribute, "fs_serializer", "0")]
+[CompilerGenerated]
+[DebuggerTypeProxy("BlueBottleIPC.LeagueBroadcast.Commands.StreamTextureCreateSDPOffer")]
+public class StreamTextureCreateSDPOffer : IFlatBufferSerializable<StreamTextureCreateSDPOffer>, IFlatBufferSerializable
+{
+	[FlatBufferItem(0)]
+	public virtual AssetIdentifier? Ident { get; set; }
+
+	[FlatBufferItem(2)]
+	public virtual IList<IceServer>? IceServers { get; set; }
+
+	public static ISerializer<StreamTextureCreateSDPOffer> Serializer { get; }
+
+	ISerializer IFlatBufferSerializable.Serializer => (ISerializer)((IFlatBufferSerializable<StreamTextureCreateSDPOffer>)this).Serializer;
+
+	ISerializer<StreamTextureCreateSDPOffer> IFlatBufferSerializable<StreamTextureCreateSDPOffer>.Serializer => Serializer;
+
+	private static readonly ISerializer<StreamTextureCreateSDPOffer> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStreamTextureCreateSDPOffer_003E_002ELazySerializer;
+
+	static ISerializer<StreamTextureCreateSDPOffer> IFlatBufferSerializable<StreamTextureCreateSDPOffer>.LazySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStreamTextureCreateSDPOffer_003E_002ELazySerializer;
+
+	private static readonly ISerializer<StreamTextureCreateSDPOffer> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStreamTextureCreateSDPOffer_003E_002EGreedySerializer;
+
+	static ISerializer<StreamTextureCreateSDPOffer> IFlatBufferSerializable<StreamTextureCreateSDPOffer>.GreedySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStreamTextureCreateSDPOffer_003E_002EGreedySerializer;
+
+	private static readonly ISerializer<StreamTextureCreateSDPOffer> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStreamTextureCreateSDPOffer_003E_002EGreedyMutableSerializer;
+
+	static ISerializer<StreamTextureCreateSDPOffer> IFlatBufferSerializable<StreamTextureCreateSDPOffer>.GreedyMutableSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStreamTextureCreateSDPOffer_003E_002EGreedyMutableSerializer;
+
+	private static readonly ISerializer<StreamTextureCreateSDPOffer> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStreamTextureCreateSDPOffer_003E_002EProgressiveSerializer;
+
+	static ISerializer<StreamTextureCreateSDPOffer> IFlatBufferSerializable<StreamTextureCreateSDPOffer>.ProgressiveSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStreamTextureCreateSDPOffer_003E_002EProgressiveSerializer;
+
+	static StreamTextureCreateSDPOffer()
+	{
+		Serializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStreamTextureCreateSDPOffer_003E_002ELazySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Lazy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStreamTextureCreateSDPOffer_003E_002EGreedySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Greedy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStreamTextureCreateSDPOffer_003E_002EGreedyMutableSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStreamTextureCreateSDPOffer_003E_002EProgressiveSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Progressive);
+	}
+
+	public StreamTextureCreateSDPOffer()
+	{
+		Ident = null;
+		IceServers = null;
+	}
+
+	protected StreamTextureCreateSDPOffer(FlatBufferDeserializationContext context)
+	{
+	}
+
+	[SetsRequiredMembers]
+	public StreamTextureCreateSDPOffer(StreamTextureCreateSDPOffer source)
+	{
+		Ident = CloneHelpers_7c83be20ee504926b8fb188858421982.Clone(source.Ident);
+		IceServers = CloneHelpers_7c83be20ee504926b8fb188858421982.Clone(source.IceServers);
+	}
+
+	protected void OnFlatSharpDeserialized(FlatBufferDeserializationContext context)
+	{
+	}
+}

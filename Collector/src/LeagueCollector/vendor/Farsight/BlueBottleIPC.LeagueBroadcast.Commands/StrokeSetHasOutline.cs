@@ -1,0 +1,69 @@
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
+using FlatSharp;
+using FlatSharp.Attributes;
+using FlatSharp.Compiler.Generated;
+using FlatSharp.Compiler.Generated.N05612B7F730FEC53FECDBB4339C75F8C1B8FFFA5962C618B39B51CFEA72CB10F;
+
+namespace BlueBottleIPC.LeagueBroadcast.Commands;
+
+[FlatBufferTable(BuildSerializer = true)]
+[FlatBufferMetadata(FlatBufferMetadataKind.FbsAttribute, "fs_serializer", "0")]
+[CompilerGenerated]
+[DebuggerTypeProxy("BlueBottleIPC.LeagueBroadcast.Commands.StrokeSetHasOutline")]
+public class StrokeSetHasOutline : IFlatBufferSerializable<StrokeSetHasOutline>, IFlatBufferSerializable
+{
+	[FlatBufferItem(0)]
+	public virtual bool HasOutline { get; set; }
+
+	public static ISerializer<StrokeSetHasOutline> Serializer { get; }
+
+	ISerializer IFlatBufferSerializable.Serializer => (ISerializer)((IFlatBufferSerializable<StrokeSetHasOutline>)this).Serializer;
+
+	ISerializer<StrokeSetHasOutline> IFlatBufferSerializable<StrokeSetHasOutline>.Serializer => Serializer;
+
+	private static readonly ISerializer<StrokeSetHasOutline> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSetHasOutline_003E_002ELazySerializer;
+
+	static ISerializer<StrokeSetHasOutline> IFlatBufferSerializable<StrokeSetHasOutline>.LazySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSetHasOutline_003E_002ELazySerializer;
+
+	private static readonly ISerializer<StrokeSetHasOutline> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSetHasOutline_003E_002EGreedySerializer;
+
+	static ISerializer<StrokeSetHasOutline> IFlatBufferSerializable<StrokeSetHasOutline>.GreedySerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSetHasOutline_003E_002EGreedySerializer;
+
+	private static readonly ISerializer<StrokeSetHasOutline> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSetHasOutline_003E_002EGreedyMutableSerializer;
+
+	static ISerializer<StrokeSetHasOutline> IFlatBufferSerializable<StrokeSetHasOutline>.GreedyMutableSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSetHasOutline_003E_002EGreedyMutableSerializer;
+
+	private static readonly ISerializer<StrokeSetHasOutline> FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSetHasOutline_003E_002EProgressiveSerializer;
+
+	static ISerializer<StrokeSetHasOutline> IFlatBufferSerializable<StrokeSetHasOutline>.ProgressiveSerializer => FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSetHasOutline_003E_002EProgressiveSerializer;
+
+	static StrokeSetHasOutline()
+	{
+		Serializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSetHasOutline_003E_002ELazySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Lazy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSetHasOutline_003E_002EGreedySerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Greedy);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSetHasOutline_003E_002EGreedyMutableSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.GreedyMutable);
+		FlatSharp_002EIFlatBufferSerializable_003CBlueBottleIPC_002ELeagueBroadcast_002ECommands_002EStrokeSetHasOutline_003E_002EProgressiveSerializer = new Serializer().AsISerializer(FlatBufferDeserializationOption.Progressive);
+	}
+
+	public StrokeSetHasOutline()
+	{
+		HasOutline = false;
+	}
+
+	protected StrokeSetHasOutline(FlatBufferDeserializationContext context)
+	{
+	}
+
+	[SetsRequiredMembers]
+	public StrokeSetHasOutline(StrokeSetHasOutline source)
+	{
+		HasOutline = CloneHelpers_7c83be20ee504926b8fb188858421982.Clone(source.HasOutline);
+	}
+
+	protected void OnFlatSharpDeserialized(FlatBufferDeserializationContext context)
+	{
+	}
+}

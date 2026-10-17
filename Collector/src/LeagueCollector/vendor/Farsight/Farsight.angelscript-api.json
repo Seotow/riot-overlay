@@ -1,0 +1,1837 @@
+{
+  "version": 3,
+  "language": "AngelScript",
+  "namespaces": [
+    {
+      "label": "Game",
+      "detail": "Game and script timing",
+      "members": [
+        {
+          "label": "time",
+          "kind": "property",
+          "detail": "const float time"
+        },
+        {
+          "label": "deltaTime",
+          "kind": "property",
+          "detail": "const float deltaTime"
+        },
+        {
+          "label": "frameCount",
+          "kind": "property",
+          "detail": "const uint64 frameCount"
+        },
+        {
+          "label": "timelineEpoch",
+          "kind": "property",
+          "detail": "const uint64 timelineEpoch"
+        },
+        {
+          "label": "timelineStable",
+          "kind": "property",
+          "detail": "const bool timelineStable"
+        },
+        {
+          "label": "realTime",
+          "kind": "function",
+          "detail": "float realTime()",
+          "apply": "realTime()"
+        },
+        {
+          "label": "matchTime",
+          "kind": "function",
+          "detail": "float matchTime()",
+          "apply": "matchTime()"
+        },
+        {
+          "label": "formattedMatchTime",
+          "kind": "function",
+          "detail": "string formattedMatchTime()",
+          "apply": "formattedMatchTime()"
+        }
+      ]
+    },
+    {
+      "label": "World",
+      "detail": "Live native game objects",
+      "members": [
+        {
+          "label": "all",
+          "kind": "function",
+          "detail": "array<GameObject@>@ all()",
+          "apply": "all()"
+        },
+        {
+          "label": "turrets",
+          "kind": "function",
+          "detail": "array<GameObject@>@ turrets()",
+          "apply": "turrets()"
+        },
+        {
+          "label": "inhibitors",
+          "kind": "function",
+          "detail": "array<GameObject@>@ inhibitors()",
+          "apply": "inhibitors()"
+        },
+        {
+          "label": "nexuses",
+          "kind": "function",
+          "detail": "array<GameObject@>@ nexuses()",
+          "apply": "nexuses()"
+        },
+        {
+          "label": "minions",
+          "kind": "function",
+          "detail": "array<GameObject@>@ minions()",
+          "apply": "minions()"
+        },
+        {
+          "label": "jungleCamps",
+          "kind": "function",
+          "detail": "array<GameObject@>@ jungleCamps()",
+          "apply": "jungleCamps()"
+        },
+        {
+          "label": "jungleMinions",
+          "kind": "function",
+          "detail": "array<GameObject@>@ jungleMinions()",
+          "apply": "jungleMinions()"
+        },
+        {
+          "label": "voidgrubs",
+          "kind": "function",
+          "detail": "array<GameObject@>@ voidgrubs()",
+          "apply": "voidgrubs()"
+        },
+        {
+          "label": "dragon",
+          "kind": "function",
+          "detail": "GameObject@ dragon()",
+          "apply": "dragon()"
+        },
+        {
+          "label": "baron",
+          "kind": "function",
+          "detail": "GameObject@ baron()",
+          "apply": "baron()"
+        },
+        {
+          "label": "riftHerald",
+          "kind": "function",
+          "detail": "GameObject@ riftHerald()",
+          "apply": "riftHerald()"
+        },
+        {
+          "label": "atakhan",
+          "kind": "function",
+          "detail": "GameObject@ atakhan()",
+          "apply": "atakhan()"
+        },
+        {
+          "label": "byNetworkId",
+          "kind": "function",
+          "detail": "GameObject@ byNetworkId(uint)",
+          "apply": "byNetworkId(${arg1})"
+        }
+      ]
+    },
+    {
+      "label": "Heroes",
+      "detail": "Live champion access",
+      "members": [
+        {
+          "label": "all",
+          "kind": "function",
+          "detail": "array<Hero@>@ all()",
+          "apply": "all()"
+        },
+        {
+          "label": "at",
+          "kind": "function",
+          "detail": "Hero@ at(uint)",
+          "apply": "at(${arg1})"
+        },
+        {
+          "label": "byNetworkId",
+          "kind": "function",
+          "detail": "Hero@ byNetworkId(uint)",
+          "apply": "byNetworkId(${arg1})"
+        },
+        {
+          "label": "byTeamAndRole",
+          "kind": "function",
+          "detail": "Hero@ byTeamAndRole(Team, Role)",
+          "apply": "byTeamAndRole(${arg1}, ${arg2})"
+        },
+        {
+          "label": "localPlayer",
+          "kind": "function",
+          "detail": "Hero@ localPlayer()",
+          "apply": "localPlayer()"
+        }
+      ]
+    },
+    {
+      "label": "Entities",
+      "detail": "Scene entity queries",
+      "members": [
+        {
+          "label": "find",
+          "kind": "function",
+          "detail": "Entity@ find(uint64)",
+          "apply": "find(${arg1})"
+        },
+        {
+          "label": "all",
+          "kind": "function",
+          "detail": "array<Entity@>@ all()",
+          "apply": "all()"
+        },
+        {
+          "label": "withComponent",
+          "kind": "function",
+          "detail": "array<Entity@>@ withComponent(ComponentType)",
+          "apply": "withComponent(${arg1})"
+        },
+        {
+          "label": "count",
+          "kind": "function",
+          "detail": "uint count()",
+          "apply": "count()"
+        }
+      ]
+    },
+    {
+      "label": "Shared",
+      "detail": "Typed state shared by scene scripts",
+      "members": [
+        {
+          "label": "set",
+          "kind": "function",
+          "detail": "void set(const string &in, const ?&in)",
+          "apply": "set(${arg1}, ${arg2})"
+        },
+        {
+          "label": "get",
+          "kind": "function",
+          "detail": "bool get(const string &in, ?&out)",
+          "apply": "get(${arg1}, ${arg2})"
+        },
+        {
+          "label": "has",
+          "kind": "function",
+          "detail": "bool has(const string &in)",
+          "apply": "has(${arg1})"
+        },
+        {
+          "label": "clear",
+          "kind": "function",
+          "detail": "void clear(const string &in)",
+          "apply": "clear(${arg1})"
+        },
+        {
+          "label": "clearAll",
+          "kind": "function",
+          "detail": "void clearAll()",
+          "apply": "clearAll()"
+        },
+        {
+          "label": "keys",
+          "kind": "function",
+          "detail": "array<string>@ keys()",
+          "apply": "keys()"
+        }
+      ]
+    },
+    {
+      "label": "Vec3",
+      "detail": "Vector helpers",
+      "members": [
+        {
+          "label": "distance",
+          "kind": "function",
+          "detail": "float distance(const Vec3 &in, const Vec3 &in)",
+          "apply": "distance(${arg1}, ${arg2})"
+        },
+        {
+          "label": "lerp",
+          "kind": "function",
+          "detail": "Vec3 lerp(const Vec3 &in, const Vec3 &in, float)",
+          "apply": "lerp(${arg1}, ${arg2}, ${arg3})"
+        }
+      ]
+    },
+    {
+      "label": "Quat",
+      "detail": "Quaternion helpers",
+      "members": [
+        {
+          "label": "fromEulerDegrees",
+          "kind": "function",
+          "detail": "Quat fromEulerDegrees(float, float, float)",
+          "apply": "fromEulerDegrees(${arg1}, ${arg2}, ${arg3})"
+        }
+      ]
+    },
+    {
+      "label": "log",
+      "detail": "Script console logging",
+      "members": [
+        {
+          "label": "debug",
+          "kind": "function",
+          "detail": "void debug(const string &in)",
+          "apply": "debug(${arg1})"
+        },
+        {
+          "label": "info",
+          "kind": "function",
+          "detail": "void info(const string &in)",
+          "apply": "info(${arg1})"
+        },
+        {
+          "label": "warning",
+          "kind": "function",
+          "detail": "void warning(const string &in)",
+          "apply": "warning(${arg1})"
+        },
+        {
+          "label": "error",
+          "kind": "function",
+          "detail": "void error(const string &in)",
+          "apply": "error(${arg1})"
+        }
+      ]
+    },
+    {
+      "label": "Objectives",
+      "detail": "AngelScript Objectives namespace",
+      "members": [
+        {
+          "label": "dragon",
+          "kind": "function",
+          "detail": "ObjectiveState@ dragon()",
+          "apply": "dragon()"
+        },
+        {
+          "label": "baron",
+          "kind": "function",
+          "detail": "ObjectiveState@ baron()",
+          "apply": "baron()"
+        },
+        {
+          "label": "voidgrubs",
+          "kind": "function",
+          "detail": "ObjectiveState@ voidgrubs()",
+          "apply": "voidgrubs()"
+        },
+        {
+          "label": "riftHerald",
+          "kind": "function",
+          "detail": "ObjectiveState@ riftHerald()",
+          "apply": "riftHerald()"
+        },
+        {
+          "label": "atakhan",
+          "kind": "function",
+          "detail": "ObjectiveState@ atakhan()",
+          "apply": "atakhan()"
+        },
+        {
+          "label": "byKind",
+          "kind": "function",
+          "detail": "ObjectiveState@ byKind(ObjectiveKind)",
+          "apply": "byKind(${arg1})"
+        },
+        {
+          "label": "inhibitor",
+          "kind": "function",
+          "detail": "ObjectiveState@ inhibitor(Team, int, int)",
+          "apply": "inhibitor(${arg1}, ${arg2}, ${arg3})"
+        },
+        {
+          "label": "inhibitors",
+          "kind": "function",
+          "detail": "array<ObjectiveState@>@ inhibitors()",
+          "apply": "inhibitors()"
+        }
+      ]
+    },
+    {
+      "label": "Screen",
+      "detail": "AngelScript Screen namespace",
+      "members": [
+        {
+          "label": "measureText",
+          "kind": "function",
+          "detail": "ScreenRect measureText(const string &in, const string &in, float)",
+          "apply": "measureText(${arg1}, ${arg2}, ${arg3})"
+        },
+        {
+          "label": "text",
+          "kind": "function",
+          "detail": "void text(const string &in, float, float, const string &in, float, const Color &in)",
+          "apply": "text(${arg1}, ${arg2}, ${arg3}, ${arg4}, ${arg5}, ${arg6})"
+        },
+        {
+          "label": "outlinedText",
+          "kind": "function",
+          "detail": "void outlinedText(const string &in, float, float, const string &in, float, const Color &in, const Color &in, float)",
+          "apply": "outlinedText(${arg1}, ${arg2}, ${arg3}, ${arg4}, ${arg5}, ${arg6}, ${arg7}, ${arg8})"
+        },
+        {
+          "label": "rectangle",
+          "kind": "function",
+          "detail": "void rectangle(const ScreenRect &in, const Color &in)",
+          "apply": "rectangle(${arg1}, ${arg2})"
+        },
+        {
+          "label": "image",
+          "kind": "function",
+          "detail": "void image(const string &in, const ScreenRect &in, const Color &in)",
+          "apply": "image(${arg1}, ${arg2}, ${arg3})"
+        }
+      ]
+    }
+  ],
+  "types": [
+    {
+      "label": "Vec3",
+      "detail": "Three-dimensional vector value",
+      "members": [
+        {
+          "label": "x",
+          "kind": "property",
+          "detail": "float"
+        },
+        {
+          "label": "y",
+          "kind": "property",
+          "detail": "float"
+        },
+        {
+          "label": "z",
+          "kind": "property",
+          "detail": "float"
+        },
+        {
+          "label": "length",
+          "kind": "property",
+          "detail": "float, read-only"
+        },
+        {
+          "label": "lengthSquared",
+          "kind": "property",
+          "detail": "float, read-only"
+        },
+        {
+          "label": "normalized",
+          "kind": "function",
+          "detail": "Vec3 normalized() const",
+          "apply": "normalized()"
+        },
+        {
+          "label": "dot",
+          "kind": "function",
+          "detail": "float dot(const Vec3 &in) const",
+          "apply": "dot(${arg1})"
+        },
+        {
+          "label": "cross",
+          "kind": "function",
+          "detail": "Vec3 cross(const Vec3 &in) const",
+          "apply": "cross(${arg1})"
+        }
+      ]
+    },
+    {
+      "label": "Quat",
+      "detail": "Quaternion value",
+      "members": [
+        {
+          "label": "x",
+          "kind": "property",
+          "detail": "float"
+        },
+        {
+          "label": "y",
+          "kind": "property",
+          "detail": "float"
+        },
+        {
+          "label": "z",
+          "kind": "property",
+          "detail": "float"
+        },
+        {
+          "label": "w",
+          "kind": "property",
+          "detail": "float"
+        },
+        {
+          "label": "normalized",
+          "kind": "function",
+          "detail": "Quat normalized() const",
+          "apply": "normalized()"
+        }
+      ]
+    },
+    {
+      "label": "Color",
+      "detail": "Linear RGBA color value",
+      "members": [
+        {
+          "label": "r",
+          "kind": "property",
+          "detail": "float"
+        },
+        {
+          "label": "g",
+          "kind": "property",
+          "detail": "float"
+        },
+        {
+          "label": "b",
+          "kind": "property",
+          "detail": "float"
+        },
+        {
+          "label": "a",
+          "kind": "property",
+          "detail": "float"
+        }
+      ]
+    },
+    {
+      "label": "GameObject",
+      "detail": "Stable handle to a live Riot game object",
+      "members": [
+        {
+          "label": "valid",
+          "kind": "property",
+          "detail": "bool, read-only"
+        },
+        {
+          "label": "networkId",
+          "kind": "property",
+          "detail": "uint, read-only"
+        },
+        {
+          "label": "name",
+          "kind": "property",
+          "detail": "string, read-only"
+        },
+        {
+          "label": "identifier",
+          "kind": "property",
+          "detail": "string, read-only"
+        },
+        {
+          "label": "position",
+          "kind": "property",
+          "detail": "Vec3, read-only"
+        },
+        {
+          "label": "health",
+          "kind": "property",
+          "detail": "float, read-only"
+        },
+        {
+          "label": "maxHealth",
+          "kind": "property",
+          "detail": "float, read-only"
+        },
+        {
+          "label": "healthPercent",
+          "kind": "property",
+          "detail": "float, read-only"
+        },
+        {
+          "label": "team",
+          "kind": "property",
+          "detail": "Team, read-only"
+        },
+        {
+          "label": "alive",
+          "kind": "property",
+          "detail": "bool, read-only"
+        },
+        {
+          "label": "level",
+          "kind": "property",
+          "detail": "int, read-only"
+        },
+        {
+          "label": "armor",
+          "kind": "property",
+          "detail": "float, read-only"
+        },
+        {
+          "label": "magicResist",
+          "kind": "property",
+          "detail": "float, read-only"
+        },
+        {
+          "label": "movementSpeed",
+          "kind": "property",
+          "detail": "float, read-only"
+        },
+        {
+          "label": "plateCount",
+          "kind": "property",
+          "detail": "uint, read-only"
+        },
+        {
+          "label": "maxPlateCount",
+          "kind": "property",
+          "detail": "uint, read-only"
+        }
+      ]
+    },
+    {
+      "label": "Hero",
+      "detail": "Stable handle to a live champion",
+      "members": [
+        {
+          "label": "wasInCombat",
+          "kind": "function",
+          "detail": "bool wasInCombat(float) const",
+          "apply": "wasInCombat(${arg1})"
+        },
+        {
+          "label": "valid",
+          "kind": "property",
+          "detail": "bool, read-only"
+        },
+        {
+          "label": "networkId",
+          "kind": "property",
+          "detail": "uint, read-only"
+        },
+        {
+          "label": "name",
+          "kind": "property",
+          "detail": "string, read-only"
+        },
+        {
+          "label": "champion",
+          "kind": "property",
+          "detail": "string, read-only"
+        },
+        {
+          "label": "position",
+          "kind": "property",
+          "detail": "Vec3, read-only"
+        },
+        {
+          "label": "team",
+          "kind": "property",
+          "detail": "Team, read-only"
+        },
+        {
+          "label": "health",
+          "kind": "property",
+          "detail": "float, read-only"
+        },
+        {
+          "label": "maxHealth",
+          "kind": "property",
+          "detail": "float, read-only"
+        },
+        {
+          "label": "healthPercent",
+          "kind": "property",
+          "detail": "float, read-only"
+        },
+        {
+          "label": "resource",
+          "kind": "property",
+          "detail": "float, read-only"
+        },
+        {
+          "label": "maxResource",
+          "kind": "property",
+          "detail": "float, read-only"
+        },
+        {
+          "label": "level",
+          "kind": "property",
+          "detail": "int, read-only"
+        },
+        {
+          "label": "gold",
+          "kind": "property",
+          "detail": "float, read-only"
+        },
+        {
+          "label": "totalGold",
+          "kind": "property",
+          "detail": "float, read-only"
+        },
+        {
+          "label": "kills",
+          "kind": "property",
+          "detail": "int, read-only"
+        },
+        {
+          "label": "deaths",
+          "kind": "property",
+          "detail": "int, read-only"
+        },
+        {
+          "label": "assists",
+          "kind": "property",
+          "detail": "int, read-only"
+        },
+        {
+          "label": "creepScore",
+          "kind": "property",
+          "detail": "float, read-only"
+        },
+        {
+          "label": "neutralCreepScore",
+          "kind": "property",
+          "detail": "float, read-only"
+        },
+        {
+          "label": "laneCreepScore",
+          "kind": "property",
+          "detail": "float, read-only"
+        },
+        {
+          "label": "alive",
+          "kind": "property",
+          "detail": "bool, read-only"
+        },
+        {
+          "label": "recalling",
+          "kind": "property",
+          "detail": "bool, read-only"
+        },
+        {
+          "label": "armor",
+          "kind": "property",
+          "detail": "float, read-only"
+        },
+        {
+          "label": "magicResist",
+          "kind": "property",
+          "detail": "float, read-only"
+        },
+        {
+          "label": "movementSpeed",
+          "kind": "property",
+          "detail": "float, read-only"
+        },
+        {
+          "label": "championIndex",
+          "kind": "property",
+          "detail": "uint, read-only"
+        },
+        {
+          "label": "respawnTime",
+          "kind": "property",
+          "detail": "float, read-only"
+        },
+        {
+          "label": "respawnAt",
+          "kind": "property",
+          "detail": "float, read-only"
+        },
+        {
+          "label": "visionScore",
+          "kind": "property",
+          "detail": "float, read-only"
+        },
+        {
+          "label": "ultimateCooldown",
+          "kind": "property",
+          "detail": "float, read-only"
+        },
+        {
+          "label": "ultimateLevel",
+          "kind": "property",
+          "detail": "int, read-only"
+        }
+      ]
+    },
+    {
+      "label": "GameEvent",
+      "detail": "Immutable snapshot of a queued game notification",
+      "members": [
+        {
+          "label": "type",
+          "kind": "property",
+          "detail": "GameEventType, read-only"
+        },
+        {
+          "label": "time",
+          "kind": "property",
+          "detail": "float, read-only"
+        },
+        {
+          "label": "goldReward",
+          "kind": "property",
+          "detail": "float, read-only"
+        },
+        {
+          "label": "killCount",
+          "kind": "property",
+          "detail": "uint, read-only"
+        },
+        {
+          "label": "killerNetworkId",
+          "kind": "property",
+          "detail": "uint, read-only"
+        },
+        {
+          "label": "victimNetworkId",
+          "kind": "property",
+          "detail": "uint, read-only"
+        },
+        {
+          "label": "objectiveNetworkId",
+          "kind": "property",
+          "detail": "uint, read-only"
+        },
+        {
+          "label": "notificationId",
+          "kind": "property",
+          "detail": "uint, read-only"
+        },
+        {
+          "label": "epoch",
+          "kind": "property",
+          "detail": "uint64, read-only"
+        },
+        {
+          "label": "objectiveKind",
+          "kind": "property",
+          "detail": "ObjectiveKind, read-only"
+        },
+        {
+          "label": "objectiveTeam",
+          "kind": "property",
+          "detail": "Team, read-only"
+        },
+        {
+          "label": "laneIndex",
+          "kind": "property",
+          "detail": "int, read-only"
+        },
+        {
+          "label": "positionIndex",
+          "kind": "property",
+          "detail": "int, read-only"
+        },
+        {
+          "label": "previousTime",
+          "kind": "property",
+          "detail": "float, read-only"
+        },
+        {
+          "label": "inferred",
+          "kind": "property",
+          "detail": "bool, read-only"
+        },
+        {
+          "label": "killer",
+          "kind": "property",
+          "detail": "Hero@, read-only"
+        },
+        {
+          "label": "victim",
+          "kind": "property",
+          "detail": "Hero@, read-only"
+        },
+        {
+          "label": "objective",
+          "kind": "property",
+          "detail": "GameObject@, read-only"
+        },
+        {
+          "label": "assisters",
+          "kind": "property",
+          "detail": "array<Hero@>@, read-only"
+        },
+        {
+          "label": "stolenFrom",
+          "kind": "property",
+          "detail": "array<Hero@>@, read-only"
+        }
+      ]
+    },
+    {
+      "label": "SceneScript",
+      "detail": "Base class for attached scene scripts",
+      "members": [
+        {
+          "label": "onLoad",
+          "kind": "function",
+          "detail": "void onLoad()"
+        },
+        {
+          "label": "onUpdate",
+          "kind": "function",
+          "detail": "void onUpdate(float dt)"
+        },
+        {
+          "label": "onEnable",
+          "kind": "function",
+          "detail": "void onEnable()"
+        },
+        {
+          "label": "onDisable",
+          "kind": "function",
+          "detail": "void onDisable()"
+        },
+        {
+          "label": "onScreenDraw",
+          "kind": "function",
+          "detail": "void onScreenDraw()"
+        },
+        {
+          "label": "onHealthBar",
+          "kind": "function",
+          "detail": "void onHealthBar(HealthBar@ healthBar)"
+        },
+        {
+          "label": "onGameEvent",
+          "kind": "function",
+          "detail": "void onGameEvent(GameEvent@ event)"
+        },
+        {
+          "label": "onChampionKill",
+          "kind": "function",
+          "detail": "void onChampionKill(GameEvent@ event)"
+        },
+        {
+          "label": "onFirstBlood",
+          "kind": "function",
+          "detail": "void onFirstBlood(GameEvent@ event)"
+        },
+        {
+          "label": "onTurretKill",
+          "kind": "function",
+          "detail": "void onTurretKill(GameEvent@ event)"
+        },
+        {
+          "label": "onInhibitorKill",
+          "kind": "function",
+          "detail": "void onInhibitorKill(GameEvent@ event)"
+        },
+        {
+          "label": "onAce",
+          "kind": "function",
+          "detail": "void onAce(GameEvent@ event)"
+        },
+        {
+          "label": "onTurretPlateDestroyed",
+          "kind": "function",
+          "detail": "void onTurretPlateDestroyed(GameEvent@ event)"
+        },
+        {
+          "label": "onMultiKill",
+          "kind": "function",
+          "detail": "void onMultiKill(GameEvent@ event)"
+        },
+        {
+          "label": "onDragonSteal",
+          "kind": "function",
+          "detail": "void onDragonSteal(GameEvent@ event)"
+        },
+        {
+          "label": "onBaronSteal",
+          "kind": "function",
+          "detail": "void onBaronSteal(GameEvent@ event)"
+        },
+        {
+          "label": "onVoidgrubSteal",
+          "kind": "function",
+          "detail": "void onVoidgrubSteal(GameEvent@ event)"
+        },
+        {
+          "label": "onAtakhanSteal",
+          "kind": "function",
+          "detail": "void onAtakhanSteal(GameEvent@ event)"
+        },
+        {
+          "label": "onRiftHeraldSteal",
+          "kind": "function",
+          "detail": "void onRiftHeraldSteal(GameEvent@ event)"
+        },
+        {
+          "label": "onObjectiveKill",
+          "kind": "function",
+          "detail": "void onObjectiveKill(GameEvent@ event)"
+        },
+        {
+          "label": "onObjectiveSpawn",
+          "kind": "function",
+          "detail": "void onObjectiveSpawn(GameEvent@ event)"
+        },
+        {
+          "label": "onInhibitorRespawn",
+          "kind": "function",
+          "detail": "void onInhibitorRespawn(GameEvent@ event)"
+        },
+        {
+          "label": "onTimelineReset",
+          "kind": "function",
+          "detail": "void onTimelineReset(GameEvent@ event)"
+        },
+        {
+          "label": "onAnimationStateEnter",
+          "kind": "function",
+          "detail": "void onAnimationStateEnter(const string &in state)"
+        },
+        {
+          "label": "onAnimationStateExit",
+          "kind": "function",
+          "detail": "void onAnimationStateExit(const string &in state)"
+        },
+        {
+          "label": "onAnimationTransition",
+          "kind": "function",
+          "detail": "void onAnimationTransition(const string &in fromState, const string &in toState)"
+        }
+      ]
+    },
+    {
+      "label": "Entity",
+      "detail": "Stable handle to a scene entity",
+      "members": [
+        {
+          "label": "valid",
+          "kind": "property",
+          "detail": "bool, read-only"
+        },
+        {
+          "label": "id",
+          "kind": "property",
+          "detail": "uint64, read-only"
+        },
+        {
+          "label": "position",
+          "kind": "property",
+          "detail": "Vec3"
+        },
+        {
+          "label": "rotation",
+          "kind": "property",
+          "detail": "Quat"
+        },
+        {
+          "label": "scale",
+          "kind": "property",
+          "detail": "Vec3"
+        },
+        {
+          "label": "opacity",
+          "kind": "property",
+          "detail": "float"
+        },
+        {
+          "label": "visible",
+          "kind": "property",
+          "detail": "bool"
+        },
+        {
+          "label": "parent",
+          "kind": "property",
+          "detail": "Entity@"
+        },
+        {
+          "label": "translate",
+          "kind": "function",
+          "detail": "void translate(const Vec3 &in)",
+          "apply": "translate(${arg1})"
+        },
+        {
+          "label": "unitAnchorNetworkId",
+          "kind": "property",
+          "detail": "uint"
+        },
+        {
+          "label": "setUnitAnchorTeamPosition",
+          "kind": "function",
+          "detail": "void setUnitAnchorTeamPosition(UnitAnchorTeam, uint)",
+          "apply": "setUnitAnchorTeamPosition(${arg1}, ${arg2})"
+        },
+        {
+          "label": "unitAnchorRelativeTransform",
+          "kind": "property",
+          "detail": "bool"
+        },
+        {
+          "label": "hasComponent",
+          "kind": "function",
+          "detail": "bool hasComponent(ComponentType) const",
+          "apply": "hasComponent(${arg1})"
+        },
+        {
+          "label": "text",
+          "kind": "property",
+          "detail": "string"
+        },
+        {
+          "label": "font",
+          "kind": "property",
+          "detail": "string"
+        },
+        {
+          "label": "textColor",
+          "kind": "property",
+          "detail": "Color"
+        },
+        {
+          "label": "decalTexture",
+          "kind": "property",
+          "detail": "string"
+        },
+        {
+          "label": "decalAngle",
+          "kind": "property",
+          "detail": "float"
+        },
+        {
+          "label": "streamName",
+          "kind": "property",
+          "detail": "string"
+        },
+        {
+          "label": "streamAutoStart",
+          "kind": "property",
+          "detail": "bool"
+        },
+        {
+          "label": "animationClip",
+          "kind": "property",
+          "detail": "string"
+        },
+        {
+          "label": "animationTime",
+          "kind": "property",
+          "detail": "float"
+        },
+        {
+          "label": "animationSpeed",
+          "kind": "property",
+          "detail": "float"
+        },
+        {
+          "label": "animationLooping",
+          "kind": "property",
+          "detail": "bool"
+        },
+        {
+          "label": "animationPlaying",
+          "kind": "property",
+          "detail": "bool"
+        },
+        {
+          "label": "animationStateMachineEnabled",
+          "kind": "property",
+          "detail": "bool"
+        },
+        {
+          "label": "animationState",
+          "kind": "property",
+          "detail": "string, read-only"
+        },
+        {
+          "label": "fireAnimationTrigger",
+          "kind": "function",
+          "detail": "void fireAnimationTrigger(const string &in)",
+          "apply": "fireAnimationTrigger(${arg1})"
+        },
+        {
+          "label": "playAnimation",
+          "kind": "function",
+          "detail": "void playAnimation()",
+          "apply": "playAnimation()"
+        },
+        {
+          "label": "pauseAnimation",
+          "kind": "function",
+          "detail": "void pauseAnimation()",
+          "apply": "pauseAnimation()"
+        },
+        {
+          "label": "stopAnimation",
+          "kind": "function",
+          "detail": "void stopAnimation()",
+          "apply": "stopAnimation()"
+        },
+        {
+          "label": "restartAnimation",
+          "kind": "function",
+          "detail": "void restartAnimation()",
+          "apply": "restartAnimation()"
+        },
+        {
+          "label": "isVideo",
+          "kind": "property",
+          "detail": "bool, read-only"
+        },
+        {
+          "label": "playVideo",
+          "kind": "function",
+          "detail": "bool playVideo()",
+          "apply": "playVideo()"
+        },
+        {
+          "label": "pauseVideo",
+          "kind": "function",
+          "detail": "bool pauseVideo()",
+          "apply": "pauseVideo()"
+        },
+        {
+          "label": "restartVideo",
+          "kind": "function",
+          "detail": "bool restartVideo()",
+          "apply": "restartVideo()"
+        },
+        {
+          "label": "videoPaused",
+          "kind": "property",
+          "detail": "bool, read-only"
+        },
+        {
+          "label": "videoSpeed",
+          "kind": "property",
+          "detail": "float"
+        }
+      ]
+    },
+    {
+      "label": "Team",
+      "detail": "League team",
+      "members": [
+        {
+          "label": "Neutral",
+          "kind": "property",
+          "detail": "Team value",
+          "value": 0
+        },
+        {
+          "label": "Blue",
+          "kind": "property",
+          "detail": "Team value",
+          "value": 100
+        },
+        {
+          "label": "Red",
+          "kind": "property",
+          "detail": "Team value",
+          "value": 200
+        }
+      ]
+    },
+    {
+      "label": "Role",
+      "detail": "Champion role",
+      "members": [
+        {
+          "label": "Top",
+          "kind": "property",
+          "detail": "Role value",
+          "value": 0
+        },
+        {
+          "label": "Jungle",
+          "kind": "property",
+          "detail": "Role value",
+          "value": 1
+        },
+        {
+          "label": "Middle",
+          "kind": "property",
+          "detail": "Role value",
+          "value": 2
+        },
+        {
+          "label": "Bottom",
+          "kind": "property",
+          "detail": "Role value",
+          "value": 3
+        },
+        {
+          "label": "Support",
+          "kind": "property",
+          "detail": "Role value",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "label": "GameEventType",
+      "detail": "Queued game notification type",
+      "members": [
+        {
+          "label": "ChampionKill",
+          "kind": "property",
+          "detail": "GameEventType value",
+          "value": 0
+        },
+        {
+          "label": "FirstBlood",
+          "kind": "property",
+          "detail": "GameEventType value",
+          "value": 1
+        },
+        {
+          "label": "TurretKill",
+          "kind": "property",
+          "detail": "GameEventType value",
+          "value": 2
+        },
+        {
+          "label": "InhibitorKill",
+          "kind": "property",
+          "detail": "GameEventType value",
+          "value": 3
+        },
+        {
+          "label": "Ace",
+          "kind": "property",
+          "detail": "GameEventType value",
+          "value": 4
+        },
+        {
+          "label": "TurretPlateDestroyed",
+          "kind": "property",
+          "detail": "GameEventType value",
+          "value": 5
+        },
+        {
+          "label": "MultiKill",
+          "kind": "property",
+          "detail": "GameEventType value",
+          "value": 6
+        },
+        {
+          "label": "DragonSteal",
+          "kind": "property",
+          "detail": "GameEventType value",
+          "value": 7
+        },
+        {
+          "label": "BaronSteal",
+          "kind": "property",
+          "detail": "GameEventType value",
+          "value": 8
+        },
+        {
+          "label": "VoidgrubSteal",
+          "kind": "property",
+          "detail": "GameEventType value",
+          "value": 9
+        },
+        {
+          "label": "AtakhanSteal",
+          "kind": "property",
+          "detail": "GameEventType value",
+          "value": 10
+        },
+        {
+          "label": "RiftHeraldSteal",
+          "kind": "property",
+          "detail": "GameEventType value",
+          "value": 11
+        },
+        {
+          "label": "ObjectiveKill",
+          "kind": "property",
+          "detail": "GameEventType value",
+          "value": 12
+        },
+        {
+          "label": "ObjectiveSpawn",
+          "kind": "property",
+          "detail": "GameEventType value",
+          "value": 13
+        },
+        {
+          "label": "TimelineReset",
+          "kind": "property",
+          "detail": "GameEventType value",
+          "value": 14
+        }
+      ]
+    },
+    {
+      "label": "ComponentType",
+      "detail": "Scene component type",
+      "members": [
+        {
+          "label": "Transform",
+          "kind": "property",
+          "detail": "ComponentType value",
+          "value": 0
+        },
+        {
+          "label": "Visibility",
+          "kind": "property",
+          "detail": "ComponentType value",
+          "value": 1
+        },
+        {
+          "label": "EditState",
+          "kind": "property",
+          "detail": "ComponentType value",
+          "value": 2
+        },
+        {
+          "label": "Script",
+          "kind": "property",
+          "detail": "ComponentType value",
+          "value": 3
+        },
+        {
+          "label": "MeshRenderer",
+          "kind": "property",
+          "detail": "ComponentType value",
+          "value": 4
+        },
+        {
+          "label": "DecalProjector",
+          "kind": "property",
+          "detail": "ComponentType value",
+          "value": 5
+        },
+        {
+          "label": "TextRenderer",
+          "kind": "property",
+          "detail": "ComponentType value",
+          "value": 6
+        },
+        {
+          "label": "StreamSource",
+          "kind": "property",
+          "detail": "ComponentType value",
+          "value": 7
+        },
+        {
+          "label": "SpriteRenderer",
+          "kind": "property",
+          "detail": "ComponentType value",
+          "value": 8
+        },
+        {
+          "label": "UnitAnchor",
+          "kind": "property",
+          "detail": "ComponentType value",
+          "value": 9
+        }
+      ]
+    },
+    {
+      "label": "ObjectiveState",
+      "detail": "AngelScript ObjectiveState type",
+      "members": [
+        {
+          "label": "kind",
+          "kind": "property",
+          "detail": "ObjectiveKind, read-only"
+        },
+        {
+          "label": "status",
+          "kind": "property",
+          "detail": "ObjectiveStatus, read-only"
+        },
+        {
+          "label": "alive",
+          "kind": "property",
+          "detail": "bool, read-only"
+        },
+        {
+          "label": "timerKnown",
+          "kind": "property",
+          "detail": "bool, read-only"
+        },
+        {
+          "label": "elder",
+          "kind": "property",
+          "detail": "bool, read-only"
+        },
+        {
+          "label": "networkId",
+          "kind": "property",
+          "detail": "uint, read-only"
+        },
+        {
+          "label": "team",
+          "kind": "property",
+          "detail": "Team, read-only"
+        },
+        {
+          "label": "laneIndex",
+          "kind": "property",
+          "detail": "int, read-only"
+        },
+        {
+          "label": "positionIndex",
+          "kind": "property",
+          "detail": "int, read-only"
+        },
+        {
+          "label": "epoch",
+          "kind": "property",
+          "detail": "uint64, read-only"
+        },
+        {
+          "label": "spawnAt",
+          "kind": "property",
+          "detail": "float, read-only"
+        },
+        {
+          "label": "lastKilledAt",
+          "kind": "property",
+          "detail": "float, read-only"
+        },
+        {
+          "label": "timeRemaining",
+          "kind": "property",
+          "detail": "float, read-only"
+        },
+        {
+          "label": "object",
+          "kind": "property",
+          "detail": "GameObject@, read-only"
+        }
+      ]
+    },
+    {
+      "label": "ScreenRect",
+      "detail": "AngelScript ScreenRect type",
+      "members": [
+        {
+          "label": "x",
+          "kind": "property",
+          "detail": "float"
+        },
+        {
+          "label": "y",
+          "kind": "property",
+          "detail": "float"
+        },
+        {
+          "label": "width",
+          "kind": "property",
+          "detail": "float"
+        },
+        {
+          "label": "height",
+          "kind": "property",
+          "detail": "float"
+        },
+        {
+          "label": "right",
+          "kind": "property",
+          "detail": "float, read-only"
+        },
+        {
+          "label": "bottom",
+          "kind": "property",
+          "detail": "float, read-only"
+        }
+      ]
+    },
+    {
+      "label": "HealthBar",
+      "detail": "AngelScript HealthBar type",
+      "members": [
+        {
+          "label": "heroNetworkId",
+          "kind": "property",
+          "detail": "uint, read-only"
+        },
+        {
+          "label": "bar",
+          "kind": "property",
+          "detail": "ScreenRect, read-only"
+        },
+        {
+          "label": "border",
+          "kind": "property",
+          "detail": "ScreenRect, read-only"
+        }
+      ]
+    },
+    {
+      "label": "ObjectiveKind",
+      "detail": "AngelScript ObjectiveKind type",
+      "members": [
+        {
+          "label": "Unknown",
+          "kind": "property",
+          "detail": "ObjectiveKind value",
+          "value": 0
+        },
+        {
+          "label": "Dragon",
+          "kind": "property",
+          "detail": "ObjectiveKind value",
+          "value": 1
+        },
+        {
+          "label": "Baron",
+          "kind": "property",
+          "detail": "ObjectiveKind value",
+          "value": 2
+        },
+        {
+          "label": "Voidgrubs",
+          "kind": "property",
+          "detail": "ObjectiveKind value",
+          "value": 3
+        },
+        {
+          "label": "RiftHerald",
+          "kind": "property",
+          "detail": "ObjectiveKind value",
+          "value": 4
+        },
+        {
+          "label": "Atakhan",
+          "kind": "property",
+          "detail": "ObjectiveKind value",
+          "value": 5
+        },
+        {
+          "label": "Inhibitor",
+          "kind": "property",
+          "detail": "ObjectiveKind value",
+          "value": 6
+        }
+      ]
+    },
+    {
+      "label": "ObjectiveStatus",
+      "detail": "AngelScript ObjectiveStatus type",
+      "members": [
+        {
+          "label": "Unknown",
+          "kind": "property",
+          "detail": "ObjectiveStatus value",
+          "value": 0
+        },
+        {
+          "label": "NotSpawned",
+          "kind": "property",
+          "detail": "ObjectiveStatus value",
+          "value": 1
+        },
+        {
+          "label": "Alive",
+          "kind": "property",
+          "detail": "ObjectiveStatus value",
+          "value": 2
+        },
+        {
+          "label": "Respawning",
+          "kind": "property",
+          "detail": "ObjectiveStatus value",
+          "value": 3
+        },
+        {
+          "label": "Despawned",
+          "kind": "property",
+          "detail": "ObjectiveStatus value",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "label": "UnitAnchorTeam",
+      "detail": "AngelScript UnitAnchorTeam type",
+      "members": [
+        {
+          "label": "Blue",
+          "kind": "property",
+          "detail": "UnitAnchorTeam value",
+          "value": 0
+        },
+        {
+          "label": "Red",
+          "kind": "property",
+          "detail": "UnitAnchorTeam value",
+          "value": 1
+        }
+      ]
+    }
+  ],
+  "globals": [
+    {
+      "label": "self",
+      "kind": "variable",
+      "detail": "protected Entity@"
+    },
+    {
+      "label": "abs",
+      "kind": "function",
+      "detail": "float abs(float)",
+      "apply": "abs(${arg1})"
+    },
+    {
+      "label": "acos",
+      "kind": "function",
+      "detail": "float acos(float)",
+      "apply": "acos(${arg1})"
+    },
+    {
+      "label": "asin",
+      "kind": "function",
+      "detail": "float asin(float)",
+      "apply": "asin(${arg1})"
+    },
+    {
+      "label": "atan",
+      "kind": "function",
+      "detail": "float atan(float)",
+      "apply": "atan(${arg1})"
+    },
+    {
+      "label": "atan2",
+      "kind": "function",
+      "detail": "float atan2(float, float)",
+      "apply": "atan2(${arg1}, ${arg2})"
+    },
+    {
+      "label": "ceil",
+      "kind": "function",
+      "detail": "float ceil(float)",
+      "apply": "ceil(${arg1})"
+    },
+    {
+      "label": "closeTo",
+      "kind": "function",
+      "detail": "bool closeTo(float, float, float = 0.00001f)",
+      "apply": "closeTo(${arg1}, ${arg2}, ${arg3})"
+    },
+    {
+      "label": "cos",
+      "kind": "function",
+      "detail": "float cos(float)",
+      "apply": "cos(${arg1})"
+    },
+    {
+      "label": "cosh",
+      "kind": "function",
+      "detail": "float cosh(float)",
+      "apply": "cosh(${arg1})"
+    },
+    {
+      "label": "floor",
+      "kind": "function",
+      "detail": "float floor(float)",
+      "apply": "floor(${arg1})"
+    },
+    {
+      "label": "fraction",
+      "kind": "function",
+      "detail": "float fraction(float)",
+      "apply": "fraction(${arg1})"
+    },
+    {
+      "label": "log",
+      "kind": "function",
+      "detail": "float log(float)",
+      "apply": "log(${arg1})"
+    },
+    {
+      "label": "log10",
+      "kind": "function",
+      "detail": "float log10(float)",
+      "apply": "log10(${arg1})"
+    },
+    {
+      "label": "pow",
+      "kind": "function",
+      "detail": "float pow(float, float)",
+      "apply": "pow(${arg1}, ${arg2})"
+    },
+    {
+      "label": "sin",
+      "kind": "function",
+      "detail": "float sin(float)",
+      "apply": "sin(${arg1})"
+    },
+    {
+      "label": "sinh",
+      "kind": "function",
+      "detail": "float sinh(float)",
+      "apply": "sinh(${arg1})"
+    },
+    {
+      "label": "sqrt",
+      "kind": "function",
+      "detail": "float sqrt(float)",
+      "apply": "sqrt(${arg1})"
+    },
+    {
+      "label": "tan",
+      "kind": "function",
+      "detail": "float tan(float)",
+      "apply": "tan(${arg1})"
+    },
+    {
+      "label": "tanh",
+      "kind": "function",
+      "detail": "float tanh(float)",
+      "apply": "tanh(${arg1})"
+    }
+  ],
+  "snippets": [
+    {
+      "label": "Script class",
+      "detail": "Required scene script class",
+      "apply": "final class Script : SceneScript\n{\n    Script(Entity@ owner)\n    {\n        super(owner);\n    }\n\n    void onUpdate(float dt) override\n    {\n        ${}\n    }\n}"
+    },
+    {
+      "label": "game event callback",
+      "detail": "Handle every game notification",
+      "apply": "void onGameEvent(GameEvent@ event) override\n{\n    if (event is null) return;\n    ${}\n}"
+    },
+    {
+      "label": "champion kill callback",
+      "detail": "Handle champion deaths",
+      "apply": "void onChampionKill(GameEvent@ event) override\n{\n    Hero@ killer = event.killer;\n    Hero@ victim = event.victim;\n    ${}\n}"
+    },
+    {
+      "label": "editable field",
+      "detail": "Public script fields appear in the Inspector; use private for runtime-only state",
+      "apply": "float ${name} = ${1.0}f;"
+    }
+  ],
+  "keywords": [
+    "abstract",
+    "bool",
+    "break",
+    "class",
+    "const",
+    "continue",
+    "else",
+    "false",
+    "final",
+    "float",
+    "for",
+    "if",
+    "int",
+    "namespace",
+    "null",
+    "override",
+    "private",
+    "protected",
+    "return",
+    "string",
+    "super",
+    "this",
+    "true",
+    "uint",
+    "uint64",
+    "void",
+    "while"
+  ]
+}
