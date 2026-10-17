@@ -1,8 +1,9 @@
 import { spawn } from 'node:child_process';
 import { createServer } from 'node:net';
-import { access, mkdir, open, readFile, unlink } from 'node:fs/promises';
+import { randomBytes } from 'node:crypto';
+import { access, mkdir, open, readFile, unlink, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
-import { moduleRoot, loadKey } from './config.mjs';
+import { moduleRoot, loadKey, frontendBrowserDir } from './config.mjs';
 import { createFrontend } from './frontend.mjs';
 
 export async function availablePort(port) {
@@ -16,6 +17,27 @@ export async function backendHealth(port) {
   const health = await res.json();
   if (!res.ok || health.module !== 'riot-overlay-valorant') throw new Error('Unexpected backend');
   return { status: health.status, matchesRunning: health.matchesRunning, observersConnected: health.observersConnected };
+}
+
+// Cổng lệnh thủ công của Client fork: cố định theo cổng output để không đổi schema config.
+export const controlPort = config => config.ports.output + 10;
+
+// Client fork (GPL, build từ source trong modules/valorant/collector) chạy ẩn cửa sổ; Studio cấp config, key đọc từ file.
+export async function forkCollector(config, configPath) {
+  const dir = resolve(moduleRoot, 'collector');
+  const electron = resolve(dir, 'node_modules/@overwolf/ow-electron/dist/electron.exe');
+  await access(electron);
+  await access(resolve(dir, 'app/main.js'));
+  const runtimeDir = resolve(dirname(configPath), 'runtime');
+  const configFile = resolve(runtimeDir, 'headless.json');
+  await writeFile(configFile, JSON.stringify({ ingestIp: `http://127.0.0.1:${config.ports.ingest}`, groupCode: config.groupCode,
+    keyFile: resolve(dirname(configPath), 'auth.key'), observerName: 'Riot Overlay',
+    controlPort: controlPort(config), controlToken: randomBytes(32).toString('hex'),
+    teamLogoUrl: `http://127.0.0.1:${config.ports.frontend}/assets/misc/logo.webp` }), { mode: 0o600 });
+  const profile = resolve(dirname(configPath), 'collector/fork-profile');
+  await mkdir(profile, { recursive: true });
+  return { command: electron, args: [dir], cwd: dir,
+    env: { ...process.env, RIOT_OVERLAY_SPECTRA_CONFIG: configFile, RIOT_OVERLAY_SPECTRA_PROFILE: profile } };
 }
 
 export async function startModule({ config, configPath, servicesOnly = false, startupMs = 15000, onState = () => {} }) {
@@ -55,7 +77,7 @@ export async function startModule({ config, configPath, servicesOnly = false, st
   };
   try {
     await access(resolve(moduleRoot, 'backend/dist/index.js'));
-    const browserDir = resolve(moduleRoot, 'frontend/dist/spectra-frontend/browser');
+    const { dir: browserDir, variant: frontendVariant } = await frontendBrowserDir(config);
     await access(resolve(browserDir, 'index.html'));
     const authKey = await loadKey(configPath);
     if (!servicesOnly && config.collectorPath) await access(config.collectorPath);
@@ -73,7 +95,7 @@ export async function startModule({ config, configPath, servicesOnly = false, st
     }
     lockOwned = true;
     await lock.writeFile(JSON.stringify({ pid: process.pid }));
-    for (const port of Object.values(config.ports)) await availablePort(port);
+    for (const port of [...Object.values(config.ports), controlPort(config)]) await availablePort(port);
     const backend = spawn(process.execPath, [resolve(moduleRoot, 'backend/dist/index.js')], {
       cwd: runtimeDir, windowsHide: true, stdio: 'ignore', shell: false,
       env: { ...process.env, INSECURE: 'true', USE_BACKEND: 'false', REQUIRE_AUTH_KEY: 'true', AUTH_KEY: authKey,
@@ -95,14 +117,23 @@ export async function startModule({ config, configPath, servicesOnly = false, st
     const getStatus = async () => {
       let health = null;
       try { health = await backendHealth(config.ports.extras); } catch {}
-      return { module: 'valorant', groupCode: config.groupCode, backend: health ? backendState : 'unavailable', frontend: stopping ? 'stopped' : 'ready',
+      return { module: 'valorant', groupCode: config.groupCode, frontendVariant, backend: health ? backendState : 'unavailable', frontend: stopping ? 'stopped' : 'ready',
         collector: collectorState, observerConnected: (health?.observersConnected ?? 0) > 0, matchesRunning: health?.matchesRunning ?? 0,
         telemetry: 'not-yet-verified', ports: config.ports };
     };
     frontend = createFrontend({ config, browserDir, getStatus });
     await new Promise((ok, fail) => { frontend.once('error', fail); frontend.listen(config.ports.frontend, '127.0.0.1', ok); });
     frontend.on('error', () => { fatalResolve('frontend-failed'); void stop(); });
-    if (!servicesOnly && config.collectorPath) {
+    const fork = !servicesOnly && config.collectorMode === 'fork' ? await forkCollector(config, configPath).catch(() => null) : null;
+    if (fork) {
+      // Bản fork tự kết nối ingest và ẩn cửa sổ; chỉ process do module này tạo mới bị dừng.
+      const collector = spawn(fork.command, fork.args, { cwd: fork.cwd, env: fork.env, windowsHide: true, stdio: 'ignore', shell: false });
+      children.push(collector);
+      collectorState = 'fork-starting';
+      collector.on('spawn', () => { collectorState = 'fork-running-gep-unverified'; onState(collectorState); });
+      collector.on('error', () => { collectorState = 'launch-failed'; onState(collectorState); });
+      collector.on('exit', code => { collectorState = stopping ? 'stopped' : `fork-exited-${code}`; onState(collectorState); });
+    } else if (!servicesOnly && config.collectorPath) {
       // Collector is an interactive GUI: the operator must see GEP/auth status.
       // Keep backend/helpers hidden, but do not hide this application's window.
       const collector = spawn(config.collectorPath, [], { cwd: dirname(config.collectorPath), windowsHide: false, stdio: 'ignore', shell: false });

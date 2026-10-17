@@ -135,7 +135,7 @@ export const gameModules = [
   {
     id: "valorant",
     name: "VALORANT",
-    status: "planned",
-    description: "Chưa có adapter, phase mở rộng",
+    status: "experimental",
+    description: "Adapter Spectra (Socket.IO), chưa kiểm chứng đủ 10 người",
   },
 ] as const;

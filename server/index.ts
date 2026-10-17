@@ -17,6 +17,8 @@ import { createState, applyCommand, tick } from "../shared/mock";
 import type { State } from "../shared/schema";
 import { PostgameService, postgameError } from "./postgame-service";
 import { ReplayHudService } from "./replay-hud";
+import { ValorantSpectraSource, loadSpectraOptions } from "./valorant-spectra";
+import { sendValorantCommand } from "./valorant-control";
 import { COLLECTOR_SAMPLE_INTERVAL_MS, remainingSampleDelay } from "../shared/capture-rules";
 const host = "127.0.0.1",
   port = Number(process.env.PORT || 4310);
@@ -47,6 +49,8 @@ if (startProvider === "riot" || startProvider === "recording") state.provider = 
 if (process.argv.includes("--collector")) state.provider = "league-collector";
 if (process.argv.includes("--collector-accountless")) state.provider = "collector-accountless";
 const postgame = new PostgameService();
+// Nguồn Valorant chỉ mở socket khi Studio/overlay Valorant hỏi lần đầu; không ảnh hưởng LoL.
+const valorant = new ValorantSpectraSource(await loadSpectraOptions());
 const replayHud = new ReplayHudService();
 // Isolated verification can persist a temporary theme without touching user branding.
 const themePath = resolve(process.env.RIOT_OVERLAY_THEME_PATH || "data/theme.json");
@@ -294,6 +298,80 @@ const server = createServer(async (req, res) => {
     }
     return;
   }
+  if (req.url === "/api/valorant/status" || req.url === "/api/valorant/frame") {
+    res.setHeader("Content-Type", "application/json");
+    res.setHeader("Cache-Control", "no-store");
+    const allowed = [`http://${host}:${port}`, `http://localhost:${port}`];
+    if (
+      ![`127.0.0.1:${port}`, `localhost:${port}`].includes(req.headers.host || "") ||
+      (req.headers.origin && !allowed.includes(req.headers.origin)) ||
+      req.headers["sec-fetch-site"] === "cross-site"
+    ) {
+      res.writeHead(403);
+      res.end('{"error":"Forbidden"}');
+      return;
+    }
+    if (req.method !== "GET") {
+      res.writeHead(405, { Allow: "GET" });
+      res.end("{}");
+      return;
+    }
+    valorant.start();
+    res.end(
+      JSON.stringify(
+        req.url === "/api/valorant/status"
+          ? valorant.snapshot()
+          : { status: valorant.snapshot().status, frame: valorant.observe() },
+      ),
+    );
+    return;
+  }
+  if (req.url === "/api/valorant/control") {
+    res.setHeader("Content-Type", "application/json");
+    res.setHeader("Cache-Control", "no-store");
+    const allowed = [`http://${host}:${port}`, `http://localhost:${port}`];
+    // Lệnh thay đổi hiển thị phát sóng: bắt buộc cùng origin, POST và JSON.
+    if (
+      ![`127.0.0.1:${port}`, `localhost:${port}`].includes(req.headers.host || "") ||
+      !allowed.includes(req.headers.origin || "") ||
+      req.headers["sec-fetch-site"] === "cross-site"
+    ) {
+      res.writeHead(403);
+      res.end('{"error":"Forbidden"}');
+      return;
+    }
+    if (req.method !== "POST") {
+      res.writeHead(405, { Allow: "POST" });
+      res.end("{}");
+      return;
+    }
+    if (req.headers["content-type"]?.split(";")[0] !== "application/json") {
+      res.writeHead(415);
+      res.end('{"error":"json-required"}');
+      return;
+    }
+    const chunks: Buffer[] = [];
+    let size = 0;
+    for await (const chunk of req) {
+      size += chunk.length;
+      if (size > 4096) {
+        res.writeHead(413);
+        res.end('{"error":"body-too-large"}');
+        return;
+      }
+      chunks.push(Buffer.from(chunk));
+    }
+    let input: unknown;
+    try {
+      input = JSON.parse(Buffer.concat(chunks).toString("utf8"));
+    } catch {
+      input = null;
+    }
+    const outcome = await sendValorantCommand(input);
+    res.writeHead(outcome.ok ? 200 : outcome.error === "invalid-command" ? 400 : 409);
+    res.end(JSON.stringify(outcome));
+    return;
+  }
   if (req.url === "/api/health") {
     res.setHeader("Content-Type", "application/json");
     res.end(
@@ -312,7 +390,7 @@ const server = createServer(async (req, res) => {
   try {
     const path = decodeURIComponent((req.url || "/").split("?")[0]);
     const file =
-      path === "/" || path === "/overlay"
+      path === "/" || path === "/overlay" || path === "/valorant-overlay"
         ? resolve("dist/index.html")
         : resolve("dist", "." + path);
     if (!file.startsWith(resolve("dist") + "/") && !file.startsWith(resolve("dist") + "\\"))
@@ -575,6 +653,7 @@ async function shutdown() {
   localCollector.stop();
   accountlessCollector.stop();
   leagueBroadcast.stop();
+  valorant.stop();
   for (const client of wss.clients) client.terminate();
   await collectorRuntime.stop();
   await accountlessRuntime.stop();

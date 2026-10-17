@@ -31,5 +31,16 @@
       ".vscode"
     ],
     "archiveSha256": "963c32e9382611af48e6b920326a3660d6abc1338160ce3b86316d12242c116f"
+  },
+  {
+    "repository": "https://github.com/nobiiVAL/Spectra-Frontend-VAL26",
+    "revision": "938cf707da7431d1bc3a70164a662bff3597ecbf",
+    "directory": "frontend-val26",
+    "license": "Elastic License 2.0",
+    "attribution": "nobiiVAL, fork of ValoSpectra/Spectra-Frontend (Purple Shark UG, nobii)",
+    "excluded": [
+      ".git",
+      ".github"
+    ]
   }
 ]

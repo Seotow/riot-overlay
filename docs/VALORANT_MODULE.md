@@ -151,3 +151,42 @@ sát Ready trực tiếp từ cửa sổ/log version nhưng status module chưa 
 thu mẫu game thật, capability/normalization đầy đủ, custom giao diện/branding,
 nhúng FE vào Studio và launcher chung LoL+Valorant. Không có collector mới thay GEP.
 Giấy phép/provenance và khác biệt manifest được ghi ở `modules/valorant/MODIFICATIONS.md`.
+
+## Client fork tự gắn vào app (18/10/2026)
+
+`npm run start:all` chạy Studio + backend/FE Valorant + **Client fork** (build từ source trong
+`modules/valorant/collector`), không cần mở Spectra Client hay nhập form. Fork thêm `src/headless.ts`:
+chỉ bật khi có `RIOT_OVERLAY_SPECTRA_CONFIG` (JSON do supervisor ghi vào `data/valorant/runtime/headless.json`,
+chỉ chứa ingest loopback, group code và đường dẫn tới `auth.key`; key không nằm trong config và không ghi log).
+Chế độ này ẩn cửa sổ/tray, bỏ kiểm tra cập nhật, nuốt hộp thoại, tự kết nối ingest và dùng profile riêng
+(`data/valorant/collector/fork-profile`, `RIOT_OVERLAY_SPECTRA_PROFILE`) nên không đụng Client cài sẵn.
+Không có biến này thì fork chạy như upstream. GEP do Overwolf cung cấp qua ow-electron, không cần đăng nhập.
+
+Build (một lần, cần Node 22, Yarn 4 qua corepack; không cần Visual Studio vì bỏ qua rebuild native):
+
+```powershell
+cd modules/valorant/collector
+$env:YARN_ENABLE_SCRIPTS = "false"; yarn install
+node node_modules/@overwolf/ow-electron/install.js
+npx tsc; yarn workspace angular build
+```
+
+`collectorMode` trong `data/valorant/module.json` (`fork` mặc định, hoặc `official` để dùng
+`collectorPath`). Fork chưa build thì supervisor quay về `collectorPath` nếu có. Chỉ nên chạy một Client tại
+một thời điểm: Client chính thức đang mở sẽ tranh GEP với fork. Đã kiểm chứng: fork xác thực với backend,
+GEP 315.3.5 báo ready, observer=1, Studio `receiving` ở lobby. Chưa kiểm trong trận.
+Dừng bằng Ctrl+C ở terminal launcher; nếu launcher bị kill đột ngột, process Electron của fork có thể còn sót.
+
+## Điều khiển thủ công và overlay VAL26 (18/10/2026)
+
+Trang Studio `/?page=valorant` có các nút tương đương phím nóng/nút của Spectra Client: bom đã đặt (chỉ nhận khi
+round đang combat), tech pause, timeout đội trái/phải, đổi KDA/credits, đổi trái-phải, đổi tấn công-thủ và toast.
+Lệnh đi Studio `POST /api/valorant/control` (cùng origin, JSON, allowlist) → Client fork (cổng output + 10, bearer
+token trong `data/valorant/runtime/headless.json`, không trả về trình duyệt) → ingest. Trạng thái pause/timeout/toast đọc
+lại từ frame (`controls`) và là dữ liệu nhập tay, không phải telemetry. Đã kiểm: tech pause, đổi KDA/credits, toast
+(tự tắt) và chặn origin lạ; chưa thử plant/timeout trong trận.
+
+Overlay in-game dùng bản **VAL26** của nobiiVAL (`modules/valorant/frontend-val26`, ELv2, xem `SOURCE.md`):
+`http://127.0.0.1:5322/overlay?groupCode=RIOTLOCAL` (OBS 1920×1080). Build bằng `npm run build:valorant`
+(hoặc `npm run build` trong thư mục đó). `frontendVariant: "spectra"` trong `data/valorant/module.json` quay về bản cũ.
+Chưa audit toàn bộ widget/animation; team name/logo đang là mặc định "Team 1/Team 2" cho tới khi có cấu hình đội.
