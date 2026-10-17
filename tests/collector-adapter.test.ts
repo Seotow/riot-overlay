@@ -683,3 +683,21 @@ test("WebSocket consumer receives native envelopes and clears output on socket c
     await new Promise<void>((resolve) => server.close(() => resolve()));
   }
 });
+
+test("ultimate skill level is passed through only for R and only when valid", () => {
+  const ult = (level: unknown) => {
+    const raw: any = fixture();
+    raw.data.heroes[0].spells.find((s: any) => s.index === 3).level = level;
+    raw.data.heroes[0].spells.find((s: any) => s.index === 4).level = 3;
+    const cooldowns = normalizeCollector(raw, base)!.sample.players[0].cooldowns?.value;
+    return {
+      r: cooldowns?.find((c) => c.slot === "R"),
+      flash: cooldowns?.find((c) => c.slot === "D"),
+    };
+  };
+  assert.equal(ult(0).r?.level, 0);
+  assert.equal(ult(1).r?.level, 1);
+  assert.equal("level" in (ult(undefined).r ?? {}), false);
+  assert.equal("level" in (ult(99).r ?? {}), false);
+  assert.equal("level" in (ult(1).flash ?? {}), false);
+});

@@ -591,7 +591,7 @@ test("team lead, lane gaps, towers, dragons and objective timers use observed da
   assert.ok(html.includes("is-available"));
   assert.ok(!html.includes(">LIVE<"));
 });
-test("ultimate stays locked below level 6 even when its cooldown reads ready, and unlocks at 6", () => {
+test("ultimate is locked by its own skill level, not by champion level 6", () => {
   const f = frame(),
     s = f.sample!;
   s.assetVersion = liveCatalog.version;
@@ -601,20 +601,29 @@ test("ultimate stays locked below level 6 even when its cooldown reads ready, an
     source: "leaguebroadcast" as const,
     observedAt: s.capturedAt,
   });
-  for (const p of s.players) {
-    p.championId = observed(120);
-    p.cooldowns = observed([{ kind: "ultimate" as const, slot: "R", readyAt: 0, total: 100 }]);
-    p.level = observed(5);
-  }
+  const setUltimate = (level: number | undefined, championLevel: number) => {
+    for (const p of s.players) {
+      p.championId = observed(120);
+      p.cooldowns = observed([
+        { kind: "ultimate" as const, slot: "R", readyAt: 0, total: 100, level },
+      ]);
+      p.level = observed(championLevel);
+    }
+  };
   const render = () =>
     renderToStaticMarkup(createElement(LiveOverlay, { theme: createState().theme, frame: f, now }));
+  const covers = (html: string) => (html.match(/class="ult-lock-cover"/g) || []).length;
+  // Level 6 champion that has not put a point in R: covered, on both icons of every player.
+  setUltimate(0, 9);
   let html = render();
-  assert.equal((html.match(/class="row-ultimate on-cooldown"/g) || []).length, 10);
-  assert.match(html, /Chưa học R \(cấp 6\)/);
-  // Solid black cover on both the panel icon and the simple-layout icon of every player.
-  assert.equal((html.match(/class="ult-lock-cover"/g) || []).length, 20);
-  for (const p of s.players) p.level = observed(6);
+  assert.equal(covers(html), 20);
+  assert.match(html, /Chưa cộng điểm R/);
+  // Learned before level 6 (ultimate available early): not covered.
+  setUltimate(1, 3);
   html = render();
+  assert.equal(covers(html), 0);
   assert.equal((html.match(/class="row-ultimate on-cooldown"/g) || []).length, 0);
-  assert.equal((html.match(/ult-lock-cover/g) || []).length, 0);
+  // No skill level from the source: nothing is assumed, whatever the champion level.
+  setUltimate(undefined, 2);
+  assert.equal(covers(render()), 0);
 });

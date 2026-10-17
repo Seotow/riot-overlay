@@ -73,6 +73,8 @@ export const observedPlayerSchema = z
               id: z.number().int().positive().optional(),
               readyAt: finite,
               total: finite,
+              // Skill level of the ability (0 = not learned). Only reported for the ultimate.
+              level: z.number().int().min(0).max(18).optional(),
             })
             .strict(),
         )

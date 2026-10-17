@@ -191,15 +191,16 @@ function LiveRow({
 }) {
   const c = assetsReady ? liveChampion(player?.championId.value) : undefined;
   const ultimate = player?.cooldowns?.value?.find((c) => c.kind === "ultimate");
-  // R cannot be used before it is learned at level 6, whatever readyAt says.
-  const ultimateLocked = player?.level?.value != null && player.level.value < 6;
+  // R is locked while its own skill level is 0: some champions have it from level 1 and a level 6
+  // champion may not have learned it yet. Without a skill level nothing is assumed.
+  const ultimateLocked = ultimate?.level === 0;
   const ultimateRemaining = ultimateLocked
     ? null
     : time == null || !ultimate
       ? null
       : Math.max(0, ultimate.readyAt - time);
   const ultimateTitle = ultimateLocked
-    ? "Chưa học R (cấp 6)"
+    ? "Chưa cộng điểm R"
     : ultimateRemaining === null
       ? "Chưa có dữ liệu cooldown R"
       : `R ${Math.ceil(ultimateRemaining)}`;

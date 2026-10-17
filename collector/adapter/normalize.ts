@@ -136,6 +136,8 @@ export function normalizeCollector(raw: unknown, nowMs: number): NormalizedColle
         slot: s.index === 3 ? "R" : s.index === 4 ? "D" : "F",
         readyAt: num(s.readyAt),
         total: num(s.maxCooldown),
+        // The ultimate's own skill level decides whether it can be used, not the champion level.
+        level: s.index === 3 ? num(s.level, true, 18) : null,
       }));
     const validAbilityCooldowns =
       cooldowns &&
@@ -146,6 +148,7 @@ export function normalizeCollector(raw: unknown, nowMs: number): NormalizedColle
             slot: string;
             readyAt: number;
             total: number;
+            level: number | null;
           }[])
         : null;
     const itemCooldowns =
@@ -174,7 +177,12 @@ export function normalizeCollector(raw: unknown, nowMs: number): NormalizedColle
         : [];
     const validCooldowns =
       validAbilityCooldowns || itemCooldowns.length
-        ? [...(validAbilityCooldowns ?? []), ...itemCooldowns]
+        ? [
+            ...(validAbilityCooldowns ?? []).map(({ level, ...c }) =>
+              level === null ? c : { ...c, level },
+            ),
+            ...itemCooldowns,
+          ]
         : null;
     const perks = collectorPerks(h.perks);
     const extras = collectorPlayerExtras(h, gameTime);
