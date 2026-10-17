@@ -3,7 +3,7 @@ import { Input } from "./components/ui/input";
 import { useState } from "react";
 import { postgameSampleSchema, samplePostgame } from "../shared/postgame";
 import type { Command, State } from "../shared/schema";
-import { RiotPostgamePanel } from "./RiotPostgamePanel";
+import { PostgamePanel } from "./PostgamePanel";
 
 export function PostgameDesk({
   state,
@@ -32,10 +32,9 @@ export function PostgameDesk({
           </div>
         </div>
         <p role="status">
-          Postgame đang được nghiên cứu nguồn dữ liệu nên overlay postgame trống và các thao tác
-          nhập, tải, phát bị khóa. Máy spectator không có màn kết thúc trận, lịch sử trận tùy chọn
-          hay EOG; dữ liệu đầy đủ hiện chỉ có ở client người tham gia. Chi tiết và các hướng đang
-          cân nhắc: docs/POSTGAME_DATA_FINDINGS.md.
+          Postgame đang bị khóa nên overlay postgame trống và các thao tác nhập, nạp, phát bị khóa.
+          Máy spectator không có màn kết thúc trận, lịch sử trận tùy chọn hay EOG. Hướng đã chốt là
+          replay .rofl; chi tiết: docs/POSTGAME_DATA_FINDINGS.md.
         </p>
         <p>
           Khóa do backend được khởi động với <code>RIOT_OVERLAY_POSTGAME=0</code>; bỏ biến này để
@@ -63,7 +62,7 @@ export function PostgameDesk({
           Mở overlay postgame ↗
         </a>
       </div>
-      <RiotPostgamePanel state={state} connected={connected} />
+      <PostgamePanel state={state} connected={connected} />
       <h3>Xem trước</h3>
       <div className="program-monitor">
         <iframe title="Preview postgame OBS" src="/overlay?scene=postgame" />

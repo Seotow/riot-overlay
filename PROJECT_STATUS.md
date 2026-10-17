@@ -42,18 +42,15 @@ trí, cấm chọn, lịch sử vàng, rồng. Khóa lại bằng `RIOT_OVERLAY_
 - ROFL đọc được damage của 10 người, khớp LCU. Người dùng xác nhận file do
   tài khoản Seotoww tải trước đó. **Tạm hoãn hướng ROFL**, chưa làm import hoặc
   coi đây là nguồn tự động cho spectator. Elder counter còn lệch với raw.
-- Standard API key đã thử: custom 404, trận thường đối chứng 403. Chưa xác
-  nhận được quyền truy cập Match-V5 của key hiện tại.
+- Riot API (Standard/RSO) và LCU EOG đã gỡ khỏi project (18/10/2026) sau khi chốt hướng replay `.rofl`;
+  mã cũ còn trong lịch sử Git.
 - Damage theo combat, một số champion stack, end-game tự động và draft live
   chưa hoàn tất. Không bù dữ liệu thiếu bằng mock.
 - Ẩn riêng dấu 18+ VNG đang nghiên cứu. REA và Valorant giữ riêng, không
   nằm trong bản vận hành LoL này.
 
-- 17/10: LCU có `gameclient-eog-stats-block`, `eog-stats-block` và `lol-replays` (tải `.rofl` theo gameId).
-  Đã đo game 1608102102: spectator không nhận EOG (phase InProgress → None); client người tham gia có
-  `eog-stats-block` đủ 10 người kèm damage và winner. Hướng tiếp: đọc EOG trên máy người tham gia rồi
-  chuyển sang Studio. Xem mục "Điều tra hướng cho tài khoản spectator" trong
-  [postgame](docs/POSTGAME_DATA_FINDINGS.md).
+- 17/10: đo game 1608102102: spectator không nhận EOG; chỉ client người tham gia có. Số đo giữ ở
+  [postgame](docs/POSTGAME_DATA_FINDINGS.md); hướng vận hành là replay `.rofl`.
 
 Chi tiết: [LCU](docs/LCU_POSTGAME_FINDINGS.md),
 [ROFL](docs/ROFL_POSTGAME_FINDINGS.md), [postgame](docs/POSTGAME_DATA_FINDINGS.md).

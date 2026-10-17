@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { spawn } from "node:child_process";
 import { createServer as createPortProbe } from "node:net";
 import { mkdtemp, readFile, rm } from "node:fs/promises";
-import { existsSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { WebSocket } from "ws";
@@ -25,26 +25,15 @@ await new Promise<void>((resolve, reject) => {
 });
 const directory = await mkdtemp(join(tmpdir(), "riot-overlay-test-"));
 const themePath = join(directory, "theme.json");
-const server = spawn(
-  process.execPath,
-  [
-    "--import",
-    "tsx",
-    "--import",
-    "./tests/fixtures/riot-api-preload.ts",
-    "server/index.ts",
-    "--production",
-  ],
-  {
-    env: {
-      ...process.env,
-      PORT: "4311",
-      RIOT_OVERLAY_THEME_PATH: themePath,
-      RIOT_OVERLAY_PROVIDER: "riot",
-    },
-    stdio: ["ignore", "pipe", "pipe"],
+const server = spawn(process.execPath, ["--import", "tsx", "server/index.ts", "--production"], {
+  env: {
+    ...process.env,
+    PORT: "4311",
+    RIOT_OVERLAY_THEME_PATH: themePath,
+    RIOT_OVERLAY_PROVIDER: "riot",
   },
-);
+  stdio: ["ignore", "pipe", "pipe"],
+});
 let logs = "";
 server.stdout.on("data", (b) => (logs += b));
 server.stderr.on("data", (b) => (logs += b));
@@ -109,40 +98,33 @@ try {
     ws!.send(JSON.stringify(value));
     return until((m) => m.type === "snapshot" || m.type === "error");
   };
-  const riotPost = (route: string, value: unknown, origin = base) =>
-    fetch(`${base}/api/riot-postgame/${route}`, {
+  const postgamePost = (route: string, value: unknown, origin = base) =>
+    fetch(`${base}/api/postgame/${route}`, {
       method: "POST",
       headers: { Origin: origin, "Content-Type": "application/json" },
       body: JSON.stringify(value),
     });
-  assert.equal((await (await fetch(base + "/api/riot-postgame/status")).json()).configured, false);
+  assert.equal((await (await fetch(base + "/api/postgame/status")).json()).candidate, null);
+  const rows = JSON.parse(readFileSync("tests/fixtures/rofl-rows.json", "utf8"));
   assert.equal(
-    (
-      await riotPost(
-        "credential",
-        { mode: "standard", secret: "SYNTHETIC-NOT-A-REAL-KEY" },
-        "https://evil.test",
-      )
-    ).status,
+    (await postgamePost("import-rofl", { gameNumber: 1, rofl: rows }, "https://evil.test")).status,
     403,
   );
-  const credentialStatus = await (
-    await riotPost("credential", { mode: "standard", secret: "SYNTHETIC-NOT-A-REAL-KEY" })
-  ).text();
-  assert.doesNotMatch(credentialStatus, /SYNTHETIC|secret/);
-  assert.equal(JSON.parse(credentialStatus).configured, true);
   assert.equal(
-    (await riotPost("load", { matchId: "https://evil.test", gameNumber: 1 })).status,
+    (await postgamePost("import-rofl", { gameNumber: 1, replay: "../x.rofl" })).status,
     400,
   );
-  assert.equal((await riotPost("publish", { matchId: "VN2_123456" })).status, 409);
-  const candidateResponse = await riotPost("load", { matchId: "VN2_123456", gameNumber: 1 });
+  assert.equal((await postgamePost("publish", { matchId: "VN2_123456" })).status, 409);
+  const candidateResponse = await postgamePost("import-rofl", { gameNumber: 1, rofl: rows });
   assert.equal(candidateResponse.status, 200);
   const candidate = (await candidateResponse.json()).candidate;
-  assert.equal(candidate.teams[0].players[0].damage, 1000);
-  assert.doesNotMatch(JSON.stringify(candidate), /SYNTHETIC|puuid|riotId|secret/);
+  assert.equal(candidate.evidence.mode, "rofl");
+  assert.doesNotMatch(JSON.stringify(candidate), /puuid|riotId|secret/i);
   messages.length = 0;
-  assert.equal((await riotPost("publish", { matchId: "VN2_123456" })).status, 200);
+  assert.equal(
+    (await postgamePost("publish", { matchId: candidate.evidence.matchId })).status,
+    200,
+  );
   const publishedRiot = (await until((m) => m.type === "snapshot")).state;
   assert.deepEqual(publishedRiot.postgame, candidate);
   assert.equal(publishedRiot.scene, "postgame");
@@ -152,9 +134,7 @@ try {
     "error",
     "Observed provenance cannot be imported over WS",
   );
-  assert.equal((await riotPost("credential", { clear: true })).status, 200);
-  assert.equal((await riotPost("load", { matchId: "VN2_123456", gameNumber: 1 })).status, 409);
-  assert.equal((await fetch(base + "/api/riot-postgame/credential")).status, 405);
+  assert.equal((await fetch(base + "/api/postgame/publish")).status, 405);
   const draft = { ...emptyDraft(), hover: "Annie" };
   const sample = samplePostgame();
   const pgResult = await command({ type: "postgameState", value: sample });

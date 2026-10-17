@@ -37,17 +37,14 @@ Source mới chưaregister providerselectorStudio; LBproduction giữ baseline.
 Fieldmatrix/capabilities tách supportedprojection khỏi runtimeverification và
 productionreadiness. Xem collector/docs/ADAPTER.vi.md và FIELD-MATRIX.vi.md.
 
-### Riot postgame staged / secrets RAM — 13/10/2026
+### Postgame từ replay — 18/10/2026
 
-`RiotPostgamePanel` POST local credential → `RiotPostgameService` RAM vault
-(không persist/WS), rồi explicit load Match+Timeline qua SEA GET. Adapter
-allowlist → candidate normalized v2. Review cùng Surface/PostgameOverlay;
-explicit publish chỉ gửi matchId và backend lấy candidate do nó đã tải, rồi
-broadcast state chung. Command/import bộ mẫu chỉ nhận v1/source sample.
-Không raw provider/secret/PUUID vào widget. Clear/config generation hủy pending,
-giữ result đã publish; lỗi tải không thay chương trình. Cả key/candidate/result
-không tự tồn tại qua restart. Header/Origin/body/egress/rate limits tại
-`docs/RIOT_API_SETUP.md`. Chưa authenticated test bằng key người dùng.
+Nhánh Riot API (key/RSO, Match-V5) và nhánh LCU EOG đã gỡ sau khi chốt hướng
+replay `.rofl`. `PostgamePanel` → `/api/postgame/*` → `PostgameService` giữ một
+candidate (v2, `evidence.mode = "rofl"`) từ file replay + sổ trận collector. Review
+cùng Surface/PostgameOverlay; publish chỉ gửi matchId, backend phát candidate đã
+nhập. Không raw provider/PUUID vào widget. Bản cũ nằm trong lịch sử Git
+(trước commit dọn dẹp postgame).
 
 ### Postgame sample review — 13/10/2026
 

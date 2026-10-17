@@ -865,13 +865,13 @@ body.studio-body {
 .studio-shell .modern-production .section-heading .data-status {
   margin: 8px 0 0;
 }
-.studio-shell .riot-postgame-panel {
+.studio-shell .postgame-panel {
   border: 1px solid var(--border);
   border-radius: 8px;
   background: #18191e;
   padding: 20px;
 }
-.studio-shell .riot-postgame-panel h3 {
+.studio-shell .postgame-panel h3 {
   font:
     600 16px/1.5 "Segoe UI",
     sans-serif;

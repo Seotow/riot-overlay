@@ -49,7 +49,7 @@ Không cộng HP giảm: thiếu healing/shield/mitigation/nguồn gây damage v
 3. Overwolf GEP có tài liệu `total_damage_dealt_to_champions`, nhưng chưa có
    bằng chứng đủ10 người ở spectator/custom; không coi là giải pháp đã đạt:
    <https://dev.overwolf.com/ow-native/live-game-data-gep/supported-games/league-of-legends/>.
-4. RSO/Tournament là hướng xin quyền riêng, xem `RIOT_POSTGAME_API_FINDINGS.md`;
+4. RSO/Tournament là hướng xin quyền riêng, (tài liệu riêng đã gỡ cùng nhánh Riot API; xem lịch sử Git);
    không mặc định Production Standard mở custom hoặc entitlement khác.
 
 Các thống kê KDA/vàng/mục tiêu/gold history có thể dùng ledger snapshot theo

@@ -72,8 +72,8 @@ Bản ghi nằm trong `data/captures`, nhịp mục tiêu 0,5 giây. Giữ nguy�
   LCU đọc được trận khi đăng nhập người tham gia, nhưng cùng trận trả 404 khi
   đổi sang spectator. File replay thử nghiệm do tài khoản người chơi tải;
   hướng đọc metadata đang tạm hoãn.
-- Standard Riot API đã có luồng tải và duyệt kết quả. Thử key hiện tại chưa
-  thành công; không coi đây là nguồn đã dùng được cho custom.
+- Postgame đi theo replay `.rofl` (tự theo dõi thư mục Replays, kèm sổ trận từ
+  collector). Riot API và LCU EOG đã gỡ khỏi project.
 - Damage theo giao tranh, một số stack champion và telemetry khác còn thiếu mẫu.
 - Ẩn riêng dấu 18+ VNG trong game đang để nghiên cứu. Valorant và REA giữ riêng.
 

@@ -1,9 +1,8 @@
 # Postgame · duyệt UI trước khi tìm nguồn thật
 
-**Cập nhật 13/10:** đã thêm nhánh Riot API bên cạnh bộ mẫu; thao tác/security
-và phạm vi kiểm chứng tại [RIOT_API_SETUP](RIOT_API_SETUP.md). Các phần dưới
-mô tả baseline mẫu ban đầu, không phải trạng thái nguồn mới. UI sample v1
-giữ nguyên; dataset Riot v2 chỉ backend tải được quyền mới có thể publish.
+**Cập nhật 18/10:** nhánh Riot API đã gỡ; nguồn thật hiện là replay `.rofl` (xem
+POSTGAME_DATA_FINDINGS.md). Các phần dưới mô tả baseline mẫu ban đầu. UI sample v1
+giữ nguyên.
 
 Ngày 13/10/2026. Phạm vi người dùng chốt: thiết kế UI và mẫu dữ liệu trước;
 chỉ kiểm chứng/nối data thật sau khi duyệt. Không có adapter postgame live,

@@ -35,7 +35,6 @@
     "capture:analyze": "node scripts/capture/analyze-capture-events.mjs",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "probe:eog": "tsx scripts/inspect/probe-lcu-eog.ts",
     "probe:tracking": "tsx scripts/inspect/probe-tracking.ts"
   },
   "keywords": [],

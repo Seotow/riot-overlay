@@ -2,7 +2,6 @@ import { observeIngame, observerRecording } from "./observer";
 import { diagnose } from "./diagnostics";
 import { leagueBroadcast } from "./leaguebroadcast";
 import { DraftLcu } from "./draft-lcu";
-import { EogLcu } from "./eog-lcu";
 import { ReplayWatcher } from "./replays";
 import { MatchLedger } from "./match-ledger";
 import { emptyDraft } from "../shared/draft";
@@ -16,7 +15,7 @@ import { WebSocketServer, WebSocket } from "ws";
 import { commandSchema, themeSchema } from "../shared/schema";
 import { createState, applyCommand, tick } from "../shared/mock";
 import type { State } from "../shared/schema";
-import { RiotPostgameService, riotError } from "./riot-postgame";
+import { PostgameService, postgameError } from "./postgame-service";
 import { ReplayHudService } from "./replay-hud";
 import { COLLECTOR_SAMPLE_INTERVAL_MS, remainingSampleDelay } from "../shared/capture-rules";
 const host = "127.0.0.1",
@@ -47,7 +46,7 @@ const startProvider = process.env.RIOT_OVERLAY_PROVIDER;
 if (startProvider === "riot" || startProvider === "recording") state.provider = startProvider;
 if (process.argv.includes("--collector")) state.provider = "league-collector";
 if (process.argv.includes("--collector-accountless")) state.provider = "collector-accountless";
-const riotPostgame = new RiotPostgameService();
+const postgame = new PostgameService();
 const replayHud = new ReplayHudService();
 // Isolated verification can persist a temporary theme without touching user branding.
 const themePath = resolve(process.env.RIOT_OVERLAY_THEME_PATH || "data/theme.json");
@@ -124,7 +123,7 @@ const server = createServer(async (req, res) => {
     }
     return;
   }
-  if (req.url?.startsWith("/api/riot-postgame")) {
+  if (req.url?.startsWith("/api/postgame")) {
     res.setHeader("Content-Type", "application/json");
     res.setHeader("Cache-Control", "no-store");
     res.setHeader("X-Content-Type-Options", "nosniff");
@@ -140,14 +139,10 @@ const server = createServer(async (req, res) => {
       return;
     }
     const routes = [
-      "/api/riot-postgame/status",
-      "/api/riot-postgame/credential",
-      "/api/riot-postgame/load",
-      "/api/riot-postgame/publish",
-      "/api/riot-postgame/import-eog",
-      "/api/riot-postgame/eog-files",
-      "/api/riot-postgame/rofl-files",
-      "/api/riot-postgame/import-rofl",
+      "/api/postgame/status",
+      "/api/postgame/publish",
+      "/api/postgame/rofl-files",
+      "/api/postgame/import-rofl",
     ];
     if (!routes.includes(req.url)) {
       res.writeHead(404);
@@ -160,31 +155,19 @@ const server = createServer(async (req, res) => {
       res.end('{"error":"postgame-locked"}');
       return;
     }
-    if (req.url === routes[6]) {
+    if (req.url === routes[2] || req.url === routes[0]) {
       if (req.method !== "GET") {
         res.writeHead(405, { Allow: "GET" });
         res.end("{}");
         return;
       }
-      res.end(JSON.stringify({ files: await replays.files(), replay: replays.snapshot() }));
-      return;
-    }
-    if (req.url === routes[5]) {
-      if (req.method !== "GET") {
-        res.writeHead(405, { Allow: "GET" });
-        res.end("{}");
-        return;
-      }
-      res.end(JSON.stringify({ files: await riotPostgame.listEogFiles() }));
-      return;
-    }
-    if (req.url === routes[0]) {
-      if (req.method !== "GET") {
-        res.writeHead(405, { Allow: "GET" });
-        res.end("{}");
-        return;
-      }
-      res.end(JSON.stringify({ ...riotPostgame.status(), locked: postgameLocked }));
+      res.end(
+        JSON.stringify(
+          req.url === routes[2]
+            ? { files: await replays.files(), replay: replays.snapshot() }
+            : { ...postgame.status(), locked: postgameLocked },
+        ),
+      );
       return;
     }
     if (req.method !== "POST") {
@@ -202,8 +185,7 @@ const server = createServer(async (req, res) => {
       let size = 0;
       for await (const chunk of req) {
         size += chunk.length;
-        // The EOG block is a few hundred KB at most; every other body is tiny.
-        if (size > (req.url === routes[4] ? 1_048_576 : 16384)) {
+        if (size > 16384) {
           res.writeHead(413);
           res.end('{"error":"body-too-large"}');
           return;
@@ -211,15 +193,10 @@ const server = createServer(async (req, res) => {
         chunks.push(Buffer.from(chunk));
       }
       const input = JSON.parse(Buffer.concat(chunks).toString("utf8"));
-      if (req.url === routes[1]) {
-        if (input?.clear === true && Object.keys(input).length === 1) {
-          riotPostgame.clear();
-          res.end(JSON.stringify(riotPostgame.status()));
-        } else res.end(JSON.stringify(riotPostgame.configure(input)));
-      } else if (req.url === routes[7])
+      if (req.url === routes[3])
         res.end(
           JSON.stringify(
-            await riotPostgame.importRofl(
+            await postgame.importRofl(
               input,
               async (name) => {
                 const file = (await replays.files()).find((f) => f.name === name);
@@ -229,12 +206,10 @@ const server = createServer(async (req, res) => {
             ),
           ),
         );
-      else if (req.url === routes[4]) res.end(JSON.stringify(await riotPostgame.importEog(input)));
-      else if (req.url === routes[2]) res.end(JSON.stringify(await riotPostgame.load(input)));
       else {
         if (!input || typeof input.matchId !== "string" || Object.keys(input).length !== 1)
           throw Error();
-        const candidate = riotPostgame.publishedCandidate(input.matchId);
+        const candidate = postgame.publishedCandidate(input.matchId);
         state = {
           ...state,
           postgame: candidate,
@@ -253,9 +228,9 @@ const server = createServer(async (req, res) => {
         );
       }
     } catch (e) {
-      const safe = riotError(e);
+      const safe = postgameError(e);
       res.writeHead(safe.status >= 400 && safe.status <= 599 ? safe.status : 502);
-      res.end(JSON.stringify({ error: safe.code, retryAfter: safe.retryAfter }));
+      res.end(JSON.stringify({ error: safe.code }));
     }
     return;
   }
@@ -522,7 +497,6 @@ setInterval(async () => {
     lcuBusy = false;
   }
 }, 600);
-// A participant's client has the end-of-game block as soon as the match ends: stage it for review.
 // What the collector sees during the match; fills gold over time and dragons of the replay postgame.
 const ledger = new MatchLedger();
 void ledger.load();
@@ -534,30 +508,11 @@ setInterval(async () => {
   try {
     await replays.afterMatch();
     for (const file of await replays.fresh())
-      await riotPostgame.stageReplayFile(resolve(file.dir, file.name), ledger.snapshot());
+      await postgame.stageReplayFile(resolve(file.dir, file.name), ledger.snapshot());
   } finally {
     replayBusy = false;
   }
 }, 5000);
-const eogLcu = new EogLcu();
-let eogBusy = false;
-setInterval(async () => {
-  if (postgameLocked || eogBusy || shuttingDown || wss.clients.size === 0) return;
-  eogBusy = true;
-  try {
-    const block = await eogLcu.read();
-    if (block) {
-      const gameId = Number((block as { gameId?: unknown }).gameId);
-      // History can lag a little behind the end-of-game block; try again on later polls.
-      riotPostgame.stageLiveEog(
-        block,
-        riotPostgame.needsLiveHistory(gameId) ? await eogLcu.readHistory(gameId) : null,
-      );
-    }
-  } finally {
-    eogBusy = false;
-  }
-}, 4000);
 setInterval(() => {
   if (state.playing) {
     state = tick(state);

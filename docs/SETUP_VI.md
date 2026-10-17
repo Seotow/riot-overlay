@@ -87,9 +87,8 @@ Cách đối chiếu raw và bản dựng: [bàn giao dữ liệu](UI_COLLECTOR_
 
 ## Sau trận và bảo mật
 
-Trang **Sau trận** có ô nhập Riot API key, lưu trong RAM của backend.
-Khởi động lại cần nhập lại. Không đưa key vào theme, file ghi trận, frontend
-hoặc Git. Xem [thiết lập Riot API](RIOT_API_SETUP.md).
+Trang **Sau trận** nạp dữ liệu từ replay `.rofl` (tự theo dõi thư mục Replays hoặc
+chọn file). Không cần Riot API key. Xem docs/POSTGAME_DATA_FINDINGS.md.
 
 LCU/ROFL cho custom vẫn là hướng nghiên cứu, chưa có bước tự động trong
 quy trình vận hành. File ROFL đã thử do người chơi tải trước đó; không xem

@@ -203,22 +203,9 @@ Seotoww, phase Lobby). Không POST, không tải file, không in token.
 | `lol-match-history` | Chi tiết/timeline theo gameId: đã xác nhận 404 với spectator |
 | Native collector | `damageDealtEvents` có nhưng `damageDealt` luôn 0 trong mọi bản ghi; không phải nguồn damage |
 
-### Probe EOG chỉ đọc (chạy trên máy spectator)
-
-```powershell
-npm run probe:eog          # tự dừng 90 giây sau khi về lobby; Ctrl+C để dừng sớm
-npm run probe:eog -- --keep   # chạy qua nhiều trận
-```
-
-Bật trước khi vào trận (hoặc lúc đang ở lobby/phòng cấm chọn). Probe chỉ GET: `gameflow-phase` và
-`gameflow/v1/session` (phase, gameId, isSpectator, queueId, gameMode), `gameclient-eog-stats-block`,
-`eog-stats-block`, rồi `lol-replays/v1/metadata/{gameId}` khi phase là WaitingForStats/PreEndOfGame/
-EndOfGame/Lobby. Thông tin đăng nhập LCU lấy từ tiến trình LeagueClientUx, chỉ nằm trong RAM.
-Kết quả ở `.npm-cache/lcu-eog/` (không theo Git): `probe-<thời gian>.ndjson` là nhật ký
-(phase, trạng thái HTTP, tóm tắt: số người, các khóa `stats`, có `DAMAGE_DEALT_TO_CHAMPIONS` hay không) và
-`<thời gian>-NN-<endpoint>.json` là payload đã lọc (bỏ PUUID, Riot ID, tên, token, dữ liệu chat; giữ
-số liệu và champion). Đọc `summary.hasDamageToChampions` và `players` để biết spectator có nhận EOG
-đủ 10 người không.
+> 18/10/2026: probe EOG (`npm run probe:eog`), bộ nhập EOG, đọc EOG tự động và nhánh Riot API đã gỡ khỏi
+> project sau khi chốt hướng replay `.rofl`. Số đo bên dưới giữ lại làm bằng chứng; mã cũ còn trong lịch sử
+> Git (trước commit dọn dẹp postgame).
 
 ### Kết quả đo thật, 17/10/2026 (game 1608102102, hai máy cùng trận)
 
@@ -231,47 +218,6 @@ Kết luận: client spectator **không** vào luồng kết thúc trận nên k
 người tham gia ngay khi vào EndOfGame. Hướng khả thi: đọc `eog-stats-block` trên máy người tham gia rồi chuyển
 kết quả đã lọc sang Studio (export/import hoặc kênh được cấp quyền), không chuyển token LCU. Probe ghi thêm
 `endpoint-status` để phân biệt 404 với lỗi khác và poll mỗi giây trong 60 giây sau khi trận kết thúc.
-
-### Bộ nhập EOG (đã làm)
-
-Studio → **Sau trận** → mục **Nhập từ file EOG (LCU)**: chọn file `*-postgame-bundle.json` (đủ dữ liệu) hoặc `*-eog-stats-block.json` do probe lưu
-(hoặc payload thô; server lọc lại trước khi dùng), nhập ván trong loạt, rồi xem bản chờ duyệt, tích đã đối chiếu
-và bấm **Dùng dữ liệu này cho postgame**. Chuẩn hóa ở `shared/eog-postgame.ts`, API
-`POST /api/riot-postgame/import-eog` (JSON tối đa 1 MB, chỉ từ Studio).
-
-Nguồn nạp: (1) chọn file bằng tay; (2) danh sách **Đã lưu trên máy này** (các bản probe lưu ở
-`.npm-cache/lcu-eog`); (3) tự động: backend đọc `eog-stats-block` của client trên máy chạy Studio
-(4 giây một lần) và đưa vào vùng duyệt một lần cho mỗi game. Chỉ máy người tham gia mới có khối này; trên
-máy spectator, mục (3) không bao giờ có gì. Không có bản nào tự lên overlay: luôn cần tích đã đối chiếu rồi
-bấm dùng.
-
-Bổ sung từ lịch sử trận của client người tham gia (`/lol-match-history/v1/games/{id}` và
-`/game-timelines/{id}`, chỉ đọc, rút gọn ở `shared/eog-history.ts`, không giữ tên hay ID tài khoản): bộ đếm
-rồng/Baron/Sứ giả/Sâu/trụ, cấm chọn, biểu đồ vàng theo phút (mỗi khung timeline), patch, và tách rồng
-nguyên tố/Elder từ event `ELITE_MONSTER_KILL` chỉ khi mọi event có đội và tổng khớp bộ đếm. Backend tự lấy
-phần này khi đưa EOG vào vùng duyệt (thử lại khi lịch sử đến trễ); probe lưu thêm file
-`*-postgame-bundle.json` gồm `{ eog, history }` để nhập trên máy khác. Đã thử với game 1608102102: rồng
-đỏ 1 (Hextech), sâu 1/2, 17 điểm vàng, các mục khác 0; trận practice nên không có cấm chọn.
-
-Ánh xạ: đội 100 là xanh, 200 là đỏ; winner từ `isWinningTeam`; thời lượng từ `gameLength`; người chơi
-xếp TOP/JUNGLE/MID/BOT/SUPPORT theo `detectedTeamPosition` (thiếu thì theo thứ tự client, có cảnh báo);
-damage, KDA, vàng, trụ cộng từ `stats` từng người; `botPlayer` giữ thành cờ `bot`. EOG không có cấm/chọn,
-lịch sử vàng, rồng nguyên tố/Elder, Baron, Sứ giả, Sâu: các mục này để —, không điền 0. Định danh trận
-là `LCU_<gameId>`, nhãn nguồn `LCU-EOG`. Đã thử với game 1608102102: 10 người, winner đỏ, 15:46, overlay
-hiển thị đúng; fixture rút gọn không có tên ở `tests/fixtures/eog-stats-block.json`.
-
-Hướng thử tiếp, theo thứ tự rủi ro thấp trước:
-
-1. **Thăm dò chỉ đọc cuối trận trên máy spectator**: poll `gameflow-phase`, `gameclient-eog-stats-block`
-   và `eog-stats-block` từ lúc vào trận tới khi về lobby, ghi payload đã lọc (không PUUID/Riot ID).
-   Cho biết spectator có nhận khối EOG không và `stats` có damage đủ 10 người không.
-2. **Replay theo gameId**: sau trận, đọc `metadata/{gameId}`; chỉ khi người dùng đồng ý mới thử
-   `download`. Nếu tải được `.rofl`, đã có parser đọc metadata (khớp 10/10 với LCU) để lấy damage,
-   KDA, gold, winner.
-3. **Máy người tham gia**: agent chỉ đọc LCU history sau trận rồi export JSON (đã xác nhận có đủ damage).
-4. Riot Match-V5/Tournament/RSO cần quyền riêng; key Standard hiện 403/404.
-5. Dự phòng: sổ sự kiện từ collector cho KDA/vàng/mục tiêu (partial) và operator nhập damage + winner
-   với provenance thủ công.
 
 ## Damage và winner: hướng có thể kiểm chứng tiếp
 
