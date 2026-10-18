@@ -3,7 +3,16 @@ import { useCallback, useEffect, useState } from "react";
 export type GameId = "lol" | "valorant";
 export type GamesReport = {
   games: Record<GameId, boolean>;
-  valorant: { status: "stopped" | "starting" | "running" | "failed"; error: string | null };
+  valorant: {
+    status: "stopped" | "installing" | "starting" | "running" | "failed";
+    error: string | null;
+    step: string | null;
+    collector: string | null;
+    official: { state: string; title: string } | null;
+    collectorError: string | null;
+    controllerConnected: boolean | null;
+    controllerError: string | null;
+  };
 };
 
 /** Trạng thái bật/tắt kết nối của từng game; công tắc gọi server để mở/đóng nguồn thật. */

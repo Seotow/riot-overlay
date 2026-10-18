@@ -1,0 +1,32 @@
+{
+  "name": "riot-overlay-valorant-collector",
+  "productName": "Riot Overlay Valorant Collector",
+  "version": "0.1.0",
+  "author": {
+    "name": "Riot Overlay",
+    "url": "https://github.com/Seotow/riot-overlay"
+  },
+  "description": "Collector Valorant của Riot Overlay: đọc Overwolf GEP và gửi lên backend Spectra. Không có giao diện.",
+  "private": true,
+  "license": "GPL-3.0-only",
+  "main": "./app/main.js",
+  "overwolf": {
+    "packages": [
+      "gep"
+    ]
+  },
+  "scripts": {
+    "build": "tsc",
+    "check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "socket.io-client": "4.8.1"
+  },
+  "devDependencies": {
+    "@overwolf/ow-electron": "37.10.3",
+    "@overwolf/ow-electron-packages-types": "^1.0.3",
+    "@types/node": "^22.19.9",
+    "electron": "37.10.3",
+    "typescript": "5.8.3"
+  }
+}

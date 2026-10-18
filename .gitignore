@@ -4,14 +4,18 @@ node_modules/
 dist/
 data/
 *.log
-modules/valorant/**/out-tsc/
-modules/valorant/**/.angular/
-modules/valorant/**/.env
-modules/valorant/**/logs/
-modules/valorant/**/replays/
+collector/hosts/valorant-collector/**/out-tsc/
+collector/hosts/valorant-collector/**/.angular/
+collector/hosts/valorant-collector/**/.env
+collector/hosts/valorant-collector/**/logs/
+collector/hosts/valorant-collector/**/replays/
+# Dữ liệu cục bộ của ValorantCollector: config, key, Spectra Client đã tải, profile, logo, cấu hình trận
+collector/hosts/valorant-collector/local/
 
 # Collector vendor/source exports, runtimes and retained local validation evidence
-collector/archive/
+collector/archive/*
+!collector/archive/valorant-collector/
+collector/archive/valorant-collector/app/
 collector/config/collector.env
 collector/evidence/
 collector/**/bin/
@@ -28,3 +32,4 @@ collector/**/captures/
 # Generated development/test outputs
 .dev-build/
 .test-build/
+

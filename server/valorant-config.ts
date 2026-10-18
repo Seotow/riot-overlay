@@ -20,9 +20,12 @@ export interface ValorantConfigPaths {
 
 export const defaultPaths = (frontendPort = 5322): ValorantConfigPaths => ({
   config: resolve(
-    process.env.RIOT_OVERLAY_VALORANT_MATCH_CONFIG || "data/valorant/match-config.json",
+    process.env.RIOT_OVERLAY_VALORANT_MATCH_CONFIG ||
+      "collector/hosts/valorant-collector/local/match-config.json",
   ),
-  assets: resolve(process.env.RIOT_OVERLAY_VALORANT_ASSETS || "data/valorant/assets"),
+  assets: resolve(
+    process.env.RIOT_OVERLAY_VALORANT_ASSETS || "collector/hosts/valorant-collector/local/assets",
+  ),
   frontendPort,
 });
 

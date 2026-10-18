@@ -8,10 +8,20 @@ import { useValorant } from "../lib/useValorant";
 
 export const moduleText = {
   stopped: "Đã tắt",
+  installing: "Đang cài đặt…",
   starting: "Đang khởi động…",
   running: "Đang chạy",
   failed: "Lỗi",
 } as const;
+// Trạng thái collector do supervisor báo; chỉ nêu lỗi cần người dùng xử lý.
+const collectorHint = (state: string | null) =>
+  state === "official-not-installed"
+    ? "Chưa có Spectra Client chính thức: tắt rồi bật lại kết nối để tự tải (một lần), hoặc chạy npm run valorant:setup."
+    : state === "official-failed"
+      ? "Không điều khiển được Spectra Client chính thức; xem lỗi bên dưới."
+      : state === "official-exited-1" || state?.startsWith("official-exited")
+        ? "Spectra Client chính thức đã thoát; tắt rồi bật lại kết nối."
+        : null;
 const sourceText = {
   offline: "Chưa kết nối",
   connecting: "Đang kết nối",
@@ -98,7 +108,18 @@ export function ValorantOverview({
             {on ? "Tắt kết nối Valorant" : "Bật kết nối Valorant"}
           </Button>
         </div>
+        {module?.step && <p>{module.step}…</p>}
         {module?.error && <p role="alert">{module.error}</p>}
+        {module?.official && (
+          <p>
+            Spectra Client (chạy ngầm): {module.official.title || module.official.state}
+            {module.controllerConnected === false ? " · lệnh thủ công chờ trận bắt đầu" : ""}
+          </p>
+        )}
+        {module?.collectorError && <p role="alert">{module.collectorError}</p>}
+        {collectorHint(module?.collector ?? null) && (
+          <p role="alert">{collectorHint(module?.collector ?? null)}</p>
+        )}
         {detail && (
           <p>
             {detail.acceptedFrames} frame hợp lệ · {detail.invalidFrames} lỗi · group{" "}

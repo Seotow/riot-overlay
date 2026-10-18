@@ -112,3 +112,18 @@ vì bài đó thay đổi mock state.
 
 Giữ theme, credentials, captures, cache, binary và thư mục REA riêng khi chuyển
 máy. Trạng thái hiện hành nằm ở [PROJECT_STATUS.md](../PROJECT_STATUS.md).
+
+## Valorant trên máy mới
+
+`data/` không nằm trong Git nên máy mới chưa có cấu hình, key hay Client. Sau khi clone:
+
+```powershell
+npm ci
+npm run build
+npm start
+```
+
+Chọn Valorant ở thanh bên Studio rồi bật công tắc "Kết nối Valorant". Lần đầu Studio tự tạo `collector/hosts/valorant-collector/local/module.json` + `auth.key`, cài và build backend/overlay,
+tải Spectra Client chính thức (một lần, kiểm SHA256) nếu máy chưa có rồi chạy ngầm; tiến trình hiện trong trang Tổng quan Valorant.
+Chạy tay các bước đó bằng `npm run valorant:setup` (thêm `-- --force` để làm lại). Cần Node 22 và mạng; không cần cài Overwolf hay Spectra Client trước.
+Dữ liệu cục bộ nằm ở `collector/hosts/valorant-collector/local` (Git bỏ qua). Xem [VALORANT_MODULE.md](VALORANT_MODULE.md).

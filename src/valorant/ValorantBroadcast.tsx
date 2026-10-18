@@ -11,6 +11,7 @@ const errors: Record<string, string> = {
   "client-unreachable": "Không nối được Client.",
   "not-connected": "Client chưa kết nối backend.",
   "invalid-command": "Lệnh không hợp lệ.",
+  "not-in-combat": "Chỉ đặt bom được khi round đang giao tranh.",
 };
 
 function Preview({ group }: { group: string }) {
