@@ -3,6 +3,7 @@ import { toObservable } from "@angular/core/rxjs-interop";
 import { distinctUntilChanged, EMPTY, interval, switchMap } from "rxjs";
 import { Subscription } from "rxjs";
 import { DataModelService } from "../../../../services/dataModel.service";
+import { overlayNumberParam } from "../../../../shared/overlay-params";
 
 @Component({
   selector: "app-sponsor-box",
@@ -12,6 +13,9 @@ import { DataModelService } from "../../../../services/dataModel.service";
 })
 export class SponsorBoxComponent implements OnDestroy {
   dataModel = inject(DataModelService);
+
+  // Dịch khung logo theo trục dọc (?logoY=-12, đơn vị px; âm = đẩy lên).
+  offsetY = overlayNumberParam("logoY", -200, 200);
 
   currentIndex = signal(0);
   private sub?: Subscription;

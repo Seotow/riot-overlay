@@ -17,8 +17,11 @@ rõ hình nào lấy từ bản ghi trận thật và hình nào là dữ liệu
 
 ### Cấm chọn
 
-Thanh cấm chọn chạy theo lượt: ô đang đến lượt, hình tướng được cấm/chọn, tên
-tuyển thủ, huấn luyện viên, logo đội, thứ tự chọn và thanh thời gian.
+Cấm chọn nhận trực tiếp từ LoL Client (LCU `champ-select`, chỉ đọc): tướng
+được cấm/chọn, tướng đang hover, lượt hiện tại và thanh thời gian đi theo
+client, không cần nhập tay. Studio chỉ nhập phần cấu hình: tên tuyển thủ
+(không nhập thì lấy tên trong client), huấn luyện viên, logo đội, thứ tự vị trí
+và cấm theo series.
 
 <img src="docs/media/draft-banpick.gif" width="960" alt="Cấm chọn từ lượt cấm đầu tiên đến khi đủ 10 tướng">
 
@@ -151,7 +154,7 @@ liệu mẫu và **không phải dữ liệu thật**:
 | Quest đường trên, rừng, giữa, hỗ trợ | Mẫu: dựng từ quest xạ thủ thật, đổi vị trí |
 | Linh hồn rồng, Baron Power Play, Elder | Mẫu: bản ghi chưa có sự kiện, dựng từ sự kiện hạ rồng |
 | Đồng hồ nhà lính | Mẫu: biến thể xem thử |
-| Cấm chọn | Bộ mẫu UI (`source: "reference"`) |
+| Cấm chọn | Bộ mẫu UI (`source: "reference"`): hình chỉ minh họa, bản chạy thật nhận từ LCU |
 | Sau trận | Bộ mẫu `samplePostgame()` |
 
 Chưa có mẫu thật cho: damage theo giao tranh, linh hồn rồng, Baron, quest các
@@ -180,7 +183,8 @@ Không dùng `npm ci --omit=dev`: backend hiện chạy bằng `tsx`.
 1. Vào **Cấu hình trận đấu** để đặt tên đội, màu, logo, tỉ số và layout.
    Logo không bắt buộc. Lưu cấu hình để cập nhật Studio và OBS.
 2. Vào **Nguồn dữ liệu** để chọn nguồn trận. Tắt dữ liệu mẫu khi phát thật.
-3. Dùng **Cấm chọn** để điều khiển pick/ban thủ công.
+3. Mở **Cấm chọn** để nhập huấn luyện viên, cấm theo series và đổi bên. Pick/ban
+   tự chạy theo LoL Client khi vào phòng chọn tướng; cần client đang mở.
 4. Dùng **Phát sóng** để bật leaderboard, rune, timer nhà lính và layout tối giản.
 5. **Phòng thử** dùng bản ghi đã lưu, có play/pause, tua và tốc độ.
    Khi phát bản ghi, đầu ra OBS cũng dùng bản ghi đó.
@@ -196,6 +200,7 @@ hoặc nhãn kiểm thử. Trạng thái nguồn và cảnh báo nằm trong Stu
 | LeagueBroadcast | LB chạy riêng và đang xuất feed spectator |
 | Collector tích hợp | Cần runtime, DLL và cache local được chuẩn bị riêng |
 | Riot local | Chỉ có các field mà API local cung cấp |
+| LCU champ-select | Cấm chọn: LoL Client đang mở, đọc cục bộ, chỉ đọc |
 | Bản ghi | Cần thư mục capture trên máy; không đi kèm Git |
 
 Chạy collector tích hợp bằng `npm run start:collector` hoặc
@@ -220,7 +225,6 @@ Bản ghi nằm trong `data/captures`, nhịp mục tiêu 0,5 giây. Giữ nguy�
 
 ## Phần chưa hoàn tất
 
-- Draft hiện nhập tay, chưa nhận cấm chọn tự động.
 - Chưa có nguồn postgame tự động đáng tin cậy cho custom trên máy spectator.
   LCU đọc được trận khi đăng nhập người tham gia, nhưng cùng trận trả 404 khi
   đổi sang spectator. File replay thử nghiệm do tài khoản người chơi tải;

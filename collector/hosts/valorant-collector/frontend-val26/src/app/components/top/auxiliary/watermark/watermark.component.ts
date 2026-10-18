@@ -2,6 +2,7 @@ import { Component, inject, OnInit, signal } from "@angular/core";
 import { TranslatePipe } from "@ngx-translate/core";
 import { DataModelService } from "../../../../services/dataModel.service";
 import { TranslateKeys } from "../../../../services/i18nHelper";
+import { overlayColorParam } from "../../../../shared/overlay-params";
 
 @Component({
   selector: "app-watermark",
@@ -12,6 +13,9 @@ import { TranslateKeys } from "../../../../services/i18nHelper";
 export class WatermarkComponent implements OnInit {
   dataModel = inject(DataModelService);
   TranslateKeys = TranslateKeys;
+
+  // Nền thanh watermark do người vận hành chọn (?wmBg=151b22); watermark vẫn luôn hiển thị.
+  background = overlayColorParam("wmBg");
 
   currentRotationIndex = signal(0);
 

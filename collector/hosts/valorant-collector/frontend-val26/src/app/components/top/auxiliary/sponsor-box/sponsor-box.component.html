@@ -2,6 +2,7 @@
   <div
     class="vw-245 vh-88 absolute top-0 -right-60 bg-cover bg-left bg-no-repeat"
     [style.background-image]="'url(assets/topscore/sponsorBox.svg)'"
+    [style.top.px]="offsetY"
   >
     @for (sponsor of dataModel.sponsorInfo().sponsors; track $index) {
       <img

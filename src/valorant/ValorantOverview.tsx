@@ -1,6 +1,7 @@
 import { Card } from "../components/ui/card";
 import { Button } from "../components/ui/button";
 import { Badge } from "../components/ui/badge";
+import { useState } from "react";
 import type { ValorantField, ValorantFrame } from "../../shared/valorant";
 import type { ValorantConfigView } from "../../shared/valorant-config";
 import type { GamesReport } from "../lib/useGames";
@@ -39,7 +40,75 @@ const phaseText: Record<string, string> = {
 };
 export const val = (f: ValorantField<string | number | boolean>) =>
   f.value === null ? "—" : String(f.value);
-export const ingameUrl = (group: string) => `http://127.0.0.1:5322/overlay?groupCode=${group}`;
+export type OverlayLook = { wmBg: string; logoY: number };
+const LOOK_KEY = "valorant-overlay-look";
+const defaultLook: OverlayLook = { wmBg: "", logoY: 0 };
+const validBg = (v: string) => /^#?([0-9a-f]{3}|[0-9a-f]{6})$/i.test(v);
+
+export function loadOverlayLook(): OverlayLook {
+  try {
+    const raw = JSON.parse(localStorage.getItem(LOOK_KEY) ?? "{}");
+    return {
+      wmBg: typeof raw.wmBg === "string" && validBg(raw.wmBg) ? raw.wmBg : "",
+      logoY: Number.isFinite(raw.logoY) ? Math.max(-200, Math.min(200, raw.logoY)) : 0,
+    };
+  } catch {
+    return defaultLook;
+  }
+}
+
+// Tùy chỉnh hiển thị overlay (nền thanh watermark, vị trí logo giải); watermark Spectra vẫn luôn hiện.
+export const ingameUrl = (group: string, look: OverlayLook = loadOverlayLook()) => {
+  const q = new URLSearchParams({ groupCode: group });
+  if (look.wmBg) q.set("wmBg", look.wmBg.replace(/^#/, ""));
+  if (look.logoY) q.set("logoY", String(look.logoY));
+  return `http://127.0.0.1:5322/overlay?${q}`;
+};
+
+function LookConfig({ onChange }: { onChange: () => void }) {
+  const [look, setLook] = useState(loadOverlayLook);
+  const save = (next: OverlayLook) => {
+    setLook(next);
+    try {
+      localStorage.setItem(LOOK_KEY, JSON.stringify(next));
+    } catch {
+      /* không lưu được thì chỉ áp dụng cho lần xem này */
+    }
+    onChange();
+  };
+  return (
+    <div className="val-row">
+      <label>
+        Nền thanh watermark{" "}
+        <input
+          value={look.wmBg}
+          placeholder="#151b22"
+          size={8}
+          onChange={(e) =>
+            validBg(e.target.value) || e.target.value === ""
+              ? save({ ...look, wmBg: e.target.value })
+              : setLook({ ...look, wmBg: e.target.value })
+          }
+        />
+      </label>
+      <Button variant="outline" onClick={() => save({ ...look, wmBg: "#151b22" })}>
+        #151b22
+      </Button>
+      <label>
+        Đẩy logo giải lên (px){" "}
+        <input
+          type="number"
+          min={0}
+          max={200}
+          value={-look.logoY}
+          onChange={(e) =>
+            save({ ...look, logoY: -Math.max(0, Math.min(200, Number(e.target.value) || 0)) })
+          }
+        />
+      </label>
+    </div>
+  );
+}
 
 function Roster({ frame }: { frame: ValorantFrame }) {
   const rows = frame.teams.flatMap((t) => t.players.map((p) => ({ team: t.index, p })));
@@ -89,6 +158,8 @@ export function ValorantOverview({
   toggle: (on: boolean) => void;
   config: ValorantConfigView | null;
 }) {
+  const [, setTick] = useState(0);
+  const refresh = () => setTick((t) => t + 1);
   const on = games?.games.valorant ?? false;
   const { status, frame, detail } = useValorant(1000, true);
   const group = detail?.groupCode ?? "RIOTLOCAL";
@@ -126,6 +197,7 @@ export function ValorantOverview({
             {detail.groupCode}
           </p>
         )}
+        <LookConfig onChange={refresh} />
         <p>
           OBS in-game:{" "}
           <a href={ingameUrl(group)} target="_blank" rel="noreferrer">
