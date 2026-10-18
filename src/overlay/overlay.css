@@ -1751,9 +1751,10 @@
   color: #ece8d7;
 }
 .live-canvas .real-rune-board {
-  left: 287px;
+  /* Same span as the player table: between the game's left panel (x=306) and the minimap (x=1641). */
+  left: 306px;
   top: 793px;
-  width: 1346px;
+  width: 1335px;
   height: 287px;
   border: 0;
   padding: 0;
@@ -3702,9 +3703,9 @@
   box-shadow: inset -2px -2px 6px -5px var(--red);
 }
 .live-canvas.no-player-cameras.minimal .ref-player-table[data-source="observed"] {
-  left: 287px;
-  width: 1346px;
-  grid-template-columns: 653px 40px 653px;
+  left: 306px;
+  width: 1335px;
+  grid-template-columns: 648px 40px 647px;
 }
 .live-canvas.minimal .table-gold {
   border: 0;
