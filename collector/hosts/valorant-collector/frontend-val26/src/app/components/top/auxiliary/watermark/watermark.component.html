@@ -2,6 +2,7 @@
   <div
     class="vh-24 font-dinnext-medium relative flex flex-row items-center justify-center overflow-hidden rounded-b-lg text-center text-[0.78vw] tracking-[0.04em] text-white uppercase"
     [class]="dataModel.sponsorInfo().enabled ? 'vw-270' : 'vw-500'"
+    [style.background-color]="background"
   >
     @if (
       dataModel.watermarkInfo().spectraWatermark &&
