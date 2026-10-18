@@ -5,7 +5,8 @@ import { ReplayHudService } from "../server/replay-hud";
 import { createState } from "../shared/mock";
 import { themeSchema } from "../shared/schema";
 
-test("HUD defaults hide redundant groups, retain minimap, announcements and parent groups", () => {
+test("HUD defaults hide redundant groups and the game killfeed, retain minimap, announcements and parent groups", () => {
+  assert.equal(defaultHud.interfaceKillCallouts, false);
   assert.equal(defaultHud.interfaceFrames, false);
   assert.equal(defaultHud.interfaceScore, false);
   assert.equal(defaultHud.interfaceScoreboard, false);
@@ -14,17 +15,13 @@ test("HUD defaults hide redundant groups, retain minimap, announcements and pare
     "interfaceAll",
     "interfaceReplay",
     "interfaceAnnounce",
-    "interfaceKillCallouts",
     "interfaceMinimap",
   ] as const)
     assert.equal(defaultHud[key], true);
-  for (const key of [
-    "interfaceAll",
-    "interfaceReplay",
-    "interfaceAnnounce",
-    "interfaceKillCallouts",
-  ])
+  for (const key of ["interfaceAll", "interfaceReplay", "interfaceAnnounce"])
     assert.equal(hudSchema.safeParse({ ...defaultHud, [key]: false }).success, false);
+  // The killfeed flag is the one switch that may be on or off.
+  assert.equal(hudSchema.safeParse({ ...defaultHud, interfaceKillCallouts: true }).success, true);
   for (const key of ["cameraPosition", "speed", "path", "vngWarning", "environment"])
     assert.equal(hudSchema.safeParse({ ...defaultHud, [key]: false }).success, false);
 });

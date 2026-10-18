@@ -59,8 +59,9 @@ playback, tốc độ, file output hay host tùy ý; chỉ boolean HUD trong all
    HUD được hỗ trợ, không phải khôi phục toàn bộ cấu hình game trước đó.
 
 Preset ẩn interfaceScore/Scoreboard/Frames/Timeline/Chat/Quests/NeutralTimers,
-giữ Minimap và Target. Giữ interfaceAll/interfaceReplay và cả
-interfaceAnnounce/interfaceKillCallouts=true để bảo vệ thông báo. Thiếu bất kỳ
+giữ Minimap và Target. Giữ interfaceAll/interfaceReplay/interfaceAnnounce=true để bảo
+vệ thông báo. `interfaceKillCallouts` tắt = ẩn killfeed gốc góc phải (preset overlay tắt
+nó vì overlay tự vẽ killfeed; bật lại ở form nếu cần). Thiếu bất kỳ
 cờ bảo vệ nào thì backend từ chối ghi, không áp preset một phần thiếu bảo vệ.
 
 ## Kết quả điều tra và phần chưa chốt
@@ -72,9 +73,9 @@ cờ bảo vệ nào thì backend từ chối ghi, không áp preset một phầ
 - [League Director api.py](https://github.com/RiotGames/leaguedirector/blob/master/leaguedirector/api.py)
   và [app.py](https://github.com/RiotGames/leaguedirector/blob/master/leaguedirector/app.py):
   các field HUD và nhãn visibility; không cần module camera3D để dùng chúng.
-- Chưa xác minh field nào tách killfeed góc phải khỏi banner giữa màn hình.
-  Vì vậy chưa có tùy chọn ẩn riêng killfeed gốc; không tự tắt hai cờ thông báo.
-  Bước tiếp cần user mở replay để đối chiếu từng cờ có kiểm soát và hoàn trả.
+- 18/10/2026, đã kiểm trên replay thật (GET/POST `/replay/render`, hoàn trả sau khi thử):
+  `interfaceKillCallouts=false` ẩn đúng killfeed gốc góc phải, người dùng xác nhận chính xác.
+  Vì vậy cờ này không còn bị khóa; `interfaceAnnounce` vẫn khóa bật (bảo vệ thông báo).
 - Không thấy field riêng cho dấu18+ VNG trong bề mặt API/League Director đã đọc.
   Chưa hỗ trợ ẩn dấu này, không kết luận có thể làm bằng API, không patch client.
 - GET thật ngày16/10 trả không kết nối được2999: chưa kiểm chứng hình game,

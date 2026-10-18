@@ -36,6 +36,15 @@ export function replayRender(
           else chunks.push(chunk);
         });
         res.on("end", () => {
+          if (res.statusCode === 404) {
+            // The port answers but has no /replay routes: a live game (Practice Tool, custom, spectate).
+            finish(
+              Error(
+                "Game đang mở không phải replay (Replay API trả 404). HUD chỉ áp dụng khi xem lại replay .rofl; trận live hoặc Practice Tool không có /replay/render.",
+              ),
+            );
+            return;
+          }
           if (res.statusCode !== 200) {
             finish(Error("Replay API không sẵn sàng hoặc không chấp nhận cấu hình."));
             return;

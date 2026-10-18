@@ -130,12 +130,7 @@ export function ReplayHud({
         <fieldset>
           <legend>Preset hiển thị (bật = hiện)</legend>
           {(Object.keys(hudFields) as HudKey[]).map((key) => {
-            const locked = [
-              "interfaceAll",
-              "interfaceReplay",
-              "interfaceAnnounce",
-              "interfaceKillCallouts",
-            ].includes(key);
+            const locked = ["interfaceAll", "interfaceReplay", "interfaceAnnounce"].includes(key);
             return (
               <label key={key} className="hud-option">
                 <Input
@@ -163,7 +158,8 @@ export function ReplayHud({
         <fieldset>
           <legend>Giới hạn cần biết</legend>
           <p>
-            Thông báo hạ gục và chuỗi hạ gục luôn được giữ lại. Chưa hỗ trợ ẩn riêng killfeed gốc.
+            Thông báo (Announcements) luôn được giữ lại. Killfeed gốc ẩn bằng cờ Kill Callouts: bỏ
+            tích để ẩn killfeed góc phải, thông báo giữa màn hình không đổi (đã kiểm trên replay).
           </p>
           <p>Chưa hỗ trợ ẩn riêng dấu 18+ VNG.</p>
           <p>

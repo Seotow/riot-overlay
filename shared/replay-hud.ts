@@ -13,7 +13,7 @@ export const hudFields = {
   interfaceQuests: "Quest mặc định",
   interfaceNeutralTimers: "Timer mục tiêu mặc định",
   interfaceAnnounce: "Announcements (giữ thông báo)",
-  interfaceKillCallouts: "Kill Callouts (giữ thông báo hạ gục)",
+  interfaceKillCallouts: "Killfeed gốc / Kill Callouts (tắt = ẩn killfeed góc phải)",
 } as const;
 export type HudKey = keyof typeof hudFields;
 export const hudSchema = z
@@ -30,7 +30,7 @@ export const hudSchema = z
     interfaceQuests: z.boolean(),
     interfaceNeutralTimers: z.boolean(),
     interfaceAnnounce: z.literal(true),
-    interfaceKillCallouts: z.literal(true),
+    interfaceKillCallouts: z.boolean(),
   })
   .strict();
 export type HudConfig = z.infer<typeof hudSchema>;
@@ -47,7 +47,8 @@ export const defaultHud: HudConfig = {
   interfaceQuests: false,
   interfaceNeutralTimers: false,
   interfaceAnnounce: true,
-  interfaceKillCallouts: true,
+  // Off: the overlay draws its own killfeed. Verified on a replay: this flag hides the game's one.
+  interfaceKillCallouts: false,
 };
 export function renderHudFields(raw: unknown): Partial<Record<HudKey, boolean>> {
   if (!raw || typeof raw !== "object" || Array.isArray(raw)) return {};
