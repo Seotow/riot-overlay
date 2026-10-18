@@ -1,6 +1,6 @@
 # Review lifecycle Collector — 14/10/2026
 
-Phạm vi: bản source thử nghiệm trong `../src/LeagueCollector`.
+Phạm vi: bản source thử nghiệm trong `../archive/legacy-src/LeagueCollector` (bản sao cũ, đã lưu trữ).
 Review chỉ đọc source và bằng chứng managed lab; không truy cập game, không chạy
 DLL native, không đổi xác thực, quyền, spectator check hoặc transport.
 

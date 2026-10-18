@@ -19,6 +19,8 @@ collector/
     lb-host/            Host dùng DLL LB (trước là src/LeagueCollector); có lifecycle fix.
                         Project C# nằm ở src/LeagueCollector
     independent-reader/ Source C++/host độc lập (trước là src/LeagueReader), chưa game-validated
+    valorant-collector/ Collector Valorant: Spectra Client chính thức chạy ngầm + backend/overlay Spectra, runtime, test,
+                        local/ (dữ liệu cục bộ, Git bỏ qua); xem README.vi.md trong thư mục
   bundles/              Gói Windows đã build kèm runtime .NET, tách khỏi source đang sửa
     lb-host/            Bản chạy của lb-host (trước là runtime/LeagueCollector)
     independent-reader/ Bản chạy của independent-reader (trước là runtime/LeagueReader-Windows-x64)
@@ -31,6 +33,8 @@ collector/
   archive/
     cloud-export/       Export cloud nguyên vẹn để diff/kiểm checksum
     packages/           ZIP gốc và hướng dẫn download
+    legacy-src/         Bản sao cũ LeagueCollector/LeagueReader (trước ở src/, không còn được dùng)
+    valorant-collector/ Nghiên cứu collector riêng cho Valorant (không dùng)
 ```
 
 `hosts/independent-reader` là source làm việc từ baseline cloud. Archive giữ

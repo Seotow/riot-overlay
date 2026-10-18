@@ -54,7 +54,7 @@ và giả định lifecycle Unix. Không lưu credentials/raw player stats/addre
   `59370210865bc39b291ab93fa8bccac741594233e11e520536e572603efef264`.
 - Inventory bằng công cụ filesystem thông thường: 1543 entry, 37,551,636 byte
   giải nén; đã kiểm tra mọi resolved path nằm trong đích và không ghi đè.
-  Bản ZIP không đổi. Source copy ở `../src/LeagueCollector`.
+  Bản ZIP không đổi. Source copy ở `../archive/legacy-src/LeagueCollector` (bản sao cũ, đã lưu trữ).
 - Native vẫn là DLL gốc LB, SHA256
   `a1028d56ef03c84a0808ac028a0ee3a982e7962e844592157ed4b6c2663141d3`.
   Các file C++ trong archive là pseudocode chọn lọc, không engine native build lại.

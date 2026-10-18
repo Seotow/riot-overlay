@@ -264,7 +264,10 @@ export class ValorantSpectraSource {
 
 /** Đọc cổng output + group code từ config module; không đụng tới key xác thực. */
 export async function loadSpectraOptions(
-  path = resolve(process.env.RIOT_OVERLAY_VALORANT_CONFIG || "data/valorant/module.json"),
+  path = resolve(
+    process.env.RIOT_OVERLAY_VALORANT_CONFIG ||
+      "collector/hosts/valorant-collector/local/module.json",
+  ),
 ): Promise<SpectraOptions> {
   let port = 5320,
     groupCode = "RIOTLOCAL",

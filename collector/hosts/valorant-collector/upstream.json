@@ -1,0 +1,24 @@
+[
+  {
+    "repository": "https://github.com/ValoSpectra/Spectra-Server",
+    "revision": "64782ac2dcd5863aa179a084c8f402c3be794ebe",
+    "directory": "backend",
+    "excluded": [
+      ".github",
+      ".husky",
+      ".vscode"
+    ],
+    "archiveSha256": "da5fd6bde351d58063f8e521fc7aa081c77dc8dcaccaa2769c1b423aa1ca5251"
+  },
+  {
+    "repository": "https://github.com/nobiiVAL/Spectra-Frontend-VAL26",
+    "revision": "938cf707da7431d1bc3a70164a662bff3597ecbf",
+    "directory": "frontend-val26",
+    "license": "Elastic License 2.0",
+    "attribution": "nobiiVAL, fork of ValoSpectra/Spectra-Frontend (Purple Shark UG, nobii)",
+    "excluded": [
+      ".git",
+      ".github"
+    ]
+  }
+]

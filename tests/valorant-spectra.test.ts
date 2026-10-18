@@ -158,47 +158,77 @@ test("manual controls are read from timeout/toast state and marked as operator s
   assert.equal(normalizeSpectra(raw(), at, 1)!.controls.toast.active, false);
 });
 
-test("control commands are validated and forwarded with a bearer token only", async () => {
+test("controller: chỉ reconnect vào trận có sẵn, gửi lệnh đúng định dạng obs_data, chặn plant ngoài combat", async () => {
+  const { ValorantController } = await import("../server/valorant-controller");
   const { sendValorantCommand } = await import("../server/valorant-control");
-  const { mkdtemp, writeFile } = await import("node:fs/promises");
-  const { tmpdir } = await import("node:os");
-  const { join } = await import("node:path");
-  const dir = await mkdtemp(join(tmpdir(), "val-ctl-"));
-  const runtimePath = join(dir, "headless.json");
-  await writeFile(runtimePath, JSON.stringify({ controlPort: 5330, controlToken: "a".repeat(64) }));
-  const calls: any[] = [];
-  const fetcher = (async (url: string, init: any) => {
-    calls.push({ url, init });
-    return { ok: true, status: 200, json: async () => ({ ok: true }) };
-  }) as any;
-  assert.deepEqual(await sendValorantCommand({ command: "tech_pause" }, { runtimePath, fetcher }), {
+  const { defaultPaths } = await import("../server/valorant-config");
+  let phase: string | null = "shopping";
+  const controller: any = new ValorantController({
+    ingestPort: 1,
+    extrasPort: 1,
+    groupCode: "RIOTLOCAL",
+    key: "k".repeat(64),
+    observerName: "Studio",
+    secretFile: "unused",
+    paths: { ...defaultPaths(5322), config: "nope.json", assets: "nope" },
+    phase: () => phase,
+  });
+  const sent: string[] = [];
+  const ws = { send: (m: string) => sent.push(m) };
+  controller.ws = ws;
+  await controller.message(ws, '0{"sid":"x"}', "SECRET");
+  await controller.message(ws, "40", "SECRET");
+  assert.equal(sent[0], "40");
+  const logon = JSON.parse(JSON.parse(sent[1].slice(2))[1]);
+  assert.equal(logon.groupSecret, "SECRET");
+  assert.equal(logon.groupCode, "RIOTLOCAL");
+  // Chưa nối: mọi lệnh báo not-connected
+  assert.deepEqual(await controller.run({ command: "tech_pause" }), {
+    ok: false,
+    error: "not-connected",
+  });
+  // Server chấp nhận bằng reconnected
+  await controller.message(
+    ws,
+    '42["obs_logon_ack","{\\"type\\":\\"authenticate\\",\\"value\\":true,\\"reason\\":\\"reconnected\\"}"]',
+    "SECRET",
+  );
+  assert.equal(controller.isConnected(), true);
+  assert.deepEqual(await controller.run({ command: "tech_pause" }), { ok: true });
+  const frame = JSON.parse(JSON.parse(sent.at(-1)!.slice(2))[1]);
+  assert.deepEqual(
+    { t: frame.type, d: frame.data, g: frame.groupCode },
+    { t: "tech_pause", d: true, g: "RIOTLOCAL" },
+  );
+  assert.deepEqual(await controller.run({ command: "spike_planted" }), {
+    ok: false,
+    error: "not-in-combat",
+  });
+  phase = "combat";
+  assert.deepEqual(await controller.run({ command: "spike_planted" }), { ok: true });
+  assert.deepEqual(
+    await controller.run({ command: "toast", title: "t", message: "m", duration: 3000 }),
+    { ok: true },
+  );
+  const toast = JSON.parse(JSON.parse(sent.at(-1)!.slice(2))[1]);
+  assert.equal(toast.data.active, true);
+  // Qua sendValorantCommand: lệnh sai bị từ chối, thiếu controller báo not-connected
+  assert.equal(
+    (await sendValorantCommand({ command: "rm -rf" }, { controller })).error,
+    "invalid-command",
+  );
+  assert.equal((await sendValorantCommand({ command: "tech_pause" })).error, "not-connected");
+  assert.deepEqual(await sendValorantCommand({ command: "left_timeout" }, { controller }), {
     ok: true,
   });
-  assert.equal(calls[0].url, "http://127.0.0.1:5330/command");
-  assert.equal(calls[0].init.headers.Authorization, `Bearer ${"a".repeat(64)}`);
-  assert.equal(
-    (await sendValorantCommand({ command: "rm -rf" }, { runtimePath, fetcher })).error,
-    "invalid-command",
+  // Nếu server cấp bí mật mới (controller vô tình tạo trận) thì không bao giờ chấp nhận
+  await controller.message(
+    ws,
+    '42["obs_logon_ack","{\\"type\\":\\"authenticate\\",\\"value\\":true,\\"reason\\":\\"NEWSECRET1234\\"}"]',
+    "SECRET",
   );
-  assert.equal(
-    (
-      await sendValorantCommand(
-        { command: "toast", title: "x", message: "y", duration: 5 },
-        { runtimePath, fetcher },
-      )
-    ).error,
-    "invalid-command",
-  );
-  assert.equal(
-    (
-      await sendValorantCommand(
-        { command: "tech_pause" },
-        { runtimePath: join(dir, "none.json"), fetcher },
-      )
-    ).error,
-    "client-not-managed",
-  );
-  assert.equal(calls.length, 1);
+  assert.equal(controller.isConnected(), false);
+  assert.equal(controller.status().error, "controller-created-match");
 });
 
 test("game power persists per game and defaults to LoL only", async () => {

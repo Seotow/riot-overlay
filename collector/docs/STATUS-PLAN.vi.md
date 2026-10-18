@@ -194,5 +194,5 @@ review/fixture. Mục tiêu full telemetry chưa đạt; không báo phần tră
 - [Bắt đầu gói cloud](../archive/cloud-export/RiotOverlay-local/00-START-HERE.vi.md)
 - [Kế hoạch cloud](../archive/cloud-export/RiotOverlay-local/docs/LOCAL-NEXT-STEPS.vi.md)
 - [State machine-readable](../archive/cloud-export/RiotOverlay-local/STATE.json)
-- [Source reader riêng](../src/LeagueReader/README.vi.md)
+- [Source reader riêng](../archive/legacy-src/LeagueReader/README.vi.md)
 - [Bằng chứng đối chiếu local](../evidence/import/import-audit-20261014.json)

@@ -60,7 +60,10 @@ const valorantPaths = defaultPaths(spectraOptions.frontendPort);
 // Mỗi game có công tắc riêng: tắt thì không mở socket, process hay vòng poll của game đó.
 const games = new GamePower();
 await games.load();
-const valorantModule = new ValorantModule();
+const valorantModule = new ValorantModule({
+  paths: valorantPaths,
+  phase: () => valorant.observe()?.match.roundPhase.value ?? null,
+});
 const replayHud = new ReplayHudService();
 // Isolated verification can persist a temporary theme without touching user branding.
 const themePath = resolve(process.env.RIOT_OVERLAY_THEME_PATH || "data/theme.json");
@@ -99,6 +102,24 @@ const vite = production
       await import("vite")
     ).createServer({ server: { middlewareMode: true, host }, appType: "spa" });
 // Bật/tắt kết nối của từng game; tắt LoL ngắt mọi nguồn LoL, tắt Valorant dừng cả module.
+async function gamesReport() {
+  const detail = (await valorantModule.detail()) as {
+    collector?: string;
+    controller?: { connected: boolean; error: string | null };
+    collectorDetail?: { official?: { state: string; title: string }; error?: string | null } | null;
+  } | null;
+  return {
+    games: games.snapshot(),
+    valorant: {
+      ...valorantModule.snapshot(),
+      collector: detail?.collector ?? null,
+      official: detail?.collectorDetail?.official ?? null,
+      collectorError: detail?.collectorDetail?.error ?? null,
+      controllerConnected: detail?.controller?.connected ?? null,
+      controllerError: detail?.controller?.error ?? null,
+    },
+  };
+}
 async function applyGame(game: Game, on: boolean) {
   await games.set(game, on);
   if (game === "lol" && !on) {
@@ -401,7 +422,7 @@ const server = createServer(async (req, res) => {
     } catch {
       input = null;
     }
-    const outcome = await sendValorantCommand(input);
+    const outcome = await sendValorantCommand(input, { controller: valorantModule.controller() });
     res.writeHead(outcome.ok ? 200 : outcome.error === "invalid-command" ? 400 : 409);
     res.end(JSON.stringify(outcome));
     return;
@@ -420,7 +441,7 @@ const server = createServer(async (req, res) => {
       return;
     }
     if (req.method === "GET") {
-      res.end(JSON.stringify({ games: games.snapshot(), valorant: valorantModule.snapshot() }));
+      res.end(JSON.stringify(await gamesReport()));
       return;
     }
     if (
@@ -457,7 +478,7 @@ const server = createServer(async (req, res) => {
       return;
     }
     await applyGame(parsed.data.game, parsed.data.enabled);
-    res.end(JSON.stringify({ games: games.snapshot(), valorant: valorantModule.snapshot() }));
+    res.end(JSON.stringify(await gamesReport()));
     return;
   }
   if (req.url === "/api/valorant/config") {
@@ -505,8 +526,13 @@ const server = createServer(async (req, res) => {
       res.end(JSON.stringify(saved));
       return;
     }
-    // Client fork chưa chạy thì cấu hình vẫn được lưu và áp dụng khi nó kết nối.
-    const applied = (await sendValorantCommand({ command: "apply_config" })).ok;
+    // Collector chưa chạy thì cấu hình vẫn được lưu và áp dụng khi nó kết nối.
+    const applied = (
+      await sendValorantCommand(
+        { command: "apply_config" },
+        { controller: valorantModule.controller() },
+      )
+    ).ok;
     res.end(JSON.stringify({ ...saved.view, applied }));
     return;
   }

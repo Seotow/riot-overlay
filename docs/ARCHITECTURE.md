@@ -115,7 +115,7 @@ Collector → normalized frame → WebSocket observer → LiveOverlay ở Studio
 
 ## Module nguồn và mở rộng game
 
-Mốc Valorant 13/10/2026: đã fork local Client/Server/Frontend trong `modules/valorant`, BE Node/FE Angular có dependency/build riêng, launcher quản lý port/ownership/readiness/shutdown và executable collector tùy cấu hình. Runtime không nhập code Valorant vào contract/build LoL; Studio React chưa nhúng FE Angular. Chưa build collector hoặc xác minh game telemetry. Xem `docs/VALORANT_MODULE.md` và `docs/VALOSPECTRA_FEASIBILITY.md`.
+Mốc Valorant 13/10/2026: đã fork local Client/Server/Frontend trong `collector/hosts/valorant-collector`, BE Node/FE Angular có dependency/build riêng, launcher quản lý port/ownership/readiness/shutdown và executable collector tùy cấu hình. Runtime không nhập code Valorant vào contract/build LoL; Studio React chưa nhúng FE Angular. Chưa build collector hoặc xác minh game telemetry. Xem `docs/VALORANT_MODULE.md` và `docs/VALOSPECTRA_FEASIBILITY.md`.
 
 Dashboard tách Tổng quan, Nguồn dữ liệu, Studio/OBS, Demo, Theme và Lộ trình. Workspace game là lớp điều hướng; LoL đang hoạt động, Valorant mới là khung mở rộng và không dùng chung contract trận.
 

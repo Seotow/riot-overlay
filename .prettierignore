@@ -14,6 +14,5 @@ docs/
 # Collector: native hosts, packaged bundles and vendored third-party sources
 collector/hosts/
 collector/bundles/
+collector/archive/
 
-# Valorant module is a fork of upstream projects with its own conventions
-modules/valorant/

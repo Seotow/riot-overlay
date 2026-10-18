@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 // Cấu hình trận Valorant do operator nhập (provenance manual). Logo lưu bằng tên file trong
-// data/valorant/assets, được frontend module phục vụ ở /uploads; không đưa data URL qua socket trận.
+// collector/hosts/valorant-collector/local/assets, được frontend module phục vụ ở /uploads; không đưa data URL qua socket trận.
 export const logoNameSchema = z.string().regex(/^(?:[a-f0-9]{16}\.(?:png|jpg|webp))?$/);
 
 export const valorantTeamConfigSchema = z.object({

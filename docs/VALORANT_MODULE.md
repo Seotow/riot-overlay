@@ -1,67 +1,34 @@
-# Module Valorant — khởi động độc lập
+# Module Valorant: ValorantCollector
 
-Mốc 13/10/2026: đã import/fork local source ValoSpectra Client, Server, Frontend
-theo revision pin. Backend/FE build và chạy riêng; đã có launcher và kiểm thử
-lifecycle/Socket.IO. Đã gắn và khởi động **official Client 0.3.4 Observer**, cửa
-sổ báo Ready/GEP 315.1.0. **Chưa kết nối collector tới backend hoặc xác minh
-telemetry trận Valorant.** Source collector fork 0.3.3 chưa build; không coi
-binary official 0.3.4 là bản build từ source fork.
+Valorant là một collector tự chứa ở `collector/hosts/valorant-collector`, cùng cấp với các host LoL. Nó dùng **Spectra**:
+Spectra Client chính thức chạy ngầm (lấy dữ liệu qua Overwolf GEP), backend Spectra Server fork và overlay VAL26.
+Studio chỉ giữ phần giao diện/API (`server/valorant-*.ts`, `shared/valorant*.ts`, `src/valorant/`).
+Mốc 13/10 (import fork Client/Server/Frontend) và các mốc 18/10 (Client ngầm, controller, cấu hình trận) xem `PROJECT_STATUS.md`.
 
 ## Cấu trúc và ranh giới
 
-- `modules/valorant/collector`: source Overwolf Electron, giữ GPL; chưa build.
-- `modules/valorant/backend`: fork Spectra Server, dependency/build riêng.
-- `modules/valorant/frontend`: fork Angular FE, dependency/build riêng.
-- `modules/valorant/runtime`: launcher Node và static/status server chỉ loopback.
-- `modules/valorant/upstream.json`, `MODIFICATIONS.md`: provenance và thay đổi.
-- `data/valorant`: config, key và owner runtime; bị Git ignore, tách theme LoL.
+- `collector/hosts/valorant-collector/backend`: fork Spectra Server (ELv2), dependency/build riêng.
+- `collector/hosts/valorant-collector/frontend-val26`: overlay in-game VAL26 của nobiiVAL (ELv2, `SOURCE.md`).
+- `collector/hosts/valorant-collector/client`: điều khiển Spectra Client chính thức (tải một lần, SHA256 đã pin trong `release.json`).
+- `collector/hosts/valorant-collector/runtime`: supervisor (backend + overlay + Client), cấu hình, setup tự cài, CLI; chỉ loopback.
+- `collector/hosts/valorant-collector/tests`, `upstream.json`, `MODIFICATIONS.md`: kiểm thử, provenance, thay đổi so với upstream.
+- `collector/hosts/valorant-collector/local`: dữ liệu cục bộ (config, key, Spectra Client đã tải, profile ngầm, logo, cấu hình trận); Git bỏ qua, tách theme LoL.
+- Collector riêng đã nghiên cứu: `collector/archive/valorant-collector` (không dùng).
 
-Không sửa contract, provider, theme hoặc renderer LoL. Lệnh `dev`/`start` LoL
-giữ nguyên. Module chưa được nhúng vào tab Valorant của Studio; đó là mốc kế tiếp.
-Không tự chạy Docker, đóng Overwolf hoặc chiếm cổng của stack Spectra cũ.
+Không sửa contract, provider, theme hoặc renderer LoL. Không tự chạy Docker, đóng Overwolf hay chiếm cổng của stack Spectra khác.
 
 ## Cài và build
 
-Từ root project:
+Thường không cần làm tay: bật công tắc Valorant trong Studio lần đầu sẽ tự cài (xem [SETUP_VI.md](SETUP_VI.md)). Chạy tay:
 
 ```powershell
-npm ci --ignore-scripts --prefix modules/valorant/backend
-npm ci --ignore-scripts --prefix modules/valorant/frontend
-npm run build:valorant
-npm run valorant:init
-npm run valorant:doctor
+npm run valorant:setup    # config + key, backend, overlay VAL26, tải Spectra Client (một lần, SHA256 pin)
+npm run valorant:doctor   # kiểm build, Spectra Client, cổng
 ```
 
-Node 22.12 hiện đã build được; một dependency lint mới cảnh báo cần 22.13+/24.
-Không tự nâng Node toàn máy. Dependency module nằm ngoài root lock/tsconfig,
-không thêm Angular vào build LoL. Npm lifecycle scripts upstream được tắt để
-không cài hook Git hoặc tự chạy installer.
-
-`valorant:init` không ghi đè config/key đã có. Đặt `collectorPath` trong
-`data/valorant/module.json` thành đường dẫn absolute tới **Spectra Client.exe**
-đã cài, hoặc để `null` khi chỉ kiểm chứng services. Không nhập command shell.
-Source Client không thay thế executable/Overwolf runtime. Đã có helper
-`scripts/assets/acquire-spectra-client.ps1` tải/giải nén release 0.3.4 theo SHA256
-pin (cần 7-Zip); không chạy installer hoặc can thiệp anti-cheat. Nếu thư mục
-runtime đã có, helper từ chối ghi đè.
-
-Sau khi tìm/khôi phục executable, gắn path bằng:
-
-```powershell
-npm run valorant:collector -- "D:\duong-dan\Spectra Client.exe"
-```
-
-Lệnh tạo backup config, kiểm tra path, giữ group/port/key hiện có. Runtime đang
-dùng nằm trong `data/valorant/collector/0.3.4` (bị Git ignore). Đã tìm thấy
-installer cũ 0.3.4 trong Downloads/SetUp, hash khớp release chính thức; shortcut
-Player/Auxiliary cũ trỏ tới executable đã mất. Không chạy lại installer cũ hoặc
-ghi đè shortcut. Provenance ở `modules/valorant/collector-release.json`.
-
-Binary official dùng profile/log upstream Spectra Client tại AppData, chưa có
-profile riêng như BE/config module. Module không copy/export raw log; chỉ đọc
-marker version/Observer/GEP ready để kiểm chứng. Không đưa config, key hay
-log toàn bộ upstream vào chat/Git. Startup collector GUI được để hiển thị
-cho operator; helper/backend vẫn ẩn console.
+Cần Node 22 và mạng. Dependency module nằm ngoài root lock/tsconfig; npm lifecycle scripts upstream bị tắt (`--ignore-scripts`)
+để không cài hook Git hay tự chạy installer. `npm run build:valorant` build lại backend và overlay.
+Spectra Client dùng profile riêng trong `local/spectra/official-profile`; log của chính Client có ghi key local nên không chia sẻ thư mục `local/`.
 
 ## Chạy
 
@@ -106,13 +73,13 @@ server có authenticated observer và output trả snapshot đúng RIOTLOCAL.
 Main Menu có LOBBY/isRunning=false/0 player, chưa xác minh telemetry trận.
 Nếu Reconnecting trong khi game status vẫn đúng, kiểm tra backend còn chạy;
 GEP và đường Client→Server là hai kết nối riêng. Giữ terminal launcher hoạt động.
-`node modules/valorant/runtime/inspect-output.mjs` đọc một snapshot output và
+`node collector/hosts/valorant-collector/runtime/inspect-output.mjs` đọc một snapshot output và
 chỉ báo số slot/capability, không ghi raw/danh tính. Services-only giữ Client
 người dùng đã mở, không dừng nó khi đóng services.
 
 1. Cung cấp đường dẫn/version Client và mở bằng launcher sau khi config path.
 2. Chọn ingest custom `http://127.0.0.1:5310`, group code `RIOTLOCAL`.
-3. Nhập access key từ **file local** `data/valorant/auth.key`; không gửi nội dung
+3. Nhập access key từ **file local** `collector/hosts/valorant-collector/local/auth.key`; không gửi nội dung
    key vào chat, log, screenshot hoặc Git. Điền observer/team theo UI Client.
 4. Kết nối, đối chiếu `observerConnected` và GEP Ready ở Client. Sau đó mới mở
    custom observer để thu mẫu roster/scoreboard/round/kill/spike và reconnect.
@@ -135,7 +102,7 @@ kiểm tra conflict, ownership, lỗi/restart, auth, output/reconnect, source lo
 HTTP guard và shutdown. Dữ liệu là synthetic transport fixture, không phải game.
 LoL integration dùng backend/theme riêng; không gọi command lên phiên đang phát.
 
-Browser QA: `modules/valorant/tests/browser-smoke.mjs`, cần biến
+Browser QA: `collector/hosts/valorant-collector/tests/browser-smoke.mjs`, cần biến
 `OVERLAY_BROWSER_PACKAGES` trỏ thư mục Playwright/sharp có sẵn. Dùng Edge
 headless/profile riêng, kiểm tra status, routes, transparent OBS 1920×1080 và
 không request ngoài. Screenshot nằm trong `.npm-cache`, không thuộc runtime.
@@ -150,54 +117,38 @@ Build/package collector fork, health GEP readiness tự động tại launcher (
 sát Ready trực tiếp từ cửa sổ/log version nhưng status module chưa có IPC GEP), tự cấu hình Client,
 thu mẫu game thật, capability/normalization đầy đủ, custom giao diện/branding,
 nhúng FE vào Studio và launcher chung LoL+Valorant. Không có collector mới thay GEP.
-Giấy phép/provenance và khác biệt manifest được ghi ở `modules/valorant/MODIFICATIONS.md`.
+Giấy phép/provenance và khác biệt manifest được ghi ở `collector/hosts/valorant-collector/MODIFICATIONS.md`.
 
-## Client fork tự gắn vào app (18/10/2026)
+## Client chạy ngầm cùng app (18/10/2026)
 
-Chạy `npm start` rồi bật công tắc **Kết nối Valorant** trong Studio (chọn game Valorant ở thanh bên): Studio tự chạy backend/FE Valorant + **Client fork** (build từ source trong
-`modules/valorant/collector`), không cần mở Spectra Client hay nhập form. Fork thêm `src/headless.ts`:
-chỉ bật khi có `RIOT_OVERLAY_SPECTRA_CONFIG` (JSON do supervisor ghi vào `data/valorant/runtime/headless.json`,
-chỉ chứa ingest loopback, group code và đường dẫn tới `auth.key`; key không nằm trong config và không ghi log).
-Chế độ này ẩn cửa sổ/tray, bỏ kiểm tra cập nhật, nuốt hộp thoại, tự kết nối ingest và dùng profile riêng
-(`data/valorant/collector/fork-profile`, `RIOT_OVERLAY_SPECTRA_PROFILE`) nên không đụng Client cài sẵn.
-Không có biến này thì fork chạy như upstream. GEP do Overwolf cung cấp qua ow-electron, không cần đăng nhập.
+Chạy `npm start`, chọn game Valorant ở thanh bên Studio và bật công tắc **Kết nối Valorant**. Lần đầu Studio tự cài (backend, overlay VAL26) và **tải Spectra Client chính thức một lần**
+(kiểm SHA256 đã pin) nếu máy chưa có, rồi chạy ngầm; không cần mở Client hay nhập form. Chi tiết cách chạy ngầm, tự cấu hình, tắt phím nóng toàn cục, controller và giới hạn:
+[collector/valorant/README.vi.md](../collector/hosts/valorant-collector/client/README.vi.md).
 
-Build (một lần, cần Node 22, Yarn 4 qua corepack; không cần Visual Studio vì bỏ qua rebuild native):
-
-```powershell
-cd modules/valorant/collector
-$env:YARN_ENABLE_SCRIPTS = "false"; yarn install
-node node_modules/@overwolf/ow-electron/install.js
-npx tsc; yarn workspace angular build
-```
-
-`collectorMode` trong `data/valorant/module.json` (`fork` mặc định, hoặc `official` để dùng
-`collectorPath`). Fork chưa build thì supervisor quay về `collectorPath` nếu có. Chỉ nên chạy một Client tại
-một thời điểm: Client chính thức đang mở sẽ tranh GEP với fork. Đã kiểm chứng: fork xác thực với backend,
-GEP 315.3.5 báo ready, observer=1, Studio `receiving` ở lobby. Chưa kiểm trong trận.
-Dừng bằng Ctrl+C ở terminal launcher; nếu launcher bị kill đột ngột, process Electron của fork có thể còn sót.
+Vì sao dùng Client chính thức thay vì collector riêng: Overwolf chỉ cấp GEP thật cho app UID đã đăng ký (UID là băm của `productName/name + author.name`). Collector riêng đã dịch từ Spectra Client
+nhận gói giả `0.0.0` với UID của dự án nên không có dữ liệu; nó được lưu ở `collector/archive/valorant-collector`. Dự án không dùng danh tính của Spectra cho app khác và không chỉnh gói GEP.
+`collectorMode` trong `module.json` chỉ còn `official` (giá trị cũ `gep`/`fork` được coi là `official`).
 
 ## Điều khiển thủ công và overlay VAL26 (18/10/2026)
 
 Trang Studio `/?page=valorant` có các nút tương đương phím nóng/nút của Spectra Client: bom đã đặt (chỉ nhận khi
 round đang combat), tech pause, timeout đội trái/phải, đổi KDA/credits, đổi trái-phải, đổi tấn công-thủ và toast.
-Lệnh đi Studio `POST /api/valorant/control` (cùng origin, JSON, allowlist) → Client fork (cổng output + 10, bearer
-token trong `data/valorant/runtime/headless.json`, không trả về trình duyệt) → ingest. Trạng thái pause/timeout/toast đọc
+Lệnh đi Studio `POST /api/valorant/control` (cùng origin, JSON, allowlist) → controller của Studio (phiên observer thứ hai) → ingest. Trạng thái pause/timeout/toast đọc
 lại từ frame (`controls`) và là dữ liệu nhập tay, không phải telemetry. Đã kiểm: tech pause, đổi KDA/credits, toast
 (tự tắt) và chặn origin lạ; chưa thử plant/timeout trong trận.
 
-Overlay in-game dùng bản **VAL26** của nobiiVAL (`modules/valorant/frontend-val26`, ELv2, xem `SOURCE.md`):
+Overlay in-game dùng bản **VAL26** của nobiiVAL (`collector/hosts/valorant-collector/frontend-val26`, ELv2, xem `SOURCE.md`):
 `http://127.0.0.1:5322/overlay?groupCode=RIOTLOCAL` (OBS 1920×1080). Build bằng `npm run build:valorant`
-(hoặc `npm run build` trong thư mục đó). `frontendVariant: "spectra"` trong `data/valorant/module.json` quay về bản cũ.
+(hoặc `npm run build` trong thư mục đó). `frontendVariant: "spectra"` trong `collector/hosts/valorant-collector/local/module.json` quay về bản cũ.
 Chưa audit toàn bộ widget/animation; team name/logo đang là mặc định "Team 1/Team 2" cho tới khi có cấu hình đội.
 
 ## Chọn game, công tắc kết nối và cấu hình trận (18/10/2026)
 
 Studio chọn game LoL/Valorant ở thanh bên; mỗi game có công tắc kết nối riêng (lưu ở `data/studio-games.json`, mặc định LoL bật, Valorant tắt).
-Tắt LoL ngắt LeagueBroadcast, collector và các vòng poll LoL; tắt Valorant dừng toàn bộ module (backend, frontend, Client fork) và socket Spectra.
+Tắt LoL ngắt LeagueBroadcast, collector và các vòng poll LoL; tắt Valorant dừng toàn bộ module (backend, frontend, Client) và socket Spectra.
 Module Valorant do Studio quản lý (`server/valorant-module.ts`); `npm run start:valorant` vẫn dùng được khi chạy riêng, nhưng không chạy song song với công tắc (trùng owner/cổng sẽ báo lỗi).
 
 Trang Valorant có Tổng quan, Cấu hình trận (tên/mã/logo hai đội, tỉ số loạt trận, thể thức, tên và logo giải, tên thay thế người chơi) và Phát sóng
-(overlay thu nhỏ + nút điều khiển). Cấu hình lưu ở `data/valorant/match-config.json`, logo ở `data/valorant/assets` (đặt tên theo hash, kiểm tra chữ ký ảnh,
-tối đa 350KB, phục vụ ở `/uploads` của frontend module). Lưu xong, Studio gửi lệnh `apply_config`; Client fork gửi `config_update` lên backend fork để đổi giữa trận
-(Spectra gốc chỉ đọc đội lúc tạo trận). Client mới kết nối cũng đọc lại file này.
+(overlay thu nhỏ + nút điều khiển). Cấu hình lưu ở `collector/hosts/valorant-collector/local/match-config.json`, logo ở `collector/hosts/valorant-collector/local/assets` (đặt tên theo hash, kiểm tra chữ ký ảnh,
+tối đa 350KB, phục vụ ở `/uploads` của frontend module). Lưu xong, Studio gửi lệnh `apply_config`; controller gửi `config_update` lên backend fork để đổi giữa trận
+(Spectra gốc chỉ đọc đội lúc tạo trận). Client mới kết nối cũng được điền lại từ file này.
