@@ -1,0 +1,254 @@
+/* ── Fonts ─────────────────────────────────────────────────────────────────── */
+@font-face {
+  font-family: "Tungsten";
+  src: url("fonts/SVN-Tungsten Black.otf") format("opentype");
+  font-weight: 900;
+}
+@font-face {
+  font-family: "Tungsten";
+  src: url("fonts/SVN-Tungsten Bold.otf") format("opentype");
+  font-weight: 700;
+}
+@font-face {
+  font-family: "Tungsten";
+  src: url("fonts/SVN-Tungsten Semibold.otf") format("opentype");
+  font-weight: 600;
+}
+@font-face {
+  font-family: "Tungsten";
+  src: url("fonts/SVN-Tungsten Medium.otf") format("opentype");
+  font-weight: 500;
+}
+@font-face {
+  font-family: "Tungsten";
+  src: url("fonts/SVN-Tungsten Book.otf") format("opentype");
+  font-weight: 400;
+}
+
+/* ── CSS variables (defaults — overridden live by mvp.js) ──────────────────── */
+:root {
+  --primary-rgb: 57, 241, 254;
+  --primary-a: 0.78;
+  --cell-rgb: 0, 0, 0;
+  --cell-a: 0.37;
+  --cell2-rgb: 0, 0, 0;
+  --cell2-a: 0.37;
+  --header-bg-rgb: 0, 0, 0;
+  --header-bg-a: 0.38;
+  --header-text: #ffffff;
+  --body-text: #ffffff;
+  --font-overlay: "Tungsten";
+  --white: #f5f5f5;
+  --black: #050505;
+  --line: 4px;
+}
+
+/* ── Reset ─────────────────────────────────────────────────────────────────── */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: transparent;
+  color: var(--body-text);
+  font-family: var(--font-overlay), "Tungsten", Arial, Helvetica, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+body {
+  display: grid;
+  place-items: center;
+}
+
+/* ── Stage ─────────────────────────────────────────────────────────────────── */
+.stage {
+  width: min(100vw, calc(100vh * 16 / 9));
+  aspect-ratio: 16 / 9;
+  position: relative;
+  overflow: hidden;
+  background: transparent;
+}
+
+.bg-layer {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+/* ── Card ──────────────────────────────────────────────────────────────────── */
+.card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1600px;
+  height: 900px;
+  display: flex;
+  border: var(--line) solid rgba(var(--primary-rgb), var(--primary-a));
+  filter: drop-shadow(0 6px 32px rgba(0, 0, 0, 0.65));
+}
+
+/* ── Agent panel (left) ────────────────────────────────────────────────────── */
+.agent-panel {
+  width: 500px;
+  flex-shrink: 0;
+  background: rgba(var(--cell2-rgb), var(--cell2-a));
+  position: relative;
+  overflow: hidden;
+}
+
+/* Agent themed background (background.png from valorant-api.com) */
+.agent-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 120%;
+  object-fit: cover;
+  object-position: center top;
+}
+.agent-bg:not([src]),
+.agent-bg[src=""] {
+  display: none;
+}
+
+/* Agent full portrait on top of background */
+.agent-portrait {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
+  height: 130%;
+  object-fit: cover;
+  object-position: top center;
+}
+.agent-portrait:not([src]),
+.agent-portrait[src=""] {
+  display: none;
+}
+
+/* Fade into stats panel */
+.agent-panel-fade {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 90px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(var(--cell-rgb), var(--cell-a))
+  );
+  pointer-events: none;
+}
+
+/* ── Stats panel (right) ───────────────────────────────────────────────────── */
+.stats-panel {
+  max-width: 1092px;
+  overflow: hidden;
+  flex: 1;
+  background: rgba(var(--cell-rgb), var(--cell-a));
+  padding: 36px 48px 32px 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Team row: logo + name */
+.team-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+
+.team-logo {
+  height: 50px;
+  max-width: 68px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+.team-logo:not([src]),
+.team-logo[src=""] {
+  display: none;
+}
+
+.team-name {
+  font-size: 48px;
+  font-weight: 700;
+  color: rgba(var(--primary-rgb), var(--primary-a));
+  line-height: 1;
+}
+
+/* Player name */
+.player-name {
+  font-size: 120px;
+  font-weight: 900;
+  line-height: 0.88;
+  color: var(--header-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+/* "MVP OF THE MAP" subtitle */
+.mvp-label {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: var(--body-text);
+  margin-top: 8px;
+  margin-bottom: 14px;
+}
+
+/* Accent divider line */
+.divider {
+  height: var(--line);
+  background: rgba(var(--primary-rgb), var(--primary-a));
+  margin-bottom: 14px;
+}
+
+/* Stats table */
+.stats-table {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.stat-row {
+  font-size: 68px;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.stat-label {
+  font-weight: 600;
+  color: var(--body-text);
+  flex-shrink: 0;
+}
+
+.stat-value {
+  font-weight: 900;
+  line-height: 1;
+  color: rgba(var(--primary-rgb), var(--primary-a));
+  white-space: nowrap;
+}
+
+@media (max-aspect-ratio: 16/9) {
+  .stage {
+    width: 100vw;
+  }
+}

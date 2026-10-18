@@ -125,3 +125,8 @@
     grid-template-columns: 1fr;
   }
 }
+.val-previews {
+  display: grid;
+  gap: 16px;
+  align-content: start;
+}

@@ -1,0 +1,238 @@
+﻿<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>VALORANT Postgame Overlay</title>
+  <link rel="stylesheet" href="./overlay.css" />
+</head>
+<body>
+  <main class="stage" id="stage" aria-label="VALORANT postgame overlay">
+    <div class="bg-layer" id="bg-layer"></div>
+    <section class="overlay">
+
+      <header class="score-header">
+        <div class="team-block left">
+          <img class="team-logo" data-bind-img="leftTeamLogo" src="" alt="" />
+          <div class="team-text">
+            <div class="team-name" data-bind="leftTeamName">TEAM A</div>
+            <div class="result" data-bind="leftResult">THẮNG</div>
+          </div>
+          <div class="score left" data-bind="leftScore">13</div>
+        </div>
+        <div class="league-center">
+          <img class="league-logo" data-bind-img="leagueLogo" src="" alt="" />
+          <!-- <div class="match-meta">
+            <div data-bind="mapName">ASCENT</div>
+            <div data-bind="queueName">COMPETITIVE</div>
+            <div data-bind="duration">38:24</div>
+          </div> -->
+        </div>
+        <div class="team-block right">
+          <img class="team-logo" data-bind-img="rightTeamLogo" src="" alt="" />
+          <div class="team-text right">
+            <div class="team-name" data-bind="rightTeamName">TEAM B</div>
+            <div class="result" data-bind="rightResult">THUA</div>
+          </div>
+          <div class="score right" data-bind="rightScore">11</div>
+        </div>
+      </header>
+
+      <section class="main-grid">
+
+        <!-- ── Row 1: MVP (portrait + stats merged) ────── -->
+        <aside class="cell mvp-cell left">
+          <img class="agent-art" data-bind-img="leftMvpPortrait" src="" alt="" />
+          <div class="mvp-ribbon">MVP</div>
+          <div class="mvp-overlay">
+            <div class="mvp-bottom">
+              <div class="mvp-info">
+                <div class="player-name-small" data-bind="leftMvpAgent">NEON</div>
+                <div class="player-name-large" data-bind="leftMvpName">BUZZ</div>
+              </div>
+              <div class="mvp-numbers left">
+                <div class="mvp-stat-row">
+                  <span class="stat-val" data-bind="leftMvpKills">23</span>
+                  <span class="stat-sep">/</span>
+                  <span class="stat-deaths" data-bind="leftMvpDeaths">16</span>
+                </div>
+                <div class="mvp-stat-row">
+                  <span class="stat-val" data-bind="leftMvpAcs">305</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </aside>
+
+        <article class="cell center-mvp-labels">
+          <div class="mvp-label-list">
+            <div>MẠNG <br> HẠ GỤC</div>
+            <div>ĐIỂM GIAO TRANH <br> TRUNG BÌNH</div>
+          </div>
+        </article>
+
+        <aside class="cell mvp-cell right">
+          <img class="agent-art" data-bind-img="rightMvpPortrait" src="" alt="" />
+          <div class="mvp-ribbon right">MVP</div>
+          <div class="mvp-overlay">
+            <div class="mvp-bottom">
+              <div class="mvp-numbers right">
+                <div class="mvp-stat-row right">
+                  <span class="stat-deaths" data-bind="rightMvpDeaths">15</span>
+                  <span class="stat-sep">/</span>
+                  <span class="stat-val" data-bind="rightMvpKills">15</span>
+                </div>
+                <div class="mvp-stat-row right">
+                  <span class="stat-val" data-bind="rightMvpAcs">207</span>
+                </div>
+              </div>
+              <div class="mvp-info right">
+                <div class="player-name-small" data-bind="rightMvpAgent">KAY/O</div>
+                <div class="player-name-large" data-bind="rightMvpName">CRAZYGUY</div>
+              </div>
+            </div>
+          </div>
+        </aside>
+
+        <!-- ── Side panels: map image (rows 2–5) ────────── -->
+        <aside class="cell map-panel left">
+          <img class="map-art" data-bind-img="mapImageLeft" src="" alt="" />
+          <div class="map-name-label" data-bind="mapNameLeft">MAP</div>
+        </aside>
+
+        <!-- ── Row 2 ──────────────────────────────────── -->
+        <article class="cell round-row round-row-l">
+          <img class="agent-icon agent-icon-tl" data-round-left-icon="0" src="" alt="" />
+          <div class="row-text">
+            <div class="row-line">
+              <div class="sub" data-round-left-sub="0">ASTRA</div>
+              <span class="row-num"><span data-round-left-kills="0">0</span></span>
+            </div>
+            <div class="row-line">
+              <div class="main" data-round-left-main="0">PLAYER01#VN</div>
+              <span class="row-num"><span data-round-left-acs="0">0</span></span>
+            </div>
+          </div>
+        </article>
+        <article class="cell round-center">
+          <div><div class="label">MẠNG HẠ GỤC</div><div class="value">ĐGTTB</div></div>
+        </article>
+        <article class="cell round-row round-row-r">
+          <img class="agent-icon agent-icon-tr" data-round-right-icon="0" src="" alt="" />
+          <div class="row-text">
+            <div class="row-line">
+              <span class="row-num"><span data-round-right-kills="0">0</span></span>
+              <div class="sub" data-round-right-sub="0">OMEN</div>
+            </div>
+            <div class="row-line">
+              <span class="row-num"><span data-round-right-acs="0">0</span></span>
+              <div class="main" data-round-right-main="0">PLAYER06#VN</div>
+            </div>
+          </div>
+        </article>
+
+        <!-- ── Row 3 ──────────────────────────────────── -->
+        <article class="cell round-row round-row-l">
+          <img class="agent-icon agent-icon-tl" data-round-left-icon="1" src="" alt="" />
+          <div class="row-text">
+            <div class="row-line">
+              <div class="sub" data-round-left-sub="1">KILLJOY</div>
+              <span class="row-num"><span data-round-left-kills="1">0</span></span>
+            </div>
+            <div class="row-line">
+              <div class="main" data-round-left-main="1">PLAYER02#VN</div>
+              <span class="row-num"><span data-round-left-acs="1">0</span></span>
+            </div>
+          </div>
+        </article>
+        <article class="cell round-center">
+          <div><div class="label">MẠNG HẠ GỤC</div><div class="value">ĐGTTB</div></div>
+        </article>
+        <article class="cell round-row round-row-r">
+          <img class="agent-icon agent-icon-tr" data-round-right-icon="1" src="" alt="" />
+          <div class="row-text">
+            <div class="row-line">
+              <span class="row-num"><span data-round-right-kills="1">0</span></span>
+              <div class="sub" data-round-right-sub="1">RAZE</div>
+            </div>
+            <div class="row-line">
+              <span class="row-num"><span data-round-right-acs="1">0</span></span>
+              <div class="main" data-round-right-main="1">PLAYER07#VN</div>
+            </div>
+          </div>
+        </article>
+
+        <!-- ── Row 4 ──────────────────────────────────── -->
+        <article class="cell round-row round-row-l">
+          <img class="agent-icon agent-icon-tl" data-round-left-icon="2" src="" alt="" />
+          <div class="row-text">
+            <div class="row-line">
+              <div class="sub" data-round-left-sub="2">OMEN</div>
+              <span class="row-num"><span data-round-left-kills="2">0</span></span>
+            </div>
+            <div class="row-line">
+              <div class="main" data-round-left-main="2">PLAYER03#VN</div>
+              <span class="row-num"><span data-round-left-acs="2">0</span></span>
+            </div>
+          </div>
+        </article>
+        <article class="cell round-center">
+          <div><div class="label">MẠNG HẠ GỤC</div><div class="value">ĐGTTB</div></div>
+        </article>
+        <article class="cell round-row round-row-r">
+          <img class="agent-icon agent-icon-tr" data-round-right-icon="2" src="" alt="" />
+          <div class="row-text">
+            <div class="row-line">
+              <span class="row-num"><span data-round-right-kills="2">0</span></span>
+              <div class="sub" data-round-right-sub="2">SAGE</div>
+            </div>
+            <div class="row-line">
+              <span class="row-num"><span data-round-right-acs="2">0</span></span>
+              <div class="main" data-round-right-main="2">PLAYER08#VN</div>
+            </div>
+          </div>
+        </article>
+
+        <!-- ── Row 5 ──────────────────────────────────── -->
+        <article class="cell round-row round-row-l">
+          <img class="agent-icon agent-icon-tl" data-round-left-icon="3" src="" alt="" />
+          <div class="row-text">
+            <div class="row-line">
+              <div class="sub" data-round-left-sub="3">PHOENIX</div>
+              <span class="row-num"><span data-round-left-kills="3">0</span></span>
+            </div>
+            <div class="row-line">
+              <div class="main" data-round-left-main="3">PLAYER04#VN</div>
+              <span class="row-num"><span data-round-left-acs="3">0</span></span>
+            </div>
+          </div>
+        </article>
+        <article class="cell round-center">
+          <div><div class="label">MẠNG HẠ GỤC</div><div class="value">ĐGTTB</div></div>
+        </article>
+        <article class="cell round-row round-row-r">
+          <img class="agent-icon agent-icon-tr" data-round-right-icon="3" src="" alt="" />
+          <div class="row-text">
+            <div class="row-line">
+              <span class="row-num"><span data-round-right-kills="3">0</span></span>
+              <div class="sub" data-round-right-sub="3">VIPER</div>
+            </div>
+            <div class="row-line">
+              <span class="row-num"><span data-round-right-acs="3">0</span></span>
+              <div class="main" data-round-right-main="3">PLAYER09#VN</div>
+            </div>
+          </div>
+        </article>
+
+        <!-- ── Right sponsor panel (rows 2–5) ───────── -->
+        <aside class="cell map-panel right">
+          <img class="sponsor-art" data-bind-img="sponsorImage" src="" alt="" />
+        </aside>
+
+      </section>
+    </section>
+  </main>
+
+  <script src="./overlay.js"></script>
+</body>
+</html>

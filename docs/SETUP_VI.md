@@ -127,3 +127,7 @@ Chọn Valorant ở thanh bên Studio rồi bật công tắc "Kết nối Valor
 tải Spectra Client chính thức (một lần, kiểm SHA256) nếu máy chưa có rồi chạy ngầm; tiến trình hiện trong trang Tổng quan Valorant.
 Chạy tay các bước đó bằng `npm run valorant:setup` (thêm `-- --force` để làm lại). Cần Node 22 và mạng; không cần cài Overwolf hay Spectra Client trước.
 Dữ liệu cục bộ nằm ở `collector/hosts/valorant-collector/local` (Git bỏ qua). Xem [VALORANT_MODULE.md](VALORANT_MODULE.md).
+
+## Postgame Valorant
+
+Trang Valorant → Postgame dùng ngay khung cuối của trận Spectra, không cần cài thêm. Muốn đủ ACS, damage, first kill, KAST và thời lượng: lấy API key miễn phí tại https://docs.henrikdev.xyz/general/api-keys, nhập Riot ID + key trong trang rồi chọn trận. Key chỉ lưu ở `collector/hosts/valorant-collector/local/postgame.json` (Git bỏ qua). Thêm Browser Source 1920×1080 với URL của từng overlay hiển thị ở trang.

@@ -21,7 +21,9 @@ import { ValorantSpectraSource, loadSpectraOptions } from "./valorant-spectra";
 import { sendValorantCommand } from "./valorant-control";
 import { GamePower, type Game } from "./game-power";
 import { ValorantModule } from "./valorant-module";
-import { defaultPaths, saveMatchConfig, viewMatchConfig } from "./valorant-config";
+import { PostgameStore, ValorantAssets, buildMvp, buildRender } from "./valorant-postgame";
+import { postgameErrorText, postgameSelectSchema } from "../shared/valorant-postgame";
+import { defaultPaths, logoUrl, saveMatchConfig, viewMatchConfig } from "./valorant-config";
 import { z } from "zod";
 import { COLLECTOR_SAMPLE_INTERVAL_MS, remainingSampleDelay } from "../shared/capture-rules";
 const host = "127.0.0.1",
@@ -65,6 +67,14 @@ const valorantModule = new ValorantModule({
   phase: () => valorant.observe()?.match.roundPhase.value ?? null,
 });
 const replayHud = new ReplayHudService();
+const valorantPostgame = new PostgameStore({
+  file: resolve("collector/hosts/valorant-collector/local/postgame.json"),
+  snapshot: resolve("collector/hosts/valorant-collector/local/postgame-last.json"),
+});
+const valorantAssets = new ValorantAssets();
+// Giữ khung cuối của trận Valorant đang theo dõi để làm hậu trận khi Spectra về sảnh.
+const postgameTimer = setInterval(() => valorantPostgame.observe(valorant.observe()), 1000);
+postgameTimer.unref();
 // Isolated verification can persist a temporary theme without touching user branding.
 const themePath = resolve(process.env.RIOT_OVERLAY_THEME_PATH || "data/theme.json");
 const captureReplay = new CaptureReplay();
@@ -481,6 +491,92 @@ const server = createServer(async (req, res) => {
     res.end(JSON.stringify(await gamesReport()));
     return;
   }
+  if (req.url?.startsWith("/api/valorant/postgame")) {
+    res.setHeader("Content-Type", "application/json");
+    res.setHeader("Cache-Control", "no-store");
+    const route = req.url.split("?")[0];
+    const mutating = req.method !== "GET";
+    const allowed = [`http://${host}:${port}`, `http://localhost:${port}`];
+    if (
+      ![`127.0.0.1:${port}`, `localhost:${port}`].includes(req.headers.host || "") ||
+      (req.headers.origin ? !allowed.includes(req.headers.origin) : mutating) ||
+      req.headers["sec-fetch-site"] === "cross-site"
+    ) {
+      res.writeHead(403);
+      res.end('{"error":"Forbidden"}');
+      return;
+    }
+    const readBody = async () => {
+      const chunks: Buffer[] = [];
+      let size = 0;
+      for await (const chunk of req) {
+        size += chunk.length;
+        if (size > 20_000) return undefined;
+        chunks.push(Buffer.from(chunk));
+      }
+      try {
+        return JSON.parse(Buffer.concat(chunks).toString("utf8"));
+      } catch {
+        return undefined;
+      }
+    };
+    const context = async () => {
+      await valorantAssets.ensure();
+      const view = await viewMatchConfig(valorantPaths);
+      return {
+        config: (await valorantPostgame.status()).config,
+        matchConfig: view.config,
+        logo: (name: string) => (name ? `/api/valorant/postgame/logo/${name}` : ""),
+        lookups: valorantAssets,
+      };
+    };
+    const logo = /^\/api\/valorant\/postgame\/logo\/([a-f0-9]{16}\.(png|jpg|webp))$/.exec(route);
+    if (logo && req.method === "GET") {
+      // Logo phục vụ ngay từ Studio để hậu trận chạy cả khi module Valorant đang tắt.
+      try {
+        const types = { png: "image/png", jpg: "image/jpeg", webp: "image/webp" } as const;
+        const bytes = await readFile(resolve(valorantPaths.assets, logo[1]));
+        res.setHeader("Content-Type", types[logo[2] as keyof typeof types]);
+        res.setHeader("Cache-Control", "public, max-age=3600");
+        res.end(bytes);
+      } catch {
+        res.writeHead(404);
+        res.end();
+      }
+      return;
+    }
+    if (route === "/api/valorant/postgame" && req.method === "GET") {
+      res.end(JSON.stringify(await valorantPostgame.status()));
+    } else if (route === "/api/valorant/postgame/config" && req.method === "PUT") {
+      const saved = await valorantPostgame.save(await readBody());
+      res.writeHead(saved.ok ? 200 : 400);
+      res.end(JSON.stringify(saved.ok ? await valorantPostgame.status() : saved));
+    } else if (route === "/api/valorant/postgame/history" && req.method === "GET") {
+      const history = await valorantPostgame.history();
+      res.end(
+        JSON.stringify(
+          history.ok ? history : { ...history, message: postgameErrorText[history.error] },
+        ),
+      );
+    } else if (route === "/api/valorant/postgame/select" && req.method === "POST") {
+      const input = postgameSelectSchema.safeParse(await readBody());
+      if (!input.success) {
+        res.writeHead(400);
+        res.end('{"ok":false,"error":"invalid-selection"}');
+        return;
+      }
+      const done = await valorantPostgame.select(input.data);
+      res.end(JSON.stringify(done.ok ? done : { ...done, message: postgameErrorText[done.error] }));
+    } else if (route === "/api/valorant/postgame/render" && req.method === "GET") {
+      res.end(JSON.stringify(buildRender(await valorantPostgame.current(), await context())));
+    } else if (route === "/api/valorant/postgame/mvp" && req.method === "GET") {
+      res.end(JSON.stringify(buildMvp(await valorantPostgame.current(), await context())));
+    } else {
+      res.writeHead(404);
+      res.end("{}");
+    }
+    return;
+  }
   if (req.url === "/api/valorant/config") {
     res.setHeader("Content-Type", "application/json");
     res.setHeader("Cache-Control", "no-store");
@@ -820,6 +916,7 @@ async function shutdown() {
   localCollector.stop();
   accountlessCollector.stop();
   leagueBroadcast.stop();
+  clearInterval(postgameTimer);
   valorant.stop();
   await valorantModule.stop();
   for (const client of wss.clients) client.terminate();

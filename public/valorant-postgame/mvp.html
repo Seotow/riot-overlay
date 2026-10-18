@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>VALORANT Match MVP</title>
+  <link rel="stylesheet" href="./mvp.css" />
+</head>
+<body>
+  <main class="stage" id="stage" aria-label="VALORANT match MVP overlay">
+    <div class="bg-layer" id="bg-layer"></div>
+
+    <div class="card">
+
+      <!-- ── LEFT: Agent panel ──────────────────────────── -->
+      <div class="agent-panel">
+        <img class="agent-bg"       id="mvp-agent-bg"       src="" alt="" />
+        <img class="agent-portrait" id="mvp-agent-portrait" src="" alt="" />
+        <div class="agent-panel-fade"></div>
+      </div>
+
+      <!-- ── RIGHT: Stats panel ────────────────────────── -->
+      <div class="stats-panel">
+
+        <!-- Team row -->
+        <div class="team-row">
+          <img class="team-logo" id="mvp-team-logo" src="" alt="" />
+          <span class="team-name" id="mvp-team-name">TEAM</span>
+        </div>
+
+        <!-- Player name -->
+        <div class="player-name" id="mvp-name">PLAYER</div>
+        <div class="mvp-label">MVP OF THE MAP</div>
+
+        <!-- Accent divider -->
+        <div class="divider"></div>
+
+        <!-- Stats table -->
+        <div class="stats-table">
+          <div class="stat-row">
+            <span class="stat-label">ĐGTTB</span>
+            <span class="stat-value" id="mvp-acs">0</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">KDA</span>
+            <span class="stat-value" id="mvp-kda">0/0</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">SÁT THƯƠNG / VÒNG ĐẤU</span>
+            <span class="stat-value" id="mvp-dpr">0</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">% CHIẾN CÔNG ĐẦU</span>
+            <span class="stat-value" id="mvp-fk">0</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">KAST %</span>
+            <span class="stat-value" id="mvp-kast">0</span>
+          </div>
+        </div>
+
+      </div><!-- /stats-panel -->
+    </div><!-- /card -->
+  </main>
+
+  <script src="./mvp.js"></script>
+</body>
+</html>

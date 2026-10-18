@@ -152,3 +152,18 @@ Trang Valorant có Tổng quan, Cấu hình trận (tên/mã/logo hai đội, t�
 (overlay thu nhỏ + nút điều khiển). Cấu hình lưu ở `collector/hosts/valorant-collector/local/match-config.json`, logo ở `collector/hosts/valorant-collector/local/assets` (đặt tên theo hash, kiểm tra chữ ký ảnh,
 tối đa 350KB, phục vụ ở `/uploads` của frontend module). Lưu xong, Studio gửi lệnh `apply_config`; controller gửi `config_update` lên backend fork để đổi giữa trận
 (Spectra gốc chỉ đọc đội lúc tạo trận). Client mới kết nối cũng được điền lại từ file này.
+
+## Postgame (19/10/2026)
+
+Trang Valorant → **Postgame**, overlay OBS tại `/valorant-postgame/preview.html` (bảng điểm) và `/valorant-postgame/mvp.html` (thẻ MVP), 1920×1080, nền trong suốt. Bố cục lấy từ repo `Seotow/valorant-postgame-stats` (xem `public/valorant-postgame/SOURCE.md`), phần Flask đã chuyển vào Studio (`server/valorant-postgame.ts`).
+
+Hai nguồn, chọn trong trang:
+
+- **Spectra (tự động, không cần key):** Studio giữ khung cuối của trận đang theo dõi (lưu ở `local/postgame-last.json`). Có tỉ số, map, agent, K/D/A, tên người chơi. Không có ACS, damage/round, first kill %, KAST %, thời lượng: overlay hiện "—".
+- **Henrik Dev (đủ số liệu):** nhập Riot ID, khu vực và API key (lưu ở `local/postgame.json`, không bao giờ trả về trình duyệt), tải lịch sử rồi chọn trận. Nếu Henrik lỗi, overlay lùi về khung Spectra.
+
+Tên đội, logo, logo giải và tên thay thế lấy từ **Cấu hình trận**, dùng chung với overlay in-game.
+
+Vì sao Spectra không đủ: GEP của Overwolf không có ACS, không có damage của người khác (chỉ `round_report` của người chơi cục bộ), `match_end` không kèm dữ liệu hay thời gian. First kill và thời lượng có thể suy ra từ kill feed và mốc thời gian nhưng cần mở rộng backend Spectra; chưa làm.
+
+Bổ sung: theme mặc định (màu, độ mờ, font, ảnh nền và nhà tài trợ) lấy từ `overlay-config.json` của project gốc và chỉnh được trong mục Giao diện; file cấu hình cũ chưa có `themeVersion` được nạp lại theme gốc một lần. Logo đội phục vụ qua `/api/valorant/postgame/logo/<tên>` nên chạy cả khi module Valorant tắt; ảnh lỗi bị ẩn. Overlay đọc `/api/valorant/postgame/render` và `/mvp`, tự làm mới mỗi 2 giây.

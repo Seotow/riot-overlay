@@ -25,6 +25,7 @@ import { ReplayHud } from "./ReplayHud";
 import { ValorantOverview, moduleText } from "./valorant/ValorantOverview";
 import { ValorantMatchConfig } from "./valorant/ValorantMatchConfig";
 import { ValorantBroadcast } from "./valorant/ValorantBroadcast";
+import { ValorantPostgame } from "./valorant/ValorantPostgame";
 import { useGames, type GameId } from "./lib/useGames";
 import { useValorantConfig } from "./lib/useValorantConfig";
 import { RecordingDesk } from "./RecordingDesk";
@@ -63,6 +64,7 @@ const valorantNavigation = [
   { id: "overview", label: "Tổng quan", icon: LayoutDashboard },
   { id: "config", label: "Cấu hình trận", icon: Settings2 },
   { id: "broadcast", label: "Phát sóng", icon: Clapperboard },
+  { id: "postgame", label: "Postgame", icon: ChartColumn },
 ] as const;
 type ValorantPage = (typeof valorantNavigation)[number]["id"];
 const gameLabels: Record<GameId, string> = { lol: "League of Legends", valorant: "VALORANT" };
@@ -316,6 +318,7 @@ function App() {
               toggle={(on) => void gamesPower.toggle("valorant", on)}
             />
           )}
+          {isVal && valorantPage === "postgame" && <ValorantPostgame />}
           {!isVal && page === "overview" && (
             <Dashboard
               state={state}
