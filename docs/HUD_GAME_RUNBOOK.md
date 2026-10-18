@@ -19,6 +19,21 @@ Bước cần người dùng: ảnh đầy đủ màn game có sign để địn
 phương án nếu cần che ở đầu ra OBS thay vì ẩn native. Che đầu ra không được
 mô tả là đã tắt sign trong game, và sẽ che cả pixel gameplay trong vùng đó.
 
+### Điều tra tiếp 18/10/2026 (chỉ đọc, chưa chạm game/client)
+
+- Cửa sổ game là `League of Legends (TM) Client` (RiotWindowClass, 1920×1080 tại 0,0). Liệt kê
+  mọi cửa sổ đang hiện (chủ tiến trình, lớp, vị trí, topmost/layered): không có cửa sổ riêng
+  ~168×28 ở góc trên trái. Dấu được vẽ **trong game**; OBS Game Capture (hay Window Capture)
+  đều thu cùng khung hình đó nên không loại ra bằng cách đổi kiểu thu hình.
+- LCU có `/lol-honeyfruit/v1/vng-publisher-settings` → `{"visible":true}` (log client:
+  "VNG Publisher Settings updated"). Chỉ có GET và POST không tham số, không có PUT/PATCH;
+  chưa chứng minh nó điều khiển dấu trong game, chưa thử POST.
+- Lệnh mở replay do client tạo (log gameflow "Game args"): `<file>.rofl -GameBaseDir=… -Region=VN2
+  -PlatformID=VN2 -Locale=en_US -SkipBuild -EnableCrashpad=true -DisableCrashUploading`. Không có
+  tham số riêng cho dấu tuổi; dấu có thể gắn với `-Region=VN2`. Chưa thử đổi tham số.
+- `/replay/render`, `game.cfg`, `PersistedSettings.json` và các `*.yaml` trong Config không có khóa
+  nào về tuổi/VNG. Không sửa file game (anti-cheat, đã chốt không patch client).
+
 ## Overlay killfeed
 
 Trang Cấu hình trước trận → Kiểu killfeed → Broadcast → Lưu. Checkbox

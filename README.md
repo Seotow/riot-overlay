@@ -4,6 +4,159 @@ Bộ công cụ phát sóng LoL chạy trên máy Windows. Studio dùng để c�
 điều khiển overlay và phát lại bản ghi. OBS nhận hình qua Browser Source.
 Bản hiện tại dành cho nội bộ, chưa phải dịch vụ web hoặc bộ cài độc lập.
 
+Overlay có ba cảnh: **cấm chọn**, **trong game** và **sau trận**. Mỗi cảnh là
+một trang trong suốt 1920 × 1080, chỉ nhận dữ liệu, nên ghép thẳng lên hình
+game hoặc replay trong OBS.
+
+## Xem trước các phần tử
+
+Mọi ảnh/GIF dưới đây là chính overlay đang chạy, cắt đúng vùng của từng phần tử
+(nền xanh đen chỉ để dễ nhìn, overlay thật trong suốt). Tệp nằm ở
+[docs/media](docs/media). Bảng [nguồn của hình mẫu](#nguồn-của-hình-mẫu) ghi
+rõ hình nào lấy từ bản ghi trận thật và hình nào là dữ liệu mẫu.
+
+### Cấm chọn
+
+Thanh cấm chọn chạy theo lượt: ô đang đến lượt, hình tướng được cấm/chọn, tên
+tuyển thủ, huấn luyện viên, logo đội, thứ tự chọn và thanh thời gian.
+
+<img src="docs/media/draft-banpick.gif" width="960" alt="Cấm chọn từ lượt cấm đầu tiên đến khi đủ 10 tướng">
+
+Kết quả khi đã đủ 10 tướng:
+
+<img src="docs/media/draft-complete.png" width="960" alt="Cấm chọn hoàn tất">
+
+### Trong game
+
+#### Thanh tỉ số
+
+Tỉ số đội, tổng vàng, chênh lệch vàng, số trụ, rồng đã hạ, đồng hồ trận và
+dấu các loại rồng của mỗi đội.
+
+<img src="docs/media/ingame-scoreboard.gif" width="800" alt="Thanh tỉ số">
+
+#### Timer mục tiêu
+
+Đếm ngược hồi sinh rồng, Baron, Herald hoặc Voidgrub, kèm biểu tượng đúng loại.
+
+<img src="docs/media/ingame-objective-timers.gif" width="360" alt="Timer mục tiêu">
+
+#### Bảng thông tin người chơi
+
+10 hàng: đồ, ô trang bị, rune, phép bổ trợ, chân dung, tên, KDA, CS/vàng, thanh
+máu và tài nguyên. Chiêu cuối có vòng hồi, bị phủ đen khi chưa cộng điểm.
+
+<img src="docs/media/ingame-leaderboard.gif" width="900" alt="Bảng thông tin người chơi">
+
+Ba biểu tượng nhỏ riêng cho từng tướng:
+
+| Tướng có stack (Smolder) | Tiền thưởng khi hạ (bounty) |
+| --- | --- |
+| <img src="docs/media/ingame-champion-stack-smolder.png" width="480" alt="Stack của Smolder"> | <img src="docs/media/ingame-bounty-badge.png" width="400" alt="Bounty"> |
+
+Bounty chỉ hiện từ 100G trở lên và chỉ lấy phần nguyên của giá trị game báo.
+Stack của các tướng (Smolder, Veigar, Nasus…) nằm cạnh biểu tượng chiêu cuối
+khi nguồn dữ liệu có giá trị tương ứng.
+
+#### Các bảng phụ
+
+Bật từ Studio, đặt cùng trục với bảng thông tin.
+
+| Tổng vàng | Kinh nghiệm và cấp |
+| --- | --- |
+| <img src="docs/media/ingame-board-gold.png" width="260" alt="Bảng tổng vàng"> | <img src="docs/media/ingame-board-level.png" width="260" alt="Bảng kinh nghiệm và cấp"> |
+
+Rune toàn đội:
+
+<img src="docs/media/ingame-board-runes.png" width="900" alt="Bảng rune toàn đội">
+
+#### Layout tối giản
+
+Chỉ giữ chân dung, cấp, thanh máu/tài nguyên và chiêu cuối. Đồ hoàn thành và
+phần thưởng quest hiện ngay trên chân dung.
+
+<img src="docs/media/ingame-layout-minimal.png" width="900" alt="Layout tối giản">
+
+#### Hiệu ứng trên chân dung
+
+Hiệu ứng nổi lên trên chân dung người chơi và tự tắt sau vài giây.
+
+| Lên cấp | Hoàn thành món đồ lớn |
+| --- | --- |
+| <img src="docs/media/ingame-level-up.gif" width="440" alt="Hiệu ứng lên cấp"> | <img src="docs/media/ingame-item-complete.gif" width="440" alt="Hiệu ứng lên đồ"> |
+
+#### Hoàn thành lane quest
+
+Mỗi vị trí có bảng quest riêng: tên vị trí, phần thưởng và giới hạn cấp.
+
+| Đường trên | Rừng | Đường giữa |
+| --- | --- | --- |
+| <img src="docs/media/ingame-quest-complete-top.gif" width="300" alt="Quest đường trên"> | <img src="docs/media/ingame-quest-complete-jungle.gif" width="300" alt="Quest rừng"> | <img src="docs/media/ingame-quest-complete-mid.gif" width="300" alt="Quest đường giữa"> |
+
+| Xạ thủ | Hỗ trợ |
+| --- | --- |
+| <img src="docs/media/ingame-quest-complete-bot.gif" width="300" alt="Quest xạ thủ"> | <img src="docs/media/ingame-quest-complete-support.gif" width="300" alt="Quest hỗ trợ"> |
+
+#### Mục tiêu lớn
+
+Hạ rồng: biểu ngữ theo loại rồng cùng dải biểu tượng đội vừa hạ.
+
+<img src="docs/media/ingame-dragon-kill.gif" width="900" alt="Hạ rồng">
+
+| Rồng lửa | Rồng Ngàn Tuổi |
+| --- | --- |
+| <img src="docs/media/ingame-dragon-fire.gif" width="440" alt="Hạ rồng lửa"> | <img src="docs/media/ingame-dragon-elder.gif" width="440" alt="Hạ rồng Ngàn Tuổi"> |
+
+Linh hồn rồng (artwork tĩnh theo từng hệ, kèm mô tả hiệu ứng):
+
+<img src="docs/media/ingame-dragon-soul.gif" width="520" alt="Linh hồn rồng">
+
+Baron Power Play: chênh lệch vàng khi có bùa, đồng hồ bùa và khung tím quanh
+người chơi được bùa. Khi có cả bùa Elder, khung đổi theo.
+
+| Baron Power Play | Bùa Baron và Elder cùng lúc |
+| --- | --- |
+| <img src="docs/media/ingame-baron-powerplay.gif" width="440" alt="Baron Power Play"> | <img src="docs/media/ingame-baron-elder-buffs.gif" width="440" alt="Bùa Baron và Elder"> |
+
+Phá trụ đầu tiên và đồng hồ nhà lính:
+
+| Trụ đầu tiên | Hồi sinh nhà lính |
+| --- | --- |
+| <img src="docs/media/ingame-tower-first.gif" width="440" alt="Phá trụ đầu tiên"> | <img src="docs/media/ingame-inhibitor-timer.gif" width="260" alt="Đồng hồ nhà lính"> |
+
+### Sau trận
+
+Bảng tổng kết: kết quả, thời lượng, KDA, vàng, trụ, rồng, Baron, Herald,
+Voidgrub, cấm, sát thương theo vị trí và đường chênh lệch vàng theo thời gian.
+Cảnh chờ dữ liệu hiện trước khi có kết quả.
+
+<img src="docs/media/postgame-summary.gif" width="960" alt="Bảng tổng kết sau trận">
+
+Nguồn thật của postgame là bản replay `.rofl` (xem [Nguồn dữ liệu](#nguồn-dữ-liệu)).
+
+### Nguồn của hình mẫu
+
+Hình được dựng trên máy dev bằng Chrome không giao diện, phát lại bản ghi trận
+thật `2026-10-17T02-41-50-859Z` (trận replay, 10 người). Tên đội HANA/HANOI là
+cấu hình mẫu. Những phần bản ghi không có sự kiện tương ứng được dựng bằng dữ
+liệu mẫu và **không phải dữ liệu thật**:
+
+| Phần tử | Nguồn |
+| --- | --- |
+| Thanh tỉ số, timer, bảng thông tin, lên cấp, lên đồ | Bản ghi thật, phát lại |
+| Bảng vàng, kinh nghiệm, rune, layout tối giản | Bản ghi thật |
+| Stack Smolder, bounty | Bản ghi thật |
+| Quest xạ thủ, hạ rồng, trụ đầu tiên | Bản ghi thật (sự kiện có trong bản ghi) |
+| Rồng lửa, rồng Ngàn Tuổi | Sự kiện hạ rồng thật, đổi loại rồng bằng biến thể xem thử |
+| Quest đường trên, rừng, giữa, hỗ trợ | Mẫu: dựng từ quest xạ thủ thật, đổi vị trí |
+| Linh hồn rồng, Baron Power Play, Elder | Mẫu: bản ghi chưa có sự kiện, dựng từ sự kiện hạ rồng |
+| Đồng hồ nhà lính | Mẫu: biến thể xem thử |
+| Cấm chọn | Bộ mẫu UI (`source: "reference"`) |
+| Sau trận | Bộ mẫu `samplePostgame()` |
+
+Chưa có mẫu thật cho: damage theo giao tranh, linh hồn rồng, Baron, quest các
+vị trí khác ngoài xạ thủ. Xem [PROJECT_STATUS.md](PROJECT_STATUS.md).
+
 ## Chạy nhanh
 
 Cài Node.js 24, mở terminal tại thư mục project:
@@ -102,4 +255,3 @@ phiên đang phát sóng. Hướng dẫn chi tiết:
 Theme cá nhân, captures và credentials không theo Git. Không gửi API key hoặc
 LCU credentials vào chat. Asset Riot và nhận diện giải cần được kiểm tra quyền
 sử dụng trước khi phân phối ngoài nội bộ.
-
