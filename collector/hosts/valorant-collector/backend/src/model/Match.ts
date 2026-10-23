@@ -570,6 +570,37 @@ export class Match {
       this.tools.tournamentInfo.logoUrl = str(raw.tournament.logoUrl, 700_000);
       this.tools.tournamentInfo.backdropUrl = str(raw.tournament.backdropUrl, 700_000);
     }
+    if (raw?.watermark) {
+      // Giữ nguyên cổng Spectra Plus: không supporter thì watermark luôn bật, custom text bị tắt.
+      this.tools.watermarkInfo.customText = str(raw.watermark.customText, 80);
+      this.tools.watermarkInfo.spectraWatermark =
+        raw.watermark.spectraWatermark === true || !this.orgIsSupporter;
+      this.tools.watermarkInfo.customTextEnabled =
+        raw.watermark.customTextEnabled === true && !!this.orgIsSupporter;
+    }
+    if (raw?.seriesMaps) {
+      // enabled=false hoặc rỗng → overlay ẩn cả cụm dải map (component chỉ hiện khi mapInfo.length > 0).
+      if (raw.seriesMaps.enabled !== true || !Array.isArray(raw.seriesMaps.items)) {
+        this.tools.seriesInfo.mapInfo = [];
+      } else {
+        this.tools.seriesInfo.mapInfo = raw.seriesMaps.items.slice(0, 5).map((it: any) => {
+          const logo = str(it?.logo, 700_000);
+          return it?.type === "present"
+            ? { type: "present", logo }
+            : { type: "future", map: str(it?.map, 40), logo };
+        });
+      }
+    }
+    if (raw?.playercams) {
+      this.tools.playercamsInfo.enable = raw.playercams.enable === true;
+      this.tools.playercamsInfo.identifier = str(raw.playercams.identifier, 64);
+      this.tools.playercamsInfo.enabledPlayers = Array.isArray(raw.playercams.enabledPlayers)
+        ? raw.playercams.enabledPlayers
+            .filter((p: unknown) => typeof p === "string")
+            .slice(0, 10)
+            .map((p: string) => p.slice(0, 60))
+        : [];
+    }
     if (Array.isArray(raw?.nameOverrides)) {
       const pairs = raw.nameOverrides
         .filter((p: unknown) => Array.isArray(p) && typeof p[0] === "string" && typeof p[1] === "string")

@@ -200,6 +200,27 @@ export class ValorantController {
         backdropUrl: "",
       },
       nameOverrides: config.nameOverrides.map((o) => [o.player, o.display]),
+      // Dải map: ô đầu là map hiện tại (present), còn lại là map kế (future); logo lấy từ đội đã pick.
+      seriesMaps: {
+        enabled: config.mapInfo.enabled,
+        items: config.mapInfo.maps.map((m, i) => {
+          const logo =
+            m.pickedBy === "left" ? team(0).url : m.pickedBy === "right" ? team(1).url : "";
+          return i === 0 ? { type: "present", logo } : { type: "future", map: m.map, logo };
+        }),
+      },
+      // Watermark: gửi tên giải làm custom text; backend giữ nguyên cổng Spectra Plus, không giả supporter.
+      watermark: {
+        spectraWatermark: !config.watermarkText,
+        customTextEnabled: config.watermarkText,
+        customText: config.tournament.name,
+      },
+      // Player cam vdo.ninja: room id + danh sách player bật cam.
+      playercams: {
+        enable: config.playercams.enable,
+        identifier: config.playercams.roomId,
+        enabledPlayers: config.playercams.players,
+      },
     });
   }
 

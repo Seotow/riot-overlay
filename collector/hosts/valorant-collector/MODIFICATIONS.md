@@ -75,3 +75,10 @@ local BE/FE builds. Do not enable `prepare` to install nested upstream Git hooks
 - 18/10/2026: collector nối thẳng ingest ngay khi khởi động; khi GEP là gói giả, supervisor trao bí mật trận cho Client chính thức để nối lại đúng trận (thay cho việc chặn nối của bản trước). Controller của Studio đóng transport khi bị từ chối và dùng bí mật hợp lệ gần nhất.
 
 - 18/10/2026: chốt dùng Spectra Client chính thức chạy ngầm làm collector (`collector/hosts/valorant-collector`, `release.json` thay `collector/hosts/valorant-collector/collector-release.json`). Collector riêng chuyển vào `collector/archive/valorant-collector`; gỡ chế độ `gep`, fallback tự động và cổng lệnh của collector khỏi supervisor/server/UI. Lệnh thủ công chỉ đi qua controller của Studio.
+
+## config_update mở rộng (23/10/2026)
+Fork backend `handleConfigUpdate` nhận thêm: `seriesMaps` (dải map CURRENT/NEXT ghi vào
+`seriesInfo.mapInfo`; rỗng/tắt thì overlay tự ẩn), `playercams` (identifier + enabledPlayers cho
+vdo.ninja), và `watermark` (customText = tên giải). Cổng Spectra Plus GIỮ NGUYÊN: không supporter
+thì `spectraWatermark` luôn true và `customTextEnabled` bị ép false; không giả cờ `isSupporter`,
+không bỏ watermark.

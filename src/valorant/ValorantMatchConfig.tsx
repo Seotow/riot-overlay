@@ -120,6 +120,14 @@ export function ValorantMatchConfig({
       ...draft,
       nameOverrides: draft.nameOverrides.map((r, j) => (j === index ? { ...r, ...patch } : r)),
     });
+  const setMap = (index: number, patch: Partial<Config["mapInfo"]["maps"][0]>) =>
+    change({
+      ...draft,
+      mapInfo: {
+        ...draft.mapInfo,
+        maps: draft.mapInfo.maps.map((m, j) => (j === index ? { ...m, ...patch } : m)),
+      },
+    });
   const players = (frame?.teams.flatMap((t) => t.players.map((p) => p.name.value)) ?? []).filter(
     (n): n is string => !!n,
   );
@@ -230,6 +238,96 @@ export function ValorantMatchConfig({
             onPick={(f) => void pick("tournament", f)}
             onClear={() => clear("tournament")}
           />
+        </fieldset>
+        <fieldset>
+          <legend>Dải map (overlay in-game)</legend>
+          <label className="val-check">
+            <input
+              type="checkbox"
+              checked={draft.mapInfo.enabled}
+              onChange={(e) =>
+                change({ ...draft, mapInfo: { ...draft.mapInfo, enabled: e.target.checked } })
+              }
+            />{" "}
+            Hiện dải map (tắt thì ẩn cả cụm)
+          </label>
+          {draft.mapInfo.maps.map((m, index) => (
+            <div className="val-override" key={index}>
+              <Input
+                list="val-maps"
+                placeholder={index === 0 ? "Map hiện tại" : "Map kế tiếp"}
+                maxLength={40}
+                value={m.map}
+                onChange={(e) => setMap(index, { map: e.target.value })}
+              />
+              <NativeSelect
+                value={m.pickedBy}
+                onChange={(e) =>
+                  setMap(index, { pickedBy: e.target.value as "left" | "right" | "none" })
+                }
+                aria-label="Đội chọn map"
+              >
+                <option value="none">Không logo</option>
+                <option value="left">Đội trái chọn</option>
+                <option value="right">Đội phải chọn</option>
+              </NativeSelect>
+              <Button
+                type="button"
+                onClick={() =>
+                  change({
+                    ...draft,
+                    mapInfo: {
+                      ...draft.mapInfo,
+                      maps: draft.mapInfo.maps.filter((_, j) => j !== index),
+                    },
+                  })
+                }
+              >
+                Xóa
+              </Button>
+            </div>
+          ))}
+          <datalist id="val-maps">
+            {[
+              "Ascent",
+              "Bind",
+              "Haven",
+              "Split",
+              "Lotus",
+              "Sunset",
+              "Icebox",
+              "Breeze",
+              "Fracture",
+              "Pearl",
+              "Abyss",
+              "Corrode",
+            ].map((name) => (
+              <option key={name} value={name} />
+            ))}
+          </datalist>
+          <Button
+            type="button"
+            disabled={draft.mapInfo.maps.length >= 5}
+            onClick={() =>
+              change({
+                ...draft,
+                mapInfo: {
+                  ...draft.mapInfo,
+                  maps: [...draft.mapInfo.maps, { map: "", pickedBy: "none" }],
+                },
+              })
+            }
+          >
+            Thêm map (ô đầu = hiện tại)
+          </Button>
+          <label className="val-check">
+            <input
+              type="checkbox"
+              checked={draft.watermarkText}
+              onChange={(e) => change({ ...draft, watermarkText: e.target.checked })}
+            />{" "}
+            Hiện tên giải ở góc phải thay watermark (cần key Spectra Plus)
+          </label>
         </fieldset>
         <fieldset>
           <legend>Tên thay thế người chơi</legend>

@@ -15,6 +15,27 @@ export const valorantTeamConfigSchema = z.object({
   logo: logoNameSchema,
 });
 
+// Dải map CURRENT/NEXT ở overlay in-game: ô đầu là map hiện tại (present), các ô sau là map kế (future),
+// mỗi ô kèm đội đã pick để hiện logo nhỏ. enabled=false thì backend xóa mapInfo và overlay ẩn cả cụm.
+export const valorantMapPickSchema = z.object({
+  map: z.string().trim().max(40),
+  pickedBy: z.enum(["left", "right", "none"]),
+});
+export const valorantMapInfoSchema = z.object({
+  enabled: z.boolean(),
+  maps: z.array(valorantMapPickSchema).max(5),
+});
+// Player cam qua vdo.ninja: roomId là tên phòng chung, players là danh sách Tên#Tag được bật cam.
+export const valorantPlayercamsSchema = z.object({
+  enable: z.boolean(),
+  roomId: z
+    .string()
+    .trim()
+    .max(64)
+    .regex(/^[A-Za-z0-9_-]*$/),
+  players: z.array(z.string().trim().max(60)).max(10),
+});
+
 export const valorantMatchConfigSchema = z
   .object({
     schemaVersion: z.literal(1),
@@ -37,6 +58,10 @@ export const valorantMatchConfigSchema = z
         }),
       )
       .max(20),
+    mapInfo: valorantMapInfoSchema.default({ enabled: false, maps: [] }),
+    // Hiện tên giải ở ô watermark góc phải (backend vẫn giữ cổng Spectra Plus).
+    watermarkText: z.boolean().default(false),
+    playercams: valorantPlayercamsSchema.default({ enable: false, roomId: "", players: [] }),
   })
   .refine((c) => Math.max(c.series.wonLeft, c.series.wonRight) <= c.series.needed, {
     message: "series-score-over-limit",
@@ -52,6 +77,9 @@ export const defaultValorantMatchConfig: ValorantMatchConfig = {
   series: { needed: 1, wonLeft: 0, wonRight: 0 },
   tournament: { name: "", logo: "" },
   nameOverrides: [],
+  mapInfo: { enabled: false, maps: [] },
+  watermarkText: false,
+  playercams: { enable: false, roomId: "", players: [] },
 };
 
 export const logoSlots = ["left", "right", "tournament"] as const;
