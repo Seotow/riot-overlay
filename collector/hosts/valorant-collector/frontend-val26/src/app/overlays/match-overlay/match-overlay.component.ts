@@ -2,6 +2,7 @@ import { Component, inject } from "@angular/core";
 import { ScoreboardComponent } from "../../components/shopping/scoreboard/scoreboard.component";
 import { DataModelService } from "../../services/dataModel.service";
 import { SeriesMapsComponent } from "../../components/top/auxiliary/series-maps/series-maps.component";
+import { TournamentNameComponent } from "../../components/top/auxiliary/tournament-name/tournament-name.component";
 import { RoundNumberComponent } from "../../components/top/match/round-number/round-number.component";
 import { TopTeamInfoComponent } from "../../components/top/match/team-info/team-info.component";
 import { SpikePlantedComponent } from "../../components/top/match/spike-planted/spike-planted.component";
@@ -21,6 +22,7 @@ import { LiveToastComponent } from "../toast-overlay/toast.component";
   imports: [
     ScoreboardComponent,
     SeriesMapsComponent,
+    TournamentNameComponent,
     RoundNumberComponent,
     TopTeamInfoComponent,
     SpikePlantedComponent,

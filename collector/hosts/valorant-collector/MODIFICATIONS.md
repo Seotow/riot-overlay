@@ -82,3 +82,8 @@ Fork backend `handleConfigUpdate` nhận thêm: `seriesMaps` (dải map CURRENT/
 vdo.ninja), và `watermark` (customText = tên giải). Cổng Spectra Plus GIỮ NGUYÊN: không supporter
 thì `spectraWatermark` luôn true và `customTextEnabled` bị ép false; không giả cờ `isSupporter`,
 không bỏ watermark.
+
+## Component tên giải (23/10/2026)
+Thêm component riêng `components/top/auxiliary/tournament-name` hiện `tournamentInfo.name` NGAY BÊN
+TRÁI logo Spectra (vị trí watermark cũ, `pos-x-1360`). KHÔNG đụng tới watermark/logo Spectra: giữ
+nguyên trạng thái upstream, không gỡ/thay để vượt giấy phép.

@@ -1,0 +1,14 @@
+@if (dataModel.tournamentInfo().name) {
+  <div
+    class="vh-24 vw-270 font-dinnext-medium flex flex-row items-center justify-center gap-1 overflow-hidden rounded-b-lg px-2 text-center text-[0.78vw] tracking-[0.04em] text-white uppercase"
+  >
+    <p class="truncate whitespace-nowrap">{{ dataModel.tournamentInfo().name }}</p>
+    @if (dataModel.tournamentInfo().logoUrl !== "") {
+      <img
+        [src]="dataModel.tournamentInfo().logoUrl"
+        class="max-h-4 max-w-4 shrink-0 object-contain"
+        alt=""
+      />
+    }
+  </div>
+}

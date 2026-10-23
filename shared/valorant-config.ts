@@ -59,8 +59,6 @@ export const valorantMatchConfigSchema = z
       )
       .max(20),
     mapInfo: valorantMapInfoSchema.default({ enabled: false, maps: [] }),
-    // Hiện tên giải ở ô watermark góc phải (backend vẫn giữ cổng Spectra Plus).
-    watermarkText: z.boolean().default(false),
     playercams: valorantPlayercamsSchema.default({ enable: false, roomId: "", players: [] }),
   })
   .refine((c) => Math.max(c.series.wonLeft, c.series.wonRight) <= c.series.needed, {
@@ -78,7 +76,6 @@ export const defaultValorantMatchConfig: ValorantMatchConfig = {
   tournament: { name: "", logo: "" },
   nameOverrides: [],
   mapInfo: { enabled: false, maps: [] },
-  watermarkText: false,
   playercams: { enable: false, roomId: "", players: [] },
 };
 

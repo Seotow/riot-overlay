@@ -136,6 +136,8 @@ export class ValorantController {
           this.error = "controller-created-match";
           this.connected = false;
           this.close();
+        } else if (this.connected) {
+          await this.sendConfig();
         }
       } catch {}
     }
@@ -158,7 +160,30 @@ export class ValorantController {
       groupSecret: secret,
       leftTeam: team(0),
       rightTeam: team(1),
-      toolsData: {},
+      toolsData: {
+        seriesInfo: {
+          needed: config.series.needed,
+          wonLeft: config.series.wonLeft,
+          wonRight: config.series.wonRight,
+          mapInfo: config.mapInfo.enabled
+            ? config.mapInfo.maps.slice(0, 5).map((map, index) =>
+                index === 0
+                  ? { type: "present", logo: "" }
+                  : { type: "future", map: map.map, logo: "" },
+              )
+            : [],
+        },
+        tournamentInfo: {
+          name: config.tournament.name,
+          logoUrl: logoUrl(this.options.paths, config.tournament.logo),
+          backdropUrl: "",
+        },
+        watermarkInfo: {
+          spectraWatermark: true,
+          customTextEnabled: false,
+          customText: config.tournament.name,
+        },
+      },
     };
   }
 
@@ -211,8 +236,8 @@ export class ValorantController {
       },
       // Watermark: gửi tên giải làm custom text; backend giữ nguyên cổng Spectra Plus, không giả supporter.
       watermark: {
-        spectraWatermark: !config.watermarkText,
-        customTextEnabled: config.watermarkText,
+        spectraWatermark: true,
+        customTextEnabled: false,
         customText: config.tournament.name,
       },
       // Player cam vdo.ninja: room id + danh sách player bật cam.

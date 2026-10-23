@@ -323,14 +323,6 @@ export function ValorantMatchConfig({
           >
             Thêm map (ô đầu = hiện tại)
           </Button>
-          <label className="val-check">
-            <input
-              type="checkbox"
-              checked={draft.watermarkText}
-              onChange={(e) => change({ ...draft, watermarkText: e.target.checked })}
-            />{" "}
-            Hiện tên giải ở góc phải thay watermark (cần key Spectra Plus)
-          </label>
         </fieldset>
         <fieldset>
           <legend>Player cam (vdo.ninja)</legend>
