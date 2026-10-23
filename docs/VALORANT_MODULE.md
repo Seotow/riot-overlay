@@ -183,3 +183,10 @@ Bổ sung: theme mặc định (màu, độ mờ, font, ảnh nền và nhà tà
   sách Tên#Tag; Studio gửi `playercams` (identifier + enabledPlayers) qua config_update, overlay kéo
   cam `vdo.ninja/?room=<id>&view=<Tên>_H_<Tag>`. Mỗi player mở "Link đẩy cam" để phát webcam. Media
   không đi qua host nên host chạy local vẫn hoạt động.
+
+## Overlay nạp cấu hình khi chưa có trận (23/10/2026)
+
+`/overlay` giờ hiện tên giải, dải map, đội và series ngay cả khi chưa vào trận. Server frontend
+(`runtime/frontend.mjs`) thêm `/api/overlay-config` đọc `local/match-config.json` và trả seed; overlay
+(`frontend-val26` dataModel) nạp seed khi chưa nhận `match_data` thật, dừng ngay khi có dữ liệu live.
+Seed KHÔNG bật custom text watermark (giữ cổng Spectra Plus); tên giải hiện qua component riêng.

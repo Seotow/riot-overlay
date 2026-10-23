@@ -45,6 +45,10 @@ export class DataModelService {
     } else {
       SocketService.getInstance().subscribeMatch(this.onMatchUpdate.bind(this));
       SocketService.getInstance().connectMatch(this.config.serverEndpoint, this.groupCode());
+      // Khi CHƯA có trận live, nạp cấu hình (tên giải, dải map, đội, series) để overlay vẫn hiện config.
+      // Dừng ngay khi có match_data thật.
+      void this.seedFromConfig();
+      setInterval(() => void this.seedFromConfig(), 3000);
     }
 
     if (this.sessionId() && this.sessionId().length > 0) {
@@ -59,7 +63,48 @@ export class DataModelService {
     }
   }
 
+  private liveReceived = false;
+
+  // Nạp cấu hình hiện tại từ module (chỉ khi chưa nhận match_data thật). Không bật custom text watermark.
+  private async seedFromConfig() {
+    if (this.liveReceived) return;
+    try {
+      const res = await fetch("/api/overlay-config", { cache: "no-store" });
+      if (!res.ok) return;
+      const seed = await res.json();
+      if (this.liveReceived) return;
+      const base = this.match();
+      const teams = base.teams.map((t, i) => ({
+        ...t,
+        teamName: seed.teams?.[i]?.name ?? t.teamName,
+        teamTricode: seed.teams?.[i]?.tricode ?? t.teamTricode,
+        teamUrl: seed.teams?.[i]?.url ?? t.teamUrl,
+      })) as typeof base.teams;
+      this.match.set({
+        ...base,
+        teams,
+        map: seed.map || base.map,
+        tools: {
+          ...base.tools,
+          seriesInfo: seed.series ?? base.tools.seriesInfo,
+          tournamentInfo: seed.tournament ?? base.tools.tournamentInfo,
+          // Giữ nguyên cổng watermark: chỉ mang customText, cờ customTextEnabled vẫn như mặc định.
+          watermarkInfo: { ...base.tools.watermarkInfo, customText: seed.watermark?.customText ?? "" },
+          playercamsInfo: {
+            ...base.tools.playercamsInfo,
+            enable: seed.playercams?.enable === true,
+            identifier: seed.playercams?.identifier ?? "",
+            enabledPlayers: seed.playercams?.enabledPlayers ?? [],
+          },
+        },
+      });
+    } catch {
+      /* module chưa sẵn sàng */
+    }
+  }
+
   private onMatchUpdate(data: any) {
+    this.liveReceived = true;
     // Construct map for name overrides if it's a string (from JSON).
     // The server keeps it as JSON to avoid having to (de)-serialize multiple times.
     const tempOverrides = data?.tools?.nameOverrides?.overrides || null;

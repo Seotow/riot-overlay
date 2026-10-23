@@ -10,6 +10,31 @@ const page = `<!doctype html><html lang="vi"><meta charset="utf-8"><title>Riot O
 <p>OBS dùng 1920 × 1080. Khi chưa có nguồn, renderer trống và nền trong suốt. Bản module hiện giữ giao diện ValoSpectra; chưa custom/audit toàn bộ telemetry.</p>
 <script>async function refresh(){try{const s=await(await fetch('/api/module/status')).json();document.getElementById('status').textContent=JSON.stringify(s,null,2);document.getElementById('overlay').href='/overlay?groupCode='+encodeURIComponent(s.groupCode);document.getElementById('draft').href='/agent-select?groupCode='+encodeURIComponent(s.groupCode)}catch{document.getElementById('status').textContent='Module không phản hồi'}}refresh();setInterval(refresh,1500)</script></html>`;
 
+// Seed cấu hình cho overlay khi CHƯA có trận: tên giải, dải map, đội, series. KHÔNG bật custom text
+// watermark (giữ cổng Spectra Plus) — chỉ đưa customText để component riêng dùng nếu cần, cờ vẫn tắt.
+async function overlaySeed(config, assetsDir) {
+  let c = null;
+  try { c = JSON.parse(await readFile(resolve(assetsDir, '..', 'match-config.json'), 'utf8')); } catch {}
+  const port = config.ports.frontend;
+  const logo = (name) => (typeof name === 'string' && /^[a-f0-9]{16}.(?:png|jpg|webp)$/.test(name)) ? `http://127.0.0.1:${port}/uploads/${name}` : '';
+  const teams = c?.teams ?? [{}, {}];
+  const series = c?.series ?? { needed: 1, wonLeft: 0, wonRight: 0 };
+  const maps = (c?.mapInfo?.enabled && Array.isArray(c?.mapInfo?.maps)) ? c.mapInfo.maps : [];
+  const teamLogo = (pick) => pick === 'left' ? logo(teams[0]?.logo) : pick === 'right' ? logo(teams[1]?.logo) : '';
+  const mapInfo = maps.slice(0, 5).map((m, i) => i === 0
+    ? { type: 'present', logo: teamLogo(m?.pickedBy) }
+    : { type: 'future', map: String(m?.map ?? ''), logo: teamLogo(m?.pickedBy) });
+  const pc = c?.playercams ?? { enable: false, roomId: '', players: [] };
+  return {
+    teams: [0, 1].map((i) => ({ name: teams[i]?.name ?? '', tricode: teams[i]?.tricode ?? '', url: logo(teams[i]?.logo) })),
+    map: maps[0]?.map ?? '',
+    series: { needed: series.needed ?? 1, wonLeft: series.wonLeft ?? 0, wonRight: series.wonRight ?? 0, mapInfo },
+    tournament: { name: c?.tournament?.name ?? '', logoUrl: logo(c?.tournament?.logo), backdropUrl: '' },
+    watermark: { customText: c?.tournament?.name ?? '' },
+    playercams: { enable: pc.enable === true, identifier: pc.roomId ?? '', enabledPlayers: pc.enable ? (pc.players ?? []).filter((p) => typeof p === 'string') : [] },
+  };
+}
+
 export function createFrontend({ config, browserDir, getStatus, assetsDir }) {
   const base = resolve(browserDir);
   return createServer(async (req, res) => {
@@ -22,6 +47,7 @@ export function createFrontend({ config, browserDir, getStatus, assetsDir }) {
       const url = new URL(req.url, `http://${host}`);
       if (url.pathname === '/' || url.pathname === '/_module') { send(page, mime['.html']); return; }
       if (url.pathname === '/api/module/status') { send(JSON.stringify(await getStatus()), mime['.json']); return; }
+      if (url.pathname === '/api/overlay-config') { send(JSON.stringify(await overlaySeed(config, assetsDir)), mime['.json']); return; }
       // Logo do operator tải lên từ Studio: chỉ tên file dạng hash, không đi qua đường dẫn tự do.
       const upload = /^\/uploads\/([a-f0-9]{16}\.(?:png|jpg|webp))$/.exec(url.pathname);
       if (upload && assetsDir) {
