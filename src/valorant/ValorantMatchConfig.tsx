@@ -73,12 +73,15 @@ export function ValorantMatchConfig({
   const [message, setMessage] = useState("");
   const { frame } = useValorant(2000);
   const loaded = view?.config;
+  // Chỉ nạp lại form khi cấu hình ĐÃ LƯU đổi nội dung (so theo JSON, không theo tham chiếu object),
+  // nếu không mỗi lần load lại dữ liệu sẽ ghi đè nội dung đang gõ dở.
+  const savedJson = loaded ? JSON.stringify(loaded) : "";
   useEffect(() => {
-    if (loaded) {
-      setDraft(loaded);
+    if (savedJson) {
+      setDraft(JSON.parse(savedJson) as Config);
       setUploads({});
     }
-  }, [loaded]);
+  }, [savedJson]);
   const change = (next: Config) => {
     setDraft(next);
     setMessage("Có thay đổi chưa lưu.");
