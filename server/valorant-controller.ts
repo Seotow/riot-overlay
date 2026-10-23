@@ -219,7 +219,8 @@ export class ValorantController {
       playercams: {
         enable: config.playercams.enable,
         identifier: config.playercams.roomId,
-        enabledPlayers: config.playercams.players,
+        // Tắt cam thì gửi danh sách rỗng để overlay ẩn hẳn, không phụ thuộc cách overlay dùng cờ enable.
+        enabledPlayers: config.playercams.enable ? config.playercams.players : [],
       },
     });
   }
