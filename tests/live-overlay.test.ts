@@ -239,7 +239,10 @@ test("two rune slots beside spells remain separate from actual ultimate, quest r
   assert.equal((html.match(/class="row-keystone" title="Electrocute"/g) || []).length, 10);
   assert.equal((html.match(/class="row-secondary rune-path" title="Precision"/g) || []).length, 10);
   assert.equal((html.match(/class="row-ultimate on-cooldown"/g) || []).length, 10);
-  assert.equal((html.match(/src="\/ddragon\/16.20.1\/ability\/Hecarim.png"/g) || []).length, 20);
+  assert.equal(
+    html.split(`src="/ddragon/${liveCatalog.version}/ability/Hecarim.png"`).length - 1,
+    20,
+  );
   s.players[0].roleQuest = observed({
     role: "bot" as const,
     itemId: 3006,

@@ -24,6 +24,7 @@ import { ValorantModule } from "./valorant-module";
 import { PostgameStore, ValorantAssets, buildMvp, buildRender } from "./valorant-postgame";
 import { postgameErrorText, postgameSelectSchema } from "../shared/valorant-postgame";
 import { defaultPaths, logoUrl, saveMatchConfig, viewMatchConfig } from "./valorant-config";
+import { updateDataDragon } from "./ddragon-updater";
 import { z } from "zod";
 import { COLLECTOR_SAMPLE_INTERVAL_MS, remainingSampleDelay } from "../shared/capture-rules";
 const host = "127.0.0.1",
@@ -907,6 +908,9 @@ async function pollObservation() {
 }
 void pollObservation();
 if (games.isOn("valorant")) void valorantModule.start();
+// Tests and isolated runs pick a fixed provider; they must not touch the network or the asset folders.
+if (process.env.RIOT_OVERLAY_DDRAGON_UPDATE !== "0" && !process.env.RIOT_OVERLAY_PROVIDER)
+  void updateDataDragon();
 server.listen(port, host, () =>
   console.log(`Rift Studio: http://${host}:${port}\nOBS overlay: http://${host}:${port}/overlay`),
 );

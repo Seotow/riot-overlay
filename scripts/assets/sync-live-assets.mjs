@@ -21,7 +21,9 @@ async function save(path, bytes) {
   await rename(`${path}.tmp`, path);
 }
 const versions = JSON.parse((await fetchBytes(`${base}/api/versions.json`)).toString());
-const version = versions[0];
+// `--version=x.y.z` lets the server pin the realm's live patch instead of the newest listed one.
+const pinned = process.argv.find((a) => a.startsWith("--version="))?.slice(10);
+const version = pinned ?? versions[0];
 if (!/^\d+\.\d+\.\d+$/.test(version)) throw Error("Invalid Riot version");
 const root = `public/ddragon/${version}`;
 const metadata = {};
@@ -81,10 +83,6 @@ for (const tree of metadata.runesReforged) {
     };
 }
 // Data Dragon's rune metadata omits stat shards; these are Riot CDN icons.
-await save(
-  "shared/generated/rune-paths.json",
-  Buffer.from(JSON.stringify({ version, paths: runePaths }, null, 2) + "\n"),
-);
 for (const [id, name, file] of [
   [5001, "Health", "StatModsHealthPlusIcon"],
   [5011, "Scaling Health", "StatModsHealthScalingIcon"],
@@ -181,6 +179,11 @@ await save(
     null,
     2,
   ),
+);
+// Catalog files are written last so a failed download never leaves a half-updated version.
+await save(
+  "shared/generated/rune-paths.json",
+  Buffer.from(JSON.stringify({ version, paths: runePaths }, null, 2) + "\n"),
 );
 await save("shared/generated/live-catalog.json", JSON.stringify(catalog, null, 2));
 console.log(
