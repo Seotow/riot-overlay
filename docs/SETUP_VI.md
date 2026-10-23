@@ -131,3 +131,10 @@ Dữ liệu cục bộ nằm ở `collector/hosts/valorant-collector/local` (Git
 ## Postgame Valorant
 
 Trang Valorant → Postgame dùng ngay khung cuối của trận Spectra, không cần cài thêm. Muốn đủ ACS, damage, first kill, KAST và thời lượng: lấy API key miễn phí tại https://docs.henrikdev.xyz/general/api-keys, nhập Riot ID + key trong trang rồi chọn trận. Key chỉ lưu ở `collector/hosts/valorant-collector/local/postgame.json` (Git bỏ qua). Thêm Browser Source 1920×1080 với URL của từng overlay hiển thị ở trang.
+
+## Player Valorant đẩy dữ liệu từ xa
+
+Host bật "Player đẩy dữ liệu (ngoài LAN)" ở trang Phát sóng, chép code gửi riêng cho từng player. Player
+chạy `npm run valorant:player -- <CODE>` (cần Node + đã cài phụ thuộc repo); Spectra Client tải một lần
+rồi chạy ngầm. Code đổi mỗi lần host bật lại tunnel. Cam dùng vdo.ninja: mở "Link đẩy cam" trong Cấu
+hình trận và cho phép webcam.

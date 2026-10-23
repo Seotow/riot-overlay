@@ -4,6 +4,7 @@ import { Input } from "../components/ui/input";
 import type { ValorantCommand, ValorantFrame } from "../../shared/valorant";
 import type { GamesReport } from "../lib/useGames";
 import { useValorant } from "../lib/useValorant";
+import { RemotePanel } from "./ValorantRemote";
 import { ingameUrl } from "./ValorantOverview";
 
 const errors: Record<string, string> = {
@@ -132,6 +133,7 @@ export function ValorantBroadcast({
           </Button>
         </div>
         {message && <p role="alert">{message}</p>}
+        <RemotePanel />
       </div>
     </section>
   );

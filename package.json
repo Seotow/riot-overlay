@@ -36,7 +36,8 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "probe:tracking": "tsx scripts/inspect/probe-tracking.ts",
-    "probe:bounty": "tsx scripts/inspect/probe-bounty.ts"
+    "probe:bounty": "tsx scripts/inspect/probe-bounty.ts",
+    "valorant:player": "node collector/hosts/valorant-collector/player/join.mjs"
   },
   "keywords": [],
   "author": "",

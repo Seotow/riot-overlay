@@ -130,3 +130,24 @@
   gap: 16px;
   align-content: start;
 }
+.val-remote {
+  display: grid;
+  gap: 8px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+.val-remote input[readonly] {
+  font-family: ui-monospace, monospace;
+  font-size: 12px;
+}
+.val-cam-row {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 6px;
+  align-items: center;
+  margin-bottom: 6px;
+}
+.val-hint {
+  font-size: 12px;
+  opacity: 0.7;
+}

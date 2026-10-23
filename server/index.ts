@@ -22,6 +22,7 @@ import { sendValorantCommand } from "./valorant-control";
 import { GamePower, type Game } from "./game-power";
 import { ValorantModule } from "./valorant-module";
 import { PostgameStore, ValorantAssets, buildMvp, buildRender } from "./valorant-postgame";
+import { ValorantRemoteAccess } from "./valorant-remote";
 import { postgameErrorText, postgameSelectSchema } from "../shared/valorant-postgame";
 import { defaultPaths, logoUrl, saveMatchConfig, viewMatchConfig } from "./valorant-config";
 import { updateDataDragon } from "./ddragon-updater";
@@ -68,6 +69,8 @@ const valorantModule = new ValorantModule({
   phase: () => valorant.observe()?.match.roundPhase.value ?? null,
 });
 const replayHud = new ReplayHudService();
+// Tunnel cho player ngoài LAN đẩy dữ liệu về (bật theo yêu cầu, không tự mở cổng).
+const valorantRemote = new ValorantRemoteAccess();
 const valorantPostgame = new PostgameStore({
   file: resolve("collector/hosts/valorant-collector/local/postgame.json"),
   snapshot: resolve("collector/hosts/valorant-collector/local/postgame-last.json"),
@@ -149,6 +152,7 @@ async function applyGame(game: Game, on: boolean) {
     else {
       valorant.stop();
       await valorantModule.stop();
+      await valorantRemote.disable();
     }
   }
 }
@@ -490,6 +494,36 @@ const server = createServer(async (req, res) => {
     }
     await applyGame(parsed.data.game, parsed.data.enabled);
     res.end(JSON.stringify(await gamesReport()));
+    return;
+  }
+  if (req.url === "/api/valorant/remote") {
+    res.setHeader("Content-Type", "application/json");
+    res.setHeader("Cache-Control", "no-store");
+    const allowed = [`http://${host}:${port}`, `http://localhost:${port}`];
+    if (
+      ![`127.0.0.1:${port}`, `localhost:${port}`].includes(req.headers.host || "") ||
+      (req.headers.origin ? !allowed.includes(req.headers.origin) : req.method !== "GET") ||
+      req.headers["sec-fetch-site"] === "cross-site"
+    ) {
+      res.writeHead(403);
+      res.end('{"error":"Forbidden"}');
+      return;
+    }
+    if (req.method === "POST") {
+      const chunks: Buffer[] = [];
+      for await (const chunk of req) chunks.push(Buffer.from(chunk));
+      let enable = false;
+      try {
+        enable = JSON.parse(Buffer.concat(chunks).toString("utf8"))?.enable === true;
+      } catch {}
+      if (enable) await valorantRemote.enable();
+      else await valorantRemote.disable();
+    } else if (req.method !== "GET") {
+      res.writeHead(405, { Allow: "GET, POST" });
+      res.end("{}");
+      return;
+    }
+    res.end(JSON.stringify(await valorantRemote.status()));
     return;
   }
   if (req.url?.startsWith("/api/valorant/postgame")) {
@@ -921,6 +955,7 @@ async function shutdown() {
   accountlessCollector.stop();
   leagueBroadcast.stop();
   clearInterval(postgameTimer);
+  valorantRemote.stop();
   valorant.stop();
   await valorantModule.stop();
   for (const client of wss.clients) client.terminate();

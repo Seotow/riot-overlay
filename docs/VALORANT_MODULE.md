@@ -167,3 +167,19 @@ Tên đội, logo, logo giải và tên thay thế lấy từ **Cấu hình tr�
 Vì sao Spectra không đủ: GEP của Overwolf không có ACS, không có damage của người khác (chỉ `round_report` của người chơi cục bộ), `match_end` không kèm dữ liệu hay thời gian. First kill và thời lượng có thể suy ra từ kill feed và mốc thời gian nhưng cần mở rộng backend Spectra; chưa làm.
 
 Bổ sung: theme mặc định (màu, độ mờ, font, ảnh nền và nhà tài trợ) lấy từ `overlay-config.json` của project gốc và chỉnh được trong mục Giao diện; file cấu hình cũ chưa có `themeVersion` được nạp lại theme gốc một lần. Logo đội phục vụ qua `/api/valorant/postgame/logo/<tên>` nên chạy cả khi module Valorant tắt; ảnh lỗi bị ẩn. Overlay đọc `/api/valorant/postgame/render` và `/mvp`, tự làm mới mỗi 2 giây.
+
+## Player đẩy dữ liệu từ xa + cam (23/10/2026)
+
+Để lấy đủ dữ liệu 10 người, mỗi player chạy bản player đẩy về ingest của host qua tunnel.
+
+- **Host:** Valorant → Phát sóng → bật "Player đẩy dữ liệu (ngoài LAN)". Studio chạy `cloudflared`
+  quick tunnel (tải một lần, kiểm SHA256, không cần tài khoản) trỏ về cổng ingest, lấy URL
+  `trycloudflare.com` rồi sinh **code ngắn** (`shared/valorant-remote.ts`) chứa origin + group code +
+  key. API `/api/valorant/remote` GET/POST; quản lý ở `server/valorant-remote.ts`,
+  `collector/hosts/valorant-collector/runtime/tunnel.mjs`. Tắt game Valorant thì tunnel tự tắt.
+- **Player:** `npm run valorant:player -- <CODE>` (`collector/hosts/valorant-collector/player/`). Giải
+  mã code, tải Spectra Client một lần, chạy ngầm trỏ ingest tới URL công khai. Chỉ cần nhập code.
+- **Cam:** qua vdo.ninja (bên thứ ba, WebRTC). Trong Cấu hình trận → "Player cam": đặt room id và danh
+  sách Tên#Tag; Studio gửi `playercams` (identifier + enabledPlayers) qua config_update, overlay kéo
+  cam `vdo.ninja/?room=<id>&view=<Tên>_H_<Tag>`. Mỗi player mở "Link đẩy cam" để phát webcam. Media
+  không đi qua host nên host chạy local vẫn hoạt động.
