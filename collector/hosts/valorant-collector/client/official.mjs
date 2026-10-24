@@ -72,12 +72,23 @@ export function withIngestPort(url) {
   return `${text}:${text.startsWith("https://") ? 443 : 80}`;
 }
 
+// Vá tap ở main process qua CDP. `require` không phải biến toàn cục trong main process, và
+// `process.mainModule` không phải lúc nào cũng có (Electron có thể đã bỏ nó, hoặc evaluate chạy quá
+// sớm) — từng gặp lỗi "Cannot read properties of undefined (reading 'require')". Vì vậy thử lần lượt:
+// require của command-line API (Node inspector cấp khi includeCommandLineAPI), rồi process.mainModule.
 function armScript() {
   return `(() => {
-    const main = process.mainModule;
-    const install = main.require(${JSON.stringify(tapModule())}).install;
+    const pick = () => {
+      if (typeof require === "function") return require;
+      const main = process.mainModule;
+      if (main && typeof main.require === "function") return main.require.bind(main);
+      return null;
+    };
+    const req = pick();
+    if (!req) throw new Error("không lấy được require của main process");
+    const install = req(${JSON.stringify(tapModule())}).install;
     const result = install();
-    setTimeout(() => { try { main.require("node:inspector").close(); } catch {} }, 400);
+    setTimeout(() => { try { req("node:inspector").close(); } catch {} }, 400);
     return JSON.stringify(result);
   })()`;
 }
@@ -203,6 +214,8 @@ class Cdp {
       expression,
       returnByValue: true,
       awaitPromise: true,
+      // Node inspector cấp `require` qua command-line API; armScript dựa vào đó khi mainModule thiếu.
+      includeCommandLineAPI: true,
     });
     if (m.result?.exceptionDetails)
       throw new Error(m.result.exceptionDetails.exception?.description ?? "CDP exception");
@@ -367,10 +380,22 @@ export async function startOfficial({
       const tapPort = inspectorPort;
       const mainTarget = await waitForMainTarget(tapPort);
       if (!mainTarget) throw new Error("Không thấy target main process");
-      const mainCdp = new Cdp(mainTarget.webSocketDebuggerUrl);
-      await mainCdp.open();
-      const armed = JSON.parse(await mainCdp.eval(armScript()));
-      mainCdp.close();
+      // main process có thể chưa sẵn sàng ngay sau khi spawn: thử lại vài lần trước khi bỏ.
+      let armed = null;
+      let lastError = null;
+      for (let attempt = 1; attempt <= 3 && !armed; attempt++) {
+        const mainCdp = new Cdp(mainTarget.webSocketDebuggerUrl);
+        try {
+          await mainCdp.open();
+          armed = JSON.parse(await mainCdp.eval(armScript()));
+        } catch (error) {
+          lastError = error;
+          if (attempt < 3) await pause(700);
+        } finally {
+          mainCdp.close();
+        }
+      }
+      if (!armed) throw lastError ?? new Error("không vá được tap");
       console.log(`[tap] ${JSON.stringify(armed)}`);
       onState({ state, title, tap: armed });
     } catch (error) {
