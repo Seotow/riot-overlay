@@ -55,14 +55,18 @@
 
       <section>
         <h2>3. Camera</h2>
+        <label class="check">
+          <input id="cam-auto" type="checkbox" checked />
+          Tự kết nối camera khi đã biết Riot ID (không cần bấm gì thêm)
+        </label>
+        <p class="hint">
+          Nhập code ở mục 1 là camera tự đẩy lên khi biết Riot ID: vào trận client tự đọc, hoặc nhập tay
+          bên dưới. Riot ID phải khớp đúng cái host đã thêm vào <em>Cấu hình trận → Player cam</em>.
+        </p>
         <label class="field">
           Riot ID của bạn (Tên#Tag)
           <input id="riot-id" placeholder="Seotoww#2013" autocomplete="off" spellcheck="false" />
         </label>
-        <p class="hint">
-          Tự đọc từ trận khi vào; nhập tay nếu chưa thấy. Phải khớp đúng Riot ID host đã thêm vào
-          <em>Cấu hình trận → Player cam</em>.
-        </p>
         <dl id="cam-facts" class="facts">
           <div class="fact"><dt>Room vdo.ninja của host</dt><dd id="f-room">—</dd></div>
           <div class="fact"><dt>Stream id đẩy lên</dt><dd id="f-stream">—</dd></div>
@@ -72,12 +76,13 @@
           <a id="cam-open" class="ghost" href="#" target="_blank" rel="noreferrer" hidden>Mở cửa sổ riêng</a>
           <button id="cam-test" class="ghost" type="button">Kiểm tra webcam</button>
         </div>
+        <p id="cam-wait" class="hint" hidden></p>
         <p id="cam-problem" class="warn" hidden></p>
         <div id="cam-frame" class="frame" hidden></div>
         <video id="cam-preview" playsinline muted hidden></video>
         <p class="hint">
-          Lần đầu trình duyệt sẽ hỏi quyền camera — bấm <em>Cho phép</em>. Hình chỉ được gửi khi bạn bật
-          camera ở đây; tắt là dừng ngay.
+          Lần đầu trình duyệt sẽ hỏi quyền camera — bấm <em>Cho phép</em>. Nếu khung chưa hiện hình, bấm
+          nút trong khung một lần (trình duyệt bắt buộc với khung nhúng). Tắt camera là dừng ngay.
         </p>
       </section>
     </main>

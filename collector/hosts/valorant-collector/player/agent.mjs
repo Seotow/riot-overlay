@@ -16,7 +16,7 @@ export function canonicalRiotId(value) {
   return `${text.slice(0, index).trim()}#${text.slice(index + 1).trim()}`;
 }
 
-export function createPlayerAgent({ log = () => {}, onUpdate = () => {} } = {}) {
+export function createPlayerAgent({ log = () => {}, onUpdate = () => {}, resolver = resolveJoin } = {}) {
   const state = {
     phase: "idle",
     detail: "",
@@ -24,6 +24,11 @@ export function createPlayerAgent({ log = () => {}, onUpdate = () => {} } = {}) 
     host: null,
     riotId: "",
     riotIdManual: false,
+    // Camera: mặc định tự kết nối ngay khi biết đủ room (từ code) + Riot ID. Người dùng tắt tay thì
+    // giữ nguyên ý đó cho tới khi bật lại / bỏ chọn "tự động".
+    camAuto: true,
+    camUserOff: false,
+    camManual: false,
     camOn: false,
     client: {
       tap: "starting",
@@ -50,12 +55,40 @@ export function createPlayerAgent({ log = () => {}, onUpdate = () => {} } = {}) 
     emit();
   };
 
-  /** Ảnh chụp trạng thái cho UI/CLI: mọi thứ suy ra từ state, không có gì ẩn. */
-  function view() {
+  /**
+   * Trạng thái camera suy ra từ state. Camera chỉ đẩy được khi có room id (do host công bố trong
+   * code) và biết Riot ID của chính máy này (để stream id khớp roster của overlay).
+   */
+  function camStatus() {
     const riotId = canonicalRiotId(state.riotId);
     const room = state.host?.camRoom ?? "";
     const nameProblem = streamIdProblem(riotId);
-    const camProblem = state.camOn ? (room ? nameProblem : "Host chưa đặt room id vdo.ninja.") : null;
+    const active = state.phase !== "idle" && state.phase !== "error";
+    // Muốn đẩy camera khi: người dùng chưa tắt tay, và (chế độ tự động HOẶC đã bật tay chế độ không tự động).
+    const wanted = !state.camUserOff && (state.camAuto || state.camManual) && active;
+    const on = wanted && !!room && !nameProblem;
+    let waiting = null;
+    if (wanted && !on) {
+      waiting = !room
+        ? "Host chưa đặt room id vdo.ninja trong Cấu hình trận."
+        : "Đang chờ Riot ID: vào trận client sẽ tự đọc, hoặc nhập tay bên dưới.";
+    }
+    return { riotId, room, nameProblem, on, waiting, auto: state.camAuto };
+  }
+
+  /** Cập nhật camOn theo điều kiện hiện tại; trả true nếu có thay đổi (để emit một lần). */
+  function syncCam() {
+    const next = camStatus().on;
+    if (next === state.camOn) return false;
+    state.camOn = next;
+    if (next) log("camera tự bật (đã có room + Riot ID)");
+    else if (state.camUserOff) log("camera đang tắt theo yêu cầu");
+    return true;
+  }
+
+  /** Ảnh chụp trạng thái cho UI/CLI: mọi thứ suy ra từ state, không có gì ẩn. */
+  function view() {
+    const cam = camStatus();
     return {
       phase: state.phase,
       detail: state.detail,
@@ -71,14 +104,15 @@ export function createPlayerAgent({ log = () => {}, onUpdate = () => {} } = {}) 
         : null,
       client: { ...state.client },
       counters: { ...state.counters },
-      riotId,
+      riotId: cam.riotId,
       riotIdManual: state.riotIdManual,
       cam: {
-        on: state.camOn,
-        room,
-        streamId: nameProblem ? "" : camStreamId(riotId),
-        url: state.camOn && room && !nameProblem ? playercamPushUrl(room, riotId) : "",
-        problem: camProblem,
+        on: cam.on,
+        auto: cam.auto,
+        room: cam.room,
+        streamId: cam.nameProblem ? "" : camStreamId(cam.riotId),
+        url: cam.on ? playercamPushUrl(cam.room, cam.riotId) : "",
+        waiting: cam.waiting,
       },
     };
   }
@@ -111,6 +145,7 @@ export function createPlayerAgent({ log = () => {}, onUpdate = () => {} } = {}) 
         // GEP trả "Tên #Tag"; chuẩn hoá để stream id khớp overlay.
         if (!state.riotIdManual) {
           state.riotId = canonicalRiotId(d.value);
+          syncCam();
           emit();
         }
       }
@@ -130,6 +165,8 @@ export function createPlayerAgent({ log = () => {}, onUpdate = () => {} } = {}) 
 
   return {
     view,
+    /** Đẩy một frame tap vào nhân (reader gọi; test cũng dùng để mô phỏng GEP/connector). */
+    handleFrame,
     /** Mở named pipe để đọc tap. Gọi trước khi chạy client (frame sẽ được tap xếp hàng chờ). */
     async startTap() {
       reader = await startTapReader({
@@ -150,7 +187,7 @@ export function createPlayerAgent({ log = () => {}, onUpdate = () => {} } = {}) 
 
       let join;
       try {
-        join = await resolveJoin(rawCode);
+        join = await (options.resolver ?? resolver)(rawCode);
       } catch (error) {
         fail(error.message || String(error));
         return view();
@@ -158,6 +195,8 @@ export function createPlayerAgent({ log = () => {}, onUpdate = () => {} } = {}) 
       state.code = join.code;
       state.host = join;
       log(`Code ${join.code} → ${join.origin}${join.camRoom ? ` (room cam ${join.camRoom})` : ""}`);
+      // Code đã mang room cam: bật camera ngay nếu đã biết Riot ID (nhập tay/nhớ từ lần trước).
+      syncCam();
       if (options.startClient === false) {
         // Chỉ tra code (thử camera/room trước khi mở client) — không tải, không chạy Spectra Client.
         state.phase = "ready";
@@ -221,6 +260,7 @@ export function createPlayerAgent({ log = () => {}, onUpdate = () => {} } = {}) 
       state.phase = "idle";
       state.detail = "Đã dừng theo yêu cầu.";
       emit();
+
       const pending = runtimePromise;
       runtimePromise = null;
       if (pending) {
@@ -237,14 +277,32 @@ export function createPlayerAgent({ log = () => {}, onUpdate = () => {} } = {}) 
       emit();
       return view();
     },
-    setRiotId(value) {
+    /**
+     * Đặt Riot ID. `manual` = người dùng tự nhập (không cho GEP ghi đè); mặc định suy ra từ việc ô nhập
+     * có trống hay không. UI gửi `manual: false` cho giá trị nhớ từ lần trước để GEP còn sửa được.
+     */
+    setRiotId(value, options = {}) {
       state.riotId = canonicalRiotId(value);
-      state.riotIdManual = String(value ?? "").trim().length > 0;
+      state.riotIdManual =
+        options.manual ?? String(value ?? "").trim().length > 0;
+      syncCam();
       emit();
       return view();
     },
+    /** Bật/tắt camera ngay; tắt tay thì camera không tự bật lại cho tới khi người dùng bật lại. */
     setCam(on) {
-      state.camOn = !!on;
+      state.camUserOff = !on;
+      state.camManual = !!on;
+      syncCam();
+      emit();
+      return view();
+    },
+    /** Bật/tắt chế độ tự kết nối camera sau khi nhập code. Bỏ chọn thì camera dừng (không tự bật lại). */
+    setAutoCam(on) {
+      state.camAuto = !!on;
+      state.camManual = false;
+      state.camUserOff = !on;
+      syncCam();
       emit();
       return view();
     },

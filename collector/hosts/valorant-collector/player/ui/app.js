@@ -14,6 +14,25 @@ const PHASES = {
 let view = null;
 let camOn = false;
 let selfTestStream = null;
+let warmUpMessage = "";
+let camProblem = "";
+let prefilledStored = false;
+
+const RIOT_ID_KEY = "riotovl.player.riotId";
+const readStoredRiotId = () => {
+  try {
+    return localStorage.getItem(RIOT_ID_KEY) ?? "";
+  } catch {
+    return "";
+  }
+};
+const storeRiotId = (value) => {
+  try {
+    localStorage.setItem(RIOT_ID_KEY, value ?? "");
+  } catch {
+    // Trình duyệt chặn localStorage: không sao, chỉ mất phần nhớ.
+  }
+};
 
 const post = async (path, body) => {
   const response = await fetch(path, {
@@ -59,22 +78,31 @@ function renderHost() {
 }
 
 function renderCamera() {
-  const cam = view?.cam ?? { on: false, room: "", streamId: "", url: "", problem: null };
+  const cam = view?.cam ?? { on: false, auto: true, room: "", streamId: "", url: "", waiting: null };
   camOn = cam.on;
+  if (camOn) camProblem = "";
   setText("f-room", cam.room || "(host chưa đặt room id)");
   setText("f-stream", cam.streamId || "(chưa có Riot ID hợp lệ)");
 
-  const problem = $("cam-problem");
-  problem.hidden = !cam.problem;
-  problem.textContent = cam.problem ?? "";
+  const autoNode = $("cam-auto");
+  if (document.activeElement !== autoNode) autoNode.checked = !!cam.auto;
 
   const toggle = $("cam-toggle");
   toggle.textContent = camOn ? "Tắt camera" : "Bật camera";
-  toggle.disabled = !cam.room;
 
   const open = $("cam-open");
   open.hidden = !cam.url;
   if (cam.url) open.href = cam.url;
+
+  // Camera đang bật thì thông báo chờ không còn ý nghĩa.
+  const waitText = camOn ? "" : (cam.waiting ?? "") || warmUpMessage;
+  const wait = $("cam-wait");
+  wait.hidden = !waitText;
+  wait.textContent = waitText;
+
+  const problem = $("cam-problem");
+  problem.hidden = !camProblem;
+  problem.textContent = camProblem;
 
   const frame = $("cam-frame");
   const desired = cam.url;
@@ -112,7 +140,10 @@ function render() {
   setText("f-tap", client.tap);
   setText("f-aux", String(view.counters.aux));
 
-  if (document.activeElement !== $("riot-id") && view.riotId) $("riot-id").value = view.riotId;
+  if (view.riotId) {
+    storeRiotId(view.riotId);
+    if (document.activeElement !== $("riot-id")) $("riot-id").value = view.riotId;
+  }
 
   const busy = view.phase === "downloading" || view.phase === "starting" || view.phase === "resolving";
   $("code").disabled = busy;
@@ -125,11 +156,32 @@ function render() {
 const refresh = async () => {
   try {
     view = await (await fetch("/api/state")).json();
+    // Lần đầu: điền lại Riot ID đã nhớ (manual: false để client còn tự đọc đè khi vào trận).
+    if (!prefilledStored) {
+      prefilledStored = true;
+      if (!view.riotId) {
+        const stored = readStoredRiotId();
+        if (stored) view = await post("/api/riot-id", { value: stored, manual: false });
+      }
+    }
     render();
   } catch {
     // UI cục bộ tạm mất: lần sau thử lại.
   }
 };
+
+/** Xin quyền camera sớm (rồi dừng ngay) để lần đẩy thật không bị chặn giữa trận. */
+async function warmUpCamera() {
+  if (!navigator.mediaDevices?.getUserMedia) return;
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+    for (const track of stream.getTracks()) track.stop();
+    warmUpMessage = "Đã cho phép camera. Hình sẽ tự gửi ngay khi biết Riot ID.";
+  } catch (error) {
+    warmUpMessage = `Chưa có quyền camera: ${error?.message || error}. Bấm Kiểm tra webcam để thử lại.`;
+  }
+  render();
+}
 
 $("join-form").addEventListener("submit", async (event) => {
   event.preventDefault();
@@ -139,8 +191,11 @@ $("join-form").addEventListener("submit", async (event) => {
     $("detail").textContent = "Code phải có đúng 5 ký tự.";
     return;
   }
+  camProblem = "";
   view = await post("/api/join", { code, noClient: $("no-client").checked });
   render();
+  // Code đã mang room cam: xin quyền camera sớm nếu chưa có Riot ID (khi có Riot ID camera đã tự bật).
+  if (view?.cam?.auto && view?.cam?.room && !view?.cam?.on) void warmUpCamera();
 });
 
 $("code").addEventListener("input", (event) => {
@@ -151,16 +206,24 @@ $("code").addEventListener("input", (event) => {
 });
 
 $("riot-id").addEventListener("change", async (event) => {
-  view = await post("/api/riot-id", { value: event.target.value });
+  const value = event.target.value;
+  storeRiotId(value);
+  view = await post("/api/riot-id", { value, manual: true });
+  render();
+});
+
+$("cam-auto").addEventListener("change", async (event) => {
+  view = await post("/api/cam", { auto: event.target.checked });
   render();
 });
 
 $("cam-toggle").addEventListener("click", async () => {
+  camProblem = "";
   if (!camOn && !(view?.cam?.streamId ?? "")) {
     await refresh();
     if (!view?.cam?.streamId) {
-      $("cam-problem").hidden = false;
-      $("cam-problem").textContent = view?.cam?.problem ?? "Chưa có Riot ID hợp lệ để đặt tên stream.";
+      camProblem = "Chưa có Riot ID hợp lệ để đặt tên stream. Nhập Riot ID (Tên#Tag) bên trên.";
+      renderCamera();
       return;
     }
   }
@@ -178,15 +241,17 @@ $("cam-test").addEventListener("click", async () => {
     $("cam-test").textContent = "Kiểm tra webcam";
     return;
   }
+  camProblem = "";
   try {
     selfTestStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
     video.srcObject = selfTestStream;
     video.hidden = false;
     await video.play().catch(() => {});
     $("cam-test").textContent = "Dừng xem trước";
-  } catch (error) {    $("cam-problem").hidden = false;
-    $("cam-problem").textContent = `Không mở được webcam: ${error?.message || error}`;
+  } catch (error) {
+    camProblem = `Không mở được webcam: ${error?.message || error}`;
   }
+  renderCamera();
 });
 
 $("leave").addEventListener("click", async () => {

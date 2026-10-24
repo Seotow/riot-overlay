@@ -7,18 +7,26 @@ của host qua tunnel. Player **chỉ cần nhập một code 5 ký tự** do ho
 ## Cách dùng (có UI)
 
 1. Host mở Studio → Valorant → Phát sóng → bật **"Player đẩy dữ liệu (ngoài LAN)"** và gửi **code 5 ký
-   tự** cho từng player (ví dụ `K7M2P`).
+   tự** cho từng player (ví dụ `K7M2P`). Hoặc host tự chạy `npm run valorant:code` để mở tunnel và in
+   code mà không cần Studio.
 2. Player chạy:
 
    ```bash
    npm run valorant:player
    ```
 
-   Trình duyệt mở `http://127.0.0.1:5398/`. Nhập code vào ô đầu rồi bấm **Kết nối**.
+   Trình duyệt mở `http://127.0.0.1:5398/`. Nhập code vào ô đầu — vừa đủ 5 ký tự là tự gửi, khỏi bấm
+   nút.
 3. Trang hiện trạng thái kết nối (kết nối tới host, match id, số frame máu/kỹ năng đã gửi). Lần đầu,
    Spectra Client được tải một lần (kiểm SHA256) rồi chạy ngầm (cửa sổ ẩn); cứ vào trận bình thường.
-4. Khi vào trận, trang tự đọc Riot ID của bạn từ dữ liệu game. Bấm **Bật camera** để mở vdo.ninja và
-   cho phép webcam — hình được đẩy lên room của host. **Tắt camera** để dừng ngay.
+4. **Camera tự kết nối, không phải bấm gì thêm.** Code mang sẵn room vdo.ninja của host; khi đã biết
+   Riot ID (vào trận client tự đọc, hoặc nhập tay ở ô *Riot ID của bạn*) camera tự đẩy lên. Lần đầu
+   trình duyệt hỏi quyền camera — bấm **Cho phép** (nếu chưa thấy khung, bấm một lần trong khung; trình
+   duyệt bắt buộc với khung nhúng). Bỏ chọn **Tự kết nối camera khi đã biết Riot ID** hoặc bấm **Tắt
+   camera** để dừng; tắt tay thì không tự bật lại.
+
+Riot ID được nhớ trong trình duyệt (`localStorage`) nên lần sau chỉ cần nhập code. Khi client đọc được
+Riot ID thật từ trận, nó **ghi đè** giá trị đã nhớ; nếu bạn tự sửa trong ô thì giá trị của bạn được giữ.
 
 Đóng cửa sổ terminal là client dừng; muốn dừng riêng phần kết nối thì bấm **Dừng kết nối** trong trang.
 

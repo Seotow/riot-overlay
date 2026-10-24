@@ -77,10 +77,10 @@ export async function startPlayerUi({ port = Number(process.env.RIOT_OVERLAY_PLA
         json(res, 200, await agent.join(body.code, { startClient: body.noClient !== true }));
         return;
       case "/api/cam":
-        json(res, 200, agent.setCam(body.on));
+        json(res, 200, body.auto === undefined ? agent.setCam(body.on) : agent.setAutoCam(body.auto));
         return;
       case "/api/riot-id":
-        json(res, 200, agent.setRiotId(body.value));
+        json(res, 200, agent.setRiotId(body.value, { manual: body.manual }));
         return;
       case "/api/leave":
         json(res, 200, await agent.leave());
