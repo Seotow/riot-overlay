@@ -33,8 +33,10 @@ export function decodeJoinCode(code: string): RemoteJoin | null {
 }
 
 // Link đẩy cam vdo.ninja cho một player: tên hiển thị dạng <Tên>_H_<Tag> khớp với overlay.
+// Overlay dựng stream id từ roster (name#tagline không có dấu cách), nên phải trim hai phần:
+// GEP trả "Seotoww #2013" còn roster trả name "Seotoww" + tagline "2013".
 export function playercamPushUrl(roomId: string, playerFullName: string): string {
-  const [name, tag = ""] = playerFullName.split("#");
+  const [name = "", tag = ""] = playerFullName.split("#").map((part) => part.trim());
   const streamId = `${name.replaceAll(" ", "_")}_H_${tag}`;
   return `https://vdo.ninja/?room=${encodeURIComponent(roomId)}&push=${encodeURIComponent(
     streamId,

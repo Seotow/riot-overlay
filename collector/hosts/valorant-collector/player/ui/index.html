@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Riot Overlay — Player</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>Riot Overlay <span>bản Player</span></h1>
+        <p id="phase" class="pill">đang khởi động…</p>
+      </header>
+      <p id="detail" class="detail"></p>
+
+      <section>
+        <h2>1. Nhập code của host</h2>
+        <form id="join-form">
+          <input
+            id="code"
+            name="code"
+            inputmode="latin"
+            autocomplete="off"
+            spellcheck="false"
+            maxlength="5"
+            placeholder="ABCDE"
+            aria-label="Code của host"
+          />
+          <button type="submit">Kết nối</button>
+        </form>
+        <p class="hint">Code có 5 ký tự, chỉ chữ và số (không có 0 1 I L O). Code hết hạn sau vài giờ.</p>
+        <label class="check">
+          <input id="no-client" type="checkbox" />
+          Chỉ kiểm tra code và camera (không mở Spectra Client)
+        </label>
+        <dl id="host" class="facts" hidden></dl>
+      </section>
+
+      <section>
+        <h2>2. Trạng thái dữ liệu</h2>
+        <dl id="client" class="facts">
+          <div class="fact"><dt>Kết nối tới host</dt><dd id="f-connected">—</dd></div>
+          <div class="fact"><dt>Chế độ</dt><dd id="f-mode">—</dd></div>
+          <div class="fact"><dt>Match id</dt><dd id="f-match">—</dd></div>
+          <div class="fact"><dt>Đích ingest</dt><dd id="f-ingest">—</dd></div>
+          <div class="fact"><dt>Đọc tap</dt><dd id="f-tap">—</dd></div>
+          <div class="fact"><dt>Frame máu/kỹ năng đã gửi</dt><dd id="f-aux">0</dd></div>
+        </dl>
+        <p class="hint">
+          Vào trận là dữ liệu tự chạy; cửa sổ Spectra Client đã được ẩn. Nếu mất kết nối, client tự thử lại.
+        </p>
+        <button id="leave" class="ghost" type="button">Dừng kết nối</button>
+      </section>
+
+      <section>
+        <h2>3. Camera</h2>
+        <label class="field">
+          Riot ID của bạn (Tên#Tag)
+          <input id="riot-id" placeholder="Seotoww#2013" autocomplete="off" spellcheck="false" />
+        </label>
+        <p class="hint">
+          Tự đọc từ trận khi vào; nhập tay nếu chưa thấy. Phải khớp đúng Riot ID host đã thêm vào
+          <em>Cấu hình trận → Player cam</em>.
+        </p>
+        <dl id="cam-facts" class="facts">
+          <div class="fact"><dt>Room vdo.ninja của host</dt><dd id="f-room">—</dd></div>
+          <div class="fact"><dt>Stream id đẩy lên</dt><dd id="f-stream">—</dd></div>
+        </dl>
+        <div class="row">
+          <button id="cam-toggle" type="button">Bật camera</button>
+          <a id="cam-open" class="ghost" href="#" target="_blank" rel="noreferrer" hidden>Mở cửa sổ riêng</a>
+          <button id="cam-test" class="ghost" type="button">Kiểm tra webcam</button>
+        </div>
+        <p id="cam-problem" class="warn" hidden></p>
+        <div id="cam-frame" class="frame" hidden></div>
+        <video id="cam-preview" playsinline muted hidden></video>
+        <p class="hint">
+          Lần đầu trình duyệt sẽ hỏi quyền camera — bấm <em>Cho phép</em>. Hình chỉ được gửi khi bạn bật
+          camera ở đây; tắt là dừng ngay.
+        </p>
+      </section>
+    </main>
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>

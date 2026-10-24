@@ -8,6 +8,8 @@ interface RemoteStatus {
   origin: string;
   groupCode: string;
   code: string;
+  shortCode: string;
+  publishError: string | null;
   error: string | null;
 }
 
@@ -19,7 +21,10 @@ const stateText: Record<string, string> = {
   failed: "Lỗi",
 };
 
-/** Bảng cho phép player ngoài LAN đẩy dữ liệu về: bật tunnel, hiện code ngắn để player nhập. */
+/**
+ * Bảng cho phép player ngoài LAN đẩy dữ liệu về: bật tunnel, hiện code 5 ký tự để player nhập.
+ * Code ngắn chỉ là chìa khoá tra cứu: player tự tìm ra URL tunnel hiện tại qua điểm hẹn.
+ */
 export function RemotePanel() {
   const [status, setStatus] = useState<RemoteStatus | null>(null);
   const [busy, setBusy] = useState(false);
@@ -58,10 +63,9 @@ export function RemotePanel() {
     }
   };
 
-  const copy = async () => {
-    if (!status?.code) return;
+  const copy = async (value: string) => {
     try {
-      await navigator.clipboard.writeText(status.code);
+      await navigator.clipboard.writeText(value);
       setCopied(true);
       setTimeout(() => setCopied(false), 1500);
     } catch {
@@ -80,17 +84,47 @@ export function RemotePanel() {
       </div>
       <p>Trạng thái: {stateText[status?.state ?? "off"] ?? status?.state}</p>
       {status?.error && <p role="alert">{status.error}</p>}
-      {on && !status?.code && <p>Đang lấy địa chỉ công khai…</p>}
-      {status?.code && (
+      {on && !status?.shortCode && <p>Đang lấy địa chỉ công khai…</p>}
+      {status?.shortCode && (
         <>
           <p>
-            Gửi code này cho từng player (họ dán vào bản player). Code chứa key, chỉ gửi riêng tư.
+            Player mở <code>npm run valorant:player</code>, nhập <strong>code 5 ký tự</strong> này:
           </p>
           <div className="val-row">
-            <Input readOnly value={status.code} onFocus={(e) => e.currentTarget.select()} />
-            <Button onClick={() => void copy()}>{copied ? "Đã chép" : "Chép code"}</Button>
+            <Input
+              readOnly
+              value={status.shortCode}
+              onFocus={(e) => e.currentTarget.select()}
+              style={{ fontSize: 22, letterSpacing: "0.3em", textAlign: "center" }}
+            />
+            <Button onClick={() => void copy(status.shortCode)}>
+              {copied ? "Đã chép" : "Chép code"}
+            </Button>
           </div>
+          <p>
+            Code tự phân giải ra địa chỉ tunnel hiện tại nên đổi máy hay khởi động lại tunnel vẫn
+            dùng được. Không chứa key; chỉ dùng cho chế độ auxiliary. Chia sẻ riêng cho player tin
+            cậy.
+          </p>
+          {status.publishError && <p role="alert">Đăng code lỗi: {status.publishError}</p>}
         </>
+      )}
+      {on && (
+        <details>
+          <summary>Code dài (dự phòng, có key)</summary>
+          <p className="val-hint">
+            Bản player CLI cũ dán code này khi điểm hẹn không truy cập được. Code chứa key nên chỉ
+            gửi riêng tư.
+          </p>
+          {status?.code ? (
+            <div className="val-row">
+              <Input readOnly value={status.code} onFocus={(e) => e.currentTarget.select()} />
+              <Button onClick={() => void copy(status.code)}>Chép code dài</Button>
+            </div>
+          ) : (
+            <p>Chưa có code dài (cần auth.key trong local/).</p>
+          )}
+        </details>
       )}
     </div>
   );

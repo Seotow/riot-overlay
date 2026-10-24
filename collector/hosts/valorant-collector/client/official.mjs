@@ -2,6 +2,7 @@
 // Không sửa binary hay app.asar: tải một lần (kiểm SHA256), chạy với profile riêng, rồi điều khiển giao diện của chính
 // Client qua Chrome DevTools Protocol trên cổng loopback ngẫu nhiên để điền form và bấm Connect, và ẩn cửa sổ.
 import { spawn } from "node:child_process";
+import { createServer } from "node:net";
 import { createHash } from "node:crypto";
 import { createWriteStream } from "node:fs";
 import { access, mkdir, readFile, rename, rm } from "node:fs/promises";
@@ -25,6 +26,60 @@ export async function releaseInfo() {
   return JSON.parse(
     await readFile(resolve(dirname(fileURLToPath(import.meta.url)), "release.json"), "utf8"),
   );
+}
+
+/** Cổng loopback trống: inspector cần cổng biết trước, khỏi phải đọc stderr. */
+const freePort = () =>
+  new Promise((ok, fail) => {
+    const server = createServer();
+    server.once("error", fail);
+    server.listen(0, "127.0.0.1", () => {
+      const { port } = server.address();
+      server.close(() => ok(port));
+    });
+  });
+
+/** Chờ inspector của main process lên rồi trả target "node". */
+async function waitForMainTarget(port, timeoutMs = 20000) {
+  const deadline = Date.now() + timeoutMs;
+  while (Date.now() < deadline) {
+    try {
+      const list = await (await fetch(`http://127.0.0.1:${port}/json/list`)).json();
+      const node = list.find((t) => t.type === "node");
+      if (node) return node;
+    } catch {}
+    await pause(300);
+  }
+  return null;
+}
+
+/**
+ * Tap chạy trong main process của Client, đẩy frame ra named pipe.
+ * NODE_OPTIONS=--require bị Electron chặn với app đã đóng gói (đã đo trên 0.3.4), nên đường vào là
+ * `--inspect=<cổng>` + Runtime.evaluate: lấy process.mainModule.require rồi gọi tap.install().
+ * Không sửa binary/asar; đóng inspector ngay sau khi gắn.
+ */
+export const tapPipe = "\\\\.\\pipe\\riot-spectra-tap";
+const tapModule = () => resolve(dirname(fileURLToPath(import.meta.url)), "tap/tap.cjs").replace(/\\/g, "/");
+
+/**
+ * Client tự thêm ":5100" khi URL không kèm cổng (connectorService.handleAuthProcess).
+ * Quick tunnel chỉ nghe 443, relay LAN nghe cổng riêng → luôn gửi URL có cổng tường minh.
+ */
+export function withIngestPort(url) {
+  const text = String(url ?? "").replace(/\/+$/, "");
+  if (/^https?:\/\/[^/]+:\d+/.test(text)) return text;
+  return `${text}:${text.startsWith("https://") ? 443 : 80}`;
+}
+
+function armScript() {
+  return `(() => {
+    const main = process.mainModule;
+    const install = main.require(${JSON.stringify(tapModule())}).install;
+    const result = install();
+    setTimeout(() => { try { main.require("node:inspector").close(); } catch {} }, 400);
+    return JSON.stringify(result);
+  })()`;
 }
 
 export async function officialPaths() {
@@ -182,7 +237,7 @@ export async function officialMatch(config, configPath, key) {
     observerName: "Riot Overlay",
     key,
     groupCode: config.groupCode,
-    ingest: `http://127.0.0.1:${config.ports.ingest}`,
+    ingest: withIngestPort(`http://127.0.0.1:${config.ports.ingest}`),
     teams: [team(saved.teams?.[0], 1), team(saved.teams?.[1], 2)],
     tournamentLogo: saved.tournament?.logo ? logo(saved.tournament.logo) : "",
   };
@@ -249,7 +304,11 @@ export async function startOfficial({
   match,
   onState = () => {},
   parentPid = process.pid,
+  mode = "observer",
+  auxName = "Player",
 }) {
+  const auxiliary = mode === "auxiliary";
+  const ingest = withIngestPort(match?.ingest);
   const { exe, profile } = await officialPaths();
   if (!(await exists(exe)))
     throw new Error("Chưa có Spectra Client chính thức (chạy npm run valorant:setup)");
@@ -261,11 +320,22 @@ export async function startOfficial({
   let state = "starting";
   let stopped = false;
   const children = [];
-  const child = spawn(exe, [`--user-data-dir=${profile}`, "--remote-debugging-port=0"], {
-    windowsHide: true,
-    stdio: "ignore",
-    shell: false,
-  });
+  const inspectorPort = await freePort();
+  const child = spawn(
+    exe,
+    [
+      `--user-data-dir=${profile}`,
+      "--remote-debugging-port=0",
+      `--inspect=${inspectorPort}`,
+      ...(auxiliary ? ["--auxiliary"] : []),
+    ],
+    {
+      windowsHide: true,
+      stdio: "ignore",
+      shell: false,
+      env: { ...process.env, RIOT_SPECTRA_PIPE: tapPipe },
+    },
+  );
   children.push(child);
   child.on("exit", (code) => {
     if (!stopped) {
@@ -292,6 +362,22 @@ export async function startOfficial({
   };
   let cdp;
   try {
+    // Gắn tap vào main process trước khi chờ GEP, để không mất frame đầu trận.
+    try {
+      const tapPort = inspectorPort;
+      const mainTarget = await waitForMainTarget(tapPort);
+      if (!mainTarget) throw new Error("Không thấy target main process");
+      const mainCdp = new Cdp(mainTarget.webSocketDebuggerUrl);
+      await mainCdp.open();
+      const armed = JSON.parse(await mainCdp.eval(armScript()));
+      mainCdp.close();
+      console.log(`[tap] ${JSON.stringify(armed)}`);
+      onState({ state, title, tap: armed });
+    } catch (error) {
+      // Tap là tuỳ chọn: GEP vẫn phải chạy dù gắn tap lỗi.
+      console.error(`[tap] gắn thất bại: ${error?.message ?? error}`);
+      onState({ state, title, tap: { error: String(error?.message ?? error) } });
+    }
     // Cổng DevTools ngẫu nhiên, chỉ loopback; Chromium ghi cổng vào DevToolsActivePort.
     let port = 0;
     for (let i = 0; i < 100 && !port; i++) {
@@ -334,19 +420,35 @@ export async function startOfficial({
     if (!target) throw new Error("Không thấy giao diện của Client chính thức");
     cdp = new Cdp(target.webSocketDebuggerUrl);
     await cdp.open();
-    // GEP ready: tiêu đề cửa sổ có "Ready" (Client tự báo khi gói GEP của Overwolf sẵn sàng).
-    for (let i = 0; i < 200 && !/Ready/.test(title); i++) await pause(300);
-    if (!/Ready/.test(title)) throw new Error("GEP của Client chính thức chưa sẵn sàng");
-    await cdp.eval(fillScript(match));
-    await pause(1200);
-    state = "connecting";
-    // Thử bấm Connect vài lần: lần đầu có thể rơi vào lúc form chưa được Angular xác nhận hợp lệ.
-    for (let attempt = 0; attempt < 3 && !/Connected/.test(title); attempt++) {
-      await cdp.eval(clickConnectScript);
-      for (let i = 0; i < 24 && !/Connected/.test(title); i++) await pause(250);
+    if (auxiliary) {
+      // Chế độ aux không dùng form observer: gọi thẳng IPC qua preload.
+      // Client chỉ có MATCH_ID sau khi GEP thấy trận, nên phải lặp: gọi sớm trả "No Match ID".
+      state = "aux-waiting";
+      const auxScript = `window.electronAPI.processAuxInputs(${JSON.stringify(ingest)}, ${JSON.stringify(auxName)})`;
+      const deadline = Date.now() + 10 * 60 * 1000;
+      while (Date.now() < deadline && !/Connected/.test(title)) {
+        try {
+          await cdp.eval(auxScript);
+        } catch {}
+        for (let i = 0; i < 20 && !/Connected/.test(title); i++) await pause(500);
+      }
+      state = /Connected/.test(title) ? "connected" : "connect-unconfirmed";
+      onState({ state, title });
+    } else {
+      // GEP ready: tiêu đề cửa sổ có "Ready" (Client tự báo khi gói GEP của Overwolf sẵn sàng).
+      for (let i = 0; i < 200 && !/Ready/.test(title); i++) await pause(300);
+      if (!/Ready/.test(title)) throw new Error("GEP của Client chính thức chưa sẵn sàng");
+      await cdp.eval(fillScript({ ...match, ingest }));
+      await pause(1200);
+      state = "connecting";
+      // Thử bấm Connect vài lần: lần đầu có thể rơi vào lúc form chưa được Angular xác nhận hợp lệ.
+      for (let attempt = 0; attempt < 3 && !/Connected/.test(title); attempt++) {
+        await cdp.eval(clickConnectScript);
+        for (let i = 0; i < 24 && !/Connected/.test(title); i++) await pause(250);
+      }
+      state = /Connected/.test(title) ? "connected" : "connect-unconfirmed";
+      onState({ state, title });
     }
-    state = /Connected/.test(title) ? "connected" : "connect-unconfirmed";
-    onState({ state, title });
   } catch (e) {
     await stop();
     throw e;

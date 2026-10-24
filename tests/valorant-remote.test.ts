@@ -29,6 +29,18 @@ test("link cam vdo.ninja khớp định dạng overlay (Tên_H_Tag)", () => {
   assert.match(url, /room=my%20room/);
   assert.match(url, /push=Seo_Tow_H_VN1/);
   assert.match(url, /webcam/);
+  // GEP trả "Seotoww #2013" (có dấu cách trước #); overlay dựng từ roster nên phải trim.
+  assert.match(playercamPushUrl("room", "Seotoww #2013"), /push=Seotoww_H_2013/);
+});
+
+test("bản JS thuần của player dựng link cam khớp bản TS", async () => {
+  const mod = (await import(
+    // @ts-expect-error JS thuần của runtime player, không có khai báo kiểu
+    "../collector/hosts/valorant-collector/player/cam.mjs"
+  )) as { playercamPushUrl: (room: string, name: string) => string };
+  for (const name of ["Seo Tow#VN1", "Seotoww #2013", "Solo#123"])
+    for (const room of ["my room", "room-a"])
+      assert.equal(mod.playercamPushUrl(room, name), playercamPushUrl(room, name));
 });
 
 test("bản JS thuần của player giải mã khớp bản TS", async () => {

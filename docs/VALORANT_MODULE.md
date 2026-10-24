@@ -168,21 +168,33 @@ Vì sao Spectra không đủ: GEP của Overwolf không có ACS, không có dama
 
 Bổ sung: theme mặc định (màu, độ mờ, font, ảnh nền và nhà tài trợ) lấy từ `overlay-config.json` của project gốc và chỉnh được trong mục Giao diện; file cấu hình cũ chưa có `themeVersion` được nạp lại theme gốc một lần. Logo đội phục vụ qua `/api/valorant/postgame/logo/<tên>` nên chạy cả khi module Valorant tắt; ảnh lỗi bị ẩn. Overlay đọc `/api/valorant/postgame/render` và `/mvp`, tự làm mới mỗi 2 giây.
 
-## Player đẩy dữ liệu từ xa + cam (23/10/2026)
+## Player đẩy dữ liệu từ xa + cam (23/10/2026, cập nhật 24/10/2026)
 
 Để lấy đủ dữ liệu 10 người, mỗi player chạy bản player đẩy về ingest của host qua tunnel.
 
 - **Host:** Valorant → Phát sóng → bật "Player đẩy dữ liệu (ngoài LAN)". Studio chạy `cloudflared`
   quick tunnel (tải một lần, kiểm SHA256, không cần tài khoản) trỏ về cổng ingest, lấy URL
-  `trycloudflare.com` rồi sinh **code ngắn** (`shared/valorant-remote.ts`) chứa origin + group code +
-  key. API `/api/valorant/remote` GET/POST; quản lý ở `server/valorant-remote.ts`,
-  `collector/hosts/valorant-collector/runtime/tunnel.mjs`. Tắt game Valorant thì tunnel tự tắt.
-- **Player:** `npm run valorant:player -- <CODE>` (`collector/hosts/valorant-collector/player/`). Giải
-  mã code, tải Spectra Client một lần, chạy ngầm trỏ ingest tới URL công khai. Chỉ cần nhập code.
+  `trycloudflare.com` rồi sinh **code 5 ký tự** (bảng chữ bỏ `0 1 I L O`) để player nhập. API
+  `/api/valorant/remote` GET/POST; quản lý ở `server/valorant-remote.ts`,
+  `collector/hosts/valorant-collector/runtime/tunnel.mjs`. Tắt game Valorant thì tunnel tự tắt. Không
+  dùng Studio vẫn công bố được code bằng `npm run valorant:code` (`runtime/publish-code.mjs`).
+- **Code ngắn tự phân giải:** URL tunnel đổi mỗi lần chạy nên code không chứa địa chỉ. Host công bố
+  `{origin, groupCode, camRoom}` lên điểm hẹn công khai (`runtime/rendezvous.mjs`, mặc định `ntfy.sh`,
+  đổi bằng `RIOT_OVERLAY_RENDEZVOUS`) dưới topic `riotovl-<code>` và đăng lại mỗi ~4 phút; player đọc
+  đúng topic đó. Tunnel khởi động lại thì host đăng lại cùng code với URL mới. Topic công khai nên code
+  là bí mật chia sẻ; code ngắn không chứa key (chỉ dùng được ở chế độ auxiliary). Code dài base64 cũ
+  (`shared/valorant-remote.ts`) vẫn dán được ở bản CLI khi điểm hẹn không truy cập được.
+- **Player:** `npm run valorant:player` mở UI cục bộ (`player/app.mjs`, `player/ui.mjs`,
+  `http://127.0.0.1:5398`): nhập code, xem trạng thái kết nối/match id/số frame đã gửi, bật tắt camera.
+  `player/agent.mjs` phân giải code, chạy Client ngầm ở chế độ auxiliary và đọc trạng thái qua named pipe
+  của tap (`client/tap/reader.mjs`) để tự lấy Riot ID của chính máy đó. Bản CLI không UI:
+  `npm run valorant:player:cli -- <CODE>` (`player/join.mjs`).
 - **Cam:** qua vdo.ninja (bên thứ ba, WebRTC). Trong Cấu hình trận → "Player cam": đặt room id và danh
   sách Tên#Tag; Studio gửi `playercams` (identifier + enabledPlayers) qua config_update, overlay kéo
-  cam `vdo.ninja/?room=<id>&view=<Tên>_H_<Tag>`. Mỗi player mở "Link đẩy cam" để phát webcam. Media
-  không đi qua host nên host chạy local vẫn hoạt động.
+  cam `vdo.ninja/?room=<id>&view=<Tên>_H_<Tag>`. UI player dựng link đẩy `?room=<id>&push=<Tên>_H_<Tag>`
+  bằng đúng quy tắc đó (`player/cam.mjs` giữ đồng bộ với `shared/valorant-remote.ts` — trim hai phần vì
+  GEP trả `Seotoww #2013` còn roster dựng `Seotoww_H_2013`). Media không đi qua host nên host chạy
+  local vẫn hoạt động.
 
 ## Overlay nạp cấu hình khi chưa có trận (23/10/2026)
 

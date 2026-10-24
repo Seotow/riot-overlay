@@ -1,21 +1,23 @@
-// Bản PLAYER: nhập code ngắn của host → chạy Spectra Client chính thức ngầm, đẩy dữ liệu của máy
-// player (auxiliary: máu, chiêu, tiền chính xác) về ingest của host qua tunnel. Dùng lại y hệt cơ chế
-// chạy ngầm của host (client/official.mjs), chỉ đổi đích ingest thành URL công khai trong code.
+// Bản PLAYER (CLI, không có UI): nhập code của host → chạy Spectra Client chính thức ngầm, đẩy dữ
+// liệu của máy player (auxiliary: máu, chiêu, tiền chính xác) về ingest của host qua tunnel.
+// Bản có UI đầy đủ (nhập code, trạng thái, bật/tắt camera) là player/app.mjs — dùng bản đó trước.
 //
-//   node collector/hosts/valorant-collector/player/join.mjs <CODE>
+//   npm run valorant:player:cli -- ABCDE
+//   node collector/hosts/valorant-collector/player/join.mjs ABCDE
 //
-// Player chỉ cần nhập đúng một code; Client được tải một lần nếu máy chưa có (kiểm SHA256).
+// Code nhận cả dạng ngắn 5 ký tự (tra ở điểm hẹn, runtime/rendezvous.mjs) lẫn code dài base64 cũ.
 import { createInterface } from "node:readline/promises";
 import { stdin, stdout } from "node:process";
 import { acquireOfficial, startOfficial } from "../client/official.mjs";
-import { decodeJoinCode } from "./remote-code.mjs";
+import { playercamPushUrl, streamIdProblem } from "./cam.mjs";
+import { resolveJoin } from "./join-code.mjs";
 
 async function readCode() {
   const fromArg = process.argv.slice(2).join(" ").trim();
   if (fromArg) return fromArg;
   const rl = createInterface({ input: stdin, output: stdout });
   try {
-    return (await rl.question("Dán code của host rồi Enter: ")).trim();
+    return (await rl.question("Nhập code của host (5 ký tự hoặc code dài) rồi Enter: ")).trim();
   } finally {
     rl.close();
   }
@@ -24,25 +26,39 @@ async function readCode() {
 const log = (msg) => console.log(msg);
 
 try {
-  const join = decodeJoinCode(await readCode());
-  if (!join) throw new Error("Code không hợp lệ. Hãy xin host dán lại code mới.");
+  const join = await resolveJoin(await readCode());
+  if (join.kind === "short") log(`Code ${join.code} → ${join.origin}`);
+  else log(`Code dài → ${join.origin}, group ${join.groupCode}`);
+  if (join.camRoom) {
+    const riotId = process.env.RIOT_OVERLAY_PLAYER_ID || "";
+    const problem = streamIdProblem(riotId);
+    log(`Room cam của host: ${join.camRoom}`);
+    log(
+      problem
+        ? "Đặt RIOT_OVERLAY_PLAYER_ID=Tên#Tag để in link đẩy cam, hoặc dùng player/app.mjs để tự đọc từ trận."
+        : `Link đẩy cam: ${playercamPushUrl(join.camRoom, riotId)}`,
+    );
+  }
+
   log("Chuẩn bị Spectra Client (tải một lần nếu máy chưa có)…");
   await acquireOfficial({}, log);
-  log(`Kết nối tới host (${join.origin}), group ${join.groupCode}.`);
-  const match = {
-    observerName: "Player",
-    key: join.key,
-    groupCode: join.groupCode,
-    ingest: join.origin,
-    teams: [
-      { name: "Team 1", tricode: "T1", url: "" },
-      { name: "Team 2", tricode: "T2", url: "" },
-    ],
-    tournamentLogo: "",
-  };
+  // Player đẩy dữ liệu của chính máy mình (máu, chiêu, tiền) nên phải chạy chế độ auxiliary;
+  // observer của host đã phủ roster/scoreboard. URL thiếu cổng sẽ bị Client tự thêm :5100.
   const runtime = await startOfficial({
     config: {},
-    match,
+    match: {
+      observerName: "Player",
+      key: join.key,
+      groupCode: join.groupCode,
+      ingest: join.origin,
+      teams: [
+        { name: "Team 1", tricode: "T1", url: "" },
+        { name: "Team 2", tricode: "T2", url: "" },
+      ],
+      tournamentLogo: "",
+    },
+    mode: "auxiliary",
+    auxName: "Player",
     onState: ({ state, title }) => log(`Client: ${title || state}`),
   });
   log("Đang chạy ngầm. Vào trận bình thường; cửa sổ Client đã ẩn. Nhấn Ctrl+C để dừng.");

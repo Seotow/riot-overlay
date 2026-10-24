@@ -37,7 +37,9 @@
     "format:check": "prettier --check .",
     "probe:tracking": "tsx scripts/inspect/probe-tracking.ts",
     "probe:bounty": "tsx scripts/inspect/probe-bounty.ts",
-    "valorant:player": "node collector/hosts/valorant-collector/player/join.mjs"
+    "valorant:player": "node collector/hosts/valorant-collector/player/app.mjs",
+    "valorant:player:cli": "node collector/hosts/valorant-collector/player/join.mjs",
+    "valorant:code": "node collector/hosts/valorant-collector/runtime/publish-code.mjs"
   },
   "keywords": [],
   "author": "",
