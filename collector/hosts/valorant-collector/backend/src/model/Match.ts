@@ -75,6 +75,11 @@ export class Match {
   public isRegistered: boolean = false;
   private orgIsSupporter: boolean = false;
 
+  // Player cam tự động: playerId auxiliary đã báo kết nối nhưng chưa khớp được roster, và danh sách
+  // Riot ID đã tự thêm (playerId → fullName) để có thể gỡ đúng khi player ngắt kết nối.
+  private pendingAuxPlayers: Set<string> = new Set();
+  private autoPlayercams: Map<string, string> = new Map();
+
   constructor(data: IAuthenticationData) {
     this.groupCode = data.groupCode;
     this.groupSecret = this.newGroupSecret();
@@ -385,6 +390,8 @@ export class Match {
         break;
     }
 
+    // Roster/scoreboard có thể tới sau khi player auxiliary báo kết nối → khớp lại để tự thêm Player cam.
+    this.syncAuxPlayercams();
     this.eventNumber++;
   }
 
@@ -480,6 +487,70 @@ export class Match {
 
   public setAuxDisconnected(playerId: string) {
     this.teams.forEach((team) => team.setAuxDisconnected(playerId));
+    // Gỡ khỏi Player cam đúng những Riot ID đã tự thêm cho player này (không đụng mục host nhập tay).
+    const autoFullName = this.autoPlayercams.get(playerId);
+    if (autoFullName != null) {
+      this.autoPlayercams.delete(playerId);
+      this.removeFromPlayercams(autoFullName);
+    }
+    this.pendingAuxPlayers.delete(playerId);
+  }
+
+  /**
+   * Player kết nối auxiliary: nhớ playerId để khớp với roster của trận rồi tự thêm Riot ID của họ vào
+   * Player cam (cùng room id host đã đặt), khỏi phải nhập tay ở Cấu hình trận.
+   */
+  public setAuxConnected(playerId: string) {
+    if (playerId === "") return;
+    this.pendingAuxPlayers.add(playerId);
+    this.syncAuxPlayercams();
+  }
+
+  /** Khớp các playerId auxiliary đang chờ với roster; thêm Riot ID vào Player cam khi đã biết. */
+  private syncAuxPlayercams() {
+    if (this.pendingAuxPlayers.size === 0) return;
+    for (const playerId of [...this.pendingAuxPlayers]) {
+      const fullName =
+        this.teams.map((team) => team.getPlayerFullNameById(playerId)).find((name) => name !== "") ?? "";
+      if (fullName === "") continue;
+      this.pendingAuxPlayers.delete(playerId);
+      if (this.autoPlayercams.get(playerId) === fullName) continue;
+      this.autoPlayercams.set(playerId, fullName);
+      this.addToPlayercams(fullName);
+    }
+  }
+
+  /** Thêm Riot ID vào Player cam nếu host đã đặt room id; báo overlay qua eventNumber. */
+  private addToPlayercams(fullName: string) {
+    const info = this.tools.playercamsInfo;
+    if (!info.identifier || info.identifier === "") return;
+    if (info.enabledPlayers.includes(fullName)) return;
+    info.enabledPlayers = [...info.enabledPlayers, fullName].slice(0, 10);
+    this.eventNumber++;
+    Log.info(`Player cam: tự thêm ${fullName} (room ${info.identifier})`);
+  }
+
+  private removeFromPlayercams(fullName: string) {
+    const info = this.tools.playercamsInfo;
+    if (!info.enabledPlayers.includes(fullName)) return;
+    info.enabledPlayers = info.enabledPlayers.filter((name) => name !== fullName);
+    this.eventNumber++;
+    Log.info(`Player cam: gỡ ${fullName} (player ngắt kết nối)`);
+  }
+
+  /** Bảo đảm các Riot ID đã tự thêm vẫn còn sau khi host/Studio cập nhật lại danh sách Player cam. */
+  private reapplyAutoPlayercams() {
+    if (this.autoPlayercams.size === 0) return;
+    const info = this.tools.playercamsInfo;
+    if (!info.identifier || info.identifier === "") return;
+    let changed = false;
+    for (const fullName of this.autoPlayercams.values()) {
+      if (!info.enabledPlayers.includes(fullName)) {
+        info.enabledPlayers.push(fullName);
+        changed = true;
+      }
+    }
+    if (changed) this.eventNumber++;
   }
 
   private processSpikePlantDetection(data: IAuthedData | IAuthedAuxData, team: Team) {
@@ -600,6 +671,8 @@ export class Match {
             .slice(0, 10)
             .map((p: string) => p.slice(0, 60))
         : [];
+      // Giữ lại các Riot ID do player auxiliary tự thêm (host có thể chỉnh cấu hình giữa trận).
+      this.reapplyAutoPlayercams();
     }
     if (Array.isArray(raw?.nameOverrides)) {
       const pairs = raw.nameOverrides
@@ -698,6 +771,7 @@ export class Match {
 
     this.tools.playercamsInfo.enabledPlayers = data.enabledPlayers;
     this.tools.nameOverrides.overrides = data.nameOverrides;
+    this.reapplyAutoPlayercams();
 
     this.eventNumber++;
   }

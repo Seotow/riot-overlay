@@ -26,7 +26,7 @@
     "valorant:setup": "node scripts/dev/setup-valorant.mjs",
     "start:valorant": "node collector/hosts/valorant-collector/runtime/cli.mjs start",
     "build:valorant": "npm --prefix collector/hosts/valorant-collector/backend run build && npm --prefix collector/hosts/valorant-collector/frontend-val26 run build",
-    "test:valorant": "node --test collector/hosts/valorant-collector/tests/*.test.mjs",
+    "test:valorant": "node --import tsx --test collector/hosts/valorant-collector/tests/*.test.mjs collector/hosts/valorant-collector/tests/*.test.ts",
     "assets:sync": "node scripts/assets/sync-assets.mjs",
     "assets:sync:live": "node scripts/assets/sync-live-assets.mjs",
     "capture:live": "node scripts/capture/capture-live-session.mjs",

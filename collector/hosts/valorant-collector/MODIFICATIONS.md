@@ -83,6 +83,13 @@ vdo.ninja), và `watermark` (customText = tên giải). Cổng Spectra Plus GI�
 thì `spectraWatermark` luôn true và `customTextEnabled` bị ép false; không giả cờ `isSupporter`,
 không bỏ watermark.
 
+## Player cam tự điền từ roster (25/10/2026)
+Player auxiliary khi đăng nhập (`aux_logon`) được backend nhớ `playerId`. Khi roster của trận đã có
+người khớp `playerId` đó, backend tự thêm Riot ID `Tên#Tagline` vào `playercamsInfo.enabledPlayers`
+(cùng room id `identifier` host đã đặt) và tăng `eventNumber` để overlay cập nhật — khỏi phải nhập tay ở
+Cấu hình trận. Khi player ngắt kết nối, chỉ những mục do máy chủ tự thêm mới bị gỡ; mục host nhập tay giữ
+nguyên. Cập nhật cấu hình giữa trận (`config_update` hoặc dịch vụ playercam) không làm mất các mục tự thêm.
+
 ## Component tên giải (23/10/2026)
 Thêm component riêng `components/top/auxiliary/tournament-name` hiện `tournamentInfo.name` NGAY BÊN
 TRÁI logo Spectra (vị trí watermark cũ, `pos-x-1360`). KHÔNG đụng tới watermark/logo Spectra: giữ

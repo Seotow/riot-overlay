@@ -140,6 +140,12 @@ export class MatchController {
     }
   }
 
+  setAuxConnected(groupCode: string, playerId: string) {
+    if (this.matches[groupCode] != null) {
+      this.matches[groupCode].setAuxConnected(playerId);
+    }
+  }
+
   setAuxDisconnected(groupCode: string, playerId: string) {
     if (this.matches[groupCode] != null) {
       this.matches[groupCode].setAuxDisconnected(playerId);

@@ -274,6 +274,11 @@ export class Player {
     return this.searchName;
   }
 
+  /** Riot ID đầy đủ "Tên#Tagline" — khoá để khớp Player cam của overlay. */
+  public getFullName(): string {
+    return this.fullName;
+  }
+
   public getPlayerId(): string {
     return this.riotId;
   }

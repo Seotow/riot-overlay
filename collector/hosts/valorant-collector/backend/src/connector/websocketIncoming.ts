@@ -221,6 +221,9 @@ export class WebsocketIncoming {
           user.matchId = authenticationData.matchId;
           WebsocketIncoming.authedClients.push(user);
 
+          // Tự thêm Riot ID của player này vào Player cam (host khỏi nhập tay ở Cấu hình trận).
+          this.matchController.setAuxConnected(groupCode, user.playerId);
+
           Log.info(
             `Received VALID aux auth request from ${authenticationData.playerId} for Group Code ${groupCode}`,
           );
@@ -273,6 +276,8 @@ export class WebsocketIncoming {
           await this.matchController.receiveMatchData(data);
           if (data.type === DataTypes.AUX_SCOREBOARD && user.playerId === "") {
             user.playerId = (data as IAuthedAuxData).playerId;
+            // Biết playerId muộn (từ scoreboard) → thử thêm Player cam ngay.
+            this.matchController.setAuxConnected(user.groupCode, user.playerId);
           }
         }
       } catch (e) {

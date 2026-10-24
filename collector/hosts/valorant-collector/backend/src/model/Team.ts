@@ -140,6 +140,11 @@ export class Team {
     return this.players.some((player) => player.getPlayerId() === playerId);
   }
 
+  /** Riot ID "Tên#Tagline" của người chơi theo playerId, hoặc "" nếu chưa có trong roster. */
+  getPlayerFullNameById(playerId: string): string {
+    return this.players.find((player) => player.getPlayerId() === playerId)?.getFullName() ?? "";
+  }
+
   getPlayerCount(): number {
     return this.playerCount;
   }
