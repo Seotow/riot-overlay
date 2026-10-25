@@ -40,7 +40,7 @@ export function playercamPushUrl(roomId: string, playerFullName: string): string
   const streamId = `${name.replaceAll(" ", "_")}_H_${tag}`;
   return `https://vdo.ninja/?room=${encodeURIComponent(roomId)}&push=${encodeURIComponent(
     streamId,
-  )}&webcam&noaudio&quality=2&codec=h264`;
+  )}&webcam&cleanoutput&noaudio&quality=2&codec=h264`;
 }
 
 export function playercamPreviewUrl(roomId: string, playerFullName: string): string {

@@ -175,6 +175,8 @@ test('stream id cam khớp quy tắc overlay (<Tên>_H_<Tag>)', () => {
   const url = playercamPushUrl('room-a', 'Seotoww #2013');
   assert.match(url, /room=room-a/);
   assert.match(url, /push=Seotoww_H_2013/);
+  assert.match(url, /cleanoutput/);
+  assert.match(url, /noaudio/);
   assert.match(url, /webcam/);
   assert.equal(streamIdProblem('Seotoww #2013'), null);
   assert.match(streamIdProblem('Seotoww'), /Tên#Tag/);
