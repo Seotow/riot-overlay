@@ -40,5 +40,13 @@ export function playercamPushUrl(roomId: string, playerFullName: string): string
   const streamId = `${name.replaceAll(" ", "_")}_H_${tag}`;
   return `https://vdo.ninja/?room=${encodeURIComponent(roomId)}&push=${encodeURIComponent(
     streamId,
-  )}&webcam&quality=2&codec=h264`;
+  )}&webcam&noaudio&quality=2&codec=h264`;
+}
+
+export function playercamPreviewUrl(roomId: string, playerFullName: string): string {
+  const [name = "", tag = ""] = playerFullName.split("#").map((part) => part.trim());
+  const streamId = `${name.replaceAll(" ", "_")}_H_${tag}`;
+  return `https://vdo.ninja/?room=${encodeURIComponent(roomId)}&view=${encodeURIComponent(
+    streamId,
+  )}&cleanoutput&noaudio`;
 }

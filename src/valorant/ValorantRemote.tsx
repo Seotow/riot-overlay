@@ -9,6 +9,7 @@ interface RemoteStatus {
   groupCode: string;
   code: string;
   shortCode: string;
+  cameraRoom: string;
   publishError: string | null;
   error: string | null;
 }
@@ -105,6 +106,9 @@ export function RemotePanel() {
             Code tự phân giải ra địa chỉ tunnel hiện tại nên đổi máy hay khởi động lại tunnel vẫn
             dùng được. Không chứa key; chỉ dùng cho chế độ auxiliary. Chia sẻ riêng cho player tin
             cậy.
+          </p>
+          <p>
+            Mã camera tự động: <strong>{status.cameraRoom || "đang tạo…"}</strong>
           </p>
           {status.publishError && <p role="alert">Đăng code lỗi: {status.publishError}</p>}
         </>

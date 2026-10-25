@@ -88,6 +88,7 @@ export function normalizeSpectra(
     };
   });
   const all = teams.flatMap((t: { players: ReturnType<typeof player>[] }) => t.players);
+  const playercams = raw.tools?.playercamsInfo;
   const phase = phases.find((p) => p === raw.roundPhase);
   const spike = raw.spikeState ?? {};
   const flag = (v: unknown): ValorantField<boolean> =>
@@ -115,6 +116,14 @@ export function normalizeSpectra(
       },
     },
     teams,
+    playercams: {
+      roomId: typeof playercams?.identifier === "string" ? playercams.identifier : "",
+      connected: Array.isArray(playercams?.enabledPlayers)
+        ? playercams.enabledPlayers.filter(
+            (name: unknown): name is string => typeof name === "string",
+          )
+        : [],
+    },
     controls: {
       techPause: raw.timeoutState?.techPause === true,
       leftTimeout: raw.timeoutState?.leftTeam === true,

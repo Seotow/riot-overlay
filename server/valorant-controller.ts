@@ -17,6 +17,7 @@ export interface ControllerOptions {
   secretFile: string;
   paths: ValorantConfigPaths;
   phase: () => string | null;
+  cameraRoom?: () => string;
   now?: () => number;
 }
 
@@ -166,11 +167,13 @@ export class ValorantController {
           wonLeft: config.series.wonLeft,
           wonRight: config.series.wonRight,
           mapInfo: config.mapInfo.enabled
-            ? config.mapInfo.maps.slice(0, 5).map((map, index) =>
-                index === 0
-                  ? { type: "present", logo: "" }
-                  : { type: "future", map: map.map, logo: "" },
-              )
+            ? config.mapInfo.maps
+                .slice(0, 5)
+                .map((map, index) =>
+                  index === 0
+                    ? { type: "present", logo: "" }
+                    : { type: "future", map: map.map, logo: "" },
+                )
             : [],
         },
         tournamentInfo: {
@@ -243,9 +246,9 @@ export class ValorantController {
       // Player cam vdo.ninja: room id + danh sách player bật cam.
       playercams: {
         enable: config.playercams.enable,
-        identifier: config.playercams.roomId,
+        identifier: config.playercams.enable ? (this.options.cameraRoom?.() ?? "") : "",
         // Tắt cam thì gửi danh sách rỗng để overlay ẩn hẳn, không phụ thuộc cách overlay dùng cờ enable.
-        enabledPlayers: config.playercams.enable ? config.playercams.players : [],
+        enabledPlayers: [],
       },
     });
   }

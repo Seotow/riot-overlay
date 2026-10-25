@@ -25,15 +25,9 @@ export const valorantMapInfoSchema = z.object({
   enabled: z.boolean(),
   maps: z.array(valorantMapPickSchema).max(5),
 });
-// Player cam qua vdo.ninja: roomId là tên phòng chung, players là danh sách Tên#Tag được bật cam.
+// Player cam qua vdo.ninja. Room và danh sách player được backend sinh từ phiên auxiliary.
 export const valorantPlayercamsSchema = z.object({
   enable: z.boolean(),
-  roomId: z
-    .string()
-    .trim()
-    .max(64)
-    .regex(/^[A-Za-z0-9_-]*$/),
-  players: z.array(z.string().trim().max(60)).max(10),
 });
 
 export const valorantMatchConfigSchema = z
@@ -59,7 +53,7 @@ export const valorantMatchConfigSchema = z
       )
       .max(20),
     mapInfo: valorantMapInfoSchema.default({ enabled: false, maps: [] }),
-    playercams: valorantPlayercamsSchema.default({ enable: false, roomId: "", players: [] }),
+    playercams: valorantPlayercamsSchema.default({ enable: false }),
   })
   .refine((c) => Math.max(c.series.wonLeft, c.series.wonRight) <= c.series.needed, {
     message: "series-score-over-limit",
@@ -76,7 +70,7 @@ export const defaultValorantMatchConfig: ValorantMatchConfig = {
   tournament: { name: "", logo: "" },
   nameOverrides: [],
   mapInfo: { enabled: false, maps: [] },
-  playercams: { enable: false, roomId: "", players: [] },
+  playercams: { enable: false },
 };
 
 export const logoSlots = ["left", "right", "tournament"] as const;

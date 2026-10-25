@@ -29,61 +29,29 @@
           />
           <button type="submit">Kết nối</button>
         </form>
-        <p class="hint">Code có 5 ký tự, chỉ chữ và số (không có 0 1 I L O). Code hết hạn sau vài giờ.</p>
-        <label class="check">
-          <input id="no-client" type="checkbox" />
-          Chỉ kiểm tra code và camera (không mở Spectra Client)
-        </label>
-        <dl id="host" class="facts" hidden></dl>
+        <p class="hint">Code gồm 5 ký tự. Camera được nối tự động khi client nhận diện player.</p>
       </section>
 
       <section>
-        <h2>2. Trạng thái dữ liệu</h2>
+        <h2>2. Kết nối</h2>
         <dl id="client" class="facts">
           <div class="fact"><dt>Kết nối tới host</dt><dd id="f-connected">—</dd></div>
-          <div class="fact"><dt>Chế độ</dt><dd id="f-mode">—</dd></div>
-          <div class="fact"><dt>Match id</dt><dd id="f-match">—</dd></div>
-          <div class="fact"><dt>Đích ingest</dt><dd id="f-ingest">—</dd></div>
-          <div class="fact"><dt>Đọc tap</dt><dd id="f-tap">—</dd></div>
-          <div class="fact"><dt>Frame máu/kỹ năng đã gửi</dt><dd id="f-aux">0</dd></div>
+          <div class="fact"><dt>Tên player</dt><dd id="f-player">—</dd></div>
         </dl>
-        <p class="hint">
-          Vào trận là dữ liệu tự chạy; cửa sổ Spectra Client đã được ẩn. Nếu mất kết nối, client tự thử lại.
-        </p>
         <button id="leave" class="ghost" type="button">Dừng kết nối</button>
       </section>
 
       <section>
         <h2>3. Camera</h2>
-        <label class="check">
-          <input id="cam-auto" type="checkbox" checked />
-          Tự kết nối camera khi đã biết Riot ID (không cần bấm gì thêm)
-        </label>
-        <p class="hint">
-          Nhập code ở mục 1 là camera tự đẩy lên khi biết Riot ID: vào trận client tự đọc, hoặc nhập tay
-          bên dưới. Riot ID phải khớp đúng cái host đã thêm vào <em>Cấu hình trận → Player cam</em>.
-        </p>
-        <label class="field">
-          Riot ID của bạn (Tên#Tag)
-          <input id="riot-id" placeholder="Seotoww#2013" autocomplete="off" spellcheck="false" />
-        </label>
-        <dl id="cam-facts" class="facts">
-          <div class="fact"><dt>Room vdo.ninja của host</dt><dd id="f-room">—</dd></div>
-          <div class="fact"><dt>Stream id đẩy lên</dt><dd id="f-stream">—</dd></div>
-        </dl>
         <div class="row">
-          <button id="cam-toggle" type="button">Bật camera</button>
-          <a id="cam-open" class="ghost" href="#" target="_blank" rel="noreferrer" hidden>Mở cửa sổ riêng</a>
-          <button id="cam-test" class="ghost" type="button">Kiểm tra webcam</button>
+          <button id="cam-toggle" type="button">Mở camera</button>
+          <button id="cam-test" class="ghost" type="button">Preview camera</button>
         </div>
         <p id="cam-wait" class="hint" hidden></p>
         <p id="cam-problem" class="warn" hidden></p>
         <div id="cam-frame" class="frame" hidden></div>
         <video id="cam-preview" playsinline muted hidden></video>
-        <p class="hint">
-          Lần đầu trình duyệt sẽ hỏi quyền camera — bấm <em>Cho phép</em>. Nếu khung chưa hiện hình, bấm
-          nút trong khung một lần (trình duyệt bắt buộc với khung nhúng). Tắt camera là dừng ngay.
-        </p>
+        <p class="hint">Camera chỉ truyền hình, đã tắt microphone và âm thanh hai chiều.</p>
       </section>
     </main>
     <script type="module" src="/app.js"></script>

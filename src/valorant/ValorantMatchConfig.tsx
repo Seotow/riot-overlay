@@ -11,7 +11,7 @@ import {
   type ValorantMatchConfig as Config,
 } from "../../shared/valorant-config";
 import { useValorant } from "../lib/useValorant";
-import { playercamPushUrl } from "../../shared/valorant-remote";
+import { playercamPreviewUrl } from "../../shared/valorant-remote";
 
 const errors: Record<string, string> = {
   "invalid-config": "Cấu hình không hợp lệ: kiểm tra tên, mã đội và tỉ số.",
@@ -337,60 +337,29 @@ export function ValorantMatchConfig({
             />{" "}
             Bật player cam
           </label>
-          <label>
-            Room id vdo.ninja (đặt tùy ý, giống nhau cho cả host và player)
-            <Input
-              maxLength={64}
-              placeholder="vd: giaidau-thang10"
-              value={draft.playercams.roomId}
-              onChange={(e) => setCam({ roomId: e.target.value.replace(/[^A-Za-z0-9_-]/g, "") })}
-            />
-          </label>
-          {draft.playercams.players.map((name, index) => (
-            <div className="val-cam-row" key={index}>
-              <Input
-                list="val-players"
-                placeholder="Tên#Tag trong game"
-                maxLength={60}
-                value={name}
-                onChange={(e) =>
-                  setCam({
-                    players: draft.playercams.players.map((p, j) =>
-                      j === index ? e.target.value : p,
-                    ),
-                  })
-                }
-              />
-              {draft.playercams.roomId && name.includes("#") && (
-                <a
-                  href={playercamPushUrl(draft.playercams.roomId, name)}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Link đẩy cam
-                </a>
-              )}
-              <Button
-                type="button"
-                onClick={() =>
-                  setCam({ players: draft.playercams.players.filter((_, j) => j !== index) })
-                }
-              >
-                Xóa
-              </Button>
-            </div>
-          ))}
-          <Button
-            type="button"
-            disabled={draft.playercams.players.length >= 10}
-            onClick={() => setCam({ players: [...draft.playercams.players, ""] })}
-          >
-            Thêm player cam
-          </Button>
           <p className="val-hint">
-            Gửi "Link đẩy cam" cho từng player; họ mở link, cho phép webcam. Overlay tự kéo cam theo
-            tên.
+            Mã camera được tự sinh từ mã tunnel. Chỉ player đã kết nối mới xuất hiện trong danh
+            sách.
           </p>
+          <div className="val-cam-list">
+            {(frame?.playercams.connected ?? []).map((name) => (
+              <div className="val-cam-row" key={name}>
+                <span>{name}</span>
+                {frame?.playercams.roomId && (
+                  <a
+                    href={playercamPreviewUrl(frame.playercams.roomId, name)}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Preview cam
+                  </a>
+                )}
+              </div>
+            ))}
+            {!frame?.playercams.connected.length && (
+              <span className="val-hint">Chưa có player nào kết nối camera.</span>
+            )}
+          </div>
         </fieldset>
         <fieldset>
           <legend>Tên thay thế người chơi</legend>

@@ -33,14 +33,9 @@ export class ValorantRemoteAccess {
     return import(pathToFileURL(resolve(dir, file)).href);
   }
 
-  /** Room id cam vdo.ninja trong Cấu hình trận — player cần đúng room này để overlay kéo được cam. */
-  private async camRoom() {
-    try {
-      const config = await loadMatchConfig(defaultPaths());
-      return config.playercams.enable ? config.playercams.roomId : "";
-    } catch {
-      return "";
-    }
+  /** Mã camera được sinh cùng mã tunnel, không cần operator nhập room riêng. */
+  cameraRoom() {
+    return this.tunnel && this.shortCode ? this.shortCode : "";
   }
 
   /**
@@ -55,10 +50,11 @@ export class ValorantRemoteAccess {
       const loaded = await config.ensureConfig(config.defaultConfigPath);
       const rendezvous = await this.load("rendezvous.mjs");
       if (!this.shortCode) this.shortCode = rendezvous.newCode();
+      const match = await loadMatchConfig(defaultPaths());
       const payload = rendezvous.buildPayload({
         origin,
         groupCode: loaded.groupCode,
-        camRoom: await this.camRoom(),
+        camRoom: match.playercams.enable ? this.cameraRoom() : "",
         host: "host",
       });
       const result = await rendezvous.publishCode(this.shortCode, payload);
@@ -84,6 +80,8 @@ export class ValorantRemoteAccess {
     try {
       const config = await this.load("config.mjs");
       const loaded = await config.ensureConfig(config.defaultConfigPath);
+      const rendezvous = await this.load("rendezvous.mjs");
+      if (!this.shortCode) this.shortCode = rendezvous.newCode();
       const tunnelMod = await this.load("tunnel.mjs");
       this.tunnel = await tunnelMod.startTunnel({
         ingestPort: loaded.ports.ingest,
@@ -144,6 +142,7 @@ export class ValorantRemoteAccess {
       groupCode,
       code,
       shortCode: this.shortCode,
+      cameraRoom: this.cameraRoom(),
       publishError: this.publishError,
       error: this.error,
     };

@@ -52,6 +52,10 @@ export const valorantTeamSchema = z.object({
   roundsWon: z.number().int().nonnegative(),
   players: z.array(valorantPlayerSchema),
 });
+export const valorantPlayercamsSchema = z.object({
+  roomId: z.string(),
+  connected: z.array(z.string().min(1)).max(10),
+});
 
 export const valorantFrameSchema = z.object({
   schemaVersion: z.literal(1),
@@ -74,6 +78,7 @@ export const valorantFrameSchema = z.object({
     }),
   }),
   teams: z.array(valorantTeamSchema).length(2),
+  playercams: valorantPlayercamsSchema.default({ roomId: "", connected: [] }),
   // Trạng thái do operator bấm tay trong Studio (provenance manual), không phải telemetry game.
   controls: z.object({
     techPause: z.boolean(),

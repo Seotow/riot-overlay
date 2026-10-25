@@ -26,6 +26,7 @@ export class ValorantModule {
       paths: ValorantConfigPaths;
       /** Phase round hiện tại từ output Spectra (để chặn "bom đã đặt" ngoài giao tranh). */
       phase: () => string | null;
+      cameraRoom: () => string;
     },
   ) {}
 
@@ -70,6 +71,7 @@ export class ValorantModule {
           secretFile: officialSecretFile(profile),
           paths: this.options.paths,
           phase: this.options.phase,
+          cameraRoom: this.options.cameraRoom,
         });
         this.controllerInstance.start();
       }

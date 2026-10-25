@@ -9,7 +9,7 @@ export function playercamPushUrl(roomId, playerFullName) {
   const streamId = camStreamId(playerFullName);
   return `https://vdo.ninja/?room=${encodeURIComponent(roomId)}&push=${encodeURIComponent(
     streamId,
-  )}&webcam&quality=2&codec=h264`;
+  )}&webcam&noaudio&quality=2&codec=h264`;
 }
 
 /** Kiểm tra Riot ID trước khi dựng link đẩy cam; trả thông báo lỗi hoặc null. */

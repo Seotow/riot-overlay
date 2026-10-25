@@ -64,13 +64,14 @@ const valorantPaths = defaultPaths(spectraOptions.frontendPort);
 // Mỗi game có công tắc riêng: tắt thì không mở socket, process hay vòng poll của game đó.
 const games = new GamePower();
 await games.load();
+// Tunnel cho player ngoài LAN đẩy dữ liệu về (bật theo yêu cầu, không tự mở cổng).
+const valorantRemote = new ValorantRemoteAccess();
 const valorantModule = new ValorantModule({
   paths: valorantPaths,
   phase: () => valorant.observe()?.match.roundPhase.value ?? null,
+  cameraRoom: () => valorantRemote.cameraRoom(),
 });
 const replayHud = new ReplayHudService();
-// Tunnel cho player ngoài LAN đẩy dữ liệu về (bật theo yêu cầu, không tự mở cổng).
-const valorantRemote = new ValorantRemoteAccess();
 const valorantPostgame = new PostgameStore({
   file: resolve("collector/hosts/valorant-collector/local/postgame.json"),
   snapshot: resolve("collector/hosts/valorant-collector/local/postgame-last.json"),
