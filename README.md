@@ -178,6 +178,13 @@ npm start
 Backend chỉ lắng nghe trên máy local. Không mở port ra LAN hoặc Internet.
 Không dùng `npm ci --omit=dev`: backend hiện chạy bằng `tsx`.
 
+## Valorant
+
+Module Valorant dùng Spectra Client chính thức chạy ngầm, backend fork và overlay
+VAL26. Setup host và player, cách mở tunnel, nhận code 5 ký tự, kết nối auxiliary
+và camera được hướng dẫn tại
+[Hướng dẫn setup Valorant](collector/hosts/valorant-collector/README.vi.md).
+
 ## Trước khi phát
 
 1. Vào **Cấu hình trận đấu** để đặt tên đội, màu, logo, tỉ số và layout.

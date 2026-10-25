@@ -115,18 +115,9 @@ máy. Trạng thái hiện hành nằm ở [PROJECT_STATUS.md](../PROJECT_STATUS
 
 ## Valorant trên máy mới
 
-`data/` không nằm trong Git nên máy mới chưa có cấu hình, key hay Client. Sau khi clone:
-
-```powershell
-npm ci
-npm run build
-npm start
-```
-
-Chọn Valorant ở thanh bên Studio rồi bật công tắc "Kết nối Valorant". Lần đầu Studio tự tạo `collector/hosts/valorant-collector/local/module.json` + `auth.key`, cài và build backend/overlay,
-tải Spectra Client chính thức (một lần, kiểm SHA256) nếu máy chưa có rồi chạy ngầm; tiến trình hiện trong trang Tổng quan Valorant.
-Chạy tay các bước đó bằng `npm run valorant:setup` (thêm `-- --force` để làm lại). Cần Node 22 và mạng; không cần cài Overwolf hay Spectra Client trước.
-Dữ liệu cục bộ nằm ở `collector/hosts/valorant-collector/local` (Git bỏ qua). Xem [VALORANT_MODULE.md](VALORANT_MODULE.md).
+Setup host, player, tunnel và camera đã gom thành một hướng dẫn riêng:
+[Hướng dẫn setup Valorant](../collector/hosts/valorant-collector/README.vi.md).
+Tài liệu này tránh lặp lại các lệnh có thể thay đổi theo module.
 
 ## Postgame Valorant
 
@@ -134,7 +125,6 @@ Trang Valorant → Postgame dùng ngay khung cuối của trận Spectra, không
 
 ## Player Valorant đẩy dữ liệu từ xa
 
-Host bật "Player đẩy dữ liệu (ngoài LAN)" ở trang Phát sóng, chép code gửi riêng cho từng player. Player
-chạy `npm run valorant:player -- <CODE>` (cần Node + đã cài phụ thuộc repo); Spectra Client tải một lần
-rồi chạy ngầm. Code đổi mỗi lần host bật lại tunnel. Cam dùng vdo.ninja: mở "Link đẩy cam" trong Cấu
-hình trận và cho phép webcam.
+Xem cùng [Hướng dẫn setup Valorant](../collector/hosts/valorant-collector/README.vi.md):
+player chỉ nhập code 5 ký tự, tên tự lấy từ Client, còn camera được sinh và kết nối
+tự động; không nhập room hoặc Riot ID.
